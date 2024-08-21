@@ -51,7 +51,6 @@ coverage.xml
 .pytest_cache/
 
 # Translations
-*.mo
 *.pot
 github
 .github
@@ -160,3 +159,11 @@ test.*
 temp.*
 objdump*
 *.min.*.js
+
+# scholar_navis
+crazy_functions/scholar_navis/data
+crazy_functions/scholar_navis/tmp
+crazy_functions/scholar_navis/scripts/dev
+crazy_functions/scholar_navis/memorandum.txt
+crazy_functions/scholar_navis/config.yml
+
