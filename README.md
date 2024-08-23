@@ -2,7 +2,7 @@
 
 <p align="right"><i>一款基于 gpt_academic 的流水线式领域进展分析工具</i></p>
 
-| [简体中文](readme.md) | [繁体中文](readme - zh-Hant.md) | [English](readme - en-US.md) |
+| [简体中文](readme.md) | [繁体中文](readme-zh_Hant.md) | [English](readme-en_US.md) |
 
 ### 事先说明
 
