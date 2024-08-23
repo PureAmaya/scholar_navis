@@ -22,7 +22,7 @@ def _load():
     
     try:
         with open(version_file_fp,'r') as f:
-            verison = f.read()
+            verison = f.read().strip()
     except:
         verison = ''
     

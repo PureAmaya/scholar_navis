@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-08-23 09:40+0800\n"
-"PO-Revision-Date: 2024-08-23 09:40+0800\n"
+"POT-Creation-Date: 2024-08-23 16:30+0800\n"
+"PO-Revision-Date: 2024-08-23 16:31+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -505,6 +505,10 @@ msgstr "You can click here"
 #: scripts/fine_grained_analysis_of_article.py:151
 msgid "查阅该总结库包含的文章"
 msgstr "review the articles included in the summary library"
+
+#: scripts/fine_grained_analysis_of_article.py:159
+msgid "精细分析中..."
+msgstr "In fine-grained analysis of the article.."
 
 #: scripts/fine_grained_analysis_of_article.py:163
 msgid "分析过程中出错！错误原因是：{}"
@@ -1189,7 +1193,7 @@ msgstr ""
 #: setup.py:170
 msgid "该工具所用的网络位于中国大陆吗？ y(默认)/n/c"
 msgstr ""
-"The network used by this tool is located in mainland China? y default)/n/c"
+"The network used by this tool is located in mainland China? y (default)/n/c"
 
 #: setup.py:171
 msgid "y=是 n=否 c=取消安装依赖（跳过）"

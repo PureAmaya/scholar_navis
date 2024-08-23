@@ -156,7 +156,7 @@ def 精细分析文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, sy
 
 
     # < --------------------提交给AI，进行后续的处理------------------------- >
-    yield from update_ui_lastest_msg(f'精细分析中...', chatbot, history)
+    yield from update_ui_lastest_msg(_('精细分析中...'), chatbot, history)
     try:
         yield from __analyse_pdf(pdf_fp=txt, llm_kwargs=llm_kwargs, chatbot=chatbot, history=history, use_ai_assist = plugin_kwargs['ai_assist'], GPT_prefer_language = GPT_prefer_language)
     except Exception as e:

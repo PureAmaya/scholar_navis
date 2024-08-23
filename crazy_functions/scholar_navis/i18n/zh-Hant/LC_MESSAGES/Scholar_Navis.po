@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-08-23 09:37+0800\n"
-"PO-Revision-Date: 2024-08-23 09:37+0800\n"
+"POT-Creation-Date: 2024-08-23 16:27+0800\n"
+"PO-Revision-Date: 2024-08-23 16:28+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_TW\n"
@@ -458,6 +458,10 @@ msgstr "您可以點擊此處"
 #: scripts/fine_grained_analysis_of_article.py:151
 msgid "查阅该总结库包含的文章"
 msgstr "請查閱該總結庫包含的文章"
+
+#: scripts/fine_grained_analysis_of_article.py:159
+msgid "精细分析中..."
+msgstr "精細分析中…"
 
 #: scripts/fine_grained_analysis_of_article.py:163
 msgid "分析过程中出错！错误原因是：{}"
@@ -1143,7 +1147,7 @@ msgstr "歡迎使用學者貴船"
 
 #: setup.py:244
 msgid "要安装 Scholar Navis 吗？ y(默认)/n"
-msgstr "是否安裝 Scholar Navis？ y(預設)/n"
+msgstr "是否安裝 Scholar Navis？ y(默認)/n"
 
 #~ msgid "下载成功的文章、下载的详细信息可以在 <b>文件下载区</b> 找到"
 #~ msgstr "下載成功的文章、下載的詳細資訊可在 <b>文件下載區</b> 找到"

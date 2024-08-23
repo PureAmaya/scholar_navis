@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-08-23 09:37+0800\n"
-"PO-Revision-Date: 2024-08-23 09:37+0800\n"
+"POT-Creation-Date: 2024-08-23 16:30+0800\n"
+"PO-Revision-Date: 2024-08-23 16:30+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -461,6 +461,10 @@ msgstr "您可以点击这里"
 msgid "查阅该总结库包含的文章"
 msgstr "查阅该总结库包含的文章"
 
+#: scripts/fine_grained_analysis_of_article.py:159
+msgid "精细分析中..."
+msgstr "精细分析中..."
+
 #: scripts/fine_grained_analysis_of_article.py:163
 msgid "分析过程中出错！错误原因是：{}"
 msgstr "分析过程中出错！错误原因是：{}"
@@ -905,7 +909,6 @@ msgid "该名称`{}`无法使用，详细说明如下: "
 msgstr "该名称`{}`无法使用，详细说明如下: "
 
 #: scripts/tools/article_library_ctrl.py:266
-#| msgid "Scholar Navis (ver.{}) 的关于文档如下。完整版可以参见github发布页"
 msgid ""
 "Scholar Navis (ver.{}) \n"
 "关于文档如下。完整版可以参见github发布页"
