@@ -3,7 +3,7 @@
 <p align="right"><i>
 A pipeline-based research progress analysis tool based on gpt_academic</i></p>
 
-| [简体中文](readme.md) | [繁体中文](readme - zh-Hant.md) | [English](readme - en-US.md) |
+| [简体中文](readme.md) | [繁体中文](readme-zh_Hant.md) | [English](readme-en_US.md) |
 
 ### Pre-announcement
 
