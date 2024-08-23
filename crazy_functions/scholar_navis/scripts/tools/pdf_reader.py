@@ -47,9 +47,9 @@ def get_pdf_inf(pdf_path: str,allow_ai_assist : bool,llmkwargs = None):
         
     # 反正先读取一下pdf
     with open(pdf_path,'rb') as f:
-        pdf_reader = PyPDF2.PdfFileReader(f)
+        pdf_reader = PyPDF2.PdfReader(f)
         # 获取第一页
-        first_page_text = pdf_reader.getPage(0).extract_text()
+        first_page_text = pdf_reader.pages[0].extract_text()
 
         # 获取doi
         doi = ''
