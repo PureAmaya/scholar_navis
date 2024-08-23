@@ -1,0 +1,1149 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2024-08-23 09:37+0800\n"
+"PO-Revision-Date: 2024-08-23 09:37+0800\n"
+"Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Poedit-Basepath: ../../..\n"
+"X-Poedit-KeywordsList: l(\"%s\")\n"
+"X-Poedit-SearchPath-0: scripts/fine_grained_analysis_of_article.py\n"
+"X-Poedit-SearchPath-1: scripts/pubmed_openaccess_articles_download.py\n"
+"X-Poedit-SearchPath-2: scripts/summarize_articles_by_keywords.py\n"
+"X-Poedit-SearchPath-3: scripts/更好的文章润色.py\n"
+"X-Poedit-SearchPath-4: scripts/cache_pdf_articles.py\n"
+"X-Poedit-SearchPath-5: scripts/communicate_with_ai_about_research_progress."
+"py\n"
+"X-Poedit-SearchPath-6: scripts/tools/gpt_academic_handler.py\n"
+"X-Poedit-SearchPath-7: scripts/tools/multi_lang.py\n"
+"X-Poedit-SearchPath-8: scripts/tools/pdf_reader.py\n"
+"X-Poedit-SearchPath-9: scripts/tools/sn_config.py\n"
+"X-Poedit-SearchPath-10: scripts/tools/article_library_ctrl.py\n"
+"X-Poedit-SearchPath-11: scripts/tools/common_plugin_para.py\n"
+"X-Poedit-SearchPath-12: setup.py\n"
+
+#: scripts/cache_pdf_articles.py:45
+msgid "<b>{}</b> 是一个不存在的总结库"
+msgstr "<b>{}</b> 是一個不存在的總結庫"
+
+#: scripts/cache_pdf_articles.py:46
+msgid "可以通过上传文章（含压缩包）的方式创建新的总结库"
+msgstr "可以通過上傳文章（含壓縮包）的方式建立新的總結庫"
+
+#: scripts/cache_pdf_articles.py:51
+msgid "即将创建一个新的总结库：<b>{}</b>"
+msgstr "即將建立一個新的總結庫：<b>{}</b>"
+
+#: scripts/cache_pdf_articles.py:52
+msgid "库内将包含您上传的所有文章"
+msgstr "庫內將包含您上傳的所有文章"
+
+#: scripts/cache_pdf_articles.py:88
+msgid "没有上传pdf，或者尚未上传任何文件"
+msgstr "沒有上傳pdf，或者尚未上傳任何文件"
+
+#: scripts/cache_pdf_articles.py:89
+msgid "在左上角上传文献后（支持单个pdf与压缩包），再执行本插件"
+msgstr "在左上角上傳文獻後（支援單一PDF與壓縮包），再執行本插件"
+
+#: scripts/cache_pdf_articles.py:105
+msgid "pdf加载成功"
+msgstr "pdf載入成功"
+
+#: scripts/cache_pdf_articles.py:106
+#, python-brace-format
+msgid ""
+"本次<b>上传{upload_count}篇</b>文章，<b>新加载{new_count}篇</b>文章，<b>总"
+"计{cache_count}篇</b>文章存在于缓存中待分析（已有<b>{repo}篇</b>文章分析完"
+"毕）"
+msgstr ""
+"本次<b>上傳{upload_count}篇</b>文章，<b>新載入{new_count}篇</b>文章，<b>總"
+"計{cache_count}篇</b>文章存在於快取中等待分析（已有<b>{repo}篇</b>文章分析"
+"完畢）"
+
+#: scripts/cache_pdf_articles.py:115
+msgid "<b>{}</b>文献总结库目前的关键词如下"
+msgstr "<b>{}</b>文獻總結庫目前之關鍵詞如下"
+
+#: scripts/cache_pdf_articles.py:117
+msgid "目前没有关键词。请创建新的关键词，将用于分析总结"
+msgstr "目前沒有關鍵詞。請建立新的關鍵詞，將用於分析總結"
+
+#: scripts/cache_pdf_articles.py:126
+msgid "向 <b>{}</b> 文献总结库中添加分析关键词"
+msgstr "向<b>{}</b>文獻總結庫中添加分析關鍵詞"
+
+#: scripts/cache_pdf_articles.py:126
+#: scripts/pubmed_openaccess_articles_download.py:465
+msgid "正在处理..."
+msgstr "處理中…"
+
+#: scripts/cache_pdf_articles.py:149
+msgid ""
+"已存在关键词，<b>且已经进行了总结</b>，不会进行修改</br></br><b>现在的关键"
+"词为：</b></br>{}"
+msgstr ""
+"已存在關鍵詞，<b>且已經進行了總結</b>，不會進行修改<br/><br><b>現 在的關鍵"
+"詞為：</b><br/>{}"
+
+#: scripts/cache_pdf_articles.py:156
+#, python-brace-format
+msgid ""
+"关键词已更新</br></br><b>现在的关键词为：</b></br>{new}</br></br><b>此前的"
+"关键词为：</b></br>{old}"
+msgstr ""
+"關鍵詞已更新</br></br><b>現在的關鍵詞為：</b></br>{new}</br></br><b>此前的"
+"關鍵詞為：</b></br>{old}"
+
+#: scripts/cache_pdf_articles.py:162
+msgid ""
+"已存在关键词，不会进行修改（如果还没有总结，可以试试关键词强制更新）</br></"
+"br><b>现在的关键词为：</b></br>{}"
+msgstr ""
+"已存在關鍵詞，不會進行修改（如果還沒有總結，可以試試關鍵詞強制更新）</br></"
+"br><b>現在的關鍵詞為：</b></br>{}"
+
+#: scripts/cache_pdf_articles.py:170
+#, python-brace-format
+msgid "关键词已更新</br></br><b>现在的关键词为：</b></br>{new}"
+msgstr "關鍵詞已更新</br></br><b>現在的關鍵詞為：</b></br>{new}"
+
+#: scripts/cache_pdf_articles.py:177
+msgid "该总结库已损坏：缺少lib_manifest.yml"
+msgstr "該總結庫已損壞：缺少lib_manifest.yml"
+
+#: scripts/cache_pdf_articles.py:178
+msgid "请尝试重新创建该总结库"
+msgstr "請嘗試重新建立該總結庫"
+
+#: scripts/cache_pdf_articles.py:185
+msgid "缺乏关键词，无法总结分析"
+msgstr "缺乏關鍵詞，無法總結分析"
+
+#: scripts/cache_pdf_articles.py:186
+msgid "可以使用 <b>key + 关键词</b> 命令设定新的关键词"
+msgstr "可以使用 <b>key + 關鍵詞</b> 命令設定新的關鍵詞"
+
+#: scripts/cache_pdf_articles.py:195
+msgid "不存在任何可用pdf，无法总结分析"
+msgstr "不存在任何可用PDF，無法總結分析"
+
+#: scripts/cache_pdf_articles.py:196
+msgid "可以使用 <b>缓存pdf文献</b> 缓存新的文章。"
+msgstr "可以使用的 <b>快取pdf文獻</b> 快取新的文章。"
+
+#: scripts/cache_pdf_articles.py:200
+#, python-brace-format
+msgid ""
+"所有的工序已经完成，该工具的流程结束。<ul><li>已导入pdf数量：{in_cache}(缓"
+"存中), {in_repo}(库中)</li><li>关键词：{keywords}</li></ul>"
+msgstr ""
+"所有工序已經完成，該工具的流程結束。<ul><li>已導入pdf數量：{in_cache}(快取"
+"中), {in_repo}(庫中)</li><li>關鍵詞：{keywords}</li></ul>"
+
+#: scripts/cache_pdf_articles.py:202
+msgid ""
+"您可以选择继续添加文章、修改关键词，或是使用 <b>按关键词总结文献</b> 进行AI"
+"总结"
+msgstr ""
+"您可以选择繼續新增文章、修改關鍵詞，或是使用<b>按關鍵詞總結文献</b>進行AI總"
+"結"
+
+#: scripts/cache_pdf_articles.py:210
+msgid "上传1篇pdf文献或多篇pdf的压缩包"
+msgstr "上傳1篇PDF文獻或多篇PDF的壓縮包"
+
+#: scripts/cache_pdf_articles.py:212
+msgid "创建或选择总结库"
+msgstr "建立或選擇摘要庫"
+
+#: scripts/cache_pdf_articles.py:212
+msgid "如要创建新的总结库，请输入一个新名字"
+msgstr "若要建立新的總結庫，請輸入一個新名稱"
+
+#: scripts/cache_pdf_articles.py:214
+msgid "查询或更新关键词"
+msgstr "查詢或更新關鍵詞"
+
+#: scripts/cache_pdf_articles.py:214
+msgid "强制更新关键词"
+msgstr "強制更新關鍵詞"
+
+#: scripts/cache_pdf_articles.py:216
+msgid "在此处输入用于更新的关键词（中英文逗号分割）"
+msgstr "在此處輸入用於更新的關鍵詞（中英文逗號分隔）"
+
+#: scripts/communicate_with_ai_about_research_progress.py:56
+msgid "读取总结文件失败！具体原因如下："
+msgstr "讀取總結檔案失敗！具體原因如下："
+
+#: scripts/communicate_with_ai_about_research_progress.py:60
+msgid "出现问题"
+msgstr "出現問題"
+
+#: scripts/communicate_with_ai_about_research_progress.py:60
+msgid ""
+"该总结库不含总结文件，可能是尚未完成总结或者意外删除？可以尝试重新总结"
+msgstr "该總結庫不含總結文件，可能是尚未完成總結或意外刪除？可以嘗試重新總結"
+
+#: scripts/communicate_with_ai_about_research_progress.py:71
+msgid ""
+"如果有问道某些内容的出处、来源，或者是其他的你不知道的内容、没有给你提供的"
+"内容时，请说“如果要确定详细的内容或者是寻找来源，请使用 find 命令 和 精细分"
+"析文献 功能"
+msgstr ""
+"若有疑問某些内容的出處、來源，或者是一些你不知悉的內容、沒有提供給你的內容"
+"時，請說「如果要確定詳細的內容或者是尋找來源，請使用 find 命令 和 精細分析"
+"文獻 功能」"
+
+#: scripts/communicate_with_ai_about_research_progress.py:76
+#, python-brace-format
+msgid ""
+"现在可以直接与AI交流总结的内容。也可以使用帮助指令查询还可以做些什么 \n"
+"\n"
+"总结库 <b>{name}</b> 在 <b>{key}</b> 方面的总结如下："
+msgstr ""
+"現在可以直接與AI交流總結的内容。也可以使用幫助指令查詢還可以做什么 \n"
+"\n"
+"總結庫 <b>{name}</b> 在 <b>{key}</b> 方面的總結如下："
+
+#: scripts/communicate_with_ai_about_research_progress.py:86
+#, python-brace-format
+msgid ""
+"尝试绘制图表（可能会作图失败，那时就多运行几次吧）...\n"
+"\n"
+"总结库 <b>{name}</b> 在 <b>{key}</b> 方面的总结如下：<details><summary><u>"
+"展开以检视总结的内容...</u></summary>{ov}</details>"
+msgstr ""
+"請嘗試繪製圖表（可能會作圖失敗，那時就多運行幾次吧）...\n"
+"\n"
+"總結庫 <b>{name}</b> 在 <b>{key}</b> 方面的總結如下：<details><summary><u>"
+"展開以檢視總結的內容...</u></summary>{ov}</details>"
+
+#: scripts/communicate_with_ai_about_research_progress.py:88
+msgid "等待绘制....."
+msgstr "等待繪製....."
+
+#: scripts/communicate_with_ai_about_research_progress.py:96
+msgid "参数 <b>{}</b> 不合适或超出范围，修正为 9（思维导图）"
+msgstr "參數 <b>{}</b> 不適合或超出範圍，修正為 9（思維導圖）"
+
+#: scripts/communicate_with_ai_about_research_progress.py:103
+msgid ""
+"无法生成图表。具体原因如下: \n"
+"{}"
+msgstr ""
+"無法生成圖表。具體原因如下: \n"
+"{}"
+
+#: scripts/communicate_with_ai_about_research_progress.py:109
+msgid "开始查找可能是来源的文章... "
+msgstr "開始查找可能為來源的文章..."
+
+#: scripts/communicate_with_ai_about_research_progress.py:109
+#: scripts/communicate_with_ai_about_research_progress.py:127
+msgid "请等待..."
+msgstr "請等待…"
+
+#: scripts/communicate_with_ai_about_research_progress.py:114
+msgid "请输入希望溯源的内容"
+msgstr "請輸入希望溯源的內容"
+
+#: scripts/communicate_with_ai_about_research_progress.py:121
+msgid ""
+"无法溯源。具体原因如下: \n"
+"{}"
+msgstr ""
+"無法溯源。具體原因如下: \n"
+"{}"
+
+#: scripts/communicate_with_ai_about_research_progress.py:127
+msgid "尝试拟定课题中..."
+msgstr "嘗試撰定課題中…"
+
+#: scripts/communicate_with_ai_about_research_progress.py:138
+msgid ""
+"拟定课题出错了！错误原因是：\n"
+"{}"
+msgstr ""
+"拟定課題出錯了！錯誤原因是：\n"
+"{}"
+
+#: scripts/communicate_with_ai_about_research_progress.py:253
+msgid ""
+"搜索完成！暂时没有找到与搜索内容相匹配的文章。可以多尝试几次（<b>不排除AI出"
+"问题</b>），或与AI对总结内容进行交流"
+msgstr ""
+"搜尋完成！暫時沒有找到與搜尋內容相匹配的文章。可以多嘗試几次（<b>不排除AI出"
+"問題</b>），或與AI對總結內容進行交流"
+
+#: scripts/communicate_with_ai_about_research_progress.py:275
+msgid "搜索完成！"
+msgstr "搜索完成！"
+
+#: scripts/communicate_with_ai_about_research_progress.py:276
+msgid ""
+"有 <b>{}</b> 篇文章可能符合期望。在下面可以下载这些文章（以及选中的理由），"
+"此外现在<b>可以直接进行对话</b>、了解<b>这几篇</b>文章了"
+msgstr ""
+"有 <b>{}</b> 篇文章可能符合期望。在下载區可以找到它們（以及選中的理由），此"
+"外現在<b>可以直接進行對話</b>、了解<b>這幾篇</b>文章了"
+
+#: scripts/communicate_with_ai_about_research_progress.py:277
+msgid "对话文章仅包含摘要，如果要细致分析请使用 <b>精细分析文献</b> 工具"
+msgstr "對話文章僅包含摘要，若要詳盡分析請使用<b>精細分析文獻</b>工具"
+
+#: scripts/communicate_with_ai_about_research_progress.py:278
+msgid ""
+"由于人工智能的能力各不相同，<b>回答的理由可能并不能使人满意</b>，请仔细鉴别"
+msgstr ""
+"由於人工智慧的能力各不相同，<b>回答的理由可能並不能使人滿意</b>，請仔細辨別"
+
+#: scripts/communicate_with_ai_about_research_progress.py:279
+msgid "当对结果不满意时，可以重新搜索一次"
+msgstr "當對結果不满意時，可以重新搜尋一次"
+
+#: scripts/communicate_with_ai_about_research_progress.py:280
+msgid "[文章]：指文献。[搜索内容]：指左上角输入的、需要搜索的内容"
+msgstr "[文章]：指文献。[搜索内容]：指左上角輸入的、需要搜索的内容"
+
+#: scripts/communicate_with_ai_about_research_progress.py:289
+msgid "下载文章："
+msgstr "下載文章："
+
+#: scripts/communicate_with_ai_about_research_progress.py:316
+msgid "课题拟定中..."
+msgstr "課題籌劃中..."
+
+#: scripts/communicate_with_ai_about_research_progress.py:316
+msgid "拟定要求: {}"
+msgstr "訂定要求: {}"
+
+#: scripts/communicate_with_ai_about_research_progress.py:322
+msgid "课题拟定完成！"
+msgstr "題目規劃完成！"
+
+#: scripts/communicate_with_ai_about_research_progress.py:323
+msgid "下面是AI拟定的课题及其理由（此时亦可以追问）: "
+msgstr "以下是AI擬定的課題及其理由（此時亦可以追问）:"
+
+#: scripts/communicate_with_ai_about_research_progress.py:332
+#: scripts/fine_grained_analysis_of_article.py:255
+msgid "选择总结库"
+msgstr "選擇總結庫"
+
+#: scripts/communicate_with_ai_about_research_progress.py:332
+msgid "可以在总结库中选择文章"
+msgstr "可以在總結庫中选择文章"
+
+#: scripts/communicate_with_ai_about_research_progress.py:335
+msgid "绘制思维导图 [gpt_acadmic内置功能，语言偏好可能无效]"
+msgstr "繪製思維導圖 [gpt_acadmic內置功能，語言偏好可能無效]"
+
+#: scripts/communicate_with_ai_about_research_progress.py:335
+msgid "寻找总结内容来源"
+msgstr "尋找總結內容來源"
+
+#: scripts/communicate_with_ai_about_research_progress.py:335
+msgid "拟定课题"
+msgstr "鋟定題目"
+
+#: scripts/communicate_with_ai_about_research_progress.py:338
+msgid "在此处输入思维导图类型代码/要溯源的内容/课题拟定要求"
+msgstr "在此处输入思見簡折書類型代码 / 要溯源的内容 / 課題拟定要求"
+
+#: scripts/fine_grained_analysis_of_article.py:37
+msgid "现在可以进行单篇文章的精细分析。支持总结库内置文章或上传的其他文章"
+msgstr "現在可以進行單篇文章的精细分析。支援總結庫內置文章或上傳的其他文章"
+
+#: scripts/fine_grained_analysis_of_article.py:37
+msgid "等待指令中..."
+msgstr "等待指令中…"
+
+#: scripts/fine_grained_analysis_of_article.py:45
+msgid "[注意] 上传的文献多于1篇。<b>精细分析时仅使用第一篇文章</b>"
+msgstr "[注意] 上傳的文獻多於1篇。<b>精细分析時僅使用第一篇文章</b>"
+
+#: scripts/fine_grained_analysis_of_article.py:61
+#: scripts/tools/article_library_ctrl.py:336
+msgid "该用户没有任何总结库"
+msgstr "該用戶沒有任何總結庫"
+
+#: scripts/fine_grained_analysis_of_article.py:63
+#: scripts/tools/article_library_ctrl.py:338
+msgid ""
+"下面是该用户拥有的总结库：\n"
+"\n"
+msgstr ""
+"下面是该使用者所擁有的總結庫：\n"
+"\n"
+
+#: scripts/fine_grained_analysis_of_article.py:69
+msgid ""
+"没有指定任何文章。可以选择上传文章或者从总结库中选择一篇文章进行分析</br></"
+"br>{}"
+msgstr ""
+"未指定任何文章。可選擇上傳文章或從總結庫中選擇一篇文章進行分析</br></br>{}"
+
+#: scripts/fine_grained_analysis_of_article.py:75
+msgid "没有上传可用的文章，<b>{}</b> 亦不是已有的总结库"
+msgstr "沒有上傳可用的文章，<b>{}</b>也非既有的總結庫"
+
+#: scripts/fine_grained_analysis_of_article.py:86
+msgid "总结库 <b>{}</b> 中不存在任何已经加载完成的文章"
+msgstr "總結庫 <b>{}</b> 中不存在任何已經加载完成的文章"
+
+#: scripts/fine_grained_analysis_of_article.py:113
+msgid "访问文章发布页"
+msgstr "請訪問文章發布頁"
+
+#: scripts/fine_grained_analysis_of_article.py:114
+msgid "复制文章"
+msgstr "複製文章"
+
+#: scripts/fine_grained_analysis_of_article.py:115
+msgid "下载文章"
+msgstr "下載文章"
+
+#: scripts/fine_grained_analysis_of_article.py:129
+#: scripts/tools/common_plugin_para.py:91
+msgid "总结库"
+msgstr "總結庫"
+
+#: scripts/fine_grained_analysis_of_article.py:130
+msgid "包含下面的文章："
+msgstr "若包含以下文章："
+
+#: scripts/fine_grained_analysis_of_article.py:131
+msgid ""
+"展开文字可以看到文章的预分析结果。如果没有正常显示标题，说明文章标题获取失"
+"败，但不影响后续使用"
+msgstr ""
+"展開文字可以看到文章的預分析結果。如果没有正常顯示標題，說明文章標題獲取失"
+"敗，但不影響後續使用"
+
+#: scripts/fine_grained_analysis_of_article.py:132
+msgid "分析中使用的关键词："
+msgstr "分析中使用之關鍵詞："
+
+#: scripts/fine_grained_analysis_of_article.py:133
+msgid ""
+"如果没有正常的显示文章标题，可能是该文章没有doi，或是没有在metadata中设定标"
+"题，此时显示的一般为文件名"
+msgstr ""
+"如果没有正常的顯示文章標題，可能是該文章沒有DOI，或是沒有在元數據中設定標"
+"題，此時顯示的一般為檔案名"
+
+#: scripts/fine_grained_analysis_of_article.py:134
+msgid "如果 [访问文章发布页] 不可用，可能是该文章没有doi，也可能是网络错误"
+msgstr "如果[訪問文章發布頁]不可用，可能是該文章沒有DOI，也可能是網絡錯誤"
+
+#: scripts/fine_grained_analysis_of_article.py:149
+msgid ""
+"尚未输入一个可用的文章。可以选择上传一篇文章，也可以从加载的文章中选择一篇"
+"使用"
+msgstr ""
+"尚未輸入一個可用的文章。可以選擇上傳一篇文章，也可以從加載的文章中選擇一篇"
+"使用"
+
+#: scripts/fine_grained_analysis_of_article.py:151
+msgid "您可以点击这里"
+msgstr "您可以點擊此處"
+
+#: scripts/fine_grained_analysis_of_article.py:151
+msgid "查阅该总结库包含的文章"
+msgstr "請查閱該總結庫包含的文章"
+
+#: scripts/fine_grained_analysis_of_article.py:163
+msgid "分析过程中出错！错误原因是：{}"
+msgstr "分析過程中出錯！錯誤原因是：{}"
+
+#: scripts/fine_grained_analysis_of_article.py:194
+msgid "对pdf文件处理中..."
+msgstr "對pdf文件處理中..."
+
+#: scripts/fine_grained_analysis_of_article.py:204
+#, python-brace-format
+msgid "[{i}/{total}] AI阅读中..."
+msgstr "[{i}/{total}] AI閱讀中..."
+
+#: scripts/fine_grained_analysis_of_article.py:229
+msgid "总结中..."
+msgstr "總結中..."
+
+#: scripts/fine_grained_analysis_of_article.py:236
+msgid "分析的文章如下："
+msgstr "分析的文章如下："
+
+#: scripts/fine_grained_analysis_of_article.py:238
+msgid "标题可能不准确，跳转连接亦或许无法使用，仅供参考"
+msgstr "標題可能不準確，跳轉鏈接亦或許無法使用，僅供參考"
+
+#: scripts/fine_grained_analysis_of_article.py:240
+msgid ""
+"精细分析完成，以下是分析的结果（现在亦可以与AI进行交流，也可以下载分析的结"
+"果）: "
+msgstr ""
+"精細分析完成，以下是分析結果（現今亦可與AI進行交流，亦可下載分析結果）:"
+
+#: scripts/fine_grained_analysis_of_article.py:247
+msgid "下载分析结果："
+msgstr "下載分析結果："
+
+#: scripts/fine_grained_analysis_of_article.py:254
+msgid "选定的文章"
+msgstr "選定的文章"
+
+#: scripts/fine_grained_analysis_of_article.py:254
+msgid "上传或使用总结库内的文章"
+msgstr "上傳或使用總結庫內的文章"
+
+#: scripts/fine_grained_analysis_of_article.py:255
+msgid "查看总结库内的文章"
+msgstr "檢視總結庫內的文章"
+
+#: scripts/pubmed_openaccess_articles_download.py:112
+msgid "完成已有文章的检查"
+msgstr "完成已有文章的檢查"
+
+#: scripts/pubmed_openaccess_articles_download.py:116
+msgid "所有需要下载的文章已经缓存"
+msgstr "所有需要下載的文章已經緩存"
+
+#: scripts/pubmed_openaccess_articles_download.py:134
+#: scripts/pubmed_openaccess_articles_download.py:135
+msgid "检测网络情况..."
+msgstr "檢測網絡情況..."
+
+#: scripts/pubmed_openaccess_articles_download.py:152
+msgid "代理生效"
+msgstr "代理生效"
+
+#: scripts/pubmed_openaccess_articles_download.py:154
+msgid "连接超时"
+msgstr "連接逾時"
+
+#: scripts/pubmed_openaccess_articles_download.py:156
+msgid "代理服务失效，使用直连"
+msgstr "代理服務失效，使用直連"
+
+#: scripts/pubmed_openaccess_articles_download.py:158
+msgid "地理位置获取失败。使用直连"
+msgstr "地理位置取得失敗。使用直連"
+
+#: scripts/pubmed_openaccess_articles_download.py:159
+msgid "网络监测失败。使用直连"
+msgstr "網絡監測失敗。使用直連"
+
+#: scripts/pubmed_openaccess_articles_download.py:160
+#: scripts/pubmed_openaccess_articles_download.py:197
+msgid "不使用网络代理"
+msgstr "不使用網絡代理"
+
+#: scripts/pubmed_openaccess_articles_download.py:162
+msgid "下载将使用网络代理"
+msgstr "載入將使用網絡代理"
+
+#: scripts/pubmed_openaccess_articles_download.py:163
+msgid "下载不使用网络代理"
+msgstr "下載不使用網絡代理"
+
+#: scripts/pubmed_openaccess_articles_download.py:189
+#: scripts/pubmed_openaccess_articles_download.py:190
+msgid "下载中，请等待..."
+msgstr "下載中，請等待…"
+
+#: scripts/pubmed_openaccess_articles_download.py:194
+msgid "当前下载进度"
+msgstr "當前下載進度"
+
+#: scripts/pubmed_openaccess_articles_download.py:195
+msgid "下载数"
+msgstr "下載數"
+
+#: scripts/pubmed_openaccess_articles_download.py:195
+msgid "已经存在的文章不含在内"
+msgstr "已經存在的文章不含在其中"
+
+#: scripts/pubmed_openaccess_articles_download.py:196
+msgid "完成百分比"
+msgstr "完成百分比"
+
+#: scripts/pubmed_openaccess_articles_download.py:197
+msgid "使用网络代理"
+msgstr "使用網絡代理"
+
+#: scripts/pubmed_openaccess_articles_download.py:212
+msgid "所有文件下载完成"
+msgstr "所有文件下載完成"
+
+#: scripts/pubmed_openaccess_articles_download.py:256
+msgid "api解析失败"
+msgstr "api解析失敗"
+
+#: scripts/pubmed_openaccess_articles_download.py:262
+msgid "api解析成功"
+msgstr "API 解析成功"
+
+#: scripts/pubmed_openaccess_articles_download.py:324
+#: scripts/pubmed_openaccess_articles_download.py:325
+msgid "用户终止下载"
+msgstr "用戶終止下載"
+
+#: scripts/pubmed_openaccess_articles_download.py:452
+msgid ""
+"上传您在PubMed中保存的csv格式的引文（citations）文件以执行新的下载任务"
+msgstr ""
+"請上傳您在PubMed中保存的csv格式之引文（citations）檔案以執行新的下載任務"
+
+#: scripts/pubmed_openaccess_articles_download.py:453
+msgid "按下 <b>停止</b> 按钮以终止该下载进程"
+msgstr "按下<b>停止</b>按鈕以終止該下載進程"
+
+#: scripts/pubmed_openaccess_articles_download.py:454
+msgid "下载的时间比较耗时，可以打开新的页面进行ai对话"
+msgstr "下載的時間較為耗時，可以打開新的頁面進行AI對話"
+
+#: scripts/pubmed_openaccess_articles_download.py:455
+msgid ""
+"<font color=red>[提醒]</font> 当前一次下载任务终止后，再次运行可能会显示出"
+"之前的下载内容，尚未知如何修复。可以尝试`重置`"
+msgstr ""
+"<font color=red>[提醒]</font> 當前一次下載任務終止後，再次運行可能會顯示出"
+"之前的下載內容，尚未知如何修復。可以嘗試「重置」"
+
+#: scripts/pubmed_openaccess_articles_download.py:456
+msgid "批量从PubMed上下载 OpenAccess 文章"
+msgstr "批次從PubMed上下載OpenAccess文章"
+
+#: scripts/pubmed_openaccess_articles_download.py:470
+msgid "注意，上传的文件不是可用的csv文件"
+msgstr "請注意，上傳的文檔不是可用的csv文件"
+
+#: scripts/pubmed_openaccess_articles_download.py:484
+msgid ""
+"读取出错！可能是文件内容缺失或错误，请检查\"PMID\", \"PMCID\", \"Title\", "
+"\"DOI\"及其内容是否是使用英文逗号分割，以及内容是否正确"
+msgstr ""
+"讀取出錯！可能是文件內容缺失或錯誤，請檢查\"PMID\", \"PMCID\", \"Title\", "
+"\"DOI\"及其內容是否是使用英文逗號分割，以及內容是否正確"
+
+#: scripts/pubmed_openaccess_articles_download.py:488
+msgid ""
+"上传的文件中，缺少 \"PMID\", \"PMCID\", \"Title\", \"DOI\"其中的若干项目，"
+"或拼写错误，请检查"
+msgstr ""
+"上傳的文件中，缺少\"PMID\", \"PMCID\", \"Title\", \"DOI\"其中的若干项目，或"
+"拼寫錯誤，請檢查"
+
+#: scripts/pubmed_openaccess_articles_download.py:500
+#: scripts/pubmed_openaccess_articles_download.py:501
+msgid "正在记录文章信息... "
+msgstr "正在記錄文章信息……"
+
+#: scripts/pubmed_openaccess_articles_download.py:500
+msgid "(文件较大，请等待)"
+msgstr "(檔案較大，請等待)"
+
+#: scripts/pubmed_openaccess_articles_download.py:510
+msgid "文章信息记录完成"
+msgstr "文章資訊記錄完成"
+
+#: scripts/pubmed_openaccess_articles_download.py:517
+msgid "正在下载文章..."
+msgstr "正在下載文章..."
+
+#: scripts/pubmed_openaccess_articles_download.py:527
+msgid ""
+"出现错误。请检查上传的csv是否正确、代理格式是否正确、网络条件是否良好或其他"
+"可能存在的问题"
+msgstr ""
+"出現錯誤。請檢查上傳的CSV是否正確、代理格式是否正確、網絡條件是否良好或其他"
+"可能存在的问题"
+
+#: scripts/pubmed_openaccess_articles_download.py:557
+msgid "此次 PubMed Open Access 下载任务执行完成"
+msgstr "此次 PubMed Open Access 下載任務執行完成"
+
+#: scripts/pubmed_openaccess_articles_download.py:558
+msgid "下载成功的文章"
+msgstr "下載成功的文章"
+
+#: scripts/pubmed_openaccess_articles_download.py:559
+msgid "下载失败的文章"
+msgstr "下載失敗的文章"
+
+#: scripts/pubmed_openaccess_articles_download.py:560
+msgid "下载成功率"
+msgstr "下載成功率"
+
+#: scripts/pubmed_openaccess_articles_download.py:561
+msgid "如果下载失败，则需要手动下载"
+msgstr "如果下載失敗，則需要手動下載"
+
+#: scripts/pubmed_openaccess_articles_download.py:562
+msgid "为什么会这样"
+msgstr "為何會這樣"
+
+#: scripts/pubmed_openaccess_articles_download.py:563
+msgid "点击获取下载的文章"
+msgstr "點擊以取得下載之文章"
+
+#: scripts/pubmed_openaccess_articles_download.py:563
+msgid "点击获取下载日志"
+msgstr "點擊以獲取下載日誌"
+
+#: scripts/pubmed_openaccess_articles_download.py:564
+msgid ""
+"可以直接将下载完成的文章进行分析: 用<b>缓存pdf文献</b>开始总结分析这些文章"
+msgstr ""
+"可以直接將下載完成的文章進行分析：用<b>緩存PDF文獻</b>開始總結分析這些文章"
+
+#: scripts/pubmed_openaccess_articles_download.py:580
+msgid "上传保存的文章列表"
+msgstr "上傳保存的文章清單"
+
+#: scripts/pubmed_openaccess_articles_download.py:580
+msgid "一般为csv格式"
+msgstr "一般為csv格式"
+
+#: scripts/summarize_articles_by_keywords.py:57
+msgid "总结终止。没有找到可用的关键词"
+msgstr "總結終止。未找到可用之關鍵字"
+
+#: scripts/summarize_articles_by_keywords.py:58
+msgid "请在 <b>缓存pdf文献</b> 中设定关键词"
+msgstr "請在 <b>緩存pdf文獻</b> 中設定關鍵詞"
+
+#: scripts/summarize_articles_by_keywords.py:82
+#, python-brace-format
+msgid ""
+"总结库 <b>{name}</b> 已经分析完毕，可以使用<b>与AI交流研究进展</b>进一步了"
+"解该方面的研究现状，如果得到了某篇感兴趣的文章，也可以使用 <b>精细分析文献"
+"</b> 进行精读"
+msgstr ""
+"總結庫 <b>{name}</b> 已經分析完成，可以使用<b>與AI交流研究進展</b>進一步了"
+"解該方面的研究現狀，如果得到某篇感興趣的文章，也可以使用 <b>精細分析文獻</"
+"b> 於精讀"
+
+#: scripts/summarize_articles_by_keywords.py:83
+msgid "参考关键词"
+msgstr "參考關鍵詞"
+
+#: scripts/summarize_articles_by_keywords.py:84
+msgid "如果对分析结果不满意，可以选择强制重新分析（仅对最终总结生效）"
+msgstr "如果對分析結果不滿意，可以選擇強制重新分析（僅對最終總結生效）。"
+
+#: scripts/summarize_articles_by_keywords.py:86
+msgid ""
+"<b>注意：</b>执行此操作会<font color=red>删除此前的总结</font>（不会影响预"
+"处理和预分析的结果）。如果对此前的总结不满意再使用! "
+msgstr ""
+"<b>注意：</b>執行此操作會<font color=red>刪除此前的總結</font>（不會影響預"
+"處理和預分析的結果）。如果對此前的總結不滿意再使用！"
+
+#: scripts/summarize_articles_by_keywords.py:87
+msgid "下面是此前的总结内容: "
+msgstr "以下是此前的總結內容："
+
+#: scripts/summarize_articles_by_keywords.py:103
+msgid "现在将对{}中的文献进行总结分析"
+msgstr "現在將對{}中的文獻進行總結分析"
+
+#: scripts/summarize_articles_by_keywords.py:104
+msgid "分析参考的关键词是 {}。为加快速度，默认 <b>仅对摘要</b> 进行总结"
+msgstr "分析參考的关键字是 {}。為加快速度，默認 <b>僅對摘要</b> 進行總結"
+
+#: scripts/summarize_articles_by_keywords.py:115
+msgid ""
+"该总结库中没有任何可用的pdf文章。如果需要进行总结分析，请先使用 <b>缓存pdf"
+"文献</b> 添加新的文章"
+msgstr ""
+"該總結庫中沒有任何可用的 PDF 文章。如果需要进行總結分析，請先使用 <b>快取 "
+"PDF 文獻</b> 添加新的文章"
+
+#: scripts/summarize_articles_by_keywords.py:121
+msgid "没有新的文章需要预处理或已预处理完成"
+msgstr "沒有新的文章需要預處理或已預處理完成"
+
+#: scripts/summarize_articles_by_keywords.py:122
+msgid "目前已经有<b>{}篇文章</b>预处理完毕，即将进行下一步操作..."
+msgstr "目前已經有<b>{}篇文章</b>預處理完畢，即將進行下一步操作..."
+
+#: scripts/summarize_articles_by_keywords.py:188
+#, python-brace-format
+msgid ""
+"目前有{pdf_count}篇文章处于缓存中（实际需要预处理{jb}篇，{done}篇已经完成流"
+"程），即将使用{cpu}个线程进行预处理。全部预处理完成后就会使用GPT进行汇总分"
+"析..."
+msgstr ""
+"目前有{pdf_count}篇文章處於緩存中（實際需要預處理{jb}篇，{done}篇已經完成流"
+"程），即將使用{cpu}個線程進行預處理。全部預處理完成後就会使用GPT進行匯總分"
+"析..."
+
+#: scripts/summarize_articles_by_keywords.py:190
+msgid "预处理中...."
+msgstr "預處理中...."
+
+#: scripts/summarize_articles_by_keywords.py:199
+#, python-brace-format
+msgid "任务分组 [{done_num}/{task_total}] 预处理中..."
+msgstr "任務分組 [{done_num}/{task_total}] 預處理中..."
+
+#: scripts/summarize_articles_by_keywords.py:213
+msgid "缓存文章预处理完成"
+msgstr "暫存文章預處理完成"
+
+#: scripts/summarize_articles_by_keywords.py:224
+msgid "现在开始使用GPT进行预先分析，每5个文章一组,总共有<b>{}</b>篇文章"
+msgstr "現在開始使用GPT進行預先分析，每5篇文章一組，總共有<b>{}</b>篇文章"
+
+#: scripts/summarize_articles_by_keywords.py:225
+msgid "此过程中可以随时关闭该页面，下次会从 <b>中断的分组</b> 开始"
+msgstr "此過程中可以隨時關閉該頁面，下次會從＜b＞中斷的分组＜/b＞開始"
+
+#: scripts/summarize_articles_by_keywords.py:233
+msgid "分析终止！因为某些原因，程序并没有找到可以总结分析的内容"
+msgstr "分析終止！因為某些原因，程序并未找到可以總結分析的内容"
+
+#: scripts/summarize_articles_by_keywords.py:273
+msgid "移动文件时出错：{}"
+msgstr "移動文件時出錯：{}"
+
+#: scripts/summarize_articles_by_keywords.py:279
+msgid "正在总结，总结过程中，请不要关闭该页面..."
+msgstr "正在總結，總結過程中，請不要關閉該頁面…"
+
+#: scripts/summarize_articles_by_keywords.py:279
+msgid "处理中...."
+msgstr "處理中...."
+
+#: scripts/summarize_articles_by_keywords.py:297
+msgid "总结完成。下面是总结的内容: （不支持对话）"
+msgstr "總結完成。以下是總結內容：（不支持對話）"
+
+#: scripts/summarize_articles_by_keywords.py:299
+msgid "围绕着关键词：{}"
+msgstr "關於關鍵詞：{}"
+
+#: scripts/summarize_articles_by_keywords.py:301
+msgid "如果不满意生成的结果（例如内容明显缺失），可以使用尝试重新生成"
+msgstr "如果對生產的結果不满意（例如內容明顯缺失），可以嘗試重新生成"
+
+#: scripts/summarize_articles_by_keywords.py:304
+msgid "点击这里下载pdf格式的总结内容"
+msgstr "點擊這裡下載PDF格式的總結內容"
+
+#: scripts/summarize_articles_by_keywords.py:359
+#, python-brace-format
+msgid ""
+"[批次进度：{a}/{b}] 请对这篇文章的摘要进行总结概括\n"
+"\n"
+"围绕: {key}"
+msgstr ""
+"[批次進度：{a}/{b}] 請對這篇文章的摘要進行總結概括\n"
+"\n"
+"環繞: {key}"
+
+#: scripts/summarize_articles_by_keywords.py:486
+msgid "处理中..."
+msgstr "處理中..."
+
+#: scripts/summarize_articles_by_keywords.py:497
+msgid "多线程操作完成"
+msgstr "多線程操作完成"
+
+#: scripts/summarize_articles_by_keywords.py:512
+msgid "合并优化中..."
+msgstr "合併優化中…"
+
+#: scripts/summarize_articles_by_keywords.py:519
+msgid "优化完成"
+msgstr "優化完成"
+
+#: scripts/summarize_articles_by_keywords.py:530
+msgid "最后总结中....."
+msgstr "最後總結中……"
+
+#: scripts/summarize_articles_by_keywords.py:537
+msgid "总结完成"
+msgstr "總結完成"
+
+#: scripts/summarize_articles_by_keywords.py:546
+msgid "强制重新分析"
+msgstr "強制重新分析"
+
+#: scripts/tools/article_library_ctrl.py:231
+#: scripts/tools/common_plugin_para.py:130
+msgid "禁用"
+msgstr "禁用"
+
+#: scripts/tools/article_library_ctrl.py:232
+#: scripts/tools/common_plugin_para.py:130
+msgid "启用"
+msgstr "啟用"
+
+#: scripts/tools/article_library_ctrl.py:245
+#, python-brace-format
+msgid ""
+"<ul><li>不能含有以下字符：{forbidden}</li><li>不能以{forbidden_start}开头</"
+"li></ul>"
+msgstr ""
+"<ul><li>不能含有以下字符：{forbidden}</li><li>不能以{forbidden_start}开头</"
+"li></ul>"
+
+#: scripts/tools/article_library_ctrl.py:246
+msgid "该名称`{}`无法使用，详细说明如下: "
+msgstr "该名稱`{}`無法使用，詳細說明如下："
+
+#: scripts/tools/article_library_ctrl.py:266
+msgid ""
+"Scholar Navis (ver.{}) \n"
+"关于文档如下。完整版可以参见github发布页"
+msgstr ""
+"Scholar Navis（ver.{}）\n"
+"關於文檔如下。完整版可參考Github發布頁"
+
+#: scripts/tools/article_library_ctrl.py:275
+msgid "Scholar Navis 使用到的第三方库: "
+msgstr "Scholar Navis 使用到的第三方庫:"
+
+#: scripts/tools/article_library_ctrl.py:285
+#: scripts/tools/gpt_academic_handler.py:42
+msgid "与AI交流研究进展"
+msgstr "與AI交流研究進展"
+
+#: scripts/tools/article_library_ctrl.py:289
+#: scripts/tools/gpt_academic_handler.py:29
+msgid "按关键词总结文献"
+msgstr "按關鍵詞摘要文獻"
+
+#: scripts/tools/article_library_ctrl.py:293
+#: scripts/tools/gpt_academic_handler.py:16
+msgid "缓存pdf文献"
+msgstr "緩存 PDF 文獻"
+
+#: scripts/tools/article_library_ctrl.py:296
+#: scripts/tools/gpt_academic_handler.py:55
+msgid "精细分析文献"
+msgstr "精緻分析文獻"
+
+#: scripts/tools/article_library_ctrl.py:301
+#: scripts/tools/gpt_academic_handler.py:68
+msgid "PubMed_OpenAccess文章获取"
+msgstr "PubMed_OpenAccess 文章獲取"
+
+#: scripts/tools/article_library_ctrl.py:306
+msgid "更好的文章润色"
+msgstr "更佳之文章修飾"
+
+#: scripts/tools/article_library_ctrl.py:320
+msgid "<b>{}</b>的帮助文档如下: "
+msgstr "<b>{}</b>的說明文件如下:"
+
+#: scripts/tools/article_library_ctrl.py:331
+msgid "总结库 <b>{}</b> 不存在，请检查输入是否准确"
+msgstr "總結庫 <b>{}</b> 不存在，請檢查輸入是否準確"
+
+#: scripts/tools/article_library_ctrl.py:331
+msgid "没有输入总结库名称"
+msgstr "沒有輸入總結庫名稱"
+
+#: scripts/tools/article_library_ctrl.py:345
+msgid "不能进行正常操作。下面是有关信息: "
+msgstr "無法進行正常操作。以下為相關信息："
+
+#: scripts/tools/common_plugin_para.py:8
+msgid "需要参数"
+msgstr "需要參數"
+
+#: scripts/tools/common_plugin_para.py:41
+msgid "文件上传路径或网址"
+msgstr "檔案上傳路徑或網址"
+
+#: scripts/tools/common_plugin_para.py:41
+msgid "请上传文件后，再点击该插件"
+msgstr "請上傳文件後，再點擊此插件"
+
+#: scripts/tools/common_plugin_para.py:69
+#: scripts/tools/common_plugin_para.py:78
+msgid "无"
+msgstr "無"
+
+#: scripts/tools/common_plugin_para.py:75
+msgid "帮助文档"
+msgstr "協助文檔"
+
+#: scripts/tools/common_plugin_para.py:76
+msgid "版权信息"
+msgstr "版權資訊"
+
+#: scripts/tools/common_plugin_para.py:77
+msgid "关于"
+msgstr "有關"
+
+#: scripts/tools/common_plugin_para.py:78
+msgid "辅助指令"
+msgstr "輔助指令"
+
+#: scripts/tools/common_plugin_para.py:78
+msgid "使用辅助指令可以实现额外的操作"
+msgstr "使用輔助指令可實現額外的操作"
+
+#: scripts/tools/common_plugin_para.py:82
+msgid "指令参数"
+msgstr "指令參數"
+
+#: scripts/tools/common_plugin_para.py:82
+msgid "如需要，在此处输入辅助指令的参数"
+msgstr "如有需要，在此處輸入輔助指令的參數"
+
+#: scripts/tools/common_plugin_para.py:91
+msgid "选择总结库进行操作"
+msgstr "請選擇總結庫進行操作"
+
+#: scripts/tools/common_plugin_para.py:107
+#: scripts/tools/common_plugin_para.py:109
+msgid "不选择"
+msgstr "不選擇"
+
+#: scripts/tools/common_plugin_para.py:126
+msgid "调整GPT偏好语言"
+msgstr "調整GPT偏好語言"
+
+#: scripts/tools/common_plugin_para.py:126
+msgid "默认为设定的偏好语言"
+msgstr "預設為設定的偏好語言"
+
+#: scripts/tools/common_plugin_para.py:130
+msgid "使用AI辅助功能"
+msgstr "使用AI輔助功能"
+
+#: scripts/tools/common_plugin_para.py:130
+msgid "AI补全信息，速度较慢"
+msgstr "AI補全資訊，速度較慢"
+
+#: scripts/tools/gpt_academic_handler.py:84
+msgid "多语言翻译器"
+msgstr "多語言翻譯器"
+
+#: scripts/tools/gpt_academic_handler.py:94
+msgid "Scholar Navis 加载失败"
+msgstr "Scholar Navis 載入失敗"
+
+#: setup.py:34
+#, python-brace-format
+msgid "如果希望 {lang} 为GPT的偏好语言，请输入 {k}"
+msgstr "如果希望{lang}為GPT的偏好語言，請輸入{k}"
+
+#: setup.py:42 setup.py:175 setup.py:249
+msgid "不合法输入，请重新输入"
+msgstr "不合規輸入，請重新輸入"
+
+#: setup.py:55
+msgid "没有安装在gpt_academic的crazy_functions文件夹下"
+msgstr "未安裝於gpt_academic的crazy_functions資料夾下"
+
+#: setup.py:61
+msgid ""
+"安装的文件夹 \"{}\" 不合规。仅支持英文字母，数字，下划线，并且不能是纯数"
+"字，开头也不能是数字"
+msgstr ""
+"安裝的資料夾 \\{} 不合規。僅支援英文字母、數字、底線，並且不能是純數字，開"
+"頭也不能是數字"
+
+#: setup.py:65 setup.py:206 setup.py:248
+msgid "按回车键退出..."
+msgstr "按回車鍵退出…"
+
+#: setup.py:78
+msgid "找不到预先数据，该过程跳过"
+msgstr "找不到預先數據，該過程略過"
+
+#: setup.py:83
+msgid "已安装预先数据，该过程跳过"
+msgstr "已安裝預先資料，該過程跳過"
+
+#: setup.py:86
+msgid "预先数据安装完成"
+msgstr "預先數據安裝完成"
+
+#: setup.py:107
+msgid "已经在 crazy_functional 中注册过本工具，此过程跳过"
+msgstr "已在crazy_functional中註冊過本工具，此過程跳過"
+
+#: setup.py:113
+msgid ""
+"无法在 crazy_functional 中注册本工具（可以尝试手动安装）。安装程序已终止，"
+"按回车键退出..."
+msgstr ""
+"無法在crazy_functional中註冊本工具（可以嘗試手動安裝）。安裝程序已終止，按"
+"Enter鍵退出..."
+
+#: setup.py:118
+msgid "crazy_functional 注册成功"
+msgstr "crazy_functional 註冊成功"
+
+#: setup.py:147
+msgid "config_private 注册工具组成功"
+msgstr "config_private 註冊工具組成功"
+
+#: setup.py:149
+msgid "config_private 中已注册工具组，此过程跳过"
+msgstr "config_private 中已註冊工具組，此過程跳過"
+
+#: setup.py:165
+msgid "不存在 requirements.txt 包安装终止。按回车键退出..."
+msgstr "不存在 requirements.txt 包安裝終止。按回車鍵退出…"
+
+#: setup.py:170
+msgid "该工具所用的网络位于中国大陆吗？ y(默认)/n/c"
+msgstr "該工具所使用的網絡位於中國大陸嗎？ y(默認)/n/c"
+
+#: setup.py:171
+msgid "y=是 n=否 c=取消安装依赖（跳过）"
+msgstr "y=是 n=否 c=取消安裝依賴（跳過）"
+
+#: setup.py:177
+msgid "开始安装依赖包..."
+msgstr "開始安裝依賴包..."
+
+#: setup.py:184 setup.py:190
+msgid "requirements.txt 安装成功"
+msgstr "requirements.txt 安裝成功"
+
+#: setup.py:193
+msgid "已经跳过依赖安装"
+msgstr "已經跳過依賴安裝"
+
+#: setup.py:196
+msgid "requirements.txt 安装失败（{}）。按回车键退出..."
+msgstr "requirements.txt 安装失敗（{}）。按回車鍵退出..."
+
+#: setup.py:201
+msgid "Scholar Navis 安装成功。"
+msgstr "Scholar Navis 載入成功。"
+
+#: setup.py:202
+msgid "进一步配置，请在 conig_private.py 中进行调整，内含各个参数的详细说明"
+msgstr "進一步設定，請在 conig_private.py 中進行調整，內含各個參數的詳細說明"
+
+#: setup.py:203
+msgid "此外也请阅读 readme.md ，了解本程序、gpt_academic和其他事宜！"
+msgstr "此外也請閱讀readme.md，了解本程序、gpt_academic和其他事宜！"
+
+#: setup.py:234
+msgid "欢迎使用Scholar Navis"
+msgstr "歡迎使用學者貴船"
+
+#: setup.py:244
+msgid "要安装 Scholar Navis 吗？ y(默认)/n"
+msgstr "是否安裝 Scholar Navis？ y(預設)/n"
+
+#~ msgid "下载成功的文章、下载的详细信息可以在 <b>文件下载区</b> 找到"
+#~ msgstr "下載成功的文章、下載的詳細資訊可在 <b>文件下載區</b> 找到"
