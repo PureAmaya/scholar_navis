@@ -10,8 +10,8 @@ config_file_fp = os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'config.yml')
 VERSION = '1.0.0_release'
 
 CONFIG = {
-            'GPT_prefer_language':'English',
-            'display_language':'en-US',
+            'GPT_prefer_language':'简体中文',
+            'display_language':'zh-Hans',
         }
 
 SUPPORT_DISPLAY_LANGUAGE = {'zh-Hans','zh-Hant','en-US'}

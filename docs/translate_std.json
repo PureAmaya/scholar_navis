@@ -106,5 +106,13 @@
     "解析PDF_DOC2X_转Latex": "ParsePDF_DOC2X_toLatex",
     "解析PDF_基于DOC2X": "ParsePDF_basedDOC2X",
     "解析PDF_简单拆解": "ParsePDF_simpleDecomposition",
-    "解析PDF_DOC2X_单文件": "ParsePDF_DOC2X_singleFile"
+    "解析PDF_DOC2X_单文件": "ParsePDF_DOC2X_singleFile",
+    "注释Python项目": "CommentaryPythonProject",
+    "注释源代码": "CommentarySourceCode",
+    "缓存pdf文献": "CachePDFLiterature",
+    "与AI交流研究进展": "CommunicationWithAIOnResearchProgress",
+    "精细分析文献": "FineAnalysisOfLiterature",
+    "PubMed_OpenAccess文章获取": "PubMedOpenAccessArticleAcquisition",
+    "按关键词总结文献": "SummarizeLiteratureByKeywords",
+    "多语言翻译器": "MultilingualTranslator"
 }

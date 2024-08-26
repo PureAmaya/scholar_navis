@@ -35,7 +35,7 @@ This software is developed based on gpt_academic (version 3.83) and serves as a 
 
 - User-friendly. Each possible use scenario has its corresponding help document.
 
-- Supports both Chinese and English languages. (GPT supports multiple languages, **but the ability to understand different languages may vary among different GPTs,** and the multilingual feature is currently not supported by gpt_academic itself)
+- Supports both Chinese and English languages. (GPT supports multiple languages, **but the ability to understand different languages may vary among different GPTs** ) You can use `multi_language.py` to translate gpt_academic yourself **(please translate first, then install Scholar Navis)**. Additionally, non-Simplified Chinese languages may encounter issues where the "submit" button cannot be clicked. In such cases, you can temporarily use the `Interface Appearance -> Floating Input Area` as an alternative. The exact fix for this issue is not yet known.
 
 - Command-based. Specific commands can be used to achieve different functions.
 

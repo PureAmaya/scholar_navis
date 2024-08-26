@@ -19,34 +19,34 @@ Below is a list of projects used or relied upon:
 
 **The modified parts in gpt_academic are as follows:**
 
-1. The principle is to make as few modifications to gpt_academic as possible to facilitate portability or the use of other versions.
+- The principle is to make as few modifications to gpt_academic as possible to facilitate portability or the use of other versions.
 
-2. Since modifications have been made to the source code of gpt_academic (mainly to enable it to call Scholar Navis), due to the constraints of the GPL-3.0 license, the source code of gpt_academic must also be distributed, and the modifications must be noted as well.
+- Since modifications have been made to the source code of gpt_academic (mainly to enable it to call Scholar Navis), due to the constraints of the GPL-3.0 license, the source code of gpt_academic must also be distributed, and the modifications must be noted as well.
 
-3. In `crazy_functional.py`, the following content was added around line 400. The `setup.py` can also cause the following modifications.
-   
-   ```python
-   ###### SCHOLAR NAVIS START ########
-   from crazy_functions.scholar_navis.scripts.tools.gpt_academic_handler import registrator
-   function_plugins = registrator(function_plugins)
-   ##### SCHOLAR NAVIS END - UNINSTALL: DELETE THESE ######
-   ```
+- In `crazy_functional.py`, the following content was added around line 400. The `setup.py` can also cause the following modifications.
+  
+  ```python
+  ###### SCHOLAR NAVIS START ########
+  from crazy_functions.scholar_navis.scripts.tools.gpt_academic_handler import registrator
+  function_plugins = registrator(function_plugins)
+  ##### SCHOLAR NAVIS END - UNINSTALL: DELETE THESE ######
+  ```
 
 > These modifications are made to enable gpt_academic to utilize Scholar Navis.
 
-2. In `config_private.py`, the following modifications were made around line 118. The `setup.py` can also make the following changes, or it can generate a `config_private.py` containing the following modifications.
-   
-   ```python
-   # original：
-   DEFAULT_FN_GROUPS = ['对话', '编程', '学术', '智能体']
-   
-   # modified：
-   DEFAULT_FN_GROUPS = ['Scholar Navis']
-   
-   # Sometimes the modified content may include the original content
-   # for example:
-   DEFAULT_FN_GROUPS = ['Scholar Navis','对话', '编程', '学术', '智能体']
-   ```
+- In `config_private.py`, the following modifications were made around line 118. The `setup.py` can also make the following changes, or it can generate a `config_private.py` containing the following modifications.
+  
+  ```python
+  # original：
+  DEFAULT_FN_GROUPS = ['对话', '编程', '学术', '智能体']
+  
+  # modified：
+  DEFAULT_FN_GROUPS = ['Scholar Navis']
+  
+  # Sometimes the modified content may include the original content
+  # for example:
+  DEFAULT_FN_GROUPS = ['Scholar Navis','对话', '编程', '学术', '智能体']
+  ```
 
 > This modification is made so that users can access Scholar Navis through the gpt_academic web service.
 

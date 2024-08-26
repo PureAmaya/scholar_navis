@@ -19,33 +19,33 @@ Scholar Navis 使用 GPL-3.0 license 许可证
 
 **gpt_academic中产生修改的部分如下：**
 
-1. 原则上是尽可能减少对于 gpt_academic 的修改，以方便移植或使用其他的版本。
+- 原则上是尽可能减少对于 gpt_academic 的修改，以方便移植或使用其他的版本。
 
-2. 因为对 gpt_academic 的源码产生了修改（主要是使其能够调用 Scholar Navis ），受限于GPL-3.0的约束，需要将 gpt_academic 的源码一并发布，并且亦需注明修改内容。
+- 因为对 gpt_academic 的源码产生了修改（主要是使其能够调用 Scholar Navis ），受限于GPL-3.0的约束，需要将 gpt_academic 的源码一并发布，并且亦需注明修改内容。
 
-3. crazy_functional.py：约400行处添加了下面的内容。`setup.py`亦可以产生下述修改
-   
-   ```python
-   ###### SCHOLAR NAVIS START ########
-   from crazy_functions.scholar_navis.scripts.tools.gpt_academic_handler import registrator
-   function_plugins = registrator(function_plugins)
-   ##### SCHOLAR NAVIS END - UNINSTALL: DELETE THESE ######
-   ```
+- `crazy_functional.py`：约400行处添加了下面的内容。`setup.py`亦可以产生下述修改
+  
+  ```python
+  ###### SCHOLAR NAVIS START ########
+  from crazy_functions.scholar_navis.scripts.tools.gpt_academic_handler import registrator
+  function_plugins = registrator(function_plugins)
+  ##### SCHOLAR NAVIS END - UNINSTALL: DELETE THESE ######
+  ```
 
 > 这样修改是为了gpt_academic能够使用 Scholar Navis
 
-2. config_private.py：约118行处产生了以下修改内容。`setup.py`亦可以产生下述修改，或产生一个含有下述修改内容的config_private.py
-   
-   ```python
-   # 原始内容：
-   DEFAULT_FN_GROUPS = ['对话', '编程', '学术', '智能体']
-   
-   # 修改后的内容：
-   DEFAULT_FN_GROUPS = ['Scholar Navis']
-   
-   # 有的时候修改后的内容可能会包含原始的内容，例如：
-   DEFAULT_FN_GROUPS = ['Scholar Navis','对话', '编程', '学术', '智能体']
-   ```
+- `config_private.py`：约118行处产生了以下修改内容。`setup.py`亦可以产生下述修改，或产生一个含有下述修改内容的config_private.py
+  
+  ```python
+  # 原始内容：
+  DEFAULT_FN_GROUPS = ['对话', '编程', '学术', '智能体']
+  
+  # 修改后的内容：
+  DEFAULT_FN_GROUPS = ['Scholar Navis']
+  
+  # 有的时候修改后的内容可能会包含原始的内容，例如：
+  DEFAULT_FN_GROUPS = ['Scholar Navis','对话', '编程', '学术', '智能体']
+  ```
 
 > 这样子修改是为了用户可以通过gpt_academic的web服务使用 Scholar Navis
 

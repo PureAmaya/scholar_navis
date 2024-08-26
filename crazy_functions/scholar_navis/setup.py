@@ -178,15 +178,15 @@ def __install_requirement():
         try:
             if country == 'n':
                 # gpt_Academic的依赖库
-                subprocess.run(['python3','-m','pip', 'install', '-r',f'{os.path.join(GPT_ACADEMIC_ROOT_PATH,"requirements.txt")}','--upgrade'])
+                subprocess.run(['pip', 'install', '-r',f'{os.path.join(GPT_ACADEMIC_ROOT_PATH,"requirements.txt")}','--upgrade'])
                 # school navis的依赖库
-                subprocess.run(['python3','-m','pip', 'install', '-r',f'{os.path.join(SCHOLAR_NAVIS_ROOT_PATH,"requirements.txt")}','--upgrade'])
+                subprocess.run(['pip', 'install', '-r',f'{os.path.join(SCHOLAR_NAVIS_ROOT_PATH,"requirements.txt")}','--upgrade'])
                 print(_('requirements.txt 安装成功'))
             elif country == 'y' or country == '':
                 # gpt_Academic的依赖库
-                subprocess.run(['python3','-m','pip', 'install', '-r',f'{os.path.join(GPT_ACADEMIC_ROOT_PATH,"requirements.txt")}','--upgrade','-i','https://mirrors.aliyun.com/pypi/simple/'])
+                subprocess.run(['pip', 'install', '-r',f'{os.path.join(GPT_ACADEMIC_ROOT_PATH,"requirements.txt")}','--upgrade','-i','https://pypi.mirrors.ustc.edu.cn/simple/'])
                 # school navis的依赖库
-                subprocess.run(['python3','-m','pip', 'install', '-r',f'{os.path.join(SCHOLAR_NAVIS_ROOT_PATH,"requirements.txt")}','--upgrade','-i','https://mirrors.aliyun.com/pypi/simple/'])
+                subprocess.run(['pip', 'install', '-r',f'{os.path.join(SCHOLAR_NAVIS_ROOT_PATH,"requirements.txt")}','--upgrade','-i','https://pypi.mirrors.ustc.edu.cn/simple/'])
                 print(_('requirements.txt 安装成功'))
             elif country == 'c':
                 # 取消安装
