@@ -49,6 +49,41 @@ Scholar Navis 使用 GPL-3.0 license 授權證
 
 > 這樣修改是為了用戶能通過 gpt_academic 的網絡服務使用 Scholar Navis。
 
+- `multi_language.py`：具體修改如下：
+  
+  ```python
+  # 43行
+  # 原始
+  blacklist = ['multi-language', CACHE_FOLDER, '.git', 'private_upload', 'multi_language.py', 'build', '.github', '.vscode', '__pycache__', 'venv']
+  # 修改後
+  blacklist = ['multi-language', CACHE_FOLDER, '.git', 'private_upload', 'multi_language.py', 'build', '.github', '.vscode', '__pycache__', 'venv','scholar_navis']
+  
+  # 約526行，新增了如下內容
+  def  step_ex_scholar_navis():
+      ```加入的代碼```
+  
+  # 588行，添加了如下内容
+  step_ex_scholar_navis()
+  ```
+  
+  > 這裡添加這些內容是為了在翻譯 gpt_academic 之後，Scholar Navis 可以正常運行。
+
+- `themes/init.js`：大約在第九行處，註釋掉了關於 `welcomeMessage` 的內容（因為這些內容可能會引發錯誤）。
+  
+  ```js
+  // 以下被註釋掉的部分則為修改的部分
+  
+      // 加载欢迎页面
+      // 因为欢迎界面有BUG，所以就暂时去掉了
+      //const welcomeMessage = new WelcomeMessage();
+      //welcomeMessage.begin_render();
+      chatbotIndicator = gradioApp().querySelector('#gpt-chatbot > div.wrap');
+      var chatbotObserver = new MutationObserver(() => {
+          chatbotContentChanged(1);
+          //welcomeMessage.update();
+      });
+  ```
+
 **gpt_academic 的使用策略**：
 
 - 存取 AI：多線程和單線程對多個 AI 的存取，以及其中發生的網絡處理、token 限制、和存取 AI 所需的 API 及其所需文本內容的整合。

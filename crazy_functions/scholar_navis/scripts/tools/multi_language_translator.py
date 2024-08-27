@@ -16,8 +16,8 @@ public_prompt = '''
 You are good at translation. When translating, please use the same expression for identical statements.
 If there are any special symbols, please retain them unchanged.
 You should translate follow these:
-[文章] Article
-[搜搜内容] Query
+[文章] [Article]
+[搜搜内容] [Query]
 文献总结库   article summarization library
 总结文件 summarization file
 精细分析文献  Fine-grained Analysis of Article

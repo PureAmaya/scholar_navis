@@ -3,12 +3,15 @@ import yaml
 import shutil
 import zipfile
 from .tools.multi_lang import _
-from ...生成多种Mermaid图表 import 生成多种Mermaid图表
 from .tools.common_plugin_para import common_plugin_para
 from .tools.article_library_ctrl import check_library_exist_and_assistant,lib_manifest,pdf_yaml,get_tmp_dir_of_this_user,download_file
 from toolbox import CatchException,get_log_folder,get_user,update_ui,update_ui_lastest_msg
 from ...crazy_utils import request_gpt_model_in_new_thread_with_ui_alive,request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency
 
+try:
+    from ...生成多种Mermaid图表 import 生成多种Mermaid图表
+except:
+    from ...GenerateMultipleMermaidCharts import GenerateMultipleMermaidCharts as 生成多种Mermaid图表
 
 @check_library_exist_and_assistant(accept_nonexistent=False,accept_blank=False)
 @CatchException

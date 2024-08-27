@@ -50,6 +50,41 @@ Below is a list of projects used or relied upon:
 
 > This modification is made so that users can access Scholar Navis through the gpt_academic web service.
 
+- `multi_language.py`: The specific modifications are as follow:
+  
+  ```python
+  # line 43
+  # Original
+  blacklist = ['multi-language', CACHE_FOLDER, '.git', 'private_upload', 'multi_language.py', 'build', '.github', '.vscode', '__pycache__', 'venv']
+  # Modified
+  blacklist = ['multi-language', CACHE_FOLDER, '.git', 'private_upload', 'multi_language.py', 'build', '.github', '.vscode', '__pycache__', 'venv','scholar_navis']
+  
+  # Approximately line 526, added the following content
+  def  step_ex_scholar_navis():
+      ```Added code```
+  
+  # Line 588, added the following content
+  step_ex_scholar_navis()
+  ```
+  
+  > These contents are added here to ensure that Scholar Navis can operate normally after the translation of gpt_academic.
+
+- `themes/init.js`: Approximately on the ninth line, the content related to `welcomeMessage` has been commented out (because this content might cause bugs).
+  
+  ```js
+  // The following commented out section is the part that has been modified
+  
+      // 加载欢迎页面
+      // 因为欢迎界面有BUG，所以就暂时去掉了
+      //const welcomeMessage = new WelcomeMessage();
+      //welcomeMessage.begin_render();
+      chatbotIndicator = gradioApp().querySelector('#gpt-chatbot > div.wrap');
+      var chatbotObserver = new MutationObserver(() => {
+          chatbotContentChanged(1);
+          //welcomeMessage.update();
+      });
+  ```
+
 **gpt_academic Usage Strategies**:
 
 - Accessing AI: Multithreading and single-threading for accessing multiple AIs, including network processing, token limitations, and the integration of API required for accessing AI and the necessary text content.

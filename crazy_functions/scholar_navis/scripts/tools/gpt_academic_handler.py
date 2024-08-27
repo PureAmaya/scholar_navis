@@ -1,6 +1,9 @@
 from toolbox import HotReload
 from .multi_lang import _
-from shared_utils.colorful import print亮黄
+try:
+    from shared_utils.colorful import print亮黄
+except:
+    from shared_utils.colorful import PrintBrightYellow as print亮黄
 
 
 enable_translator = False # 翻译完之后，别忘了把这个给关了

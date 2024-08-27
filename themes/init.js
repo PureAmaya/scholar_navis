@@ -5,17 +5,20 @@ async function GptAcademicJavaScriptInit(dark, prompt, live2d, layout, tts) {
     ButtonWithDropdown_init();
     
     // 加载欢迎页面
-    const welcomeMessage = new WelcomeMessage();
-    welcomeMessage.begin_render();
+    // 因为欢迎界面有BUG，所以就暂时去掉了
+    //const welcomeMessage = new WelcomeMessage();
+    //welcomeMessage.begin_render();
     chatbotIndicator = gradioApp().querySelector('#gpt-chatbot > div.wrap');
     var chatbotObserver = new MutationObserver(() => {
         chatbotContentChanged(1);
-        welcomeMessage.update();
+        //welcomeMessage.update();
     });
+    
     chatbotObserver.observe(chatbotIndicator, { attributes: true, childList: true, subtree: true });
     
     if (layout === "LEFT-RIGHT") { chatbotAutoHeight(); }
     if (layout === "LEFT-RIGHT") { limit_scroll_position(); }
+
 
     // 第二部分，读取Cookie，初始话界面
     let searchString = "";

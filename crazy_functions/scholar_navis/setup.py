@@ -1,6 +1,7 @@
 import os
 import sys
 import shutil
+import argparse
 import subprocess
 from scripts.tools.sn_config import GPT_SUPPORT_LAMGUAGE
 from scripts.tools.multi_lang import _,i18n
@@ -108,7 +109,8 @@ def __crazy_function_modifier():
         return 
         
     # 找到特定行的位置在哪，之后在这段文本的前后插入
-    insert_position = cr.find('# -=--=- 尚未充分测试的实验性插件 & 需要额外依赖的插件 -=--=-')    
+    insert_position = cr.find('# -=--=-')   
+    print(insert_position) 
     if insert_position == -1 :
         input(_('无法在 crazy_functional 中注册本工具（可以尝试手动安装）。安装程序已终止，按回车键退出...'))
         sys.exit(1)
@@ -249,4 +251,15 @@ def main():
         else:print('\n'); print(_('不合法输入，请重新输入'))
         
 if __name__ == "__main__":
-    main()
+
+    parser = argparse.ArgumentParser(description='Process some parameters.')
+
+    #parser.add_argument('-l', '--lang', type=str, default='en', help='Language code (default: en)')
+    parser.add_argument('-l', '--lang', action='store_true', help='only choose language')
+    
+    args = parser.parse_args()
+    
+    if not args.lang:
+        main()
+    else:
+        __choose_language()
