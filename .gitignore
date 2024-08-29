@@ -162,6 +162,8 @@ objdump*
 
 # scholar_navis
 notification.txt
+notification-cn.txt
+notification-en.txt
 tmp
 crazy_functions/scholar_navis/data
 crazy_functions/scholar_navis/scripts/dev
