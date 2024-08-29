@@ -5,18 +5,11 @@ import shutil
 import codecs
 import sqlite3
 from enum import Enum
+from .multi_lang import _
 from functools import wraps
 from datetime import datetime
-
-
-# 该插件的根目录
-SCHOLAR_NAVIS_ROOT_PATH = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-'''该插件的根目录'''
-GPT_ACADEMIC_ROOT_PATH = os.path.dirname(os.path.dirname(SCHOLAR_NAVIS_ROOT_PATH))
-'''gpt_academic根目录'''
-SCHOLAR_NAVIS_DIR_NAME = os.path.basename(SCHOLAR_NAVIS_ROOT_PATH)
-'''该插件所在的那个文件夹（仅一个文件夹）'''
-
+from .sn_config import CONFIG,VERSION
+from .const import SCHOLAR_NAVIS_ROOT_PATH,GPT_ACADEMIC_ROOT_PATH
 
 class lib_manifest(Enum):# 单纯为了规范yaml的名称
     library_name = 'library_name'
@@ -198,8 +191,7 @@ def check_library_exist_and_assistant(accept_nonexistent=False,accept_blank = Fa
     
     # 不适合放在外面的
     from toolbox import ChatBotWithCookies, update_ui, get_log_folder, get_user
-    from .sn_config import CONFIG,VERSION
-    from .multi_lang import _
+
     
     
     def decorate(f):
@@ -225,7 +217,7 @@ def check_library_exist_and_assistant(accept_nonexistent=False,accept_blank = Fa
             plugin_kwargs['command_para'] = plugin_kwargs.get('command_para','').strip()
             
             # 语言设定修订
-            plugin_kwargs['gpt_prefer_lang'] = plugin_kwargs.get('gpt_prefer_lang',CONFIG['GPT_prefer_language'])
+            plugin_kwargs['gpt_prefer_lang'] = plugin_kwargs.get('gpt_prefer_lang',CONFIG['language_GPT_prefer'])
 
             # AI辅助修订
             ai_assist_text = plugin_kwargs.get('ai_assist',_('禁用'))
@@ -254,7 +246,7 @@ def check_library_exist_and_assistant(accept_nonexistent=False,accept_blank = Fa
             this_library_fp = os.path.join(tool_root, library_name)
             
             # 插件的文档文件夹
-            doc_dir = os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'doc',CONFIG['display_language']) 
+            doc_dir = os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'doc',CONFIG['language_display']) 
                 
             # < --------------------泛用型用户命令解析--------------------- >
             doc_fp = ''
@@ -346,9 +338,6 @@ def check_library_exist_and_assistant(accept_nonexistent=False,accept_blank = Fa
                 yield from update_ui(chatbot=chatbot, history=[])  # 刷新界面
                 return
             
-            # 运行之前，清除一下缓存
-            shutil.rmtree(get_tmp_dir_of_this_user(chatbot,'',[],False))
-            
             # 正常情况下，就调用原函数
             yield from f(txt, args[1], plugin_kwargs, chatbot, [], args[5], args[6]) # 反正history已经是[]了
             
@@ -407,10 +396,10 @@ def csv_load(file_fp:str):
 
 def _get_dir(root_dir: str, sub_dir: list[str] , create_datetime_dir: bool):
     
-    if create_datetime_dir:
-        sub_dir.append(datetime.now().strftime("%Y-%m-%d %H-%M-%S"))
-
     dir = root_dir
+    
+    if create_datetime_dir:
+        dir = os.path.join(dir,datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
 
     # 补充子目录
     if len(sub_dir) > 0:
@@ -434,11 +423,14 @@ def download_file(file_path,txt:str = None):
 
 def get_data_dir(root_dir: str, sub_dir: list[str] = []):
     root_dir = os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'data',root_dir)
+    # SCHOLAR_NAVIS_ROOT_PATH/data/root_dir/sub_dir
     return _get_dir(create_datetime_dir=False,root_dir=root_dir,sub_dir=sub_dir)
 
 def get_tmp_dir_of_this_user(chatbot,root_dir: str, sub_dir: list[str] = [],create_datetime_dir=True):
-    from toolbox import get_log_folder, get_user
-    this_user_tmp_dir = os.path.join(get_log_folder(user=get_user(chatbot), plugin_name='scholar_navis'), 'tmp',root_dir)
+    from toolbox import get_user
+    this_user_tmp_dir = os.path.join('tmp',get_user(chatbot))
+    sub_dir.insert(0,root_dir)
+    # tmp/user/2024-08-29 09-53-20/root_dir/sub_dir
     return _get_dir(root_dir=this_user_tmp_dir,sub_dir=sub_dir,create_datetime_dir=create_datetime_dir)
 
 

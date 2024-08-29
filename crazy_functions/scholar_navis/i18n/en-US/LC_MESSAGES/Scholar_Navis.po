@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-08-23 16:30+0800\n"
-"PO-Revision-Date: 2024-08-23 16:31+0800\n"
+"POT-Creation-Date: 2024-08-29 21:57+0800\n"
+"PO-Revision-Date: 2024-08-29 21:59+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -190,23 +190,23 @@ msgid "在此处输入用于更新的关键词（中英文逗号分割）"
 msgstr ""
 "Please enter keywords for update (Chinese or English, separated by commas)"
 
-#: scripts/communicate_with_ai_about_research_progress.py:56
+#: scripts/communicate_with_ai_about_research_progress.py:59
 msgid "读取总结文件失败！具体原因如下："
 msgstr ""
 "Failed to read the summarization file! The specific reason is as follows:"
 
-#: scripts/communicate_with_ai_about_research_progress.py:60
+#: scripts/communicate_with_ai_about_research_progress.py:63
 msgid "出现问题"
 msgstr "Problem occurred"
 
-#: scripts/communicate_with_ai_about_research_progress.py:60
+#: scripts/communicate_with_ai_about_research_progress.py:63
 msgid "该总结库不含总结文件，可能是尚未完成总结或者意外删除？可以尝试重新总结"
 msgstr ""
 "The article summarization library does not contain any summarization files, "
 "which may be because the summaries have not been completed or were "
 "accidentally deleted. You can try to summarize them again"
 
-#: scripts/communicate_with_ai_about_research_progress.py:71
+#: scripts/communicate_with_ai_about_research_progress.py:74
 msgid ""
 "如果有问道某些内容的出处、来源，或者是其他的你不知道的内容、没有给你提供的内"
 "容时，请说“如果要确定详细的内容或者是寻找来源，请使用 find 命令 和 精细分析文"
@@ -217,7 +217,7 @@ msgstr ""
 "please say: To determine detailed content or to find sources, please use the "
 "'find' command and the 'Fine-grained Analysis of Article' function"
 
-#: scripts/communicate_with_ai_about_research_progress.py:76
+#: scripts/communicate_with_ai_about_research_progress.py:79
 #, python-brace-format
 msgid ""
 "现在可以直接与AI交流总结的内容。也可以使用帮助指令查询还可以做些什么 \n"
@@ -230,7 +230,7 @@ msgstr ""
 "article summarization library ( <b>{name}</b> ) in regard to <b>{key}</b> is "
 "as follows:"
 
-#: scripts/communicate_with_ai_about_research_progress.py:86
+#: scripts/communicate_with_ai_about_research_progress.py:89
 #, python-brace-format
 msgid ""
 "尝试绘制图表（可能会作图失败，那时就多运行几次吧）...\n"
@@ -245,17 +245,17 @@ msgstr ""
 "<details><summary><u>Click to expand and view the summary contents...</u></"
 "summary>{ov}</details>"
 
-#: scripts/communicate_with_ai_about_research_progress.py:88
+#: scripts/communicate_with_ai_about_research_progress.py:91
 msgid "等待绘制....."
 msgstr "Waiting for drawing...."
 
-#: scripts/communicate_with_ai_about_research_progress.py:96
+#: scripts/communicate_with_ai_about_research_progress.py:99
 msgid "参数 <b>{}</b> 不合适或超出范围，修正为 9（思维导图）"
 msgstr ""
 "Parameter <b>{}</b> is inappropriate or out of range, corrected to 9 (Mind "
 "Map)"
 
-#: scripts/communicate_with_ai_about_research_progress.py:103
+#: scripts/communicate_with_ai_about_research_progress.py:106
 msgid ""
 "无法生成图表。具体原因如下: \n"
 "{}"
@@ -263,20 +263,20 @@ msgstr ""
 "Unable to generate charts. The specific reasons are as follows: \n"
 "{}"
 
-#: scripts/communicate_with_ai_about_research_progress.py:109
+#: scripts/communicate_with_ai_about_research_progress.py:112
 msgid "开始查找可能是来源的文章... "
 msgstr "Starting to search for articles that may be the source... "
 
-#: scripts/communicate_with_ai_about_research_progress.py:109
-#: scripts/communicate_with_ai_about_research_progress.py:127
+#: scripts/communicate_with_ai_about_research_progress.py:112
+#: scripts/communicate_with_ai_about_research_progress.py:130
 msgid "请等待..."
 msgstr "Please wait..."
 
-#: scripts/communicate_with_ai_about_research_progress.py:114
+#: scripts/communicate_with_ai_about_research_progress.py:117
 msgid "请输入希望溯源的内容"
 msgstr "Please input the content for traceability"
 
-#: scripts/communicate_with_ai_about_research_progress.py:121
+#: scripts/communicate_with_ai_about_research_progress.py:124
 msgid ""
 "无法溯源。具体原因如下: \n"
 "{}"
@@ -285,11 +285,11 @@ msgstr ""
 "\n"
 "{}"
 
-#: scripts/communicate_with_ai_about_research_progress.py:127
+#: scripts/communicate_with_ai_about_research_progress.py:130
 msgid "尝试拟定课题中..."
 msgstr "Attempt to formulate the topic..."
 
-#: scripts/communicate_with_ai_about_research_progress.py:138
+#: scripts/communicate_with_ai_about_research_progress.py:141
 msgid ""
 "拟定课题出错了！错误原因是：\n"
 "{}"
@@ -297,7 +297,7 @@ msgstr ""
 "The topic formulation is incorrect! The error reason is: \n"
 "{}"
 
-#: scripts/communicate_with_ai_about_research_progress.py:253
+#: scripts/communicate_with_ai_about_research_progress.py:256
 msgid ""
 "搜索完成！暂时没有找到与搜索内容相匹配的文章。可以多尝试几次（<b>不排除AI出问"
 "题</b>），或与AI对总结内容进行交流"
@@ -306,11 +306,11 @@ msgstr ""
 "try again several times (<b>do not rule out that AI is having an issue</b>), "
 "or communicate with AI about the summarized content"
 
-#: scripts/communicate_with_ai_about_research_progress.py:275
+#: scripts/communicate_with_ai_about_research_progress.py:278
 msgid "搜索完成！"
 msgstr "Search completed!"
 
-#: scripts/communicate_with_ai_about_research_progress.py:276
+#: scripts/communicate_with_ai_about_research_progress.py:279
 msgid ""
 "有 <b>{}</b> 篇文章可能符合期望。在下面可以下载这些文章（以及选中的理由），此"
 "外现在<b>可以直接进行对话</b>、了解<b>这几篇</b>文章了"
@@ -319,102 +319,102 @@ msgstr ""
 "reasons for selection) can be found in the download area, and now you can "
 "<b>directly engage in dialogue</b> and learn about <b>these articles</b>"
 
-#: scripts/communicate_with_ai_about_research_progress.py:277
+#: scripts/communicate_with_ai_about_research_progress.py:280
 msgid "对话文章仅包含摘要，如果要细致分析请使用 <b>精细分析文献</b> 工具"
 msgstr ""
 "The dialogue articles only contain summaries. For detailed analysis, please "
 "use the <b>Fine-grained Analysis of Article</b> tool"
 
-#: scripts/communicate_with_ai_about_research_progress.py:278
+#: scripts/communicate_with_ai_about_research_progress.py:281
 msgid ""
 "由于人工智能的能力各不相同，<b>回答的理由可能并不能使人满意</b>，请仔细鉴别"
 msgstr ""
 "Due to the varying capabilities of artificial intelligence, the reasons for "
 "the answers may not be satisfactory, please differentiate carefully"
 
-#: scripts/communicate_with_ai_about_research_progress.py:279
+#: scripts/communicate_with_ai_about_research_progress.py:282
 msgid "当对结果不满意时，可以重新搜索一次"
 msgstr "When you are not satisfied with the results, you can search again"
 
-#: scripts/communicate_with_ai_about_research_progress.py:280
+#: scripts/communicate_with_ai_about_research_progress.py:283
 msgid "[文章]：指文献。[搜索内容]：指左上角输入的、需要搜索的内容"
 msgstr ""
 "[Article]: Refers to the document. [Query]: Refers to the content entered in "
 "the top left corner, which needs to be searched"
 
-#: scripts/communicate_with_ai_about_research_progress.py:289
+#: scripts/communicate_with_ai_about_research_progress.py:292
 msgid "下载文章："
 msgstr "Download Articles:"
 
-#: scripts/communicate_with_ai_about_research_progress.py:316
+#: scripts/communicate_with_ai_about_research_progress.py:319
 msgid "课题拟定中..."
 msgstr "Topic under formulation..."
 
-#: scripts/communicate_with_ai_about_research_progress.py:316
+#: scripts/communicate_with_ai_about_research_progress.py:319
 msgid "拟定要求: {}"
 msgstr "Topic formulation requirements: {}"
 
-#: scripts/communicate_with_ai_about_research_progress.py:322
+#: scripts/communicate_with_ai_about_research_progress.py:325
 msgid "课题拟定完成！"
 msgstr "Topic proposal completed!"
 
-#: scripts/communicate_with_ai_about_research_progress.py:323
+#: scripts/communicate_with_ai_about_research_progress.py:326
 msgid "下面是AI拟定的课题及其理由（此时亦可以追问）: "
 msgstr ""
 "Below are the topics proposed by AI and their reasons (questions can be "
 "asked at this point as well): "
 
-#: scripts/communicate_with_ai_about_research_progress.py:332
-#: scripts/fine_grained_analysis_of_article.py:255
+#: scripts/communicate_with_ai_about_research_progress.py:335
+#: scripts/fine_grained_analysis_of_article.py:257
 msgid "选择总结库"
 msgstr "Select Summary Library"
 
-#: scripts/communicate_with_ai_about_research_progress.py:332
+#: scripts/communicate_with_ai_about_research_progress.py:335
 msgid "可以在总结库中选择文章"
 msgstr "You can select articles in the article summarization library"
 
-#: scripts/communicate_with_ai_about_research_progress.py:335
+#: scripts/communicate_with_ai_about_research_progress.py:338
 msgid "绘制思维导图 [gpt_acadmic内置功能，语言偏好可能无效]"
 msgstr ""
 "Create Mind Map [Built-in Function of gpt_academic, language preference may "
 "be ineffective]"
 
-#: scripts/communicate_with_ai_about_research_progress.py:335
+#: scripts/communicate_with_ai_about_research_progress.py:338
 msgid "寻找总结内容来源"
 msgstr "Find source of summarization content"
 
-#: scripts/communicate_with_ai_about_research_progress.py:335
+#: scripts/communicate_with_ai_about_research_progress.py:338
 msgid "拟定课题"
 msgstr "Formulate a topic"
 
-#: scripts/communicate_with_ai_about_research_progress.py:338
+#: scripts/communicate_with_ai_about_research_progress.py:341
 msgid "在此处输入思维导图类型代码/要溯源的内容/课题拟定要求"
 msgstr ""
 "Enter mind map type code/traceable content/project requirements formulation"
 
-#: scripts/fine_grained_analysis_of_article.py:37
+#: scripts/fine_grained_analysis_of_article.py:39
 msgid "现在可以进行单篇文章的精细分析。支持总结库内置文章或上传的其他文章"
 msgstr ""
 "Now fine-grained analysis of individual articles is supported. It supports "
 "articles built into the summary library or other articles uploaded"
 
-#: scripts/fine_grained_analysis_of_article.py:37
+#: scripts/fine_grained_analysis_of_article.py:39
 msgid "等待指令中..."
 msgstr "Waiting for commands..."
 
-#: scripts/fine_grained_analysis_of_article.py:45
+#: scripts/fine_grained_analysis_of_article.py:47
 msgid "[注意] 上传的文献多于1篇。<b>精细分析时仅使用第一篇文章</b>"
 msgstr ""
 "[Note] More than one article has been uploaded. <b>Only the first article "
 "will be used for fine-grained analysis</b>"
 
-#: scripts/fine_grained_analysis_of_article.py:61
-#: scripts/tools/article_library_ctrl.py:336
+#: scripts/fine_grained_analysis_of_article.py:63
+#: scripts/tools/article_library_ctrl.py:328
 msgid "该用户没有任何总结库"
 msgstr "The user has no article summarization library"
 
-#: scripts/fine_grained_analysis_of_article.py:63
-#: scripts/tools/article_library_ctrl.py:338
+#: scripts/fine_grained_analysis_of_article.py:65
+#: scripts/tools/article_library_ctrl.py:330
 msgid ""
 "下面是该用户拥有的总结库：\n"
 "\n"
@@ -422,7 +422,7 @@ msgstr ""
 "Below is the summary library owned by this user:\n"
 "\n"
 
-#: scripts/fine_grained_analysis_of_article.py:69
+#: scripts/fine_grained_analysis_of_article.py:71
 msgid ""
 "没有指定任何文章。可以选择上传文章或者从总结库中选择一篇文章进行分析</br></"
 "br>{}"
@@ -431,38 +431,38 @@ msgstr ""
 "select an article from the article summarization library for analysis</br></"
 "br>{}"
 
-#: scripts/fine_grained_analysis_of_article.py:75
+#: scripts/fine_grained_analysis_of_article.py:77
 msgid "没有上传可用的文章，<b>{}</b> 亦不是已有的总结库"
 msgstr ""
 "No available articles uploaded, neither is <b>{}</b> part of the existing "
 "summarization library"
 
-#: scripts/fine_grained_analysis_of_article.py:86
+#: scripts/fine_grained_analysis_of_article.py:88
 msgid "总结库 <b>{}</b> 中不存在任何已经加载完成的文章"
 msgstr "There are no articles loaded in the <b>{}</b> summary library"
 
-#: scripts/fine_grained_analysis_of_article.py:113
+#: scripts/fine_grained_analysis_of_article.py:115
 msgid "访问文章发布页"
 msgstr "Article Publisher Page"
 
-#: scripts/fine_grained_analysis_of_article.py:114
+#: scripts/fine_grained_analysis_of_article.py:116
 msgid "复制文章"
 msgstr "Copy Article"
 
-#: scripts/fine_grained_analysis_of_article.py:115
+#: scripts/fine_grained_analysis_of_article.py:117
 msgid "下载文章"
 msgstr "Download Article"
 
-#: scripts/fine_grained_analysis_of_article.py:129
+#: scripts/fine_grained_analysis_of_article.py:131
 #: scripts/tools/common_plugin_para.py:91
 msgid "总结库"
 msgstr "article summarization library"
 
-#: scripts/fine_grained_analysis_of_article.py:130
+#: scripts/fine_grained_analysis_of_article.py:132
 msgid "包含下面的文章："
 msgstr "includes the following articles:"
 
-#: scripts/fine_grained_analysis_of_article.py:131
+#: scripts/fine_grained_analysis_of_article.py:133
 msgid ""
 "展开文字可以看到文章的预分析结果。如果没有正常显示标题，说明文章标题获取失"
 "败，但不影响后续使用"
@@ -471,11 +471,11 @@ msgstr ""
 "title does not display normally, it indicates that the article title "
 "retrieval has failed, but it does not affect subsequent use"
 
-#: scripts/fine_grained_analysis_of_article.py:132
+#: scripts/fine_grained_analysis_of_article.py:134
 msgid "分析中使用的关键词："
 msgstr "Keywords used in analysis:"
 
-#: scripts/fine_grained_analysis_of_article.py:133
+#: scripts/fine_grained_analysis_of_article.py:135
 msgid ""
 "如果没有正常的显示文章标题，可能是该文章没有doi，或是没有在metadata中设定标"
 "题，此时显示的一般为文件名"
@@ -484,13 +484,13 @@ msgstr ""
 "does not have a DOI, or the title has not been set in the metadata. In this "
 "case, the displayed title is generally the filename"
 
-#: scripts/fine_grained_analysis_of_article.py:134
+#: scripts/fine_grained_analysis_of_article.py:136
 msgid "如果 [访问文章发布页] 不可用，可能是该文章没有doi，也可能是网络错误"
 msgstr ""
 "If [Article Publisher Page] is not available, it may be that the article "
 "does not have a DOI, or there may be a network error"
 
-#: scripts/fine_grained_analysis_of_article.py:149
+#: scripts/fine_grained_analysis_of_article.py:151
 msgid ""
 "尚未输入一个可用的文章。可以选择上传一篇文章，也可以从加载的文章中选择一篇使"
 "用"
@@ -498,45 +498,45 @@ msgstr ""
 "No available articles have been input. You can either upload an article or "
 "select an article from the loaded articles to use"
 
-#: scripts/fine_grained_analysis_of_article.py:151
+#: scripts/fine_grained_analysis_of_article.py:153
 msgid "您可以点击这里"
 msgstr "You can click here"
 
-#: scripts/fine_grained_analysis_of_article.py:151
+#: scripts/fine_grained_analysis_of_article.py:153
 msgid "查阅该总结库包含的文章"
 msgstr "review the articles included in the summary library"
 
-#: scripts/fine_grained_analysis_of_article.py:159
+#: scripts/fine_grained_analysis_of_article.py:161
 msgid "精细分析中..."
 msgstr "In fine-grained analysis of the article.."
 
-#: scripts/fine_grained_analysis_of_article.py:163
+#: scripts/fine_grained_analysis_of_article.py:165
 msgid "分析过程中出错！错误原因是：{}"
 msgstr "Error occurred during analysis! Error reason is: {}"
 
-#: scripts/fine_grained_analysis_of_article.py:194
+#: scripts/fine_grained_analysis_of_article.py:196
 msgid "对pdf文件处理中..."
 msgstr "Processing PDF files..."
 
-#: scripts/fine_grained_analysis_of_article.py:204
+#: scripts/fine_grained_analysis_of_article.py:206
 #, python-brace-format
 msgid "[{i}/{total}] AI阅读中..."
 msgstr "[{i}/{total}] AI reading in progress..."
 
-#: scripts/fine_grained_analysis_of_article.py:229
+#: scripts/fine_grained_analysis_of_article.py:231
 msgid "总结中..."
 msgstr "In summary..."
 
-#: scripts/fine_grained_analysis_of_article.py:236
+#: scripts/fine_grained_analysis_of_article.py:238
 msgid "分析的文章如下："
 msgstr "The analyzed articles are as follows:"
 
-#: scripts/fine_grained_analysis_of_article.py:238
+#: scripts/fine_grained_analysis_of_article.py:240
 msgid "标题可能不准确，跳转连接亦或许无法使用，仅供参考"
 msgstr ""
 "Title may be inaccurate, link may not be functional, for reference only"
 
-#: scripts/fine_grained_analysis_of_article.py:240
+#: scripts/fine_grained_analysis_of_article.py:242
 msgid ""
 "精细分析完成，以下是分析的结果（现在亦可以与AI进行交流，也可以下载分析的结"
 "果）: "
@@ -544,19 +544,19 @@ msgstr ""
 "Fine-grained analysis completed, the following are the analysis results (you "
 "can now also communicate with AI and download the analysis results): "
 
-#: scripts/fine_grained_analysis_of_article.py:247
+#: scripts/fine_grained_analysis_of_article.py:249
 msgid "下载分析结果："
 msgstr "Download analysis results:"
 
-#: scripts/fine_grained_analysis_of_article.py:254
+#: scripts/fine_grained_analysis_of_article.py:256
 msgid "选定的文章"
 msgstr "Selected articles"
 
-#: scripts/fine_grained_analysis_of_article.py:254
+#: scripts/fine_grained_analysis_of_article.py:256
 msgid "上传或使用总结库内的文章"
 msgstr "Upload or use articles from the summary library"
 
-#: scripts/fine_grained_analysis_of_article.py:255
+#: scripts/fine_grained_analysis_of_article.py:257
 msgid "查看总结库内的文章"
 msgstr "View articles in the summarization library"
 
@@ -959,17 +959,17 @@ msgstr "Summary completed"
 msgid "强制重新分析"
 msgstr "Forced reanalysis"
 
-#: scripts/tools/article_library_ctrl.py:231
+#: scripts/tools/article_library_ctrl.py:223
 #: scripts/tools/common_plugin_para.py:130
 msgid "禁用"
 msgstr "Disabled"
 
-#: scripts/tools/article_library_ctrl.py:232
+#: scripts/tools/article_library_ctrl.py:224
 #: scripts/tools/common_plugin_para.py:130
 msgid "启用"
 msgstr "Enabled"
 
-#: scripts/tools/article_library_ctrl.py:245
+#: scripts/tools/article_library_ctrl.py:237
 #, python-brace-format
 msgid ""
 "<ul><li>不能含有以下字符：{forbidden}</li><li>不能以{forbidden_start}开头</"
@@ -978,11 +978,11 @@ msgstr ""
 "<ul><li>Cannot contain the following characters: {forbidden}</li><li>Cannot "
 "start with {forbidden_start}</li></ul>"
 
-#: scripts/tools/article_library_ctrl.py:246
+#: scripts/tools/article_library_ctrl.py:238
 msgid "该名称`{}`无法使用，详细说明如下: "
 msgstr "The name `{}` cannot be used, detailed explanation as follows: "
 
-#: scripts/tools/article_library_ctrl.py:266
+#: scripts/tools/article_library_ctrl.py:258
 msgid ""
 "Scholar Navis (ver.{}) \n"
 "关于文档如下。完整版可以参见github发布页"
@@ -991,54 +991,54 @@ msgstr ""
 "about document is as follows. The complete version can be found on the "
 "GitHub release page"
 
-#: scripts/tools/article_library_ctrl.py:275
+#: scripts/tools/article_library_ctrl.py:267
 msgid "Scholar Navis 使用到的第三方库: "
 msgstr "Third-party libraries used by Scholar Navis: "
 
-#: scripts/tools/article_library_ctrl.py:285
-#: scripts/tools/gpt_academic_handler.py:42
+#: scripts/tools/article_library_ctrl.py:277
+#: scripts/tools/gpt_academic_handler.py:49
 msgid "与AI交流研究进展"
 msgstr "Communicate with AI about Research Progress"
 
-#: scripts/tools/article_library_ctrl.py:289
-#: scripts/tools/gpt_academic_handler.py:29
+#: scripts/tools/article_library_ctrl.py:281
+#: scripts/tools/gpt_academic_handler.py:36
 msgid "按关键词总结文献"
 msgstr "Summarize Articles by Keywords"
 
-#: scripts/tools/article_library_ctrl.py:293
-#: scripts/tools/gpt_academic_handler.py:16
+#: scripts/tools/article_library_ctrl.py:285
+#: scripts/tools/gpt_academic_handler.py:23
 msgid "缓存pdf文献"
 msgstr "Cache PDF Articles"
 
-#: scripts/tools/article_library_ctrl.py:296
-#: scripts/tools/gpt_academic_handler.py:55
+#: scripts/tools/article_library_ctrl.py:288
+#: scripts/tools/gpt_academic_handler.py:62
 msgid "精细分析文献"
 msgstr "Fine-grained Analysis of Article"
 
-#: scripts/tools/article_library_ctrl.py:301
-#: scripts/tools/gpt_academic_handler.py:68
+#: scripts/tools/article_library_ctrl.py:293
+#: scripts/tools/gpt_academic_handler.py:76
 msgid "PubMed_OpenAccess文章获取"
 msgstr "PubMed Open Access Articles Download"
 
-#: scripts/tools/article_library_ctrl.py:306
+#: scripts/tools/article_library_ctrl.py:298
 msgid "更好的文章润色"
 msgstr "Better article editing"
 
-#: scripts/tools/article_library_ctrl.py:320
+#: scripts/tools/article_library_ctrl.py:312
 msgid "<b>{}</b>的帮助文档如下: "
 msgstr "<b>{}</b> help documentation is as follows: "
 
-#: scripts/tools/article_library_ctrl.py:331
+#: scripts/tools/article_library_ctrl.py:323
 msgid "总结库 <b>{}</b> 不存在，请检查输入是否准确"
 msgstr ""
 "Summary library <b>{}</b> does not exist, please check if the input is "
 "accurate"
 
-#: scripts/tools/article_library_ctrl.py:331
+#: scripts/tools/article_library_ctrl.py:323
 msgid "没有输入总结库名称"
 msgstr "No input for the article summarization library name"
 
-#: scripts/tools/article_library_ctrl.py:345
+#: scripts/tools/article_library_ctrl.py:337
 msgid "不能进行正常操作。下面是有关信息: "
 msgstr ""
 "Cannot perform normal operation. The following is related information: "
@@ -1113,58 +1113,86 @@ msgstr "Utilize AI-assisted features"
 msgid "AI补全信息，速度较慢"
 msgstr "AI fill in information, slow speed"
 
-#: scripts/tools/gpt_academic_handler.py:84
+#: scripts/tools/gpt_academic_handler.py:91
 msgid "多语言翻译器"
 msgstr "Multilingual Translator"
 
-#: scripts/tools/gpt_academic_handler.py:94
+#: scripts/tools/gpt_academic_handler.py:101
 msgid "Scholar Navis 加载失败"
 msgstr "Scholar Navis failed to load"
 
-#: setup.py:34
+#: setup.py:21 setup.py:56 setup.py:235 setup.py:311
+msgid "不合法输入，请重新输入"
+msgstr "Invalid input, please re-enter"
+
+#: setup.py:48
 #, python-brace-format
 msgid "如果希望 {lang} 为GPT的偏好语言，请输入 {k}"
 msgstr "If you want {lang} to be GPT's preferred language, please enter {k}."
 
-#: setup.py:42 setup.py:175 setup.py:249
-msgid "不合法输入，请重新输入"
-msgstr "Invalid input, please re-enter"
-
-#: setup.py:55
+#: setup.py:68
 msgid "没有安装在gpt_academic的crazy_functions文件夹下"
 msgstr "There are no crazy_functions folders installed under gpt_academic"
 
-#: setup.py:61
-msgid ""
-"安装的文件夹 \"{}\" 不合规。仅支持英文字母，数字，下划线，并且不能是纯数字，"
-"开头也不能是数字"
-msgstr ""
-"The installed folder \"{}\" is not compliant. It supports only letters, "
-"numbers, and underscores, and cannot be all numbers or start with a number"
+#: setup.py:73
+msgid "没有安装在crazy_functions\\scholar_navis中"
+msgstr "There is no installation in crazy_functions\\scholar_navis"
 
-#: setup.py:65 setup.py:206 setup.py:248
+#: setup.py:77 setup.py:266 setup.py:310
 msgid "按回车键退出..."
 msgstr "Press the Enter key to exit..."
 
-#: setup.py:78
+#: setup.py:90
+msgid "y(启用) / n(禁用) / 不输入(跳过修改)"
+msgstr "y(enable) / n(disable) /no input (skip modification)"
+
+#: setup.py:93
+msgid "修改配置"
+msgstr "Modify the configuration"
+
+#: setup.py:96
+msgid "启用临时文件自动删除: "
+msgstr "Enable automatic deletion of temporary files: "
+
+#: setup.py:97 setup.py:102 setup.py:107 setup.py:112 setup.py:117
+msgid "当前: "
+msgstr "Current: "
+
+#: setup.py:101
+msgid "启用总结库自动删除: "
+msgstr "Enable automatic deletion of summary repository: "
+
+#: setup.py:106
+msgid "启用上传文件自动删除: "
+msgstr "Enable automatic deletion of uploaded files: "
+
+#: setup.py:111
+msgid "启用简易翻译器（仅限于 Scholar Navis）: "
+msgstr "Enable the simple translator (for Scholar Navis only): "
+
+#: setup.py:116
+msgid "启用 PubMed OA 下载器: "
+msgstr "Enable PubMed OA downloader: "
+
+#: setup.py:129
 msgid "找不到预先数据，该过程跳过"
 msgstr "Pre-scheduled data not found, process skipped"
 
-#: setup.py:83
+#: setup.py:134
 msgid "已安装预先数据，该过程跳过"
 msgstr "Pre-installed pre-data, the process is skipped"
 
-#: setup.py:86
+#: setup.py:137
 msgid "预先数据安装完成"
 msgstr "Pre-installed data completed"
 
-#: setup.py:107
+#: setup.py:160
 msgid "已经在 crazy_functional 中注册过本工具，此过程跳过"
 msgstr ""
 "You have already registered this tool in crazy_functional, this process will "
 "be skipped"
 
-#: setup.py:113
+#: setup.py:167
 msgid ""
 "无法在 crazy_functional 中注册本工具（可以尝试手动安装）。安装程序已终止，按"
 "回车键退出..."
@@ -1172,72 +1200,79 @@ msgstr ""
 "Cannot register this tool in crazy_functional (try manual installation). "
 "Installation has been terminated, press Enter key to exit..."
 
-#: setup.py:118
+#: setup.py:172
 msgid "crazy_functional 注册成功"
 msgstr "successful registration of crazy_functional"
 
-#: setup.py:147
+#: setup.py:204
 msgid "config_private 注册工具组成功"
 msgstr "config_private registration succeeded"
 
-#: setup.py:149
+#: setup.py:206
 msgid "config_private 中已注册工具组，此过程跳过"
 msgstr ""
 "The tool group has been registered in config_private; this process is skipped"
 
-#: setup.py:165
+#: setup.py:225
 msgid "不存在 requirements.txt 包安装终止。按回车键退出..."
 msgstr ""
 "There is no requirement to stop package installation. Press Enter to exit..."
 
-#: setup.py:170
+#: setup.py:230
 msgid "该工具所用的网络位于中国大陆吗？ y(默认)/n/c"
 msgstr ""
 "The network used by this tool is located in mainland China? y (default)/n/c"
 
-#: setup.py:171
+#: setup.py:231
 msgid "y=是 n=否 c=取消安装依赖（跳过）"
 msgstr "y=Yes n=No c=Cancel (Skip Installation)"
 
-#: setup.py:177
+#: setup.py:237
 msgid "开始安装依赖包..."
 msgstr "Starting to install dependencies..."
 
-#: setup.py:184 setup.py:190
+#: setup.py:244 setup.py:250
 msgid "requirements.txt 安装成功"
 msgstr "requirements.txt installed successfully"
 
-#: setup.py:193
+#: setup.py:253
 msgid "已经跳过依赖安装"
 msgstr "Already skipped dependency installation"
 
-#: setup.py:196
+#: setup.py:256
 msgid "requirements.txt 安装失败（{}）。按回车键退出..."
 msgstr "requirements.txt installation failed ({}) Press Enter to exit..."
 
-#: setup.py:201
+#: setup.py:261
 msgid "Scholar Navis 安装成功。"
 msgstr "Scholar Navis load successfully"
 
-#: setup.py:202
+#: setup.py:262
 msgid "进一步配置，请在 conig_private.py 中进行调整，内含各个参数的详细说明"
 msgstr ""
 "Further configuration, please adjust in conig_private.py, which contains "
 "detailed descriptions of each parameter"
 
-#: setup.py:203
+#: setup.py:263
 msgid "此外也请阅读 readme.md ，了解本程序、gpt_academic和其他事宜！"
 msgstr ""
 "Please read the readme.md as well for information about this program, "
 "gpt_academic, and other matters!"
 
-#: setup.py:234
+#: setup.py:296
 msgid "欢迎使用Scholar Navis"
 msgstr "Welcome to use Scholar Navis"
 
-#: setup.py:244
+#: setup.py:306
 msgid "要安装 Scholar Navis 吗？ y(默认)/n"
 msgstr "Do you want to install Scholar Navis? y(default)/n"
+
+#~ msgid ""
+#~ "安装的文件夹 \"{}\" 不合规。仅支持英文字母，数字，下划线，并且不能是纯数"
+#~ "字，开头也不能是数字"
+#~ msgstr ""
+#~ "The installed folder \"{}\" is not compliant. It supports only letters, "
+#~ "numbers, and underscores, and cannot be all numbers or start with a number"
 
 #~ msgid "下载成功的文章、下载的详细信息可以在 <b>文件下载区</b> 找到#~"
 #~ msgstr ""

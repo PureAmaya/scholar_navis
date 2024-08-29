@@ -1,6 +1,6 @@
 import os
 from toolbox import CatchException
-from .article_library_ctrl import SCHOLAR_NAVIS_ROOT_PATH
+from .const import SCHOLAR_NAVIS_ROOT_PATH
 from .sn_config import SUPPORT_DISPLAY_LANGUAGE
 from request_llms.bridge_all import predict_no_ui_long_connection # 问就是这个不能脱离gpt_academic独自运行，我也不想对gpt_acadmic产生过多修改
 

@@ -1,7 +1,7 @@
 import os
 import gettext
 from .sn_config import CONFIG
-from .article_library_ctrl import SCHOLAR_NAVIS_ROOT_PATH
+from .const import SCHOLAR_NAVIS_ROOT_PATH
 
 class _i18n:
     def __init__(self) -> None:
@@ -16,10 +16,10 @@ class _i18n:
     def update(self):
         # 更新语言环境
         i18n_root_path = os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'i18n')
-        selected_lang_dir = os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'i18n',CONFIG['display_language'])
+        selected_lang_dir = os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'i18n',CONFIG['language_display'])
         # 语言不存在，临时用中文语言包吧
-        if not  os.path.exists(selected_lang_dir):CONFIG['display_language'] = 'zh-Hans'
-        self.trans = gettext.translation('Scholar_Navis', i18n_root_path, [CONFIG['display_language']])
+        if not  os.path.exists(selected_lang_dir):CONFIG['language_display'] = 'zh-Hans'
+        self.trans = gettext.translation('Scholar_Navis', i18n_root_path, [CONFIG['language_display']])
 
 i18n = _i18n()
 _ = i18n.gettext

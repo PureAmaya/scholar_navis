@@ -23,7 +23,23 @@ Below is a list of projects used or relied upon:
 
 - Since modifications have been made to the source code of gpt_academic (mainly to enable it to call Scholar Navis), due to the constraints of the GPL-3.0 license, the source code of gpt_academic must also be distributed, and the modifications must be noted as well.
 
-- In `crazy_functional.py`, the following content was added around line 400. The `setup.py` can also cause the following modifications.
+- `main.py`: At around line 63, the following content was added. This will enable a simple notification display.
+  
+  ```python
+  # SCHOAR NAVIS 
+  sn_version_fp = os.path.join(os.path.dirname(__file__),'crazy_functions','scholar_navis','version')
+  if os.path.exists(sn_version_fp):
+      with open(sn_version_fp,'r',encoding='utf-8') as f:
+          title_html = f"<h1 align=\"center\">GPT 学术优化 {get_current_version()} (Scholar Navis {f.read()})</h1>{theme_declaration}"
+  else:title_html = f"<h1 align=\"center\">GPT 学术优化 {get_current_version()}</h1>{theme_declaration}"
+  
+  notification_fp = os.path.join(os.path.dirname(__file__),'notification.txt')
+  if os.path.exists(notification_fp):
+      with open(notification_fp,'r',encoding='utf-8') as f:
+          title_html = title_html + f'<p style="text-align: left; margin-left: 20px; margin-right: 20px;">{f.read()}</p>'
+  ```
+
+- In `crazy_functional.py`, the following content was added around line 400. The `setup.py` can also cause the following modifications. These modifications are made to enable gpt_academic to utilize Scholar Navis.
   
   ```python
   ###### SCHOLAR NAVIS START ########
@@ -32,9 +48,7 @@ Below is a list of projects used or relied upon:
   ##### SCHOLAR NAVIS END - UNINSTALL: DELETE THESE ######
   ```
 
-> These modifications are made to enable gpt_academic to utilize Scholar Navis.
-
-- In `config_private.py`, the following modifications were made around line 118. The `setup.py` can also make the following changes, or it can generate a `config_private.py` containing the following modifications.
+- In `config_private.py`, the following modifications were made around line 118. The `setup.py` can also make the following changes, or it can generate a `config_private.py` containing the following modifications. This modification is made so that users can access Scholar Navis through the gpt_academic web service.
   
   ```python
   # original：
@@ -48,9 +62,7 @@ Below is a list of projects used or relied upon:
   DEFAULT_FN_GROUPS = ['Scholar Navis','对话', '编程', '学术', '智能体']
   ```
 
-> This modification is made so that users can access Scholar Navis through the gpt_academic web service.
-
-- `multi_language.py`: The specific modifications are as follow:
+- `multi_language.py`: The specific modifications are as follow. These contents are added here to ensure that Scholar Navis can operate normally after the translation of gpt_academic.
   
   ```python
   # line 43
@@ -66,8 +78,6 @@ Below is a list of projects used or relied upon:
   # Line 588, added the following content
   step_ex_scholar_navis()
   ```
-  
-  > These contents are added here to ensure that Scholar Navis can operate normally after the translation of gpt_academic.
 
 - `themes/init.js`: Approximately on the ninth line, the content related to `welcomeMessage` has been commented out (because this content might cause bugs).
   

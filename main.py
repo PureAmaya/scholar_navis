@@ -59,8 +59,19 @@ def main():
     from themes.theme import adjust_theme, advanced_css, theme_declaration, js_code_clear, js_code_reset, js_code_show_or_hide, js_code_show_or_hide_group2
     from themes.theme import js_code_for_toggle_darkmode, js_code_for_persistent_cookie_init
     from themes.theme import load_dynamic_theme, to_cookie_str, from_cookie_str, assign_user_uuid
-    title_html = f"<h1 align=\"center\">GPT 学术优化 {get_current_version()}</h1>{theme_declaration}"
-
+    
+    # SCHOAR NAVIS 
+    sn_version_fp = os.path.join(os.path.dirname(__file__),'crazy_functions','scholar_navis','version')
+    if os.path.exists(sn_version_fp):
+        with open(sn_version_fp,'r',encoding='utf-8') as f:
+            title_html = f"<h1 align=\"center\">GPT 学术优化 {get_current_version()} (Scholar Navis {f.read()})</h1>{theme_declaration}"
+    else:title_html = f"<h1 align=\"center\">GPT 学术优化 {get_current_version()}</h1>{theme_declaration}"
+    
+    notification_fp = os.path.join(os.path.dirname(__file__),'notification.txt')
+    if os.path.exists(notification_fp):
+        with open(notification_fp,'r',encoding='utf-8') as f:
+            title_html = title_html + f'<p style="text-align: left; margin-left: 20px; margin-right: 20px;">{f.read()}</p>'
+    
     # 对话、日志记录
     enable_log(PATH_LOGGING)
 

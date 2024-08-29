@@ -23,7 +23,23 @@ Scholar Navis 使用 GPL-3.0 license 授權證
 
 - 因為對 gpt_academic 的源碼產生了修改（主要是使其能夠調用 Scholar Navis ），受限于 GPL-3.0 的約束，需要將 gpt_academic 的源碼一並發布，並且亦需注明修改內容。
 
-- crazy_functional.py：約 400 行處添加了下面的內容。`setup.py` 亦可以產生下述修改
+- `main.py`: 約在第63行添加了以下內容。這樣做可以實現簡易的通知顯示。
+  
+  ```python
+  # SCHOAR NAVIS 
+  sn_version_fp = os.path.join(os.path.dirname(__file__),'crazy_functions','scholar_navis','version')
+  if os.path.exists(sn_version_fp):
+      with open(sn_version_fp,'r',encoding='utf-8') as f:
+          title_html = f"<h1 align=\"center\">GPT 学术优化 {get_current_version()} (Scholar Navis {f.read()})</h1>{theme_declaration}"
+  else:title_html = f"<h1 align=\"center\">GPT 学术优化 {get_current_version()}</h1>{theme_declaration}"
+  
+  notification_fp = os.path.join(os.path.dirname(__file__),'notification.txt')
+  if os.path.exists(notification_fp):
+      with open(notification_fp,'r',encoding='utf-8') as f:
+          title_html = title_html + f'<p style="text-align: left; margin-left: 20px; margin-right: 20px;">{f.read()}</p>'
+  ```
+
+- `crazy_functional.py`：約 400 行處添加了下面的內容。`setup.py` 亦可以產生下述修改。這樣修改是為了 gpt_academic 能夠使用 Scholar Navis
   
   ```python
   ###### SCHOLAR NAVIS START ########
@@ -32,9 +48,7 @@ Scholar Navis 使用 GPL-3.0 license 授權證
   ##### SCHOLAR NAVIS END - UNINSTALL: DELETE THESE ######
   ```
 
-> 這樣修改是為了 gpt_academic 能夠使用 Scholar Navis
-
-- config_private.py：約 118 行處產生了以下修改內容。`setup.py` 亦可以產生下述修改，或產生一個含有下述修改內容的 config_private.py
+- `config_private.py`：約 118 行處產生了以下修改內容。`setup.py` 亦可以產生下述修改，或產生一個含有下述修改內容的 config_private.py。這樣修改是為了用戶能通過 gpt_academic 的網絡服務使用 Scholar Navis。
   
   ```python
   # 原始内容：
@@ -47,9 +61,7 @@ Scholar Navis 使用 GPL-3.0 license 授權證
   DEFAULT_FN_GROUPS = ['Scholar Navis','对话', '编程', '学术', '智能体']
   ```
 
-> 這樣修改是為了用戶能通過 gpt_academic 的網絡服務使用 Scholar Navis。
-
-- `multi_language.py`：具體修改如下：
+- `multi_language.py`：具體修改如下。這裡添加這些內容是為了在翻譯 gpt_academic 之後，Scholar Navis 可以正常運行。
   
   ```python
   # 43行
@@ -65,8 +77,6 @@ Scholar Navis 使用 GPL-3.0 license 授權證
   # 588行，添加了如下内容
   step_ex_scholar_navis()
   ```
-  
-  > 這裡添加這些內容是為了在翻譯 gpt_academic 之後，Scholar Navis 可以正常運行。
 
 - `themes/init.js`：大約在第九行處，註釋掉了關於 `welcomeMessage` 的內容（因為這些內容可能會引發錯誤）。
   

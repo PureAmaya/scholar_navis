@@ -6,9 +6,22 @@ import subprocess
 from scripts.tools.sn_config import GPT_SUPPORT_LAMGUAGE
 from scripts.tools.multi_lang import _,i18n
 from scripts.tools.sn_config import VERSION,CONFIG,write_config 
-from scripts.tools.article_library_ctrl import GPT_ACADEMIC_ROOT_PATH,SCHOLAR_NAVIS_DIR_NAME,SCHOLAR_NAVIS_ROOT_PATH
+from scripts.tools.const import GPT_ACADEMIC_ROOT_PATH, SCHOLAR_NAVIS_ROOT_PATH,SCHOLAR_NAVIS_DIR_NAME
 
-def __choose_language():
+def _clear_console():
+    if sys.platform == 'win32':os.system('cls')
+    else:os.system('clear') 
+
+
+def _check_input(txt:str,accept_char):
+    while(True):
+        print(txt)
+        a = input().strip().lower()
+        if a in accept_char:return a
+        else:print('\n'); print(_('不合法输入，请重新输入'))
+
+def _choose_language():
+    
     
     # 选择 显示语言
     print('如果希望使用 简体中文 作为显示语言，请输入1')
@@ -17,9 +30,9 @@ def __choose_language():
     
     while(True): # 反正就仨）
         txt = input('\n').strip()
-        if txt == '1':CONFIG['display_language'] = 'zh-Hans';break
-        if txt == '2':CONFIG['display_language'] = 'zh-Hant';break
-        elif txt == '3' :CONFIG['display_language'] = 'en-US';break
+        if txt == '1':CONFIG['language_display'] = 'zh-Hans';break
+        if txt == '2':CONFIG['language_display'] = 'zh-Hant';break
+        elif txt == '3' :CONFIG['language_display'] = 'en-US';break
         else:print('不合法输入，请重新输入\n不合法輸入，請重新輸入\nInvalid input, please try again.')
     
     # 保存偏好
@@ -27,7 +40,7 @@ def __choose_language():
     # 更新语言
     i18n.update()
     
-    __clear_console()
+    _clear_console()
     
     # 选择 GPT偏好语言
     print('\n')
@@ -38,14 +51,13 @@ def __choose_language():
         txt = input('\n').strip()
         try:
             txt_int = int(txt) - 1
-            CONFIG['GPT_prefer_language'] = GPT_SUPPORT_LAMGUAGE[txt_int];break
+            CONFIG['language_GPT_prefer'] = GPT_SUPPORT_LAMGUAGE[txt_int];break
         except:
             print(_('不合法输入，请重新输入'))
         
         
     # 保存偏好
     write_config()
-
 
 def __check_path():
     
@@ -56,19 +68,57 @@ def __check_path():
         print(_('没有安装在gpt_academic的crazy_functions文件夹下'))
         install_vaild = False
     
-    # 检查安装目录是否可用（仅支持英文字母，数字，下划线，并且不能是纯数字，开头也不能是数字）
-    all_is_letters_number_underscore = all(char.isalnum() or char == '_' for char in SCHOLAR_NAVIS_DIR_NAME)
-    if  (not all_is_letters_number_underscore) or SCHOLAR_NAVIS_DIR_NAME.isdigit() or SCHOLAR_NAVIS_DIR_NAME[0].isdigit():
-        print(_('安装的文件夹 "{}" 不合规。仅支持英文字母，数字，下划线，并且不能是纯数字，开头也不能是数字').format(SCHOLAR_NAVIS_DIR_NAME))
+    # 检查安装目录是否可用
+    if  SCHOLAR_NAVIS_DIR_NAME != 'scholar_navis':
+        print(_('没有安装在crazy_functions\scholar_navis中'))
         install_vaild = False
     
     if not install_vaild:
         input(_("按回车键退出..."))
         sys.exit(1)
 
-def __clear_console():
-    if sys.platform == 'win32':os.system('cls')
-    else:os.system('clear') 
+
+def _configuration():
+    
+    _clear_console()
+    
+    def ync_parse(a,value):
+        if a == 'y':return True
+        elif a == 'n':return False
+        else:return value
+        
+    bool_prompt = _('y(启用) / n(禁用) / 不输入(跳过修改)')
+    bool_input = {'y','n',''}
+    
+    print(_('修改配置'))
+    print('\n')
+    
+    print(_('启用临时文件自动删除: '))
+    print(_('当前: ') + str(CONFIG['auto_clear_tmp']))
+    a = _check_input(bool_prompt,bool_input)
+    CONFIG['auto_clear_tmp'] = ync_parse(a,CONFIG['auto_clear_tmp'])
+    
+    print(_('启用总结库自动删除: '))
+    print(_('当前: ') + str(CONFIG['auto_clear_summary_lib']))
+    a = _check_input(bool_prompt,bool_input)
+    CONFIG['auto_clear_summary_lib'] = ync_parse(a,CONFIG['auto_clear_summary_lib'])
+    
+    print(_('启用上传文件自动删除: '))
+    print(_('当前: ') + str(CONFIG['auto_clear_private_upload']))
+    a = _check_input(bool_prompt,bool_input)
+    CONFIG['auto_clear_private_upload'] = ync_parse(a,CONFIG['auto_clear_private_upload'])
+    
+    print(_('启用简易翻译器（仅限于 Scholar Navis）: '))
+    print(_('当前: ') + str(CONFIG['enable_simple_translator']))
+    a = _check_input(bool_prompt,bool_input)
+    CONFIG['enable_simple_translator'] = ync_parse(a,CONFIG['enable_simple_translator'])
+    
+    print(_('启用 PubMed OA 下载器: '))
+    print(_('当前: ') + str(CONFIG['enable_pubmed_downloader']))
+    a = _check_input(bool_prompt,bool_input)
+    CONFIG['enable_pubmed_downloader'] = ync_parse(a,CONFIG['enable_pubmed_downloader'])
+    
+    write_config()
 
 def __install_def_data():
     
@@ -86,7 +136,9 @@ def __install_def_data():
         shutil.copytree(def_database_fp,user_database_fp)
         print(_('预先数据安装完成'))
 
-def __crazy_function_modifier():
+def _crazy_function_modifier():
+    
+    _clear_console()
     
     txt = f'''
     ###### SCHOLAR NAVIS START ########
@@ -119,7 +171,10 @@ def __crazy_function_modifier():
         with open(crazy_functional_fp,'w',encoding='utf-8') as f:f.write(cr)
         print(_('crazy_functional 注册成功'))
         
-def __config_pri_modifier():
+def _config_pri_modifier():
+    
+    _clear_console()
+    
     config_pri_bak_fp = os.path.join(GPT_ACADEMIC_ROOT_PATH,'config_private.py.bak')
     config_pri_fp = os.path.join(GPT_ACADEMIC_ROOT_PATH,'config_private.py')
     config_fp = os.path.join(GPT_ACADEMIC_ROOT_PATH,'config.py')
@@ -160,7 +215,10 @@ def __config_pri_modifier():
     with open(config_pri_fp,'w',encoding='utf-8') as f:
         config_read = f.write(config_content) 
         
-def __install_requirement():
+def _install_requirement():
+    
+    _clear_console()
+    
         # 安装需要的包
     requirements_fp = os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'requirements.txt')
     if not os.path.exists(requirements_fp):
@@ -210,19 +268,21 @@ def __config_prompt():
 
 def install():
     
-    __clear_console()
+    _configuration()
+    
+    _clear_console()
     
     # 安装预先数据 现在暂时不需要了
     #__install_def_data()
     
     #  crazy中安装本工具 
-    __crazy_function_modifier()
+    _crazy_function_modifier()
         
     # 配置中加上去
-    __config_pri_modifier()
+    _config_pri_modifier()
     
     # 安装需要的包
-    __install_requirement()
+    _install_requirement()
     
     #提示一下应该调整的配置
     __config_prompt()
@@ -230,14 +290,14 @@ def install():
 
 def main():
     
-    __clear_console()
+    _clear_console()
     
     print('\n')
     print(_('欢迎使用Scholar Navis'))
     print(f'ver. {VERSION}\n')
     
     # 选择语言
-    __choose_language()
+    _choose_language()
     
     # 路经检查
     __check_path()
@@ -256,10 +316,16 @@ if __name__ == "__main__":
 
     #parser.add_argument('-l', '--lang', type=str, default='en', help='Language code (default: en)')
     parser.add_argument('-l', '--lang', action='store_true', help='only choose language')
+    parser.add_argument('-c', '--config', action='store_true', help='just configure')
     
     args = parser.parse_args()
     
-    if not args.lang:
+    if args.config:
+        _configuration()
+    
+    elif args.lang:
+        _choose_language()
+    
+    elif not args.lang and not args.config:
         main()
-    else:
-        __choose_language()
+

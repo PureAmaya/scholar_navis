@@ -1,7 +1,7 @@
 from .multi_lang import _
 from shared_utils.config_loader import get_conf
 from .sn_config import CONFIG, GPT_SUPPORT_LAMGUAGE
-from .article_library_ctrl import get_def_user_library_list
+# from .article_library_ctrl import get_def_user_library_list
 from crazy_functions.plugin_template.plugin_class_template import GptAcademicPluginTemplate, ArgProperty
 
 AUTHENTICATION = get_conf('AUTHENTICATION')
@@ -119,7 +119,7 @@ class common_plugin_para(GptAcademicPluginTemplate):
             gui_definition直接可以用的参数
         """
         try:
-            index = GPT_SUPPORT_LAMGUAGE.index(CONFIG['GPT_prefer_language'])
+            index = GPT_SUPPORT_LAMGUAGE.index(CONFIG['language_GPT_prefer'])
         except:
             index = GPT_SUPPORT_LAMGUAGE.index('English')
         

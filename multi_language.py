@@ -525,7 +525,7 @@ def step_2_core_key_translate():
                     
 def  step_ex_scholar_navis():
 
-    from crazy_functions.scholar_navis.scripts.tools.article_library_ctrl import SCHOLAR_NAVIS_ROOT_PATH
+    from crazy_functions.scholar_navis.scripts.tools.const import SCHOLAR_NAVIS_ROOT_PATH
     import subprocess
     import shutil
     

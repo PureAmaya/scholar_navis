@@ -11,7 +11,13 @@ This software is developed based on gpt_academic (version 3.83) and serves as a 
 
 ### Brief Introduction
 
-- This tool integrates literature reading and understanding of research field progress with AI, providing a solution that, unlike commercial tools on the market, can complete more precise analysis at a lower cost. It allows for the exploration of predecessors' experiences and unexplored areas of research.
+- This tool integrates literature reading and understanding of research field progress with AI, providing a solution that, unlike commercial tools on the market, can complete more precise analysis at a lower cost. Scholar Navis is a cross-platform tool that can simultaneously analyze and summarize multiple documents, understand the current state of development in the field, recognize the similarities, the innovative points and shortcomings of these articles, and combining one's own knowledge,pioneer new research directions. It also provides some assistance in the writing of reviews.
+
+- Find interesting articles among numerous documents and analyze these articles or any other articles, further digesting and absorbing the content of the article.
+
+- Engage in dialogue with individual articles, even with large volumes of them, by means of Q&A sessions, discussing research details with the AI.
+
+- Processes uploaded articles to minimize the acquisition of external erroneous information, and within the capabilities of the LLM model, strives to maximize the accuracy of analysis and dialogue.
 
 - "Navis" in Latin means "**ship**." With this ship, chart new lands that have not been discovered by predecessors.
 
@@ -60,7 +66,7 @@ This software is developed based on gpt_academic (version 3.83) and serves as a 
   > - Drawing mind maps. With the help of the gpt_academic plugin (generating various Mermaid charts @Menghuan1918), various types of mind maps can be created.
   > - Universal. General-purpose LLMs (large language models) can be used without the need for fine-tuning the model.
   > - Controllable. The analysis and summary of AI, as well as the dialogue, are based on the uploaded articles, provided keywords, and prompts, making them controllable.
-  > - Low cost. Models such as`moonshot-v1-32k`、`GLM-4-Flash`, `GLM-4-Air`, `qwen-turbo`, `chatgpt-3.5 turbo`, which are relatively inexpensive, can be used to complete almost all tasks because the materials summarized and analyzed come from the content you upload, as long as the AI can understand it, it can be used.
+  > - Low cost. Models such as`deepseek-chat`、`moonshot-v1-8k`、`GLM-4-Flash`、`GLM-4-Air`、`qwen-turbo`、`ChatGPT-3.5 turbo` or `Aggregation and relay service for large model interfaces provided by Aihubmix.`, which are relatively inexpensive, can be used to complete almost all tasks because the materials summarized and analyzed come from the content you upload, as long as the AI can understand it, it can be used.
 
 ### Disclaimer
 
@@ -85,7 +91,7 @@ This software is developed based on gpt_academic (version 3.83) and serves as a 
    > If you need Python for other development or to run other applications, it is recommended to use Conda.
    > If you are using Linux, you should be able to resolve any installation issues on your own.
 
-2. Once Python is installed correctly, run `setup.py` to complete the configuration and installation (usually, it will be installed automatically). During the configuration process, it primarily involves setting the display language and the preferred GPT language (the preferred GPT language can also be selected within the program).
+2. Once Python is installed correctly, run `crazy_functions\scholar_navis\setup.pysetup.py` to complete the configuration and installation (usually, it will be installed automatically). During the configuration process, it primarily involves setting the display language and the preferred GPT language (the preferred GPT language can also be selected within the program).
 
 3. As needed, modify the configuration content in `config_private.py`, especially the `API_KEY` (including keys from other providers), and fill in the required model for the API in `AVAIL_LLM_MODELS`. Detailed instructions can be found in the [Project Configuration Instructions](https://github.com/binary-husky/gpt_academic/wiki/%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E).
 
