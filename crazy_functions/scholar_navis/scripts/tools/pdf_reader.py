@@ -2,7 +2,7 @@ import os
 import re
 import yaml
 import json
-import PyPDF2
+import pymupdf
 from request_llms.bridge_all import predict_no_ui_long_connection
 from .article_library_ctrl  import pdf_yaml,SQLiteDatabase,db_type
 
@@ -46,123 +46,122 @@ def get_pdf_inf(pdf_path: str,allow_ai_assist : bool,llmkwargs = None):
                 pdf_yaml_content.update({k: v for k, v in pdf_yaml_content.items() if v is not None})
         
     # 反正先读取一下pdf
-    with open(pdf_path,'rb') as f:
-        pdf_reader = PyPDF2.PdfReader(f)
-        # 获取第一页
-        first_page_text = pdf_reader.pages[0].extract_text()
+    pdf_reader =pymupdf.open(pdf_path)
+    # 获取第一页
+    first_page_text = pdf_reader.load_page(0).get_textpage().extractText()
 
-        # 获取doi
-        doi = ''
-        if pdf_yaml_content[pdf_yaml.doi.value] is None  or pdf_yaml_content[pdf_yaml.doi.value] == 'None':
-            doi :str = re.findall(r'10\.\d{4,}/.+', first_page_text)[0].strip()
-            # 去除网址（e.g. nature的某些就有）
-            doi = doi.split('www.')[0].strip()
-            # 去除空格之后的多余信息（e.g.版权信息，网站信息等）
-            doi = doi.split(' ',1)[0].strip()
-            
-        # 获取标题
-        title = ''
-        if pdf_yaml_content[pdf_yaml.title.value] is None or  pdf_yaml_content[pdf_yaml.title.value] == 'None':
-            with SQLiteDatabase(db_type.article_doi_title) as db: 
-                    title_tuple = db.select(doi,('title',))
-                    if title_tuple is None: # 放心，如果数据库/数据不存在，返回的是None
-                        # 数据库没有的话，就用元数据记录/文件名代替吧
-                        meta_title = pdf_reader.metadata.title
-                        title =  str(meta_title) if meta_title else os.path.basename(pdf_manifest_path)[:-4]
-                        
-                    else:# 数据库有记录
-                        title = title_tuple[0]
+    # 获取doi
+    doi = ''
+    if pdf_yaml_content[pdf_yaml.doi.value] is None  or pdf_yaml_content[pdf_yaml.doi.value] == 'None':
+        doi :str = re.findall(r'10\.\d{4,}/.+', first_page_text)[0].strip()
+        # 去除网址（e.g. nature的某些就有）
+        doi = doi.split('www.')[0].strip()
+        # 去除空格之后的多余信息（e.g.版权信息，网站信息等）
+        doi = doi.split(' ',1)[0].strip()
+        
+    # 获取标题
+    title = ''
+    if pdf_yaml_content[pdf_yaml.title.value] is None or  pdf_yaml_content[pdf_yaml.title.value] == 'None':
+        with SQLiteDatabase(db_type.article_doi_title) as db: 
+                title_tuple = db.select(doi,('title',))
+                if title_tuple is None: # 放心，如果数据库/数据不存在，返回的是None
+                    # 数据库没有的话，就用元数据记录/文件名代替吧
+                    meta_title = pdf_reader.metadata.title
+                    title =  str(meta_title) if meta_title else os.path.basename(pdf_manifest_path)[:-4]
+                    
+                else:# 数据库有记录
+                    title = title_tuple[0]
 
-        # 宁可错杀，不可放过。反正都想要AI辅助获取信息了，尽可能把信息弄全了
-        if len(doi) < 10 or len(title) <= 20 or '..' in title:     
-            # 不需要辅助，放行
-            if not allow_ai_assist:pass
-            # 需要辅助
-            else:
-                # 用AI获取到信息后，顺便存到数据库里，减少后续的获取量
-                dict = ___get_inf_AI_assistant(first_page_text,llmkwargs)
-                if dict:
-                    title = dict['title'];doi=dict['doi']
-                    with SQLiteDatabase(db_type.article_doi_title) as db:
-                        db.insert_ingore(doi,('title','info'),(title,'attached by ai'))
-            
-        # 设定上doi和title
-        pdf_yaml_content[pdf_yaml.doi.value] = doi
-        pdf_yaml_content[pdf_yaml.title.value] = title
+    # 宁可错杀，不可放过。反正都想要AI辅助获取信息了，尽可能把信息弄全了
+    if len(doi) < 10 or len(title) <= 20 or '..' in title:     
+        # 不需要辅助，放行
+        if not allow_ai_assist:pass
+        # 需要辅助
+        else:
+            # 用AI获取到信息后，顺便存到数据库里，减少后续的获取量
+            dict = ___get_inf_AI_assistant(first_page_text,llmkwargs)
+            if dict:
+                title = dict['title'];doi=dict['doi']
+                with SQLiteDatabase(db_type.article_doi_title) as db:
+                    db.insert_ingore(doi,('title','info'),(title,'attached by ai'))
+        
+    # 设定上doi和title
+    pdf_yaml_content[pdf_yaml.doi.value] = doi
+    pdf_yaml_content[pdf_yaml.title.value] = title
 
-        # < ---------获取摘要-------------- >
-        if pdf_yaml_content[pdf_yaml.abstract.value] is None or pdf_yaml_content[pdf_yaml.abstract.value] == 'None':
-            
+    # < ---------获取摘要-------------- >
+    if pdf_yaml_content[pdf_yaml.abstract.value] is None or pdf_yaml_content[pdf_yaml.abstract.value] == 'None':
+        
+        # print(page_text)
+        # 针对 PNAS 单独设计的代码（这东西就没有introduction和abstract）
+        if re.search('www.pnas.org', first_page_text):
+            # 摘要前
+            PNAS_front_pattern = r'.*(?:Contributed|Edited) by.*?\n'
+            # print(re.findall(PNAS_front_pattern, page_text,re.DOTALL)[0])
+            first_page_text = re.sub(PNAS_front_pattern, '',
+                            first_page_text, flags=re.DOTALL)
+            # 摘要后
+            PNAS_back_pattern = r'\|.*?\|.*'
+            # 如果后面那些文本真的删不了，那就尽可能地去除一些内容吧
+            if re.findall(PNAS_back_pattern, first_page_text, re.DOTALL) == []:
+                PNAS_back_pattern = r'\([0-9]\).*'
+            # print(re.findall(PNAS_back_pattern, page_text,re.DOTALL)[0])
+            first_page_text = re.sub(PNAS_back_pattern, '',
+                            first_page_text, flags=re.DOTALL)
+
+            # 去掉最后一个句号（period）之后的内容
+            last_period_index = first_page_text.rfind('.')
+            if last_period_index > 0:
+                first_page_text = first_page_text[:last_period_index + 1]  # +1；把句号留着
+
             # print(page_text)
-            # 针对 PNAS 单独设计的代码（这东西就没有introduction和abstract）
-            if re.search('www.pnas.org', first_page_text):
-                # 摘要前
-                PNAS_front_pattern = r'.*(?:Contributed|Edited) by.*?\n'
-                # print(re.findall(PNAS_front_pattern, page_text,re.DOTALL)[0])
-                first_page_text = re.sub(PNAS_front_pattern, '',
-                                first_page_text, flags=re.DOTALL)
-                # 摘要后
-                PNAS_back_pattern = r'\|.*?\|.*'
-                # 如果后面那些文本真的删不了，那就尽可能地去除一些内容吧
-                if re.findall(PNAS_back_pattern, first_page_text, re.DOTALL) == []:
-                    PNAS_back_pattern = r'\([0-9]\).*'
-                # print(re.findall(PNAS_back_pattern, page_text,re.DOTALL)[0])
-                first_page_text = re.sub(PNAS_back_pattern, '',
-                                first_page_text, flags=re.DOTALL)
 
-                # 去掉最后一个句号（period）之后的内容
-                last_period_index = first_page_text.rfind('.')
-                if last_period_index > 0:
-                    first_page_text = first_page_text[:last_period_index + 1]  # +1；把句号留着
+        # 其他正常一点的文章，abstract/summary和introduction至少得有一个吧。通用的
+        else:
 
-                # print(page_text)
+            # 如果有abstract / summary，删除及其之前的内容  the plant journal用的是summary而不是abstract
+            summary_pattern = r'.*(?:[Ss]ummary|SUMMARY|ABSTRACT|[Aa]bstract)'
+            # print(re.findall(summary_pattern, page_text,re.DOTALL)[0])
+            first_page_text = re.sub(summary_pattern, '', first_page_text, flags=re.DOTALL)
 
-            # 其他正常一点的文章，abstract/summary和introduction至少得有一个吧。通用的
-            else:
+            # 删除introduction及其之后的内容
+            # 不知道为什么加上大小写判定之后就炸了
+            introduction_pattern = r'[Ii](?:ntroduction|NTRODUCTION).*'
+            # print(re.findall(introduction_pattern,page_text,re.DOTALL)[0])
+            first_page_text = re.sub(introduction_pattern, '',
+                            first_page_text, flags=re.DOTALL)
 
-                # 如果有abstract / summary，删除及其之前的内容  the plant journal用的是summary而不是abstract
-                summary_pattern = r'.*(?:[Ss]ummary|SUMMARY|ABSTRACT|[Aa]bstract)'
-                # print(re.findall(summary_pattern, page_text,re.DOTALL)[0])
-                first_page_text = re.sub(summary_pattern, '', first_page_text, flags=re.DOTALL)
+            # 删除key words及其之后的内容
+            keywords_pattern = r'\n[Kk](?:eywords|ey words|EYWORDS|EY WORDS).*'
+            # print(re.findall(keywords_pattern,page_text,re.DOTALL)[0])
+            first_page_text = re.sub(keywords_pattern, '',
+                            first_page_text, flags=re.DOTALL)
 
-                # 删除introduction及其之后的内容
-                # 不知道为什么加上大小写判定之后就炸了
-                introduction_pattern = r'[Ii](?:ntroduction|NTRODUCTION).*'
-                # print(re.findall(introduction_pattern,page_text,re.DOTALL)[0])
-                first_page_text = re.sub(introduction_pattern, '',
-                                first_page_text, flags=re.DOTALL)
+            # 删除版权信息
+            copyright_pattern = r'\.\n.*http://creativecommons.org/licenses/by-nc-nd/4.0/.*'
+            # print(re.findall(copyright_pattern,page_text,re.DOTALL)[0])
+            first_page_text = re.sub(copyright_pattern, '',
+                            first_page_text, flags=re.DOTALL)
 
-                # 删除key words及其之后的内容
-                keywords_pattern = r'\n[Kk](?:eywords|ey words|EYWORDS|EY WORDS).*'
-                # print(re.findall(keywords_pattern,page_text,re.DOTALL)[0])
-                first_page_text = re.sub(keywords_pattern, '',
-                                first_page_text, flags=re.DOTALL)
+            # 删除DOI
+            # doi_pattern = r'[Dd][Oo][Ii]:.*'
+            # print(re.findall(doi_pattern,page_text,re.DOTALL)[0])
+            # page_text = re.sub(doi_pattern,'',page_text,flags=re.DOTALL)
 
-                # 删除版权信息
-                copyright_pattern = r'\.\n.*http://creativecommons.org/licenses/by-nc-nd/4.0/.*'
-                # print(re.findall(copyright_pattern,page_text,re.DOTALL)[0])
-                first_page_text = re.sub(copyright_pattern, '',
-                                first_page_text, flags=re.DOTALL)
+            # 删除Citation（PLOS那种东西，在摘要下面有很多怪的东西）
+            # citation_pattern = r'[Cc]itation:.*'
+            # print(re.findall(citation_pattern,page_text,re.DOTALL)[0])
+            # page_text = re.sub(citation_pattern,'',page_text,flags=re.DOTALL)
 
-                # 删除DOI
-                # doi_pattern = r'[Dd][Oo][Ii]:.*'
-                # print(re.findall(doi_pattern,page_text,re.DOTALL)[0])
-                # page_text = re.sub(doi_pattern,'',page_text,flags=re.DOTALL)
+            # 如果有参考文献的那个字样，删除及其之后的内容（顺便还可以删除参考文献所在的这一句）
+            reference_pattern = r'et al.*?\).*'
+            # print(re.findall(reference_pattern,page_text,re.DOTALL)[0])
+            first_page_text = re.sub(reference_pattern, '',
+                            first_page_text, flags=re.DOTALL)
 
-                # 删除Citation（PLOS那种东西，在摘要下面有很多怪的东西）
-                # citation_pattern = r'[Cc]itation:.*'
-                # print(re.findall(citation_pattern,page_text,re.DOTALL)[0])
-                # page_text = re.sub(citation_pattern,'',page_text,flags=re.DOTALL)
-
-                # 如果有参考文献的那个字样，删除及其之后的内容（顺便还可以删除参考文献所在的这一句）
-                reference_pattern = r'et al.*?\).*'
-                # print(re.findall(reference_pattern,page_text,re.DOTALL)[0])
-                first_page_text = re.sub(reference_pattern, '',
-                                first_page_text, flags=re.DOTALL)
-
-            # 去除多余的换行符
-            pdf_yaml_content[pdf_yaml.abstract.value] = first_page_text.replace('\n', '')
-            # print(abstract)
+        # 去除多余的换行符
+        pdf_yaml_content[pdf_yaml.abstract.value] = first_page_text.replace('\n', '')
+        # print(abstract)
 
 
     # 保存pdf的yaml

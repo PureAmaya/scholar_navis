@@ -9,12 +9,11 @@ Below is a list of projects used or relied upon:
 | Third-party Library or Tool                                                             | License                              | Usage Strategy                                                                                                                              |
 | --------------------------------------------------------------------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | <a href="https://github.com/binary-husky/gpt_academic" target="_blank">GPT Academic</a> | GPL-3.0 license                      | Used as a plugin for this tool; cannot run independently. Detailed modifications and usage strategies for gpt_academic are described below. |
-| <a href="https://pypi.org/project/PyPDF2/" target="_blank">PyPDF2</a>                   | BSD License                          | Library used for PDF processing                                                                                                             |
 | <a href="https://pypi.org/project/PyYAML" target="_blank">PyYAML</a>                    | MIT License                          | Library used for parsing YAML files                                                                                                         |
 | <a href="https://pypi.org/project/beautifulsoup4" target="_blank">beautifulsoup4</a>    | MIT License                          | Library used for web request processing                                                                                                     |
 | <a href="https://pypi.org/project/requests/" target="_blank">requests</a>               | Apache Software License (Apache-2.0) | Library used for web requests                                                                                                               |
 | <a href="https://pypi.org/project/python-docx" target="_blank">python-docx</a>          | MIT License                          | Library used to parse docx files and extract text content, and to convert markdown to word (these features are still in testing)            |
-| <a href="https://pypi.org/project/markdown-pdf/" target="_blank">markdown-pdf</a>       | MIT License                          | Library used to convert markdown to PDF                                                                                                     |
+| <a href="https://pypi.org/project/PyMuPDF/" target="_blank">PyMuPDF</a>                 | AGPL-3.0 license                     | Library used to convert HTML to PDF                                                                                                         |
 | <a href="https://github.com/marktext/marktext" target="_blank">MarkText</a>             | MIT License                          | Used the software to convert markdown to HTML, and modifications were made to the HTML                                                      |
 
 **The modified parts in gpt_academic are as follows:**
@@ -100,6 +99,8 @@ Below is a list of projects used or relied upon:
 - Accessing AI: Multithreading and single-threading for accessing multiple AIs, including network processing, token limitations, and the integration of API required for accessing AI and the necessary text content.
 
 - Web Service (based on gradio): This includes but is not limited to login, multi-user management, user interface, cookie management, plugin selection and parameter modification, markdown parsing, error capture with web page presentation, frontend and backend communication, file upload and download, and HTML links and redirections used by Scholar Navis.
+
+- Convert Markdown to HTML
 
 - File Management: Handling and usage of files/folders belonging to gpt_academic, as well as PDF full-text retrieval.
 

@@ -4,6 +4,7 @@ import yaml
 import shutil
 import codecs
 import sqlite3
+import pymupdf
 from enum import Enum
 from .multi_lang import _
 from functools import wraps
@@ -378,13 +379,28 @@ def get_this_user_library_list(tool_root: str):
     return list
 
 
-def markdown_to_pdf(text:str,title:str):
-    from markdown_pdf import MarkdownPdf,Section
-    pdf = MarkdownPdf(toc_level=0)
-    pdf.add_section(Section(text))
-    pdf.meta["title"] = title
-    pdf.meta["author"] = "Scholar Navis"
-    return pdf
+
+
+def markdown_to_pdf(text:str,title:str,save_dir:str):
+    from shared_utils.advanced_markdown_format import markdown_convertion
+    
+    fp = os.path.join(save_dir,f"{title}.pdf")
+    HTML =  markdown_convertion(text)
+    A4 = pymupdf.paper_rect("A4")  # size of a page
+    WHERE = A4 + (36, 36, -36, -36)  # leave borders of 0.5 inches
+    story =  pymupdf.Story(html=HTML)  # make the story
+    writer = pymupdf.DocumentWriter(fp)  # make the writer
+    pno = 0 # current page number
+    more = 1  # will be set to 0 when done
+    while more:  # loop until all story content is processed
+        dev = writer.begin_page(A4)  # make a device to write on the page
+        more, filled = story.place(WHERE)  # compute content positions on page
+        story.draw(dev)
+        writer.end_page()
+        pno += 1  # increase page number
+    writer.close()  # close output file
+    return fp
+
 
 def csv_load(file_fp:str):
     with codecs.open(filename=file_fp,encoding='utf-8-sig') as f:

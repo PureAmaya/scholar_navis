@@ -242,9 +242,7 @@ def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_
     history.append(f'Please reply to me using {GPT_prefer_language}') # 防止意外，再加一次
     
     # 提供一下下载
-    pdf_path = os.path.join(get_tmp_dir_of_this_user(chatbot,'markdown2pdf',['Fine-grained Analysis of Article']),f'Analysis of {title}.pdf')
-    pdf = markdown_to_pdf(gpt_say_last,f'Analysis of {title}')
-    pdf.save(pdf_path)
+    pdf_path = markdown_to_pdf(gpt_say_last,f'Analysis of {title}',get_tmp_dir_of_this_user(chatbot,'markdown2pdf',['Fine-grained Analysis of Article']))
     chatbot.append([_("下载分析结果："),download_file(pdf_path)])
 
     yield from update_ui(chatbot=chatbot,history=history) # 这里的history是分片总结得到的内容

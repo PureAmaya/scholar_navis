@@ -3,10 +3,13 @@ import sys
 import shutil
 import argparse
 import subprocess
-from scripts.tools.sn_config import GPT_SUPPORT_LAMGUAGE
+# 有的时候需要提前安装一个yaml
+try:import yaml
+except:subprocess.run(['pip', 'install', 'PyYAML'])
+# 安装好之后再导入
 from scripts.tools.multi_lang import _,i18n
-from scripts.tools.sn_config import VERSION,CONFIG,write_config 
 from scripts.tools.const import GPT_ACADEMIC_ROOT_PATH, SCHOLAR_NAVIS_ROOT_PATH,SCHOLAR_NAVIS_DIR_NAME
+from scripts.tools.sn_config import VERSION,CONFIG,write_config, GPT_SUPPORT_LAMGUAGE
 
 def _clear_console():
     if sys.platform == 'win32':os.system('cls')
@@ -70,7 +73,7 @@ def __check_path():
     
     # 检查安装目录是否可用
     if  SCHOLAR_NAVIS_DIR_NAME != 'scholar_navis':
-        print(_('没有安装在crazy_functions\scholar_navis中'))
+        print(_("没有安装在crazy_functions/scholar_navis中"))
         install_vaild = False
     
     if not install_vaild:
@@ -173,7 +176,6 @@ def _crazy_function_modifier():
         
 def _config_pri_modifier():
     
-    _clear_console()
     
     config_pri_bak_fp = os.path.join(GPT_ACADEMIC_ROOT_PATH,'config_private.py.bak')
     config_pri_fp = os.path.join(GPT_ACADEMIC_ROOT_PATH,'config_private.py')
@@ -268,9 +270,9 @@ def __config_prompt():
 
 def install():
     
+    
     _configuration()
     
-    _clear_console()
     
     # 安装预先数据 现在暂时不需要了
     #__install_def_data()
@@ -280,6 +282,8 @@ def install():
         
     # 配置中加上去
     _config_pri_modifier()
+    
+    input(_('按下回车键以继续...'))
     
     # 安装需要的包
     _install_requirement()
@@ -296,11 +300,11 @@ def main():
     print(_('欢迎使用Scholar Navis'))
     print(f'ver. {VERSION}\n')
     
-    # 选择语言
-    _choose_language()
-    
     # 路经检查
     __check_path()
+    
+    # 选择语言
+    _choose_language()
     
     while(True):
         print(_('要安装 Scholar Navis 吗？ y(默认)/n'))

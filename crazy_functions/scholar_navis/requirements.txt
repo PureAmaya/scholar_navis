@@ -1,6 +1,5 @@
-PyPDF2
 PyYAML
 beautifulsoup4
 requests
 python-docx
-markdown-pdf
+pymupdf

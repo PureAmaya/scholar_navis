@@ -94,7 +94,7 @@ def 按关键词总结文献(txt, llm_kwargs, plugin_kwargs, chatbot, history, s
                 summarization_content = file.read()
                 # 假如pdf没了，生成一个
                 if not os.path.exists(summarization_pdf_fp):
-                    markdown_to_pdf(summarization_content,'Summarize Articles by Keywords - Scholar Navis').save(summarization_pdf_fp)
+                    markdown_to_pdf(summarization_content,'summarization',os.path.dirname(summarization_pdf_fp))
                 chatbot.append([summarization_content,f'<a href="file={os.path.relpath(summarization_pdf_fp)}" target="_blank">{_("点击这里下载pdf格式的总结内容")}</a>'])
             yield from update_ui(chatbot=chatbot, history=[])  # 刷新界面
             return
@@ -290,8 +290,7 @@ def 按关键词总结文献(txt, llm_kwargs, plugin_kwargs, chatbot, history, s
 
     # pdf推送下载
     if os.path.exists(summarization_pdf_fp): os.remove(summarization_pdf_fp)
-    pdf = markdown_to_pdf(result,'Summarize Articles by Keywords - Scholar Navis')
-    pdf.save(summarization_pdf_fp)
+    markdown_to_pdf(result,'Summarize Articles by Keywords - Scholar Navis',os.path.dirname(summarization_pdf_fp))
 
     chatbot.clear()
     chatbot.append([_('总结完成。下面是总结的内容: （不支持对话）') , 

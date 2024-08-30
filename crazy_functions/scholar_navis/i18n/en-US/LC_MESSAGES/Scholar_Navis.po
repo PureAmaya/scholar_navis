@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-08-29 21:57+0800\n"
-"PO-Revision-Date: 2024-08-29 21:59+0800\n"
+"POT-Creation-Date: 2024-08-30 17:54+0800\n"
+"PO-Revision-Date: 2024-08-30 17:54+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -365,7 +365,7 @@ msgstr ""
 "asked at this point as well): "
 
 #: scripts/communicate_with_ai_about_research_progress.py:335
-#: scripts/fine_grained_analysis_of_article.py:257
+#: scripts/fine_grained_analysis_of_article.py:254
 msgid "选择总结库"
 msgstr "Select Summary Library"
 
@@ -392,29 +392,29 @@ msgid "在此处输入思维导图类型代码/要溯源的内容/课题拟定�
 msgstr ""
 "Enter mind map type code/traceable content/project requirements formulation"
 
-#: scripts/fine_grained_analysis_of_article.py:39
+#: scripts/fine_grained_analysis_of_article.py:38
 msgid "现在可以进行单篇文章的精细分析。支持总结库内置文章或上传的其他文章"
 msgstr ""
 "Now fine-grained analysis of individual articles is supported. It supports "
 "articles built into the summary library or other articles uploaded"
 
-#: scripts/fine_grained_analysis_of_article.py:39
+#: scripts/fine_grained_analysis_of_article.py:38
 msgid "等待指令中..."
 msgstr "Waiting for commands..."
 
-#: scripts/fine_grained_analysis_of_article.py:47
+#: scripts/fine_grained_analysis_of_article.py:46
 msgid "[注意] 上传的文献多于1篇。<b>精细分析时仅使用第一篇文章</b>"
 msgstr ""
 "[Note] More than one article has been uploaded. <b>Only the first article "
 "will be used for fine-grained analysis</b>"
 
-#: scripts/fine_grained_analysis_of_article.py:63
-#: scripts/tools/article_library_ctrl.py:328
+#: scripts/fine_grained_analysis_of_article.py:62
+#: scripts/tools/article_library_ctrl.py:329
 msgid "该用户没有任何总结库"
 msgstr "The user has no article summarization library"
 
-#: scripts/fine_grained_analysis_of_article.py:65
-#: scripts/tools/article_library_ctrl.py:330
+#: scripts/fine_grained_analysis_of_article.py:64
+#: scripts/tools/article_library_ctrl.py:331
 msgid ""
 "下面是该用户拥有的总结库：\n"
 "\n"
@@ -422,7 +422,7 @@ msgstr ""
 "Below is the summary library owned by this user:\n"
 "\n"
 
-#: scripts/fine_grained_analysis_of_article.py:71
+#: scripts/fine_grained_analysis_of_article.py:70
 msgid ""
 "没有指定任何文章。可以选择上传文章或者从总结库中选择一篇文章进行分析</br></"
 "br>{}"
@@ -431,38 +431,38 @@ msgstr ""
 "select an article from the article summarization library for analysis</br></"
 "br>{}"
 
-#: scripts/fine_grained_analysis_of_article.py:77
+#: scripts/fine_grained_analysis_of_article.py:76
 msgid "没有上传可用的文章，<b>{}</b> 亦不是已有的总结库"
 msgstr ""
 "No available articles uploaded, neither is <b>{}</b> part of the existing "
 "summarization library"
 
-#: scripts/fine_grained_analysis_of_article.py:88
+#: scripts/fine_grained_analysis_of_article.py:87
 msgid "总结库 <b>{}</b> 中不存在任何已经加载完成的文章"
 msgstr "There are no articles loaded in the <b>{}</b> summary library"
 
-#: scripts/fine_grained_analysis_of_article.py:115
+#: scripts/fine_grained_analysis_of_article.py:114
 msgid "访问文章发布页"
 msgstr "Article Publisher Page"
 
-#: scripts/fine_grained_analysis_of_article.py:116
+#: scripts/fine_grained_analysis_of_article.py:115
 msgid "复制文章"
 msgstr "Copy Article"
 
-#: scripts/fine_grained_analysis_of_article.py:117
+#: scripts/fine_grained_analysis_of_article.py:116
 msgid "下载文章"
 msgstr "Download Article"
 
-#: scripts/fine_grained_analysis_of_article.py:131
+#: scripts/fine_grained_analysis_of_article.py:130
 #: scripts/tools/common_plugin_para.py:91
 msgid "总结库"
 msgstr "article summarization library"
 
-#: scripts/fine_grained_analysis_of_article.py:132
+#: scripts/fine_grained_analysis_of_article.py:131
 msgid "包含下面的文章："
 msgstr "includes the following articles:"
 
-#: scripts/fine_grained_analysis_of_article.py:133
+#: scripts/fine_grained_analysis_of_article.py:132
 msgid ""
 "展开文字可以看到文章的预分析结果。如果没有正常显示标题，说明文章标题获取失"
 "败，但不影响后续使用"
@@ -471,11 +471,11 @@ msgstr ""
 "title does not display normally, it indicates that the article title "
 "retrieval has failed, but it does not affect subsequent use"
 
-#: scripts/fine_grained_analysis_of_article.py:134
+#: scripts/fine_grained_analysis_of_article.py:133
 msgid "分析中使用的关键词："
 msgstr "Keywords used in analysis:"
 
-#: scripts/fine_grained_analysis_of_article.py:135
+#: scripts/fine_grained_analysis_of_article.py:134
 msgid ""
 "如果没有正常的显示文章标题，可能是该文章没有doi，或是没有在metadata中设定标"
 "题，此时显示的一般为文件名"
@@ -484,13 +484,13 @@ msgstr ""
 "does not have a DOI, or the title has not been set in the metadata. In this "
 "case, the displayed title is generally the filename"
 
-#: scripts/fine_grained_analysis_of_article.py:136
+#: scripts/fine_grained_analysis_of_article.py:135
 msgid "如果 [访问文章发布页] 不可用，可能是该文章没有doi，也可能是网络错误"
 msgstr ""
 "If [Article Publisher Page] is not available, it may be that the article "
 "does not have a DOI, or there may be a network error"
 
-#: scripts/fine_grained_analysis_of_article.py:151
+#: scripts/fine_grained_analysis_of_article.py:150
 msgid ""
 "尚未输入一个可用的文章。可以选择上传一篇文章，也可以从加载的文章中选择一篇使"
 "用"
@@ -498,45 +498,45 @@ msgstr ""
 "No available articles have been input. You can either upload an article or "
 "select an article from the loaded articles to use"
 
-#: scripts/fine_grained_analysis_of_article.py:153
+#: scripts/fine_grained_analysis_of_article.py:152
 msgid "您可以点击这里"
 msgstr "You can click here"
 
-#: scripts/fine_grained_analysis_of_article.py:153
+#: scripts/fine_grained_analysis_of_article.py:152
 msgid "查阅该总结库包含的文章"
 msgstr "review the articles included in the summary library"
 
-#: scripts/fine_grained_analysis_of_article.py:161
+#: scripts/fine_grained_analysis_of_article.py:160
 msgid "精细分析中..."
 msgstr "In fine-grained analysis of the article.."
 
-#: scripts/fine_grained_analysis_of_article.py:165
+#: scripts/fine_grained_analysis_of_article.py:164
 msgid "分析过程中出错！错误原因是：{}"
 msgstr "Error occurred during analysis! Error reason is: {}"
 
-#: scripts/fine_grained_analysis_of_article.py:196
+#: scripts/fine_grained_analysis_of_article.py:195
 msgid "对pdf文件处理中..."
 msgstr "Processing PDF files..."
 
-#: scripts/fine_grained_analysis_of_article.py:206
+#: scripts/fine_grained_analysis_of_article.py:205
 #, python-brace-format
 msgid "[{i}/{total}] AI阅读中..."
 msgstr "[{i}/{total}] AI reading in progress..."
 
-#: scripts/fine_grained_analysis_of_article.py:231
+#: scripts/fine_grained_analysis_of_article.py:230
 msgid "总结中..."
 msgstr "In summary..."
 
-#: scripts/fine_grained_analysis_of_article.py:238
+#: scripts/fine_grained_analysis_of_article.py:237
 msgid "分析的文章如下："
 msgstr "The analyzed articles are as follows:"
 
-#: scripts/fine_grained_analysis_of_article.py:240
+#: scripts/fine_grained_analysis_of_article.py:239
 msgid "标题可能不准确，跳转连接亦或许无法使用，仅供参考"
 msgstr ""
 "Title may be inaccurate, link may not be functional, for reference only"
 
-#: scripts/fine_grained_analysis_of_article.py:242
+#: scripts/fine_grained_analysis_of_article.py:241
 msgid ""
 "精细分析完成，以下是分析的结果（现在亦可以与AI进行交流，也可以下载分析的结"
 "果）: "
@@ -544,19 +544,19 @@ msgstr ""
 "Fine-grained analysis completed, the following are the analysis results (you "
 "can now also communicate with AI and download the analysis results): "
 
-#: scripts/fine_grained_analysis_of_article.py:249
+#: scripts/fine_grained_analysis_of_article.py:246
 msgid "下载分析结果："
 msgstr "Download analysis results:"
 
-#: scripts/fine_grained_analysis_of_article.py:256
+#: scripts/fine_grained_analysis_of_article.py:253
 msgid "选定的文章"
 msgstr "Selected articles"
 
-#: scripts/fine_grained_analysis_of_article.py:256
+#: scripts/fine_grained_analysis_of_article.py:253
 msgid "上传或使用总结库内的文章"
 msgstr "Upload or use articles from the summary library"
 
-#: scripts/fine_grained_analysis_of_article.py:257
+#: scripts/fine_grained_analysis_of_article.py:254
 msgid "查看总结库内的文章"
 msgstr "View articles in the summarization library"
 
@@ -900,27 +900,27 @@ msgstr "Summarizing, please do not close this page during the process..."
 msgid "处理中...."
 msgstr "Processing...."
 
-#: scripts/summarize_articles_by_keywords.py:297
+#: scripts/summarize_articles_by_keywords.py:296
 msgid "总结完成。下面是总结的内容: （不支持对话）"
 msgstr ""
 "Summary completed. Below is the content of the summary: (No support for "
 "conducting a dialogue)"
 
-#: scripts/summarize_articles_by_keywords.py:299
+#: scripts/summarize_articles_by_keywords.py:298
 msgid "围绕着关键词：{}"
 msgstr "Around the keywords: {}"
 
-#: scripts/summarize_articles_by_keywords.py:301
+#: scripts/summarize_articles_by_keywords.py:300
 msgid "如果不满意生成的结果（例如内容明显缺失），可以使用尝试重新生成"
 msgstr ""
 "If you are not satisfied with the generated results (for example, if there "
 "is clear content missing), you can try regenerating"
 
-#: scripts/summarize_articles_by_keywords.py:304
+#: scripts/summarize_articles_by_keywords.py:303
 msgid "点击这里下载pdf格式的总结内容"
 msgstr "Click here to download the summary content in PDF format"
 
-#: scripts/summarize_articles_by_keywords.py:359
+#: scripts/summarize_articles_by_keywords.py:358
 #, python-brace-format
 msgid ""
 "[批次进度：{a}/{b}] 请对这篇文章的摘要进行总结概括\n"
@@ -931,45 +931,45 @@ msgstr ""
 "\n"
 "Around the keys: {key}"
 
-#: scripts/summarize_articles_by_keywords.py:486
+#: scripts/summarize_articles_by_keywords.py:485
 msgid "处理中..."
 msgstr "Processing..."
 
-#: scripts/summarize_articles_by_keywords.py:497
+#: scripts/summarize_articles_by_keywords.py:496
 msgid "多线程操作完成"
 msgstr "Multithreaded operations completed"
 
-#: scripts/summarize_articles_by_keywords.py:512
+#: scripts/summarize_articles_by_keywords.py:511
 msgid "合并优化中..."
 msgstr "Merging and optimizing..."
 
-#: scripts/summarize_articles_by_keywords.py:519
+#: scripts/summarize_articles_by_keywords.py:518
 msgid "优化完成"
 msgstr "Optimization completed"
 
-#: scripts/summarize_articles_by_keywords.py:530
+#: scripts/summarize_articles_by_keywords.py:529
 msgid "最后总结中....."
 msgstr "At the end of the summary ..."
 
-#: scripts/summarize_articles_by_keywords.py:537
+#: scripts/summarize_articles_by_keywords.py:536
 msgid "总结完成"
 msgstr "Summary completed"
 
-#: scripts/summarize_articles_by_keywords.py:546
+#: scripts/summarize_articles_by_keywords.py:545
 msgid "强制重新分析"
 msgstr "Forced reanalysis"
 
-#: scripts/tools/article_library_ctrl.py:223
+#: scripts/tools/article_library_ctrl.py:224
 #: scripts/tools/common_plugin_para.py:130
 msgid "禁用"
 msgstr "Disabled"
 
-#: scripts/tools/article_library_ctrl.py:224
+#: scripts/tools/article_library_ctrl.py:225
 #: scripts/tools/common_plugin_para.py:130
 msgid "启用"
 msgstr "Enabled"
 
-#: scripts/tools/article_library_ctrl.py:237
+#: scripts/tools/article_library_ctrl.py:238
 #, python-brace-format
 msgid ""
 "<ul><li>不能含有以下字符：{forbidden}</li><li>不能以{forbidden_start}开头</"
@@ -978,11 +978,11 @@ msgstr ""
 "<ul><li>Cannot contain the following characters: {forbidden}</li><li>Cannot "
 "start with {forbidden_start}</li></ul>"
 
-#: scripts/tools/article_library_ctrl.py:238
+#: scripts/tools/article_library_ctrl.py:239
 msgid "该名称`{}`无法使用，详细说明如下: "
 msgstr "The name `{}` cannot be used, detailed explanation as follows: "
 
-#: scripts/tools/article_library_ctrl.py:258
+#: scripts/tools/article_library_ctrl.py:259
 msgid ""
 "Scholar Navis (ver.{}) \n"
 "关于文档如下。完整版可以参见github发布页"
@@ -991,54 +991,54 @@ msgstr ""
 "about document is as follows. The complete version can be found on the "
 "GitHub release page"
 
-#: scripts/tools/article_library_ctrl.py:267
+#: scripts/tools/article_library_ctrl.py:268
 msgid "Scholar Navis 使用到的第三方库: "
 msgstr "Third-party libraries used by Scholar Navis: "
 
-#: scripts/tools/article_library_ctrl.py:277
+#: scripts/tools/article_library_ctrl.py:278
 #: scripts/tools/gpt_academic_handler.py:49
 msgid "与AI交流研究进展"
 msgstr "Communicate with AI about Research Progress"
 
-#: scripts/tools/article_library_ctrl.py:281
+#: scripts/tools/article_library_ctrl.py:282
 #: scripts/tools/gpt_academic_handler.py:36
 msgid "按关键词总结文献"
 msgstr "Summarize Articles by Keywords"
 
-#: scripts/tools/article_library_ctrl.py:285
+#: scripts/tools/article_library_ctrl.py:286
 #: scripts/tools/gpt_academic_handler.py:23
 msgid "缓存pdf文献"
 msgstr "Cache PDF Articles"
 
-#: scripts/tools/article_library_ctrl.py:288
+#: scripts/tools/article_library_ctrl.py:289
 #: scripts/tools/gpt_academic_handler.py:62
 msgid "精细分析文献"
 msgstr "Fine-grained Analysis of Article"
 
-#: scripts/tools/article_library_ctrl.py:293
+#: scripts/tools/article_library_ctrl.py:294
 #: scripts/tools/gpt_academic_handler.py:76
 msgid "PubMed_OpenAccess文章获取"
 msgstr "PubMed Open Access Articles Download"
 
-#: scripts/tools/article_library_ctrl.py:298
+#: scripts/tools/article_library_ctrl.py:299
 msgid "更好的文章润色"
 msgstr "Better article editing"
 
-#: scripts/tools/article_library_ctrl.py:312
+#: scripts/tools/article_library_ctrl.py:313
 msgid "<b>{}</b>的帮助文档如下: "
 msgstr "<b>{}</b> help documentation is as follows: "
 
-#: scripts/tools/article_library_ctrl.py:323
+#: scripts/tools/article_library_ctrl.py:324
 msgid "总结库 <b>{}</b> 不存在，请检查输入是否准确"
 msgstr ""
 "Summary library <b>{}</b> does not exist, please check if the input is "
 "accurate"
 
-#: scripts/tools/article_library_ctrl.py:323
+#: scripts/tools/article_library_ctrl.py:324
 msgid "没有输入总结库名称"
 msgstr "No input for the article summarization library name"
 
-#: scripts/tools/article_library_ctrl.py:337
+#: scripts/tools/article_library_ctrl.py:338
 msgid "不能进行正常操作。下面是有关信息: "
 msgstr ""
 "Cannot perform normal operation. The following is related information: "
@@ -1121,78 +1121,78 @@ msgstr "Multilingual Translator"
 msgid "Scholar Navis 加载失败"
 msgstr "Scholar Navis failed to load"
 
-#: setup.py:21 setup.py:56 setup.py:235 setup.py:311
+#: setup.py:24 setup.py:59 setup.py:237 setup.py:315
 msgid "不合法输入，请重新输入"
 msgstr "Invalid input, please re-enter"
 
-#: setup.py:48
+#: setup.py:51
 #, python-brace-format
 msgid "如果希望 {lang} 为GPT的偏好语言，请输入 {k}"
 msgstr "If you want {lang} to be GPT's preferred language, please enter {k}."
 
-#: setup.py:68
+#: setup.py:71
 msgid "没有安装在gpt_academic的crazy_functions文件夹下"
 msgstr "There are no crazy_functions folders installed under gpt_academic"
 
-#: setup.py:73
-msgid "没有安装在crazy_functions\\scholar_navis中"
-msgstr "There is no installation in crazy_functions\\scholar_navis"
+#: setup.py:76
+msgid "没有安装在crazy_functions/scholar_navis中"
+msgstr "There is no installation in crazy_functions/scholar_navis"
 
-#: setup.py:77 setup.py:266 setup.py:310
+#: setup.py:80 setup.py:268 setup.py:314
 msgid "按回车键退出..."
 msgstr "Press the Enter key to exit..."
 
-#: setup.py:90
+#: setup.py:93
 msgid "y(启用) / n(禁用) / 不输入(跳过修改)"
 msgstr "y(enable) / n(disable) /no input (skip modification)"
 
-#: setup.py:93
+#: setup.py:96
 msgid "修改配置"
 msgstr "Modify the configuration"
 
-#: setup.py:96
+#: setup.py:99
 msgid "启用临时文件自动删除: "
 msgstr "Enable automatic deletion of temporary files: "
 
-#: setup.py:97 setup.py:102 setup.py:107 setup.py:112 setup.py:117
+#: setup.py:100 setup.py:105 setup.py:110 setup.py:115 setup.py:120
 msgid "当前: "
 msgstr "Current: "
 
-#: setup.py:101
+#: setup.py:104
 msgid "启用总结库自动删除: "
 msgstr "Enable automatic deletion of summary repository: "
 
-#: setup.py:106
+#: setup.py:109
 msgid "启用上传文件自动删除: "
 msgstr "Enable automatic deletion of uploaded files: "
 
-#: setup.py:111
+#: setup.py:114
 msgid "启用简易翻译器（仅限于 Scholar Navis）: "
 msgstr "Enable the simple translator (for Scholar Navis only): "
 
-#: setup.py:116
+#: setup.py:119
 msgid "启用 PubMed OA 下载器: "
 msgstr "Enable PubMed OA downloader: "
 
-#: setup.py:129
+#: setup.py:132
 msgid "找不到预先数据，该过程跳过"
 msgstr "Pre-scheduled data not found, process skipped"
 
-#: setup.py:134
+#: setup.py:137
 msgid "已安装预先数据，该过程跳过"
 msgstr "Pre-installed pre-data, the process is skipped"
 
-#: setup.py:137
+#: setup.py:140
 msgid "预先数据安装完成"
 msgstr "Pre-installed data completed"
 
-#: setup.py:160
+#: setup.py:163
 msgid "已经在 crazy_functional 中注册过本工具，此过程跳过"
 msgstr ""
 "You have already registered this tool in crazy_functional, this process will "
 "be skipped"
 
-#: setup.py:167
+#: setup.py:170
 msgid ""
 "无法在 crazy_functional 中注册本工具（可以尝试手动安装）。安装程序已终止，按"
 "回车键退出..."
@@ -1200,70 +1200,74 @@ msgstr ""
 "Cannot register this tool in crazy_functional (try manual installation). "
 "Installation has been terminated, press Enter key to exit..."
 
-#: setup.py:172
+#: setup.py:175
 msgid "crazy_functional 注册成功"
 msgstr "successful registration of crazy_functional"
 
-#: setup.py:204
+#: setup.py:206
 msgid "config_private 注册工具组成功"
 msgstr "config_private registration succeeded"
 
-#: setup.py:206
+#: setup.py:208
 msgid "config_private 中已注册工具组，此过程跳过"
 msgstr ""
 "The tool group has been registered in config_private; this process is skipped"
 
-#: setup.py:225
+#: setup.py:227
 msgid "不存在 requirements.txt 包安装终止。按回车键退出..."
 msgstr ""
 "There is no requirement to stop package installation. Press Enter to exit..."
 
-#: setup.py:230
+#: setup.py:232
 msgid "该工具所用的网络位于中国大陆吗？ y(默认)/n/c"
 msgstr ""
 "The network used by this tool is located in mainland China? y (default)/n/c"
 
-#: setup.py:231
+#: setup.py:233
 msgid "y=是 n=否 c=取消安装依赖（跳过）"
 msgstr "y=Yes n=No c=Cancel (Skip Installation)"
 
-#: setup.py:237
+#: setup.py:239
 msgid "开始安装依赖包..."
 msgstr "Starting to install dependencies..."
 
-#: setup.py:244 setup.py:250
+#: setup.py:246 setup.py:252
 msgid "requirements.txt 安装成功"
 msgstr "requirements.txt installed successfully"
 
-#: setup.py:253
+#: setup.py:255
 msgid "已经跳过依赖安装"
 msgstr "Already skipped dependency installation"
 
-#: setup.py:256
+#: setup.py:258
 msgid "requirements.txt 安装失败（{}）。按回车键退出..."
 msgstr "requirements.txt installation failed ({}) Press Enter to exit..."
 
-#: setup.py:261
+#: setup.py:263
 msgid "Scholar Navis 安装成功。"
 msgstr "Scholar Navis load successfully"
 
-#: setup.py:262
+#: setup.py:264
 msgid "进一步配置，请在 conig_private.py 中进行调整，内含各个参数的详细说明"
 msgstr ""
 "Further configuration, please adjust in conig_private.py, which contains "
 "detailed descriptions of each parameter"
 
-#: setup.py:263
+#: setup.py:265
 msgid "此外也请阅读 readme.md ，了解本程序、gpt_academic和其他事宜！"
 msgstr ""
 "Please read the readme.md as well for information about this program, "
 "gpt_academic, and other matters!"
 
-#: setup.py:296
+#: setup.py:286
+msgid "按下回车键以继续..."
+msgstr "Press the Enter to continue…"
+
+#: setup.py:300
 msgid "欢迎使用Scholar Navis"
 msgstr "Welcome to use Scholar Navis"
 
-#: setup.py:306
+#: setup.py:310
 msgid "要安装 Scholar Navis 吗？ y(默认)/n"
 msgstr "Do you want to install Scholar Navis? y(default)/n"
 

@@ -21,7 +21,7 @@ auto_clear_tmp = CONFIG['auto_clear_tmp']
 auto_clear_summary_lib = CONFIG['auto_clear_summary_lib']
 auto_clear_private_upload = CONFIG['auto_clear_private_upload']
 
-thread_cycle_interval = 3
+thread_cycle_interval = 300
 '''清理线程循环间隔（默认300）'''
 tmp_lifespan = 300
 '''缓存文件最长寿命（默认300）（秒）'''

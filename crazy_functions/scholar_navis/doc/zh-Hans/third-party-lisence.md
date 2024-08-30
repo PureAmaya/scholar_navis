@@ -4,17 +4,16 @@ Scholar Navis 使用 GPL-3.0 license 许可证
 
 ----------------------------
 
-下面是使用或依赖的项目：
+下面是使用或依赖的项目（仅列举了 Scholar Navis 使用的）：
 
 | 第三方库或工具                                                                                 | 许可证                                  | 使用策略                                            |
 | --------------------------------------------------------------------------------------- | ------------------------------------ | ----------------------------------------------- |
 | <a href="https://github.com/binary-husky/gpt_academic" target="_blank">GPT Academic</a> | GPL-3.0 license                      | 作为该工具的插件，无法独立运行。针对gpt_academic详细的修改内容和使用策略请见下文。 |
-| <a href="https://pypi.org/project/PyPDF2/" target="_blank">PyPDF2</a>                   | BSD License                          | 使用库，pdf处理                                       |
 | <a href="https://pypi.org/project/PyYAML" target="_blank">PyYAML</a>                    | MIT License                          | 使用库，yaml文件解析                                    |
 | <a href="https://pypi.org/project/beautifulsoup4" target="_blank">beautifulsoup4</a>    | MIT License                          | 使用库，网络请求处理                                      |
 | <a href="https://pypi.org/project/requests/" target="_blank">requests</a>               | Apache Software License (Apache-2.0) | 使用库，网络请求                                        |
 | <a href="https://pypi.org/project/python-docx" target="_blank">python-docx</a>          | MIT License                          | 使用库，解析docx并获取文本内容，将makrdown转换为word（所所属功能仍在测试）   |
-| <a href="https://pypi.org/project/markdown-pdf/" target="_blank">markdown-pdf</a>       | MIT License                          | 使用库，将markdown转换为pdf                             |
+| <a href="https://pypi.org/project/PyMuPDF/" target="_blank">PyMuPDF</a>                 | AGPL-3.0 license                     | 使用库，将HTML转换为pdf                                 |
 | <a href="https://github.com/marktext/marktext" target="_blank">MarkText</a>             | MIT License                          | 使用该软件将markdown转换为HTML，并对HTML进行了修改               |
 
 **gpt_academic中产生修改的部分如下：**
@@ -99,6 +98,8 @@ Scholar Navis 使用 GPL-3.0 license 许可证
 - 访问AI：多线程和单线程对于多个AI的访问，以及其中发生的网络处理、token限制、和访问AI所需的API及其所需文本内容的整合。
 
 - web服务（基于gradio）。包含但不限于登录、多用户管理、用户界面、cookie管理、插件选择和参数修改、markdown解析、捕捉错误后网页呈现、前后端通讯、文件上传和下载以及 Scholar Navis 用到的HTML的链接和跳转。
+
+- Markdown转HTML
 
 - 文件管理：gpt_academic所属文件/文件夹的处理和使用、PDF全文获取
 
