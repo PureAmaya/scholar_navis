@@ -66,7 +66,7 @@ def get_pdf_inf(pdf_path: str,allow_ai_assist : bool,llmkwargs = None):
                 title_tuple = db.select(doi,('title',))
                 if title_tuple is None: # 放心，如果数据库/数据不存在，返回的是None
                     # 数据库没有的话，就用元数据记录/文件名代替吧
-                    meta_title = pdf_reader.metadata.title
+                    meta_title = pdf_reader.metadata.get('title')
                     title =  str(meta_title) if meta_title else os.path.basename(pdf_manifest_path)[:-4]
                     
                 else:# 数据库有记录
