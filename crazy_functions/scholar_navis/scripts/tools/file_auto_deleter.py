@@ -23,7 +23,7 @@ auto_clear_private_upload = CONFIG['auto_clear_private_upload']
 
 thread_cycle_interval = 3
 '''清理线程循环间隔（默认300）'''
-tmp_lifespan = 3
+tmp_lifespan = 300
 '''缓存文件最长寿命（默认300）（秒）'''
 gpt_log_lifespan = 1
 '''gpt_log文件夹最长寿命（天）'''
