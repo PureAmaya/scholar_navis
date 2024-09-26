@@ -290,7 +290,7 @@ def 按关键词总结文献(txt, llm_kwargs, plugin_kwargs, chatbot, history, s
 
     # pdf推送下载
     if os.path.exists(summarization_pdf_fp): os.remove(summarization_pdf_fp)
-    markdown_to_pdf(result,'Summarize Articles by Keywords - Scholar Navis',os.path.dirname(summarization_pdf_fp))
+    markdown_to_pdf(result,'summarization',os.path.dirname(summarization_pdf_fp))
 
     chatbot.clear()
     chatbot.append([_('总结完成。下面是总结的内容: （不支持对话）') , 
@@ -304,6 +304,7 @@ def 按关键词总结文献(txt, llm_kwargs, plugin_kwargs, chatbot, history, s
     
     yield from update_ui(chatbot=chatbot, history=[])
 
+execute = 按关键词总结文献 # 用于热更新
 
 def __analyze_abstract_gpt(pdf_manifests_fp: list, keywords: list[str], start_batch: int, total_batch: int, llm_kwargs, GPT_prefer_language, chatbot, history, system_prompt, user_request):
     """ 对提供的每个pdf的摘要进行预分析，并将分析结果写到pdf清单（md5.yml）中
@@ -506,16 +507,16 @@ def __summarize_all_paper(this_library_fp: str, llm_kwargs, GPT_prefer_language,
             and without changing the structure of the JSON? Thank you. \
                 Here is the batch of JSONs for you: {"  ".join(batch_analysis_content)}'
 
-    gpt_combine = yield from request_gpt_model_in_new_thread_with_ui_alive(
-        inputs=input,
-        inputs_show_user=_('合并优化中...'),
-        llm_kwargs=llm_kwargs,
-        chatbot=chatbot,
-        history=[],
-        sys_prompt=prompt
-    )
-
-    yield from update_ui_lastest_msg(_('优化完成'), chatbot=chatbot, history=[])
+    # combine = yield from request_gpt_model_in_new_thread_with_ui_alive(
+    #     inputs=input,
+    #     inputs_show_user=_('合并优化中...'),
+    #     llm_kwargs=llm_kwargs,
+    #     chatbot=chatbot,
+    #     history=[],
+    #     sys_prompt=prompt
+    # )
+    # yield from update_ui_lastest_msg(_('优化完成'), chatbot=chatbot, history=[])
+    combine = "  ".join(batch_analysis_content)
 
     #  < ---------------------- 最后的处理，准备输出内容（使用偏好语言） --------------------------- >
 
@@ -523,7 +524,7 @@ def __summarize_all_paper(this_library_fp: str, llm_kwargs, GPT_prefer_language,
             Please remove any duplicated content and then provide a comprehensive summary at the end. \
             Present the result in a visually appealing Markdown format, \
             and please provide me with the processed results directly, without any other information. \
-            The JSON is as follows: {gpt_combine}'
+            The JSON is as follows: {combine}'
     gpt_summary = yield from request_gpt_model_in_new_thread_with_ui_alive(
         inputs=input,
         inputs_show_user=_('最后总结中.....'),

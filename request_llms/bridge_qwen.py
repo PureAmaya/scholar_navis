@@ -15,7 +15,8 @@ def predict_no_ui_long_connection(inputs:str, llm_kwargs:dict, history:list=[], 
     response = ""
 
     from .com_qwenapi import QwenRequestInstance
-    sri = QwenRequestInstance()
+    api_key = llm_kwargs['custom_api_key']("DASHSCOPE_API_KEY")
+    sri = QwenRequestInstance(api_key)
     for response in sri.generate(inputs, llm_kwargs, history, sys_prompt):
         if len(observe_window) >= 1:
             observe_window[0] = response
@@ -31,6 +32,8 @@ def predict(inputs, llm_kwargs, plugin_kwargs, chatbot, history=[], system_promp
     chatbot.append((inputs, ""))
     yield from update_ui(chatbot=chatbot, history=history)
 
+    api_key = llm_kwargs['custom_api_key']("DASHSCOPE_API_KEY")
+    
     # 尝试导入依赖，如果缺少依赖，则给出安装建议
     try:
         check_packages(["dashscope"])
@@ -40,8 +43,8 @@ def predict(inputs, llm_kwargs, plugin_kwargs, chatbot, history=[], system_promp
         return
 
     # 检查DASHSCOPE_API_KEY
-    if get_conf("DASHSCOPE_API_KEY") == "":
-        yield from update_ui_lastest_msg(f"请配置 DASHSCOPE_API_KEY。",
+    if api_key == "":
+        yield from update_ui_lastest_msg(f"请配置 DASHSCOPE_API_KEY或自定义 通义千问(Qwen) API-KEY",
                                          chatbot=chatbot, history=history, delay=0)
         return
 
@@ -53,7 +56,7 @@ def predict(inputs, llm_kwargs, plugin_kwargs, chatbot, history=[], system_promp
 
     # 开始接收回复
     from .com_qwenapi import QwenRequestInstance
-    sri = QwenRequestInstance()
+    sri = QwenRequestInstance(api_key)
     response = f"[Local Message] 等待{model_name}响应中 ..."
     for response in sri.generate(inputs, llm_kwargs, history, system_prompt):
         chatbot[-1] = (inputs, response)

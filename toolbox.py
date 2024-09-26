@@ -36,6 +36,7 @@ from shared_utils.handle_upload import html_local_file
 from shared_utils.handle_upload import html_local_img
 from shared_utils.handle_upload import file_manifest_filter_type
 from shared_utils.handle_upload import extract_archive
+from shared_utils.user_custom_manager import get_api_key,get_url_redirect
 from typing import List
 pj = os.path.join
 default_user_name = "default_user"
@@ -92,9 +93,25 @@ def ArgsGeneralWrapper(f):
     """
     def decorated(request: gradio.Request, cookies:dict, max_length:int, llm_model:str,
                   txt:str, txt2:str, top_p:float, temperature:float, chatbot:list,
-                  history:list, system_prompt:str, plugin_advanced_arg:dict, *args):
+                  history:list, system_prompt:str, plugin_advanced_arg:dict,user_custom_data: dict, *args):  
+        
+        # 获取openai用的api
+        api_key = get_api_key(user_custom_data,"API_KEY",True)
+        url_redirect = get_url_redirect('API_URL_REDIRECT',user_custom_data)
+        # 方便获取其他供应商的api_key
+        def get_other_provider_api_key(provider_api_type:str):return get_api_key(user_custom_data,provider_api_type,True)
+        
+        if llm_model.startswith('custom-'):
+            # 自定义模型使用openai兼容方案，覆盖一些openai的设定
+            api_key = get_api_key(user_custom_data,"CUSTOM_API_KEY")
+            url_redirect = get_url_redirect('CUSTOM_REDIRECT',user_custom_data)
+
         txt_passon = txt
         if txt == "" and txt2 != "": txt_passon = txt2
+        
+        # 空输入会报错
+        if not txt_passon:txt_passon = '.'
+        
         # 引入一个有cookie的chatbot
         if request.username is not None:
             user_name = request.username
@@ -102,19 +119,21 @@ def ArgsGeneralWrapper(f):
             user_name = default_user_name
         cookies.update({
             'top_p': top_p,
-            'api_key': cookies['api_key'],
+            'api_key':api_key if api_key else cookies['api_key'], #这里是需要设定好值的
             'llm_model': llm_model,
             'temperature': temperature,
             'user_name': user_name,
         })
         llm_kwargs = {
-            'api_key': cookies['api_key'],
-            'llm_model': llm_model,
-            'top_p': top_p,
+            'api_key': cookies['api_key'], 
+            'llm_model': cookies['llm_model'],
+            'top_p': cookies['top_p'],
             'max_length': max_length,
-            'temperature': temperature,
+            'temperature': cookies['temperature'],
             'client_ip': request.client.host,
-            'most_recent_uploaded': cookies.get('most_recent_uploaded')
+            'most_recent_uploaded': cookies.get('most_recent_uploaded'),
+            'custom_api_key':get_other_provider_api_key, # 这里后面还需要用
+            'custom_url_redirect':url_redirect
         }
         if isinstance(plugin_advanced_arg, str):
             plugin_kwargs = {"advanced_arg": plugin_advanced_arg}

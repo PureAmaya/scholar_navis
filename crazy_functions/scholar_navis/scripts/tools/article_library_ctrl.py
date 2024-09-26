@@ -31,6 +31,11 @@ class db_type(Enum):
     doi_emulate_polish = 'doi_emulate_polish.db'
 
 
+# 规范化总结库名称
+_forbidden_contain = ( '\\', '/', ':', ';', '(', ')', '<', '>', '\"', '\'', '|', '@', '#', '$',  '?', '*')
+_forbidden_startwith = ('.', '-', '+')
+
+
 # 想尽量写一个通用一点的，要是不行后期再改吧
 class SQLiteDatabase:
     def __init__(self, type: db_type):
@@ -121,8 +126,10 @@ class SQLiteDatabase:
             print(f"An error occurred when creating a table: {e}")
     
     def select(self,PRIMARY_KEY_VAL:str,search_key : tuple[str]):
-        assert PRIMARY_KEY_VAL != ''
         assert len(search_key) != 0
+        
+        if PRIMARY_KEY_VAL:
+            return None
             
         try:
             query_sql = f"SELECT {', '.join(search_key)} FROM {self.table} WHERE {self.PRIMARY_KEY} = ?"
@@ -136,9 +143,10 @@ class SQLiteDatabase:
         """向目标数据库中插入键值
             如果PRIMARY_KEY已经存在，则忽略
         """
-        assert PRIMARY_KEY_VAL != ''
         assert len(insert_key) != 0
         assert len(insert_key) == len(insert_key_val)
+        
+        if PRIMARY_KEY_VAL:return
         
         try:
             value_question = ', '.join(['?' for _ in range(len(insert_key_val))]) # 生成一个 ? , ? , ?
@@ -154,9 +162,10 @@ class SQLiteDatabase:
             print(f"An error occurred when insert: {e}")
 
     def update(self,PRIMARY_KEY_VAL:str,insert_key : tuple[str],insert_key_val : tuple[str]):
-        assert PRIMARY_KEY_VAL != ''
         assert len(insert_key) != 0
         assert len(insert_key) == len(insert_key_val)
+        
+        if PRIMARY_KEY_VAL:return
         
         try:
             value = list(insert_key_val)
@@ -169,8 +178,8 @@ class SQLiteDatabase:
             print(f"An error occurred when update: {e}")
             
     def delete(self,PRIMARY_KEY_VAL:str):
-        assert PRIMARY_KEY_VAL != ''
-
+        
+        if PRIMARY_KEY_VAL:return
         try:
             query_sql = f"DELETE FROM {self.table} WHERE {self.PRIMARY_KEY} = ?"
             self.cur.execute(query_sql,(PRIMARY_KEY_VAL,))
@@ -228,14 +237,9 @@ def check_library_exist_and_assistant(accept_nonexistent=False,accept_blank = Fa
             plugin_kwargs['lib'] = plugin_kwargs.get('lib','').strip()
             library_name :str = plugin_kwargs['lib']
             
-            # 规范化总结库名称
-            forbidden_contain = ( '\\', '/', ':', ';', '(', ')', '<', '>', '\"', '\'', '|', '@', '#', '$',  '?', '*')
-            forbidden_startwith = ('.', '-', '+','tmp')
-
-
-            if any(library_name.startswith(char) for char in forbidden_startwith) or any(
-                char in library_name for char in forbidden_contain):
-                ban_inf = _('<ul><li>不能含有以下字符：{forbidden}</li><li>不能以{forbidden_start}开头</li></ul>').format(forbidden=" ".join(forbidden_contain),forbidden_start = " ".join(forbidden_startwith))
+            if any(library_name.startswith(char) for char in _forbidden_startwith) or any(
+                char in library_name for char in _forbidden_contain):
+                ban_inf = _('<ul><li>不能含有以下字符：{forbidden}</li><li>不能以{forbidden_start}开头</li></ul>').format(forbidden=" ".join(_forbidden_contain),forbidden_start = " ".join(_forbidden_startwith))
                 chatbot.append([_("该名称`{}`无法使用，详细说明如下: ").format(library_name)
                                 , ban_inf])
                 yield from update_ui(chatbot=chatbot, history=[])  # 刷新界面
@@ -379,12 +383,17 @@ def get_this_user_library_list(tool_root: str):
     return list
 
 
-
-
 def markdown_to_pdf(text:str,title:str,save_dir:str):
     from shared_utils.advanced_markdown_format import markdown_convertion
     
-    fp = os.path.join(save_dir,f"{title}.pdf")
+    filename = title
+    if any(filename.startswith(char) for char in _forbidden_startwith):
+        filename = filename[1:]
+    
+    for char in _forbidden_contain:
+        if char in filename:filename = filename.replace(char,'_')
+    
+    fp = os.path.join(save_dir,f"{filename}.pdf")
     HTML =  markdown_convertion(text)
     A4 = pymupdf.paper_rect("A4")  # size of a page
     WHERE = A4 + (36, 36, -36, -36)  # leave borders of 0.5 inches

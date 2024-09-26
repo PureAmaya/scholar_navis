@@ -28,6 +28,12 @@ proxies, TIMEOUT_SECONDS, MAX_RETRY, API_ORG, AZURE_CFG_ARRAY = \
 timeout_bot_msg = '[Local Message] Request timeout. Network error. Please check proxy settings in config.py.' + \
                   '网络错误，检查代理服务器是否可用，以及代理设置的格式是否正确，格式须是[协议]://[地址]:[端口]，缺一不可。'
 
+def _get_url_redirect_and_check(llm_kwargs:dict,model_info:dict):
+    custom_endpoint = llm_kwargs['custom_url_redirect']
+    endpoint = custom_endpoint if custom_endpoint else model_info[llm_kwargs['llm_model']]['endpoint']
+    endpoint = verify_endpoint(endpoint) 
+    return endpoint
+
 def get_full_error(chunk, stream_response):
     """
         获取完整的从Openai返回的报错
@@ -140,7 +146,7 @@ def predict_no_ui_long_connection(inputs:str, llm_kwargs:dict, history:list=[], 
         try:
             # make a POST request to the API endpoint, stream=False
             from .bridge_all import model_info
-            endpoint = verify_endpoint(model_info[llm_kwargs['llm_model']]['endpoint'])
+            endpoint = _get_url_redirect_and_check(llm_kwargs,model_info)
             response = requests.post(endpoint, headers=headers, proxies=proxies,
                                     json=payload, stream=True, timeout=TIMEOUT_SECONDS); break
         except requests.exceptions.ReadTimeout as e:
@@ -215,7 +221,7 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot:ChatBotWith
         yield from update_ui(chatbot=chatbot, history=history, msg="api_key已导入") # 刷新界面
         return
     elif not is_any_api_key(chatbot._cookies['api_key']):
-        chatbot.append((inputs, "缺少api_key。\n\n1. 临时解决方案：直接在输入区键入api_key，然后回车提交。\n\n2. 长效解决方案：在config.py中配置。"))
+        chatbot.append((inputs, "缺少api_key。\n\n1. 临时解决方案：直接在输入区键入api_key，然后回车提交。\n\n2. 长效解决方案：在上方的`API_KEY`中输入您的api-key。"))
         yield from update_ui(chatbot=chatbot, history=history, msg="缺少api_key") # 刷新界面
         return
 
@@ -250,9 +256,9 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot:ChatBotWith
         yield from update_ui(chatbot=chatbot, history=history, msg="api-key不满足要求") # 刷新界面
         return
 
-    # 检查endpoint是否合法
+    # 设定endpoint，并同时检查endpoint是否合法
     try:
-        endpoint = verify_endpoint(model_info[llm_kwargs['llm_model']]['endpoint'])
+        endpoint = _get_url_redirect_and_check(llm_kwargs,model_info)
     except:
         tb_str = '```\n' + trimmed_format_exc() + '```'
         chatbot[-1] = (inputs, tb_str)
@@ -469,6 +475,8 @@ def generate_payload(inputs:str, llm_kwargs:dict, history:list, system_prompt:st
 
 
     model = llm_kwargs['llm_model']
+    if llm_kwargs['llm_model'].startswith('custom-'):
+        model = llm_kwargs['llm_model'][len('custom-'):]
     if llm_kwargs['llm_model'].startswith('api2d-'):
         model = llm_kwargs['llm_model'][len('api2d-'):]
     if llm_kwargs['llm_model'].startswith('one-api-'):

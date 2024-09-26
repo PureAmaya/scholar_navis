@@ -20,8 +20,8 @@ def get_pdf_inf(pdf_path: str,allow_ai_assist : bool,llmkwargs = None):
         abstract: 摘要
         fp: pdf清单（md5.yml）的完整路径
     """
-    # 摘取文件名
-    filename, _1 = os.path.splitext(os.path.basename(pdf_path))
+    # 摘取文件名和拓展名
+    filename, extension = os.path.splitext(os.path.basename(pdf_path))
 
     # < ---------yaml信息-------------- >
     
@@ -46,25 +46,30 @@ def get_pdf_inf(pdf_path: str,allow_ai_assist : bool,llmkwargs = None):
                 pdf_yaml_content.update({k: v for k, v in pdf_yaml_content.items() if v is not None})
         
     # 反正先读取一下pdf
-    pdf_reader =pymupdf.open(pdf_path)
-    # 获取第一页
-    first_page_text = pdf_reader.load_page(0).get_textpage().extractText()
+    if extension.lower() == '.pdf':
+        pdf_reader =pymupdf.open(pdf_path)
+        # 获取第一页
+        first_page_text = pdf_reader.load_page(0).get_textpage().extractText()
+    elif extension.lower() == '.simpl-pdf':
+        with open(pdf_path,'r',encoding='utf-8') as sim_pdf:
+            first_page_text = sim_pdf.read().split('###FIRST PAGE###')[0].replace('#','')
 
     # 获取doi
-    doi = ''
     if pdf_yaml_content[pdf_yaml.doi.value] is None  or pdf_yaml_content[pdf_yaml.doi.value] == 'None':
-        doi :str = re.findall(r'10\.\d{4,}/.+', first_page_text)[0].strip()
-        # 去除网址（e.g. nature的某些就有）
-        doi = doi.split('www.')[0].strip()
-        # 去除空格之后的多余信息（e.g.版权信息，网站信息等）
-        doi = doi.split(' ',1)[0].strip()
+        try:
+            doi :str = re.findall(r'10\.\d{4,}/.+', first_page_text)[0].strip()
+            # 去除网址（e.g. nature的某些就有）
+            doi = doi.split('www.')[0].strip()
+            # 去除空格之后的多余信息（e.g.版权信息，网站信息等）
+            doi = doi.split(' ',1)[0].strip()
+        except:doi=''
         
-    # 获取标题
+    # 根据doi获取标题
     title = ''
     if pdf_yaml_content[pdf_yaml.title.value] is None or  pdf_yaml_content[pdf_yaml.title.value] == 'None':
         with SQLiteDatabase(db_type.article_doi_title) as db: 
                 title_tuple = db.select(doi,('title',))
-                if title_tuple is None: # 放心，如果数据库/数据不存在，返回的是None
+                if not title_tuple: # 放心，如果数据库/数据不存在，返回的是None
                     # 数据库没有的话，就用元数据记录/文件名代替吧
                     meta_title = pdf_reader.metadata.get('title')
                     title =  str(meta_title) if meta_title else os.path.basename(pdf_manifest_path)[:-4]
@@ -91,6 +96,9 @@ def get_pdf_inf(pdf_path: str,allow_ai_assist : bool,llmkwargs = None):
 
     # < ---------获取摘要-------------- >
     if pdf_yaml_content[pdf_yaml.abstract.value] is None or pdf_yaml_content[pdf_yaml.abstract.value] == 'None':
+        
+        # 去除多余换行符
+        first_page_text = first_page_text.replace('\n','')
         
         # print(page_text)
         # 针对 PNAS 单独设计的代码（这东西就没有introduction和abstract）

@@ -129,8 +129,6 @@ def get_predict_function(
         是否使用代理，True为不使用，False为使用。
     """
 
-    APIKEY = get_conf(api_key_conf_name)
-
     def predict_no_ui_long_connection(
         inputs,
         llm_kwargs,
@@ -152,6 +150,7 @@ def get_predict_function(
         observe_window = None：
             用于负责跨越线程传递已经输出的部分，大部分时候仅仅为了fancy的视觉效果，留空即可。observe_window[0]：观测窗。observe_window[1]：看门狗
         """
+        APIKEY = llm_kwargs['custom_api_key'](api_key_conf_name)
         watch_dog_patience = 5  # 看门狗的耐心，设置5秒不准咬人(咬的也不是人
         if len(APIKEY) == 0:
             raise RuntimeError(f"APIKEY为空,请检查配置文件的{APIKEY}")
@@ -266,6 +265,7 @@ def get_predict_function(
         chatbot 为WebUI中显示的对话列表，修改它，然后yeild出去，可以直接修改对话界面内容
         additional_fn代表点击的哪个按钮，按钮见functional.py
         """
+        APIKEY = llm_kwargs['custom_api_key'](api_key_conf_name)
         if len(APIKEY) == 0:
             raise RuntimeError(f"APIKEY为空,请检查配置文件的{APIKEY}")
         if inputs == "":

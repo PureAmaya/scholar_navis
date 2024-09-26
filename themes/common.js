@@ -755,7 +755,7 @@ function minor_ui_adjustment() {
         // 获取页面宽度
         var page_width = document.documentElement.clientWidth;
         // 总是保留的按钮数量
-        const always_preserve = 2;
+        const always_preserve = btn_list.length;  //鄙人还不会js，不知道咋改了（
         // 获取最后一个按钮的右侧位置
         var cur_right = btn_list[always_preserve - 1].getBoundingClientRect().right;
         if (bar_btn_width.length == 0) {
@@ -1334,6 +1334,19 @@ async function call_plugin_via_name(current_btn_name) {
     push_data_to_gradio_component(JSON.stringify(gui_args), "invisible_current_pop_up_plugin_arg_final", "string");
     push_data_to_gradio_component(current_btn_name, "invisible_callback_btn_for_plugin_exe", "string");
     document.getElementById("invisible_callback_btn_for_plugin_exe").click();
+}
+
+
+// 黑暗模式
+function js_code_for_toggle_darkmode() {
+    if (document.querySelectorAll('.dark').length) {
+        setCookie("js_darkmode_cookie", "False", 365);
+        document.querySelectorAll('.dark').forEach(el => el.classList.remove('dark'));
+    } else {
+        setCookie("js_darkmode_cookie", "True", 365);
+        document.querySelector('body').classList.add('dark');
+    }
+    document.querySelectorAll('code_pending_render').forEach(code => {code.remove();})
 }
 
 

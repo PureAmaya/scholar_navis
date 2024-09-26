@@ -1,5 +1,0 @@
-PyYAML
-beautifulsoup4
-requests
-python-docx
-pymupdf

@@ -1,6 +1,6 @@
 from functools import lru_cache
 from toolbox import get_conf
-CODE_HIGHLIGHT, ADD_WAIFU, LAYOUT = get_conf("CODE_HIGHLIGHT", "ADD_WAIFU", "LAYOUT")
+CODE_HIGHLIGHT, ADD_WAIFU, LAYOUT,ALLOW_CUSTOM_API_KEY = get_conf("CODE_HIGHLIGHT", "ADD_WAIFU", "LAYOUT",'ALLOW_CUSTOM_API_KEY')
 
 def minimize_js(common_js_path):
     try:
@@ -32,8 +32,10 @@ def get_common_html_javascript_code():
         "themes/theme.js",
         "themes/tts.js",
         "themes/init.js",
-        "themes/welcome.js",
+        "themes/scholar_navis/scholar_navis_init.js"
+        #"themes/welcome.js",
     ]
+    if ALLOW_CUSTOM_API_KEY:common_js_path_list.append("themes/scholar_navis/custom_api_key.js")
 
     if ADD_WAIFU: # 添加Live2D
         common_js_path_list += [

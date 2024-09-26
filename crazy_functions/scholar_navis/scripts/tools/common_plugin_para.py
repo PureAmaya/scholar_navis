@@ -1,4 +1,5 @@
 from .multi_lang import _
+from toolbox import HotReload
 from shared_utils.config_loader import get_conf
 from .sn_config import CONFIG, GPT_SUPPORT_LAMGUAGE
 # from .article_library_ctrl import get_def_user_library_list
@@ -142,7 +143,7 @@ class common_plugin_para(GptAcademicPluginTemplate):
     
         
     
-    def execute(self,txt, llm_kwargs, plugin_kwargs, chatbot, history, system_prompt, user_request):
+    def execute(txt, llm_kwargs, plugin_kwargs, chatbot, history, system_prompt, user_request):
         """ 开一个新的线程执行该方法
             (check_library_exist_and_assistant负责处理就行，execute只要执行该执行的方法就行)
             

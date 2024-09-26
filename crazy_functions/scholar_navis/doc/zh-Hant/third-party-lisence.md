@@ -1,10 +1,10 @@
 Scholar Navis 使用 GPL-3.0 license 授權證
 
-**gpt_academic 的版權、其所有的除 Scholar Navis 之外的插件、部分等仍然為原作者、原貢獻者所有，即 Scholar Navis 仅供 `crazy_functions\scholar_navis` 中的源碼聲明版權，其他目錄中源碼的版權均歸原作者所有**。
+**此為翻譯版本，僅供參考。如有衝突，以簡體中文版為準。**
 
 ---
 
-以下是使用或依賴的項目：
+以下是基於**gpt_academic 添加的第三方項目**（除 gpt_academic 外，所有項目均未進行任何源碼修改）：
 
 | 第三方庫或工具                                                                                 | 授權證                                  | 使用策略                                              |
 | --------------------------------------------------------------------------------------- | ------------------------------------ | ------------------------------------------------- |
@@ -15,12 +15,27 @@ Scholar Navis 使用 GPL-3.0 license 授權證
 | <a href="https://pypi.org/project/python-docx" target="_blank">python-docx</a>          | MIT License                          | 使用庫，解析docx並獲取文本內容，將 Markdown 轉換為 Word（所屬功能仍在測試）   |
 | <a href="https://pypi.org/project/PyMuPDF/" target="_blank">PyMuPDF</a>                 | AGPL-3.0 license                     | 使用庫，將 HTML 轉換為 PDF                                |
 | <a href="https://github.com/marktext/marktext" target="_blank">MarkText</a>             | MIT License                          | 使用該軟件將markdown轉換為HTML，並對HTML進行了修改                 |
+| <a href="https://github.com/Stuk/jszip" target="_blank">JSZip</a>                       | MIT license                          | 使用庫，用於在瀏覽器本地處理ZIP壓縮包（相關功能仍在測試中，目前不可用）             |
+| <a href="https://github.com/jquery/jquery" target="_blank">jQuery</a>                   | MIT license                          | 使用庫，支持$語法及其他擴展功能（所屬功能仍在測試階段，目前尚未可用）               |
+| <a href="https://github.com/mozilla/pdf.js" target="_blank">PDF.js</a>                  | Apache-2.0 license                   | 使用庫，使HTML5能夠支持處理PDF文件（所屬功能仍在測試階段，目前尚不可用）          |
+| <a href="https://github.com/eligrey/FileSaver.js/" target="_blank">FileSaver.js</a>     | MIT license                          | 使用庫，利用HTML5的saveAs()方法保存壓縮包（所屬功能仍在測試中，目前尚未可用）     |
 
 **gpt_academic 中產生修改的部分如下：**
 
 - 原則上是盡可能減少對 gpt_academic 的修改，以方便移植或使用其他的版本。
 
-- 因為對 gpt_academic 的源碼產生了修改（主要是使其能夠調用 Scholar Navis ），受限于 GPL-3.0 的約束，需要將 gpt_academic 的源碼一並發布，並且亦需注明修改內容。
+- 因為對 gpt_academic 的源碼進行了修改（主要是使其能夠調用 Scholar Navis 並使用一些新增的功能或機制），受到 GPL-3.0 協定的約束，必須將 gpt_academic 的源碼一併發布，並且亦需標明修改內容。
+
+- 通常情況下，新添加的**代碼文件**，如果沒有對原有代碼進行修改，則不會列出。
+
+- `main.py`: 第60行，發生了修改。
+  
+  ```python
+   # original
+  from themes.theme import js_code_for_toggle_darkmode, js_code_for_persistent_cookie_init
+   # motified
+  from themes.theme import js_code_for_persistent_cookie_init
+  ```
 
 - `main.py`: 約在第63行添加了以下內容。這樣做可以實現簡易的通知顯示。
   
@@ -38,7 +53,82 @@ Scholar Navis 使用 GPL-3.0 license 授權證
           title_html = title_html + f'<p style="text-align: left; margin-left: 20px; margin-right: 20px;">{f.read()}</p>'
   ```
 
-- `crazy_functional.py`：約 400 行處添加了下面的內容。`setup.py` 亦可以產生下述修改。這樣修改是為了 gpt_academic 能夠使用 Scholar Navis
+- `main.py`：約第67行，添加以下內容，用於顯示 Scholar Navis 的版本號。
+  
+  ```python
+     ... 上略 ...
+           title_html = f"<br><h1 align=\"center\">GPT 学术优化 {get_current_version()} (Scholar Navis {f.read()})</h1>{theme_declaration}"
+      else:title_html = f"<br><h1 align=\"center\">GPT 学术优化 {get_current_version()}</h1>{theme_declaration}"
+  ```
+
+- `main.py`：約第111行，發生修改，用於區別這是修改版。
+  
+  ```python
+   # original
+   with gr.Blocks(title="GPT 学术优化", theme=set_theme, analytics_enabled=False, css=advanced_css) as app_block:
+   # motified
+   with gr.Blocks(title="GPT 学术优化 (Scholar Navis 修改版)", theme=set_theme, analytics_enabled=False, css=advanced_css) as app_block:
+  ```
+
+- `main.py`：約第196行，發生修改，接入自定義API-KEY功能，將一些.js文件內容移出並合併入相應的.js文件中。
+  
+  ```python
+  # original
+  checkboxes, checkboxes_2, max_length_sl, theme_dropdown, system_prompt, file_upload_2, md_dropdown, top_p, temperature = \
+              define_gui_toolbar(AVAIL_LLM_MODELS, LLM_MODEL, INIT_SYS_PROMPT, THEME, AVAIL_THEMES, ADD_WAIFU, help_menu_description, js_code_for_toggle_darkmode)
+   # motified
+  checkboxes, checkboxes_2, max_length_sl, theme_dropdown, system_prompt, file_upload_2, md_dropdown, top_p, temperature,custom_api_key = \
+              define_gui_toolbar(AVAIL_LLM_MODELS, LLM_MODEL, INIT_SYS_PROMPT, THEME, AVAIL_THEMES, ADD_WAIFU, help_menu_description)
+  ```
+
+- `main.py`：約第229行，發生修改，接入自定義API-KEY功能，將一些JavaScript代碼從.py文件中移除，並合併到相應的.js文件中。
+  
+  ```python
+   # original
+   input_combo = [cookies, max_length_sl, md_dropdown, txt, txt2, top_p, temperature, chatbot, history, system_prompt, plugin_advanced_arg]
+          input_combo_order = ["cookies", "max_length_sl", "md_dropdown", "txt", "txt2", "top_p", "temperature", "chatbot", "history", "system_prompt", "plugin_advanced_arg"]
+    # motified
+   input_combo = [cookies, max_length_sl, md_dropdown, txt, txt2, top_p, temperature, chatbot, history, system_prompt, plugin_advanced_arg,custom_api_key]
+          input_combo_order = ["cookies", "max_length_sl", "md_dropdown", "txt", "txt2", "top_p", "temperature", "chatbot", "history", "system_prompt", "plugin_advanced_arg",'custom_api_key']
+  ```
+
+- `toolbox.py`：新增了一個新的Import
+  
+  ```python
+  from shared_utils.user_custom_manager import get_api_key,get_url_redirect
+  ```
+
+- `toolbox.py`：第98行添加的内容： 
+  
+  ```python
+          # 获取openai用的api
+          api_key = get_api_key(user_custom_data,"API_KEY",True)
+          url_redirect = get_url_redirect('API_URL_REDIRECT',user_custom_data)
+          # 方便获取其他供应商的api_key
+          def get_other_provider_api_key(provider_api_type:str):return get_api_key(user_custom_data,provider_api_type,True)
+  
+          if llm_model.startswith('custom-'):
+              # 自定义模型使用openai兼容方案，覆盖一些openai的设定
+              api_key = get_api_key(user_custom_data,"CUSTOM_API_KEY")
+              url_redirect = get_url_redirect('CUSTOM_REDIRECT',user_custom_data)
+  
+          txt_passon = txt
+          if txt == "" and txt2 != "": txt_passon = txt2
+  
+          # 空输入会报错
+          if not txt_passon:txt_passon = '.'
+  ```
+
+- `config.py`：第65行添加新內容： 
+  
+  ```python
+  # 允许用户自行设定API和URL重定向（储存在localstorage中）
+  ALLOW_CUSTOM_API_KEY = True
+  ```
+
+- `config.py`：預設模型（LLM_MODEL）更改为「glm-4-flash」；為AVAIL_LLM_MODELS添加了GLM系列、Qwen系列、Moonshot系列和Deepseek系列模型，並補充了一些GPT模型（均為原gpt_academic已經支持的模型）；多個模型（MULTI_QUERY_LLM_MODELS）更改为更廉價的模型「gpt-3.5-turbo&glm-4-flash」。
+  
+  `crazy_functional.py`：約 400 行處添加了下面的內容。`setup.py` 亦可以產生下述修改。這樣修改是為了 gpt_academic 能夠使用 Scholar Navis
   
   ```python
   ###### SCHOLAR NAVIS START ########
@@ -60,6 +150,38 @@ Scholar Navis 使用 GPL-3.0 license 授權證
   DEFAULT_FN_GROUPS = ['Scholar Navis','对话', '编程', '学术', '智能体']
   ```
 
+- `toolbox.py`：添加了 import 
+  
+  ```python
+  from shared_utils.user_custom_manager import get_api_key,get_url_redirect
+  ```
+
+- `toolbox.py`：裝飾器方法（decorated method）添加了參數 user_custom_data: dict
+
+- `toolbox.py`：第98行添加如下內容： 
+  
+  ```python
+    # 获取openai用的api
+   api_key = get_api_key(user_custom_data,"API_KEY",True)
+   url_redirect = get_url_redirect('API_URL_REDIRECT',user_custom_data)
+   # 方便获取其他供应商的api_key
+   def get_other_provider_api_key(provider_api_type:str):return get_api_key(user_custom_data,provider_api_type,True)
+  
+      if llm_model.startswith('custom-'):
+         # 自定义模型使用openai兼容方案，覆盖一些openai的设定
+         api_key = get_api_key(user_custom_data,"CUSTOM_API_KEY")
+         url_redirect = get_url_redirect('CUSTOM_REDIRECT',user_custom_data)
+  ```
+
+- `toolbox.py`：第112行添加如下內容： 
+  
+  ```python
+   # 空输入会报错
+   if not txt_passon:txt_passon = '.'
+  ```
+
+- `toolbox.py`：對 cookies 和 llm_kwargs 的鍵值進行了修改，並為 llm_kwargs 添加了新的鍵值對。 
+
 - `multi_language.py`：具體修改如下。這裡添加這些內容是為了在翻譯 gpt_academic 之後，Scholar Navis 可以正常運行。
   
   ```python
@@ -77,7 +199,7 @@ Scholar Navis 使用 GPL-3.0 license 授權證
   step_ex_scholar_navis()
   ```
 
-- `themes/init.js`：大約在第九行處，註釋掉了關於 `welcomeMessage` 的內容（因為這些內容可能會引發錯誤）。
+- `themes/init.js`：大約在第九行處，註釋掉了關於 welcomeMessage 的內容（因為這些內容可能會引發錯誤）。
   
   ```js
   // 以下被註釋掉的部分則為修改的部分
@@ -91,6 +213,109 @@ Scholar Navis 使用 GPL-3.0 license 授權證
           chatbotContentChanged(1);
           //welcomeMessage.update();
       });
+  ```
+
+- `themes/common.css`：在文件末尾添加了用於 HTML 的 summary 的樣式內容，已在源碼中注明
+
+- `themes/common.js`：約第758行，發生修改：
+  
+  ```js
+  // 原始
+  const always_preserve = 2;
+  // 修改後
+  const always_preserve = btn_list.length;
+  ```
+
+- `themes/common.js`：約第1340行，將原來在 `theme.py` 中的黑暗模式代碼（function js_code_for_toggle_darkmode）移動至此
+
+- `themes/common.py`：約第3行，添加用於獲取用戶啟用自定義功能的獲取方法 
+  
+  ```python
+  # original
+  CODE_HIGHLIGHT, ADD_WAIFU, LAYOUT = get_conf("CODE_HIGHLIGHT", "ADD_WAIFU", "LAYOUT")
+  # motified
+  CODE_HIGHLIGHT, ADD_WAIFU, LAYOUT,ALLOW_CUSTOM_API_KEY = get_conf("CODE_HIGHLIGHT", "ADD_WAIFU", "LAYOUT",'ALLOW_CUSTOM_API_KEY')
+  ```
+
+- `themes/common.py`：約第35行，註釋掉 "themes/welcome.js"，取消迎賓界面（有bug） 
+
+- `themes/common.py`：約第35和38行，添加載入 scholar_navis 初始化 js 和自定義 API-KEY 功能的 js
+  
+  ```python
+  "themes/scholar_navis/scholar_navis_init.js"
+  if ALLOW_CUSTOM_API_KEY:common_js_path_list.append("themes/scholar_navis/custom_api_key.js")
+  ```
+
+- `themes/gui_advanced_plugin_class.py`：約第3、45行，添加了高级插件熱加載功能支持（熱加載為 gpt_acadmic 自有功能）
+  
+  ```python
+  # line 3: HotReload added
+  from toolbox import format_io, find_free_port, on_file_uploaded, on_report_generated, get_conf, ArgsGeneralWrapper, DummyWith,HotReload
+  # line 45 original:
+  plugin_exe = plugin_obj.execute
+  # line 45 motified:
+  if plugins[which_plugin].get('ClassHotreload',False):
+  ```
+
+- `themes/gui_toolbar.py`：添加了 import；第9行定義的 `define_gui_toolbar` 去除了 `js_code_for_toggle_darkmode` 参数；第7行，添加了 `ALLOW_CUSTOM_API_KEY = get_conf('ALLOW_CUSTOM_API_KEY')`；`define_gui_toolbar` 的返回值添加了 `user_custom_data` 参数
+
+- `themes/gui_toolbar.py`：第17行添加了 `as model_switch_tab`，用於顯示添加的自定義模型：
+  
+  ```python
+  with gr.Tab("更换模型", elem_id="interact-panel") as model_switch_tab:
+  ```
+
+- `themes/gui_toolbar.py`：第30行添加了新的 `gradio.tab`：API-KEY；文件末尾定義了新的方法 `_add_custom_model` 用於添加自定義模型
+
+- `themes/theme.py`：移除了原有的黑暗模式代碼（`js_code_for_toggle_darkmode`），並合並到 `common.js` 中
+
+- `request_llms/bridge_all.py`：引入了 `model_info_class` 取代了以往的 `model_info`，並提供了自定義的功能（兼容原有功能）；引入了 `extend_llm_support` 函數，取代了舊有的 api2d、llama、vllm 對齊，並為自定義模型提供了支持。
+
+- `request_llms/bridge_ChatGPT.py`：約第31行，添加了 `_get_url_redirect_and_check`，用於決定是否可以使用 API 自定義重定向功能，並且該功能取代了原有的 `verify_endpoint`
+
+- `request_llms/bridge_ChatGPT.py`：約第218行，發生了修改，給用戶提示添加自定義模型/api的提醒
+  
+  ```python
+  # original
+  chatbot.append((inputs, "缺少api_key。\n\n1. 临时解决方案：直接在输入区键入api_key，然后回车提交。\n\n2. 长效解决方案：在config.py中配置。"))
+  # motified
+  chatbot.append((inputs, "缺少api_key。\n\n1. 临时解决方案：直接在输入区键入api_key，然后回车提交。\n\n2. 长效解决方案：在上方的`API_KEY`中输入您的api-key。"))
+  ```
+
+- `request_llms/bridge_ChatGPT.py`：約第478行，添加了自定義模型便簽裁剪功能。
+  
+  ```python
+  if llm_kwargs['llm_model'].startswith('custom-'):
+          model = llm_kwargs['llm_model'][len('custom-'):]
+  ```
+
+- `request_llms/bridge_moonshot.py`：約第18-21行、158行、175行，添加了api_key參數，用於使用自定義api-key。
+
+- `request_llms/bridge_moonshot.py`：約第153行、174行，修復了原有的空輸入報錯問題。
+  
+  ```python
+  if not inputs:inputs = ' ' # 空白输入报错
+  ```
+
+- `request_llms/bridge_qwen.py`：約第18行、35行、46行、56行，添加了api_key參數，用於使用自定義api-key。
+
+- `request_llms/com_qwenapi.py`：約第9行、16行、20行，添加了api_key參數，用於使用自定義api-key。
+
+- `request_llms/bridge_zhipu.py`：約第10行、31行、37行、65行、97行，添加了api_key參數，用於使用自定義api-key。
+
+- `request_llms/com_zhipuglm.py`：約第24行，添加了api_key參數，用於使用自定義api-key。
+
+- `request_llms/oai_std_model_template.py`：約第132行，刪除了原有的API-KEY獲取方法。
+
+- `request_llms/model_info.py`：為上文提到的model.info的取代組件，除了支持原list的功能外，還支持自定義模型的調用。
+
+- `shared_utils/key_pattern_manager.py`：約第70行，添加了自定義模型支持；約第73行，添加內容，讓自定義模型也能支持非標準的api2d的api。    
+  
+  ```python
+  # line 70
+  if llm_model.startswith('gpt-') or llm_model.startswith('one-api-') or llm_model.startswith('custom-'):
+  # line 73
+  if is_api2d_key(k): avail_key_list.append(k)
   ```
 
 **gpt_academic 的使用策略**：
@@ -109,6 +334,8 @@ Scholar Navis 使用 GPL-3.0 license 授權證
 
 - 為了確保兼容性，參考了對於多線程中止的處理邏輯。
 
+- 模組熱替換 
+
 **Scholar Navis 獨立於 gpt_academic 的功能**：
 
 - 文件管理：插件資料夾（scholar_navis）內部的文件管理、總結庫自身的管理。
@@ -123,7 +350,7 @@ Scholar Navis 使用 GPL-3.0 license 授權證
 
 - 适用于 gpt_academic 的 Scholar Navis 安裝器（含有安裝依賴庫的功能）。
 
-- 多語言（國際化）顯示與多語言翻譯工具（支持 po 和 mo 格式）。
+- Scholar Navis 插件的多元語言（國際化）顯示與多元語言翻譯工具（支援 po 和 mo 格式） 
 
 - 獲取論文的元數據、第一頁內容、摘要、DOI 號和標題（其中通過 LLM 獲取的部分是通過 gpt_academic 結行的）。
 
@@ -135,6 +362,10 @@ Scholar Navis 使用 GPL-3.0 license 授權證
 
 - 与 AI 交流的邏輯，包含擬定課題、尋找文章來源、直接交流的處理邏輯和 LLM 請求邏輯。
 
-- 精細分析文章的處理邏輯和 LLM 請求邏輯、以及總結庫文章包含列表（HTML）設計。
+- 精細分析文章的處理邏輯和 LLM 請求邏輯、以及總結庫文章包含列表（HTML）設計。 
 
-- PubMed OA 文章的多線程下載。
+- PubMed OA 文章的多執行緒下載（在線服務關閉，僅限本地部署）
+
+- 面向用戶的 API 自定義與模型自定義功能添加
+
+- 上傳文件及生成文件的定期清理

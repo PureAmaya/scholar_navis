@@ -6,20 +6,19 @@ import logging
 timeout_bot_msg = '[Local Message] Request timeout. Network error.'
 
 class QwenRequestInstance():
-    def __init__(self):
+    def __init__(self,api_key):
         import dashscope
         self.time_to_yield_event = threading.Event()
         self.time_to_exit_event = threading.Event()
         self.result_buf = ""
 
         def validate_key():
-            DASHSCOPE_API_KEY = get_conf("DASHSCOPE_API_KEY")
-            if DASHSCOPE_API_KEY == '': return False
+            if api_key == '': return False
             return True
 
         if not validate_key():
-            raise RuntimeError('请配置 DASHSCOPE_API_KEY')
-        dashscope.api_key = get_conf("DASHSCOPE_API_KEY")
+            raise RuntimeError('请配置 DASHSCOPE_API_KEY或自定义 通义千问(Qwen) API-KEY')
+        dashscope.api_key = api_key
 
 
     def generate(self, inputs, llm_kwargs, history, system_prompt):

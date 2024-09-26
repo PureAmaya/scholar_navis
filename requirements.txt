@@ -30,3 +30,4 @@ rjsmin
 arxiv
 numpy
 rich
+PyYAML

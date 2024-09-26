@@ -101,6 +101,8 @@ This software is developed based on gpt_academic (version 3.83) and serves as a 
 
 6. Regarding gpt_academic's language options: you can refer to [gpt_academic/multi_language.py](https://github.com/binary-husky/gpt_academic/blob/master/multi_language.py) or use other translated versions of gpt_academic (Scholar Navis makes minimal modifications to gpt_academic, making it easy to port).
 
+7. You can also use our online service. [Simplified Chinese Version (Optimized for Mainland China)](https://cn.scholarnavis.com/)、[English Version](https://scholarnavis.com/). Both versions are identical in terms of functionality, with the only differences being the display language and the location of the servers and the routes. Additionally, both versions have disabled the PubMed OA article download feature and do not allow the upload of files larger than 200MiB. 
+
 ### User Guide
 
 1. Run `main.py` to enable gpt_academic, and on the right side of the opened web page, you should see five blocks of Scholar Navis. Clicking on them will display usage tips.
@@ -128,7 +130,8 @@ H & G4 --> I[/Understand research progress and gaps\]
 ```
 
 3. Typically, if you need to upload a file, you would upload it before running a specific feature.
-4. Of course, you can also use other features of gpt_academic to process it. If you find it useful, it's best to give the original project a star!
+4. In addition, users can also enter their own key in the `API-KEY` at the upper left corner, use other relay service providers, or add additional custom models. 
+5. Of course, you can also use other features of gpt_academic to process it. If you find it useful, it's best to give the original project a star!
 
 ### Simple Developer Documentation
 
@@ -160,9 +163,7 @@ H & G4 --> I[/Understand research progress and gaps\]
 
 ### Copyright Information
 
-- Scholar Navis is distributed under the GPL-3.0 open source license.
-
-- As of now, Scholar Navis is essentially a plugin for [gpt_academic](https://github.com/binary-husky/gpt_academic) and cannot be used independently. Special thanks to gpt_academic for providing a powerful modular platform.
+- Scholar Navis is distributed under the GPL-3.0 open source license. 
 
 - Because modifications have been made to gpt_academic, it is also necessary to release the modified source code and clearly note the modifications, in accordance with the requirements of the GPL-3.0 license.
 

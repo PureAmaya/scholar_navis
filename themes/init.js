@@ -3,6 +3,7 @@ async function GptAcademicJavaScriptInit(dark, prompt, live2d, layout, tts) {
     audio_fn_init();
     minor_ui_adjustment();
     ButtonWithDropdown_init();
+    scholar_navis_init();
     
     // 加载欢迎页面
     // 因为欢迎界面有BUG，所以就暂时去掉了

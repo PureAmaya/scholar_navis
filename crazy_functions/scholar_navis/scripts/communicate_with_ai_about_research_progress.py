@@ -157,6 +157,7 @@ def 与AI交流研究进展(txt: str, llm_kwargs, plugin_kwargs, chatbot, histor
         yield from update_ui(chatbot=chatbot, history=history)
         return
 
+execute = 与AI交流研究进展 # 用于热更新
 
 def __find_article_from_summarization(library_root_dir: str, txt: str, gpt_prefer_lang: str, llm_kwargs,system_prompt, chatbot,history):
     """ 从总结中找到自己感兴趣的文章，提供文章下载 + 把这些感兴趣的文章的摘要放到历史记录中便于咨询

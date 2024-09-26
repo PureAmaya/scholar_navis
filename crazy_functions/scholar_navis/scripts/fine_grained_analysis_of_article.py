@@ -163,6 +163,7 @@ def 精细分析文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, sy
     except Exception as e:
         yield from update_ui_lastest_msg(_('分析过程中出错！错误原因是：{}').format(str(e)), chatbot, history)
 
+execute = 精细分析文献 # 用于热更新
 
 def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_prefer_language):
     """精细分析文章
@@ -200,7 +201,7 @@ def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_
 
         for index, content in enumerate(pdf_content_token):
             i_say = f"Please read the passage and retell it in English, emulating the author's writing style and narrative logic. Here's the excerpt: {content}"
-            # 一般第一个就是标题啦
+            # 一般第一页里面就有标题了
             if index == 0: i_say = i_say + f"If you encounter a title, please also repeat it in English."
             i_say_show = _("[{i}/{total}] AI阅读中...").format(i=index+1,total=len(pdf_content_token))
             

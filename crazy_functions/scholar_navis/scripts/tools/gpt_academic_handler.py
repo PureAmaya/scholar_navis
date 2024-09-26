@@ -25,7 +25,8 @@ def registrator(function_plugins:dict):
                         "Color": "stop",
                         "AsButton": True, 
                         "Function": None,
-                        "Class":pdf_cacher
+                        "Class":pdf_cacher,
+                        "ClassHotreload":True # 使这样子的面板也支持热更新
                     }
                 }
             )
@@ -38,7 +39,8 @@ def registrator(function_plugins:dict):
                         "Color": "stop",
                         "AsButton": True, 
                         "Function": None,
-                        "Class":Summarize_Articles_Keywords
+                        "Class":Summarize_Articles_Keywords,
+                        "ClassHotreload":True # 使这样子的面板也支持热更新
                     }
                 }
             )
@@ -51,7 +53,8 @@ def registrator(function_plugins:dict):
                         "Color": "stop",
                         "AsButton": True, 
                         "Function": None,
-                        "Class":Communicate_with_AI_about_research_progress
+                        "Class":Communicate_with_AI_about_research_progress,
+                        "ClassHotreload":True # 使这样子的面板也支持热更新
                     }
                 }
             )
@@ -64,7 +67,8 @@ def registrator(function_plugins:dict):
                         "Color": "stop",
                         "AsButton": True, 
                         "Function": None,
-                        "Class":Fine_Grained_Analysis_of_Article
+                        "Class":Fine_Grained_Analysis_of_Article,
+                        "ClassHotreload":True # 使这样子的面板也支持热更新
                     }
                 }
             )
@@ -78,7 +82,8 @@ def registrator(function_plugins:dict):
                         "Color": "stop",
                         "AsButton": True, 
                         "Function": None,
-                        "Class":PubMed_Open_Access_Articles_Download
+                        "Class":PubMed_Open_Access_Articles_Download,
+                        "ClassHotreload":True # 使这样子的面板也支持热更新
                     }
                 }
             )

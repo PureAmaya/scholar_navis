@@ -75,17 +75,6 @@ def from_cookie_str(c):
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 """
 
-js_code_for_toggle_darkmode = """() => {
-    if (document.querySelectorAll('.dark').length) {
-        setCookie("js_darkmode_cookie", "False", 365);
-        document.querySelectorAll('.dark').forEach(el => el.classList.remove('dark'));
-    } else {
-        setCookie("js_darkmode_cookie", "True", 365);
-        document.querySelector('body').classList.add('dark');
-    }
-    document.querySelectorAll('code_pending_render').forEach(code => {code.remove();})
-}"""
-
 
 js_code_for_persistent_cookie_init = """(web_cookie_cache, cookie) => {
     return [getCookie("web_cookie_cache"), cookie];

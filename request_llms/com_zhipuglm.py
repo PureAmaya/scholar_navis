@@ -21,8 +21,8 @@ def input_encode_handler(inputs:str, llm_kwargs:dict):
 
 class ZhipuChatInit:
 
-    def __init__(self):
-        ZHIPUAI_API_KEY, ZHIPUAI_MODEL = get_conf("ZHIPUAI_API_KEY", "ZHIPUAI_MODEL")
+    def __init__(self,ZHIPUAI_API_KEY):
+        ZHIPUAI_MODEL = get_conf("ZHIPUAI_MODEL")
         if len(ZHIPUAI_MODEL) > 0:
             logging.error('ZHIPUAI_MODEL 配置项选项已经弃用，请在LLM_MODEL中配置')
         self.zhipu_bro = ZhipuAI(api_key=ZHIPUAI_API_KEY)

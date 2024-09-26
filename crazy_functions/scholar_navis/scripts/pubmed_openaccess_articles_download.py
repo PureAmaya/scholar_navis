@@ -573,6 +573,7 @@ def PubMed_OpenAccess文章获取(txt, llm_kwargs, plugin_kwargs, chatbot, histo
     
     yield from update_ui(chatbot=chatbot, history=history)
 
+execute = PubMed_OpenAccess文章获取 # 用于热更新
 
 class PubMed_Open_Access_Articles_Download(common_plugin_para):
     def define_arg_selection_menu(self):

@@ -97,6 +97,8 @@
 
 6. 关于 gpt_academic 的其它语言选择：可以参考 [gpt_academic/multi_language.py](https://github.com/binary-husky/gpt_academic/blob/master/multi_language.py) 或使用其他已经翻译好的 gpt_academic（Scholar Navis 对于 gpt_academic的修改很少，可以轻易的移植）。
 
+7. 也可以使用我们的在线服务。[简体中文版（中国大陆优化）](https://cn.scholarnavis.com/)、[英文版](https://scholarnavis.com/)。二者除了显示语言不同和服务器所在地、线路不同外，其他功能均一致，且均关闭了PubMed OA文章下载功能，且无法上传200MiB以上的文件。
+
 ### 使用教程
 
 1. 运行`main.py`启用 gpt_academic，在打开的web的右侧，应当能够看到 Scholar Navis 的5个方块，点击后可以看到使用提示。
@@ -124,7 +126,8 @@ A[\确定大致研究方向/] --> B(下载英文文献)
 ```
 
 3. 如果需要上传文件，通常为先上传再运行某一个功能。
-4. 当然，也可以使用gpt_academic其他的功能进行处理。如果感觉有用，最好可以给原项目一个star！
+4. 此外，用户也可以在左上角的`API-KEY`中输入自己的密钥，使用其他中转服务商，或者是添加额外的自定义模型。
+5. 当然，也可以使用gpt_academic其他的功能进行处理。如果感觉有用，最好可以给原项目一个star！
 
 ### 简易开发者文档
 
@@ -157,8 +160,6 @@ A[\确定大致研究方向/] --> B(下载英文文献)
 ### 版权信息
 
 - Scholar Navis 遵守 GPL-3.0 license 开源许可证
-
-- 截至目前为止，Scholar Navis 本质上是 [gpt_academic](https://github.com/binary-husky/gpt_academic) 的一个插件，无法独立使用。特别感谢 gpt_academic 提供了一个强大的模块化平台。
 
 - 因为对gpt_academic产生了修改，根据 GPL-3.0 许可证的要求，亦需要发布修改后的源码，并注明修改的内容。
 

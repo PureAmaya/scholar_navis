@@ -532,12 +532,12 @@ def  step_ex_scholar_navis():
     backup_dir = f'./multi-language/{LANG}/'
     new_sn_dir = os.path.join(backup_dir,'crazy_functions','scholar_navis')
     
-    in_dev = False
     dev_dir = os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'scripts','dev')
     in_dev =  os.path.exists(dev_dir) # 开发版本的设置和库不需要移动。用户自己进行翻译的话当然需要
     
     blacklist_sn = ['tmp','dev','memorandum.txt','__pycache__']
     if in_dev:blacklist_sn.extend(['__pycache__','config.yml','data'])
+    # sn位于黑名单，无法被移动，只能自己写一个
     shutil.copytree(SCHOLAR_NAVIS_ROOT_PATH,new_sn_dir,ignore=lambda z,w:blacklist_sn)
 
     
@@ -545,12 +545,12 @@ def  step_ex_scholar_navis():
     config_private_fp = os.path.join(backup_dir,'config_private.py')
     crazy_functional_bak_fp = os.path.join(backup_dir,'crazy_functional.py.bak')
     need_to_del = [config_private_bak_fp,crazy_functional_bak_fp]
-    if in_dev:need_to_del.append(config_private_fp)
+    if in_dev:need_to_del.append(config_private_fp) # 开发版本，翻译后也删除私有设定
     for t in need_to_del:
         if os.path.exists(t):os.remove(t)
         
     setup_fp =  os.path.join(new_sn_dir,'setup.py')
-    subprocess.run(['python3', setup_fp])
+    subprocess.run(['python3', setup_fp]) # 设置 Scholar Navis
     
 
 step_1_core_key_translate()

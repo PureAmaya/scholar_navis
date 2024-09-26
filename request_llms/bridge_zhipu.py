@@ -7,9 +7,8 @@ from toolbox import ChatBotWithCookies
 model_name = '智谱AI大模型'
 zhipuai_default_model = 'glm-4'
 
-def validate_key():
-    ZHIPUAI_API_KEY = get_conf("ZHIPUAI_API_KEY")
-    if ZHIPUAI_API_KEY == '': return False
+def validate_key(api_key):
+    if api_key == '': return False
     return True
 
 def make_media_input(inputs, image_paths):
@@ -29,12 +28,14 @@ def predict_no_ui_long_connection(inputs:str, llm_kwargs:dict, history:list=[], 
     if llm_kwargs["llm_model"] == "zhipuai":
         llm_kwargs["llm_model"] = zhipuai_default_model
 
-    if validate_key() is False:
-        raise RuntimeError('请配置ZHIPUAI_API_KEY')
+    api_key = llm_kwargs['custom_api_key']("ZHIPUAI_API_KEY")
+
+    if validate_key(api_key) is False:
+        raise RuntimeError('请配置ZHIPUAI_API_KEY或自定义 智谱(Zhipu) API-KEY')
 
     # 开始接收回复
     from .com_zhipuglm import ZhipuChatInit
-    zhipu_bro_init = ZhipuChatInit()
+    zhipu_bro_init = ZhipuChatInit(api_key)
     for chunk, response in zhipu_bro_init.generate_chat(inputs, llm_kwargs, history, sys_prompt):
         if len(observe_window) >= 1:
             observe_window[0] = response
@@ -61,8 +62,9 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot:ChatBotWith
             chatbot=chatbot, history=history, delay=0)
         return
 
-    if validate_key() is False:
-        yield from update_ui_lastest_msg(lastmsg="[Local Message] 请配置ZHIPUAI_API_KEY", chatbot=chatbot, history=history, delay=0)
+    api_key = llm_kwargs['custom_api_key']("ZHIPUAI_API_KEY")
+    if validate_key(api_key) is False:
+        yield from update_ui_lastest_msg(lastmsg="[Local Message] 请配置ZHIPUAI_API_KEY或自定义 智谱(Zhipu) API-KEY", chatbot=chatbot, history=history, delay=0)
         return
 
     if additional_fn is not None:
@@ -92,7 +94,7 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot:ChatBotWith
 
     # 开始接收回复
     from .com_zhipuglm import ZhipuChatInit
-    zhipu_bro_init = ZhipuChatInit()
+    zhipu_bro_init = ZhipuChatInit(api_key)
     for chunk, response in zhipu_bro_init.generate_chat(inputs, llm_kwargs, history, system_prompt):
         chatbot[-1] = [inputs, response]
         yield from update_ui(chatbot=chatbot, history=history)

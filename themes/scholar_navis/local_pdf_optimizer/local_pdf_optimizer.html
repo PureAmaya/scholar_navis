@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+<head>
+    <link rel="stylesheet" href="local_pdf_optimizer.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>local_pdf_optimizer</title>
+
+    <script type="module">
+        import jquery from 'https://cdn.jsdelivr.net/npm/jquery@3.7.1/+esm';
+        import JSZip from 'https://cdn.jsdelivr.net/npm/jszip@3.10.1/+esm';
+        import fileSaver from 'https://cdn.jsdelivr.net/npm/file-saver@2.0.5/+esm';
+        import pdfjsDist from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/+esm';
+        import * as ladda from 'https://cdn.jsdelivr.net/npm/ladda@2.0.3/+esm';
+
+        window.$ = jquery;
+        window.jquery = jquery;
+        window.JSZip = JSZip;
+        window.pdfjsDist = pdfjsDist;
+        window.ladda = ladda;
+        window.fileSaver = fileSaver;
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.6.82/build/pdf.worker.mjs';
+    </script>
+</head>
+
+<body>
+
+    <button id="toggleNightMode">手动切换夜晚模式</button>
+    <h3>请上传压缩包（压缩包内为pdf）</h3>
+    <p class="note">该工具会大幅度减小压缩包体积，提高上传和分析速度</p>
+    <input type="file" id="file_selector" name="file_selector" accept="application/zip" /><br />
+
+
+    <div id="result_block">
+        <p><div id="result"></div></p>
+    </div>
+
+    <!-- 遮罩加载 -->
+    <div class="loader-overlay">
+        <div class="loader"></div>
+    </div>
+
+    <script src="local_pdf_optimizer.js"></script>
+
+
+</body>
+
+
+
+</html>

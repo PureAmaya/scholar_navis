@@ -9,7 +9,6 @@ from .tools.common_plugin_para import common_plugin_para
 from .tools.article_library_ctrl import check_library_exist_and_assistant, lib_manifest
 from toolbox import CatchException, get_log_folder, get_user, update_ui, update_ui_lastest_msg
 
-
 @check_library_exist_and_assistant(accept_nonexistent=True, accept_blank=False)
 @CatchException
 def 缓存pdf文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, system_prompt, user_request):
@@ -83,7 +82,6 @@ def 缓存pdf文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, syste
     if os.path.exists(txt) or txt.lower().startswith('http'):
 
         _1, pdfs_user_uploaded, _2 = get_files_from_everything(txt, type='.pdf')
-
         if len(pdfs_user_uploaded) == 0:
             chatbot.append([_("没有上传pdf，或者尚未上传任何文件"),
                             _("在左上角上传文献后（支持单个pdf与压缩包），再执行本插件")])
@@ -91,7 +89,7 @@ def 缓存pdf文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, syste
             return
 
         # 记录导入文章之前，缓存中有几篇文章
-        old_cache_count = len(glob.glob(f'{cache_dir}/*.pdf'))
+        old_cache_count = len(glob.glob(f'{cache_dir}/*.pdf')) + len(glob.glob(f'{cache_dir}/*.simpl-pdf'))
 
         # 把所有需要分析的pdf放到缓存中。没有文章的话也没问题，移动数量会显示0，不影响总数的显示
         for pdf_user_uploaded in pdfs_user_uploaded:
@@ -99,7 +97,7 @@ def 缓存pdf文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, syste
             shutil.move(pdf_user_uploaded, dst)
 
         # 记录导入文章之后，缓存中有几篇文章
-        new_cache_count = len(glob.glob(f'{cache_dir}/*.pdf'))
+        new_cache_count = len(glob.glob(f'{cache_dir}/*.pdf')) + len(glob.glob(f'{cache_dir}/*.simpl-pdf'))
 
         chatbot.append(
             [_("pdf加载成功"),
@@ -189,7 +187,9 @@ def 缓存pdf文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, syste
 
     # 看看有没有文章，没有的话也提醒一下
     cache_pdf_list = glob.glob(f"{cache_dir}/*.pdf")
+    cache_pdf_list.extend(glob.glob(f"{cache_dir}/*.simpl-pdf"))
     repo_pdf_list = glob.glob(f"{repo_dir}/*.pdf")  # 测试过了，路径不存在返回[]
+    repo_pdf_list.extend(glob.glob(f"{repo_dir}/*.simpl-pdf"))
 
     if len(cache_pdf_list) + len(repo_pdf_list) == 0:
         chatbot.append([_("不存在任何可用pdf，无法总结分析"), _(
@@ -202,6 +202,7 @@ def 缓存pdf文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, syste
                     _("您可以选择继续添加文章、修改关键词，或是使用 <b>按关键词总结文献</b> 进行AI总结")])
     yield from update_ui(chatbot=chatbot, history=history)  # 刷新界面
 
+execute = 缓存pdf文献 # 用于热更新
 
 class pdf_cacher(common_plugin_para):
     def define_arg_selection_menu(self):

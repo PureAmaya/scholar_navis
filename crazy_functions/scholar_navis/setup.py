@@ -222,7 +222,7 @@ def _install_requirement():
     _clear_console()
     
         # 安装需要的包
-    requirements_fp = os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'requirements.txt')
+    requirements_fp = os.path.join(GPT_ACADEMIC_ROOT_PATH,'requirements.txt')
     if not os.path.exists(requirements_fp):
         input(_('不存在 requirements.txt 包安装终止。按回车键退出...'))
         sys.exit(1)
@@ -242,13 +242,13 @@ def _install_requirement():
                 # gpt_Academic的依赖库
                 subprocess.run(['pip', 'install', '-r',f'{os.path.join(GPT_ACADEMIC_ROOT_PATH,"requirements.txt")}','--upgrade'])
                 # school navis的依赖库
-                subprocess.run(['pip', 'install', '-r',f'{os.path.join(SCHOLAR_NAVIS_ROOT_PATH,"requirements.txt")}','--upgrade'])
+                #subprocess.run(['pip', 'install', '-r',f'{os.path.join(SCHOLAR_NAVIS_ROOT_PATH,"requirements.txt")}','--upgrade'])
                 print(_('requirements.txt 安装成功'))
             elif country == 'y' or country == '':
                 # gpt_Academic的依赖库
                 subprocess.run(['pip', 'install', '-r',f'{os.path.join(GPT_ACADEMIC_ROOT_PATH,"requirements.txt")}','--upgrade','-i','https://pypi.mirrors.ustc.edu.cn/simple/'])
                 # school navis的依赖库
-                subprocess.run(['pip', 'install', '-r',f'{os.path.join(SCHOLAR_NAVIS_ROOT_PATH,"requirements.txt")}','--upgrade','-i','https://pypi.mirrors.ustc.edu.cn/simple/'])
+                #subprocess.run(['pip', 'install', '-r',f'{os.path.join(SCHOLAR_NAVIS_ROOT_PATH,"requirements.txt")}','--upgrade','-i','https://pypi.mirrors.ustc.edu.cn/simple/'])
                 print(_('requirements.txt 安装成功'))
             elif country == 'c':
                 # 取消安装
