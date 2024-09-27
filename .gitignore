@@ -161,7 +161,7 @@ objdump*
 *.min.*.js
 
 # scholar_navis
-notification\
+notification/
 tmp
 crazy_functions/scholar_navis/data
 crazy_functions/scholar_navis/scripts/dev
