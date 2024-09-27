@@ -1,17 +1,22 @@
 import os, json; os.environ['no_proxy'] = '*' # 避免代理网络产生意外污染
 
 help_menu_description = \
-"""Github源代码开源和更新[地址🚀](https://github.com/binary-husky/gpt_academic),
+"""
+## gpt_academic：</br>
+Github源代码开源和更新[地址🚀](https://github.com/binary-husky/gpt_academic),
 感谢热情的[开发者们❤️](https://github.com/binary-husky/gpt_academic/graphs/contributors).
-</br></br>常见问题请查阅[项目Wiki](https://github.com/binary-husky/gpt_academic/wiki),
-如遇到Bug请前往[Bug反馈](https://github.com/binary-husky/gpt_academic/issues).
-</br></br>普通对话使用说明: 1. 输入问题; 2. 点击提交
+
+## Scholar Navis：</br>
+**[Scholar Navis](https://github.com/PureAmaya/scholar_navis)为 gpt_academic的衍生作品**</br>
+关于对gpt_acadmic的修改和使用帮助，请阅读[README](https://github.com/PureAmaya/scholar_navis/blob/main/README.md).
+
+</br>普通对话使用说明: 1. 输入问题; 2. 点击提交
 </br></br>基础功能区使用说明: 1. 输入文本; 2. 点击任意基础功能区按钮
 </br></br>函数插件区使用说明: 1. 输入路径/问题, 或者上传文件; 2. 点击任意函数插件区按钮
-</br></br>虚空终端使用说明: 点击虚空终端, 然后根据提示输入指令, 再次点击虚空终端
 </br></br>如何保存对话: 点击保存当前的对话按钮
 </br></br>如何语音对话: 请阅读Wiki
-</br></br>如何临时更换API_KEY: 在输入区输入临时API_KEY后提交（网页刷新后失效）"""
+</br></br>要使用大模型，请在左上角的 API-KEY 中输入您的密钥。
+"""
 
 def enable_log(PATH_LOGGING):
     import logging
