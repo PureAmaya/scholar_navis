@@ -6,19 +6,19 @@ Scholar Navis is licensed under the GPL-3.0 license.
 
 In addition to gpt_academic, the following third-party projects are included (none of which have made any source code modifications):
 
-| Third-party Library or Tool                                                             | License                              | Usage Strategy                                                                                                                                             |
-| --------------------------------------------------------------------------------------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <a href="https://github.com/binary-husky/gpt_academic" target="_blank">GPT Academic</a> | GPL-3.0 license                      | Used as a plugin for this tool; cannot run independently. Detailed modifications and usage strategies for gpt_academic are described below.                |
-| <a href="https://pypi.org/project/PyYAML" target="_blank">PyYAML</a>                    | MIT License                          | Library used for parsing YAML files                                                                                                                        |
-| <a href="https://pypi.org/project/beautifulsoup4" target="_blank">beautifulsoup4</a>    | MIT License                          | Library used for web request processing                                                                                                                    |
-| <a href="https://pypi.org/project/requests/" target="_blank">requests</a>               | Apache Software License (Apache-2.0) | Library used for web requests                                                                                                                              |
-| <a href="https://pypi.org/project/python-docx" target="_blank">python-docx</a>          | MIT License                          | Library used to parse docx files and extract text content, and to convert markdown to word (these features are still in testing)                           |
-| <a href="https://pypi.org/project/PyMuPDF/" target="_blank">PyMuPDF</a>                 | AGPL-3.0 license                     | Library used to convert HTML to PDF                                                                                                                        |
-| <a href="https://github.com/marktext/marktext" target="_blank">MarkText</a>             | MIT License                          | Used the software to convert markdown to HTML, and modifications were made to the HTML                                                                     |
-| <a href="https://github.com/Stuk/jszip" target="_blank">JSZip</a>                       | MIT license                          | Using a library for local ZIP compression package processing in the browser (the associated features are still in testing and are currently unavailable).  |
-| <a href="https://github.com/jquery/jquery" target="_blank">jQuery</a>                   | MIT license                          | Using a library that supports the $ syntax and other extensions (the associated features are still in the testing phase and are currently not available).  |
-| <a href="https://github.com/mozilla/pdf.js" target="_blank">PDF.js</a>                  | Apache-2.0 license                   | Using a library to enable HTML5 support for processing PDF files (the associated features are still in the testing phase and are currently not available). |
-| <a href="https://github.com/eligrey/FileSaver.js/" target="_blank">FileSaver.js</a>     | MIT license                          | 使用库，HTML5 saveAs() 保存压缩包（所所属功能仍在测试，目前不可用）                                                                                                                  |
+| Third-party Library or Tool                                                             | License                              | Usage Strategy                                                                                                                              |
+| --------------------------------------------------------------------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| <a href="https://github.com/binary-husky/gpt_academic" target="_blank">GPT Academic</a> | GPL-3.0 license                      | Used as a plugin for this tool; cannot run independently. Detailed modifications and usage strategies for gpt_academic are described below. |
+| <a href="https://pypi.org/project/PyYAML" target="_blank">PyYAML</a>                    | MIT License                          | Library used for parsing YAML files                                                                                                         |
+| <a href="https://pypi.org/project/beautifulsoup4" target="_blank">beautifulsoup4</a>    | MIT License                          | Library used for web request processing                                                                                                     |
+| <a href="https://pypi.org/project/requests/" target="_blank">requests</a>               | Apache Software License (Apache-2.0) | Library used for web requests                                                                                                               |
+| <a href="https://pypi.org/project/python-docx" target="_blank">python-docx</a>          | MIT License                          | Library used to parse docx files and extract text content, and to convert markdown to word (these features are still in testing)            |
+| <a href="https://pypi.org/project/PyMuPDF/" target="_blank">PyMuPDF</a>                 | AGPL-3.0 license                     | Library used to convert HTML to PDF                                                                                                         |
+| <a href="https://github.com/marktext/marktext" target="_blank">MarkText</a>             | MIT License                          | Used the software to convert markdown to HTML, and modifications were made to the HTML                                                      |
+| <a href="https://github.com/Stuk/jszip" target="_blank">JSZip</a>                       | MIT license                          | Using a library for local ZIP compression package processing in the browser (the feature is still in testing and currently unavailable).    |
+| <a href="https://github.com/jquery/jquery" target="_blank">jQuery</a>                   | MIT license                          | Using a library that supports the $ syntax and other extensions (the feature is still in testing and currently unavailable).                |
+| <a href="https://github.com/mozilla/pdf.js" target="_blank">PDF.js</a>                  | Apache-2.0 license                   | Using a library to enable HTML5 support for processing PDF files(the feature is still in testing and currently unavailable).                |
+| <a href="https://github.com/eligrey/FileSaver.js/" target="_blank">FileSaver.js</a>     | MIT license                          | Using libraries, HTML5 saveAs() to save a compressed package (the feature is still in testing and currently unavailable).                   |
 
 **The modified parts in gpt_academic are as follows:**
 
@@ -46,8 +46,8 @@ In addition to gpt_academic, the following third-party projects are included (no
       with open(sn_version_fp,'r',encoding='utf-8') as f:
           title_html = f"<h1 align=\"center\">GPT 学术优化 {get_current_version()} (Scholar Navis {f.read()})</h1>{theme_declaration}"
   else:title_html = f"<h1 align=\"center\">GPT 学术优化 {get_current_version()}</h1>{theme_declaration}"
-  
-  notification_fp = os.path.join(os.path.dirname(__file__),'notification.txt')
+   
+  notification_fp = os.path.join(os.path.dirname(__file__),'notification','notification.txt')
   if os.path.exists(notification_fp):
       with open(notification_fp,'r',encoding='utf-8') as f:
           title_html = title_html + f'<p style="text-align: left; margin-left: 20px; margin-right: 20px;">{f.read()}</p>'

@@ -46,8 +46,8 @@ Scholar Navis 使用 GPL-3.0 license 授權證
       with open(sn_version_fp,'r',encoding='utf-8') as f:
           title_html = f"<h1 align=\"center\">GPT 学术优化 {get_current_version()} (Scholar Navis {f.read()})</h1>{theme_declaration}"
   else:title_html = f"<h1 align=\"center\">GPT 学术优化 {get_current_version()}</h1>{theme_declaration}"
-  
-  notification_fp = os.path.join(os.path.dirname(__file__),'notification.txt')
+   
+  notification_fp = os.path.join(os.path.dirname(__file__),'notification','notification.txt')
   if os.path.exists(notification_fp):
       with open(notification_fp,'r',encoding='utf-8') as f:
           title_html = title_html + f'<p style="text-align: left; margin-left: 20px; margin-right: 20px;">{f.read()}</p>'
