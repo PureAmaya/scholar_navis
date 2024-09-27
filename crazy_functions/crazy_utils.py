@@ -536,6 +536,8 @@ def get_files_from_everything(txt, type): # type='.md'
     """
     import glob, os
 
+    if txt.strip() == '.':txt = '' # 空格输入防止出现问题的那个，这里变成空输入
+
     success = True
     if txt.startswith('http'):
         # 网络的远程文件

@@ -42,6 +42,7 @@ def 精细分析文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, sy
 
     # 如果是上传的文章（仅限pdf格式，不支持zip等），那就没问题了
     if file_exist:
+        print(txt)
         txt = pdfs_fp[0]
         if len(pdfs_fp) >= 2 : yield from update_ui_lastest_msg(_('[注意] 上传的文献多于1篇。<b>精细分析时仅使用第一篇文章</b>'), chatbot, history)
 
