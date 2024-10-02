@@ -8,6 +8,8 @@ import threading
 from time import time,sleep
 from datetime import datetime
 from bs4 import BeautifulSoup
+
+from shared_utils.sqlite import SQLiteDatabase, db_type
 from .tools.multi_lang import _
 from multiprocessing import cpu_count
 from requests.adapters import HTTPAdapter,Retry
@@ -16,7 +18,7 @@ from concurrent.futures import ThreadPoolExecutor
 from ...crazy_utils import get_files_from_everything
 from .tools.common_plugin_para import common_plugin_para
 from toolbox import CatchException,update_ui,update_ui_lastest_msg
-from .tools.article_library_ctrl import check_library_exist_and_assistant,SQLiteDatabase,db_type, download_file,get_data_dir,get_tmp_dir_of_this_user,csv_load
+from .tools.article_library_ctrl import check_library_exist_and_assistant,download_file,get_data_dir,get_tmp_dir_of_this_user,csv_load
 
 
 

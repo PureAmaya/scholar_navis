@@ -37,6 +37,7 @@ from shared_utils.handle_upload import html_local_img
 from shared_utils.handle_upload import file_manifest_filter_type
 from shared_utils.handle_upload import extract_archive
 from shared_utils.user_custom_manager import get_api_key,get_url_redirect
+from shared_utils.statistics import user_useage_log
 from typing import List
 pj = os.path.join
 default_user_name = "default_user"
@@ -143,6 +144,8 @@ def ArgsGeneralWrapper(f):
         chatbot_with_cookie.write_list(chatbot)
 
         if cookies.get('lock_plugin', None) is None:
+            # 记录日志
+            user_useage_log(request,user_name,llm_model,f.__name__,system_prompt,txt_passon)
             # 正常状态
             if len(args) == 0:  # 插件通道
                 yield from f(txt_passon, llm_kwargs, plugin_kwargs, chatbot_with_cookie, history, system_prompt, request)

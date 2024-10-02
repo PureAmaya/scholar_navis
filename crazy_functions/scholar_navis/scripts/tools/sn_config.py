@@ -17,7 +17,8 @@ CONFIG = {
             #'auto_clear_gpt_log':False,
             'auto_clear_private_upload':False,
             'enable_simple_translator':False,
-            'enable_pubmed_downloader':True
+            'enable_pubmed_downloader':True,
+            'enable_user_usage_log':False,
         }
 
 SUPPORT_DISPLAY_LANGUAGE = {'zh-Hans','zh-Hant','en-US'}

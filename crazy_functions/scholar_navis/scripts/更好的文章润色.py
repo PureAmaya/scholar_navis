@@ -1,7 +1,9 @@
 import os
 import random
 from docx import Document
-from .tools.article_library_ctrl import SQLiteDatabase,db_type,get_tmp_dir_of_this_user, command_information, check_library_exist_and_assistant, promote_file_to_downloadzone, VERSION,pdf_reader,read_and_clean_pdf_text,breakdown_text_to_satisfy_token_limit,article_library_ctrl, CatchException,get_files_from_everything,get_log_folder,get_user,l,update_ui,update_ui_lastest_msg,request_gpt_model_in_new_thread_with_ui_alive,GPT_prefer_language
+
+from shared_utils.sqlite import SQLiteDatabase, db_type
+from .tools.article_library_ctrl import get_tmp_dir_of_this_user, command_information, check_library_exist_and_assistant, promote_file_to_downloadzone, VERSION,pdf_reader,read_and_clean_pdf_text,breakdown_text_to_satisfy_token_limit,article_library_ctrl, CatchException,get_files_from_everything,get_log_folder,get_user,l,update_ui,update_ui_lastest_msg,request_gpt_model_in_new_thread_with_ui_alive,GPT_prefer_language
 
 # ! 后面再说，这个目前没啥必要
 # ! 没改好，也暂时没啥必要

@@ -1,6 +1,7 @@
 import os
 import yaml
 import shutil
+from  shared_utils.sqlite import SQLiteDatabase, db_type
 from .tools import pdf_reader
 from .tools.multi_lang import _
 from .tools.const import SCHOLAR_NAVIS_ROOT_PATH
@@ -8,7 +9,7 @@ from .tools.common_plugin_para import common_plugin_para
 from crazy_functions.pdf_fns.breakdown_txt import breakdown_text_to_satisfy_token_limit
 from toolbox import CatchException,get_user,get_log_folder,update_ui,update_ui_lastest_msg
 from ...crazy_utils import get_files_from_everything,read_and_clean_pdf_text,request_gpt_model_in_new_thread_with_ui_alive
-from .tools.article_library_ctrl import download_file, markdown_to_pdf, db_type,SQLiteDatabase,get_tmp_dir_of_this_user,check_library_exist_and_assistant,get_this_user_library_list,lib_manifest,pdf_yaml
+from .tools.article_library_ctrl import download_file, markdown_to_pdf, get_tmp_dir_of_this_user,check_library_exist_and_assistant,get_this_user_library_list,lib_manifest,pdf_yaml
 
 
 @check_library_exist_and_assistant(accept_nonexistent=True,accept_blank=True)
@@ -214,7 +215,7 @@ def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_
             
         # 跑完AI，记录一下读到的全文
         with SQLiteDatabase(type=db_type.doi_fulltext_ai_understand) as ft:
-            ft.insert_ingore(doi,('fulltext',),('\n\n\n'.join(history),))
+            if doi:ft.insert_ingore(doi,('fulltext',),('\n\n\n'.join(history),))
     
     # 有的话，用它就行
     else:

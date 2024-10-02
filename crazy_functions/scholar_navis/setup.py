@@ -121,23 +121,12 @@ def _configuration():
     a = _check_input(bool_prompt,bool_input)
     CONFIG['enable_pubmed_downloader'] = ync_parse(a,CONFIG['enable_pubmed_downloader'])
     
+    print(_('启用 用户使用日志: '))
+    print(_('当前: ') + str(CONFIG['enable_user_usage_log']))
+    a = _check_input(bool_prompt,bool_input)
+    CONFIG['enable_user_usage_log'] = ync_parse(a,CONFIG['enable_user_usage_log'])
+    
     write_config()
-
-def __install_def_data():
-    
-    def_database_fp = os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'def_data')
-    user_database_fp = os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'data')
-    
-    if not os.path.exists(def_database_fp):
-        print(_('找不到预先数据，该过程跳过'))
-        return
-    
-    # 因为现在默认数据没多少，就先用想要预安装的数据库顶着吧
-    if os.path.exists(user_database_fp):
-        print(_('已安装预先数据，该过程跳过'))
-    else:
-        shutil.copytree(def_database_fp,user_database_fp)
-        print(_('预先数据安装完成'))
 
 def _crazy_function_modifier():
     

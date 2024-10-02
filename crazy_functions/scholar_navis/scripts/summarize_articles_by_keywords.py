@@ -12,7 +12,6 @@ from toolbox import CatchException, get_log_folder, get_user, update_ui, update_
 from .tools.article_library_ctrl import check_library_exist_and_assistant, download_file, lib_manifest, pdf_yaml,markdown_to_pdf
 from ...crazy_utils import request_gpt_model_in_new_thread_with_ui_alive, request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency
 
-
 @check_library_exist_and_assistant(accept_nonexistent=False, accept_blank=False)
 @CatchException
 def 按关键词总结文献(txt, llm_kwargs, plugin_kwargs, chatbot, history, system_prompt, user_request):

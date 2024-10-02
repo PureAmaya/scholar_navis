@@ -46,7 +46,7 @@ In addition to gpt_academic, the following third-party projects are included (no
       with open(sn_version_fp,'r',encoding='utf-8') as f:
           title_html = f"<h1 align=\"center\">GPT 学术优化 {get_current_version()} (Scholar Navis {f.read()})</h1>{theme_declaration}"
   else:title_html = f"<h1 align=\"center\">GPT 学术优化 {get_current_version()}</h1>{theme_declaration}"
-   
+  
   notification_fp = os.path.join(os.path.dirname(__file__),'notification','notification.txt')
   if os.path.exists(notification_fp):
       with open(notification_fp,'r',encoding='utf-8') as f:
@@ -159,6 +159,8 @@ In addition to gpt_academic, the following third-party projects are included (no
 
 - `toolbox.py`: The decorated method has added a parameter user_custom_data: dict
 
+- In `toolbox.py`, on line 40, add `from shared_utils.statistics import user_usage_log` 
+
 - `toolbox.py`: The following content has been added at line 98:
   
   ```python
@@ -179,6 +181,13 @@ In addition to gpt_academic, the following third-party projects are included (no
   ```python
    # 空输入会报错
    if not txt_passon:txt_passon = '.'
+  ```
+
+- `toolbox.py`, on line 147, add the following content:  
+  
+  ```python
+  # 记录日志
+  user_useage_log(request,user_name,llm_model,f.__name__,system_prompt,txt_passon)
   ```
 
 - `toolbox.py`: The keys and values of cookies and llm_kwargs have been modified, and new key-value pairs have been added to llm_kwargs.
@@ -372,3 +381,5 @@ In addition to gpt_academic, the following third-party projects are included (no
 - Customization of user-facing APIs and model customization features added
 
 - Scheduled cleanup of uploaded files and generated file 
+
+- User request log records

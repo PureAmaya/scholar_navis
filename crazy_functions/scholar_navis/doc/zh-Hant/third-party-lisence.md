@@ -46,7 +46,7 @@ Scholar Navis 使用 GPL-3.0 license 授權證
       with open(sn_version_fp,'r',encoding='utf-8') as f:
           title_html = f"<h1 align=\"center\">GPT 学术优化 {get_current_version()} (Scholar Navis {f.read()})</h1>{theme_declaration}"
   else:title_html = f"<h1 align=\"center\">GPT 学术优化 {get_current_version()}</h1>{theme_declaration}"
-   
+  
   notification_fp = os.path.join(os.path.dirname(__file__),'notification','notification.txt')
   if os.path.exists(notification_fp):
       with open(notification_fp,'r',encoding='utf-8') as f:
@@ -158,6 +158,8 @@ Scholar Navis 使用 GPL-3.0 license 授權證
 
 - `toolbox.py`：裝飾器方法（decorated method）添加了參數 user_custom_data: dict
 
+- `toolbox.py` ：第 40 行，加入 `from shared_utils.statistics import user_usage_log` 
+
 - `toolbox.py`：第98行添加如下內容： 
   
   ```python
@@ -178,6 +180,13 @@ Scholar Navis 使用 GPL-3.0 license 授權證
   ```python
    # 空输入会报错
    if not txt_passon:txt_passon = '.'
+  ```
+
+- `toolbox.py` ：第 147 行，添加以下內容：  
+  
+  ```python
+   # 记录日志
+  user_useage_log(request,user_name,llm_model,f.__name__,system_prompt,txt_passon)
   ```
 
 - `toolbox.py`：對 cookies 和 llm_kwargs 的鍵值進行了修改，並為 llm_kwargs 添加了新的鍵值對。 
@@ -369,3 +378,5 @@ Scholar Navis 使用 GPL-3.0 license 授權證
 - 面向用戶的 API 自定義與模型自定義功能添加
 
 - 上傳文件及生成文件的定期清理
+
+- 用户請求日誌記錄

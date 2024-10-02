@@ -1,6 +1,5 @@
 import os
 import yaml
-import shutil
 import zipfile
 from .tools.multi_lang import _
 from .tools.common_plugin_para import common_plugin_para

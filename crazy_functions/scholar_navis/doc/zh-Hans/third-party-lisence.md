@@ -156,6 +156,8 @@ Scholar Navis 使用 GPL-3.0 license 许可证
 
 - `toolbox.py`：decorated 方法添加参数 user_custom_data: dict
 
+- `toolbox.py`：第40行，添加  from shared_utils.statistics import user_useage_log
+
 - `toolbox.py`：98行添加如下内容：
   
   ```python
@@ -178,7 +180,14 @@ Scholar Navis 使用 GPL-3.0 license 许可证
    if not txt_passon:txt_passon = '.'
   ```
 
-- `toolbox.py`:对cookies和llm_kwargs的键值进行了修改，并且为llm_kwargs添加了新的键值对
+- `toolbox.py`：第147行，添加下述内容：
+  
+  ```python
+  # 记录日志
+  user_useage_log(request,user_name,llm_model,f.__name__,system_prompt,txt_passon)
+  ```
+
+- `toolbox.py`:对cookies和llm_kwargs的键值进行了修改，并且为llm_kwargs添加了新的键值对 
 
 - `multi_language.py`：具体修改如下。这里添加这些内容是为了在翻译gpt_academic后，Scholar Navis 可以正常运行
   
@@ -371,3 +380,5 @@ Scholar Navis 使用 GPL-3.0 license 许可证
 - 面向用户的API自定义与模型自定义添加功能
 
 - 上传文件和产生文件的定时清理
+
+- 用户使用请求日志记录
