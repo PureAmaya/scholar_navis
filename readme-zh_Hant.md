@@ -10,7 +10,7 @@
 
 ### 簡單介紹
 
-- 將文獻閱讀、了解研究領域進展等需求與 AI 整合的一款工具。Scholar Navis 是一款橫跨平台工具，可以同時分析總結多篇文獻、了解該領域的發展現狀、認識到這些文章的相似之處、創新點與不足，並結合自身的知識，開辟出新的研究方向，在综述的撰寫上也有一定的幫助。
+- 將文獻閱讀、了解研究領域進展等需求與 AI 整合的一款工具。Scholar Navis 是一款橫跨平台工具，可以同時分析總結多篇文獻、了解該領域的發展現狀、認識到這些文章的相似之處、創新點與不足，**並結合自身的知識**，開辟出新的研究方向，在综述的撰寫上也有一定的幫助。
 
 - 可以從眾多文章中找到感興趣的文章，並對這篇文章或其他任何文章進行分析，進一步消化吸收該篇文章。
 
@@ -20,7 +20,7 @@
 
 - “Navis”在拉丁語中是“**船**”的意思，借助這艘船，開辟前人尚未發現的新大陸吧。
 
-- 該工具包含有五個工具：`缓存 pdf 文獻`、`按關鍵詞分析文獻`、`與 AI 交流研究進展`、`精細分析文獻`與`PubMed OpenAccess 文章獲取`，幫助從一個寬泛的研究方向一次性了解多篇文章，再從這些文章中找到更有價值的文章，從中進行了解和學習。
+- 該工具包含有五個工具：[`PubMed OpenAccess文章獲取`](crazy_functions/scholar_navis/doc/zh-Hant/PubMed Open Access Articles Download.md)、[`緩存pdf文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Cache PDF Articles.md)、[`按關鍵詞分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Summarize Articles by Keywords.md)、[`與AI交流研究進展`](crazy_functions/scholar_navis/doc/zh-Hant/Communicate with AI about Research Progress.md)、[`精細分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Fine-grained Analysis of Article.md)，幫助從一個寬泛的研究方向一次性了解多篇文章，再從這些文章中找到更有價值的文章，從中進行了解和學習。
 
 ### 設計初衷
 
@@ -107,7 +107,7 @@
 
 1. 運行 `main.py` 启用 gpt_academic，在打開的網頁的右側，應當能看到 Scholar Navis 的5個方塊，點擊後可以看到使用提示。<img title="" src="docs/img/scholar_navis_functions -  zh-Hant.png" alt="" data-align="inline" width="448"> <img title="" src="docs/img/function_ui -  zh-Hant.png" alt="" width="130">
 
-2. 5個插件（`PubMed OpenAccess文章獲取`、`緩存pdf文獻`、`按關鍵詞分析文獻`、`與AI交流研究進展`、`精細分析文獻`）其均內置了簡潔的操作指南和功能作用，切換到該工具，`輔助指令` -> `help: 帮助文檔`即可查看。
+2. 5個插件（[`PubMed OpenAccess文章獲取`](crazy_functions/scholar_navis/doc/zh-Hant/PubMed Open Access Articles Download.md)、[`緩存pdf文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Cache PDF Articles.md)、[`按關鍵詞分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Summarize Articles by Keywords.md)、[`與AI交流研究進展`](crazy_functions/scholar_navis/doc/zh-Hant/Communicate with AI about Research Progress.md)、[`精細分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Fine-grained Analysis of Article.md)）其均內置了簡潔的操作指南和功能作用，切換到該工具，`輔助指令` -> `help: 帮助文檔`即可查看。
 
 3. 作為一種流水線式工具，一般而言的使用流程為（共四大步，每個功能前均有編號）：
 

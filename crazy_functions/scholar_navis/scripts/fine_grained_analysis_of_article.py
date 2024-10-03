@@ -3,8 +3,8 @@ import yaml
 import shutil
 from  shared_utils.sqlite import SQLiteDatabase, db_type
 from .tools import pdf_reader
-from .tools.multi_lang import _
-from .tools.const import SCHOLAR_NAVIS_ROOT_PATH
+from shared_utils.multi_lang import _
+from shared_utils.const import SCHOLAR_NAVIS_ROOT_PATH
 from .tools.common_plugin_para import common_plugin_para
 from crazy_functions.pdf_fns.breakdown_txt import breakdown_text_to_satisfy_token_limit
 from toolbox import CatchException,get_user,get_log_folder,update_ui,update_ui_lastest_msg

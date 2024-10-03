@@ -19,6 +19,7 @@ CONFIG = {
             'enable_simple_translator':False,
             'enable_pubmed_downloader':True,
             'enable_user_usage_log':False,
+            'prioritize_use_AI_assistance':True
         }
 
 SUPPORT_DISPLAY_LANGUAGE = {'zh-Hans','zh-Hant','en-US'}

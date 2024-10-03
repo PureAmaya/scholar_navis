@@ -90,33 +90,6 @@ Scholar Navis 使用 GPL-3.0 license 许可证
           input_combo_order = ["cookies", "max_length_sl", "md_dropdown", "txt", "txt2", "top_p", "temperature", "chatbot", "history", "system_prompt", "plugin_advanced_arg",'custom_api_key']
   ```
 
-- `toolbox.py`：添加新的Impot
-  
-  ```python
-  from shared_utils.user_custom_manager import get_api_key,get_url_redirect
-  ```
-
-- `toolbox.py`：98行添加的内容：
-  
-  ```python
-          # 获取openai用的api
-          api_key = get_api_key(user_custom_data,"API_KEY",True)
-          url_redirect = get_url_redirect('API_URL_REDIRECT',user_custom_data)
-          # 方便获取其他供应商的api_key
-          def get_other_provider_api_key(provider_api_type:str):return get_api_key(user_custom_data,provider_api_type,True)
-  
-          if llm_model.startswith('custom-'):
-              # 自定义模型使用openai兼容方案，覆盖一些openai的设定
-              api_key = get_api_key(user_custom_data,"CUSTOM_API_KEY")
-              url_redirect = get_url_redirect('CUSTOM_REDIRECT',user_custom_data)
-  
-          txt_passon = txt
-          if txt == "" and txt2 != "": txt_passon = txt2
-  
-          # 空输入会报错
-          if not txt_passon:txt_passon = '.'
-  ```
-
 - `config.py`：第65行添加新内容:
   
   ```python
@@ -154,7 +127,7 @@ Scholar Navis 使用 GPL-3.0 license 许可证
   from shared_utils.user_custom_manager import get_api_key,get_url_redirect
   ```
 
-- `toolbox.py`：decorated 方法添加参数 user_custom_data: dict
+- `toolbox.py`：decorated 方法添加参数 user_custom_data: dict  
 
 - `toolbox.py`：第40行，添加  from shared_utils.statistics import user_useage_log
 
@@ -171,13 +144,9 @@ Scholar Navis 使用 GPL-3.0 license 许可证
          # 自定义模型使用openai兼容方案，覆盖一些openai的设定
          api_key = get_api_key(user_custom_data,"CUSTOM_API_KEY")
          url_redirect = get_url_redirect('CUSTOM_REDIRECT',user_custom_data)
-  ```
-
-- `toolbox.py`：112行添加如下内容：
   
-  ```python
-   # 空输入会报错
-   if not txt_passon:txt_passon = '.'
+      # 空输入会报错
+      if not txt_passon:txt_passon = ' ' 
   ```
 
 - `toolbox.py`：第147行，添加下述内容：
@@ -362,6 +331,8 @@ Scholar Navis 使用 GPL-3.0 license 许可证
 - 适用于 gpt_academic 的 Scholar Navis 安装器（含有安装依赖库的功能）
 
 - Scholar Navis插件的多语言（国际化）显示与多语言翻译工具（支持po和mo格式）
+
+- 为一些需要访问LLM或者是需要文献信息、网络请求的部分，设计了缓存机制，减少因为请求而产生的额外耗时
 
 - 获取论文的元数据、第一页内容、摘要、doi号和标题（其中通过LLM获取的部分是通过 gpt_academic 进行的）
 

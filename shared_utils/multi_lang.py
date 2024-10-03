@@ -1,3 +1,5 @@
+# ! 后续，这个会慢慢的取代gpt_academic自带的multi_language.py，逐步用一套体系完成多语言的开发
+
 import os
 import gettext
 from .sn_config import CONFIG

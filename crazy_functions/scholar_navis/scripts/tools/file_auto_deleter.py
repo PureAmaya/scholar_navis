@@ -2,8 +2,8 @@ import os
 import shutil
 import threading
 from time import sleep
-if __name__ == "__main__":from sn_config import CONFIG
-else:from .sn_config import CONFIG
+if __name__ == "__main__":from shared_utils.sn_config import CONFIG
+else:from shared_utils.sn_config import CONFIG
 from datetime import datetime
 
 # 需要自动清理的文件夹：

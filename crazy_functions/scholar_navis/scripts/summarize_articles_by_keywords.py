@@ -4,7 +4,7 @@ import glob
 import shutil
 from time import sleep,time
 from .tools import pdf_reader
-from .tools.multi_lang import _
+from shared_utils.multi_lang import _
 from multiprocessing import cpu_count
 from concurrent.futures import ThreadPoolExecutor
 from .tools.common_plugin_para import common_plugin_para

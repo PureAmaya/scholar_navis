@@ -11,7 +11,7 @@ This software is developed based on gpt_academic (version 3.83) and serves as a 
 
 ### Brief Introduction
 
-- This tool integrates literature reading and understanding of research field progress with AI, providing a solution that, unlike commercial tools on the market, can complete more precise analysis at a lower cost. Scholar Navis is a cross-platform tool that can simultaneously analyze and summarize multiple documents, understand the current state of development in the field, recognize the similarities, the innovative points and shortcomings of these articles, and combining one's own knowledge,pioneer new research directions. It also provides some assistance in the writing of reviews.
+- This tool integrates literature reading and understanding of research field progress with AI, providing a solution that, unlike commercial tools on the market, can complete more precise analysis at a lower cost. Scholar Navis is a cross-platform tool that can simultaneously analyze and summarize multiple documents, understand the current state of development in the field, recognize the similarities, the innovative points and shortcomings of these articles, **and combining one's own knowledge**,pioneer new research directions. It also provides some assistance in the writing of reviews.
 
 - Find interesting articles among numerous documents and analyze these articles or any other articles, further digesting and absorbing the content of the article.
 
@@ -21,7 +21,7 @@ This software is developed based on gpt_academic (version 3.83) and serves as a 
 
 - "Navis" in Latin means "**ship**." With this ship, chart new lands that have not been discovered by predecessors.
 
-- The tool includes five features: `Cache PDF Articles`, `Summarize Articles by Keywords`, `Communicate with AI about Research Progress`, `Fine-grained Analysis of Article`, and `PubMed Open Access Articles Download`. These help to gain an understanding of multiple articles from a broad research direction at once, and then to find more valuable articles among them for learning and understanding.
+- The tool includes five features:[`PubMed Open Access Articles Download`](crazy_functions/scholar_navis/doc/en-US/PubMed Open Access Articles Download.md), [`Cache PDF Articles`](crazy_functions/scholar_navis/doc/en-US/Cache PDF Articles.md), [`Summarize Articles by Keywords`](crazy_functions/scholar_navis/doc/en-US/Summarize Articles by Keywords.md), [`Communicate with AI about Research Progress`](crazy_functions/scholar_navis/doc/en-US/Communicate with AI about Research Progress.md), and[ `Fine-grained Analysis of Article`](crazy_functions/scholar_navis/doc/en-US/Fine-grained Analysis of Article.md). These help to gain an understanding of multiple articles from a broad research direction at once, and then to find more valuable articles among them for learning and understanding.
 
 ### Design Intent
 
@@ -109,7 +109,7 @@ This software is developed based on gpt_academic (version 3.83) and serves as a 
    
    <img title="" src="docs/img/scholar_navis_functions - en-US.png" alt="" data-align="inline" width="401"> <img title="" src="docs/img/function_ui - en-US.png" alt="" width="159">
 
-2. There are 5 plugins (`PubMed Open Access Articles Download`, `Cache PDF Articles`, `Summarize Articles by Keywords`, `Communicate with AI about Research Progress`, and `Detailed Literature Analysis`) each of which comes with a simple operation guide and function description. To switch to the tool, go to `Auxiliary Commands` -> `help: help document` to view it.
+2. There are 5 plugins ([`PubMed Open Access Articles Download`](crazy_functions/scholar_navis/doc/en-US/PubMed Open Access Articles Download.md), [`Cache PDF Articles`](crazy_functions/scholar_navis/doc/en-US/Cache PDF Articles.md), [`Summarize Articles by Keywords`](crazy_functions/scholar_navis/doc/en-US/Summarize Articles by Keywords.md), [`Communicate with AI about Research Progress`](crazy_functions/scholar_navis/doc/en-US/Communicate with AI about Research Progress.md), and[ `Fine-grained Analysis of Article`](crazy_functions/scholar_navis/doc/en-US/Fine-grained Analysis of Article.md)) each of which comes with a simple operation guide and function description. To switch to the tool, go to `Auxiliary Commands` -> `help: help document` to view it.
 
 3. As a pipeline tool, the general usage process is as follows (consisting of four major steps, with each function numbered):
 

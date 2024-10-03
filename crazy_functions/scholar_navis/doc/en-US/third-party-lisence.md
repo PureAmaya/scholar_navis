@@ -92,33 +92,6 @@ In addition to gpt_academic, the following third-party projects are included (no
           input_combo_order = ["cookies", "max_length_sl", "md_dropdown", "txt", "txt2", "top_p", "temperature", "chatbot", "history", "system_prompt", "plugin_advanced_arg",'custom_api_key']
   ```
 
-- `toolbox.py`: A new import has been added.
-  
-  ```python
-  from shared_utils.user_custom_manager import get_api_key,get_url_redirect
-  ```
-
-- `toolbox.py`：第98行添加的内容：
-  
-  ```python
-          # 获取openai用的api
-          api_key = get_api_key(user_custom_data,"API_KEY",True)
-          url_redirect = get_url_redirect('API_URL_REDIRECT',user_custom_data)
-          # 方便获取其他供应商的api_key
-          def get_other_provider_api_key(provider_api_type:str):return get_api_key(user_custom_data,provider_api_type,True)
-  
-          if llm_model.startswith('custom-'):
-              # 自定义模型使用openai兼容方案，覆盖一些openai的设定
-              api_key = get_api_key(user_custom_data,"CUSTOM_API_KEY")
-              url_redirect = get_url_redirect('CUSTOM_REDIRECT',user_custom_data)
-  
-          txt_passon = txt
-          if txt == "" and txt2 != "": txt_passon = txt2
-  
-          # 空输入会报错
-          if not txt_passon:txt_passon = '.'sssss
-  ```
-
 - `config.py`: New content added on line 65: 
   
   ```python
@@ -151,7 +124,7 @@ In addition to gpt_academic, the following third-party projects are included (no
   DEFAULT_FN_GROUPS = ['Scholar Navis','对话', '编程', '学术', '智能体']
   ```
 
-- `toolbox.py`: An import has been added. 
+- `toolbox.py`: An import has been added.  
   
   ```python
   from shared_utils.user_custom_manager import get_api_key,get_url_redirect
@@ -166,7 +139,7 @@ In addition to gpt_academic, the following third-party projects are included (no
   ```python
     # 获取openai用的api
    api_key = get_api_key(user_custom_data,"API_KEY",True)
-   url_redirect = get_url_redirect('API_URL_REDIRECT',user_custom_data)
+   url_rdirect = get_url_redirect('API_URL_REDIRECT',user_custom_data)
    # 方便获取其他供应商的api_key
    def get_other_provider_api_key(provider_api_type:str):return get_api_key(user_custom_data,provider_api_type,True)
   
@@ -174,16 +147,12 @@ In addition to gpt_academic, the following third-party projects are included (no
          # 自定义模型使用openai兼容方案，覆盖一些openai的设定
          api_key = get_api_key(user_custom_data,"CUSTOM_API_KEY")
          url_redirect = get_url_redirect('CUSTOM_REDIRECT',user_custom_data)
-  ```
-
-- `toolbox.py`: The following content has been added at line 112:
   
-  ```python
-   # 空输入会报错
-   if not txt_passon:txt_passon = '.'
+       # 空输入会报错  
+       if not txt_passon:txt_passon = ' '
   ```
 
-- `toolbox.py`, on line 147, add the following content:  
+- `toolbox.py`, on line 147, add the following content:   
   
   ```python
   # 记录日志
@@ -363,6 +332,8 @@ In addition to gpt_academic, the following third-party projects are included (no
 - Installer for Scholar Navis compatible with gpt_academic (including functionality to install dependency libraries)
 
 - Scholar Navis plugin's multilingual (internationalization) display and multilingual translation tool (supports po and mo formats) 
+
+- A caching mechanism has been designed for parts that require access to LLMs or need literature information and network requests to reduce the additional time spent due to requests.  
 
 - Retrieval of metadata, first page content, abstract, DOI number, and title of papers (where part obtained through LLM is done via gpt_academic)
 

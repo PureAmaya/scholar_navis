@@ -1,12 +1,14 @@
-from .multi_lang import _
+from shared_utils.multi_lang import _
 from toolbox import HotReload
 from shared_utils.config_loader import get_conf
-from .sn_config import CONFIG, GPT_SUPPORT_LAMGUAGE
+from shared_utils.sn_config import CONFIG, GPT_SUPPORT_LAMGUAGE
 # from .article_library_ctrl import get_def_user_library_list
 from crazy_functions.plugin_template.plugin_class_template import GptAcademicPluginTemplate, ArgProperty
 
 AUTHENTICATION = get_conf('AUTHENTICATION')
 NEED_PARA_INDICATOR = _('需要参数')
+
+# ! 后续考虑一下用js的方式暂存输入的内容
 
 class common_plugin_para(GptAcademicPluginTemplate):
     """再次封装的插件面板（
@@ -128,7 +130,10 @@ class common_plugin_para(GptAcademicPluginTemplate):
         return {'gpt_prefer_lang':ArgProperty(**para).model_dump_json()}
     
     def add_use_AI_assistant_selector(self):
-        para = {'title':_('使用AI辅助功能'),'description':_('AI补全信息，速度较慢'),'options':[_('启用'),_('禁用')],'default_value':_('禁用'),'type':"dropdown"}
+        if CONFIG['prioritize_use_AI_assistance']:default = _('启用')
+        else:default = _('禁用')
+        
+        para = {'title':_('使用AI辅助功能'),'description':_('AI补全信息，速度较慢'),'options':[_('启用'),_('禁用')],'default_value':default,'type':"dropdown"}
         return {'ai_assist':ArgProperty(**para).model_dump_json()}
     
     def define_arg_selection_menu(self):

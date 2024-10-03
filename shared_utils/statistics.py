@@ -1,5 +1,5 @@
 from shared_utils.sqlite import SQLiteDatabase,db_type
-from crazy_functions.scholar_navis.scripts.tools.sn_config import CONFIG
+from .sn_config import CONFIG
 from datetime import datetime
 
 

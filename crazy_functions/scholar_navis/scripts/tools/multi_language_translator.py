@@ -1,7 +1,7 @@
 import os
 from toolbox import CatchException
-from .const import SCHOLAR_NAVIS_ROOT_PATH
-from .sn_config import SUPPORT_DISPLAY_LANGUAGE
+from shared_utils.const import SCHOLAR_NAVIS_ROOT_PATH
+from shared_utils.sn_config import SUPPORT_DISPLAY_LANGUAGE
 from request_llms.bridge_all import predict_no_ui_long_connection # 问就是这个不能脱离gpt_academic独自运行，我也不想对gpt_acadmic产生过多修改
 
 # ! 专供本软件的翻译，不能保证其他软件翻译可用

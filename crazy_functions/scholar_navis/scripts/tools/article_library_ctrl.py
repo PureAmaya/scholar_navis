@@ -5,11 +5,11 @@ import shutil
 import codecs
 import pymupdf
 from enum import Enum
-from .multi_lang import _
+from shared_utils.multi_lang import _
 from functools import wraps
 from datetime import datetime
-from .sn_config import CONFIG,VERSION
-from .const import SCHOLAR_NAVIS_ROOT_PATH,GPT_ACADEMIC_ROOT_PATH
+from shared_utils.sn_config import CONFIG,VERSION
+from shared_utils.const import SCHOLAR_NAVIS_ROOT_PATH,GPT_ACADEMIC_ROOT_PATH
 
 class lib_manifest(Enum):# 单纯为了规范yaml的名称
     library_name = 'library_name'
@@ -94,7 +94,7 @@ def check_library_exist_and_assistant(accept_nonexistent=False,accept_blank = Fa
             # 插件的文档文件夹
             doc_dir = os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'doc',CONFIG['language_display']) 
                 
-            # < --------------------泛用型用户命令解析--------------------- >
+            # < --------------------通用型用户命令解析--------------------- >
             doc_fp = ''
             # 关于信息
             if command == 'about' or command == 'info':
@@ -160,6 +160,7 @@ def check_library_exist_and_assistant(accept_nonexistent=False,accept_blank = Fa
                 return
 
             # < --------------------高级参数筛查（现在由一个修饰器统一实现）------------------------ >
+            # ! 乱（
 
             # 只有不接受accept_blank时，才检测是否为空白
             # 只有不接受“总结库不存在”的时候，才检测是否存在这个总结库

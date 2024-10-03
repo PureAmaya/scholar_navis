@@ -111,7 +111,7 @@ def ArgsGeneralWrapper(f):
         if txt == "" and txt2 != "": txt_passon = txt2
         
         # 空输入会报错
-        if not txt_passon:txt_passon = '.'
+        if not txt_passon:txt_passon = ' '
         
         # 引入一个有cookie的chatbot
         if request.username is not None:

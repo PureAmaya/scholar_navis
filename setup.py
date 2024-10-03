@@ -7,9 +7,9 @@ import subprocess
 try:import yaml
 except:subprocess.run(['pip', 'install', 'PyYAML'])
 # 安装好之后再导入
-from scripts.tools.multi_lang import _,i18n
-from scripts.tools.const import GPT_ACADEMIC_ROOT_PATH, SCHOLAR_NAVIS_ROOT_PATH,SCHOLAR_NAVIS_DIR_NAME
-from scripts.tools.sn_config import VERSION,CONFIG,write_config, GPT_SUPPORT_LAMGUAGE
+from shared_utils.multi_lang import _,i18n
+from shared_utils.const import GPT_ACADEMIC_ROOT_PATH, SCHOLAR_NAVIS_ROOT_PATH
+from shared_utils.sn_config import VERSION,CONFIG,write_config, GPT_SUPPORT_LAMGUAGE
 
 def _clear_console():
     if sys.platform == 'win32':os.system('cls')
@@ -71,10 +71,6 @@ def __check_path():
         print(_('没有安装在gpt_academic的crazy_functions文件夹下'))
         install_vaild = False
     
-    # 检查安装目录是否可用
-    if  SCHOLAR_NAVIS_DIR_NAME != 'scholar_navis':
-        print(_("没有安装在crazy_functions/scholar_navis中"))
-        install_vaild = False
     
     if not install_vaild:
         input(_("按回车键退出..."))
@@ -86,6 +82,7 @@ def _configuration():
     _clear_console()
     
     def ync_parse(a,value):
+        _clear_console()
         if a == 'y':return True
         elif a == 'n':return False
         else:return value
@@ -126,6 +123,11 @@ def _configuration():
     a = _check_input(bool_prompt,bool_input)
     CONFIG['enable_user_usage_log'] = ync_parse(a,CONFIG['enable_user_usage_log'])
     
+    print(_('优先使用AI辅助功能获取文献doi和标题'))
+    print(_('当前: ') + str(CONFIG['prioritize_use_AI_assistance']))
+    a = _check_input(bool_prompt,bool_input)
+    CONFIG['prioritize_use_AI_assistance'] = ync_parse(a,CONFIG['prioritize_use_AI_assistance'])
+    
     write_config()
 
 def _crazy_function_modifier():
@@ -134,7 +136,7 @@ def _crazy_function_modifier():
     
     txt = f'''
     ###### SCHOLAR NAVIS START ########
-    from crazy_functions.{SCHOLAR_NAVIS_DIR_NAME}.scripts.tools.gpt_academic_handler import registrator
+    from crazy_functions.scholar_navis.scripts.tools.gpt_academic_handler import registrator
     function_plugins = registrator(function_plugins)
     ##### SCHOLAR NAVIS END - UNINSTALL: DELETE THESE #########
     '''
@@ -192,6 +194,7 @@ def _config_pri_modifier():
     #DEFAULT_FN_GROUP没有Scholar Navis的话，就给他加上
     if not 'Scholar Navis' in DEFAULT_FN_GROUPS_line_str:
         DEFAULT_FN_GROUPS_line_str = DEFAULT_FN_GROUPS_line_str.replace('[',"['Scholar Navis',",1)
+        # 防止出现 , 后没有内容的情况
         print(_('config_private 注册工具组成功'))
     # 有了的话就保留现状
     else: print(_('config_private 中已注册工具组，此过程跳过'))
@@ -228,16 +231,10 @@ def _install_requirement():
         print(_('开始安装依赖包...'))
         try:
             if country == 'n':
-                # gpt_Academic的依赖库
                 subprocess.run(['pip', 'install', '-r',f'{os.path.join(GPT_ACADEMIC_ROOT_PATH,"requirements.txt")}','--upgrade'])
-                # school navis的依赖库
-                #subprocess.run(['pip', 'install', '-r',f'{os.path.join(SCHOLAR_NAVIS_ROOT_PATH,"requirements.txt")}','--upgrade'])
                 print(_('requirements.txt 安装成功'))
             elif country == 'y' or country == '':
-                # gpt_Academic的依赖库
                 subprocess.run(['pip', 'install', '-r',f'{os.path.join(GPT_ACADEMIC_ROOT_PATH,"requirements.txt")}','--upgrade','-i','https://pypi.mirrors.ustc.edu.cn/simple/'])
-                # school navis的依赖库
-                #subprocess.run(['pip', 'install', '-r',f'{os.path.join(SCHOLAR_NAVIS_ROOT_PATH,"requirements.txt")}','--upgrade','-i','https://pypi.mirrors.ustc.edu.cn/simple/'])
                 print(_('requirements.txt 安装成功'))
             elif country == 'c':
                 # 取消安装

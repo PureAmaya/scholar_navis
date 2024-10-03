@@ -1,6 +1,6 @@
 from toolbox import HotReload
-from .multi_lang import _
-from .sn_config import CONFIG
+from shared_utils.multi_lang import _
+from shared_utils.sn_config import CONFIG
 from .file_auto_deleter import start_clear_old_files
 try:
     from shared_utils.colorful import print亮黄

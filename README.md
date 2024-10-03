@@ -10,7 +10,7 @@
 
 ### 简单介绍
 
-- 将文献阅读、了解研究领域进展等需求与AI进行整合的一款工具。Scholar Navis 是一款跨平台工具、可以同时分析总结多篇文献、了解该领域的发展现状、认识到这些文章的相似之处、创新点和不足，并结合自身的知识，开辟出新的研究方向，在综述的撰写上也有一定的帮助。
+- 将文献阅读、了解研究领域进展等需求与AI进行整合的一款工具。Scholar Navis 是一款跨平台工具、可以同时分析总结多篇文献、了解该领域的发展现状、认识到这些文章的相似之处、创新点和不足，**并结合自身的知识**，开辟出新的研究方向，在综述的撰写上也有一定的帮助。
 
 - 可以从众多的文章中找到感兴趣的文章，并对这个文章或其他任何文章进行分析，进一步消化吸收该篇文章。
 
@@ -18,7 +18,7 @@
 
 - “Navis”在拉丁语中是“**船**”的意思，借助这艘船，开辟前人尚未发现的新大陆吧。
 
-- 该工具包含有五个工具：`缓存pdf文献`、`按关键词分析文献`、`与AI交流研究进展`、`精细分析文献`与`PubMed OpenAccess文章获取`，帮助从一个宽泛的研究方向一次性了解多篇文章，再从这些文章中找到更有价值的文章，从中进行了解和学习。
+- 该工具包含有五个工具：[`PubMed OpenAccess文章获取`](crazy_functions/scholar_navis/doc/zh-Hans/PubMed Open Access Articles Download.md)、[`缓存pdf文献`](crazy_functions/scholar_navis/doc/zh-Hans/Cache PDF Articles.md)、[`按关键词分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Summarize Articles by Keywords.md)、[`与AI交流研究进展`](crazy_functions/scholar_navis/doc/zh-Hans/Communicate with AI about Research Progress.md)、[`精细分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Fine-grained Analysis of Article.md)，帮助从一个宽泛的研究方向一次性了解多篇文章，再从这些文章中找到更有价值的文章，从中进行了解和学习。
 
 ### 设计初衷
 
@@ -105,7 +105,7 @@
    
    <img title="" src="docs/img/scholar_navis_functions.png" alt="" data-align="inline" width="448"> <img title="" src="docs/img/function_ui.png" alt="" width="130">
 
-2. 5个插件（`PubMed OpenAccess文章获取`、`缓存pdf文献`、`按关键词分析文献`、`与AI交流研究进展`、`精细分析文献`）其均内置了简洁的操作指南和功能作用，切换到该工具，`辅助指令` -> `help: 帮助文档`即可查看。
+2. 5个插件（[`PubMed OpenAccess文章获取`](crazy_functions/scholar_navis/doc/zh-Hans/PubMed Open Access Articles Download.md)、[`缓存pdf文献`](crazy_functions/scholar_navis/doc/zh-Hans/Cache PDF Articles.md)、[`按关键词分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Summarize Articles by Keywords.md)、[`与AI交流研究进展`](crazy_functions/scholar_navis/doc/zh-Hans/Communicate with AI about Research Progress.md)、[`精细分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Fine-grained Analysis of Article.md)）其均内置了简洁的操作指南和功能作用，切换到该工具，`辅助指令` -> `help: 帮助文档`即可查看。
 
 3. 作为一种流水线式工具，一般而言的使用流程为（共四大步，每个功能前均有编号）：
 
