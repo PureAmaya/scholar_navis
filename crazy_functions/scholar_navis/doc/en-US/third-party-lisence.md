@@ -4,7 +4,7 @@ Scholar Navis is licensed under the GPL-3.0 license.
 
 ----------------------------
 
-In addition to gpt_academic, the following third-party projects are included (none of which have made any source code modifications):
+In addition to gpt_academic, the following third-party projects are included ( apart from gpt_academic, no source code modifications have been made): 
 
 | Third-party Library or Tool                                                             | License            | Usage Strategy                                                                                                                                                                     |
 | --------------------------------------------------------------------------------------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
