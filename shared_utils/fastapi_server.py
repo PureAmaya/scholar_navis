@@ -213,6 +213,21 @@ def start_app(app_block, CONCURRENT_COUNT, AUTHENTICATION, PORT, SSL_KEYFILE, SS
         async def forward_post_request(request: Request):
             return await forward_request(request, "POST")
 
+    # 不敏感的一些在线服务
+    from .const import WEB_SERVICES_ROOT_PATH
+    from fastapi.responses import FileResponse,PlainTextResponse
+    @gradio_app.get("/services/pdf_viewer/{path:path}")
+    async def pdf_viewer(path:str):
+        
+        if path.startswith('web/gpt_log'):realpath = path[4:]
+        else:realpath = os.path.join(WEB_SERVICES_ROOT_PATH,'pdf.js',path)
+        
+        if os.path.exists(realpath):
+            return FileResponse(realpath)
+        else: return PlainTextResponse('bad request',status_code=400)
+
+
+
     # --- --- app_lifespan --- ---
     from contextlib import asynccontextmanager
     @asynccontextmanager

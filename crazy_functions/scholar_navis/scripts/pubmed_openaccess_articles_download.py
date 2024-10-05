@@ -18,7 +18,7 @@ from concurrent.futures import ThreadPoolExecutor
 from ...crazy_utils import get_files_from_everything
 from .tools.common_plugin_para import common_plugin_para
 from toolbox import CatchException,update_ui,update_ui_lastest_msg
-from .tools.article_library_ctrl import check_library_exist_and_assistant,download_file,get_data_dir,get_tmp_dir_of_this_user,csv_load
+from .tools.article_library_ctrl import check_library_exist_and_assistant,generate_download_file,get_data_dir,get_tmp_dir_of_this_user,csv_load
 
 
 
@@ -562,7 +562,7 @@ def PubMed_OpenAccess文章获取(txt, llm_kwargs, plugin_kwargs, chatbot, histo
     dl_percent_msg = _('下载成功率')
     dl_failed_msg_note = _('如果下载失败，则需要手动下载')
     dl_failed_why = _('为什么会这样')
-    dl_success_note = download_file(zip_path,_('点击获取下载的文章')) + '\t' + download_file(log_path,_('点击获取下载日志')) 
+    dl_success_note = generate_download_file(zip_path,_('点击获取下载的文章')) + '\t' + generate_download_file(log_path,_('点击获取下载日志')) 
     dl_msg = _('可以直接将下载完成的文章进行分析: 用<b>缓存pdf文献</b>开始总结分析这些文章')
     
     chatbot.append([f'{title}</br>',

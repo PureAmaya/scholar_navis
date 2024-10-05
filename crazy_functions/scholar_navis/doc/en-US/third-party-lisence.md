@@ -6,19 +6,16 @@ Scholar Navis is licensed under the GPL-3.0 license.
 
 In addition to gpt_academic, the following third-party projects are included (none of which have made any source code modifications):
 
-| Third-party Library or Tool                                                             | License                              | Usage Strategy                                                                                                                              |
-| --------------------------------------------------------------------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| <a href="https://github.com/binary-husky/gpt_academic" target="_blank">GPT Academic</a> | GPL-3.0 license                      | Used as a plugin for this tool; cannot run independently. Detailed modifications and usage strategies for gpt_academic are described below. |
-| <a href="https://pypi.org/project/PyYAML" target="_blank">PyYAML</a>                    | MIT License                          | Library used for parsing YAML files                                                                                                         |
-| <a href="https://pypi.org/project/beautifulsoup4" target="_blank">beautifulsoup4</a>    | MIT License                          | Library used for web request processing                                                                                                     |
-| <a href="https://pypi.org/project/requests/" target="_blank">requests</a>               | Apache Software License (Apache-2.0) | Library used for web requests                                                                                                               |
-| <a href="https://pypi.org/project/python-docx" target="_blank">python-docx</a>          | MIT License                          | Library used to parse docx files and extract text content, and to convert markdown to word (these features are still in testing)            |
-| <a href="https://pypi.org/project/PyMuPDF/" target="_blank">PyMuPDF</a>                 | AGPL-3.0 license                     | Library used to convert HTML to PDF                                                                                                         |
-| <a href="https://github.com/marktext/marktext" target="_blank">MarkText</a>             | MIT License                          | Used the software to convert markdown to HTML, and modifications were made to the HTML                                                      |
-| <a href="https://github.com/Stuk/jszip" target="_blank">JSZip</a>                       | MIT license                          | Using a library for local ZIP compression package processing in the browser (the feature is still in testing and currently unavailable).    |
-| <a href="https://github.com/jquery/jquery" target="_blank">jQuery</a>                   | MIT license                          | Using a library that supports the $ syntax and other extensions (the feature is still in testing and currently unavailable).                |
-| <a href="https://github.com/mozilla/pdf.js" target="_blank">PDF.js</a>                  | Apache-2.0 license                   | Using a library to enable HTML5 support for processing PDF files(the feature is still in testing and currently unavailable).                |
-| <a href="https://github.com/eligrey/FileSaver.js/" target="_blank">FileSaver.js</a>     | MIT license                          | Using libraries, HTML5 saveAs() to save a compressed package (the feature is still in testing and currently unavailable).                   |
+| Third-party Library or Tool                                                             | License            | Usage Strategy                                                                                                                                                                     |
+| --------------------------------------------------------------------------------------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <a href="https://github.com/binary-husky/gpt_academic" target="_blank">GPT Academic</a> | GPL-3.0 license    | Used as a plugin for this tool; cannot run independently. Detailed modifications and usage strategies for gpt_academic are described below.                                        |
+| <a href="https://pypi.org/project/PyYAML" target="_blank">PyYAML</a>                    | MIT License        | Library used for parsing YAML files                                                                                                                                                |
+| <a href="https://pypi.org/project/beautifulsoup4" target="_blank">beautifulsoup4</a>    | MIT License        | Library used for web request processing                                                                                                                                            |
+| <a href="https://pypi.org/project/requests/" target="_blank">requests</a>               | Apache-2.0 license | Library used for web requests                                                                                                                                                      |
+| <a href="https://pypi.org/project/python-docx" target="_blank">python-docx</a>          | MIT License        | Library used to parse docx files and extract text content, and to convert markdown to word (these features are still in testing)                                                   |
+| <a href="https://pypi.org/project/PyMuPDF/" target="_blank">PyMuPDF</a>                 | AGPL-3.0 license   | Library used to convert HTML to PDF                                                                                                                                                |
+| <a href="https://github.com/marktext/marktext" target="_blank">MarkText</a>             | MIT License        | Used the software to convert markdown to HTML, and modifications were made to the HTML                                                                                             |
+| <a href="https://github.com/mozilla/pdf.js" target="_blank">PDF.js</a>                  | Apache-2.0 license | Directly use the prebuilt software package. The source code has not been modified, and it is used for online PDF viewing. The complete content is located in `web_services\pdf.js` |
 
 **The modified parts in gpt_academic are as follows:**
 
@@ -68,6 +65,12 @@ In addition to gpt_academic, the following third-party projects are included (no
    with gr.Blocks(title="GPT 学术优化", theme=set_theme, analytics_enabled=False, css=advanced_css) as app_block:
    # motified
    with gr.Blocks(title="GPT 学术优化 (Scholar Navis 修改版)", theme=set_theme, analytics_enabled=False, css=advanced_css) as app_block:
+  ```
+
+- `main.py`: Add an AI warning at line 120
+  
+  ```python
+  gr.HTML('<strong>下方内容为 AI 生成，不代表任何立场，可能存在片面甚至错误。仅供参考，开发者及其组织不负任何责任。</strong>')
   ```
 
 - `main.py`: around line 196, there has been a modification to incorporate a custom API-KEY feature, moving some JavaScript content out and merging it into the corresponding JavaScript files.
@@ -290,6 +293,23 @@ In addition to gpt_academic, the following third-party projects are included (no
 
 - `request_llms/model_info.py`: As a replacement component for the mentioned model.info, in addition to supporting the original list functionality, it also supports calling custom models.
 
+- `shared_utils/fastapi_server.py`: At around line 216, add an online service feature to the web (currently just the online browsing feature of pdf.js)  
+  
+  ```python
+      # 不敏感的一些在线服务
+      from .const import WEB_SERVICES_ROOT_PATH
+      from fastapi.responses import FileResponse,PlainTextResponse
+      @gradio_app.get("/services/pdf_viewer/{path:path}")
+      async def pdf_viewer(path:str):
+  
+          if path.startswith('web/gpt_log'):realpath = path[4:]
+          else:realpath = os.path.join(WEB_SERVICES_ROOT_PATH,'pdf.js',path)
+  
+          if os.path.exists(realpath):
+              return FileResponse(realpath)
+          else: return PlainTextResponse('bad request',status_code=400)
+  ```
+
 - `shared_utils/key_pattern_manager.py`: Around line 70, custom model support was added; around line 73, content was added to allow custom models to also support non-standard api2d's api. 
   
   ```python
@@ -354,3 +374,5 @@ In addition to gpt_academic, the following third-party projects are included (no
 - Scheduled cleanup of uploaded files and generated file 
 
 - User request log records
+
+- Online PDF viewing 

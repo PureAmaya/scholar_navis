@@ -278,15 +278,28 @@ def _get_dir(root_dir: str, sub_dir: list[str] , create_datetime_dir: bool):
 
     return dir
 
-def download_file(file_path,txt:str = None):
-    
+def generate_download_file(file_path:str,txt:str = None):
+    """生成下载链接（PDF则为跳转到在线服务）
+
+    Args:
+        file_path (str): 需要下载的文件路径
+        txt (str, optional): 超链接显示的文本. 默认为下载文件的basename.
+
+    Returns:
+        str: html的href
+    """
     # 为什么要把绝对路径转换为相对路径：下载连接更短，然后可以减少暴露，或许安全点？
     if os.path.isabs(file_path):
         file_path = os.path.relpath(file_path,os.getcwd())
+
         
     if not txt:txt = os.path.basename(file_path)
         
-    return f'<a href="file={file_path}" target="_blank">{txt}</a>'
+        
+    if file_path.startswith('gpt_log') and file_path.lower().endswith('.pdf'):
+        return f'<a href="services/pdf_viewer/web/viewer.html?file={file_path}" target="_blank">{txt}</a>'
+    else:    
+        return f'<a href="file={file_path}" target="_blank">{txt}</a>'
 
 def get_data_dir(root_dir: str, sub_dir: list[str] = []):
     root_dir = os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'data',root_dir)

@@ -6,19 +6,16 @@ Scholar Navis 使用 GPL-3.0 license 授權證
 
 以下是基於**gpt_academic 添加的第三方項目**（除 gpt_academic 外，所有項目均未進行任何源碼修改）：
 
-| 第三方庫或工具                                                                                 | 授權證                                  | 使用策略                                              |
-| --------------------------------------------------------------------------------------- | ------------------------------------ | ------------------------------------------------- |
-| <a href="https://github.com/binary-husky/gpt_academic" target="_blank">GPT Academic</a> | GPL-3.0 license                      | 作為該工具的插件，無法獨立運行。關於 gpt_academic 的詳細修改內容和使用策略請見下文。 |
-| <a href="https://pypi.org/project/PyYAML" target="_blank">PyYAML</a>                    | MIT License                          | 使用庫，yaml文件解析                                      |
-| <a href="https://pypi.org/project/beautifulsoup4" target="_blank">beautifulsoup4</a>    | MIT License                          | 使用庫，網絡請求處理                                        |
-| <a href="https://pypi.org/project/requests/" target="_blank">requests</a>               | Apache Software License (Apache-2.0) | 使用庫，網絡請求                                          |
-| <a href="https://pypi.org/project/python-docx" target="_blank">python-docx</a>          | MIT License                          | 使用庫，解析docx並獲取文本內容，將 Markdown 轉換為 Word（所屬功能仍在測試）   |
-| <a href="https://pypi.org/project/PyMuPDF/" target="_blank">PyMuPDF</a>                 | AGPL-3.0 license                     | 使用庫，將 HTML 轉換為 PDF                                |
-| <a href="https://github.com/marktext/marktext" target="_blank">MarkText</a>             | MIT License                          | 使用該軟件將markdown轉換為HTML，並對HTML進行了修改                 |
-| <a href="https://github.com/Stuk/jszip" target="_blank">JSZip</a>                       | MIT license                          | 使用庫，用於在瀏覽器本地處理ZIP壓縮包（相關功能仍在測試中，目前不可用）             |
-| <a href="https://github.com/jquery/jquery" target="_blank">jQuery</a>                   | MIT license                          | 使用庫，支持$語法及其他擴展功能（所屬功能仍在測試階段，目前尚未可用）               |
-| <a href="https://github.com/mozilla/pdf.js" target="_blank">PDF.js</a>                  | Apache-2.0 license                   | 使用庫，使HTML5能夠支持處理PDF文件（所屬功能仍在測試階段，目前尚不可用）          |
-| <a href="https://github.com/eligrey/FileSaver.js/" target="_blank">FileSaver.js</a>     | MIT license                          | 使用庫，利用HTML5的saveAs()方法保存壓縮包（所屬功能仍在測試中，目前尚未可用）     |
+| 第三方庫或工具                                                                                 | 授權證                | 使用策略                                                              |
+| --------------------------------------------------------------------------------------- | ------------------ | ----------------------------------------------------------------- |
+| <a href="https://github.com/binary-husky/gpt_academic" target="_blank">GPT Academic</a> | GPL-3.0 license    | 作為該工具的插件，無法獨立運行。關於 gpt_academic 的詳細修改內容和使用策略請見下文。                 |
+| <a href="https://pypi.org/project/PyYAML" target="_blank">PyYAML</a>                    | MIT License        | 使用庫，yaml文件解析                                                      |
+| <a href="https://pypi.org/project/beautifulsoup4" target="_blank">beautifulsoup4</a>    | MIT License        | 使用庫，網絡請求處理                                                        |
+| <a href="https://pypi.org/project/requests/" target="_blank">requests</a>               | Apache-2.0 license | 使用庫，網絡請求                                                          |
+| <a href="https://pypi.org/project/python-docx" target="_blank">python-docx</a>          | MIT License        | 使用庫，解析docx並獲取文本內容，將 Markdown 轉換為 Word（所屬功能仍在測試）                   |
+| <a href="https://pypi.org/project/PyMuPDF/" target="_blank">PyMuPDF</a>                 | AGPL-3.0 license   | 使用庫，將 HTML 轉換為 PDF                                                |
+| <a href="https://github.com/marktext/marktext" target="_blank">MarkText</a>             | MIT License        | 使用該軟件將markdown轉換為HTML，並對HTML進行了修改                                 |
+| <a href="https://github.com/mozilla/pdf.js" target="_blank">PDF.js</a>                  | Apache-2.0 license | 直接使用其Prebuilt軟件包。源碼沒有發生修改，用於在線瀏覽PDF。完整的内容位於 `web_services\pdf.js` |
 
 **gpt_academic 中產生修改的部分如下：**
 
@@ -68,6 +65,12 @@ Scholar Navis 使用 GPL-3.0 license 授權證
    with gr.Blocks(title="GPT 学术优化", theme=set_theme, analytics_enabled=False, css=advanced_css) as app_block:
    # motified
    with gr.Blocks(title="GPT 学术优化 (Scholar Navis 修改版)", theme=set_theme, analytics_enabled=False, css=advanced_css) as app_block:
+  ```
+
+- `main.py`：在120行添加AI警告
+  
+  ```python
+  gr.HTML('<strong>下方内容为 AI 生成，不代表任何立场，可能存在片面甚至错误。仅供参考，开发者及其组织不负任何责任。</strong>')
   ```
 
 - `main.py`：約第196行，發生修改，接入自定義API-KEY功能，將一些.js文件內容移出並合併入相應的.js文件中。
@@ -287,6 +290,23 @@ Scholar Navis 使用 GPL-3.0 license 授權證
 
 - `request_llms/model_info.py`：為上文提到的model.info的取代組件，除了支持原list的功能外，還支持自定義模型的調用。
 
+- `shared_utils/fastapi_server.py`：約216行，為網頁添加在線服務功能（目前只是pdf.js的在線瀏覽功能）  
+  
+  ```python
+      # 不敏感的一些在线服务
+      from .const import WEB_SERVICES_ROOT_PATH
+      from fastapi.responses import FileResponse,PlainTextResponse
+      @gradio_app.get("/services/pdf_viewer/{path:path}")
+      async def pdf_viewer(path:str):
+  
+          if path.startswith('web/gpt_log'):realpath = path[4:]
+          else:realpath = os.path.join(WEB_SERVICES_ROOT_PATH,'pdf.js',path)
+  
+          if os.path.exists(realpath):
+              return FileResponse(realpath)
+          else: return PlainTextResponse('bad request',status_code=400)
+  ```
+
 - `shared_utils/key_pattern_manager.py`：約第70行，添加了自定義模型支持；約第73行，添加內容，讓自定義模型也能支持非標準的api2d的api。    
   
   ```python
@@ -351,3 +371,5 @@ Scholar Navis 使用 GPL-3.0 license 授權證
 - 上傳文件及生成文件的定期清理
 
 - 用户請求日誌記錄
+
+- 在線PDF瀏覽 

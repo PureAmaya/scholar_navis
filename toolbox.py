@@ -559,6 +559,7 @@ def on_file_uploaded(
             f"\n\n{moved_files_str}" +
             f"\n\n调用路径参数已自动修正到: \n\n{txt}" +
             f"\n\n现在您点击任意函数插件时，以上文件将被作为输入参数" +
+            '\n\n请注意，当上述文件名出现异常时，请检查您的压缩包是否为UTF-8或CP437编码。'+
             upload_msg,
         ]
     )

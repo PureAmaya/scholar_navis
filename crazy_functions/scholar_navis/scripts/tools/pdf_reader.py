@@ -10,19 +10,25 @@ from .article_library_ctrl  import pdf_yaml
 
 
 def get_pdf_inf(pdf_path: str,allow_ai_assist : bool,llmkwargs = None):
-    """获取论文的摘要、MD5、元数据标题、doi等信息
+    """
+    获取论文的摘要、元数据标题、doi等信息
         此外，将获取的这些信息，外加文件名、关键词写入到pdf清单中（与pdf相同文件名）
 
     Args:
         pdf_path (str): 待提取的pdf路径
         allow_ai_assist (bool): 允许AI辅助获取标题和doi吗
+        llmkwargs (dict, optional): AI辅助时用到的模型参数. Defaults to None.
 
     Returns:
-        abstract: 摘要
-        fp: pdf清单（md5.yml）的完整路径
+        usable (str): 能否使用（通常都可以，但是中文学位论文、加密文件、非PDF文件或损坏文件不行）
+        abstract (str): 摘要.
+        fp (str): pdf清单（md5.yml）的完整路径.
+
     """
     # 摘取文件名和拓展名
     filename, extension = os.path.splitext(os.path.basename(pdf_path))
+    # 默认可用
+    usable = True
 
     # < ---------yaml信息-------------- >
     
@@ -48,12 +54,19 @@ def get_pdf_inf(pdf_path: str,allow_ai_assist : bool,llmkwargs = None):
         
     # 反正先读取一下pdf
     if extension.lower() == '.pdf':
-        pdf_reader =pymupdf.open(pdf_path)
+        try: pdf_reader =pymupdf.open(pdf_path)
+        except: return False,None,None # 如果PDF加密了，会读取失败
         # 获取第一页
         first_page_text = pdf_reader.load_page(0).get_textpage().extractText()
-    elif extension.lower() == '.simpl-pdf':
-        with open(pdf_path,'r',encoding='utf-8') as sim_pdf:
-            first_page_text = sim_pdf.read().split('###FIRST PAGE###')[0].replace('#','')
+    else: usable = False
+
+    # 不分析中文的学位论文（太长啦）
+    pattern = r'学位论文|单位代码'
+    if re.search(pattern, first_page_text):
+        usable = False
+        
+    # 不能用，后面不管了
+    if not usable:return False,None,None
 
     # 获取doi
     if pdf_yaml_content[pdf_yaml.doi.value] is None  or pdf_yaml_content[pdf_yaml.doi.value] == 'None':
@@ -105,17 +118,17 @@ def get_pdf_inf(pdf_path: str,allow_ai_assist : bool,llmkwargs = None):
         # 针对 PNAS 单独设计的代码（这东西就没有introduction和abstract）
         if re.search('www.pnas.org', first_page_text):
             # 摘要前
-            PNAS_front_pattern = r'.*(?:Contributed|Edited) by.*?\n'
+            pattern = r'.*(?:Contributed|Edited) by.*?\n'
             # print(re.findall(PNAS_front_pattern, page_text,re.DOTALL)[0])
-            first_page_text = re.sub(PNAS_front_pattern, '',
+            first_page_text = re.sub(pattern, '',
                             first_page_text, flags=re.DOTALL)
             # 摘要后
-            PNAS_back_pattern = r'\|.*?\|.*'
+            pattern = r'\|.*?\|.*'
             # 如果后面那些文本真的删不了，那就尽可能地去除一些内容吧
-            if re.findall(PNAS_back_pattern, first_page_text, re.DOTALL) == []:
-                PNAS_back_pattern = r'\([0-9]\).*'
+            if re.findall(Ppattern, first_page_text, re.DOTALL) == []:
+                Ppattern = r'\([0-9]\).*'
             # print(re.findall(PNAS_back_pattern, page_text,re.DOTALL)[0])
-            first_page_text = re.sub(PNAS_back_pattern, '',
+            first_page_text = re.sub(Ppattern, '',
                             first_page_text, flags=re.DOTALL)
 
             # 去掉最后一个句号（period）之后的内容
@@ -129,27 +142,27 @@ def get_pdf_inf(pdf_path: str,allow_ai_assist : bool,llmkwargs = None):
         else:
 
             # 如果有abstract / summary，删除及其之前的内容  the plant journal用的是summary而不是abstract
-            summary_pattern = r'.*(?:[Ss]ummary|SUMMARY|ABSTRACT|[Aa]bstract)'
+            pattern = r'.*(?:[Ss]ummary|SUMMARY|ABSTRACT|[Aa]bstract)'
             # print(re.findall(summary_pattern, page_text,re.DOTALL)[0])
-            first_page_text = re.sub(summary_pattern, '', first_page_text, flags=re.DOTALL)
+            first_page_text = re.sub(pattern, '', first_page_text, flags=re.DOTALL)
 
             # 删除introduction及其之后的内容
             # 不知道为什么加上大小写判定之后就炸了
-            introduction_pattern = r'[Ii](?:ntroduction|NTRODUCTION).*'
+            pattern = r'[Ii](?:ntroduction|NTRODUCTION).*'
             # print(re.findall(introduction_pattern,page_text,re.DOTALL)[0])
-            first_page_text = re.sub(introduction_pattern, '',
+            first_page_text = re.sub(pattern, '',
                             first_page_text, flags=re.DOTALL)
 
             # 删除key words及其之后的内容
-            keywords_pattern = r'\n[Kk](?:eywords|ey words|EYWORDS|EY WORDS).*'
+            pattern = r'\n[Kk](?:eywords|ey words|EYWORDS|EY WORDS).*'
             # print(re.findall(keywords_pattern,page_text,re.DOTALL)[0])
-            first_page_text = re.sub(keywords_pattern, '',
+            first_page_text = re.sub(pattern, '',
                             first_page_text, flags=re.DOTALL)
 
             # 删除版权信息
-            copyright_pattern = r'\.\n.*http://creativecommons.org/licenses/by-nc-nd/4.0/.*'
+            pattern = r'\.\n.*http://creativecommons.org/licenses/by-nc-nd/4.0/.*'
             # print(re.findall(copyright_pattern,page_text,re.DOTALL)[0])
-            first_page_text = re.sub(copyright_pattern, '',
+            first_page_text = re.sub(pattern, '',
                             first_page_text, flags=re.DOTALL)
 
             # 删除DOI
@@ -163,9 +176,9 @@ def get_pdf_inf(pdf_path: str,allow_ai_assist : bool,llmkwargs = None):
             # page_text = re.sub(citation_pattern,'',page_text,flags=re.DOTALL)
 
             # 如果有参考文献的那个字样，删除及其之后的内容（顺便还可以删除参考文献所在的这一句）
-            reference_pattern = r'et al.*?\).*'
+            pattern = r'et al.*?\).*'
             # print(re.findall(reference_pattern,page_text,re.DOTALL)[0])
-            first_page_text = re.sub(reference_pattern, '',
+            first_page_text = re.sub(pattern, '',
                             first_page_text, flags=re.DOTALL)
 
         # 去除多余的换行符
@@ -178,7 +191,7 @@ def get_pdf_inf(pdf_path: str,allow_ai_assist : bool,llmkwargs = None):
         f.write(yaml.safe_dump(pdf_yaml_content))
 
     # 返回摘要和创建的manifest路径
-    return pdf_yaml_content[pdf_yaml.abstract.value], pdf_manifest_path
+    return True,pdf_yaml_content[pdf_yaml.abstract.value], pdf_manifest_path
 
 def ___get_inf_AI_assistant(pdf_first_page: str,llm_kwargs):
     """使用AI辅助获取标题和doi号

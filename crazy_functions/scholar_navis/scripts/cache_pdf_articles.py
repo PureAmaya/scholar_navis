@@ -75,75 +75,109 @@ def 缓存pdf文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, syste
 
 
     # 获取必要的信息
-    old_keywords = manifest_dict[lib_manifest.key_words.value]
+    present_keywords = manifest_dict[lib_manifest.key_words.value]
     pdfs_in_cache = glob.glob(f"{cache_dir}/*.pdf")
     summarization_file_fp = os.path.join(this_library_root_dir, "summarization.txt")
     pdfs_in_repo = glob.glob(f"{repo_dir}/*.pdf")  # 测试过了，路径不存在返回[]
 
     # 检查完成状态
-    workflow_done = len(pdfs_in_cache) == 0 and len(
-        pdfs_in_repo) > 1 and os.path.exists(summarization_file_fp)
+    workflow_done = os.path.exists(summarization_file_fp)
 
     # < --------------------用户输入：缓存新的pdf--------------- >
 
     # 要添加新的文章
     if os.path.exists(txt) or txt.lower().startswith('http'):
-        chatbot.append([_("接收文章中"),
-                                _("正在处理...")])
-        yield from update_ui(chatbot=chatbot, history=history)  # 刷新界面
-        
+
         if workflow_done:
-            yield from update_ui_lastest_msg(_('文章接收终止，因为已经完成了总结分析'),chatbot,history)
-            return
+            chatbot.append([_("流程警告："), _("当前总结库已经总结完毕，无法添加新的文章")])
+            yield from update_ui(chatbot=chatbot, history=history,msg='warning')  # 刷新界面
+        else: yield from _upload_file(txt,chatbot,repo_dir,cache_dir,pdfs_in_cache)
 
-        _1, pdfs_user_uploaded, _2 = get_files_from_everything(txt, type='.pdf')
-        if len(pdfs_user_uploaded) == 0:
-            chatbot.append([_("没有上传pdf，或者尚未上传任何文件"),
-                            _("在左上角上传文献后（支持单个pdf与压缩包），再执行本插件")])
-            yield from update_ui(chatbot=chatbot, history=history)  # 刷新界面
-            return
-
-        # 记录导入文章之前，缓存中有几篇文章
-        old_cache_count = len(pdfs_in_cache)
-
-        # 把所有需要分析的pdf放到缓存中。没有文章的话也没问题，移动数量会显示0，不影响总数的显示
-        for pdf_user_uploaded in pdfs_user_uploaded:
-            dst = os.path.join(cache_dir, os.path.basename(pdf_user_uploaded))
-            shutil.move(pdf_user_uploaded, dst)
-
-        # 记录导入文章之后，缓存中有几篇文章
-        new_cache_count = len(glob.glob(f'{cache_dir}/*.pdf'))
-
-        chatbot.append(
-            [_("pdf加载成功"),
-             _("本次<b>上传{upload_count}篇</b>文章，<b>新加载{new_count}篇</b>文章，<b>总计{cache_count}篇</b>文章存在于缓存中待分析（已有<b>{repo}篇</b>文章分析完毕）")
-             .format(upload_count=len(pdfs_user_uploaded), new_count=new_cache_count - old_cache_count, cache_count=new_cache_count, repo=len(glob.glob(f'{repo_dir}/*.yml')))
-             ])
-        yield from update_ui(chatbot=chatbot, history=history)  # 刷新界面
 
     # < --------------------更新关键词 --------------- >
 
     # 查看关键词
     if command == 'key' and command_para == '':
         chatbot.append([_("<b>{}</b>文献总结库目前的关键词如下").format(library_name), ""])
-        if old_keywords == []:
+        if present_keywords == []:
             yield from update_ui_lastest_msg(_('目前没有关键词。请创建新的关键词，将用于分析总结'), chatbot, [])
         else:
-            yield from update_ui_lastest_msg(f"{'<br>'.join(old_keywords)}", chatbot, [])
-        return
+            yield from update_ui_lastest_msg(f"{'<br>'.join(present_keywords)}", chatbot, [])
 
     # 更新关键词
     elif command.startswith('key') and command_para != '':
 
-        chatbot.append(
-            [_("更新<b>{}</b> 文献总结库的关键词").format(library_name), _("正在处理...")])
+        if workflow_done:
+            chatbot.append([_("流程警告："), _("当前总结库已经总结完毕，无法更新关键词")])
+            yield from update_ui(chatbot=chatbot, history=history,msg='warning')  # 刷新界面
+        else:yield from _update_keywords(chatbot,present_keywords,command,command_para,manifest_dict,manifest_fp)
+        
+    # < --------------------检查该项工具的流程是否全部完成。--------------- >
+    error = False
+    # manifest_fp 直接没了。
+    if not os.path.exists(manifest_fp):
+        chatbot.append([_("该总结库已损坏：缺少lib_manifest.yml"),
+                        _("请尝试重新创建该总结库")])
+        yield from update_ui(chatbot=chatbot, history=history)  # 刷新界面
+        error = True
+
+    # 检查一下有没有关键词，没有的话提醒一下。
+    with open(manifest_fp, 'r') as f:
+        if yaml.safe_load(f)[lib_manifest.key_words.value] == []:
+            chatbot.append([_("缺乏关键词，无法总结分析"),
+                            _("可以使用 <b>key + 关键词</b> 命令设定新的关键词")])
+            yield from update_ui(chatbot=chatbot, history=history)  # 刷新界面
+            error = True
+
+    # 看看有没有文章，没有的话也提醒一下
+    pdfs_in_cache = glob.glob(f"{cache_dir}/*.pdf")
+
+    if len(pdfs_in_cache) + len(pdfs_in_repo) == 0:
+        chatbot.append([_("不存在任何可用pdf，无法总结分析"), _(
+            "可以使用 <b>缓存pdf文献</b> 缓存新的文章。")])
+        yield from update_ui(chatbot=chatbot, history=history)  # 刷新界面
+        error = True
+
+    if not error:
+        chatbot.append([_('所有的工序已经完成，该工具的流程结束。<ul><li>已导入pdf数量：{in_cache}(缓存中), {in_repo}(库中)</li><li>关键词：{keywords}</li></ul>')
+                        .format(in_cache=len(pdfs_in_cache), in_repo=len(pdfs_in_repo), keywords=", ".join(present_keywords)),
+                        _("在使用 <b>按关键词总结文献</b> 进行AI总结之前，您可以选择继续添加文章、修改关键词。")])
+    yield from update_ui(chatbot=chatbot, history=history)  # 刷新界面
+
+    if workflow_done:
+        chatbot.append([_('该总结库已经完成了总结分析。无法添加新的文章或修改关键词。如果要修改请新建总结库'),
+                _("关于总结内容等信息，请使用 <b>按关键词总结文献</b> 查看")])
         yield from update_ui(chatbot=chatbot, history=history)  # 刷新界面
 
-        if workflow_done:
-            yield from update_ui_lastest_msg(_('关键词更新终止，因为已经完成了总结分析'),chatbot,history)
-            return
+def _upload_file(txt,chatbot,repo_dir,cache_dir,pdfs_in_cache):
+    _1, pdfs_user_uploaded, _2 = get_files_from_everything(txt, type='.pdf')
+    if len(pdfs_user_uploaded) == 0:
+        chatbot.append([_("没有上传pdf，或者尚未上传任何文件，该步骤跳过..."),
+                        _("如果想要添加新的文章，请先上传文件再执行本功能。")])
+        yield from update_ui(chatbot=chatbot, history=[])  # 刷新界面
+        return
 
-        # 获取新输入的关键词
+    # 记录导入文章之前，缓存中有几篇文章
+    old_cache_count = len(pdfs_in_cache)
+
+    # 把所有需要分析的pdf放到缓存中。没有文章的话也没问题，移动数量会显示0，不影响总数的显示
+    for pdf_user_uploaded in pdfs_user_uploaded:
+        dst = os.path.join(cache_dir, os.path.basename(pdf_user_uploaded))
+        shutil.move(pdf_user_uploaded, dst)
+
+    # 记录导入文章之后，缓存中有几篇文章
+    new_cache_count = len(glob.glob(f'{cache_dir}/*.pdf'))
+
+    chatbot.append(
+        [_("pdf加载成功"),
+        _("本次<b>上传{upload_count}篇</b>文章，<b>新加载{new_count}篇</b>文章，<b>总计{cache_count}篇</b>文章存在于缓存中待分析（已有<b>{repo}篇</b>文章分析完毕）")
+        .format(upload_count=len(pdfs_user_uploaded), new_count=new_cache_count - old_cache_count, cache_count=new_cache_count, repo=len(glob.glob(f'{repo_dir}/*.yml')))
+        ])
+    yield from update_ui(chatbot=chatbot, history=[])  # 刷新界面
+
+
+def _update_keywords(chatbot,present_keywords,command,command_para,manifest_dict,manifest_fp):
+    # 获取新输入的关键词
         new_keywords = []
         if len(command_para.split(',')) > len(command_para.split('，')):
             _new_keywords = command_para.split(',')
@@ -153,57 +187,28 @@ def 缓存pdf文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, syste
             new_keywords.append(key.strip())
 
         # 已经有关键词了，然后强制更新
-        if len(old_keywords) > 0 and command == 'key-force':
+        if len(present_keywords) > 0 and command == 'key-force':
             manifest_dict[lib_manifest.key_words.value] = new_keywords
             with open(manifest_fp, 'w') as f:
                 f.write(yaml.safe_dump(manifest_dict))
             yield from update_ui_lastest_msg(_('关键词已更新</br></br><b>现在的关键词为：</b></br>{new}</br></br><b>此前的关键词为：</b></br>{old}')
-                                                .format(new="<br>".join(new_keywords), old="<br>".join(old_keywords)), chatbot, [])
-            old_keywords = new_keywords
+                                                .format(new="<br>".join(new_keywords), old="<br>".join(present_keywords)), chatbot, [])
+            present_keywords = new_keywords
 
         # 已经有关键词了，但是不强制更新
-        elif len(old_keywords) > 0 and command == 'key':
+        elif len(present_keywords) > 0 and command == 'key':
             yield from update_ui_lastest_msg(_('已存在关键词，不会进行修改（如果还没有总结，可以试试关键词强制更新）</br></br><b>现在的关键词为：</b></br>{}')
-                                            .format("<br>".join(old_keywords)), chatbot, [])
+                                            .format("<br>".join(present_keywords)), chatbot, [])
 
         # 还没关键词，是否强制随意了
-        elif len(old_keywords) == 0:
+        elif len(present_keywords) == 0:
             manifest_dict[lib_manifest.key_words.value] = new_keywords
             with open(manifest_fp, 'w') as f:
                 f.write(yaml.safe_dump(manifest_dict))
             yield from update_ui_lastest_msg(_('关键词已更新</br></br><b>现在的关键词为：</b></br>{new}')
                                             .format(new="<br>".join(new_keywords)), chatbot, [])
-            old_keywords = new_keywords
+            present_keywords = new_keywords
 
-    # < --------------------检查该项工具的流程是否全部完成。--------------- >
-    # manifest_fp 直接没了。
-    if not os.path.exists(manifest_fp):
-        chatbot.append([_("该总结库已损坏：缺少lib_manifest.yml"),
-                        _("请尝试重新创建该总结库")])
-        yield from update_ui(chatbot=chatbot, history=history)  # 刷新界面
-        return
-
-    # 检查一下有没有关键词，没有的话提醒一下。
-    with open(manifest_fp, 'r') as f:
-        if yaml.safe_load(f)[lib_manifest.key_words.value] == []:
-            chatbot.append([_("缺乏关键词，无法总结分析"),
-                            _("可以使用 <b>key + 关键词</b> 命令设定新的关键词")])
-            yield from update_ui(chatbot=chatbot, history=history)  # 刷新界面
-            return
-
-    # 看看有没有文章，没有的话也提醒一下
-    pdfs_in_cache = glob.glob(f"{cache_dir}/*.pdf")
-
-    if len(pdfs_in_cache) + len(pdfs_in_repo) == 0:
-        chatbot.append([_("不存在任何可用pdf，无法总结分析"), _(
-            "可以使用 <b>缓存pdf文献</b> 缓存新的文章。")])
-        yield from update_ui(chatbot=chatbot, history=history)  # 刷新界面
-        return
-
-    chatbot.append([_('所有的工序已经完成，该工具的流程结束。<ul><li>已导入pdf数量：{in_cache}(缓存中), {in_repo}(库中)</li><li>关键词：{keywords}</li></ul>')
-                    .format(in_cache=len(pdfs_in_cache), in_repo=len(pdfs_in_repo), keywords=", ".join(old_keywords)),
-                    _("在使用 <b>按关键词总结文献</b> 进行AI总结之前，您可以选择继续添加文章、修改关键词。")])
-    yield from update_ui(chatbot=chatbot, history=history)  # 刷新界面
 
 execute = 缓存pdf文献 # 用于热更新
 
@@ -215,7 +220,7 @@ class pdf_cacher(common_plugin_para):
         gui_definition.update(self.add_lib_field(
             True, _('创建或选择总结库'), _('如要创建新的总结库，请输入一个新名字')))
         gui_definition.update(self.add_command_selector(
-            ['key', 'key-force'], [_('查询或更新关键词'), _('强制更新关键词')], [True, True]))
+            ['key', 'key-force'], [_('查询或更新关键词'), _('强制更新关键词')], [True, True],'key'))
         gui_definition.update(self.add_command_para_field(
             description=_('在此处输入用于更新的关键词（中英文逗号分割）')))
         return gui_definition

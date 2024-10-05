@@ -98,7 +98,7 @@ def extract_archive(file_path, dest_dir):
     # Extract the archive based on its extension
     if file_extension == ".zip":
         with zipfile.ZipFile(file_path, "r") as zipobj:
-            zipobj._extract_member = lambda a,b,c: zip_extract_member_new(zipobj, a,b,c)    # 修复中文乱码的问题
+            #zipobj._extract_member = lambda a,b,c: zip_extract_member_new(zipobj, a,b,c)    # 修复中文乱码的问题
             zipobj.extractall(path=dest_dir)
             print("Successfully extracted zip archive to {}".format(dest_dir))
 

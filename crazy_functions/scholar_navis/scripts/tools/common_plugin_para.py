@@ -54,7 +54,7 @@ class common_plugin_para(GptAcademicPluginTemplate):
         
         return  {"main_input":ArgProperty(title=title, description=description , default_value="", type="string").model_dump_json()} # 主输入，自动从输入框同步
     
-    def add_command_selector(self,command: list[str],command_natural_lang: list[str],need_command_para: list[bool]):
+    def add_command_selector(self,command: list[str],command_natural_lang: list[str],need_command_para: list[bool],default_value:str = None):
         """添加命令用的东西。默认的命令已经添加了
         help license about 这些东西就已经有啦
 
@@ -68,17 +68,23 @@ class common_plugin_para(GptAcademicPluginTemplate):
         """
 
         assert len(command) == len(command_natural_lang) == len(need_command_para)
+        if not default_value:default_value = _('无')
+        else: assert default_value in command
         
         command_to_show = [_('无')]
         if len(command) >= 1:
             for index , natural_lang in enumerate(command_natural_lang):
                 # 注册额外的指令
-                command_to_show.append(self.__link_command(command[index],natural_lang,need_command_para[index]))
+                command_with_natural_description = self.__link_command(command[index],natural_lang,need_command_para[index])
+                command_to_show.append(command_with_natural_description)
+                # 也为默认值补全自然语言描述
+                if default_value == command[index]:default_value = command_with_natural_description
 
+        # 三个通用的命令
         command_to_show.extend([self.__link_command('help',_('帮助文档'),False),
                         self.__link_command('license',_('版权信息'),False),
                         self.__link_command('about',_('关于'),False)])
-        para =  {'title':_('辅助指令'),'description':_('使用辅助指令可以实现额外的操作'),'options':command_to_show,'default_value':_('无'),'type':"dropdown"}
+        para =  {'title':_('辅助指令'),'description':_('使用辅助指令可以实现额外的操作'),'options':command_to_show,'default_value':default_value,'type':"dropdown"}
         return {'command':ArgProperty(**para).model_dump_json()}
 
 

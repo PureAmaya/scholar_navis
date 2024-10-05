@@ -3,7 +3,7 @@ import yaml
 import zipfile
 from shared_utils.multi_lang import _
 from .tools.common_plugin_para import common_plugin_para
-from .tools.article_library_ctrl import check_library_exist_and_assistant,lib_manifest,pdf_yaml,get_tmp_dir_of_this_user,download_file
+from .tools.article_library_ctrl import check_library_exist_and_assistant,lib_manifest,pdf_yaml,get_tmp_dir_of_this_user,generate_download_file
 from toolbox import CatchException,get_log_folder,get_user,update_ui,update_ui_lastest_msg
 from ...crazy_utils import request_gpt_model_in_new_thread_with_ui_alive,request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency
 
@@ -289,7 +289,7 @@ def __find_article_from_summarization(library_root_dir: str, txt: str, gpt_prefe
                                         \n - {line6}"
                                         ,chatbot,history)
     
-    chatbot.append([_('下载文章：'),download_file(zip_fp)])
+    chatbot.append([_('下载文章：'),generate_download_file(zip_fp)])
     yield from update_ui(chatbot=chatbot,history=history)
     
 

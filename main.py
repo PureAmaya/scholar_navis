@@ -117,7 +117,7 @@ def main():
         gr.HTML(title_html)
         secret_css = gr.Textbox(visible=False, elem_id="secret_css")
         register_advanced_plugin_init_arr = ""
-
+        gr.HTML('<strong>下方内容为 AI 生成，不代表任何立场，可能存在片面甚至错误。仅供参考，开发者及其组织不负任何责任。</strong>')
         cookies, web_cookie_cache = make_cookie_cache() # 定义 后端state（cookies）、前端（web_cookie_cache）两兄弟
         with gr_L1():
             with gr_L2(scale=2, elem_id="gpt-chat"):

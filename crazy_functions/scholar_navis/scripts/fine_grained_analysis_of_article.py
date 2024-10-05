@@ -9,7 +9,7 @@ from .tools.common_plugin_para import common_plugin_para
 from crazy_functions.pdf_fns.breakdown_txt import breakdown_text_to_satisfy_token_limit
 from toolbox import CatchException,get_user,get_log_folder,update_ui,update_ui_lastest_msg
 from ...crazy_utils import get_files_from_everything,read_and_clean_pdf_text,request_gpt_model_in_new_thread_with_ui_alive
-from .tools.article_library_ctrl import download_file, markdown_to_pdf, get_tmp_dir_of_this_user,check_library_exist_and_assistant,get_this_user_library_list,lib_manifest,pdf_yaml
+from .tools.article_library_ctrl import generate_download_file, markdown_to_pdf, get_tmp_dir_of_this_user,check_library_exist_and_assistant,get_this_user_library_list,lib_manifest,pdf_yaml
 
 
 @check_library_exist_and_assistant(accept_nonexistent=True,accept_blank=True)
@@ -184,7 +184,9 @@ def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_
     # 看看数据库里面有没有(因为是支持直接复制库内文章的)
     pdf_yml_fp = f'{pdf_fp[:-3]}yml'
     if not os.path.exists(f'{pdf_fp[:-3]}yml'):
-        _1, pdf_yml_fp = pdf_reader.get_pdf_inf(pdf_fp,use_ai_assist,llm_kwargs) # 外部导入的文章（没有yml），临时生成一个
+        # 外部导入的文章（没有yml），临时生成一个yml，顺便检查一下这个PDF能不能用
+        usable,_1, pdf_yml_fp = pdf_reader.get_pdf_inf(pdf_fp,use_ai_assist,llm_kwargs) 
+        if not usable:yield from update_ui_lastest_msg(_('上传的文件 {} 不可用。我们不接受中文学位论文、加密文件、非PDF文件或损坏文件').format(pdf_fp), chatbot, history)
     with open(pdf_yml_fp , 'r') as yml:
         yaml_content = yaml.safe_load(yml)
         doi = yaml_content[pdf_yaml.doi.value]
@@ -193,8 +195,8 @@ def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_
     with SQLiteDatabase(type=db_type.doi_fulltext_ai_understand) as ft:
         fulltext = ft.select(doi,('fulltext',))
     # 没有的话，只能跑一边AI了
-    if fulltext is None:
-    
+    if not fulltext:
+        
         yield from update_ui_lastest_msg(_('对pdf文件处理中...'), chatbot, history)
         # 获取pdf的内容（可能不含参考文献等内容，所有比正文字号小的都被删掉了）
         pdf_content, _1 = read_and_clean_pdf_text(pdf_fp)
@@ -246,7 +248,7 @@ def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_
     
     # 提供一下下载
     pdf_path = markdown_to_pdf(gpt_say_last,f'Analysis of {title}',get_tmp_dir_of_this_user(chatbot,'markdown2pdf',['Fine-grained Analysis of Article']))
-    chatbot.append([_("下载分析结果："),download_file(pdf_path)])
+    chatbot.append([_("下载分析结果："),generate_download_file(pdf_path)])
 
     yield from update_ui(chatbot=chatbot,history=history) # 这里的history是分片总结得到的内容
     
