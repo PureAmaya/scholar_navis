@@ -187,14 +187,10 @@ Scholar Navis 使用 GPL-3.0 license 授權證
           return str
   ```
 
-- `toolbox.py`：約564行程，修改如下：  
+- `toolbox.py`：約564行程，修改如下：   
   
   ```python
-  # original:
-   files = glob.glob(f"{target_path_base}/**/*", recursive=True)
-   moved_files.append(fp)
-  
-  # motified
+      # 整理文件集合 输出消息
       files = glob.glob(f"{target_path_base}/**/*", recursive=True)
       moved_files = []
       for fp in files: # 修复不受cp437支持而产生的乱码
@@ -202,6 +198,7 @@ Scholar Navis 使用 GPL-3.0 license 授權證
               basename = correct_code_error(os.path.basename(fp))
               correct_fp = os.path.join(os.path.dirname(fp),basename)
               os.rename(fp,correct_fp)
+              moved_files.append(correct_fp)
           else:moved_files.append(fp)
   ```
 

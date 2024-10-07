@@ -188,14 +188,10 @@ In addition to gpt_academic, the following third-party projects are included ( a
           return str
   ```
 
-- `toolbox.py`：line 564, modifications as follows:  
+- `toolbox.py`：line 564, modifications as follows:   
   
   ```python
-  # original:
-   files = glob.glob(f"{target_path_base}/**/*", recursive=True)
-   moved_files.append(fp)
-  
-  # motified
+      # 整理文件集合 输出消息
       files = glob.glob(f"{target_path_base}/**/*", recursive=True)
       moved_files = []
       for fp in files: # 修复不受cp437支持而产生的乱码
@@ -203,6 +199,7 @@ In addition to gpt_academic, the following third-party projects are included ( a
               basename = correct_code_error(os.path.basename(fp))
               correct_fp = os.path.join(os.path.dirname(fp),basename)
               os.rename(fp,correct_fp)
+              moved_files.append(correct_fp)
           else:moved_files.append(fp)
   ```
 

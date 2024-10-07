@@ -565,6 +565,7 @@ def on_file_uploaded(
             basename = correct_code_error(os.path.basename(fp))
             correct_fp = os.path.join(os.path.dirname(fp),basename)
             os.rename(fp,correct_fp)
+            moved_files.append(correct_fp)
         else:moved_files.append(fp)
     
     max_file_to_show = 10
