@@ -185,6 +185,24 @@ Scholar Navis 使用 GPL-3.0 license 许可证
           return str
   ```
 
+- `toolbox.py`：约564行，修改如下：
+  
+  ```python
+  # original:
+   files = glob.glob(f"{target_path_base}/**/*", recursive=True)
+   moved_files.append(fp)
+  
+  # motified
+      files = glob.glob(f"{target_path_base}/**/*", recursive=True)
+      moved_files = []
+      for fp in files: # 修复不受cp437支持而产生的乱码
+          if os.path.isfile(fp):
+              basename = correct_code_error(os.path.basename(fp))
+              correct_fp = os.path.join(os.path.dirname(fp),basename)
+              os.rename(fp,correct_fp)
+          else:moved_files.append(fp)
+  ```
+
 - `multi_language.py`：具体修改如下。这里添加这些内容是为了在翻译gpt_academic后，Scholar Navis 可以正常运行
   
   ```python

@@ -561,10 +561,11 @@ def on_file_uploaded(
     files = glob.glob(f"{target_path_base}/**/*", recursive=True)
     moved_files = []
     for fp in files: # 修复不受cp437支持而产生的乱码
-        basename = correct_code_error(os.path.basename(fp))
-        correct_fp = os.path.join(os.path.dirname(fp),basename)
-        os.rename(fp,correct_fp)
-        moved_files.append(correct_fp)
+        if os.path.isfile(fp):
+            basename = correct_code_error(os.path.basename(fp))
+            correct_fp = os.path.join(os.path.dirname(fp),basename)
+            os.rename(fp,correct_fp)
+        else:moved_files.append(fp)
     
     max_file_to_show = 10
     if len(moved_files) > max_file_to_show:

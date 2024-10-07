@@ -188,6 +188,24 @@ In addition to gpt_academic, the following third-party projects are included ( a
           return str
   ```
 
+- `toolbox.py`：line 564, modifications as follows:  
+  
+  ```python
+  # original:
+   files = glob.glob(f"{target_path_base}/**/*", recursive=True)
+   moved_files.append(fp)
+  
+  # motified
+      files = glob.glob(f"{target_path_base}/**/*", recursive=True)
+      moved_files = []
+      for fp in files: # 修复不受cp437支持而产生的乱码
+          if os.path.isfile(fp):
+              basename = correct_code_error(os.path.basename(fp))
+              correct_fp = os.path.join(os.path.dirname(fp),basename)
+              os.rename(fp,correct_fp)
+          else:moved_files.append(fp)
+  ```
+
 - `multi_language.py`: The specific modifications are as follow. These contents are added here to ensure that Scholar Navis can operate normally after the translation of gpt_academic.
   
   ```python
