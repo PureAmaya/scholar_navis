@@ -557,7 +557,7 @@ def _unusable_pdf_message(lib_dir:str,unusable_pdf_fp: str = None):
     # 同样的，支持中断
     
     unusable_pdf_yml_content = {'latest_datetime':datetime.now().strftime("%Y-%m-%d %H-%M-%S"), # 因为支持中断，所以记录最新的更新日期
-                                'preprocess':False, # 所有的预处理完成了吗？
+                                'preprocess_done':False, # 所有的预处理完成了吗？
                                 'scholar_navis_version':VERSION,
                                 'reason':'Chinese dissertations, encrypted files, non-PDF files or damaged files',
                                 'list':[]}
@@ -580,7 +580,7 @@ def _unusable_pdf_message(lib_dir:str,unusable_pdf_fp: str = None):
             unusable_pdf_yml_content['latest_datetime'] = datetime.now().strftime("%Y-%m-%d %H-%M-%S") # 记录更新日期
     # 没有新产生的，就用之前保存的提示。反正不能添加新的文章了
     else:
-        unusable_pdf_yml_content['preprocess'] = True
+        unusable_pdf_yml_content['preprocess_done'] = True
 
     # 记录咯
     with open(unusable_pdf_yml_fp,'w',encoding='utf-8') as f:

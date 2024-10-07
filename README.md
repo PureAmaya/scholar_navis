@@ -18,7 +18,7 @@
 
 - “Navis”在拉丁语中是“**船**”的意思，借助这艘船，开辟前人尚未发现的新大陆吧。
 
-- 该工具包含有五个工具：[`PubMed OpenAccess文章获取`](crazy_functions/scholar_navis/doc/zh-Hans/PubMed Open Access Articles Download.md)、[`缓存pdf文献`](crazy_functions/scholar_navis/doc/zh-Hans/Cache PDF Articles.md)、[`按关键词分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Summarize Articles by Keywords.md)、[`与AI交流研究进展`](crazy_functions/scholar_navis/doc/zh-Hans/Communicate with AI about Research Progress.md)、[`精细分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Fine-grained Analysis of Article.md)，帮助从一个宽泛的研究方向一次性了解多篇文章，再从这些文章中找到更有价值的文章，从中进行了解和学习。
+- 除gpt_academic内置的对话、学术功能之外，Scholar Navis 修改或新引入了多项功能。该工具包含有五个工具：[`PubMed OpenAccess文章获取`](crazy_functions/scholar_navis/doc/zh-Hans/PubMed Open Access Articles Download.md)、[`缓存pdf文献`](crazy_functions/scholar_navis/doc/zh-Hans/Cache PDF Articles.md)、[`按关键词分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Summarize Articles by Keywords.md)、[`与AI交流研究进展`](crazy_functions/scholar_navis/doc/zh-Hans/Communicate with AI about Research Progress.md)、[`精细分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Fine-grained Analysis of Article.md)，这五项功能组成了最主要的分析管线，是scholar navis目前最为重要的工作流，帮助从一个宽泛的研究方向一次性了解多篇文章，再从这些文章中找到更有价值的文章，从中进行了解和学习；自定义语言输出，模型分析过程中使用英语，输出结果时使用目标语言，打破语言壁垒，快速获取重要学术信息；基于大语言模型的本地化多语言支持；自定义提供商、API-KEY、模型功能；为一些需要访问LLM或者是需要文献信息、网络请求的部分，设计了缓存机制，减少因为请求而产生的额外耗时；通过大语言模型的文字理解能力，更好的识别文章的doi、标题；自带文件清理机制，适时删除过期文件。
 
 ### 设计初衷
 
@@ -54,6 +54,8 @@
 * 更注重文章的创新性和缺陷。
 
 * 使用缓存，减少访问LLM大语言模型的次数，降低使用成本，加快处理速度
+
+* 支持用户自定义API-KEY（支持OpenAI、智谱、通义千问、深度求索和月之暗面）、自定义OpenAI的URL重定向，支持添加新的模型
 - 借助 gpt_academic，得以实现以下功能：
   
   > - 中文友好。对中国大陆进行优化，有完善的中文对话服务，有中文注释，支持网络代理。此外也支持英文。
@@ -61,7 +63,7 @@
   > - 绘制思维导图。借助 gpt_academic 的插件（生成多种 Mermaid 图表 @Menghuan1918）可以绘制多种类型的思维导图
   > - 通用。使用通用的LLM（大语言模型）即可，无需对模型进行微调。
   > - 可控。AI的分析总结和对话，均基于上传的文章、提供的关键词、提示等可控的内容。
-  > - 低成本。使用`deepseek-chat`、`moonshot-v1-8k`、`GLM-4-Flash`、`GLM-4-Air`、`qwen-turbo`、`ChatGPT-3.5 turbo`或`Aihubmix 提供的大模型接口聚合中转服务`等价格相对低廉的模型即可完成几乎所有任务，因为他们总结分析的材料均来自您上传的内容，只要AI能够看懂，就可以用。
+  > - 低成本。使用`deepseek-chat`、`moonshot-v1-8k`、`GLM-4-Flash`、`GLM-4-Air`、`qwen-turbo`、`ChatGPT-3.5 turbo`等价格相对低廉的模型即可完成几乎所有任务，因为他们总结分析的材料均来自您上传的内容，只要AI能够看懂，就可以用。
 
 ### 免责声明
 
@@ -79,6 +81,8 @@
 
 * 仅作为辅助工具，务必辅以必要的人工检查和处理。<font color=red><b>**我们不推荐在不加检查、不加修正的情况下，直接采用AI输出的结果。如果发生任何问题，Scholar Navis 作者及其所属组织、语言模型提供服务商、gpt_academic及其有关或衍生内容不负任何责任。**</b>"</font>
 
+* 您需要知道的是，GPLv3提供责任限制（版权人对使用者造成的损失不负任何责任），不提供任何担保（版权人亦不为该软件的品质提供任何担保）。如果使用了本AI服务，则默认同意上述内容，否则请勿使用。
+
 ### 安装过程
 
 1. 直接下载本项目，并安装好python。
@@ -87,7 +91,7 @@
    > 如果还需要python进行其他开发或运行其他应用，推荐使用conda
    > 如果您在使用linux，相信您有能力自行解决安装中出现的所有问题
 
-2. 确保python正常安装后，运行`crazy_functions\scholar_navis\setup.pysetup.py`即可完成配置与安装（通常情况下已经安装完毕）。配置过程中，主要是对于显示语言和GPT偏好语言进行设置（GPT偏好语言在程序中也可以进行选择）
+2. 确保python正常安装后，运行`setup.py`即可完成配置与安装（通常情况下已经安装完毕）。配置过程中，主要是对于显示语言和GPT偏好语言进行设置（GPT偏好语言在程序中也可以进行选择）
 
 3. 根据需要，自行修改`config_private.py`中的配置内容，尤其是`API_KEY`（含其他提供商的），并将该API所需的模型填写到`AVAIL_LLM_MODELS`中。具体操作说明可以参考[项目配置说明](https://github.com/binary-husky/gpt_academic/wiki/%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E)
 
@@ -133,29 +137,41 @@ A[\确定大致研究方向/] --> B(下载英文文献)
 
 **在`crazy_functions\scholar_navis`文件夹中，除了运行 Scholar Navis 正常运行所需的脚本外，还有以下文件(夹)：data、i18n、config.yml和version。使用过程中如果遇到一些问题，或者是其他情况，可以对这里进行调整**
 
-- data：运行过程中，储存着PubMed下载的文章，doi与文章标题对应数据库（article_doi_title.db）、AI阅读全文缓存数据库（doi_fulltext_ai_understand.db）。当内容不相符或出现严重问题时，可以尝试删除此文件夹或其中某个文件。
+- `data`文件夹内容：
   
-  - 下载的文章：位于`data\pubmedOA_download`。仅用于储存使用内置工具下载的文章，减少不必要的重复下载（当该文件夹中存在名称为PMCID的pdf文件时，则下载器跳过下载，直接使用该缓存）
+  - `pubmedOA_download`：仅用于储存使用内置工具下载的文章，减少不必要的重复下载（当该文件夹中存在名称为PMCID的pdf文件时，则下载器跳过下载，直接使用该缓存）
   
-  - article_doi_title.db：位于`data\db`。储存着所有由PubMed下载器、元数据读取、AI辅助获取、正则表达式获取的doi和标题的对应关系。用于在展示文章时，输出文章标题，并提供跳转到文章发布页的功能。当数据库中有储存时，会跳过对doi和title的获取和解析。
+  - `article_doi_title.db`：储存着所有由PubMed下载器、元数据读取、AI辅助获取、正则表达式获取的doi和标题的对应关系。用于在展示文章时，输出文章标题，并提供跳转到文章发布页的功能。当数据库中有储存时，会跳过对doi和title的获取和解析。
   
-  - doi_fulltext_ai_understand.db：位于`data\db`。储存着精细分析文章时，AI阅读文章的内容。当精细分析文章的doi命中时，则直接使用缓存的内容，减少访问LLM的次数
+  - `doi_fulltext_ai_understand.db`：储存着精细分析文章时，AI阅读文章的内容。当精细分析文章的doi命中时，则直接使用缓存的内容，减少访问LLM的次数
+  
+  - `user_useage_log.db`：记录用户使用日志，仅在`enable_user_usage_log = true`时启用。记录内容包括一些敏感内容，包括用户名、访问ip、使用时间、使用模型名称、调用功能名称（predict通常为普通对话，execute为scholar navis的插件）、用户的prompt和输入内容。
 
-- i18n：`gettext`所需的国际化文本（仅限于 Scholar Navis，不适用于gpt_academic）。
+- `i18n`：`gettext`所需的国际化文本（仅限于 Scholar Navis和部分gpt_academic内容，不适用于gpt_academic）。
 
-- config.yml：储存着GPT偏好语言和显示语言设定。
+- `config.yml`：储存着GPT偏好语言和显示语言设定。
 
-- version：储存着版本号。
+- `version`：储存着scholar navis的版本号，与gpt_academic的版本号不同。
 
 **用户上传的文章、分析过程中产生的各类文件和缓存，均储存在`gpt_log`中**
 
 - gpt_academic 支持多用户，如果没有设定用户，则所有的处理均以`default_user`用户进行。
 - `gpt_log\ {用户名} \scholar_navis` 中储存着产生的各类总结库。总结库为进行某一领域方向分析的一个单位。
-- `gpt_log\ {用户名} \scholar_navis\tmp`：该用户运行过程中产生的缓存。每次执行功能之前，均会清除该用户下的所有缓存。
-- 总结库`cache`文件夹：储存着新导入的、尚未进行预分析（按照指定的关键词分析文章摘要）、未进行总结的文章，但是他们可能已经进行了预处理（即有同名的yml文件，获取doi和标题）。
-- 总结库`repository`文件夹：储存着所有已经处理完成的文章。
-- 总结库`summarization.pdf/txt`：储存着按照指定关键词分析的结果。pdf仅用于展示给用户，后续如果需要用到分析结果，只会用`summarization.txt`
-- 总结库`lib_manifest.yml`：储存着该总结库的名字、关键词和该总结库生成时 Scholar Navis 的版本号。总结库名字应当与所在文件夹一致。
+- `cache`文件夹：储存着新导入的、尚未进行预分析（按照指定的关键词分析文章摘要）、未进行总结的文章，但是他们可能已经进行了预处理（即有同名的yml文件，获取doi和标题）。
+- `repository`文件夹：储存着所有已经处理完成的文章。
+- `summarization.pdf/txt`：储存着按照指定关键词分析的结果。pdf仅用于展示给用户，后续如果需要用到分析结果，只会用`summarization.txt`
+- `lib_manifest.yml`：储存着该总结库的名字、关键词和该总结库生成时 Scholar Navis 的版本号。总结库名字应当与所在文件夹一致。
+- `unusable_pdf_list.yml`：记录无法使用的文件列表。
+
+**根目录中添加的一些特殊目录和文件**
+
+- `tmp`：scholar navis功能运行过程中产生的临时文件。今后也可能包括其他临时文件
+
+- `notification`：用于制作简易的通知。在内部创建一个`notification.txt`即可把通知内容显示在网页上了，支持html，不支持热更新。
+
+- `web_services`：用于使用一些基于HTML + JS + CSS的服务。目前使用pdf.js作为pdf viewer，提供在线的PDF展示与下载功能。
+
+- `setup.py`：负责在config_private.py、crazy_funcitonal.py中注册scholar navis的工作管线；配置部分多语言选项和语言偏好；配置部分选项；安装依赖（requirements.txt）。支持使用参数调整语言和选项，可以使用  -h 命令查看（仅英文）。
 
 ### 版权信息
 

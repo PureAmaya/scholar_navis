@@ -514,6 +514,19 @@ def to_markdown_tabs(head: list, tabs: list, alignment=":---:", column=False, om
     return tabs_list
 
 
+def correct_code_error(str:str):
+    try:
+        cp437_code = str.encode('cp437')
+        try:
+            return cp437_code.decode('gbk')
+        except:
+            try:
+                return cp437_code.decode('utf-8')
+            except:return str
+    except:
+        return str
+
+
 def on_file_uploaded(
     request: gradio.Request, files:List[str], chatbot:ChatBotWithCookies,
     txt:str, txt2:str, checkboxes:List[str], cookies:dict
@@ -546,7 +559,13 @@ def on_file_uploaded(
 
     # 整理文件集合 输出消息
     files = glob.glob(f"{target_path_base}/**/*", recursive=True)
-    moved_files = [fp for fp in files]
+    moved_files = []
+    for fp in files: # 修复不受cp437支持而产生的乱码
+        basename = correct_code_error(os.path.basename(fp))
+        correct_fp = os.path.join(os.path.dirname(fp),basename)
+        os.rename(fp,correct_fp)
+        moved_files.append(correct_fp)
+    
     max_file_to_show = 10
     if len(moved_files) > max_file_to_show:
         moved_files = moved_files[:max_file_to_show//2] + [f'... ( 📌省略{len(moved_files) - max_file_to_show}个文件的显示 ) ...'] + \

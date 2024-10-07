@@ -25,6 +25,8 @@ In addition to gpt_academic, the following third-party projects are included ( a
 
 - Generally speaking, new code **files** that do not make any modifications to the existing code are not listed.
 
+- All files related to Docker have been deleted because Scholar Navis currently does not support Docker.
+
 - `main.py`: line 60, has been modified.
   
   ```python
@@ -95,6 +97,12 @@ In addition to gpt_academic, the following third-party projects are included ( a
           input_combo_order = ["cookies", "max_length_sl", "md_dropdown", "txt", "txt2", "top_p", "temperature", "chatbot", "history", "system_prompt", "plugin_advanced_arg",'custom_api_key']
   ```
 
+- `main.py`: Line 362, the automatic update program has been commented out. 
+  
+  ```python
+  def auto_updates(): time.sleep(0); # auto_update() scholar naivs由于修改了代码，所以需要禁用自动更新
+  ```
+
 - `config.py`: New content added on line 65: 
   
   ```python
@@ -163,6 +171,22 @@ In addition to gpt_academic, the following third-party projects are included ( a
   ```
 
 - `toolbox.py`: The keys and values of cookies and llm_kwargs have been modified, and new key-value pairs have been added to llm_kwargs.
+
+- `toolbox.py`: Approximately line 517, content has been added to correct text encoding, which is used to fix the garbled text that occurs after decompression. 
+  
+  ```python
+  def correct_code_error(str:str):
+      try:
+          cp437_code = str.encode('cp437')
+          try:
+              return cp437_code.decode('gbk')
+          except:
+              try:
+                  return cp437_code.decode('utf-8')
+              except:return str
+      except:
+          return str
+  ```
 
 - `multi_language.py`: The specific modifications are as follow. These contents are added here to ensure that Scholar Navis can operate normally after the translation of gpt_academic.
   
@@ -336,6 +360,8 @@ In addition to gpt_academic, the following third-party projects are included ( a
 - To ensure compatibility, the logic for handling thread interruption was referenced.
 
 - Hot Module Replacement
+
+- Almost all the functions and plugins of gpt_academic have been retained. 
 
 **Scholar Navis Functions Independent of gpt_academic**:
 

@@ -359,7 +359,7 @@ def main():
         if DARK_MODE:   print(f"\t「暗色主题已启用（支持动态切换主题）」: http://localhost:{PORT}")
         else:           print(f"\t「亮色主题已启用（支持动态切换主题）」: http://localhost:{PORT}")
 
-        def auto_updates(): time.sleep(0); auto_update()
+        def auto_updates(): time.sleep(0); # auto_update() scholar naivs由于修改了代码，所以需要禁用自动更新
         def open_browser(): time.sleep(2); webbrowser.open_new_tab(f"http://localhost:{PORT}")
         def warm_up_mods(): time.sleep(6); warm_up_modules()
 

@@ -186,7 +186,10 @@ def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_
     if not os.path.exists(f'{pdf_fp[:-3]}yml'):
         # 外部导入的文章（没有yml），临时生成一个yml，顺便检查一下这个PDF能不能用
         usable,_1, pdf_yml_fp = pdf_reader.get_pdf_inf(pdf_fp,use_ai_assist,llm_kwargs) 
-        if not usable:yield from update_ui_lastest_msg(_('上传的文件 {} 不可用。我们不接受中文学位论文、加密文件、非PDF文件或损坏文件').format(pdf_fp), chatbot, history)
+        if not usable:
+            yield from update_ui_lastest_msg(_('上传的文件 {} 不可用。我们不接受中文学位论文、加密文件、非PDF文件或损坏文件').format(pdf_fp), chatbot, history)
+            return
+        
     with open(pdf_yml_fp , 'r') as yml:
         yaml_content = yaml.safe_load(yml)
         doi = yaml_content[pdf_yaml.doi.value]

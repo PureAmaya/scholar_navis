@@ -25,6 +25,8 @@ Scholar Navis 使用 GPL-3.0 license 授權證
 
 - 通常情況下，新添加的**代碼文件**，如果沒有對原有代碼進行修改，則不會列出。
 
+- 已刪除所有與Docker相關的文件，因為目前Scholar Navis還不支持Docker。 
+
 - `main.py`: 第60行，發生了修改。
   
   ```python
@@ -95,6 +97,12 @@ Scholar Navis 使用 GPL-3.0 license 授權證
           input_combo_order = ["cookies", "max_length_sl", "md_dropdown", "txt", "txt2", "top_p", "temperature", "chatbot", "history", "system_prompt", "plugin_advanced_arg",'custom_api_key']
   ```
 
+- `main.py`：第362行，已將自動更新程序註解掉。 
+  
+  ```python
+  def auto_updates(): time.sleep(0); # auto_update() scholar naivs由于修改了代码，所以需要禁用自动更新
+  ```
+
 - `config.py`：第65行添加新內容： 
   
   ```python
@@ -162,6 +170,22 @@ Scholar Navis 使用 GPL-3.0 license 授權證
   ```
 
 - `toolbox.py`：對 cookies 和 llm_kwargs 的鍵值進行了修改，並為 llm_kwargs 添加了新的鍵值對。 
+
+- `toolbox.py`：在第517行左右添加了修正文字編碼的內容，用以修復解壓後產生的亂碼。  
+  
+  ```python
+  def correct_code_error(str:str):
+      try:
+          cp437_code = str.encode('cp437')
+          try:
+              return cp437_code.decode('gbk')
+          except:
+              try:
+                  return cp437_code.decode('utf-8')
+              except:return str
+      except:
+          return str
+  ```
 
 - `multi_language.py`：具體修改如下。這裡添加這些內容是為了在翻譯 gpt_academic 之後，Scholar Navis 可以正常運行。
   
@@ -333,6 +357,8 @@ Scholar Navis 使用 GPL-3.0 license 授權證
 - 為了確保兼容性，參考了對於多線程中止的處理邏輯。
 
 - 模組熱替換 
+
+- 保留了gpt_academic幾乎全部的功能和插件。 
 
 **Scholar Navis 獨立於 gpt_academic 的功能**：
 

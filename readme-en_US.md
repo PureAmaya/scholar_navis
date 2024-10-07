@@ -21,7 +21,7 @@ This software is developed based on gpt_academic (version 3.83) and serves as a 
 
 - "Navis" in Latin means "**ship**." With this ship, chart new lands that have not been discovered by predecessors.
 
-- The tool includes five features:[`PubMed Open Access Articles Download`](crazy_functions/scholar_navis/doc/en-US/PubMed Open Access Articles Download.md), [`Cache PDF Articles`](crazy_functions/scholar_navis/doc/en-US/Cache PDF Articles.md), [`Summarize Articles by Keywords`](crazy_functions/scholar_navis/doc/en-US/Summarize Articles by Keywords.md), [`Communicate with AI about Research Progress`](crazy_functions/scholar_navis/doc/en-US/Communicate with AI about Research Progress.md), and[ `Fine-grained Analysis of Article`](crazy_functions/scholar_navis/doc/en-US/Fine-grained Analysis of Article.md). These help to gain an understanding of multiple articles from a broad research direction at once, and then to find more valuable articles among them for learning and understanding.
+- In addition to the built-in conversation and academic functions of gpt_academic, Scholar Navis has modified or introduced several new features. The tool includes five tools: [`PubMed Open Access Articles Download`](crazy_functions/scholar_navis/doc/en-US/PubMed Open Access Articles Download.md), [`Cache PDF Articles`](crazy_functions/scholar_navis/doc/en-US/Cache PDF Articles.md), [`Summarize Articles by Keywords`](crazy_functions/scholar_navis/doc/en-US/Summarize Articles by Keywords.md), [`Communicate with AI about Research Progress`](crazy_functions/scholar_navis/doc/en-US/Communicate with AI about Research Progress.md), and[ `Fine-grained Analysis of Article`](crazy_functions/scholar_navis/doc/en-US/Fine-grained Analysis of Article.md). These five features make up the main analysis pipeline, which is currently the most important workflow for Scholar Navis, helping to understand multiple articles at once from a broad research direction, and then find more valuable articles among them for understanding and learning; customizable language output, using English during the model analysis process and the target language for output, breaking down language barriers, and quickly obtaining important academic information; localized multilingual support based on large language models; customizable providers, API-KEYs, and model functions; designed a caching mechanism for parts that require access to LLMs or need literature information and network requests to reduce additional time spent on requests; better identification of article DOIs and titles through the text comprehension capabilities of large language models; includes a file cleanup mechanism to delete expired files in a timely manner.
 
 ### Design Intent
 
@@ -59,6 +59,8 @@ This software is developed based on gpt_academic (version 3.83) and serves as a 
 
 - Uses caching to reduce the number of times the LLM large language model is accessed, lowering costs and speeding up processing.
 
+- Supports user-defined API-KEY (compatible with OpenAI, ZhiPu, TongYi QianWen, DeepSeek, and Moonshot), custom OpenAI URL redirection, and allows the addition of new models.
+
 - Utilizes gpt_academic to achieve the following functions:
   
   > - Chinese-friendly. Optimized for mainland China, with comprehensive Chinese dialogue services, Chinese annotations, and support for network proxy. It also supports English.
@@ -66,7 +68,7 @@ This software is developed based on gpt_academic (version 3.83) and serves as a 
   > - Drawing mind maps. With the help of the gpt_academic plugin (generating various Mermaid charts @Menghuan1918), various types of mind maps can be created.
   > - Universal. General-purpose LLMs (large language models) can be used without the need for fine-tuning the model.
   > - Controllable. The analysis and summary of AI, as well as the dialogue, are based on the uploaded articles, provided keywords, and prompts, making them controllable.
-  > - Low cost. Models such as`deepseek-chat`、`moonshot-v1-8k`、`GLM-4-Flash`、`GLM-4-Air`、`qwen-turbo`、`ChatGPT-3.5 turbo` or `Aggregation and relay service for large model interfaces provided by Aihubmix.`, which are relatively inexpensive, can be used to complete almost all tasks because the materials summarized and analyzed come from the content you upload, as long as the AI can understand it, it can be used.
+  > - Low cost. Using models such as `deepseek-chat`, `moonshot-v1-8k`, `GLM-4-Flash`, `GLM-4-Air`, `qwen-turbo`, and `ChatGPT-3.5 turbo`, which are relatively inexpensive, can complete almost all tasks. This is because they summarize and analyze materials from the content you upload, and as long as the AI can understand it, it can be used.
 
 ### Disclaimer
 
@@ -83,6 +85,8 @@ This software is developed based on gpt_academic (version 3.83) and serves as a 
 
 - This tool is intended to be used as an aid and must be supplemented with necessary manual checks and processing.<font color=red><b>****We do not recommend using the results directly without any checks or corrections. If any issues arise, the authors of Scholar Navis, their affiliated organizations, the language model service providers, gpt_academic, and any related or derivative content are not liable for any responsibility.****</b></font>
 
+- What you need to know is that GPLv3 provides limitation of liability (the copyright holder is not liable for any damages caused to the user) and does not provide any warranty (the copyright holder also does not warrant the quality of the software). By using this AI service, you are deemed to agree to the aforementioned terms; otherwise, please do not use it.
+
 ### Install
 
 1. Directly download this project and install Python.
@@ -91,7 +95,7 @@ This software is developed based on gpt_academic (version 3.83) and serves as a 
    > If you need Python for other development or to run other applications, it is recommended to use Conda.
    > If you are using Linux, you should be able to resolve any installation issues on your own.
 
-2. Once Python is installed correctly, run `crazy_functions\scholar_navis\setup.pysetup.py` to complete the configuration and installation (usually, it will be installed automatically). During the configuration process, it primarily involves setting the display language and the preferred GPT language (the preferred GPT language can also be selected within the program).
+2. Once Python is installed correctly, run `setup.py` to complete the configuration and installation (usually, it will be installed automatically). During the configuration process, it primarily involves setting the display language and the preferred GPT language (the preferred GPT language can also be selected within the program).
 
 3. As needed, modify the configuration content in `config_private.py`, especially the `API_KEY` (including keys from other providers), and fill in the required model for the API in `AVAIL_LLM_MODELS`. Detailed instructions can be found in the [Project Configuration Instructions](https://github.com/binary-husky/gpt_academic/wiki/%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E).
 
@@ -137,29 +141,39 @@ H & G4 --> I[/Understand research progress and gaps\]
 
 **In the `crazy_functions\scholar_navis` folder, in addition to the scripts required for the normal operation of Scholar Navis, there are also the following files/folders: data, i18n, config.yml, and version. If you encounter any issues or other situations during use, you can adjust them here:**
 
-- data: During operation, this folder stores the articles downloaded from PubMed, the database corresponding to the doi and article title (article_doi_title.db), and the cache database for AI reading of full texts (doi_fulltext_ai_understand.db). If there are discrepancies in the content or serious issues arise, you can try deleting this folder or one of the files within it.
+- Content of the `data` folder: 
   
-  - Downloaded articles: Located in `data\pubmedOA_download`. These are used to store articles downloaded using built-in tools, reducing unnecessary repeated downloads (the downloader skips the download and uses the cached file directly if a PDF file named PMCID exists in this folder).
+  - `pubmedOA_download`:  These are used to store articles downloaded using built-in tools, reducing unnecessary repeated downloads (the downloader skips the download and uses the cached file directly if a PDF file named PMCID exists in this folder).
   
-  - article_doi_title.db: Located in `data\db`. This stores the correspondence between doi and titles obtained from the PubMed downloader, metadata reading, AI-assisted acquisition, and regular expression extraction. It is used to display article titles and provide a function to jump to the article's publication page. When there is stored data in the database, it skips the acquisition and parsing of doi and title.
+  - `article_doi_title.db`: This stores the correspondence between doi and titles obtained from the PubMed downloader, metadata reading, AI-assisted acquisition, and regular expression extraction. It is used to display article titles and provide a function to jump to the article's publication page. When there is stored data in the database, it skips the acquisition and parsing of doi and title.
   
-  - doi_fulltext_ai_understand.db: Located in `data\db`. This stores the content read by AI when performing detailed analysis of articles. When a detailed analysis of an article's doi matches, it directly uses the cached content, reducing the number of times the LLM is accessed.
+  - `doi_fulltext_ai_understand.db`:  This stores the content read by AI when performing detailed analysis of articles. When a detailed analysis of an article's doi matches, it directly uses the cached content, reducing the number of times the LLM is accessed.
 
-- i18n: Internationalization text required by `gettext` (limited to Scholar Navis, not applicable to gpt_academic).
+- `i18n`: Internationalization text required by `gettext` (limited to Scholar Navis, not applicable to gpt_academic).
 
-- config.yml: Stores GPT preference language and display language settings.
+- `config.yml`: Stores GPT preference language and display language settings.
 
-- version: Stores the version number.
+- `version`: It contains the version number of Scholar Navis, which is different from the version number of gpt_academic. 
 
 **The articles uploaded by users, various files generated during the analysis process, and cache are all stored in the `gpt_log` folder.**
 
 - gpt_academic supports multiple users. If no user is specified, all processing is done under the `default_user` account.
 - The `gpt_log\ {username} \scholar_navis` folder stores various summary libraries. A summary library is a unit for analyzing a specific field or direction.
-- `gpt_log\ {username} \scholar_navis\tmp`: This folder contains the cache generated during the user's operation. All cache under the user's account is cleared before each function execution.
-- Summary library `cache` folder: Stores newly imported articles that have not yet been pre-analyzed (analyzed based on specified keywords for article abstracts), and have not been summarized, although they may have been preprocessed (i.e., there are the same name yml files, which obtain doi and title).
-- Summary library `repository` folder: Stores all articles that have been processed.
-- Summary library `summarization.pdf/txt`: Stores the results of the analysis based on specified keywords. The pdf is used solely for display to the user, while the `summarization.txt` is used for any subsequent use of the analysis results.
-- Summary library `lib_manifest.yml`: Stores the name of the summary library, the keywords, and the version number of Scholar Navis at the time the summary library was generated. The summary library name should match the name of the folder it is in.
+- `cache` folder: Stores newly imported articles that have not yet been pre-analyzed (analyzed based on specified keywords for article abstracts), and have not been summarized, although they may have been preprocessed (i.e., there are the same name yml files, which obtain doi and title).
+- `repository` folder: Stores all articles that have been processed.
+- `summarization.pdf/txt`: Stores the results of the analysis based on specified keywords. The pdf is used solely for display to the user, while the `summarization.txt` is used for any subsequent use of the analysis results.
+- `lib_manifest.yml`: Stores the name of the summary library, the keywords, and the version number of Scholar Navis at the time the summary library was generated. The summary library name should match the name of the folder it is in.
+- `unusable_pdf_list.yml`: Records a list of files that are not usable. 
+
+**Special Directories and Files Added in the Root Directory**
+
+- `tmp`: Temporary files generated during the operation of Scholar Navis. In the future, it may also include other temporary files.
+
+- `notification`: Used for creating simple notifications. Creating a `notification.txt` inside will display the notification content on the web page. It supports HTML but not hot updates.
+
+- `web_services`: Used for utilizing services based on HTML + JS + CSS. Currently, it uses pdf.js as a PDF viewer to provide online PDF display and download features.
+
+- `setup.py`: Responsible for registering Scholar Navis's workflow in `config_private.py` and `crazy_funcitonal.py`; configuring some multilingual options and language preferences; configuring some options; and installing dependencies (requirements.txt). It supports adjusting languages and options using parameters and can display help information with the `-h` command (only in English).
 
 ### Copyright Information
 

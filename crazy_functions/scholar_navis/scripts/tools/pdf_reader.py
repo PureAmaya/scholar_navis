@@ -226,6 +226,7 @@ def ___get_inf_AI_assistant(pdf_first_page: str,llm_kwargs):
         doi:str = dict['doi'].strip() # 这两行是故意的，如果报错，就能排除一些其他不可见的问题
         
         if 'doi.org/' in doi: dict['doi'] = doi.split('doi.org/',1)[1]
+        if not doi.strip().startswith('10.'): return None
         return dict
         
     except:

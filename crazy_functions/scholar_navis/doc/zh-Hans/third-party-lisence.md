@@ -2,7 +2,7 @@ Scholar Navis 使用 GPL-3.0 license 许可证
 
 ----------------------------
 
-下面是使用**在 gpt_academic 基础上，额外添加的**第三方项目（除gpt_academic外，均未发生任何源码的修改）：
+下面是**在 gpt_academic 基础上，额外添加的**第三方项目（除gpt_academic外，均未发生任何源码的修改）：
 
 | 第三方库或工具                                                                                 | 许可证                | 使用策略                                                             |
 | --------------------------------------------------------------------------------------- | ------------------ | ---------------------------------------------------------------- |
@@ -22,6 +22,8 @@ Scholar Navis 使用 GPL-3.0 license 许可证
 - 因为对 gpt_academic 的源码产生了修改（主要是使其能够调用 Scholar Navis 并使用一些新加的功能或机制），受限于GPL-3.0的约束，需要将 gpt_academic 的源码一并发布，并且亦需注明修改内容。
 
 - 通常情况下，新添加的代码**文件**，如果没有对原有代码产生修改，则不列出。
+
+- 删除了所有与docker有关的文件，因为目前Scholar Navis 还不支持docker。
 
 - `main.py`: 60行，发生修改。
   
@@ -93,6 +95,12 @@ Scholar Navis 使用 GPL-3.0 license 许可证
           input_combo_order = ["cookies", "max_length_sl", "md_dropdown", "txt", "txt2", "top_p", "temperature", "chatbot", "history", "system_prompt", "plugin_advanced_arg",'custom_api_key']
   ```
 
+- `main.py`：362行，注释掉了自动更新程序
+  
+  ```python
+  def auto_updates(): time.sleep(0); # auto_update() scholar naivs由于修改了代码，所以需要禁用自动更新
+  ```
+
 - `config.py`：第65行添加新内容:
   
   ```python
@@ -160,6 +168,22 @@ Scholar Navis 使用 GPL-3.0 license 许可证
   ```
 
 - `toolbox.py`:对cookies和llm_kwargs的键值进行了修改，并且为llm_kwargs添加了新的键值对 
+
+- `toolbox.py`：约517行添加了修正文字编码的内容，用于修复解压后产生的乱码
+  
+  ```python
+  def correct_code_error(str:str):
+      try:
+          cp437_code = str.encode('cp437')
+          try:
+              return cp437_code.decode('gbk')
+          except:
+              try:
+                  return cp437_code.decode('utf-8')
+              except:return str
+      except:
+          return str
+  ```
 
 - `multi_language.py`：具体修改如下。这里添加这些内容是为了在翻译gpt_academic后，Scholar Navis 可以正常运行
   
@@ -335,6 +359,8 @@ Scholar Navis 使用 GPL-3.0 license 许可证
 - 为了保证兼容性，参考了对于多线程中止的处理逻辑
 
 - 模块热加载
+
+- 保留了gpt_academic几乎全部的功能和插件
 
 **Scholar Navis 独立于 gpt_academic 的功能**：
 
