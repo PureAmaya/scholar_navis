@@ -119,25 +119,25 @@ def check_library_exist_and_assistant(accept_nonexistent=False,accept_blank = Fa
                 help_fp = ''
                 muilt_lang_name = ''
                 if f.__name__ == '与AI交流研究进展':
-                    help_fp = os.path.join(doc_dir,'Communicate with AI about Research Progress.md')
+                    help_fp = os.path.join(doc_dir,'Communicate-with-AI-about-Research-Progress.md')
                     muilt_lang_name = _('与AI交流研究进展')
                 
                 elif f.__name__ == '按关键词总结文献':
-                    help_fp = os.path.join(doc_dir,'Summarize Articles by Keywords.md')
+                    help_fp = os.path.join(doc_dir,'Summarize-Articles-by-Keywords.md')
                     muilt_lang_name = _('按关键词总结文献')
                 
                 elif f.__name__ == '缓存pdf文献':
-                    help_fp = os.path.join(doc_dir,'Cache PDF Articles.md')
+                    help_fp = os.path.join(doc_dir,'Cache-PDF-Articles.md')
                     muilt_lang_name = _('缓存pdf文献')
                 
                 elif f.__name__ == '精细分析文献':
                     muilt_lang_name = _('精细分析文献')
-                    help_fp = os.path.join(doc_dir,'Fine-grained Analysis of Article.md')
+                    help_fp = os.path.join(doc_dir,'Fine-grained-Analysis-of-Article.md')
                     
                 elif f.__name__ == 'PubMed_OpenAccess文章获取':
                     pass
                     muilt_lang_name = _('PubMed_OpenAccess文章获取')
-                    help_fp = os.path.join(doc_dir,'PubMed Open Access Articles Download.md')
+                    help_fp = os.path.join(doc_dir,'PubMed-Open-Access-Articles-Download.md')
                 
                 elif f.__name__ == '更好的文章润色':
                     pass

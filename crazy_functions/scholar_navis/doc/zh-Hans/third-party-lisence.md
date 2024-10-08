@@ -14,10 +14,12 @@ Scholar Navis 使用 GPL-3.0 license 许可证
 | <a href="https://pypi.org/project/PyMuPDF/" target="_blank">PyMuPDF</a>                 | AGPL-3.0 license   | 使用库，将HTML转换为pdf                                                  |
 | <a href="https://github.com/marktext/marktext" target="_blank">MarkText</a>             | MIT License        | 使用该软件将markdown转换为HTML，并对HTML进行了修改                                |
 | <a href="https://github.com/mozilla/pdf.js" target="_blank">PDF.js</a>                  | Apache-2.0 license | 直接使用其Prebuilt软件包。源码没有发生修改，用于在线浏览PDF。完整的内容位于`web_services\pdf.js` |
+| <a href="https://github.com/MohammadYounes/AlertifyJS" target="_blank">AlertifyJS</a>   | GPL-3.0 license    | 使用库，用于制作通知                                                       |
+| <a href="https://github.com/twbs/bootstrap" target="_blank">Bootstrap</a>               | MIT License        | 使用库，用于AlertifyJS的CSS样式                                           |
 
 **gpt_academic中产生修改的部分如下：**
 
-- 原则上是尽可能减少对于 gpt_academic 的修改，以方便移植或使用其他的版本。
+- 原则上是尽可能减少对于 gpt_academic 的修改，https://github.com/twbs/bootstrap以方便移植或使用其他的版本。
 
 - 因为对 gpt_academic 的源码产生了修改（主要是使其能够调用 Scholar Navis 并使用一些新加的功能或机制），受限于GPL-3.0的约束，需要将 gpt_academic 的源码一并发布，并且亦需注明修改内容。
 
@@ -331,21 +333,12 @@ Scholar Navis 使用 GPL-3.0 license 许可证
 
 - `request_llms/model_info.py`：为上文提到的model.info的取代组件，除了支持原list的功能外，还支持自定义模型的调用
 
-- `shared_utils/fastapi_server.py`：约216行，为web添加在线服务功能（目前仅仅是pdf.js的在线浏览功能）  
+- `shared_utils/fastapi_server.py`：约216行，为web添加在线服务功能（目前仅仅是pdf.js的在线浏览功能） 
   
   ```python
-      # 不敏感的一些在线服务
-      from .const import WEB_SERVICES_ROOT_PATH
-      from fastapi.responses import FileResponse,PlainTextResponse
-      @gradio_app.get("/services/pdf_viewer/{path:path}")
-      async def pdf_viewer(path:str):
-  
-          if path.startswith('web/gpt_log'):realpath = path[4:]
-          else:realpath = os.path.join(WEB_SERVICES_ROOT_PATH,'pdf.js',path)
-  
-          if os.path.exists(realpath):
-              return FileResponse(realpath)
-          else: return PlainTextResponse('bad request',status_code=400)
+      # web api和服务
+      from .scholar_navis_web_services import enable_api,enable_services
+      enable_api(gradio_app);enable_services(gradio_app)
   ```
 
 - `shared_utils/key_pattern_manager.py`：约70行，添加自定义模型支持；约73行，添加内容，让自定义模型也能支持非标准的api2d的api
@@ -415,4 +408,6 @@ Scholar Navis 使用 GPL-3.0 license 许可证
 
 - 用户使用请求日志记录
 
-- 在线PDF浏览
+- web服务：在线PDF浏览
+
+- API服务：简易维护提醒

@@ -20,7 +20,7 @@
 
 - “Navis”在拉丁語中是“**船**”的意思，借助這艘船，開辟前人尚未發現的新大陸吧。
 
-- 除gpt_academic內置的對話、學術功能之外，Scholar Navis 修改或新引入了多項功能。該工具包含有五個工具：[`PubMed OpenAccess文章獲取`](crazy_functions/scholar_navis/doc/zh-Hant/PubMed Open Access Articles Download.md)、[`緩存pdf文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Cache PDF Articles.md)、[`按關鍵詞分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Summarize Articles by Keywords.md)、[`與AI交流研究進展`](crazy_functions/scholar_navis/doc/zh-Hant/Communicate with AI about Research Progress.md)、[`精細分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Fine-grained Analysis of Article.md)，這五項功能組成了最主要的分析管線，是scholar navis目前最為重要的工作流程，幫助從一個廣泛的研究方向一次性了解多篇文章，再從這些文章中找到更有價值的文章，從中進行了解和學習；自定義語言輸出，模型分析過程中使用英語，輸出結果時使用目標語言，打破語言壁壘，快速獲取重要學術信息；基於大語言模型的本地化多語言支持；自定義提供商、API-KEY、模型功能；為一些需要訪問LLM或者是需要文獻信息、網絡請求的部分，設計了緩存機制，減少因為請求而產生的额外耗时；通過大語言模型的文字理解能力，更好的識別文章的doi、標題；自带文件清理機制，適時刪除過期文件。
+- 除gpt_academic內置的對話、學術功能之外，Scholar Navis 修改或新引入了多項功能。該工具包含有五個工具：[`PubMed OpenAccess文章獲取`](crazy_functions/scholar_navis/doc/zh-Hant/PubMed-Open-Access-Articles-Download.md)、[`緩存pdf文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Cache-PDF-Articles.md)、[`按關鍵詞分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Summarize-Articles-by-Keywords.md)、[`與AI交流研究進展`](crazy_functions/scholar_navis/doc/zh-Hant/Communicate-with-AI-about-Research-Progress.md)、[`精細分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Fine-grained-Analysis-of-Article.md)，這五項功能組成了最主要的分析管線，是scholar navis目前最為重要的工作流程，幫助從一個廣泛的研究方向一次性了解多篇文章，再從這些文章中找到更有價值的文章，從中進行了解和學習；自定義語言輸出，模型分析過程中使用英語，輸出結果時使用目標語言，打破語言壁壘，快速獲取重要學術信息；基於大語言模型的本地化多語言支持；自定義提供商、API-KEY、模型功能；為一些需要訪問LLM或者是需要文獻信息、網絡請求的部分，設計了緩存機制，減少因為請求而產生的额外耗时；通過大語言模型的文字理解能力，更好的識別文章的doi、標題；自带文件清理機制，適時刪除過期文件。
 
 ### 設計初衷
 
@@ -59,6 +59,10 @@
 - 使用緩存，減少訪問LLM大語言模型的次數，降低使用成本，加快處理速度。 
 
 - 支持用户自定义API-KEY（支持OpenAI、智譜、通義千問、深度求索和月之暗面），支持自定义OpenAI的URL重定向，支持添加新的模型。
+
+- 網絡服務：在線PDF瀏覽
+
+- API服務：簡易維護提醒
 
 - 借助 gpt_academic，得以實現以下功能：
 
@@ -111,7 +115,7 @@
 
 1. 運行 `main.py` 启用 gpt_academic，在打開的網頁的右側，應當能看到 Scholar Navis 的5個方塊，點擊後可以看到使用提示。<img title="" src="docs/img/scholar_navis_functions -  zh-Hant.png" alt="" data-align="inline" width="448"> <img title="" src="docs/img/function_ui -  zh-Hant.png" alt="" width="130">
 
-2. 5個插件（[`PubMed OpenAccess文章獲取`](crazy_functions/scholar_navis/doc/zh-Hant/PubMed Open Access Articles Download.md)、[`緩存pdf文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Cache PDF Articles.md)、[`按關鍵詞分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Summarize Articles by Keywords.md)、[`與AI交流研究進展`](crazy_functions/scholar_navis/doc/zh-Hant/Communicate with AI about Research Progress.md)、[`精細分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Fine-grained Analysis of Article.md)）其均內置了簡潔的操作指南和功能作用，切換到該工具，`輔助指令` -> `help: 帮助文檔`即可查看。
+2. 5個插件（[`PubMed OpenAccess文章獲取`](crazy_functions/scholar_navis/doc/zh-Hant/PubMed-Open-Access-Articles-Download.md)、[`緩存pdf文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Cache-PDF-Articles.md)、[`按關鍵詞分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Summarize-Articles-by-Keywords.md)、[`與AI交流研究進展`](crazy_functions/scholar_navis/doc/zh-Hant/Communicate-with-AI-about-Research-Progress.md)、[`精細分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Fine-grained-Analysis-of-Article.md)）其均內置了簡潔的操作指南和功能作用，切換到該工具，`輔助指令` -> `help: 帮助文檔`即可查看。
 
 3. 作為一種流水線式工具，一般而言的使用流程為（共四大步，每個功能前均有編號）：
 

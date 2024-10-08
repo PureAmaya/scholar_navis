@@ -45,7 +45,7 @@ def get_pdf_inf(pdf_path: str,allow_ai_assist : bool,llmkwargs = None):
     
     # （如果有）读取此前有yaml，读一下
     if os.path.exists(pdf_manifest_path):
-        with open(pdf_manifest_path,'r') as f:
+        with open(pdf_manifest_path,'r',encoding='utf-8') as f:
             pdf_manifest_content_file = yaml.safe_load(f)
             
             # 对上面的初始值更新
@@ -187,7 +187,7 @@ def get_pdf_inf(pdf_path: str,allow_ai_assist : bool,llmkwargs = None):
 
 
     # 保存pdf的yaml
-    with open(pdf_manifest_path,'w') as f:
+    with open(pdf_manifest_path,'w',encoding='utf-8') as f:
         f.write(yaml.safe_dump(pdf_yaml_content))
 
     # 返回摘要和创建的manifest路径

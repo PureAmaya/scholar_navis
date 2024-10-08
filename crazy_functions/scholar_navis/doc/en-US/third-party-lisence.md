@@ -16,6 +16,8 @@ In addition to gpt_academic, the following third-party projects are included ( a
 | <a href="https://pypi.org/project/PyMuPDF/" target="_blank">PyMuPDF</a>                 | AGPL-3.0 license   | Library used to convert HTML to PDF                                                                                                                                                |
 | <a href="https://github.com/marktext/marktext" target="_blank">MarkText</a>             | MIT License        | Used the software to convert markdown to HTML, and modifications were made to the HTML                                                                                             |
 | <a href="https://github.com/mozilla/pdf.js" target="_blank">PDF.js</a>                  | Apache-2.0 license | Directly use the prebuilt software package. The source code has not been modified, and it is used for online PDF viewing. The complete content is located in `web_services\pdf.js` |
+| <a href="https://github.com/MohammadYounes/AlertifyJS" target="_blank">AlertifyJS</a>   | GPL-3.0 license    | Library used for creating notification                                                                                                                                             |
+| <a href="https://github.com/twbs/bootstrap" target="_blank">Bootstrap</a>               | MIT License        | Library used for CSS styles with AlertifyJS                                                                                                                                        |
 
 **The modified parts in gpt_academic are as follows:**
 
@@ -335,18 +337,9 @@ In addition to gpt_academic, the following third-party projects are included ( a
 - `shared_utils/fastapi_server.py`: At around line 216, add an online service feature to the web (currently just the online browsing feature of pdf.js)  
   
   ```python
-      # 不敏感的一些在线服务
-      from .const import WEB_SERVICES_ROOT_PATH
-      from fastapi.responses import FileResponse,PlainTextResponse
-      @gradio_app.get("/services/pdf_viewer/{path:path}")
-      async def pdf_viewer(path:str):
-  
-          if path.startswith('web/gpt_log'):realpath = path[4:]
-          else:realpath = os.path.join(WEB_SERVICES_ROOT_PATH,'pdf.js',path)
-  
-          if os.path.exists(realpath):
-              return FileResponse(realpath)
-          else: return PlainTextResponse('bad request',status_code=400)
+      # web api和服务
+      from .scholar_navis_web_services import enable_api,enable_services
+      enable_api(gradio_app);enable_services(gradio_app)
   ```
 
 - `shared_utils/key_pattern_manager.py`: Around line 70, custom model support was added; around line 73, content was added to allow custom models to also support non-standard api2d's api. 
@@ -416,4 +409,6 @@ In addition to gpt_academic, the following third-party projects are included ( a
 
 - User request log records
 
-- Online PDF viewing 
+- Web service: Online PDF viewing
+
+- API service: Easy maintenance reminder

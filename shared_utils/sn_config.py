@@ -29,7 +29,7 @@ GPT_SUPPORT_LAMGUAGE = ('简体中文','繁體中文','English','日本語','Fra
 def _load():
     
     try:
-        with open(version_file_fp,'r') as f:
+        with open(version_file_fp,'r',encoding='utf-8') as f:
             verison = f.read().strip()
     except:
         verison = ''
@@ -38,7 +38,7 @@ def _load():
     if not os.path.exists(config_file_fp):
         return verison,CONFIG,True
     try:
-        with open(config_file_fp,'r') as f:
+        with open(config_file_fp,'r',encoding='utf-8') as f:
             config:dict = yaml.safe_load(f)
             # 获取字典中的实际键
             actual_keys = config.keys()
@@ -63,7 +63,7 @@ def _load():
 
 def write_config():
     # 该插件的根目录
-    with open(config_file_fp,'w') as f:
+    with open(config_file_fp,'w',encoding='utf-8') as f:
         f.write(yaml.safe_dump(CONFIG))
         
 

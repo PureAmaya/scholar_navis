@@ -16,6 +16,8 @@ Scholar Navis 使用 GPL-3.0 license 授權證
 | <a href="https://pypi.org/project/PyMuPDF/" target="_blank">PyMuPDF</a>                 | AGPL-3.0 license   | 使用庫，將 HTML 轉換為 PDF                                                |
 | <a href="https://github.com/marktext/marktext" target="_blank">MarkText</a>             | MIT License        | 使用該軟件將markdown轉換為HTML，並對HTML進行了修改                                 |
 | <a href="https://github.com/mozilla/pdf.js" target="_blank">PDF.js</a>                  | Apache-2.0 license | 直接使用其Prebuilt軟件包。源碼沒有發生修改，用於在線瀏覽PDF。完整的内容位於 `web_services\pdf.js` |
+| <a href="https://github.com/MohammadYounes/AlertifyJS" target="_blank">AlertifyJS</a>   | GPL-3.0 license    | 使用庫，用於製作通知                                                        |
+| <a href="https://github.com/twbs/bootstrap" target="_blank">Bootstrap</a>               | MIT License        | 使用庫，用於AlertifyJS的CSS樣式                                            |
 
 **gpt_academic 中產生修改的部分如下：**
 
@@ -329,21 +331,12 @@ Scholar Navis 使用 GPL-3.0 license 授權證
 
 - `request_llms/model_info.py`：為上文提到的model.info的取代組件，除了支持原list的功能外，還支持自定義模型的調用。
 
-- `shared_utils/fastapi_server.py`：約216行，為網頁添加在線服務功能（目前只是pdf.js的在線瀏覽功能）  
+- `shared_utils/fastapi_server.py`：約216行，為網頁添加在線服務功能（目前只是pdf.js的在線瀏覽功能） 
   
   ```python
-      # 不敏感的一些在线服务
-      from .const import WEB_SERVICES_ROOT_PATH
-      from fastapi.responses import FileResponse,PlainTextResponse
-      @gradio_app.get("/services/pdf_viewer/{path:path}")
-      async def pdf_viewer(path:str):
-  
-          if path.startswith('web/gpt_log'):realpath = path[4:]
-          else:realpath = os.path.join(WEB_SERVICES_ROOT_PATH,'pdf.js',path)
-  
-          if os.path.exists(realpath):
-              return FileResponse(realpath)
-          else: return PlainTextResponse('bad request',status_code=400)
+      # web api和服务
+      from .scholar_navis_web_services import enable_api,enable_services
+      enable_api(gradio_app);enable_services(gradio_app)
   ```
 
 - `shared_utils/key_pattern_manager.py`：約第70行，添加了自定義模型支持；約第73行，添加內容，讓自定義模型也能支持非標準的api2d的api。    
@@ -411,6 +404,6 @@ Scholar Navis 使用 GPL-3.0 license 授權證
 
 - 上傳文件及生成文件的定期清理
 
-- 用户請求日誌記錄
+- 網絡服務：在線PDF瀏覽
 
-- 在線PDF瀏覽 
+- API服務：簡易維護提醒

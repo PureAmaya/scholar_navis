@@ -18,7 +18,7 @@
 
 - “Navis”在拉丁语中是“**船**”的意思，借助这艘船，开辟前人尚未发现的新大陆吧。
 
-- 除gpt_academic内置的对话、学术功能之外，Scholar Navis 修改或新引入了多项功能。该工具包含有五个工具：[`PubMed OpenAccess文章获取`](crazy_functions/scholar_navis/doc/zh-Hans/PubMed Open Access Articles Download.md)、[`缓存pdf文献`](crazy_functions/scholar_navis/doc/zh-Hans/Cache PDF Articles.md)、[`按关键词分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Summarize Articles by Keywords.md)、[`与AI交流研究进展`](crazy_functions/scholar_navis/doc/zh-Hans/Communicate with AI about Research Progress.md)、[`精细分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Fine-grained Analysis of Article.md)，这五项功能组成了最主要的分析管线，是scholar navis目前最为重要的工作流，帮助从一个宽泛的研究方向一次性了解多篇文章，再从这些文章中找到更有价值的文章，从中进行了解和学习；自定义语言输出，模型分析过程中使用英语，输出结果时使用目标语言，打破语言壁垒，快速获取重要学术信息；基于大语言模型的本地化多语言支持；自定义提供商、API-KEY、模型功能；为一些需要访问LLM或者是需要文献信息、网络请求的部分，设计了缓存机制，减少因为请求而产生的额外耗时；通过大语言模型的文字理解能力，更好的识别文章的doi、标题；自带文件清理机制，适时删除过期文件。
+- 除gpt_academic内置的对话、学术功能之外，Scholar Navis 修改或新引入了多项功能。该工具包含有五个工具：[`PubMed OpenAccess文章获取`](crazy_functions/scholar_navis/doc/zh-Hans/PubMed-Open-Access-Articles-Download.md)、[`缓存pdf文献`](crazy_functions/scholar_navis/doc/zh-Hans/Cache-PDF-Articles.md)、[`按关键词分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Summarize-Articles-by-Keywords.md)、[`与AI交流研究进展`](crazy_functions/scholar_navis/doc/zh-Hans/Communicate-with-AI-about-Research-Progress.md)、[`精细分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Fine-grained-Analysis-of-Article.md)，这五项功能组成了最主要的分析管线，是scholar navis目前最为重要的工作流，帮助从一个宽泛的研究方向一次性了解多篇文章，再从这些文章中找到更有价值的文章，从中进行了解和学习；自定义语言输出，模型分析过程中使用英语，输出结果时使用目标语言，打破语言壁垒，快速获取重要学术信息；基于大语言模型的本地化多语言支持；自定义提供商、API-KEY、模型功能；为一些需要访问LLM或者是需要文献信息、网络请求的部分，设计了缓存机制，减少因为请求而产生的额外耗时；通过大语言模型的文字理解能力，更好的识别文章的doi、标题；自带文件清理机制，适时删除过期文件。
 
 ### 设计初衷
 
@@ -56,6 +56,10 @@
 * 使用缓存，减少访问LLM大语言模型的次数，降低使用成本，加快处理速度
 
 * 支持用户自定义API-KEY（支持OpenAI、智谱、通义千问、深度求索和月之暗面）、自定义OpenAI的URL重定向，支持添加新的模型
+
+* web服务：在线PDF浏览
+
+* API服务：简易维护提醒
 - 借助 gpt_academic，得以实现以下功能：
   
   > - 中文友好。对中国大陆进行优化，有完善的中文对话服务，有中文注释，支持网络代理。此外也支持英文。
@@ -109,7 +113,7 @@
    
    <img title="" src="docs/img/scholar_navis_functions.png" alt="" data-align="inline" width="448"> <img title="" src="docs/img/function_ui.png" alt="" width="130">
 
-2. 5个插件（[`PubMed OpenAccess文章获取`](crazy_functions/scholar_navis/doc/zh-Hans/PubMed Open Access Articles Download.md)、[`缓存pdf文献`](crazy_functions/scholar_navis/doc/zh-Hans/Cache PDF Articles.md)、[`按关键词分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Summarize Articles by Keywords.md)、[`与AI交流研究进展`](crazy_functions/scholar_navis/doc/zh-Hans/Communicate with AI about Research Progress.md)、[`精细分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Fine-grained Analysis of Article.md)）其均内置了简洁的操作指南和功能作用，切换到该工具，`辅助指令` -> `help: 帮助文档`即可查看。
+2. 5个插件（[`PubMed OpenAccess文章获取`](crazy_functions/scholar_navis/doc/zh-Hans/PubMed-Open-Access-Articles-Download.md)、[`缓存pdf文献`](crazy_functions/scholar_navis/doc/zh-Hans/Cache-PDF-Articles.md)、[`按关键词分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Summarize-Articles-by-Keywords.md)、[`与AI交流研究进展`](crazy_functions/scholar_navis/doc/zh-Hans/Communicate-with-AI-about-Research-Progress.md)、[`精细分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Fine-grained-Analysis-of-Article.md)）其均内置了简洁的操作指南和功能作用，切换到该工具，`辅助指令` -> `help: 帮助文档`即可查看。
 
 3. 作为一种流水线式工具，一般而言的使用流程为（共四大步，每个功能前均有编号）：
 
