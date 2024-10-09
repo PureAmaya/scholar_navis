@@ -160,6 +160,7 @@ objdump*
 *.min.*.js
 
 # scholar_navis
+dev/
 notification/
 tmp
 crazy_functions/scholar_navis/data
