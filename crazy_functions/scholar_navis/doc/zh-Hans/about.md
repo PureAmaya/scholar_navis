@@ -1,3 +1,7 @@
-- 本软件基于 gpt_academic（3.83）开发，作为其一款插件执行跨平台任务的前沿分析工具。因为对gpt_academic的源码发生了小幅度修改（主要是使其能够调用 Scholar Navis），为遵守 GNU General Public License v3.0 许可证，本库中亦包含gpt_academic的代码。详细使用情况和修改内容，请阅读`README.md`和`third-party-lisence.md`
+- 本软件基于 gpt_academic（3.83）开发，为其衍生作品。遵守 GNU General Public License v3.0 许可证。
 
-- 使用此工具，可以从确定研究方向开始，流水线式地下载文章，拟定课题，分析当前领域的研究现状和缺口，发掘前人尚未研究的方向，对感兴趣的文章进行精细摘要、对不清楚的地方进行提问并为之解答。
+- 因为对gpt_academic产生了修改，根据 GPL-3.0 许可证的要求，亦需要发布修改后的源码，并注明修改的内容。
+
+- Scholar Navis 引用的所有第三方库及其许可证信息，对gpt_academic的修改和使用，以及更加详细的版权声明，请查看README。
+
+- 在web界面中， Scholar Naivs 功能可以使用辅助指令`license`查看许可证和其他第三方版权信息与gpt_academic修改信息；也可以使用`about`查看关于文档

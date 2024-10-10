@@ -6,7 +6,7 @@
 
 ### 事先说明
 
-本软件基于 gpt_academic（3.83）开发，作为其一款插件执行跨平台任务的前沿分析工具。因为对gpt_academic的源码发生了小幅度修改（主要是使其能够调用 Scholar Navis），为遵守 GNU General Public License v3.0 许可证，本库中亦包含gpt_academic的代码。详细使用情况和修改内容，可以点击[这里](crazy_functions/scholar_navis/doc/zh-Hans/third-party-lisence.md)
+本软件基于 gpt_academic（3.83）开发，为其衍生作品。遵守 GNU General Public License v3.0 许可证。详细使用情况和修改内容，可以点击[这里](crazy_functions/scholar_navis/doc/zh-Hans/third-party-lisence.md)
 
 ### 简单介绍
 
@@ -184,3 +184,5 @@ A[\确定大致研究方向/] --> B(下载英文文献)
 - 因为对gpt_academic产生了修改，根据 GPL-3.0 许可证的要求，亦需要发布修改后的源码，并注明修改的内容。
 
 - Scholar Navis 引用的所有第三方库及其许可证信息，对gpt_academic的修改和使用，以及更加详细的版权声明，可以看[这里](crazy_functions/scholar_navis/doc/zh-Hans/third-party-lisence.md)
+
+- 在web界面中， Scholar Naivs 功能可以使用辅助指令`license`查看许可证和其他第三方版权信息与gpt_academic修改信息；也可以使用`about`查看关于文档

@@ -7,7 +7,7 @@ A pipeline-based research progress analysis tool based on gpt_academic</i></p>
 
 ### Pre-announcement
 
-This software is developed based on gpt_academic (version 3.83) and serves as a plugin for executing frontier analysis tools for cross-platform tasks. Due to minor modifications made to the source code of gpt_academic (mainly to enable it to call Scholar Navis), in compliance with the GNU General Public License v3.0, the code for gpt_academic is also included in this library. For detailed information on usage and modifications, please click [here](crazy_functions/scholar_navis/doc/en-US/third-party-lisence.md)
+This software is developed based on gpt_academic (3.83) and is considered a derivative work. It is compliant with the GNU General Public License v3.0. For detailed information on usage and modifications, please click [here](crazy_functions/scholar_navis/doc/en-US/third-party-lisence.md)
 
 ### Brief Introduction
 
@@ -186,3 +186,5 @@ H & G4 --> I[/Understand research progress and gaps\]
 - Because modifications have been made to gpt_academic, it is also necessary to release the modified source code and clearly note the modifications, in accordance with the requirements of the GPL-3.0 license.
 
 - The third-party libraries referenced by Scholar Navis, their license information, the modifications made to gpt_academic, and a more detailed copyright statement can be viewed [here](crazy_functions/scholar_navis/doc/en-US/third-party-lisence.md).
+
+- In the web interface, the Scholar Naivs feature can use the auxiliary command `license` to view license and other third-party copyright information, as well as modifications to gpt_academic; it can also use `about` to view information about the document.
