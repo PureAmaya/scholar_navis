@@ -19,7 +19,7 @@ Scholar Navis 使用 GPL-3.0 license 许可证
 
 **gpt_academic中产生修改的部分如下：**
 
-- 原则上是尽可能减少对于 gpt_academic 的修改，https://github.com/twbs/bootstrap以方便移植或使用其他的版本。
+- 原则上是尽可能减少对于 gpt_academic 的修改，以方便移植或使用其他的版本。
 
 - 因为对 gpt_academic 的源码产生了修改（主要是使其能够调用 Scholar Navis 并使用一些新加的功能或机制），受限于GPL-3.0的约束，需要将 gpt_academic 的源码一并发布，并且亦需注明修改内容。
 
