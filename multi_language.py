@@ -525,7 +525,7 @@ def step_2_core_key_translate():
                     
 def  step_ex_scholar_navis():
 
-    from shared_utils.const import SCHOLAR_NAVIS_ROOT_PATH
+    from shared_utils.scholar_navis.const import SCHOLAR_NAVIS_ROOT_PATH
     import subprocess
     import shutil
     

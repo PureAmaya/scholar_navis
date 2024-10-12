@@ -8,9 +8,8 @@ import threading
 from time import time,sleep
 from datetime import datetime
 from bs4 import BeautifulSoup
-
-from shared_utils.sqlite import SQLiteDatabase, db_type
-from shared_utils.multi_lang import _
+from shared_utils.scholar_navis.sqlite import SQLiteDatabase, db_type
+from shared_utils.scholar_navis.multi_lang import _
 from multiprocessing import cpu_count
 from requests.adapters import HTTPAdapter,Retry
 from shared_utils.config_loader import get_conf

@@ -2,7 +2,7 @@ import copy
 import gradio as gr
 from themes.theme import advanced_css
 from toolbox import get_conf
-from shared_utils.user_custom_manager import DEFAULT_USER_CUSTOM,SUPPORT_API_PROVIDER,get_api_key,get_url_redirect_domain,get_url_redirect_path
+from shared_utils.scholar_navis.user_custom_manager import DEFAULT_USER_CUSTOM,SUPPORT_API_PROVIDER,get_api_key,get_url_redirect_domain,get_url_redirect_path
 
 ALLOW_CUSTOM_API_KEY = get_conf('ALLOW_CUSTOM_API_KEY')
 

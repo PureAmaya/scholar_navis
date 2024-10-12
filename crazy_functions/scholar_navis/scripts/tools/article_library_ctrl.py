@@ -5,11 +5,11 @@ import shutil
 import codecs
 import pymupdf
 from enum import Enum
-from shared_utils.multi_lang import _
+from shared_utils.scholar_navis.multi_lang import _
 from functools import wraps
 from datetime import datetime
-from shared_utils.sn_config import CONFIG,VERSION
-from shared_utils.const import SCHOLAR_NAVIS_ROOT_PATH,GPT_ACADEMIC_ROOT_PATH
+from shared_utils.scholar_navis.sn_config import CONFIG,VERSION
+from shared_utils.scholar_navis.const import SCHOLAR_NAVIS_ROOT_PATH,GPT_ACADEMIC_ROOT_PATH
 
 class lib_manifest(Enum):# 单纯为了规范yaml的名称
     library_name = 'library_name'

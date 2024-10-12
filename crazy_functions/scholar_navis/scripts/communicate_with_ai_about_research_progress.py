@@ -1,7 +1,7 @@
 import os
 import yaml
 import zipfile
-from shared_utils.multi_lang import _
+from shared_utils.scholar_navis.multi_lang import _
 from .tools.common_plugin_para import common_plugin_para
 from .tools.article_library_ctrl import check_library_exist_and_assistant,lib_manifest,pdf_yaml,get_tmp_dir_of_this_user,generate_download_file
 from toolbox import CatchException,get_log_folder,get_user,update_ui,update_ui_lastest_msg

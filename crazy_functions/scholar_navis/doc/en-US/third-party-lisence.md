@@ -45,8 +45,8 @@ In addition to gpt_academic, the following third-party projects are included ( a
   sn_version_fp = os.path.join(os.path.dirname(__file__),'crazy_functions','scholar_navis','version')
   if os.path.exists(sn_version_fp):
       with open(sn_version_fp,'r',encoding='utf-8') as f:
-          title_html = f"<h1 align=\"center\">GPT 学术优化 {get_current_version()} (Scholar Navis {f.read()})</h1>{theme_declaration}"
-  else:title_html = f"<h1 align=\"center\">GPT 学术优化 {get_current_version()}</h1>{theme_declaration}"
+           title_html = f"<br><h1 align=\"center\">Scholar Navis {f.read()} (GPT 学术优化 {get_current_version()})</h1>{theme_declaration}"
+   else:title_html = f"<br><h1 align=\"center\">Scholar Navis</h1>{theme_declaration}"
   
   notification_fp = os.path.join(os.path.dirname(__file__),'notification','notification.txt')
   if os.path.exists(notification_fp):
@@ -118,7 +118,7 @@ In addition to gpt_academic, the following third-party projects are included ( a
   
   ```python
   ###### SCHOLAR NAVIS START ########
-  from crazy_functions.scholar_navis.scripts.tools.gpt_academic_handler import registrator
+  from shared_utils.scholar_navis.gpt_academic_handler import registrator
   function_plugins = registrator(function_plugins)
   ##### SCHOLAR NAVIS END - UNINSTALL: DELETE THESE ######
   ```
@@ -137,10 +137,11 @@ In addition to gpt_academic, the following third-party projects are included ( a
   DEFAULT_FN_GROUPS = ['Scholar Navis','对话', '编程', '学术', '智能体']
   ```
 
-- `toolbox.py`: An import has been added.  
+- `toolbox.py`: An import has been added. 
   
   ```python
-  from shared_utils.user_custom_manager import get_api_key,get_url_redirect
+  from shared_utils.scholar_navis.user_custom_manager import get_api_key,get_url_redirect
+  from shared_utils.scholar_navis.statistics import user_useage_log
   ```
 
 - `toolbox.py`: The decorated method has added a parameter user_custom_data: dict
@@ -277,7 +278,7 @@ In addition to gpt_academic, the following third-party projects are included ( a
   # line 45 original:
   plugin_exe = plugin_obj.execute
   # line 45 motified:
-  if plugins[which_plugin].get('ClassHotreload',False):
+  if plugins[which_plugin].get('ClassHotReload',False):
   ```
 
 - `themes/gui_toolbar.py`: Added import; the `define_gui_toolbar` defined on line 9 no longer takes the `js_code_for_toggle_darkmode` parameter; on line 7, `ALLOW_CUSTOM_API_KEY = get_conf('ALLOW_CUSTOM_API_KEY')` was added; the `define_gui_toolbar` return value now includes the `user_custom_data` parameter

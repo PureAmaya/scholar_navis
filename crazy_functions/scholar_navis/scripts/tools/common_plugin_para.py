@@ -1,7 +1,7 @@
-from shared_utils.multi_lang import _
+from shared_utils.scholar_navis.multi_lang import _
 from toolbox import HotReload
 from shared_utils.config_loader import get_conf
-from shared_utils.sn_config import CONFIG, GPT_SUPPORT_LAMGUAGE
+from shared_utils.scholar_navis.sn_config import CONFIG, GPT_SUPPORT_LAMGUAGE
 # from .article_library_ctrl import get_def_user_library_list
 from crazy_functions.plugin_template.plugin_class_template import GptAcademicPluginTemplate, ArgProperty
 

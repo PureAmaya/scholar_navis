@@ -1,7 +1,7 @@
 import os
 import json
 import aiofiles
-import asyncio
+import hashlib
 from fastapi import FastAPI
 from datetime import datetime
 from fastapi.responses import FileResponse,PlainTextResponse,JSONResponse
@@ -10,7 +10,7 @@ from .const import WEB_SERVICES_ROOT_PATH,NOTIFICATION_ROOT_PATH
 
 maintenance_json : dict = {
     'state' :  False,
-    'start_time:'  : '',
+    'start_time'  : '',
     'estimated_duration': '',
     'description': '',
     
@@ -38,7 +38,9 @@ def enable_api(app):
         try:
             async with aiofiles.open(maintenance_json_fp,'r',encoding='utf-8') as f:
                 a = await f.read()
-                return JSONResponse(json.loads(a))
+                json_ : dict= json.loads(a)
+                json_.setdefault('hash',hashlib.md5(a.encode('utf-8')).hexdigest())
+                return JSONResponse(json_)
         except:
             async with aiofiles.open(maintenance_json_fp,'w',encoding='utf-8') as f:
                 await f.write(json.dumps(maintenance_json))

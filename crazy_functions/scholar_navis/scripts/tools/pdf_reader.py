@@ -4,7 +4,7 @@ import yaml
 import json
 import pymupdf
 from request_llms.bridge_all import predict_no_ui_long_connection
-from shared_utils.sqlite import SQLiteDatabase, db_type
+from shared_utils.scholar_navis.sqlite import SQLiteDatabase, db_type
 from .article_library_ctrl  import pdf_yaml
 
 

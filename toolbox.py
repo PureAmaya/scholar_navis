@@ -36,8 +36,8 @@ from shared_utils.handle_upload import html_local_file
 from shared_utils.handle_upload import html_local_img
 from shared_utils.handle_upload import file_manifest_filter_type
 from shared_utils.handle_upload import extract_archive
-from shared_utils.user_custom_manager import get_api_key,get_url_redirect
-from shared_utils.statistics import user_useage_log
+from shared_utils.scholar_navis.user_custom_manager import get_api_key,get_url_redirect
+from shared_utils.scholar_navis.statistics import user_useage_log
 from typing import List
 pj = os.path.join
 default_user_name = "default_user"

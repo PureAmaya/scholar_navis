@@ -42,7 +42,7 @@ def define_gui_advanced_plugin_class(plugins):
 
                     if plugins[which_plugin].get("Class", None) is not None:  # 获取插件执行函数
                         plugin_obj = plugins[which_plugin]["Class"]
-                        if plugins[which_plugin].get('ClassHotreload',False):# 让所谓的新一代也支持热更新，不太优雅，先自己凑合用吧
+                        if plugins[which_plugin].get('ClassHotReload',False):# 让所谓的新一代也支持热更新，不太优雅，先自己凑合用吧
                             plugin_exe = HotReload(plugin_obj.execute)
                         else:plugin_exe = plugin_obj.execute
                     else:

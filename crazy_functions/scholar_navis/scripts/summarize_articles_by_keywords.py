@@ -3,10 +3,10 @@ import yaml
 import glob
 import shutil
 from datetime import datetime
-from shared_utils.sn_config import VERSION
+from shared_utils.scholar_navis.sn_config import VERSION
 from time import sleep,time
 from .tools import pdf_reader
-from shared_utils.multi_lang import _
+from shared_utils.scholar_navis.multi_lang import _
 from multiprocessing import cpu_count
 from threading import Lock
 from concurrent.futures import ThreadPoolExecutor

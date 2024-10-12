@@ -7,9 +7,9 @@ import subprocess
 try:import yaml
 except:subprocess.run(['pip', 'install', 'PyYAML'])
 # 安装好之后再导入
-from shared_utils.multi_lang import _,i18n
-from shared_utils.const import GPT_ACADEMIC_ROOT_PATH, SCHOLAR_NAVIS_ROOT_PATH
-from shared_utils.sn_config import VERSION,CONFIG,write_config, GPT_SUPPORT_LAMGUAGE
+from shared_utils.scholar_navis.multi_lang import _,i18n
+from shared_utils.scholar_navis.const import GPT_ACADEMIC_ROOT_PATH, SCHOLAR_NAVIS_ROOT_PATH
+from shared_utils.scholar_navis.sn_config import VERSION,CONFIG,write_config, GPT_SUPPORT_LAMGUAGE
 
 def _clear_console():
     if sys.platform == 'win32':os.system('cls')

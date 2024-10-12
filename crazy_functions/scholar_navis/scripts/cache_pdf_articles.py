@@ -2,8 +2,8 @@ import os
 import yaml
 import glob
 import shutil
-from shared_utils.multi_lang import _
-from shared_utils.sn_config import VERSION
+from shared_utils.scholar_navis.multi_lang import _
+from shared_utils.scholar_navis.sn_config import VERSION
 from ...crazy_utils import get_files_from_everything
 from .tools.common_plugin_para import common_plugin_para
 from .tools.article_library_ctrl import check_library_exist_and_assistant, lib_manifest

@@ -398,7 +398,7 @@ def get_crazy_functions():
     )
 
     ###### SCHOLAR NAVIS START ########
-    from crazy_functions.scholar_navis.scripts.tools.gpt_academic_handler import registrator
+    from shared_utils.scholar_navis.gpt_academic_handler import registrator
     function_plugins = registrator(function_plugins)
     ##### SCHOLAR NAVIS END - UNINSTALL: DELETE THESE #########
     

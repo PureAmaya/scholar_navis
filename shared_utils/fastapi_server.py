@@ -214,7 +214,7 @@ def start_app(app_block, CONCURRENT_COUNT, AUTHENTICATION, PORT, SSL_KEYFILE, SS
             return await forward_request(request, "POST")
 
     # web api和服务
-    from .scholar_navis_web_services import enable_api,enable_services
+    from .scholar_navis.scholar_navis_web_services import enable_api,enable_services
     enable_api(gradio_app);enable_services(gradio_app)
 
 

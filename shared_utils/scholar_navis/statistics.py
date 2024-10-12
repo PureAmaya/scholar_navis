@@ -1,4 +1,4 @@
-from shared_utils.sqlite import SQLiteDatabase,db_type
+from .sqlite import SQLiteDatabase,db_type
 from .sn_config import CONFIG
 from datetime import datetime
 

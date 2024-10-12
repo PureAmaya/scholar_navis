@@ -2,12 +2,13 @@ import os, json; os.environ['no_proxy'] = '*' # 避免代理网络产生意外�
 
 help_menu_description = \
 """
-## gpt_academic：</br>
-Github源代码开源和更新[地址🚀](https://github.com/binary-husky/gpt_academic),
-感谢热情的[开发者们❤️](https://github.com/binary-husky/gpt_academic/graphs/contributors).
+## gpt_academic：
+Github源代码开源和更新[地址](https://github.com/binary-husky/gpt_academic),
+感谢热情的[开发者们](https://github.com/binary-husky/gpt_academic/graphs/contributors).
 
-## Scholar Navis：</br>
-**[Scholar Navis](https://github.com/PureAmaya/scholar_navis)为 gpt_academic的衍生作品**</br>
+
+## Scholar Navis：
+**[Scholar Navis](https://github.com/PureAmaya/scholar_navis)为 gpt_academic的衍生作品**<br>
 关于对gpt_acadmic的修改和使用帮助，请阅读[README](https://github.com/PureAmaya/scholar_navis/blob/main/README.md).
 
 </br>普通对话使用说明: 1. 输入问题; 2. 点击提交
@@ -69,8 +70,8 @@ def main():
     sn_version_fp = os.path.join(os.path.dirname(__file__),'crazy_functions','scholar_navis','version')
     if os.path.exists(sn_version_fp):
         with open(sn_version_fp,'r',encoding='utf-8') as f:
-            title_html = f"<br><h1 align=\"center\">GPT 学术优化 {get_current_version()} (Scholar Navis {f.read()})</h1>{theme_declaration}"
-    else:title_html = f"<br><h1 align=\"center\">GPT 学术优化 {get_current_version()}</h1>{theme_declaration}"
+            title_html = f"<br><h1 align=\"center\">Scholar Navis {f.read()} (GPT 学术优化 {get_current_version()})</h1>{theme_declaration}"
+    else:title_html = f"<br><h1 align=\"center\">Scholar Navis</h1>{theme_declaration}"
     
     notification_fp = os.path.join(os.path.dirname(__file__),'notification','notification.txt')
     if os.path.exists(notification_fp):
@@ -89,6 +90,7 @@ def main():
     DEFAULT_FN_GROUPS = get_conf('DEFAULT_FN_GROUPS')
     plugins = get_crazy_functions()
     all_plugin_groups = list(set([g for _, plugin in plugins.items() for g in plugin['Group'].split('|')]))
+    if 'Scholar Navis' in all_plugin_groups: all_plugin_groups.remove('Scholar Navis')
     match_group = lambda tags, groups: any([g in groups for g in tags.split('|')])
 
     # 处理markdown文本格式的转变
@@ -113,7 +115,7 @@ def main():
     customize_btns = {}
     predefined_btns = {}
     from shared_utils.cookie_manager import make_cookie_cache, make_history_cache
-    with gr.Blocks(title="GPT 学术优化 (Scholar Navis 修改版)", theme=set_theme, analytics_enabled=False, css=advanced_css) as app_block:
+    with gr.Blocks(title="Scholar Navis", theme=set_theme, analytics_enabled=False, css=advanced_css) as app_block:
         gr.HTML(title_html)
         secret_css = gr.Textbox(visible=False, elem_id="secret_css")
         register_advanced_plugin_init_arr = ""
@@ -149,8 +151,11 @@ def main():
                             audio_mic = gr.Audio(source="microphone", type="numpy", elem_id="elem_audio", streaming=True, show_label=False).style(container=False)
                     with gr.Row():
                         status = gr.Markdown(f"Tip: 按Enter提交, 按Shift+Enter换行。支持将文件直接粘贴到输入区。", elem_id="state-panel")
-
-                with gr.Accordion("基础功能区", open=True, elem_id="basic-panel") as area_basic_fn:
+                
+                with gr.Accordion("Scholar Navis 功能区", open=True, elem_id="sn-panel") as area_sn_fn:
+                    from shared_utils.scholar_navis.gpt_academic_handler import panel_registrator
+                    plugins = panel_registrator(plugins)
+                with gr.Accordion("基础功能区", open=False, elem_id="basic-panel") as area_basic_fn:
                     with gr.Row():
                         for k in range(NUM_CUSTOM_BASIC_BTN):
                             customize_btn = gr.Button("自定义按钮" + str(k+1), visible=False, variant="secondary", info_str=f'基础功能区: 自定义按钮')
@@ -162,7 +167,7 @@ def main():
                             functional[k]["Button"] = gr.Button(k, variant=variant, info_str=f'基础功能区: {k}')
                             functional[k]["Button"].style(size="sm")
                             predefined_btns.update({k: functional[k]["Button"]})
-                with gr.Accordion("函数插件区", open=True, elem_id="plugin-panel") as area_crazy_fn:
+                with gr.Accordion("函数插件区", open=False, elem_id="plugin-panel") as area_crazy_fn:
                     with gr.Row():
                         gr.Markdown("<small>插件可读取“输入区”文本/路径作为参数（上传文件自动修正路径）</small>")
                     with gr.Row(elem_id="input-plugin-group"):
@@ -170,7 +175,7 @@ def main():
                                                       multiselect=True, interactive=True, elem_classes='normal_mut_select').style(container=False)
                     with gr.Row():
                         for index, (k, plugin) in enumerate(plugins.items()):
-                            if not plugin.get("AsButton", True): continue
+                            if not plugin.get("AsButton", True) or plugin.get("Group") == 'Scholar Navis': continue
                             visible = True if match_group(plugin['Group'], DEFAULT_FN_GROUPS) else False
                             variant = plugins[k]["Color"] if "Color" in plugin else "secondary"
                             info = plugins[k].get("Info", k)

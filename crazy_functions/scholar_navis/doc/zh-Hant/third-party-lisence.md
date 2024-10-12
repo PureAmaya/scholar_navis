@@ -45,8 +45,8 @@ Scholar Navis 使用 GPL-3.0 license 授權證
   sn_version_fp = os.path.join(os.path.dirname(__file__),'crazy_functions','scholar_navis','version')
   if os.path.exists(sn_version_fp):
       with open(sn_version_fp,'r',encoding='utf-8') as f:
-          title_html = f"<h1 align=\"center\">GPT 学术优化 {get_current_version()} (Scholar Navis {f.read()})</h1>{theme_declaration}"
-  else:title_html = f"<h1 align=\"center\">GPT 学术优化 {get_current_version()}</h1>{theme_declaration}"
+           title_html = f"<br><h1 align=\"center\">Scholar Navis {f.read()} (GPT 学术优化 {get_current_version()})</h1>{theme_declaration}"
+   else:title_html = f"<br><h1 align=\"center\">Scholar Navis</h1>{theme_declaration}"
   
   notification_fp = os.path.join(os.path.dirname(__file__),'notification','notification.txt')
   if os.path.exists(notification_fp):
@@ -118,7 +118,7 @@ Scholar Navis 使用 GPL-3.0 license 授權證
   
   ```python
   ###### SCHOLAR NAVIS START ########
-  from crazy_functions.scholar_navis.scripts.tools.gpt_academic_handler import registrator
+  from shared_utils.scholar_navis.gpt_academic_handler import registrator
   function_plugins = registrator(function_plugins)
   ##### SCHOLAR NAVIS END - UNINSTALL: DELETE THESE ######
   ```
@@ -136,10 +136,11 @@ Scholar Navis 使用 GPL-3.0 license 授權證
   DEFAULT_FN_GROUPS = ['Scholar Navis','对话', '编程', '学术', '智能体']
   ```
 
-- `toolbox.py`：添加了 import  
+- `toolbox.py`：添加了 import 
   
   ```python
-  from shared_utils.user_custom_manager import get_api_key,get_url_redirect
+  from shared_utils.scholar_navis.user_custom_manager import get_api_key,get_url_redirect
+  from shared_utils.scholar_navis.statistics import user_useage_log
   ```
 
 - `toolbox.py`：裝飾器方法（decorated method）添加了參數 user_custom_data: dict
@@ -276,7 +277,7 @@ Scholar Navis 使用 GPL-3.0 license 授權證
   # line 45 original:
   plugin_exe = plugin_obj.execute
   # line 45 motified:
-  if plugins[which_plugin].get('ClassHotreload',False):
+  if plugins[which_plugin].get('ClassHotReload',False):
   ```
 
 - `themes/gui_toolbar.py`：添加了 import；第9行定義的 `define_gui_toolbar` 去除了 `js_code_for_toggle_darkmode` 参数；第7行，添加了 `ALLOW_CUSTOM_API_KEY = get_conf('ALLOW_CUSTOM_API_KEY')`；`define_gui_toolbar` 的返回值添加了 `user_custom_data` 参数

@@ -72,15 +72,19 @@ async function getJSON(url) {
     }
 }
 
-function double_button_notification(title, msg, ok_label = 'ok', cancel_label = 'cancel', ok_fn = null, cancel_fn = null,close_fn = null) {
+// 以后改成继承吧，不过现在也就用这一个，无所谓了
+function double_button_notification(title, msg, ok_label = 'ok', cancel_label = 'cancel',closable = false, ok_fn = null, cancel_fn = null,close_fn = null) {
     alertify.dialog('confirm')
-        .set('movable', false)
-        .set({transition: 'fade', title: title, message: msg })
-        .set('labels', { ok: ok_label, cancel: cancel_label })
-        .set({'pinnable': false, 'modal': true })
-        .set('oncancel', cancel_fn)
-        .set('onok', ok_fn)
-        .set({onshow:null, onclose:close_fn})
+        .setting({'movable': false,
+    'closable': closable,
+    'closableByDimmer':closable,
+    'transition': 'fade', 'title': title, 'message': msg ,
+    'labels': { 'ok': ok_label, 'cancel': cancel_label},
+    'pinnable': true, 'modal': true ,
+    'onshow':null, 
+    'onclose': close_fn,
+    'oncancel': cancel_fn,
+    'onok': ok_fn})
         .show();
 }
 
@@ -91,7 +95,11 @@ async function check_maintance() {
     var local_value = parseInt(localStorage.getItem('maintenance_show') || '1');
 
     if (json.state) {
+        // 新的维护刷新
+        var local_hash = localStorage.getItem('maintenance_hash') || '0';
+        if ( ! Object.keys(json).includes('hash')  || local_hash!= json.hash) {local_value = 1; session_value = 1; }
 
+        // 本地维护显示
         if (session_value == 1 && local_value === 1)
             {
                 var title = '需要维护';
@@ -104,10 +112,11 @@ async function check_maintance() {
                 var ok_label = '确认'
                 var cancel_label = '本次维护不再显示'
     
-                var close_fn = () => {sessionStorage.setItem('maintenance_show', '0'); }
-                var cancel_fn = () => {localStorage.setItem('maintenance_show', '0');}
+                var ok_fn = () => {sessionStorage.setItem('maintenance_show', '0')}
+                var cancel_fn = () => {localStorage.setItem('maintenance_show', '0')}
+                var close_fn = () => {localStorage.setItem('maintenance_hash', json.hash) }
 
-                double_button_notification(title,msg,ok_label,cancel_label,close_fn,cancel_fn,close_fn)
+                double_button_notification(title,msg,ok_label,cancel_label,false,ok_fn,cancel_fn,close_fn)
         }
             
     }

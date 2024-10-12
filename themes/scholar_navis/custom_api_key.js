@@ -43,7 +43,7 @@ const CUSTOM_HELP_MSG = `
 </details>
 `;
 
-function str_to_list(str){
+function str_to_list(str) {
     value = str.split("\n");
     let trimmedArray = value.map(v => v.trim());
     return trimmedArray
@@ -52,20 +52,20 @@ function str_to_list(str){
 function init_custom_api_key() {
     // 从 localStorage 读取数据
     var localStorageData = localStorage.getItem('user_custom_data');
-    try{
+    try {
         var custom_api_json = JSON.parse(localStorageData);
         // 先按照openai进行获取
         push_data_to_gradio_component(custom_api_json['API_KEY'], 'api_key_field', 'str');
         push_data_to_gradio_component(custom_api_json['API_URL_REDIRECT'][1], 'url_redirect_path', 'str');
         push_data_to_gradio_component(custom_api_json['API_URL_REDIRECT'][0], 'url_redirect_domain', 'str');
         // 自定义需要读取一些额外的内容
-        push_data_to_gradio_component(custom_api_json['CUSTOM_MODELS'].join("\n"),'custom_model_input','str');
+        push_data_to_gradio_component(custom_api_json['CUSTOM_MODELS'].join("\n"), 'custom_model_input', 'str');
 
         // 后端获取值，便于使用
-        push_data_to_gradio_component(custom_api_json,'user_custom_data','str');
+        push_data_to_gradio_component(custom_api_json, 'user_custom_data', 'str');
     }
-    catch(e){}// 出问题就用默认值
-    
+    catch (e) { }// 出问题就用默认值
+
     update_field_visible('OpenAI');
 }
 
@@ -75,50 +75,49 @@ function save_custom_api_key(api_json) {
     localStorage.setItem('user_custom_data', str);
 }
 
-function set_api_key(custom_api_json,provider,provider_json,value){
-    set_other(custom_api_json,provider_json[provider],value);
+function set_api_key(custom_api_json, provider, provider_json, value) {
+    set_other(custom_api_json, provider_json[provider], value);
     save_custom_api_key(custom_api_json);
 }
 
-function set_url_domain(custom_api_json,provider,value){
+function set_url_domain(custom_api_json, provider, value) {
 
     if (provider == 'OpenAI') var type = 'API_URL_REDIRECT';
-    else if (provider == '自定义')  var type = 'CUSTOM_REDIRECT';
+    else if (provider == '自定义') var type = 'CUSTOM_REDIRECT';
 
     custom_api_json[type][0] = value.trim();
-    push_data_to_gradio_component(custom_api_json,'user_custom_data','str');
+    push_data_to_gradio_component(custom_api_json, 'user_custom_data', 'str');
     save_custom_api_key(custom_api_json);
 }
 
-function set_url_path(custom_api_json,provider,value){
+function set_url_path(custom_api_json, provider, value) {
 
     if (provider == 'OpenAI') var type = 'API_URL_REDIRECT';
-    else if (provider == '自定义')  var type = 'CUSTOM_REDIRECT';
+    else if (provider == '自定义') var type = 'CUSTOM_REDIRECT';
     custom_api_json[type][1] = value.trim();
-    push_data_to_gradio_component(custom_api_json,'user_custom_data','str');
+    push_data_to_gradio_component(custom_api_json, 'user_custom_data', 'str');
     save_custom_api_key(custom_api_json);
 }
 
-function set_other(custom_api_json,key,value){
-    if ( typeof value == 'string'){value = value.trim()}
+function set_other(custom_api_json, key, value) {
+    if (typeof value == 'string') { value = value.trim() }
 
-    if (key == 'CUSTOM_MODELS')
-        {
-            value = str_to_list(value)
+    if (key == 'CUSTOM_MODELS') {
+        value = str_to_list(value)
     }
-    
+
     custom_api_json[key] = value;
-    push_data_to_gradio_component(custom_api_json,'user_custom_data','str');
+    push_data_to_gradio_component(custom_api_json, 'user_custom_data', 'str');
     save_custom_api_key(custom_api_json);
 }
 
-function update_api_and_url_redirect_field(custom_api_json,provider,provider_json){
+function update_api_and_url_redirect_field(custom_api_json, provider, provider_json) {
 
-    if (provider == 'OpenAI'){
+    if (provider == 'OpenAI') {
         push_data_to_gradio_component(custom_api_json['API_URL_REDIRECT'][1], 'url_redirect_path', 'str');
         push_data_to_gradio_component(custom_api_json['API_URL_REDIRECT'][0], 'url_redirect_domain', 'str');
     }
-    else if (provider == '自定义'){
+    else if (provider == '自定义') {
         push_data_to_gradio_component(custom_api_json['CUSTOM_REDIRECT'][1], 'url_redirect_path', 'str');
         push_data_to_gradio_component(custom_api_json['CUSTOM_REDIRECT'][0], 'url_redirect_domain', 'str');
     }
@@ -150,13 +149,13 @@ function update_field_visible(provider) {
     const custom_model_input = document.getElementById('custom_model_input');
     const one_api = [custom_model_input];
     one_api.forEach(field => {
-        if (provider == '自定义') {field.style.display = 'inline';}
-        else {field.style.display = 'none';}
+        if (provider == '自定义') { field.style.display = 'inline'; }
+        else { field.style.display = 'none'; }
     });
 }
 
 //!  暂时无用
-function update_model_selector(elem_id,custom_model,one_api_toggle) {
+function update_model_selector(elem_id, custom_model, one_api_toggle) {
     const dropdown = document.getElementById(elem_id);
 
     if (!one_api_toggle) return
@@ -165,15 +164,25 @@ function update_model_selector(elem_id,custom_model,one_api_toggle) {
     dropdown.innerHTML = '';
 
     // 整理输入值
-    if (typeof custom_model == 'string' ){custom_model = str_to_list(custom_model)}
-        
+    if (typeof custom_model == 'string') { custom_model = str_to_list(custom_model) }
+
     // 添加新的选项
-    custom_model.forEach(function(choice) {
+    custom_model.forEach(function (choice) {
         var option = document.createElement('option');
         option.value = choice;
         option.textContent = choice;
         dropdown.appendChild(option);
     });
-    }
+}
+
+
+
+function delete_user_custom_data() {
+
+    ok_fn = () => {localStorage.removeItem('user_custom_data');location.reload()}
+    double_button_notification('删除确认','确认要删除此设备上的API-KEY等信息吗？','删除','取消',true,ok_fn)
+
+    
+}
 
 
