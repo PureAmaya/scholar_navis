@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-12-31 15:37+0800\n"
-"PO-Revision-Date: 2024-12-31 15:41+0800\n"
+"POT-Creation-Date: 2024-12-31 16:34+0800\n"
+"PO-Revision-Date: 2024-12-31 16:35+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_TW\n"
@@ -1538,6 +1538,14 @@ msgstr "文件上傳與設置"
 msgid "暗黑模式"
 msgstr "暗黑模式"
 
+#: main.py:112
+msgid ""
+"下方内容为 AI 生成，不代表任何立场，可能存在片面甚至错误。仅供参考，开发者及"
+"其组织不负任何责任"
+msgstr ""
+"下方內容為 AI 生成，不代表任何立場，可能存在片面甚至錯誤。僅供參考，開發者及"
+"其組織不負任何責任"
+
 #: main.py:115
 msgid "对话功能"
 msgstr "對話功能"
@@ -2267,6 +2275,10 @@ msgstr "插件調度異常"
 #: toolbox.py:592
 msgid "... (省略{}个文件的显示) ..."
 msgstr "... (省略{}個文件的顯示) ..."
+
+#: toolbox.py:594
+msgid "文件"
+msgstr "文件"
 
 #: toolbox.py:597
 msgid "我上传了文件，请查收"

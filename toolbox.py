@@ -591,7 +591,7 @@ def on_file_uploaded(
     if len(moved_files) > max_file_to_show:
         moved_files = moved_files[:max_file_to_show//2] + [_('... (省略{}个文件的显示) ...').format(len(moved_files) - max_file_to_show)] + \
                       moved_files[-max_file_to_show//2:]
-    moved_files_str = to_markdown_tabs(head=["文件"], tabs=[moved_files], omit_path=target_path_base)
+    moved_files_str = to_markdown_tabs(head=[_("文件")], tabs=[moved_files], omit_path=target_path_base)
     
     if chatbot is not None:
         chatbot.append(gradio.ChatMessage(role='user',content=_("我上传了文件，请查收")))

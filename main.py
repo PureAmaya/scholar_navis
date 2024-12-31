@@ -109,7 +109,7 @@ def main():
             dark_mode_btn = gr.Button(_('暗黑模式'),icon=os.path.join('themes','svg','dark_mode_toggle.svg'), elem_id='dark_mode_toggle')
             
         gr.HTML(title_html)
-        gr.HTML(f'<strong>{_("下方内容为 AI 生成，不代表任何立场，可能存在片面甚至错误。仅供参考，开发者及其组织不负任何责任")}</strong>')
+        gr.HTML('<strong>{}</strong>'.format(_("下方内容为 AI 生成，不代表任何立场，可能存在片面甚至错误。仅供参考，开发者及其组织不负任何责任")))
         cookies, web_cookie_cache = make_cookie_cache() # 定义 后端state（cookies）、前端（web_cookie_cache）两兄弟
 
         with gr.Tab(_('对话功能'),id = '0'):

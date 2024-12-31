@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-12-31 15:37+0800\n"
-"PO-Revision-Date: 2024-12-31 15:40+0800\n"
+"POT-Creation-Date: 2024-12-31 16:34+0800\n"
+"PO-Revision-Date: 2024-12-31 16:37+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -1033,7 +1033,7 @@ msgstr ""
 
 #: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:442
 msgid "批量从PubMed上下载 OpenAccess 文章"
-msgstr "Download OpenAccess articles from PubMed in bulk"
+msgstr "Download OpenAccess articles from PubMed in bulk."
 
 #: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:451
 msgid "正在处理..."
@@ -1675,6 +1675,15 @@ msgstr "Upload / Settings"
 #: main.py:109
 msgid "暗黑模式"
 msgstr "Dark mode"
+
+#: main.py:112
+msgid ""
+"下方内容为 AI 生成，不代表任何立场，可能存在片面甚至错误。仅供参考，开发者及"
+"其组织不负任何责任"
+msgstr ""
+"The content below is AI-generated and does not represent any stance. It may "
+"be one-sided or even incorrect. For reference only, the developers and their "
+"organization bear no responsibility."
 
 #: main.py:115
 msgid "对话功能"
@@ -2463,6 +2472,10 @@ msgstr "Plugin scheduling exception."
 #: toolbox.py:592
 msgid "... (省略{}个文件的显示) ..."
 msgstr "... (omitting the display of {} files) ..."
+
+#: toolbox.py:594
+msgid "文件"
+msgstr "File(s)"
 
 #: toolbox.py:597
 msgid "我上传了文件，请查收"
