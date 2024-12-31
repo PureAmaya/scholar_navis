@@ -13,7 +13,7 @@ Markdown==3.7
 numpy==2.2.1
 pandas==2.2.3
 pydantic==2.10.4
-pymdown-extensions=10.13
+pymdown-extensions==10.13
 PyPDF2==3.0.1
 python_docx==1.1.2
 PyYAML==6.0.2
