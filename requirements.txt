@@ -9,7 +9,6 @@ gradio==5.9.1
 gradio_modal==0.0.4
 latex2mathml==3.77.0
 Markdown==3.7
-numpy==2.2.1
 pandas==2.2.3
 pydantic==2.10.4
 pymdown-extensions==10.13
