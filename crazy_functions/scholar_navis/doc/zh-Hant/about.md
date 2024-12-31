@@ -1,4 +1,4 @@
-- 本軟件基於 gpt_academic（3.83）開發，為其衍生作品。遵守 GNU General Public License v3.0 許可證。
+- 本軟件基於 gpt_academic（3.83）開發，為其衍生作品。遵守 GNU Affero General Public License v3.0 許可證。
 
 - 因為對gpt_academic產生了修改，根據 GPL-3.0 許可證的要求，亦需要發布修改後的源碼，並註明修改的內容。
 
