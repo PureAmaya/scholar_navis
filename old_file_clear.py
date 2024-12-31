@@ -92,6 +92,10 @@ def _delete_old_files(lock):
         # 总结库就不用那么高频率了
     
 def start_clear_old_files():
+    os.makedirs('tmp',exist_ok=True)
+    os.makedirs('gpt_log',exist_ok=True)
+    os.makedirs('private_upload',exist_ok=True)
+    
     if  AUTO_CLEAR_TMP or AUTO_CLEAR_PRIVATE_UPLOAD or AUTO_CLEAR_GPT_LOG_DIR:
         
         # 创建守护进程

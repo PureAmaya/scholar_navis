@@ -86,6 +86,7 @@ def enable_api(app):
                 json_.setdefault('hash',hashlib.md5(a.encode('utf-8')).hexdigest())
                 return JSONResponse(json_)
         except:
+            os.makedirs(NOTIFICATION_ROOT_PATH,exist_ok=True)
             async with aiofiles.open(maintenance_json_fp,'w',encoding='utf-8') as f:
                 await f.write(json.dumps(maintenance_json))
                 return JSONResponse(maintenance_json)

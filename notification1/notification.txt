@@ -1,0 +1,18 @@
+<p>本在线服务基于 <a href="https://github.com/binary-husky/gpt_academic" target="_blank">gpt_academic</a> 运行，并针对 <a href="https://github.com/PureAmaya/scholar_navis" target="_blank">Scholar Navis</a> 进行了优化和配置<br>
+针对中国大陆用户，我们使用 <a href="https://aihubmix.com/" target="_blank">AIHUBMIX</a> 实现ChatGPT和其他模型的访问，请使用他的API-KEY（<b>AIHUBMIX为第三方服务，我们不负任何责任</b>）<br>
+如果涉及到中文，推荐使用国产模型，例如glm-4-flash、deepseek-chat、qwen-long等模型<br>
+受制于一些原因，<b>使用中转服务的效果和速度可能不及直接使用官方服务的效果好</b>，如果要实现最佳效果，推荐本地部署并配备官方API-KEY</p>
+
+<p>
+  为节省服务器资源，我们关闭了 PubMed OA 下载器。此外，您上传的文件、创建的总结库将在<b>一天后自动删除</b>；产生的临时内容，也会在<b>5分钟后删除</b>，还请注意！<br>
+此外，<b>上传文件最大为200MB，超出会卡住</b>。请分批次上传。
+</p>
+
+<p>
+  直接使用 OpenAI 官方 API-KEY 的海外版本：<a href="http://scholarnavis.com/" target="_blank">点击此处</a>
+</p>
+
+<p><strong>
+当前仍为内部测试版本（尚未开放源码，也还没有部署完全）。仅限个人使用，请勿外传。此外，部署的服务器位于海外，访问可能比较慢，请等待。
+</strong></p>
+
