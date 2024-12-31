@@ -1,7 +1,9 @@
 import os
 import random
 from docx import Document
-from .tools.article_library_ctrl import SQLiteDatabase,db_type,get_tmp_dir_of_this_user, command_information, check_library_exist_and_assistant, promote_file_to_downloadzone, VERSION,pdf_reader,read_and_clean_pdf_text,breakdown_text_to_satisfy_token_limit,article_library_ctrl, CatchException,get_files_from_everything,get_log_folder,get_user,l,update_ui,update_ui_lastest_msg,request_gpt_model_in_new_thread_with_ui_alive,GPT_prefer_language
+
+from shared_utils.scholar_navis.sqlite import SQLiteDatabase
+from .tools.article_library_ctrl import get_tmp_dir_of_this_user, command_information, check_library_exist_and_assistant, promote_file_to_downloadzone, VERSION,pdf_reader,read_and_clean_pdf_text,breakdown_text_to_satisfy_token_limit,article_library_ctrl, CatchException,get_files_from_everything,get_log_folder,get_user,l,update_ui,update_ui_lastest_msg,request_gpt_model_in_new_thread_with_ui_alive,GPT_prefer_language
 
 # ! 后面再说，这个目前没啥必要
 # ! 没改好，也暂时没啥必要
@@ -73,8 +75,8 @@ def 更好的文章润色(txt: str, llm_kwargs, plugin_kwargs, chatbot, history,
     emulated_reference = ''
     
     # 看看有没有之前的储存，有的话就直接用了，不用请求LLM了
-    with SQLiteDatabase(type=db_type.doi_emulate_polish) as ft:
-        emulated_reference = ft.select(doi,('emulated_content',))
+    with SQLiteDatabase(type='doi_emulate_polish') as ft:
+        emulated_reference = ft.easy_select(doi,('emulated_content',))
 
     # 没有储存的话，就请求吧
     if emulated_reference == '' or emulated_reference is None:
@@ -96,7 +98,7 @@ def 更好的文章润色(txt: str, llm_kwargs, plugin_kwargs, chatbot, history,
         emulated_reference = '\n\n\n'.join(history)
         
         # 看完了参考文章，先记录一下，尽可能不请求LLM
-        with SQLiteDatabase(type=db_type.doi_emulate_polish) as ft:
+        with SQLiteDatabase(type='doi_emulate_polish') as ft:
             ft.insert_ingore(doi,('emulated_content',),(emulated_reference,))
     
     # 润色输出内容

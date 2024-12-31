@@ -1,11 +1,13 @@
 
 import importlib
+import json
 import time
 import inspect
 import re
 import os
 import base64
-import gradio
+import traceback
+import gradio_compatibility_layer as gradio
 import shutil
 import glob
 import logging
@@ -25,6 +27,7 @@ from shared_utils.connect_void_terminal import get_chat_handle
 from shared_utils.connect_void_terminal import get_plugin_handle
 from shared_utils.connect_void_terminal import get_plugin_default_kwargs
 from shared_utils.connect_void_terminal import get_chat_default_kwargs
+from shared_utils.scholar_navis.other_tools import generate_download_file
 from shared_utils.text_mask import apply_gpt_academic_string_mask
 from shared_utils.text_mask import build_gpt_academic_masked_string
 from shared_utils.text_mask import apply_gpt_academic_string_mask_langbased
@@ -36,7 +39,10 @@ from shared_utils.handle_upload import html_local_file
 from shared_utils.handle_upload import html_local_img
 from shared_utils.handle_upload import file_manifest_filter_type
 from shared_utils.handle_upload import extract_archive
-from typing import List
+from shared_utils.scholar_navis.user_custom_manager import get_api_key,get_url_redirect
+from typing import List, Literal
+from shared_utils.scholar_navis.multi_lang import _
+
 pj = os.path.join
 default_user_name = "default_user"
 
@@ -73,17 +79,63 @@ class ChatBotWithCookies(list):
 
     def write_list(self, list):
         for t in list:
-            self.append(t)
+            super().append(t)
 
     def get_list(self):
-        return [t for t in self]
-
-    def get_cookies(self):
-        return self._cookies
+        return [t for t in self.data]
 
     def get_user(self):
         return self._cookies.get("user_name", default_user_name)
+    
+    def append(self, object):
+        if isinstance(object, (gradio.ChatMessage,dict)):# 已经准备好的信息
+            super().append(object)
+        
+        elif isinstance(object, (list,set,tuple)) and len(object) == 2:
+            # 兼容最新版的messages的chatbot
+            super().append(self._convert_to_gr_msg('user',object[0]))
+            super().append(self._convert_to_gr_msg('assistant',object[1]))
+        
+        else:raise ValueError("Invalid value type")
+        
+    def __setitem__(self, index:int, value): 
+        if type(value) == dict or type(value) == gradio.ChatMessage:# 正常的ChatMessage
+            super().__setitem__(index, value)
+        elif type(value) == list or type(value) == set or type(value) == tuple and len(value) == 2:
+            # 兼容旧版的[(,)]
+            if index < 0:index = index * 2;index += len(self)
+            elif index >= 0:index = index  * 2
 
+            super().__setitem__(index, self._convert_to_gr_msg('user',value[0]))
+            super().__setitem__(index + 1, self._convert_to_gr_msg('assistant',value[1]))
+        else:
+            raise ValueError("Invalid value type")
+    
+    def __getitem__(self, index:int): # 
+        """获取都是想要得到[(0,1)]
+
+        Args:
+            index (int): 按照每两个为一对，即[(0,1),(0,1),(0,1),(0,1)]这样的形式
+
+        Returns:
+            list: [(0,1)]
+        """
+        
+        if index < 0:index = index * 2;index += len(self)
+        elif index >= 0:index = index  * 2
+        return [super().__getitem__(index),super().__getitem__(index + 1)]
+    
+    def _convert_to_gr_msg(self,role:Literal['user','assistant'],obj):
+        if not obj:obj = ''
+        if isinstance(obj, gradio.ChatMessage):return gradio.ChatMessage(role,obj.content) 
+        elif isinstance(obj,dict):
+            if 'role' in obj and 'content' in obj:
+                return gradio.ChatMessage(role,obj['content'])
+            else:return gradio.ChatMessage(role,str(obj))
+        elif isinstance(obj,str):return gradio.ChatMessage(role,obj)
+        else:raise ValueError("Invalid value type")
+        
+INIT_SYS_PROMPT = get_conf('INIT_SYS_PROMPT')
 def ArgsGeneralWrapper(f):
     """
     装饰器函数ArgsGeneralWrapper，用于重组输入参数，改变输入参数的顺序与结构。
@@ -91,10 +143,27 @@ def ArgsGeneralWrapper(f):
     函数示意图：https://mermaid.live/edit#pako:eNqNVFtPGkEY_StkntoEDQtLoTw0sWqapjQxVWPabmOm7AiEZZcsQ9QiiW012qixqdeqqIn10geBh6ZR8PJnmAWe-hc6l3VhrWnLEzNzzvnO953ZyYOYoSIQAWOaMR5LQBN7hvoU3UN_g5iu7imAXEyT4wUF3Pd0dT3y9KGYYUJsmK8V0GPGs0-QjkyojZgwk0Fm82C2dVghX08U8EaoOHjOfoEMU0XmADRhOksVWnNLjdpM82qFzB6S5Q_WWsUhuqCc3JtAsVR_OoMnhyZwXgHWwbS1d4gnsLVZJp-P6mfVxveqAgqC70Jz_pQCOGDKM5xFdNNPDdilF6uSU_hOYqu4a3MHYDZLDzq5fodrC3PWcEaFGPUaRiqJWK_W9g9rvRITa4dhy_0nw67SiePMp3oSR6PPn41DGgllkvkizYwsrmtaejTFd8V4yekGmT1zqrt4XGlAy8WTuiPULF01LksZvukSajfQQRAxmYi5S0D81sDcyzapVdn6sYFHkjhhGyel3frVQnvsnbR23lEjlhIlaOJiFPWzU5G4tfNJo8ejwp47-TbvJkKKZvmxA6SKo16oaazJysfG6klr9T0pbTW2ZqzlL_XaT8fYbQLXe4mSmvoCZXMaa7FePW6s7jVqK9bujvse3WFjY5_Z4KfsA4oiPY4T7Drvn1tLJTbG1to1qR79ulgk89-oJbvZzbIwJty6u20LOReWa9BvwserUd9s9MIKc3x5TUWEoAhUyJK5y85w_yG-dFu_R9waoU7K581y8W_qLle35-rG9Nxcrz8QHRsc0K-r9NViYRT36KsFvCCNzDRMqvSVyzOKAnACpZECIvSvCs2UAhS9QHEwh43BST0GItjMIS_I8e-sLwnj9A262cxA_ZVh0OUY1LJiDSJ5MAEiUijYLUtBORR6KElyQPaCSRDpksNSd8AfluSgHPaFC17wjrOlbgbzyyFf4IFPDvoD_sJvnkdK-g
     """
     def decorated(request: gradio.Request, cookies:dict, max_length:int, llm_model:str,
-                  txt:str, txt2:str, top_p:float, temperature:float, chatbot:list,
-                  history:list, system_prompt:str, plugin_advanced_arg:dict, *args):
+                  txt:str,top_p:float, temperature:float, chatbot:list,
+                  history:list, system_prompt:str, plugin_advanced_arg:dict,user_custom_data: dict, *args):  
+
+        # 获取openai用的api
+        api_key = get_api_key(user_custom_data,"API_KEY",True)
+        url_redirect = get_url_redirect('API_URL_REDIRECT',user_custom_data)
+        # 方便获取其他供应商的api_key
+        def get_other_provider_api_key(provider_api_type:str):return get_api_key(user_custom_data,provider_api_type,True)
+        
+        if llm_model.startswith('custom-'):
+            # 自定义模型使用openai兼容方案，覆盖一些openai的设定
+            api_key = get_api_key(user_custom_data,"CUSTOM_API_KEY")
+            url_redirect = get_url_redirect('CUSTOM_REDIRECT',user_custom_data)
+
         txt_passon = txt
-        if txt == "" and txt2 != "": txt_passon = txt2
+        
+        # 空输入会报错
+        if not txt_passon:txt_passon = ' '
+        # 有的空prompt也会报错
+        if not system_prompt: system_prompt = INIT_SYS_PROMPT
+        
         # 引入一个有cookie的chatbot
         if request.username is not None:
             user_name = request.username
@@ -102,19 +171,21 @@ def ArgsGeneralWrapper(f):
             user_name = default_user_name
         cookies.update({
             'top_p': top_p,
-            'api_key': cookies['api_key'],
+            'api_key':api_key if api_key else cookies['api_key'], #这里是需要设定好值的
             'llm_model': llm_model,
             'temperature': temperature,
             'user_name': user_name,
         })
         llm_kwargs = {
-            'api_key': cookies['api_key'],
-            'llm_model': llm_model,
-            'top_p': top_p,
+            'api_key': cookies['api_key'], 
+            'llm_model': cookies['llm_model'],
+            'top_p': cookies['top_p'],
             'max_length': max_length,
-            'temperature': temperature,
+            'temperature': cookies['temperature'],
             'client_ip': request.client.host,
-            'most_recent_uploaded': cookies.get('most_recent_uploaded')
+            'most_recent_uploaded': cookies.get('most_recent_uploaded'),
+            'custom_api_key':get_other_provider_api_key, # 这里后面还需要用
+            'custom_url_redirect':url_redirect
         }
         if isinstance(plugin_advanced_arg, str):
             plugin_kwargs = {"advanced_arg": plugin_advanced_arg}
@@ -139,20 +210,21 @@ def ArgsGeneralWrapper(f):
             # len(args) != 0 代表“提交”键对话通道，或者基础功能通道
             if len(args) != 0 and 'files_to_promote' in final_cookies and len(final_cookies['files_to_promote']) > 0:
                 chatbot_with_cookie.append(
-                    ["检测到**滞留的缓存文档**，请及时处理。", "请及时点击“**保存当前对话**”获取所有滞留文档。"])
+                    [_("检测到**滞留的缓存文档**，请及时处理"), _("请及时点击“**保存当前对话**”获取所有滞留文档")])
                 yield from update_ui(chatbot_with_cookie, final_cookies['history'], msg="检测到被滞留的缓存文档")
 
     return decorated
 
 
-def update_ui(chatbot:ChatBotWithCookies, history, msg="正常", **kwargs):  # 刷新界面
+def update_ui(chatbot:ChatBotWithCookies, history, msg=_("正常"), **kwargs):  # 刷新界面
+    
     """
     刷新用户界面
     """
     assert isinstance(
         chatbot, ChatBotWithCookies
     ), "在传递chatbot的过程中不要将其丢弃。必要时, 可用clear将其清空, 然后用for+append循环重新赋值。"
-    cookies = chatbot.get_cookies()
+    cookies = chatbot._cookies # 不使用那个方法了，会爆栈
     # 备份一份History作为记录
     cookies.update({"history": history})
     # 解决插件锁定时的界面显示问题
@@ -163,6 +235,7 @@ def update_ui(chatbot:ChatBotWithCookies, history, msg="正常", **kwargs):  # �
             + "正在锁定插件"
             + cookies.get("lock_plugin", None)
         )
+        '''
         chatbot_gr = gradio.update(value=chatbot, label=label)
         if cookies.get("label", "") != label:
             cookies["label"] = label  # 记住当前的label
@@ -170,19 +243,21 @@ def update_ui(chatbot:ChatBotWithCookies, history, msg="正常", **kwargs):  # �
         chatbot_gr = gradio.update(value=chatbot, label=cookies.get("llm_model", ""))
         cookies["label"] = None  # 清空label
     else:
-        chatbot_gr = chatbot
-
-    yield cookies, chatbot_gr, history, msg
+        chatbot_gr = gradio.update(value=chatbot)
+    '''
+    
+    yield cookies,chatbot, history, msg
 
 
 def update_ui_lastest_msg(lastmsg:str, chatbot:ChatBotWithCookies, history:list, delay=1):  # 刷新界面
     """
     刷新用户界面
     """
-    if len(chatbot) == 0:
-        chatbot.append(["update_ui_last_msg", lastmsg])
-    chatbot[-1] = list(chatbot[-1])
-    chatbot[-1][-1] = lastmsg
+    if not isinstance(lastmsg, str):raise ValueError("lastmsg must be a string")
+    
+    if len(chatbot) == 0:chatbot.append(["update_ui_last_msg", lastmsg])
+    
+    chatbot[-1] = gradio.ChatMessage('assistant', lastmsg)
     yield from update_ui(chatbot=chatbot, history=history)
     time.sleep(delay)
 
@@ -223,15 +298,13 @@ def CatchException(f):
             tb_str = '```\n' + trimmed_format_exc() + '```'
             if len(chatbot_with_cookie) == 0:
                 chatbot_with_cookie.clear()
-                chatbot_with_cookie.append(["插件调度异常:\n" + tb_str, None])
-            chatbot_with_cookie[-1] = [chatbot_with_cookie[-1][0], e.generate_error_html()]
+            chatbot_with_cookie.append([_("插件调度异常:\n") + tb_str, e.generate_error_html()])
             yield from update_ui(chatbot=chatbot_with_cookie, history=history, msg=f'异常')  # 刷新界面
         except Exception as e:
             tb_str = '```\n' + trimmed_format_exc() + '```'
             if len(chatbot_with_cookie) == 0:
                 chatbot_with_cookie.clear()
-                chatbot_with_cookie.append(["插件调度异常", "异常原因"])
-            chatbot_with_cookie[-1] = [chatbot_with_cookie[-1][0], f"[Local Message] 插件调用出错: \n\n{tb_str} \n"]
+            chatbot_with_cookie.append([_("插件调度异常"), f"[Local Message] {_('插件调用出错: ')}\n\n{tb_str} \n"])
             yield from update_ui(chatbot=chatbot_with_cookie, history=history, msg=f'异常 {e}')  # 刷新界面
 
     return decorated
@@ -400,41 +473,6 @@ def file_already_in_downloadzone(file:str, user_path:str):
         return False
 
 
-def promote_file_to_downloadzone(file:str, rename_file:str=None, chatbot:ChatBotWithCookies=None):
-    # 将文件复制一份到下载区
-    import shutil
-
-    if chatbot is not None:
-        user_name = get_user(chatbot)
-    else:
-        user_name = default_user_name
-    if not os.path.exists(file):
-        raise FileNotFoundError(f"文件{file}不存在")
-    user_path = get_log_folder(user_name, plugin_name=None)
-    if file_already_in_downloadzone(file, user_path):
-        new_path = file
-    else:
-        user_path = get_log_folder(user_name, plugin_name="downloadzone")
-        if rename_file is None:
-            rename_file = f"{gen_time_str()}-{os.path.basename(file)}"
-        new_path = pj(user_path, rename_file)
-        # 如果已经存在，先删除
-        if os.path.exists(new_path) and not os.path.samefile(new_path, file):
-            os.remove(new_path)
-        # 把文件复制过去
-        if not os.path.exists(new_path):
-            shutil.copyfile(file, new_path)
-    # 将文件添加到chatbot cookie中
-    if chatbot is not None:
-        if "files_to_promote" in chatbot._cookies:
-            current = chatbot._cookies["files_to_promote"]
-        else:
-            current = []
-        if new_path not in current:  # 避免把同一个文件添加多次
-            chatbot._cookies.update({"files_to_promote": [new_path] + current})
-    return new_path
-
-
 def disable_auto_promotion(chatbot:ChatBotWithCookies):
     chatbot._cookies.update({"files_to_promote": []})
     return
@@ -492,15 +530,30 @@ def to_markdown_tabs(head: list, tabs: list, alignment=":---:", column=False, om
     return tabs_list
 
 
+def correct_code_error(str:str):
+    try:
+        cp437_code = str.encode('cp437')
+        try:
+            return cp437_code.decode('gbk')
+        except:
+            try:
+                return cp437_code.decode('utf-8')
+            except:return str
+    except:
+        return str
+
+
 def on_file_uploaded(
     request: gradio.Request, files:List[str], chatbot:ChatBotWithCookies,
-    txt:str, txt2:str, checkboxes:List[str], cookies:dict
+    txt:str, cookies:dict
 ):
     """
     当文件被上传时的回调函数
     """
     if len(files) == 0:
-        return chatbot, txt
+        if chatbot is not None:
+            return chatbot, txt
+        else:return txt
 
     # 创建工作路径
     user_name = default_user_name if not request.username else request.username
@@ -512,38 +565,49 @@ def on_file_uploaded(
     outdate_time_seconds = 3600  # 一小时
     del_outdated_uploads(outdate_time_seconds, get_upload_folder(user_name))
 
-    # 逐个文件转移到目标路径
+    # 逐个文件转移到目标路径（然而就是没啥用233，gradio的缓存里面该有还是有）
     upload_msg = ""
     for file in files:
-        file_origin_name = os.path.basename(file.orig_name)
+        file_origin_name = os.path.basename(file)
         this_file_path = pj(target_path_base, file_origin_name)
-        shutil.move(file.name, this_file_path)
+        shutil.copy(file.name, this_file_path) # 之前是move
+
         upload_msg += extract_archive(
             file_path=this_file_path, dest_dir=this_file_path + ".extract"
         )
 
     # 整理文件集合 输出消息
     files = glob.glob(f"{target_path_base}/**/*", recursive=True)
-    moved_files = [fp for fp in files]
+    moved_files = []
+    for fp in files: # 修复不受cp437支持而产生的乱码
+        if os.path.isfile(fp):
+            basename = correct_code_error(os.path.basename(fp))
+            correct_fp = os.path.join(os.path.dirname(fp),basename)
+            os.rename(fp,correct_fp)
+            moved_files.append(correct_fp)
+        else:moved_files.append(fp)
+
     max_file_to_show = 10
     if len(moved_files) > max_file_to_show:
-        moved_files = moved_files[:max_file_to_show//2] + [f'... ( 📌省略{len(moved_files) - max_file_to_show}个文件的显示 ) ...'] + \
+        moved_files = moved_files[:max_file_to_show//2] + [_('... (省略{}个文件的显示) ...').format(len(moved_files) - max_file_to_show)] + \
                       moved_files[-max_file_to_show//2:]
-    moved_files_str = to_markdown_tabs(head=["文件"], tabs=[moved_files], omit_path=target_path_base)
-    chatbot.append(
-        [
-            "我上传了文件，请查收",
-            f"[Local Message] 收到以下文件 （上传到路径：{target_path_base}）: " +
-            f"\n\n{moved_files_str}" +
-            f"\n\n调用路径参数已自动修正到: \n\n{txt}" +
-            f"\n\n现在您点击任意函数插件时，以上文件将被作为输入参数" +
-            upload_msg,
-        ]
-    )
+    moved_files_str = to_markdown_tabs(head=[_("文件")], tabs=[moved_files], omit_path=target_path_base)
+    
+    if chatbot is not None:
+        chatbot.append(gradio.ChatMessage(role='user',content=_("我上传了文件，请查收")))
+        
+        txt_1 = _('调用路径参数已自动修正到: ')
+        txt_2 = _('现在您点击任意函数插件时，以上文件将被作为输入参数')
+        txt_3 = _("请注意，当上述文件名出现异常时，请检查您的压缩包是否为UTF-8或CP437编码")
+        chatbot.append(gradio.ChatMessage(role='assistant',
+                                        content= _("[Local Message] 收到以下文件 （上传到路径：{}）: ").format(target_path_base) +
+                                                f"\n\n{moved_files_str}" +
+                                                f"\n\n{txt_1}\n\n{txt}" +
+                                                f"\n\n{txt_2}" +
+                                                f'\n\n{txt_3}'+
+                                                upload_msg,))
 
     txt, txt2 = target_path_base, ""
-    if "浮动输入区" in checkboxes:
-        txt, txt2 = txt2, txt
 
     # 记录近期文件
     cookies.update(
@@ -555,42 +619,29 @@ def on_file_uploaded(
             }
         }
     )
-    return chatbot, txt, txt2, cookies
+
+    if chatbot is not None:
+        return chatbot, txt,cookies
+    else:
+        return txt,  cookies
 
 
 def generate_file_link(report_files:List[str]):
     file_links = ""
     for f in report_files:
+        
         file_links += (
-            f'<br/><a href="file={os.path.abspath(f)}" target="_blank">{f}</a>'
+            f'<br/>{generate_download_file(os.path.abspath(f))}'
         )
     return file_links
 
-
-def on_report_generated(cookies:dict, files:List[str], chatbot:ChatBotWithCookies):
-    if "files_to_promote" in cookies:
-        report_files = cookies["files_to_promote"]
-        cookies.pop("files_to_promote")
-    else:
-        report_files = []
-    if len(report_files) == 0:
-        return cookies, None, chatbot
-    file_links = ""
-    for f in report_files:
-        file_links += (
-            f'<br/><a href="file={os.path.abspath(f)}" target="_blank">{f}</a>'
-        )
-    chatbot.append(["报告如何远程获取？", f"报告已经添加到右侧“文件下载区”（可能处于折叠状态），请查收。{file_links}"])
-    return cookies, report_files, chatbot
 
 
 def load_chat_cookies():
     API_KEY, LLM_MODEL, AZURE_API_KEY = get_conf(
         "API_KEY", "LLM_MODEL", "AZURE_API_KEY"
     )
-    AZURE_CFG_ARRAY, NUM_CUSTOM_BASIC_BTN = get_conf(
-        "AZURE_CFG_ARRAY", "NUM_CUSTOM_BASIC_BTN"
-    )
+    AZURE_CFG_ARRAY  = get_conf("AZURE_CFG_ARRAY")
 
     # deal with azure openai key
     if is_any_api_key(AZURE_API_KEY):
@@ -601,7 +652,7 @@ def load_chat_cookies():
     if len(AZURE_CFG_ARRAY) > 0:
         for azure_model_name, azure_cfg_dict in AZURE_CFG_ARRAY.items():
             if not azure_model_name.startswith("azure"):
-                raise ValueError("AZURE_CFG_ARRAY中配置的模型必须以azure开头")
+                raise ValueError(_("AZURE_CFG_ARRAY中配置的模型必须以azure开头"))
             AZURE_API_KEY_ = azure_cfg_dict["AZURE_API_KEY"]
             if is_any_api_key(AZURE_API_KEY_):
                 if is_any_api_key(API_KEY):
@@ -609,8 +660,9 @@ def load_chat_cookies():
                 else:
                     API_KEY = AZURE_API_KEY_
 
+    # 下面这些无用. below useless
     customize_fn_overwrite_ = {}
-    for k in range(NUM_CUSTOM_BASIC_BTN):
+    for k in range(0):
         customize_fn_overwrite_.update(
             {
                 "自定义按钮"
@@ -653,55 +705,6 @@ class DummyWith:
         return
 
 
-def run_gradio_in_subpath(demo, auth, port, custom_path):
-    """
-    把gradio的运行地址更改到指定的二次路径上
-    """
-
-    def is_path_legal(path: str) -> bool:
-        """
-        check path for sub url
-        path: path to check
-        return value: do sub url wrap
-        """
-        if path == "/":
-            return True
-        if len(path) == 0:
-            print(
-                "ilegal custom path: {}\npath must not be empty\ndeploy on root url".format(
-                    path
-                )
-            )
-            return False
-        if path[0] == "/":
-            if path[1] != "/":
-                print("deploy on sub-path {}".format(path))
-                return True
-            return False
-        print(
-            "ilegal custom path: {}\npath should begin with '/'\ndeploy on root url".format(
-                path
-            )
-        )
-        return False
-
-    if not is_path_legal(custom_path):
-        raise RuntimeError("Ilegal custom path")
-    import uvicorn
-    import gradio as gr
-    from fastapi import FastAPI
-
-    app = FastAPI()
-    if custom_path != "/":
-
-        @app.get("/")
-        def read_main():
-            return {"message": f"Gradio is running at: {custom_path}"}
-
-    app = gr.mount_gradio_app(app, demo, path=custom_path)
-    uvicorn.run(app, host="0.0.0.0", port=port)  # , auth=auth
-
-
 def clip_history(inputs, history, tokenizer, max_token_limit):
     """
     reduce the length of history by clipping.
@@ -712,7 +715,6 @@ def clip_history(inputs, history, tokenizer, max_token_limit):
     直到历史记录的标记数量降低到阈值以下。
     """
     import numpy as np
-    from request_llms.bridge_all import model_info
 
     def get_token_num(txt):
         return len(tokenizer.encode(txt, disallowed_special=()))

@@ -5,8 +5,9 @@ import os
 import json
 import threading
 import importlib
-from toolbox import update_ui, get_conf
+from toolbox import update_ui
 from multiprocessing import Process, Pipe
+from shared_utils.config_loader import get_conf
 
 load_message = "ChatGLMFT尚未加载，加载需要一段时间。注意，取决于`config.py`的配置，ChatGLMFT消耗大量的内存（CPU）或显存（GPU），也许会导致低配计算机卡死 ……"
 

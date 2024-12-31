@@ -46,7 +46,8 @@ class GptAcademicPluginTemplate():
         #     raise ValueError("You must have a 'main_input' in the define_arg_selection")
 
         DEFINE_ARG_INPUT_INTERFACE = json.dumps(define_arg_selection)
-        return base64.b64encode(DEFINE_ARG_INPUT_INTERFACE.encode('utf-8')).decode('utf-8')
+        #return base64.b64encode(DEFINE_ARG_INPUT_INTERFACE.encode('utf-8')).decode('utf-8')
+        return DEFINE_ARG_INPUT_INTERFACE
 
     def execute(txt, llm_kwargs, plugin_kwargs, chatbot, history, system_prompt, user_request):
         raise NotImplementedError("You need to implement this method in your plugin class")

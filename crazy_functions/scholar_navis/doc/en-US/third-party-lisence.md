@@ -1,60 +1,160 @@
-Scholar Navis is licensed under the GPL-3.0 license.
+Scholar Navis is licensed under the AGPL-3.0 license.
 
-**The copyright of gpt_academic, all plugins and parts thereof except for Scholar Navis, remains with the original authors and contributors. This means that Scholar Navis only claims copyright over the source code in the `crazy_functions\scholar_navis` directory, while the copyright of the source code in other directories belongs to the original authors**.
+**A translated version for reference only. In case of conflict, the Simplified Chinese version shall be considered as the authoritative one.**
 
 ----------------------------
 
-Below is a list of projects used or relied upon:
+**Third-party packages and projects:**
 
-| Third-party Library or Tool                                                             | License                              | Usage Strategy                                                                                                                              |
-| --------------------------------------------------------------------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| <a href="https://github.com/binary-husky/gpt_academic" target="_blank">GPT Academic</a> | GPL-3.0 license                      | Used as a plugin for this tool; cannot run independently. Detailed modifications and usage strategies for gpt_academic are described below. |
-| <a href="https://pypi.org/project/PyPDF2/" target="_blank">PyPDF2</a>                   | BSD License                          | Library used for PDF processing                                                                                                             |
-| <a href="https://pypi.org/project/PyYAML" target="_blank">PyYAML</a>                    | MIT License                          | Library used for parsing YAML files                                                                                                         |
-| <a href="https://pypi.org/project/beautifulsoup4" target="_blank">beautifulsoup4</a>    | MIT License                          | Library used for web request processing                                                                                                     |
-| <a href="https://pypi.org/project/requests/" target="_blank">requests</a>               | Apache Software License (Apache-2.0) | Library used for web requests                                                                                                               |
-| <a href="https://pypi.org/project/python-docx" target="_blank">python-docx</a>          | MIT License                          | Library used to parse docx files and extract text content, and to convert markdown to word (these features are still in testing)            |
-| <a href="https://pypi.org/project/markdown-pdf/" target="_blank">markdown-pdf</a>       | MIT License                          | Library used to convert markdown to PDF                                                                                                     |
-| <a href="https://github.com/marktext/marktext" target="_blank">MarkText</a>             | MIT License                          | Used the software to convert markdown to HTML, and modifications were made to the HTML                                                      |
+- gpt_academic: GPL-3.0（Contains revisions, see below.）
 
-**The modified parts in gpt_academic are as follows:**
+- aiofiles: Apache-2.0 license
 
-1. The principle is to make as few modifications to gpt_academic as possible to facilitate portability or the use of other versions.
+- aiohttp: Apache-2.0 license
 
-2. Since modifications have been made to the source code of gpt_academic (mainly to enable it to call Scholar Navis), due to the constraints of the GPL-3.0 license, the source code of gpt_academic must also be distributed, and the modifications must be noted as well.
+- alertifyJS:  GPL-3.0 license
 
-3. In `crazy_functional.py`, the following content was added around line 400. The `setup.py` can also cause the following modifications.
-   
-   ```python
-   ###### SCHOLAR NAVIS START ########
-   from crazy_functions.scholar_navis.scripts.tools.gpt_academic_handler import registrator
-   function_plugins = registrator(function_plugins)
-   ##### SCHOLAR NAVIS END - UNINSTALL: DELETE THESE ######
-   ```
+- argon2-cffi: MIT License
 
-> These modifications are made to enable gpt_academic to utilize Scholar Navis.
+- beautifulsoup4: MIT License
 
-2. In `config_private.py`, the following modifications were made around line 118. The `setup.py` can also make the following changes, or it can generate a `config_private.py` containing the following modifications.
-   
-   ```python
-   # original：
-   DEFAULT_FN_GROUPS = ['对话', '编程', '学术', '智能体']
-   
-   # modified：
-   DEFAULT_FN_GROUPS = ['Scholar Navis']
-   
-   # Sometimes the modified content may include the original content
-   # for example:
-   DEFAULT_FN_GROUPS = ['Scholar Navis','对话', '编程', '学术', '智能体']
-   ```
+- Bootstrap: MIT License
 
-> This modification is made so that users can access Scholar Navis through the gpt_academic web service.
+- Bootstrap Icons: MIT License
+
+- colorama: BSD License
+
+- dashscope: Apache-2.0 license
+
+- fastapi：MIT License
+
+- fitz (pymupdf)：GNU AFFERO GPL 3.0
+
+- gradio：Apache-2.0 license
+
+- gradio_modal：Apache-2.0 license
+
+- latex2mathml：MIT License (MIT)
+
+- Markdown：BSD-3-Clause license
+
+- Mermaid: MIT license
+
+- numpy：BSD License
+
+- pandas：BSD-3-Clause license
+
+- pydantic：MIT License
+
+- pymdown-extensions: MIT License
+
+- PyPDF2：BSD License
+
+- python_docx：MIT License
+
+- PyYAML：MIT License
+
+- rarfile：ISC License
+
+- Requests：Apache-2.0 license
+
+- rich：MIT License
+
+- rjsmin: Apache-2.0 license
+
+- starlette：BSD License
+
+- tiktoken：MIT License
+
+- uvicorn：BSD License (BSD-3-Clause)
+
+- websockets：BSD License (BSD-3-Clause)
+
+- zhipuai：unknown
+
+**The following files in `gpt_academic` were modified on December 28th:**
+
+- `crazy_functions/pdf_fns/parse_pdf_grobid.py` (not internationalized)
+- `crazy_functions/pdf_fns/parse_pdf.py` (not internationalized)
+- `crazy_functions/pdf_fns/report_gen_html.py`
+- `request_llms/生成多种Mermaid图表.py`
+- `request_llms/crazy_utils.py`
+- `request_llms/bridge_all.py`
+- `request_llms/bridge_chatglm.py` (not internationalized)
+- `request_llms/bridge_chatglm3.py` (not internationalized)
+- `request_llms/bridge_chatglmft.py` (not internationalized)
+- `request_llms/bridge_chatglmonnx.py` (not internationalized)
+- `request_llms/bridge_chatgpt_vision.py` (not internationalized)
+- `request_llms/bridge_chatgpt_website.py` (not internationalized)
+- `request_llms/bridge_chatgpt.py`
+- `request_llms/bridge_claude.py` (not internationalized)
+- `request_llms/bridge_cohere.py` (not internationalized)
+- `request_llms/bridge_deepseekcoder.py` (not internationalized)
+- `request_llms/bridge_google_gemini.py` (not internationalized)
+- `request_llms/bridge_jittorllms.py` (not internationalized)
+- `request_llms/bridge_jittorllms_llama.py` (not internationalized)
+- `request_llms/bridge_jittorllms_pangualpha.py` (not internationalized)
+- `request_llms/bridge_jittorllms_rwkv.py` (not internationalized)
+- `request_llms/bridge_llama2.py` (not internationalized)
+- `request_llms/bridge_moonshot.py`
+- `request_llms/bridge_qwen.py`
+- `request_llms/bridge_zhipu.py`
+- `request_llms/oai_std_model_template.py`
+- `shared_utils/config_loader.py`
+- `shared_utils/cookie_manager.py`
+- `shared_utils/fastapi_server.py`
+- `shared_utils/key_pattern_manager.py`
+- `themes/svg`: Removed existing graphics and added images from [Bootstrap Icons](https://icons.getbootstrap.com/)
+- `themes/common.js`
+- `themes/gui_advanced_plugin_class.py`
+- `themes/gui_toolbar.py`
+- `themes/init.js`
+- `themes/theme.py`
+- `check_proxy.py` (only added localization support)
+- `config.py`
+- `core_functional.py` (only added localization support)
+- `crazy_functional.py`
+- `toolbox.py`
+
+**scholar navis** also removed the following files and associated code, streamlining the program while maintaining compatibility and retaining features related to paper recognition, extraction, and translation:
+
+- `crazy_functions/SourceCode_Comment.py`
+- `crazy_functions/SourceCode_Analyse.py`
+- `crazy_functions/Image_Generate.py`
+- `crazy_functions/Image_Generate_Wrap.py`
+- `crazy_functions/chatglm微调工具.py`
+- `crazy_functions/总结音视频.py`
+- `crazy_functions/知识库问答.py`
+- `crazy_functions/语音助手.py`
+- `crazy_functions/生成函数注释.py`
+- `crazy_functions/命令行助手.py`
+- `crazy_functions/解析JupyterNotebook.py`
+- `crazy_functions/交互功能函数模板.py`
+- `crazy_functions/互动小游戏.py`
+- `crazy_functions/函数动态生成.py`
+- `crazy_functions/高级功能函数模板.py`
+- `crazy_functions/辅助功能.py`
+- `crazy_functions/多智能体.py`
+- `crazy_functions/数学动画生成manim.py`
+- `crazy_functions/agent_fns`
+- `crazy_functions/ast_fns`
+- `crazy_functions/diagram_fns`
+- `crazy_functions/game_fns`
+- `crazy_functions/gen_fns`
+- `crazy_functions/multi_stage`
+- `crazy_functions/vector_fns`
+- `tests` (directory)
+- `themes/gradios.py`
+- `themes/green.py`
+- `themes/gui_floating_menu.py`
 
 **gpt_academic Usage Strategies**:
 
 - Accessing AI: Multithreading and single-threading for accessing multiple AIs, including network processing, token limitations, and the integration of API required for accessing AI and the necessary text content.
 
 - Web Service (based on gradio): This includes but is not limited to login, multi-user management, user interface, cookie management, plugin selection and parameter modification, markdown parsing, error capture with web page presentation, frontend and backend communication, file upload and download, and HTML links and redirections used by Scholar Navis.
+
+- Convert Markdown to HTML
 
 - File Management: Handling and usage of files/folders belonging to gpt_academic, as well as PDF full-text retrieval.
 
@@ -64,7 +164,11 @@ Below is a list of projects used or relied upon:
 
 - To ensure compatibility, the logic for handling thread interruption was referenced.
 
+- Hot Module Replacement
+
 **Scholar Navis Functions Independent of gpt_academic**:
+
+- Supports the Latest Version of Gradio and Its Features
 
 - File Management: File management within the plugin folder (scholar_navis) and management of the summary library itself.
 
@@ -78,7 +182,9 @@ Below is a list of projects used or relied upon:
 
 - Installer for Scholar Navis compatible with gpt_academic (including functionality to install dependency libraries)
 
-- Multilingual (internationalization) display and multilingual translation tools (supporting po and mo formats)
+- Scholar Navis plugin's multilingual (internationalization) display and multilingual translation tool (supports po and mo formats) 
+
+- A caching mechanism has been designed for parts that require access to LLMs or need literature information and network requests to reduce the additional time spent due to requests.  
 
 - Retrieval of metadata, first page content, abstract, DOI number, and title of papers (where part obtained through LLM is done via gpt_academic)
 
@@ -92,4 +198,16 @@ Below is a list of projects used or relied upon:
 
 - Logic for in-depth analysis of articles and LLM request logic, as well as design of the summary library article list (HTML)
 
-- Multithreaded download of PubMed OA article
+- Multithreaded download of PubMed OA articles
+
+- User Login, Registration, and Information Storage (Sensitive Data Encrypted Where Possible). Supports anonymous usage (Sensitive Information Also Encrypted Locally)
+
+- Customization of user-facing APIs and model customization features added
+
+- Scheduled cleanup of uploaded files and generated file 
+
+- Web service: Online PDF viewing (Based on `pdf.js`)
+
+- API Service: Simple Notification
+
+- Extract useful sentences and provide translations for reading. 

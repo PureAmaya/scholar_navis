@@ -1,20 +1,17 @@
 import re
 import os
-from functools import wraps, lru_cache
-from shared_utils.advanced_markdown_format import format_io
-from shared_utils.config_loader import get_conf as get_conf
-
+from shared_utils.scholar_navis.multi_lang import _
 
 pj = os.path.join
 default_user_name = 'default_user'
 
 
 def is_openai_api_key(key):
-    CUSTOM_API_KEY_PATTERN = get_conf('CUSTOM_API_KEY_PATTERN')
+    CUSTOM_API_KEY_PATTERN = '' # get_conf('CUSTOM_API_KEY_PATTERN') 暂时无用
     if len(CUSTOM_API_KEY_PATTERN) != 0:
         API_MATCH_ORIGINAL = re.match(CUSTOM_API_KEY_PATTERN, key)
     else:
-        API_MATCH_ORIGINAL = re.match(r"sk-[a-zA-Z0-9]{48}$|sk-proj-[a-zA-Z0-9]{48}$|sess-[a-zA-Z0-9]{40}$", key)
+        API_MATCH_ORIGINAL = re.match(r"sk-[a-zA-Z0-9_-]+|sess-[a-zA-Z0-9]", key)
     return bool(API_MATCH_ORIGINAL)
 
 
@@ -59,7 +56,7 @@ def what_keys(keys):
         if is_azure_api_key(k):
             avail_key_list['Azure Key'] += 1
 
-    return f"检测到： OpenAI Key {avail_key_list['OpenAI Key']} 个, Azure Key {avail_key_list['Azure Key']} 个, API2D Key {avail_key_list['API2D Key']} 个"
+    return _("检测到： OpenAI Key {} 个, Azure Key {} 个, API2D Key {} 个").format(avail_key_list['OpenAI Key'],avail_key_list['Azure Key'],avail_key_list['API2D Key'])
 
 
 def select_api_key(keys, llm_model):
@@ -67,9 +64,10 @@ def select_api_key(keys, llm_model):
     avail_key_list = []
     key_list = keys.split(',')
 
-    if llm_model.startswith('gpt-') or llm_model.startswith('one-api-'):
+    if llm_model.startswith('gpt-') or llm_model.startswith('one-api-') or llm_model.startswith('custom-'):
         for k in key_list:
             if is_openai_api_key(k): avail_key_list.append(k)
+            if is_api2d_key(k): avail_key_list.append(k) # api2d用的不是标准openai，自定义的时候会找不到api
 
     if llm_model.startswith('api2d-'):
         for k in key_list:
@@ -84,7 +82,7 @@ def select_api_key(keys, llm_model):
             if is_cohere_api_key(k): avail_key_list.append(k)
 
     if len(avail_key_list) == 0:
-        raise RuntimeError(f"您提供的api-key不满足要求，不包含任何可用于{llm_model}的api-key。您可能选择了错误的模型或请求源（左上角更换模型菜单中可切换openai,azure,claude,cohere等请求源）。")
+        raise RuntimeError(_("您提供的api-key不满足要求，不包含任何可用于{}的api-key。您可能选择了错误的模型或请求源（左上角更换模型菜单中可切换其他模型或请求源）").format(llm_model))
 
     api_key = random.choice(avail_key_list) # 随机负载均衡
     return api_key

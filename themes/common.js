@@ -6,52 +6,8 @@ enable_tts = false;
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 function push_data_to_gradio_component(DAT, ELEM_ID, TYPE) {
-    // type,               // type==="str" / type==="float"
-    if (TYPE == "str") {
-        // convert dat to string: do nothing
-    }
-    else if (TYPE == "obj") {
-        // convert dat to string: do nothing
-    }
-    else if (TYPE == "no_conversion") {
-        // no nothing
-    }
-    else if (TYPE == "float") {
-        // convert dat to float
-        DAT = parseFloat(DAT);
-    }
-    const myEvent = new CustomEvent('gpt_academic_update_gradio_component', {
-        detail: {
-            data: DAT,
-            elem_id: ELEM_ID,
-        }
-    });
-    window.dispatchEvent(myEvent);
+    throw new Error("Not implemented");
 }
-
-
-async function get_gradio_component(ELEM_ID) {
-    function waitFor(ELEM_ID) {
-        return new Promise((resolve) => {
-            const myEvent = new CustomEvent('gpt_academic_get_gradio_component_value', {
-                detail: {
-                    elem_id: ELEM_ID,
-                    resolve,
-                }
-            });
-            window.dispatchEvent(myEvent);
-        });
-    }
-    result = await waitFor(ELEM_ID);
-    return result;
-}
-
-
-async function get_data_from_gradio_component(ELEM_ID) {
-    let comp = await get_gradio_component(ELEM_ID);
-    return comp.props.value;
-}
-
 
 function update_array(arr, item, mode) {
     //   // Remove "输入清除键"
@@ -263,95 +219,6 @@ function cancel_loading_status() {
 
 var allow_auto_read_continously = true;
 var allow_auto_read_tts_flag = false;
-function addCopyButton(botElement, index, is_last_in_arr) {
-    // https://github.com/GaiZhenbiao/ChuanhuChatGPT/tree/main/web_assets/javascript
-    // Copy bot button
-    const copiedIcon = '<span><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height=".8em" width=".8em" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"></polyline></svg></span>';
-    const copyIcon = '<span><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height=".8em" width=".8em" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></span>';
-    // const audioIcon = '<span><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height=".8em" width=".8em" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></span>';
-    const audioIcon = '<span><svg t="1713628577799" fill="currentColor" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4587" width=".9em" height=".9em"><path d="M113.7664 540.4672c0-219.9552 178.2784-398.2336 398.2336-398.2336S910.2336 320.512 910.2336 540.4672v284.4672c0 31.4368-25.4976 56.9344-56.9344 56.9344h-56.9344c-31.4368 0-56.9344-25.4976-56.9344-56.9344V597.2992c0-31.4368 25.4976-56.9344 56.9344-56.9344h56.9344c0-188.5184-152.7808-341.2992-341.2992-341.2992S170.7008 351.9488 170.7008 540.4672h56.9344c31.4368 0 56.9344 25.4976 56.9344 56.9344v227.5328c0 31.4368-25.4976 56.9344-56.9344 56.9344h-56.9344c-31.4368 0-56.9344-25.4976-56.9344-56.9344V540.4672z" p-id="4588"></path></svg></span>';
-    // const cancelAudioIcon = '<span><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height=".8em" width=".8em" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></span>';
-
-    // 此功能没准备好
-    if (allow_auto_read_continously && is_last_in_arr && allow_auto_read_tts_flag) {
-        process_latest_text_output(botElement.innerText, index);
-    }
-
-    const messageBtnColumnElement = botElement.querySelector('.message-btn-row');
-    if (messageBtnColumnElement) {
-        // if .message-btn-column exists
-        return;
-    }
-
-    var copyButton = document.createElement('button');
-    copyButton.classList.add('copy-bot-btn');
-    copyButton.setAttribute('aria-label', 'Copy');
-    copyButton.innerHTML = copyIcon;
-    copyButton.addEventListener('click', async () => {
-        const textToCopy = botElement.innerText;
-        try {
-            // push_text_to_audio(textToCopy).catch(console.error);
-            if ("clipboard" in navigator) {
-                await navigator.clipboard.writeText(textToCopy);
-                copyButton.innerHTML = copiedIcon;
-                setTimeout(() => {
-                    copyButton.innerHTML = copyIcon;
-                }, 1500);
-            } else {
-                const textArea = document.createElement("textarea");
-                textArea.value = textToCopy;
-                document.body.appendChild(textArea);
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    copyButton.innerHTML = copiedIcon;
-                    setTimeout(() => {
-                        copyButton.innerHTML = copyIcon;
-                    }, 1500);
-                } catch (error) {
-                    console.error("Copy failed: ", error);
-                }
-                document.body.removeChild(textArea);
-            }
-        } catch (error) {
-            console.error("Copy failed: ", error);
-        }
-    });
-
-    if (enable_tts){
-        var audioButton = document.createElement('button');
-        audioButton.classList.add('audio-toggle-btn');
-        audioButton.innerHTML = audioIcon;
-        audioButton.addEventListener('click', async () => {
-            if (audioPlayer.isPlaying) {
-                allow_auto_read_tts_flag = false;
-                toast_push('自动朗读已禁用。', 3000);
-                audioPlayer.stop();
-                setCookie("js_auto_read_cookie", "False", 365);
-
-            } else {
-                allow_auto_read_tts_flag = true;
-                toast_push('正在合成语音 & 自动朗读已开启 (再次点击此按钮可禁用自动朗读)。', 3000);
-                // toast_push('正在合成语音', 3000);
-                const readText = botElement.innerText;
-                prev_chatbot_index = index;
-                prev_text = readText;
-                prev_text_already_pushed = readText;
-                push_text_to_audio(readText);
-                setCookie("js_auto_read_cookie", "True", 365);
-            }
-        });
-    }
-
-    var messageBtnColumn = document.createElement('div');
-    messageBtnColumn.classList.add('message-btn-row');
-    messageBtnColumn.appendChild(copyButton);
-    if (enable_tts){
-        messageBtnColumn.appendChild(audioButton);
-    }
-    botElement.appendChild(messageBtnColumn);
-}
-
 
 let timeoutID = null;
 let lastInvocationTime = 0;
@@ -380,24 +247,6 @@ function do_something_but_not_too_frequently(min_interval, func) {
 }
 
 
-function chatbotContentChanged(attempt = 1, force = false) {
-    // https://github.com/GaiZhenbiao/ChuanhuChatGPT/tree/main/web_assets/javascript
-    for (var i = 0; i < attempt; i++) {
-        setTimeout(() => {
-            const messages = gradioApp().querySelectorAll('#gpt-chatbot .message-wrap .message.bot');
-            messages.forEach((message, index, arr) => {
-                // Check if the current message is the last in the array
-                const is_last_in_arr = index === arr.length - 1;
-
-                // Now pass both the message element and the is_last_in_arr boolean to addCopyButton
-                addCopyButton(message, index, is_last_in_arr);
-            });
-            // gradioApp().querySelectorAll('#gpt-chatbot .message-wrap .message.bot').forEach(addCopyButton);
-        }, i === 0 ? 0 : 200);
-    }
-    // we have moved mermaid-related code to gradio-fix repository: binary-husky/gradio-fix@32150d0
-
-}
 
 
 
@@ -528,7 +377,7 @@ function locate_upload_elems() {
     elem_upload_component = elem_upload.querySelector("input[type=file]");
 }
 
-async function upload_files(files) {
+function upload_files(files) {
     let totalSizeMb = 0
     elem_upload_component_float = elem_upload_float.querySelector("input[type=file]");
     if (files && files.length > 0) {
@@ -550,70 +399,6 @@ async function upload_files(files) {
         } else {
             toast_push(exist_file_msg, 3000);
         }
-    }
-}
-
-
-function register_func_paste(input) {
-    let paste_files = [];
-    if (input) {
-        input.addEventListener("paste", async function (e) {
-            const clipboardData = e.clipboardData || window.clipboardData;
-            const items = clipboardData.items;
-            if (items) {
-                for (i = 0; i < items.length; i++) {
-                    if (items[i].kind === "file") { // 确保是文件类型
-                        const file = items[i].getAsFile();
-                        // 将每一个粘贴的文件添加到files数组中
-                        paste_files.push(file);
-                        e.preventDefault();  // 避免粘贴文件名到输入框
-                    }
-                }
-                if (paste_files.length > 0) {
-                    // 按照文件列表执行批量上传逻辑
-                    await upload_files(paste_files);
-                    paste_files = []
-
-                }
-            }
-        });
-    }
-}
-
-
-function register_func_drag(elem) {
-    if (elem) {
-        const dragEvents = ["dragover"];
-        const leaveEvents = ["dragleave", "dragend", "drop"];
-
-        const onDrag = function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            if (elem_upload_float.querySelector("input[type=file]")) {
-                toast_up('⚠️释放以上传文件')
-            } else {
-                toast_up(exist_file_msg)
-            }
-        };
-
-        const onLeave = function (e) {
-            toast_down();
-            e.preventDefault();
-            e.stopPropagation();
-        };
-
-        dragEvents.forEach(event => {
-            elem.addEventListener(event, onDrag);
-        });
-
-        leaveEvents.forEach(event => {
-            elem.addEventListener(event, onLeave);
-        });
-
-        elem.addEventListener("drop", async function (e) {
-            const files = e.dataTransfer.files;
-            await upload_files(files);
-        });
     }
 }
 
@@ -640,7 +425,7 @@ function elem_upload_component_pop_message(elem) {
                 e.stopPropagation();
             });
         });
-        elem.addEventListener("drop", async function (e) {
+        elem.addEventListener("drop", function (e) {
             toast_push('正在上传中，请稍等。', 2000);
             begin_loading_status();
         });
@@ -699,200 +484,9 @@ window.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-//  第 5 部分: 音频按钮样式变化
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-function audio_fn_init() {
-    let audio_component = document.getElementById('elem_audio');
-    if (audio_component) {
-        let buttonElement = audio_component.querySelector('button');
-        let specificElement = audio_component.querySelector('.hide.sr-only');
-        specificElement.remove();
-
-        buttonElement.childNodes[1].nodeValue = '启动麦克风';
-        buttonElement.addEventListener('click', function (event) {
-            event.stopPropagation();
-            toast_push('您启动了麦克风!下一步请点击“实时语音对话”启动语音对话。');
-        });
-
-        // 查找语音插件按钮
-        let buttons = document.querySelectorAll('button');
-        let audio_button = null;
-        for (let button of buttons) {
-            if (button.textContent.includes('语音')) {
-                audio_button = button;
-                break;
-            }
-        }
-        if (audio_button) {
-            audio_button.addEventListener('click', function () {
-                toast_push('您点击了“实时语音对话”启动语音对话。');
-            });
-            let parent_element = audio_component.parentElement; // 将buttonElement移动到audio_button的内部
-            audio_button.appendChild(audio_component);
-            buttonElement.style.cssText = 'border-color: #00ffe0;border-width: 2px; height: 25px;'
-            parent_element.remove();
-            audio_component.style.cssText = 'width: 250px;right: 0px;display: inline-flex;flex-flow: row-reverse wrap;place-content: stretch space-between;align-items: center;background-color: #ffffff00;';
-        }
-
-    }
-}
-
-
-function minor_ui_adjustment() {
-    let cbsc_area = document.getElementById('cbsc');
-    cbsc_area.style.paddingTop = '15px';
-    var bar_btn_width = [];
-    // 自动隐藏超出范围的toolbar按钮
-    function auto_hide_toolbar() {
-        var qq = document.getElementById('tooltip');
-        var tab_nav = qq.getElementsByClassName('tab-nav');
-        if (tab_nav.length == 0) { return; }
-        var btn_list = tab_nav[0].getElementsByTagName('button')
-        if (btn_list.length == 0) { return; }
-        // 获取页面宽度
-        var page_width = document.documentElement.clientWidth;
-        // 总是保留的按钮数量
-        const always_preserve = 2;
-        // 获取最后一个按钮的右侧位置
-        var cur_right = btn_list[always_preserve - 1].getBoundingClientRect().right;
-        if (bar_btn_width.length == 0) {
-            // 首次运行，记录每个按钮的宽度
-            for (var i = 0; i < btn_list.length; i++) {
-                bar_btn_width.push(btn_list[i].getBoundingClientRect().width);
-            }
-        }
-        // 处理每一个按钮
-        for (var i = always_preserve; i < btn_list.length; i++) {
-            var element = btn_list[i];
-            var element_right = element.getBoundingClientRect().right;
-            if (element_right != 0) { cur_right = element_right; }
-            if (element.style.display === 'none') {
-                if ((cur_right + bar_btn_width[i]) < (page_width * 0.37)) {
-                    // 恢复显示当前按钮
-                    element.style.display = 'block';
-                    return;
-                } else {
-                    return;
-                }
-            } else {
-                if (cur_right > (page_width * 0.38)) {
-                    // 隐藏当前按钮以及右侧所有按钮
-                    for (var j = i; j < btn_list.length; j++) {
-                        if (btn_list[j].style.display !== 'none') {
-                            btn_list[j].style.display = 'none';
-                        }
-                    }
-                    return;
-                }
-            }
-        }
-    }
-
-    setInterval(function () {
-        auto_hide_toolbar();
-    }, 200); // 每50毫秒执行一次
-}
-
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-//  对提交按钮的下拉选框做的变化
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-function ButtonWithDropdown_init() {
-    let submitButton = document.querySelector('button#elem_submit_visible');
-    let submitDropdown = document.querySelector('#gpt-submit-dropdown');
-    function updateDropdownWidth() {
-        if (submitButton) {
-            let setWidth = submitButton.clientWidth + submitDropdown.clientWidth;
-            let setLeft = -1 * submitButton.clientWidth;
-            document.getElementById('submit-dropdown-style')?.remove();
-            const styleElement = document.createElement('style');
-            styleElement.id = 'submit-dropdown-style';
-            styleElement.innerHTML = `#gpt-submit-dropdown ul.options { width: ${setWidth}px; left: ${setLeft}px; }`;
-            document.head.appendChild(styleElement);
-        }
-    }
-    window.addEventListener('resize', updateDropdownWidth);
-    updateDropdownWidth();
-}
-
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-//  第 6 部分: 避免滑动
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-let prevented_offset = 0;
-function limit_scroll_position() {
-    let scrollableDiv = document.querySelector('#gpt-chatbot > div.wrap');
-    scrollableDiv.addEventListener('wheel', function (e) {
-        let preventScroll = false;
-        if (e.deltaX != 0) { prevented_offset = 0; return; }
-        if (this.scrollHeight == this.clientHeight) { prevented_offset = 0; return; }
-        if (e.deltaY < 0) { prevented_offset = 0; return; }
-        if (e.deltaY > 0 && this.scrollHeight - this.clientHeight - this.scrollTop <= 1) { preventScroll = true; }
-
-        if (preventScroll) {
-            prevented_offset += e.deltaY;
-            if (Math.abs(prevented_offset) > 499) {
-                if (prevented_offset > 500) { prevented_offset = 500; }
-                if (prevented_offset < -500) { prevented_offset = -500; }
-                preventScroll = false;
-            }
-        } else {
-            prevented_offset = 0;
-        }
-        if (preventScroll) {
-            e.preventDefault();
-            return;
-        }
-    }, { passive: false }); // Passive event listener option should be false
-}
-
-
-
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 //  第 7 部分: JS初始化函数
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
-function loadLive2D() {
-    if (document.querySelector(".waifu") )
-    {
-        $('.waifu').show();
-    } else {
-        try {
-            $("<link>").attr({ href: "file=themes/waifu_plugin/waifu.css", rel: "stylesheet", type: "text/css" }).appendTo('head');
-            $('body').append('<div class="waifu"><div class="waifu-tips"></div><canvas id="live2d" class="live2d"></canvas><div class="waifu-tool"><span class="fui-home"></span> <span class="fui-chat"></span> <span class="fui-eye"></span> <span class="fui-user"></span> <span class="fui-photo"></span> <span class="fui-info-circle"></span> <span class="fui-cross"></span></div></div>');
-            $.ajax({
-                url: "file=themes/waifu_plugin/waifu-tips.js", dataType: "script", cache: true, success: function () {
-                    $.ajax({
-                        url: "file=themes/waifu_plugin/live2d.js", dataType: "script", cache: true, success: function () {
-                            /* 可直接修改部分参数 */
-                            live2d_settings['hitokotoAPI'] = "hitokoto.cn";  // 一言 API
-                            live2d_settings['modelId'] = 3;                  // 默认模型 ID
-                            live2d_settings['modelTexturesId'] = 44;          // 默认材质 ID
-                            live2d_settings['modelStorage'] = false;         // 不储存模型 ID
-                            live2d_settings['waifuSize'] = '210x187';
-                            live2d_settings['waifuTipsSize'] = '187x52';
-                            live2d_settings['canSwitchModel'] = true;
-                            live2d_settings['canSwitchTextures'] = true;
-                            live2d_settings['canSwitchHitokoto'] = false;
-                            live2d_settings['canTakeScreenshot'] = false;
-                            live2d_settings['canTurnToHomePage'] = false;
-                            live2d_settings['canTurnToAboutPage'] = false;
-                            live2d_settings['showHitokoto'] = false;          // 显示一言
-                            live2d_settings['showF12Status'] = false;         // 显示加载状态
-                            live2d_settings['showF12Message'] = false;        // 显示看板娘消息
-                            live2d_settings['showF12OpenMsg'] = false;        // 显示控制台打开提示
-                            live2d_settings['showCopyMessage'] = false;       // 显示 复制内容 提示
-                            live2d_settings['showWelcomeMessage'] = true;     // 显示进入面页欢迎词
-                            /* 在 initModel 前添加 */
-                            initModel("file=themes/waifu_plugin/waifu-tips.json");
-                        }
-                    });
-                }
-            });
-        } catch (err) { console.log("[Error] JQuery is not defined.") }
-    }
-}
 
 
 function get_checkbox_selected_items(elem_id) {
@@ -923,12 +517,14 @@ function gpt_academic_gradio_saveload(
         let value = getCookie(cookie_key);
         if (value) {
             console.log('加载cookie', elem_id, value)
-            push_data_to_gradio_component(value, elem_id, load_type);
+            //push_data_to_gradio_component(value, elem_id, load_type);
+            return value;
         }
         else {
             if (load_default) {
                 console.log('加载cookie的默认值', elem_id, load_default_value)
-                push_data_to_gradio_component(load_default_value, elem_id, load_type);
+                //push_data_to_gradio_component(load_default_value, elem_id, load_type);
+                return load_default_value;
             }
         }
     }
@@ -942,220 +538,11 @@ function reset_conversation(a, b) {
     // console.log("js_code_reset");
     a = btoa(unescape(encodeURIComponent(JSON.stringify(a))));
     setCookie("js_previous_chat_cookie", a, 1);
-    gen_restore_btn();
     return [[], [], "已重置"];
 }
 
-// clear -> 将 history 缓存至 history_cache -> 点击复原 -> restore_previous_chat() -> 触发elem_update_history -> 读取 history_cache
-function restore_previous_chat() {
-    console.log("restore_previous_chat");
-    let chat = getCookie("js_previous_chat_cookie");
-    chat = JSON.parse(decodeURIComponent(escape(atob(chat))));
-    push_data_to_gradio_component(chat, "gpt-chatbot", "obj");
-    document.querySelector("#elem_update_history").click(); // in order to call set_history_gr_state, and send history state to server
-}
 
-function gen_restore_btn() {
-
-
-    // 创建按钮元素
-    const button = document.createElement('div');
-    // const recvIcon = '<span><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height=".8em" width=".8em" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"></polyline></svg></span>';
-    const rec_svg = '<svg t="1714361184567" style="transform:translate(1px, 2.5px)" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4389" width="35" height="35"><path d="M320 512h384v64H320zM320 384h384v64H320zM320 640h192v64H320z" p-id="4390" fill="#ffffff"></path><path d="M863.7 544c-1.9 44-11.4 86.8-28.5 127.2-18.5 43.8-45.1 83.2-78.9 117-33.8 33.8-73.2 60.4-117 78.9C593.9 886.3 545.7 896 496 896s-97.9-9.7-143.2-28.9c-43.8-18.5-83.2-45.1-117-78.9-33.8-33.8-60.4-73.2-78.9-117C137.7 625.9 128 577.7 128 528s9.7-97.9 28.9-143.2c18.5-43.8 45.1-83.2 78.9-117s73.2-60.4 117-78.9C398.1 169.7 446.3 160 496 160s97.9 9.7 143.2 28.9c23.5 9.9 45.8 22.2 66.5 36.7l-119.7 20 9.9 59.4 161.6-27 59.4-9.9-9.9-59.4-27-161.5-59.4 9.9 19 114.2C670.3 123.8 586.4 96 496 96 257.4 96 64 289.4 64 528s193.4 432 432 432c233.2 0 423.3-184.8 431.7-416h-64z" p-id="4391" fill="#ffffff"></path></svg>'
-    const recvIcon = '<span>' + rec_svg + '</span>';
-
-    // 设置按钮的样式和属性
-    button.id = 'floatingButton';
-    button.className = 'glow';
-    button.style.textAlign = 'center';
-    button.style.position = 'fixed';
-    button.style.bottom = '10px';
-    button.style.left = '10px';
-    button.style.width = '50px';
-    button.style.height = '50px';
-    button.style.borderRadius = '50%';
-    button.style.backgroundColor = '#007bff';
-    button.style.color = 'white';
-    button.style.display = 'flex';
-    button.style.alignItems = 'center';
-    button.style.justifyContent = 'center';
-    button.style.cursor = 'pointer';
-    button.style.transition = 'all 0.3s ease';
-    button.style.boxShadow = '0 0 10px rgba(0,0,0,0.2)';
-
-    button.innerHTML = recvIcon;
-
-    // 添加发光动画的关键帧
-    const styleSheet = document.createElement('style');
-    styleSheet.id = 'floatingButtonStyle';
-    styleSheet.innerText = `
-    @keyframes glow {
-        from {
-        box-shadow: 0 0 10px rgba(0,0,0,0.2);
-        }
-        to {
-        box-shadow: 0 0 13px rgba(0,0,0,0.5);
-        }
-    }
-    #floatingButton.glow {
-        animation: glow 1s infinite alternate;
-    }
-    #floatingButton:hover {
-        transform: scale(1.2);
-        box-shadow: 0 0 20px rgba(0,0,0,0.4);
-    }
-    #floatingButton.disappearing {
-        animation: shrinkAndDisappear 0.5s forwards;
-    }
-    `;
-
-    // only add when not exist
-    if (!document.getElementById('recvButtonStyle'))
-    {
-        document.head.appendChild(styleSheet);
-    }
-
-    // 鼠标悬停和移开的事件监听器
-    button.addEventListener('mouseover', function () {
-        this.textContent = "还原\n对话";
-    });
-
-    button.addEventListener('mouseout', function () {
-        this.innerHTML = recvIcon;
-    });
-
-    // 点击事件监听器
-    button.addEventListener('click', function () {
-        // 添加一个类来触发缩小和消失的动画
-        restore_previous_chat();
-        this.classList.add('disappearing');
-        // 在动画结束后移除按钮
-        document.body.removeChild(this);
-    });
-    // only add when not exist
-    if (!document.getElementById('recvButton'))
-    {
-        document.body.appendChild(button);
-    }
-
-    // 将按钮添加到页面中
-
-}
-
-async function on_plugin_exe_complete(fn_name) {
-    console.log(fn_name);
-    if (fn_name === "保存当前的对话") {
-        // get chat profile path
-        let chatbot = await get_data_from_gradio_component('gpt-chatbot');
-        let may_have_chat_profile_info = chatbot[chatbot.length - 1][1];
-
-        function get_href(htmlString) {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(htmlString, 'text/html');
-            const anchor = doc.querySelector('a');
-
-            if (anchor) {
-                return anchor.getAttribute('href');
-            } else {
-                return null;
-            }
-        }
-        let href = get_href(may_have_chat_profile_info);
-        if (href) {
-            const cleanedHref = href.replace('file=', ''); // /home/fuqingxu/chatgpt_academic/gpt_log/default_user/chat_history/GPT-Academic对话存档2024-04-12-00-35-06.html
-            console.log(cleanedHref);
-        }
-
-    }
-}
-
-
-async function generate_menu(guiBase64String, btnName){
-    // assign the button and menu data
-    push_data_to_gradio_component(guiBase64String, "invisible_current_pop_up_plugin_arg", "string");
-    push_data_to_gradio_component(btnName, "invisible_callback_btn_for_plugin_exe", "string");
-
-    // Base64 to dict
-    const stringData = atob(guiBase64String);
-    let guiJsonData = JSON.parse(stringData);
-    let menu = document.getElementById("plugin_arg_menu");
-    gui_args = {}
-    for (const key in guiJsonData) {
-        if (guiJsonData.hasOwnProperty(key)) {
-            const innerJSONString = guiJsonData[key];
-            const decodedObject = JSON.parse(innerJSONString);
-            gui_args[key] = decodedObject;
-        }
-    }
-
-    // 使参数菜单显现
-    push_data_to_gradio_component({
-        visible: true,
-        __type__: 'update'
-    }, "plugin_arg_menu", "obj");
-    hide_all_elem();
-    // 根据 gui_args, 使得对应参数项显现
-    let text_cnt = 0;
-    let dropdown_cnt = 0;
-    // PLUGIN_ARG_MENU
-    for (const key in gui_args) {
-        if (gui_args.hasOwnProperty(key)) {
-
-            ///////////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////    Textbox   ////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////
-            if (gui_args[key].type=='string'){ // PLUGIN_ARG_MENU
-                const component_name = "plugin_arg_txt_" + text_cnt;
-                push_data_to_gradio_component({
-                    visible: true,
-                    label: gui_args[key].title + "(" + gui_args[key].description +  ")",
-                    // label: gui_args[key].title,
-                    placeholder: gui_args[key].description,
-                    __type__: 'update'
-                }, component_name, "obj");
-                if (key === "main_input"){
-                    // 为了与旧插件兼容，生成菜单时，自动加载输入栏的值
-                    let current_main_input = await get_data_from_gradio_component('user_input_main');
-                    let current_main_input_2 = await get_data_from_gradio_component('user_input_float');
-                    push_data_to_gradio_component(current_main_input + current_main_input_2, component_name, "obj");
-                }
-                else if (key === "advanced_arg"){
-                    // 为了与旧插件兼容，生成菜单时，自动加载旧高级参数输入区的值
-                    let advance_arg_input_legacy = await get_data_from_gradio_component('advance_arg_input_legacy');
-                    push_data_to_gradio_component(advance_arg_input_legacy, component_name, "obj");
-                }
-                else {
-                    push_data_to_gradio_component(gui_args[key].default_value, component_name, "obj");
-                }
-                document.getElementById(component_name).parentNode.parentNode.style.display = '';
-                text_cnt += 1;
-            }
-
-            ///////////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////    Dropdown   ////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////
-            if (gui_args[key].type=='dropdown'){ // PLUGIN_ARG_MENU
-                const component_name = "plugin_arg_drop_" + dropdown_cnt;
-                push_data_to_gradio_component({
-                    visible: true,
-                    choices: gui_args[key].options,
-                    label: gui_args[key].title + "(" + gui_args[key].description +  ")",
-                    // label: gui_args[key].title,
-                    placeholder: gui_args[key].description,
-                    __type__: 'update'
-                }, component_name, "obj");
-                push_data_to_gradio_component(gui_args[key].default_value, component_name, "obj");
-                document.getElementById(component_name).parentNode.style.display = '';
-                dropdown_cnt += 1;
-            }
-
-
-        }
-    }
-}
-
-async function execute_current_pop_up_plugin(){
-    let guiBase64String = await get_data_from_gradio_component('invisible_current_pop_up_plugin_arg');
+function execute_current_pop_up_plugin(guiBase64String) {
     const stringData = atob(guiBase64String);
     let guiJsonData = JSON.parse(stringData);
     gui_args = {}
@@ -1170,9 +557,10 @@ async function execute_current_pop_up_plugin(){
     let text_cnt = 0;
     for (const key in gui_args) {
         if (gui_args.hasOwnProperty(key)) {
-            if (gui_args[key].type=='string'){ // PLUGIN_ARG_MENU
-                corrisponding_elem_id = "plugin_arg_txt_"+text_cnt
-                gui_args[key].user_confirmed_value = await get_data_from_gradio_component(corrisponding_elem_id);
+            if (gui_args[key].type == 'string') { // PLUGIN_ARG_MENU
+                corrisponding_elem_id = "plugin_arg_txt_" + text_cnt
+                //gui_args[key].user_confirmed_value = await get_data_from_gradio_component(corrisponding_elem_id);
+                gui_args[key].user_confirmed_value = document.getElementById(corrisponding_elem_id).children[1].children[2].children[0].value;
                 text_cnt += 1;
             }
         }
@@ -1180,49 +568,59 @@ async function execute_current_pop_up_plugin(){
     let dropdown_cnt = 0;
     for (const key in gui_args) {
         if (gui_args.hasOwnProperty(key)) {
-            if (gui_args[key].type=='dropdown'){ // PLUGIN_ARG_MENU
-                corrisponding_elem_id = "plugin_arg_drop_"+dropdown_cnt
-                gui_args[key].user_confirmed_value = await get_data_from_gradio_component(corrisponding_elem_id);
+            if (gui_args[key].type == 'dropdown') { // PLUGIN_ARG_MENU
+                corrisponding_elem_id = "plugin_arg_drop_" + dropdown_cnt
+                //gui_args[key].user_confirmed_value = await get_data_from_gradio_component(corrisponding_elem_id);
+                gui_args[key].user_confirmed_value = document.getElementById(corrisponding_elem_id).children[1].children[2].children[0].children[0].children[0].value;
                 dropdown_cnt += 1;
             }
         }
     }
     // close menu
-    push_data_to_gradio_component({
-        visible: false,
-        __type__: 'update'
-    }, "plugin_arg_menu", "obj");
-    hide_all_elem();
+    //push_data_to_gradio_component({
+    //    visible: false,
+    //    __type__: 'update'
+    //}, "plugin_arg_menu", "obj");
+    //document.getElementById("plugin_arg_menu").style.display = 'none';
+
+
 
     // execute the plugin
-    push_data_to_gradio_component(JSON.stringify(gui_args), "invisible_current_pop_up_plugin_arg_final", "string");
-    document.getElementById("invisible_callback_btn_for_plugin_exe").click();
-
+    //push_data_to_gradio_component(JSON.stringify(gui_args), "invisible_current_pop_up_plugin_arg_final", "string");
+    //document.getElementById('invisible_current_pop_up_plugin_arg_final').children[0].children[1].children[0].value = JSON.stringify(gui_args);
+    //document.getElementById("invisible_callback_btn_for_plugin_exe").click();
+    return JSON.stringify(gui_args)
 }
 
-function hide_all_elem(){
-     // PLUGIN_ARG_MENU
-    for (text_cnt = 0; text_cnt < 8; text_cnt++){
+function hide_all_elem() {
+    // PLUGIN_ARG_MENU
+    for (text_cnt = 0; text_cnt < 8; text_cnt++) {
+        /*
         push_data_to_gradio_component({
             visible: false,
             label: "",
             __type__: 'update'
         }, "plugin_arg_txt_"+text_cnt, "obj");
-        document.getElementById("plugin_arg_txt_"+text_cnt).parentNode.parentNode.style.display = 'none';
+        */
+        document.getElementById("plugin_arg_txt_" + text_cnt).parentNode.parentNode.style.display = 'none';
+        document.getElementById("plugin_arg_txt_" + text_cnt).style.display = 'none';
     }
-    for (dropdown_cnt = 0; dropdown_cnt < 8; dropdown_cnt++){
+    for (dropdown_cnt = 0; dropdown_cnt < 8; dropdown_cnt++) {
+        /*
         push_data_to_gradio_component({
             visible: false,
             choices: [],
             label: "",
             __type__: 'update'
         }, "plugin_arg_drop_"+dropdown_cnt, "obj");
-        document.getElementById("plugin_arg_drop_"+dropdown_cnt).parentNode.style.display = 'none';
+        */
+        document.getElementById("plugin_arg_drop_" + dropdown_cnt).parentNode.style.display = 'none';
+        document.getElementById("plugin_arg_drop_" + dropdown_cnt).style.display = 'none';
     }
 }
 
-function close_current_pop_up_plugin(){
-     // PLUGIN_ARG_MENU
+function close_current_pop_up_plugin() {
+    // PLUGIN_ARG_MENU
     push_data_to_gradio_component({
         visible: false,
         __type__: 'update'
@@ -1233,15 +631,13 @@ function close_current_pop_up_plugin(){
 
 // 生成高级插件的选择菜单
 plugin_init_info_lib = {}
-function register_plugin_init(key, base64String){
+function register_plugin_init(key, base64String) {
     // console.log('x')
     const stringData = atob(base64String);
     let guiJsonData = JSON.parse(stringData);
-    if (key in plugin_init_info_lib)
-    {
+    if (key in plugin_init_info_lib) {
     }
-    else
-    {
+    else {
         plugin_init_info_lib[key] = {};
     }
     plugin_init_info_lib[key].info = guiJsonData.Info;
@@ -1251,28 +647,26 @@ function register_plugin_init(key, base64String){
     plugin_init_info_lib[key].enable_advanced_arg = guiJsonData.AdvancedArgs;
     plugin_init_info_lib[key].arg_reminder = guiJsonData.ArgsReminder;
 }
-function register_advanced_plugin_init_code(key, code){
-    if (key in plugin_init_info_lib)
-    {
+function register_advanced_plugin_init_code(key, code) {
+    if (key in plugin_init_info_lib) {
     }
-    else
-    {
+    else {
         plugin_init_info_lib[key] = {};
     }
     plugin_init_info_lib[key].secondary_menu_code = code;
 }
-function run_advanced_plugin_launch_code(key){
+function run_advanced_plugin_launch_code(key) {
     // convert js code string to function
     generate_menu(plugin_init_info_lib[key].secondary_menu_code, key);
 }
-function on_flex_button_click(key){
-    if (plugin_init_info_lib.hasOwnProperty(key) && plugin_init_info_lib[key].hasOwnProperty('secondary_menu_code')){
+function on_flex_button_click(key) {
+    if (plugin_init_info_lib.hasOwnProperty(key) && plugin_init_info_lib[key].hasOwnProperty('secondary_menu_code')) {
         run_advanced_plugin_launch_code(key);
-    }else{
+    } else {
         document.getElementById("old_callback_btn_for_plugin_exe").click();
     }
 }
-async function run_dropdown_shift(dropdown){
+function run_dropdown_shift(dropdown) {
     let key = dropdown;
     push_data_to_gradio_component({
         value: key,
@@ -1281,7 +675,7 @@ async function run_dropdown_shift(dropdown){
         __type__: 'update'
     }, "elem_switchy_bt", "obj");
 
-    if (plugin_init_info_lib[key].enable_advanced_arg){
+    if (plugin_init_info_lib[key].enable_advanced_arg) {
         push_data_to_gradio_component({
             visible: true,
             label: plugin_init_info_lib[key].label,
@@ -1296,44 +690,11 @@ async function run_dropdown_shift(dropdown){
     }
 }
 
-async function duplicate_in_new_window() {
+function duplicate_in_new_window() {
     // 获取当前页面的URL
     var url = window.location.href;
     // 在新标签页中打开这个URL
     window.open(url, '_blank');
-}
-
-async function run_classic_plugin_via_id(plugin_elem_id){
-    for (key in plugin_init_info_lib){
-        if (plugin_init_info_lib[key].elem_id == plugin_elem_id){
-            // 获取按钮名称
-            let current_btn_name = await get_data_from_gradio_component(plugin_elem_id);
-            // 执行
-            call_plugin_via_name(current_btn_name);
-            return;
-        }
-    }
-    return;
-}
-
-async function call_plugin_via_name(current_btn_name) {
-    gui_args = {}
-    // 关闭菜单 (如果处于开启状态)
-    push_data_to_gradio_component({
-        visible: false,
-        __type__: 'update'
-    }, "plugin_arg_menu", "obj");
-    hide_all_elem();
-    // 为了与旧插件兼容，生成菜单时，自动加载旧高级参数输入区的值
-    let advance_arg_input_legacy = await get_data_from_gradio_component('advance_arg_input_legacy');
-    if (advance_arg_input_legacy.length != 0){
-        gui_args["advanced_arg"] = {};
-        gui_args["advanced_arg"].user_confirmed_value = advance_arg_input_legacy;
-    }
-    // execute the plugin
-    push_data_to_gradio_component(JSON.stringify(gui_args), "invisible_current_pop_up_plugin_arg_final", "string");
-    push_data_to_gradio_component(current_btn_name, "invisible_callback_btn_for_plugin_exe", "string");
-    document.getElementById("invisible_callback_btn_for_plugin_exe").click();
 }
 
 
@@ -1341,10 +702,10 @@ async function call_plugin_via_name(current_btn_name) {
 //  多用途复用提交按钮
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-async function click_real_submit_btn() {
+function click_real_submit_btn() {
     document.getElementById("elem_submit").click();
 }
-async function multiplex_function_begin(multiplex_sel) {
+function multiplex_function_begin(multiplex_sel) {
     if (multiplex_sel === "常规对话") {
         click_real_submit_btn();
         return;
@@ -1355,7 +716,7 @@ async function multiplex_function_begin(multiplex_sel) {
         return;
     }
 }
-async function run_multiplex_shift(multiplex_sel){
+function run_multiplex_shift(multiplex_sel) {
     let key = multiplex_sel;
     if (multiplex_sel === "常规对话") {
         key = "提交";
@@ -1367,3 +728,4 @@ async function run_multiplex_shift(multiplex_sel){
         __type__: 'update'
     }, "elem_submit_visible", "obj");
 }
+

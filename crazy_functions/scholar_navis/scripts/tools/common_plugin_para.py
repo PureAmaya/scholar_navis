@@ -1,11 +1,12 @@
-from .multi_lang import _
+from shared_utils.scholar_navis.multi_lang import _
+from shared_utils.scholar_navis.const_and_singleton import SUPPORT_DISPLAY_LANGUAGE,GPT_SUPPORT_LAMGUAGE
 from shared_utils.config_loader import get_conf
-from .sn_config import CONFIG, GPT_SUPPORT_LAMGUAGE
-from .article_library_ctrl import get_def_user_library_list
 from crazy_functions.plugin_template.plugin_class_template import GptAcademicPluginTemplate, ArgProperty
 
-AUTHENTICATION = get_conf('AUTHENTICATION')
+AUTHENTICATION,LANGUAGE_GPT_PREFER,PRIORITIZE_USE_AI_ASSISTANCE = get_conf('AUTHENTICATION','LANGUAGE_GPT_PREFER','PRIORITIZE_USE_AI_ASSISTANCE')
 NEED_PARA_INDICATOR = _('需要参数')
+
+# ! 后续考虑一下用js的方式暂存输入的内容
 
 class common_plugin_para(GptAcademicPluginTemplate):
     """再次封装的插件面板（
@@ -51,7 +52,7 @@ class common_plugin_para(GptAcademicPluginTemplate):
         
         return  {"main_input":ArgProperty(title=title, description=description , default_value="", type="string").model_dump_json()} # 主输入，自动从输入框同步
     
-    def add_command_selector(self,command: list[str],command_natural_lang: list[str],need_command_para: list[bool]):
+    def add_command_selector(self,command: list[str],command_natural_lang: list[str],need_command_para: list[bool],default_value:str = None):
         """添加命令用的东西。默认的命令已经添加了
         help license about 这些东西就已经有啦
 
@@ -65,17 +66,23 @@ class common_plugin_para(GptAcademicPluginTemplate):
         """
 
         assert len(command) == len(command_natural_lang) == len(need_command_para)
+        if not default_value:default_value = _('无')
+        else: assert default_value in command
         
         command_to_show = [_('无')]
         if len(command) >= 1:
             for index , natural_lang in enumerate(command_natural_lang):
                 # 注册额外的指令
-                command_to_show.append(self.__link_command(command[index],natural_lang,need_command_para[index]))
+                command_with_natural_description = self.__link_command(command[index],natural_lang,need_command_para[index])
+                command_to_show.append(command_with_natural_description)
+                # 也为默认值补全自然语言描述
+                if default_value == command[index]:default_value = command_with_natural_description
 
+        # 三个通用的命令
         command_to_show.extend([self.__link_command('help',_('帮助文档'),False),
                         self.__link_command('license',_('版权信息'),False),
                         self.__link_command('about',_('关于'),False)])
-        para =  {'title':_('辅助指令'),'description':_('使用辅助指令可以实现额外的操作'),'options':command_to_show,'default_value':_('无'),'type':"dropdown"}
+        para =  {'title':_('辅助指令'),'description':_('使用辅助指令可以实现额外的操作'),'options':command_to_show,'default_value':default_value,'type':"dropdown"}
         return {'command':ArgProperty(**para).model_dump_json()}
 
 
@@ -103,7 +110,7 @@ class common_plugin_para(GptAcademicPluginTemplate):
         always_field =True # 先暂时总是使用输入框吧，啥时候前端的下拉列表是动态的再去掉这个
         
         # 如果没有设定用户（也没有总是要求输入框），即所谓的默认用户，就使用下拉式的总结库选择栏
-        if len(AUTHENTICATION) == 0 and (not always_field):
+        if not AUTHENTICATION and (not always_field):
             all = [_('不选择')]
             all.extend(get_def_user_library_list())
             para = {'title':title,'description':description,'options':all,'default_value':_('不选择'),'type':"dropdown"}
@@ -119,7 +126,7 @@ class common_plugin_para(GptAcademicPluginTemplate):
             gui_definition直接可以用的参数
         """
         try:
-            index = GPT_SUPPORT_LAMGUAGE.index(CONFIG['GPT_prefer_language'])
+            index = GPT_SUPPORT_LAMGUAGE.index(LANGUAGE_GPT_PREFER)
         except:
             index = GPT_SUPPORT_LAMGUAGE.index('English')
         
@@ -127,7 +134,10 @@ class common_plugin_para(GptAcademicPluginTemplate):
         return {'gpt_prefer_lang':ArgProperty(**para).model_dump_json()}
     
     def add_use_AI_assistant_selector(self):
-        para = {'title':_('使用AI辅助功能'),'description':_('AI补全信息，速度较慢'),'options':[_('启用'),_('禁用')],'default_value':_('禁用'),'type':"dropdown"}
+        if PRIORITIZE_USE_AI_ASSISTANCE:default = _('启用')
+        else:default = _('禁用')
+        
+        para = {'title':_('使用AI辅助功能'),'description':_('AI补全信息，速度较慢'),'options':[_('启用'),_('禁用')],'default_value':default,'type':"dropdown"}
         return {'ai_assist':ArgProperty(**para).model_dump_json()}
     
     def define_arg_selection_menu(self):
@@ -138,11 +148,11 @@ class common_plugin_para(GptAcademicPluginTemplate):
         - add_command_para_field: 如果命令需要参数，添加一个这个
 
         """
-        raise NotImplementedError("没有重写define_arg_selection_menu")
+        return self.add_command_selector([],[],[])
     
         
     
-    def execute(self,txt, llm_kwargs, plugin_kwargs, chatbot, history, system_prompt, user_request):
+    def execute(txt, llm_kwargs, plugin_kwargs, chatbot, history, system_prompt, user_request):
         """ 开一个新的线程执行该方法
             (check_library_exist_and_assistant负责处理就行，execute只要执行该执行的方法就行)
             

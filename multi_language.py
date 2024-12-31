@@ -34,22 +34,22 @@ import functools
 import re
 import pickle
 import time
-from toolbox import get_conf
+from shared_utils.config_loader import get_conf
 
 CACHE_ONLY = os.environ.get('CACHE_ONLY', False)
 
 CACHE_FOLDER = get_conf('PATH_LOGGING')
 
-blacklist = ['multi-language', CACHE_FOLDER, '.git', 'private_upload', 'multi_language.py', 'build', '.github', '.vscode', '__pycache__', 'venv']
+blacklist = ['multi-language', CACHE_FOLDER, '.git', 'private_upload', 'multi_language.py', 'build', '.github', '.vscode', '__pycache__', 'venv','scholar_navis']
 
-# LANG = "TraditionalChinese"
-# TransPrompt = f"Replace each json value `#` with translated results in Traditional Chinese, e.g., \"原始文本\":\"翻譯後文字\". Keep Json format. Do not answer #."
+LANG = "TraditionalChinese"
+TransPrompt = f"Replace each json value `#` with translated results in Traditional Chinese, e.g., \"原始文本\":\"翻譯後文字\". Keep Json format. Do not answer #."
 
 # LANG = "Japanese"
 # TransPrompt = f"Replace each json value `#` with translated results in Japanese, e.g., \"原始文本\":\"テキストの翻訳\". Keep Json format. Do not answer #."
 
-LANG = "English"
-TransPrompt = f"Replace each json value `#` with translated results in English, e.g., \"原始文本\":\"TranslatedText\". Keep Json format. Do not answer #."
+#LANG = "English"
+#TransPrompt = f"Replace each json value `#` with translated results in English, e.g., \"原始文本\":\"TranslatedText\". Keep Json format. Do not answer #."
 
 
 if not os.path.exists(CACHE_FOLDER):
@@ -522,6 +522,38 @@ def step_2_core_key_translate():
                     with open(file_path_new, 'w', encoding='utf-8') as f:
                         f.write(content)
                     os.remove(file_path)
+                    
+def  step_ex_scholar_navis():
+
+    from shared_utils.scholar_navis.const_and_singleton import SCHOLAR_NAVIS_ROOT_PATH
+    import subprocess
+    import shutil
+    
+    backup_dir = f'./multi-language/{LANG}/'
+    new_sn_dir = os.path.join(backup_dir,'crazy_functions','scholar_navis')
+    
+    dev_dir = os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'scripts','dev')
+    in_dev =  os.path.exists(dev_dir) # 开发版本的设置和库不需要移动。用户自己进行翻译的话当然需要
+    
+    blacklist_sn = ['tmp','dev','memorandum.txt','__pycache__']
+    if in_dev:blacklist_sn.extend(['__pycache__','config.yml','data'])
+    # sn位于黑名单，无法被移动，只能自己写一个
+    shutil.copytree(SCHOLAR_NAVIS_ROOT_PATH,new_sn_dir,ignore=lambda z,w:blacklist_sn)
+
+    
+    config_private_bak_fp = os.path.join(backup_dir,'config_private.py.bak')
+    config_private_fp = os.path.join(backup_dir,'config_private.py')
+    crazy_functional_bak_fp = os.path.join(backup_dir,'crazy_functional.py.bak')
+    need_to_del = [config_private_bak_fp,crazy_functional_bak_fp]
+    if in_dev:need_to_del.append(config_private_fp) # 开发版本，翻译后也删除私有设定
+    for t in need_to_del:
+        if os.path.exists(t):os.remove(t)
+        
+    setup_fp =  os.path.join(new_sn_dir,'setup.py')
+    subprocess.run(['python3', setup_fp]) # 设置 Scholar Navis
+    
+
 step_1_core_key_translate()
 step_2_core_key_translate()
+step_ex_scholar_navis()
 print('Finished, checkout generated results at ./multi-language/')

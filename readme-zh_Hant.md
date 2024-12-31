@@ -6,15 +6,23 @@
 
 ### 事先說明
 
-本軟件基於 gpt_academic（3.83）開發，作為其一款插件執行跨平台任務的前沿分析工具。因為對 gpt_academic 的源碼發生了小幅度的修改（主要是使其能夠調用 Scholar Navis），為遵守 GNU 通用公共许可证第 3.0 版許可證，本庫中亦包含 gpt_academic 的代碼。詳細使用情況和修改內容，可以點擊[這裡](crazy_functions/scholar_navis/doc/zh-Hant/third-party-lisence.md)
+本軟件基於 gpt_academic（3.83）開發，為其衍生作品。遵守 GNU Affero General Public License v3.0 許可證。詳細使用情況和修改內容，可以點擊[這裡](crazy_functions/scholar_navis/doc/zh-Hant/third-party-lisence.md)
 
 ### 簡單介紹
 
-- 將文獻閱讀、了解研究領域進展等需求與 AI 整合的一款工具。與市面上商業化工具不同，該工具可以以更低的成本完成更加精準的分析，了解前人的經驗，探索尚未研究過的領域。
+- 將文獻閱讀、了解研究領域進展等需求與 AI 整合的一款工具。Scholar Navis 是一款橫跨平台工具，可以同時分析總結多篇文獻、了解該領域的發展現狀、認識到這些文章的相似之處、創新點與不足，**並結合自身的知識**，開辟出新的研究方向，在综述的撰寫上也有一定的幫助。
+
+- 可以從眾多文章中找到感興趣的文章，並對這篇文章或其他任何文章進行分析，進一步消化吸收該篇文章。
+
+- 可以與單篇文章甚至大量文章進行對話，通過問答的形式，與 AI 探討研究細節。
+
+- 透過處理上傳的文章，從而減少外界錯誤信息的獲取，在LLM模型的能力範圍內，盡可能地提高分析和對話的準確性。
 
 - “Navis”在拉丁語中是“**船**”的意思，借助這艘船，開辟前人尚未發現的新大陸吧。
 
-- 該工具包含有五個工具：`缓存 pdf 文獻`、`按關鍵詞分析文獻`、`與 AI 交流研究進展`、`精細分析文獻`與`PubMed OpenAccess 文章獲取`，幫助從一個寬泛的研究方向一次性了解多篇文章，再從這些文章中找到更有價值的文章，從中進行了解和學習。
+- 除gpt_academic內置的對話、學術功能之外，Scholar Navis 修改或新引入了多項功能。該工具包含有五個工具：[`PubMed OpenAccess文章獲取`](crazy_functions/scholar_navis/doc/zh-Hant/PubMed-Open-Access-Articles-Download.md)、[`緩存pdf文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Cache-PDF-Articles.md)、[`按關鍵詞分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Summarize-Articles-by-Keywords.md)、[`與AI交流研究進展`](crazy_functions/scholar_navis/doc/zh-Hant/Communicate-with-AI-about-Research-Progress.md)、[`精細分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Fine-grained-Analysis-of-Article.md)，這五項功能組成了最主要的分析管線，是scholar navis目前最為重要的工作流程，幫助從一個廣泛的研究方向一次性了解多篇文章，再從這些文章中找到更有價值的文章，從中進行了解和學習；自定義語言輸出，模型分析過程中使用英語，輸出結果時使用目標語言，打破語言壁壘，快速獲取重要學術信息；基於大語言模型的本地化多語言支持；自定義提供商、API-KEY、模型功能；為一些需要訪問LLM或者是需要文獻信息、網絡請求的部分，設計了緩存機制，減少因為請求而產生的额外耗时；通過大語言模型的文字理解能力，更好的識別文章的doi、標題；自带文件清理機制，適時刪除過期文件。
+
+- 此外，Scholar Navis 也有`摘取有用語句`功能，使用它可以很方便地從大量文章中摘取符合自己要求的語句（並提供翻譯，便於閱讀），對撰寫摘要、綜述和資料收集方面很有幫助。
 
 ### 設計初衷
 
@@ -34,7 +42,7 @@
 
 - 使用簡單。每個可能的使用場景均有其對應的說明文件。
 
-- 支持中文和英語雙語言顯示。（GPT則支持多種語言，<b>**不同GPT對不同語言的支援能力有所不同，GPT的理解能力也會有差異**</b>，此外多語言功能暫時不支援gpt_academic本体）
+- 支持中文和英語雙語言顯示。（GPT則支持多種語言，<b>**不同GPT對不同語言的支援能力有所不同，GPT的理解能力也會有差異**</b>）。
 
 - 指令化。使用一些特定的指令，實現不同的功能。
 
@@ -50,7 +58,13 @@
 
 - 更注重文章的創新性和缺陷。
 
-- 使用緩存，減少訪問LLM大語言模型的次數，降低使用成本，加快處理速度。
+- 使用緩存，減少訪問LLM大語言模型的次數，降低使用成本，加快處理速度。 
+
+- 支持用户自定义API-KEY（支持OpenAI、智譜、通義千問、深度求索和月之暗面），支持自定义OpenAI的URL重定向，支持添加新的模型。
+
+- 網絡服務：在線PDF瀏覽
+
+- API服務：簡易維護提醒
 
 - 借助 gpt_academic，得以實現以下功能：
 
@@ -59,7 +73,7 @@
 > - 繪製思維導圖。借助 gpt_academic 的插件（生成多種 Mermaid 圖表 @Menghuan1918）可以繪製多種類型的思維導圖。
 > - 通用。使用通用的LLM（大語言模型）即可，無需對模型進行微調。
 > - 可控。AI的分析總結和對話，均基於上傳的文章、提供的關鍵詞、提示等可控的內容。
-> - 低成本。使用`moonshot-v1-32k`、`GLM-4-Flash`、`GLM-4-Air`、`qwen-turbo`、`ChatGPT-3.5 turbo`等價格相對低廉的模型即可完成几乎所有任務，因為他們總結分析的材料均來自您上傳的內容，只要AI能夠看懂，就可以使用。 
+> - 低成本。使用如`deepseek-chat`、`moonshot-v1-8k`、`GLM-4-Flash`、`GLM-4-Air`、`qwen-turbo`、`ChatGPT-3.5 turbo`等价格相对低廉的模型即可完成几乎所有任务，因为这些模型总结分析的素材都來自您上传的内容，只要AI能夠理解，就可以使用。
 
 ### 免责聲明
 
@@ -77,7 +91,11 @@
 
 - 僅作為輔助工具，必須輔以必要的人工檢查和處理。<font color=red><b>****我們不推薦在不加檢查、不加修正的情況下，直接採用AI輸出的結果。如果發生任何問題，Scholar Navis 作者及其所屬組織、語言模型提供商、gpt_academic及其有關或衍生內容不負任何責任。****</b></font>
 
+- 您需要知道的是，AGPLv3提供了責任限制（版權人不對使用者在使用過程中造成的損失承擔任何責任），並不提供任何擔保（版權人也不對該軟件品質提供任何擔保）。如果您使用了本AI服務，則默認同意上述內容；否則，請勿使用。
+
 ### 安裝過程
+
+#### 直接安裝
 
 1. 直接下載本項目，並安裝好 Python。
 
@@ -85,21 +103,27 @@
 > 如果還需要 Python 進行其他開發或運行其他應用，推薦使用 conda
 > 如果您正在使用 Linux，相信您有能力自行解決安裝中出現的所有問題
 
-2. 確保 Python 正常安裝後，運行 `setup.py` 即可完成配置與安裝（通常情況下已經安裝完成）。配置過程中，主要是對於顯示語言和 GPT 偏好語言進行設置（GPT 偏好語言在程序中也可以進行選擇）
+2. 確保Python正常安裝後，根據`requirements.txt`完成安裝（通常使用命令 `pip install -r requirements.txt` 實現）。
 
-3. 根據需要，自行修改 `config_private.py` 中的配置內容，尤其是 `API_KEY`（含其他提供商的），並將該 API 所需的模型填寫到 `AVAIL_LLM_MODELS` 中。具體操作說明可以參考[項目配置說明](https://github.com/binary-husky/gpt_academic/wiki/%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E)
+#### Docker 安裝
 
-4. 如果您需要將 Scholar Navis 安裝到其他 gpt_academic 中，可以将 `scholar_navis` 文件夾移動到 `crazy_functions` 中，並運行安裝程序 `setup.py`；如果安裝程序運行異常、或安裝後無法正常運行，可以參考對於 `config_private.py` 和 `crazy_functional.py` 的修改，自行安裝，並手動安裝相關依賴庫。
+        待補充...
 
-5. 此外，[docs](docs) 文件夾中含有多個 gpt_academic 的所有文檔，也可以查閱這些文檔（或訪問[GitHub 頁面](https://github.com/binary-husky/gpt_academic)），非常有益！
+#### 配置
 
-6. 關於 gpt_academic 的其他語言選項：可以參考 [gpt_academic/multi_language.py](https://github.com/binary-husky/gpt_academic/blob/master/multi_language.py) 或使用其他已經翻譯完成的 gpt_academic（Scholar Navis 對 gpt_academic 的修改相當少，可以輕鬆進行移植）。
+1. 根據需要，自行修改`config_private.py`中的配置內容，或者是使用同名的環境變量進行配置。讀取優先級：環境變量 ＞ config_private.py ＞ config.py。config.py在每次更新時可能被覆蓋，不推薦在此文件中修改配置。
+
+2. 此外，[docs](docs) 文件夾中含有多個 gpt_academic 的所有文檔，也可以查閱這些文檔（或訪問[GitHub 頁面](https://github.com/binary-husky/gpt_academic)），非常有益！
+
+3. 也可以使用我們的在線服務。[簡體中文版（中國大陸優化）](https://cn.scholarnavis.com/)、[英文版](https://scholarnavis.com/)。二者除了顯示語言不同和伺服器所在地、線路不同外，其他功能均一致。 
 
 ### 使用教程
 
+#### 對話部分
+
 1. 運行 `main.py` 启用 gpt_academic，在打開的網頁的右側，應當能看到 Scholar Navis 的5個方塊，點擊後可以看到使用提示。<img title="" src="docs/img/scholar_navis_functions -  zh-Hant.png" alt="" data-align="inline" width="448"> <img title="" src="docs/img/function_ui -  zh-Hant.png" alt="" width="130">
 
-2. 5個插件（`PubMed OpenAccess文章獲取`、`緩存pdf文獻`、`按關鍵詞分析文獻`、`與AI交流研究進展`、`精細分析文獻`）其均內置了簡潔的操作指南和功能作用，切換到該工具，`輔助指令` -> `help: 帮助文檔`即可查看。
+2. 5個插件（[`PubMed OpenAccess文章獲取`](crazy_functions/scholar_navis/doc/zh-Hant/PubMed-Open-Access-Articles-Download.md)、[`緩存pdf文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Cache-PDF-Articles.md)、[`按關鍵詞分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Summarize-Articles-by-Keywords.md)、[`與AI交流研究進展`](crazy_functions/scholar_navis/doc/zh-Hant/Communicate-with-AI-about-Research-Progress.md)、[`精細分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Fine-grained-Analysis-of-Article.md)）其均內置了簡潔的操作指南和功能作用，切換到該工具，`輔助指令` -> `help: 帮助文檔`即可查看。
 
 3. 作為一種流水線式工具，一般而言的使用流程為（共四大步，每個功能前均有編號）：
 
@@ -121,42 +145,30 @@ H & G4 --> I[/了解研究進展和缺口\]
 
 4. 如果需要上傳文件，通常為先上傳再運行某個功能。
 
-5. 當然，也可以使用 gpt_academic 其他的功能進行處理。如果覺得有用，最好可以給原項目一個 star！
+5. 此外，用戶也可以在左上角的`「API-KEY」`中輸入自己的密鑰，使用其他中轉服務商，或者是添加額外的自定義模型。
 
-### 簡易開發者文檔
+6. 當然，也可以使用 gpt_academic 其他的功能進行處理。如果覺得有用，最好可以給原項目一個 star！
 
-**在 `crazy_functions\scholar_navis` 文件夾中，除了運行 Scholar Navis 正常運行所需的腳本外，還有以下的文件（夹）：data、i18n、config.yml 和 version。使用過程中如果遇到一些問題，或者是其他情況，可以對這裡進行調整**
+#### 摘取有用語句
 
-- data：運行過程中，儲存著 PubMed 下載的文章，doi 與文章標題對應數據庫（article_doi_title.db）、AI 閱讀全文緩存數據庫（doi_fulltext_ai_understand.db）。當內容不相符或出現嚴重問題時，可以嘗試刪除此文件夾或其中某個文件。
+1. 頁面中有較為詳細的教程文字。通常情況下，上傳PDF（或PDF壓縮包，可選）、上傳額外的PDF（或壓縮包）、設定好針對摘取句子時的內容要求、設定好結構要求（可以理解成滿足內容要求的文本，在行文上的要求）、翻譯語言和最大並行數，即可執行。
 
-- 下載的文章：位於 `data\pubmedOA_download`。僅用於儲存使用內置工具下載的文章，減少不必要的重複下載（當該文件夾中存在名為 PMCID 的 pdf 文件時，則下載器跳過下載，直接使用該緩存）
+2. 運行過程中，會不斷輸出日誌，當任務尚未結束時，日誌會有動畫指示。
 
-- article_doi_title.db：位於 `data\db`。儲存著所有由 PubMed 下載器、元數據讀取、AI 辅助獲取、正則表達式獲取的 doi 和標題的對應關係。用於在展示文章時，輸出文章標題，並提供跳轉到文章發布頁的功能。當數據庫中有儲存時，會跳過對 doi 和 title 的獲取和解析。
+3. 下載文件時，通常下載結果文件即可。
 
-- doi_fulltext_ai_understand.db：位於 `data\db`。儲存著精細分析文章時，AI 閱讀文章的內容。當精細分析文章的 doi 命中時，則直接使用緩存的内容，減少訪問 LLM 的次數
+4. 當需要再次運行時，需要先重置。
 
-- i18n：`gettext` 所需的國際化文本（僅限於 Scholar Navis，不適用於 gpt_academic）。
+### 開發者文檔
 
-- config.yml：儲存著 GPT 偏好語言和顯示語言設定。
-
-- version：儲存著版本號。
-
-**用戶上傳的文章、分析過程中產生的各類文件和緩存，均儲存在 `gpt_log` 中**
-
-- gpt_academic 支持多用戶，如果沒有設置用戶，則所有的處理均以 `default_user` 用戶進行。
-- `gpt_log\ {用户名} \scholar_navis` 中儲存着產生的各類總結庫。總結庫為進行某一領域方向分析的一個單位。
-- `gpt_log\ {用户名} \scholar_navis\tmp`：該用戶運行過程中產生的緩存。每次執行功能之前，均會清除該用戶下的所有緩存。
-- 總結庫 `cache` 文件夾：儲存着新導入的、尚未進行預分析（按照指定的關鍵詞分析文章摘要）、未進行總結的文章，但是他們可能已經進行了預處理（即有同名的 yml 文件，獲取 doi 和標題）。
-- 總結庫 `repository` 文件夾：儲存着所有已經處理完成的文章。
-- 總結庫 `summarization.pdf/txt`：儲存着按照指定關鍵詞分析的结果。pdf僅用於展示給用戶，後續如果需要用到分析結果，只會用 `summarization.txt`
-- 總結庫 `lib_manifest.yml`：儲存着該總結庫的名稱、關鍵詞和該總結庫生成時 Scholar Navis 的版本號。總結库名稱應當與所在文件夾一致。
+        待補充...
 
 ### 版權信息
 
-- Scholar Navis 遵守 GPL-3.0 license 開源許可證。
-
-- 截至目前为止，Scholar Navis 本質上是 [gpt_academic](https://github.com/binary-husky/gpt_academic) 的一个插件，無法獨立使用。特別感謝 gpt_academic 提供了一個強大的模塊化平台。
+- Scholar Navis 遵守 AGPL-3.0 license 開源許可證。 
 
 - 因為對 gpt_academic 進行了修改，根據 GPL-3.0 許可證的要求，亦需要發布修改後的源碼，並注明修改的内容。
 
 - Scholar Navis 引用的所有第三方庫及其許可證信息，對 gpt_academic 的修改和使用，以及更加詳細的版權聲明，可以看[這裡](crazy_functions/scholar_navis/doc/zh-Hant/third-party-lisence.md)。
+
+- 在網頁界面中，Scholar Naivs 功能可以透過輔助指令 `license` 查看許可證和其他第三方版權信息以及 gpt_academic 修改信息；同時也可以使用 `about` 查看關於文件的說明。

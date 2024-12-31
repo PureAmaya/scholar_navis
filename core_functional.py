@@ -6,11 +6,12 @@ from toolbox import clear_line_break
 from toolbox import apply_gpt_academic_string_mask_langbased
 from toolbox import build_gpt_academic_masked_string_langbased
 from textwrap import dedent
+from shared_utils.scholar_navis.multi_lang import _
 
 def get_core_functions():
     return {
 
-        "学术语料润色": {
+        _("学术语料润色"): {
             # [1*] 前缀字符串，会被加在你的输入之前。例如，用来描述你的要求，例如翻译、解释代码、润色等等。
             #      这里填一个提示词字符串就行了，这里为了区分中英文情景搞复杂了一点
             "Prefix":   build_gpt_academic_masked_string_langbased(
@@ -38,7 +39,7 @@ def get_core_functions():
         },
 
 
-        "总结绘制脑图": {
+        _("总结绘制脑图"): {
             # 前缀，会被加在你的输入之前。例如，用来描述你的要求，例如翻译、解释代码、润色等等
             "Prefix":   '''"""\n\n''',
             # 后缀，会被加在你的输入之后。例如，配合前缀可以把你的输入内容用引号圈起来
@@ -68,7 +69,7 @@ def get_core_functions():
         },
 
 
-        "查找语法错误": {
+        _("查找语法错误"): {
             "Prefix":   r"Help me ensure that the grammar and the spelling is correct. "
                         r"Do not try to polish the text, if no mistake is found, tell me that this paragraph is good. "
                         r"If you find grammar or spelling mistakes, please list mistakes you find in a two-column markdown table, "
@@ -89,13 +90,13 @@ def get_core_functions():
         },
 
 
-        "中译英": {
+        _("中译英"): {
             "Prefix":   r"Please translate following sentence to English:" + "\n\n",
             "Suffix":   r"",
         },
 
 
-        "学术英中互译": {
+        _("学术英中互译"): {
             "Prefix":   build_gpt_academic_masked_string_langbased(
                             text_show_chinese=
                                 r"I want you to act as a scientific English-Chinese translator, "
@@ -116,14 +117,14 @@ def get_core_functions():
         },
 
 
-        "英译中": {
+        _("英译中"): {
             "Prefix":   r"翻译成地道的中文：" + "\n\n",
             "Suffix":   r"",
             "Visible":  False,
         },
 
 
-        "找图片": {
+        _("找图片"): {
             "Prefix":   r"我需要你找一张网络图片。使用Unsplash API(https://source.unsplash.com/960x640/?<英语关键词>)获取图片URL，"
                         r"然后请使用Markdown格式封装，并且不要有反斜线，不要用代码块。现在，请按以下描述给我发送图片：" + "\n\n",
             "Suffix":   r"",
@@ -131,13 +132,13 @@ def get_core_functions():
         },
 
 
-        "解释代码": {
+        _("解释代码"): {
             "Prefix":   r"请解释以下代码：" + "\n```\n",
             "Suffix":   "\n```\n",
         },
 
 
-        "参考文献转Bib": {
+        _("参考文献转Bib"): {
             "Prefix":   r"Here are some bibliography items, please transform them into bibtex style."
                         r"Note that, reference styles maybe more than one kind, you should transform each item correctly."
                         r"Items need to be transformed:" + "\n\n",
@@ -171,5 +172,5 @@ def handle_core_functionality(additional_fn, inputs, history, chatbot):
         return inputs, history
 
 if __name__ == "__main__":
-    t = get_core_functions()["总结绘制脑图"]
+    t = get_core_functions()[_("总结绘制脑图")]
     print(t["Prefix"] + t["Suffix"])

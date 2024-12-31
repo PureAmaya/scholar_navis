@@ -1,5 +1,7 @@
-from toolbox import update_ui, get_conf, trimmed_format_exc, get_max_token, Singleton
+from toolbox import update_ui,trimmed_format_exc, get_max_token, Singleton, update_ui_lastest_msg
+from shared_utils.scholar_navis.multi_lang import _
 from shared_utils.char_visual_effect import scolling_visual_effect
+from shared_utils.config_loader import get_conf
 import threading
 import os
 import logging
@@ -89,7 +91,7 @@ def request_gpt_model_in_new_thread_with_ui_alive(
         while True:
             # watchdog error
             if len(mutable) >= 2 and (time.time()-mutable[1]) > watch_dog_patience:
-                raise RuntimeError("检测到程序终止。")
+                raise RuntimeError(_("检测到程序终止"))
             try:
                 # 【第一种情况】：顺利完成
                 result = predict_no_ui_long_connection(
@@ -106,21 +108,21 @@ def request_gpt_model_in_new_thread_with_ui_alive(
                     MAX_TOKEN = get_max_token(llm_kwargs)
                     EXCEED_ALLO = 512 + 512 * exceeded_cnt
                     inputs, history = input_clipping(inputs, history, max_token_limit=MAX_TOKEN-EXCEED_ALLO)
-                    mutable[0] += f'[Local Message] 警告，文本过长将进行截断，Token溢出数：{n_exceed}。\n\n'
+                    mutable[0] += f'[Local Message] {_("警告，文本过长将进行截断，Token溢出数：")}{n_exceed}。\n\n'
                     continue # 返回重试
                 else:
                     # 【选择放弃】
                     tb_str = '```\n' + trimmed_format_exc() + '```'
-                    mutable[0] += f"[Local Message] 警告，在执行过程中遭遇问题, Traceback：\n\n{tb_str}\n\n"
+                    mutable[0] += f"[Local Message] {_('警告，在执行过程中遭遇问题')}, Traceback：\n\n{tb_str}\n\n"
                     return mutable[0] # 放弃
             except:
                 # 【第三种情况】：其他错误：重试几次
                 tb_str = '```\n' + trimmed_format_exc() + '```'
                 print(tb_str)
-                mutable[0] += f"[Local Message] 警告，在执行过程中遭遇问题, Traceback：\n\n{tb_str}\n\n"
+                mutable[0] += f"[Local Message] {_('警告，在执行过程中遭遇问题')}, Traceback：\n\n{tb_str}\n\n"
                 if retry_op > 0:
                     retry_op -= 1
-                    mutable[0] += f"[Local Message] 重试中，请稍等 {retry_times_at_unknown_error-retry_op}/{retry_times_at_unknown_error}：\n\n"
+                    mutable[0] += f"[Local Message] {_('重试中，请稍等.')} {retry_times_at_unknown_error-retry_op}/{retry_times_at_unknown_error}：\n\n"
                     if ("Rate limit reached" in tb_str) or ("Too Many Requests" in tb_str):
                         time.sleep(30)
                     time.sleep(5)
@@ -133,17 +135,15 @@ def request_gpt_model_in_new_thread_with_ui_alive(
     future = executor.submit(_req_gpt, inputs, history, sys_prompt)
     while True:
         # yield一次以刷新前端页面
-        time.sleep(refresh_interval)
+        time.sleep(refresh_interval/2)
         # “喂狗”（看门狗）
         mutable[1] = time.time()
         if future.done():
             break
-        chatbot[-1] = [chatbot[-1][0], mutable[0]]
-        yield from update_ui(chatbot=chatbot, history=[]) # 刷新界面
+        yield from update_ui_lastest_msg(mutable[0],chatbot=chatbot, history=[],delay=refresh_interval/2) # 刷新界面
 
     final_result = future.result()
-    chatbot[-1] = [chatbot[-1][0], final_result]
-    yield from update_ui(chatbot=chatbot, history=[]) # 如果最后成功了，则删除报错信息
+    yield from update_ui_lastest_msg(final_result,chatbot=chatbot, history=[],delay=refresh_interval/2) # 如果最后成功了，则删除报错信息
     return final_result
 
 def can_multi_process(llm) -> bool:
@@ -216,10 +216,10 @@ def request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency(
     executor = ThreadPoolExecutor(max_workers=max_workers)
     n_frag = len(inputs_array)
     # 用户反馈
-    chatbot.append(["请开始多线程操作。", ""])
+    chatbot.append([_("请开始多线程操作"), ""])
     yield from update_ui(chatbot=chatbot, history=[]) # 刷新界面
     # 跨线程传递
-    mutable = [["", time.time(), "等待中"] for _ in range(n_frag)]
+    mutable = [["", time.time(), _("等待中")] for _V in range(n_frag)]
 
     # 看门狗耐心
     watch_dog_patience = 5
@@ -233,14 +233,14 @@ def request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency(
         detect_timeout = lambda: len(mutable[index]) >= 2 and (time.time()-mutable[index][1]) > watch_dog_patience
         while True:
             # watchdog error
-            if detect_timeout(): raise RuntimeError("检测到程序终止。")
+            if detect_timeout(): raise RuntimeError(_("检测到程序终止"))
             try:
                 # 【第一种情况】：顺利完成
                 gpt_say = predict_no_ui_long_connection(
                     inputs=inputs, llm_kwargs=llm_kwargs, history=history,
                     sys_prompt=sys_prompt, observe_window=mutable[index], console_slience=True
                 )
-                mutable[index][2] = "已成功"
+                mutable[index][2] = _("已成功")
                 return gpt_say
             except ConnectionAbortedError as token_exceeded_error:
                 # 【第二种情况】：Token溢出
@@ -252,40 +252,40 @@ def request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency(
                     MAX_TOKEN = get_max_token(llm_kwargs)
                     EXCEED_ALLO = 512 + 512 * exceeded_cnt
                     inputs, history = input_clipping(inputs, history, max_token_limit=MAX_TOKEN-EXCEED_ALLO)
-                    gpt_say += f'[Local Message] 警告，文本过长将进行截断，Token溢出数：{n_exceed}。\n\n'
+                    gpt_say += f'[Local Message] {_("警告，文本过长将进行截断，Token溢出数: ")}{n_exceed}。\n\n'
                     mutable[index][2] = f"截断重试"
                     continue # 返回重试
                 else:
                     # 【选择放弃】
                     tb_str = '```\n' + trimmed_format_exc() + '```'
-                    gpt_say += f"[Local Message] 警告，线程{index}在执行过程中遭遇问题, Traceback：\n\n{tb_str}\n\n"
-                    if len(mutable[index][0]) > 0: gpt_say += "此线程失败前收到的回答：\n\n" + mutable[index][0]
-                    mutable[index][2] = "输入过长已放弃"
+                    gpt_say += f"[Local Message] {_('警告，线程{}在执行过程中遭遇问题').format(index)}, Traceback：\n\n{tb_str}\n\n"
+                    if len(mutable[index][0]) > 0: gpt_say += _("此线程失败前收到的回答：\n\n") + mutable[index][0]
+                    mutable[index][2] = _("输入过长已放弃")
                     return gpt_say # 放弃
             except:
                 # 【第三种情况】：其他错误
-                if detect_timeout(): raise RuntimeError("检测到程序终止。")
+                if detect_timeout(): raise RuntimeError(_("检测到程序终止"))
                 tb_str = '```\n' + trimmed_format_exc() + '```'
                 print(tb_str)
-                gpt_say += f"[Local Message] 警告，线程{index}在执行过程中遭遇问题, Traceback：\n\n{tb_str}\n\n"
+                gpt_say += f"[Local Message] {_('警告，线程{}在执行过程中遭遇问题').format(index)}, Traceback：\n\n{tb_str}\n\n"
                 if len(mutable[index][0]) > 0: gpt_say += "此线程失败前收到的回答：\n\n" + mutable[index][0]
                 if retry_op > 0:
                     retry_op -= 1
                     wait = random.randint(5, 20)
                     if ("Rate limit reached" in tb_str) or ("Too Many Requests" in tb_str):
                         wait = wait * 3
-                        fail_info = "OpenAI绑定信用卡可解除频率限制 "
+                        fail_info = _("OpenAI绑定信用卡可解除频率限制")
                     else:
                         fail_info = ""
                     # 也许等待十几秒后，情况会好转
                     for i in range(wait):
-                        mutable[index][2] = f"{fail_info}等待重试 {wait-i}"; time.sleep(1)
+                        mutable[index][2] = f"{fail_info} {_('等待重试')} {wait-i}"; time.sleep(1)
                     # 开始重试
-                    if detect_timeout(): raise RuntimeError("检测到程序终止。")
-                    mutable[index][2] = f"重试中 {retry_times_at_unknown_error-retry_op}/{retry_times_at_unknown_error}"
+                    if detect_timeout(): raise RuntimeError(_("检测到程序终止"))
+                    mutable[index][2] = f"{_('重试中')} {retry_times_at_unknown_error-retry_op}/{retry_times_at_unknown_error}"
                     continue # 返回重试
                 else:
-                    mutable[index][2] = "已失败"
+                    mutable[index][2] = _("已失败")
                     wait = 5
                     time.sleep(5)
                     return gpt_say # 放弃
@@ -298,16 +298,16 @@ def request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency(
 
     while True:
         # yield一次以刷新前端页面
-        time.sleep(refresh_interval)
+        time.sleep(refresh_interval/2)
         cnt += 1
         worker_done = [h.done() for h in futures]
         # 更好的UI视觉效果
         observe_win = []
         # 每个线程都要“喂狗”（看门狗）
-        for thread_index, _ in enumerate(worker_done):
+        for thread_index, _C in enumerate(worker_done):
             mutable[thread_index][1] = time.time()
         # 在前端打印些好玩的东西
-        for thread_index, _ in enumerate(worker_done):
+        for thread_index, _V in enumerate(worker_done):
             print_something_really_funny = f"[ ...`{scolling_visual_effect(mutable[thread_index][0], scroller_max_len)}`... ]"
             observe_win.append(print_something_really_funny)
         # 在前端打印些好玩的东西
@@ -315,8 +315,10 @@ def request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency(
                             if not done else f'`{mutable[thread_index][2]}`\n\n'
                             for thread_index, done, obs in zip(range(len(worker_done)), worker_done, observe_win)])
         # 在前端打印些好玩的东西
-        chatbot[-1] = [chatbot[-1][0], f'多线程操作已经开始，完成情况: \n\n{stat_str}' + ''.join(['.']*(cnt % 10+1))]
-        yield from update_ui(chatbot=chatbot, history=[]) # 刷新界面
+        #chatbot[-1] = [chatbot[-1][0], ]
+        #yield from update_ui(chatbot=chatbot, history=[]) # 刷新界面
+        status_str = _("多线程操作已经开始，完成情况:")
+        yield from update_ui_lastest_msg(f'{status_str} \n\n{stat_str}' + ''.join(['.']*(cnt % 10+1)),chatbot,[],refresh_interval/2)
         if all(worker_done):
             executor.shutdown()
             break
@@ -423,7 +425,7 @@ def read_and_clean_pdf_text(fp):
             if REMOVE_FOOT_NOTE:
                 give_up_fize_threshold = main_fsize * REMOVE_FOOT_FFSIZE_PERCENT
         except:
-            raise RuntimeError(f'抱歉, 我们暂时无法解析此PDF文档: {fp}。')
+            raise RuntimeError(_('抱歉, 我们暂时无法解析此PDF文档: {}.').format(fp))
         ############################## <第 3 步，切分和重新整合> ##################################
         mega_sec = []
         sec = []
@@ -492,7 +494,7 @@ def read_and_clean_pdf_text(fp):
             # 对于某些PDF会有第一个段落就以小写字母开头,为了避免索引错误将其更改为大写
             if starts_with_lowercase_word(meta_txt[0]):
                 meta_txt[0] = meta_txt[0].capitalize()
-            for _ in range(100):
+            for _M in range(100):
                 for index, block_txt in enumerate(meta_txt):
                     if starts_with_lowercase_word(block_txt):
                         if meta_txt[index-1] != '\n':
@@ -507,7 +509,7 @@ def read_and_clean_pdf_text(fp):
 
         meta_txt = '\n'.join(meta_txt)
         # 清除重复的换行
-        for _ in range(5):
+        for _V in range(5):
             meta_txt = meta_txt.replace('\n\n', '\n')
 
         # 换行 -> 双换行
@@ -536,6 +538,8 @@ def get_files_from_everything(txt, type): # type='.md'
     """
     import glob, os
 
+    if txt.strip() == '.':txt = '' # 空格输入防止出现问题的那个，这里变成空输入
+
     success = True
     if txt.startswith('http'):
         # 网络的远程文件
@@ -546,7 +550,7 @@ def get_files_from_everything(txt, type): # type='.md'
         try:
             r = requests.get(txt, proxies=proxies)
         except:
-            raise ConnectionRefusedError(f"无法下载资源{txt}，请检查。")
+            raise ConnectionRefusedError(_("无法下载资源{}，请检查.").format(txt))
         path = os.path.join(get_log_folder(plugin_name='web_download'), gen_time_str()+type)
         with open(path, 'wb+') as f: f.write(r.content)
         project_folder = get_log_folder(plugin_name='web_download')
@@ -578,7 +582,7 @@ class nougat_interface():
     def nougat_with_timeout(self, command, cwd, timeout=3600):
         import subprocess
         from toolbox import ProxyNetworkActivate
-        logging.info(f'正在执行命令 {command}')
+        logging.info(_('正在执行命令 {}').format(command))
         with ProxyNetworkActivate("Nougat_Download"):
             process = subprocess.Popen(command, shell=False, cwd=cwd, env=os.environ)
         try:
@@ -594,7 +598,7 @@ class nougat_interface():
     def NOUGAT_parse_pdf(self, fp, chatbot, history):
         from toolbox import update_ui_lastest_msg
 
-        yield from update_ui_lastest_msg("正在解析论文, 请稍候。进度：正在排队, 等待线程锁...",
+        yield from update_ui_lastest_msg(_("正在解析论文, 请稍候。进度：正在排队, 等待线程锁..."),
                                          chatbot=chatbot, history=history, delay=0)
         self.threadLock.acquire()
         import glob, threading, os
@@ -602,14 +606,14 @@ class nougat_interface():
         dst = os.path.join(get_log_folder(plugin_name='nougat'), gen_time_str())
         os.makedirs(dst)
 
-        yield from update_ui_lastest_msg("正在解析论文, 请稍候。进度：正在加载NOUGAT... （提示：首次运行需要花费较长时间下载NOUGAT参数）",
+        yield from update_ui_lastest_msg(_("正在解析论文, 请稍候。进度：正在加载NOUGAT... （提示：首次运行需要花费较长时间下载NOUGAT参数）"),
                                          chatbot=chatbot, history=history, delay=0)
         command = ['nougat', '--out', os.path.abspath(dst), os.path.abspath(fp)]
         self.nougat_with_timeout(command, cwd=os.getcwd(), timeout=3600)
         res = glob.glob(os.path.join(dst,'*.mmd'))
         if len(res) == 0:
             self.threadLock.release()
-            raise RuntimeError("Nougat解析论文失败。")
+            raise RuntimeError(_("Nougat解析论文失败"))
         self.threadLock.release()
         return res[0]
 

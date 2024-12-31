@@ -1,3 +1,7 @@
-- This software is developed based on gpt_academic (version 3.83) and serves as a frontier analysis tool for executing cross-platform tasks, acting as a plugin. Due to minor modifications made to the source code of gpt_academic (primarily to enable it to call Scholar Navis), and in compliance with the GNU General Public License v3.0, the code of gpt_academic is also included in this library. For detailed usage and modification information, please read `readme - en-US.md` and `third-party-licenses.md`.
+- This software is developed based on gpt_academic (3.83) and is a derivative work. It complies with the GNU General Public License v3.0.
 
-- With this tool, you can start from defining a research direction, proceed with a pipeline for downloading articles, formulate a topic, analyze the current state and gaps in the field of research, identify directions that have not yet been explored by predecessors, create detailed summaries of articles of interest, ask questions about unclear areas, and provide answers to those questions.
+- Due to modifications made to gpt_academic, it is required by the GPL-3.0 license to release the modified source code and to note the changes made.
+
+- For all third-party libraries used by Scholar Navis and their license information, modifications and usage of gpt_academic, as well as a more detailed copyright notice, please refer to the README.
+
+- In the web interface, the Scholar Naivs feature can use the auxiliary command `license` to view the license and other third-party copyright information, as well as the modifications to gpt_academic; it can also use `about` to view information about the document.

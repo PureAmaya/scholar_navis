@@ -7,18 +7,18 @@ import os
 import time
 import logging
 
-from toolbox import get_conf, update_ui, log_chat
+from toolbox import update_ui, log_chat
 from toolbox import ChatBotWithCookies
-
+from shared_utils.scholar_navis.multi_lang import _
 import requests
 
 
 class MoonShotInit:
 
-    def __init__(self):
+    def __init__(self,api_key):
         self.llm_model = None
         self.url = 'https://api.moonshot.cn/v1/chat/completions'
-        self.api_key = get_conf('MOONSHOT_API_KEY')
+        self.api_key = api_key
 
     def __converter_file(self, user_input: str):
         what_ask = []
@@ -55,7 +55,7 @@ class MoonShotInit:
                     "role": "assistant",
                     "content": str(history[index + 1])
                 }
-                if what_i_have_asked["content"] != "":
+                if what_i_have_asked["content"]:
                     if what_gpt_answer["content"] == "": continue
                     messages.append(what_i_have_asked)
                     messages.append(what_gpt_answer)
@@ -121,7 +121,7 @@ class MoonShotInit:
 def msg_handle_error(llm_kwargs, chunk_decoded):
     use_ket = llm_kwargs.get('use-key', '')
     api_key_encryption = use_ket[:8] + '****' + use_ket[-5:]
-    openai_website = f' 请登录OpenAI查看详情 https://platform.openai.com/signup  api-key: `{api_key_encryption}`'
+    openai_website = f' {_("请登录OpenAI查看详情")} https://platform.openai.com/signup  api-key: `{api_key_encryption}`'
     error_msg = ''
     if "does not exist" in chunk_decoded:
         error_msg = f"[Local Message] Model {llm_kwargs['llm_model']} does not exist. 模型不存在, 或者您没有获得体验资格."
@@ -150,12 +150,12 @@ def msg_handle_error(llm_kwargs, chunk_decoded):
 def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot:ChatBotWithCookies,
             history:list=[], system_prompt:str='', stream:bool=True, additional_fn:str=None):
     chatbot.append([inputs, ""])
-
+    if not inputs:inputs = ' ' # 空白输入报错
     if additional_fn is not None:
         from core_functional import handle_core_functionality
         inputs, history = handle_core_functionality(additional_fn, inputs, history, chatbot)
     yield from update_ui(chatbot=chatbot, history=history, msg="等待响应")  # 刷新界面
-    gpt_bro_init = MoonShotInit()
+    gpt_bro_init = MoonShotInit(llm_kwargs['custom_api_key']("MOONSHOT_API_KEY"))
     history.extend([inputs, ''])
     stream_response = gpt_bro_init.generate_messages(inputs, llm_kwargs, history, system_prompt, stream)
     for content, gpt_bro_result, error_bro_meg in stream_response:
@@ -171,7 +171,8 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot:ChatBotWith
 
 def predict_no_ui_long_connection(inputs, llm_kwargs, history=[], sys_prompt="", observe_window=None,
                                   console_slience=False):
-    gpt_bro_init = MoonShotInit()
+    if not inputs:inputs = ' ' # 空白输入报错
+    gpt_bro_init = MoonShotInit(llm_kwargs['custom_api_key']("MOONSHOT_API_KEY"))
     watch_dog_patience = 60  # 看门狗的耐心, 设置10秒即可
     stream_response = gpt_bro_init.generate_messages(inputs, llm_kwargs, history, sys_prompt, True)
     moonshot_bro_result = ''

@@ -1,0 +1,105 @@
+
+async function scholar_navis_init(selected_language) {
+
+    // 加载pdf优化器（暂时没啦）
+    //push_data_to_gradio_component('<iframe src="' + window.location.origin + '/file=themes/scholar_navis/local_pdf_optimizer/local_pdf_optimizer.html" width="100%" height="220px"></iframe>', 'local_pdf_optimizer', 'no_conversion');
+
+    
+    try {// 删除旧版本的自定义内容
+        var custom_api_json = JSON.parse(localStorage.getItem('user_custom_data'))
+
+        if (custom_api_json && typeof custom_api_json === 'object' && !Array.isArray(custom_api_json)) {
+            // 删除 localStorage 中的 user_custom_data
+            localStorage.removeItem('user_custom_data');
+
+            // 提醒用户
+            // 先用这个笨方法了。。
+            switch (selected_language) {
+                case 'zh-Hans':
+                    label_head = '旧版本自定义内容已经删除'
+                    break;
+                case 'zh-Hant':
+                    label_head = '舊版本自訂內容已經刪除'
+                    break;
+                case 'en-US':
+                    label_head = 'Old version custom content has been deleted.'
+                    break;
+                default:
+                    label_head = '旧版本自定义内容已经删除: '
+                    break;
+            }
+            alertify.warning(label_head);
+        }
+    }
+    catch (e) {
+        // 忽略错误
+    }               
+
+    check_msg(selected_language);
+}
+
+
+// 定义一个函数来获取 JSON 数据
+async function getJSON(url) {
+    try {
+        // 发起一个 GET 请求到指定的 URL
+        const response = await fetch(url);
+
+        // 检查响应状态码是否表示成功
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        // 解析 JSON 数据
+        const jsonData = await response.json();
+
+        // 返回解析后的 JSON 对象
+        return jsonData;
+    } catch (error) {
+        // 捕获并处理可能发生的错误
+        console.error('There has been a problem with your fetch operation:', error);
+        return null;
+    }
+}
+
+
+// 从 Base64 解码为原始字符串
+function base64ToUtf8(base64) {
+    return decodeURIComponent(window.atob(base64));
+}
+
+window.modal = [];
+
+function BanModalPointEvents() {
+    window.modal.forEach(element => { element.style.pointerEvents = 'none'; });
+    //dropdown_in_modal.forEach(element => {element.style.pointerEvents = 'auto'})
+    // 延迟 0.1 秒后执行 modal 的操作
+    setTimeout(() => {
+        window.modal.forEach(element => {
+            element.style.pointerEvents = 'auto';
+        });
+    }, 100); // 100 毫秒即 0.1 秒
+
+}
+function find_all_modal() {
+    window.modal = document.querySelectorAll('.modal');
+}
+
+function set_dark_mode(enable) {
+    if (enable) {
+        document.querySelector('body').classList.add('dark');
+    } else {
+        document.querySelectorAll('.dark').forEach(el => el.classList.remove('dark'));
+    }
+}
+function dark_mode_init() {
+    const os_prefer_dark_mode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    let dark_mode_enabled = localStorage.getItem('dark_mode_enabled') === 'true' || os_prefer_dark_mode; // 确保为布尔值
+    set_dark_mode(dark_mode_enabled);
+    localStorage.setItem('dark_mode_enabled', dark_mode_enabled); // 存储布尔值
+}
+function dark_mode_toggle() {
+    let dark_mode_enabled = localStorage.getItem('dark_mode_enabled') === 'true'; // 确保为布尔值
+    set_dark_mode(!dark_mode_enabled);
+    localStorage.setItem('dark_mode_enabled', !dark_mode_enabled); // 存储布尔值
+}

@@ -3,11 +3,12 @@ import time
 import logging
 import traceback
 import requests
+from shared_utils.config_loader import get_conf
+from shared_utils.scholar_navis.multi_lang import _
 
 # config_private.py放自己的秘密如API和代理网址
 # 读取时首先看是否存在私密的config_private配置文件（不受git管控），如果有，则覆盖原config文件
 from toolbox import (
-    get_conf,
     update_ui,
     is_the_upload_folder,
 )
@@ -129,15 +130,13 @@ def get_predict_function(
         是否使用代理，True为不使用，False为使用。
     """
 
-    APIKEY = get_conf(api_key_conf_name)
-
     def predict_no_ui_long_connection(
         inputs,
         llm_kwargs,
         history=[],
         sys_prompt="",
         observe_window=None,
-        console_slience=False,
+        console_slience=True,
     ):
         """
         发送至chatGPT，等待回复，一次性完成，不显示中间过程。但内部用stream的方法避免中途网线被掐。
@@ -152,9 +151,10 @@ def get_predict_function(
         observe_window = None：
             用于负责跨越线程传递已经输出的部分，大部分时候仅仅为了fancy的视觉效果，留空即可。observe_window[0]：观测窗。observe_window[1]：看门狗
         """
+        APIKEY = llm_kwargs['custom_api_key'](api_key_conf_name)
         watch_dog_patience = 5  # 看门狗的耐心，设置5秒不准咬人(咬的也不是人
         if len(APIKEY) == 0:
-            raise RuntimeError(f"APIKEY为空,请检查配置文件的{APIKEY}")
+            raise RuntimeError(_("APIKEY为空,请检查配置文件的{}").format(APIKEY))
         if inputs == "":
             inputs = "你好👋"
         headers, playload = generate_message(
@@ -196,7 +196,7 @@ def get_predict_function(
                 if retry > MAX_RETRY:
                     raise TimeoutError
                 if MAX_RETRY != 0:
-                    print(f"请求超时，正在重试 ({retry}/{MAX_RETRY}) ……")
+                    print(f"{_('请求超时，正在重试')} ({retry}/{MAX_RETRY}) ……")
 
         stream_response = response.iter_lines()
         result = ""
@@ -206,7 +206,7 @@ def get_predict_function(
                 chunk = next(stream_response)
             except StopIteration:
                 if result == "":
-                    raise RuntimeError(f"获得空的回复，可能原因:{finish_reason}")
+                    raise RuntimeError(f"{_('获得空的回复，可能原因: ')}{finish_reason}")
                 break
             except requests.exceptions.ConnectionError:
                 chunk = next(stream_response)  # 失败了，重试一次？再失败就没办法了。
@@ -221,7 +221,7 @@ def get_predict_function(
                 chunk_decoded = chunk.decode()
                 print(chunk_decoded)
                 raise RuntimeError(
-                    f"API异常,请检测终端输出。可能的原因是:{finish_reason}"
+                    _('API异常,请检测终端输出。可能的原因是: {}').format(finish_reason)
                 )
             if chunk:
                 try:
@@ -244,7 +244,7 @@ def get_predict_function(
                     chunk_decoded = chunk.decode()
                     error_msg = chunk_decoded
                     print(error_msg)
-                    raise RuntimeError("Json解析不合常规")
+                    raise RuntimeError(_("Json解析不合常规"))
         return result
 
     def predict(
@@ -266,8 +266,9 @@ def get_predict_function(
         chatbot 为WebUI中显示的对话列表，修改它，然后yeild出去，可以直接修改对话界面内容
         additional_fn代表点击的哪个按钮，按钮见functional.py
         """
+        APIKEY = llm_kwargs['custom_api_key'](api_key_conf_name)
         if len(APIKEY) == 0:
-            raise RuntimeError(f"APIKEY为空,请检查配置文件的{APIKEY}")
+            raise RuntimeError(_("APIKEY为空,请检查配置文件的{}".format(APIKEY)))
         if inputs == "":
             inputs = "你好👋"
         if additional_fn is not None:
@@ -279,7 +280,7 @@ def get_predict_function(
         logging.info(f"[raw_input] {inputs}")
         chatbot.append((inputs, ""))
         yield from update_ui(
-            chatbot=chatbot, history=history, msg="等待响应"
+            chatbot=chatbot, history=history, msg=_("等待响应")
         )  # 刷新界面
 
         # check mis-behavior
@@ -333,10 +334,10 @@ def get_predict_function(
                 retry += 1
                 chatbot[-1] = (chatbot[-1][0], timeout_bot_msg)
                 retry_msg = (
-                    f"，正在重试 ({retry}/{MAX_RETRY}) ……" if MAX_RETRY > 0 else ""
+                    f", Retrying ({retry}/{MAX_RETRY}) ……" if MAX_RETRY > 0 else ""
                 )
                 yield from update_ui(
-                    chatbot=chatbot, history=history, msg="请求超时" + retry_msg
+                    chatbot=chatbot, history=history, msg=_("请求超时") + retry_msg
                 )  # 刷新界面
                 if retry > MAX_RETRY:
                     raise TimeoutError
@@ -368,13 +369,13 @@ def get_predict_function(
                         chunk_decoded = chunk.decode()
                         chatbot[-1] = (
                             chatbot[-1][0],
-                            "[Local Message] {finish_reason},获得以下报错信息：\n"
+                            _("[Local Message] {},获得以下报错信息：\n").format(finish_reason)
                             + chunk_decoded,
                         )
                         yield from update_ui(
                             chatbot=chatbot,
                             history=history,
-                            msg="API异常:" + chunk_decoded,
+                            msg=_("API异常: ") + chunk_decoded,
                         )  # 刷新界面
                         print(chunk_decoded)
                         return
@@ -392,16 +393,16 @@ def get_predict_function(
                     )  # 刷新界面
                 except Exception as e:
                     yield from update_ui(
-                        chatbot=chatbot, history=history, msg="Json解析不合常规"
+                        chatbot=chatbot, history=history, msg=_("Json解析不合常规")
                     )  # 刷新界面
                     chunk = get_full_error(chunk, stream_response)
                     chunk_decoded = chunk.decode()
                     chatbot[-1] = (
                         chatbot[-1][0],
-                        "[Local Message] 解析错误,获得以下报错信息：\n" + chunk_decoded,
+                        f"[Local Message] {_('解析错误,获得以下报错信息：')}\n" + chunk_decoded,
                     )
                     yield from update_ui(
-                        chatbot=chatbot, history=history, msg="Json异常" + chunk_decoded
+                        chatbot=chatbot, history=history, msg=_("Json异常") + chunk_decoded
                     )  # 刷新界面
                     print(chunk_decoded)
                     return

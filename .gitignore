@@ -8,7 +8,6 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
 develop-eggs/
 dist/
 downloads/
@@ -161,10 +160,15 @@ objdump*
 *.min.*.js
 
 # scholar_navis
-crazy_functions/scholar_navis/data
-crazy_functions/scholar_navis/tmp
+dev/
+dev.py
+notification/
+tmp/
+data/
 crazy_functions/scholar_navis/scripts/dev
 crazy_functions/scholar_navis/memorandum.txt
+memorandum.txt
 crazy_functions/scholar_navis/config.yml
 *.bak
+local_llm_function.py
 

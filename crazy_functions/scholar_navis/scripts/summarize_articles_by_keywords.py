@@ -2,16 +2,21 @@ import os
 import yaml
 import glob
 import shutil
+from datetime import datetime
+from shared_utils.scholar_navis.other_tools import generate_download_file
+from shared_utils.scholar_navis.const_and_singleton import VERSION
 from time import sleep,time
-from .tools import pdf_reader
-from .tools.multi_lang import _
+from shared_utils.scholar_navis import pdf_reader
+from shared_utils.scholar_navis.multi_lang import _
 from multiprocessing import cpu_count
+from threading import Lock
 from concurrent.futures import ThreadPoolExecutor
 from .tools.common_plugin_para import common_plugin_para
 from toolbox import CatchException, get_log_folder, get_user, update_ui, update_ui_lastest_msg
-from .tools.article_library_ctrl import check_library_exist_and_assistant, download_file, lib_manifest, pdf_yaml,markdown_to_pdf
-from ...crazy_utils import request_gpt_model_in_new_thread_with_ui_alive, request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency
+from .tools.article_library_ctrl import check_library_exist_and_assistant, lib_manifest, pdf_yaml,markdown_to_pdf
+from crazy_functions.crazy_utils import request_gpt_model_in_new_thread_with_ui_alive, request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency
 
+lock = Lock()
 
 @check_library_exist_and_assistant(accept_nonexistent=False, accept_blank=False)
 @CatchException
@@ -63,11 +68,10 @@ def 按关键词总结文献(txt, llm_kwargs, plugin_kwargs, chatbot, history, s
 
     # 判断本工具的工作流是否完成（该有的文件有了，该移动走的文件移走了）。
     # 防止重重复预处理
-    pdfs_in_cache = glob.glob(f"{cache_dir}/*.pdf")
-    pdf_yamls_in_cache = glob.glob(f"{cache_dir}/*.yml")
-    pdfs_in_repo = glob.glob(f"{repo_dir}/*.pdf")  # 测试过了，路径不存在返回[]
-    workflow_done = len(pdfs_in_cache) == 0 and len(
-        pdfs_in_repo) > 1 and os.path.exists(summarization_file_fp)
+    pdfs_in_cache = glob.glob(os.path.join(cache_dir,"*.pdf"))
+    pdf_yamls_in_cache = glob.glob(os.path.join(cache_dir,"*.yml"))
+    pdfs_in_repo =  glob.glob(os.path.join(repo_dir,"*.pdf")) # 测试过了，路径不存在返回[]
+    workflow_done = os.path.exists(summarization_file_fp)
 
     # 完成了所有的工作
     if workflow_done:
@@ -94,8 +98,12 @@ def 按关键词总结文献(txt, llm_kwargs, plugin_kwargs, chatbot, history, s
                 summarization_content = file.read()
                 # 假如pdf没了，生成一个
                 if not os.path.exists(summarization_pdf_fp):
-                    markdown_to_pdf(summarization_content,'Summarize Articles by Keywords - Scholar Navis').save(summarization_pdf_fp)
-                chatbot.append([summarization_content,f'<a href="file={os.path.relpath(summarization_pdf_fp)}" target="_blank">{_("点击这里下载pdf格式的总结内容")}</a>'])
+                    markdown_to_pdf(summarization_content,'summarization',os.path.dirname(summarization_pdf_fp))
+                chatbot.append([summarization_content,generate_download_file(summarization_pdf_fp,_('点击这里下载pdf格式的总结内容'))])
+                # 提醒一下不能用的PDF
+                chatbot.append(_unusable_pdf_message(this_library_root_dir))
+                # 提醒一下不能对话
+                chatbot.append([_('请注意，本功能不支持对话。'),_('如果要使用对话功能，请使用 <b>与AI交流研究进展</b>')])
             yield from update_ui(chatbot=chatbot, history=[])  # 刷新界面
             return
 
@@ -123,7 +131,8 @@ def 按关键词总结文献(txt, llm_kwargs, plugin_kwargs, chatbot, history, s
             yield from update_ui(chatbot=chatbot, history=history)  # 刷新界面
 
     # 如果缓存中有待分析的pdf文件，那就先预处理吧
-    else:
+    # 针对重新分析，此时工作流已经完成，及时cache中有没有分析的文章（一般是不能用的），也跳过
+    elif not workflow_done:
         
         timer = 0
         
@@ -157,11 +166,13 @@ def 按关键词总结文献(txt, llm_kwargs, plugin_kwargs, chatbot, history, s
                     _pdf_manifests_fp.append(f'{pdf_fp[:-4]}.yml')
                     continue
                 
-                print(os.path.basename(pdf_fp))
                 # 没有yaml，就获取一个吧
-                _1, pdf_manifest_fp = pdf_reader.get_pdf_inf(pdf_fp,plugin_kwargs['ai_assist'],llm_kwargs)
+                usable,_1, pdf_manifest_fp = pdf_reader.get_pdf_inf(pdf_fp,plugin_kwargs['ai_assist'],llm_kwargs)
                 # 储存所有的清单文件路径
-                _pdf_manifests_fp.append(pdf_manifest_fp)
+                if usable: _pdf_manifests_fp.append(pdf_manifest_fp)
+                else :
+                    with lock:
+                        _unusable_pdf_message(lib_dir=this_library_root_dir,unusable_pdf_fp=pdf_fp)
                 
             return _pdf_manifests_fp
         
@@ -206,12 +217,12 @@ def 按关键词总结文献(txt, llm_kwargs, plugin_kwargs, chatbot, history, s
         pdf_manifests_fp = []
         for task in tasks:
             # 获取pdf的标题、摘要和一作（并且会在pdf旁边生成一个记录这些内容的yml，文件名与pdf一致）
-            pdf_manifest_fp = task.result() # 
+            _pdf_manifest_fp = task.result() # 
             # 储存所有的清单文件路径
-            pdf_manifests_fp.extend(pdf_manifest_fp)
+            pdf_manifests_fp.extend(_pdf_manifest_fp)
 
         yield from update_ui_lastest_msg(_('缓存文章预处理完成'), chatbot=chatbot, history=history)
-
+        chatbot.append(_unusable_pdf_message(lib_dir=this_library_root_dir))
         #  注意，预处理完成后的pdf仍然在cache文件夹中（但是会多一个pdf清单文件md5.yml），因为他们还没有经过GPT分析
         #  总结完摘要的文章会在repo中，并且最后的总结性内容只会把pdf_yml中的analysis喂给AI
         #  这样子就可以实现预处理结束后问AI的阶段“断点续传”了
@@ -251,24 +262,24 @@ def 按关键词总结文献(txt, llm_kwargs, plugin_kwargs, chatbot, history, s
             
             # 先对每个文章的摘要单独分析一下
             # 这样子做可以精炼需要的信息，还可以去除提取abstract过程中产生的一些无用文本
-            yield from __analyze_abstract_gpt(batch, keywords, index + 1, len(batches), llm_kwargs, GPT_prefer_language,
+            yield from _analyze_abstract_gpt(batch, keywords, index + 1, len(batches), llm_kwargs, GPT_prefer_language,
                                               chatbot, history, system_prompt, user_request)
 
             # 当前批次的文章分析完成后，就可以移动到analyzed文件夹了
             # 移动之后就不在cache文件夹了，防止多次重复分析
-            for pdf_manifest_fp in batch:
-                filename,_1 = os.path.splitext(os.path.basename(pdf_manifest_fp))
+            for _pdf_manifest_fp in batch:
+                filename,_1 = os.path.splitext(os.path.basename(_pdf_manifest_fp))
                 yml_destination = os.path.join(
                     repo_dir, filename + '.yml')
                 pdf_destination = os.path.join(
                     repo_dir, filename + '.pdf')
                 # pdf路径
                 pdf_fp = os.path.join(os.path.dirname(
-                    pdf_manifest_fp), filename + '.pdf')
+                    _pdf_manifest_fp), filename + '.pdf')
                 try:
                     os.makedirs(repo_dir, exist_ok=True)
                     shutil.move(pdf_fp, pdf_destination)
-                    shutil.move(pdf_manifest_fp, yml_destination)
+                    shutil.move(_pdf_manifest_fp, yml_destination)
                 except IOError as e:
                     raise IOError(_("移动文件时出错：{}").format(str(e)))
 
@@ -279,7 +290,7 @@ def 按关键词总结文献(txt, llm_kwargs, plugin_kwargs, chatbot, history, s
     chatbot.append([_('正在总结，总结过程中，请不要关闭该页面...'), _('处理中....')])
     yield from update_ui(chatbot=chatbot, history=[])
 
-    result = yield from __summarize_all_paper(this_library_root_dir, llm_kwargs, GPT_prefer_language, chatbot, [], system_prompt, user_request)
+    result = yield from _summarize_all_paper(this_library_root_dir, llm_kwargs, GPT_prefer_language, chatbot, [], system_prompt, user_request)
 
     # 四个🐎。去除代码块
     result = result.replace('```','')
@@ -290,8 +301,7 @@ def 按关键词总结文献(txt, llm_kwargs, plugin_kwargs, chatbot, history, s
 
     # pdf推送下载
     if os.path.exists(summarization_pdf_fp): os.remove(summarization_pdf_fp)
-    pdf = markdown_to_pdf(result,'Summarize Articles by Keywords - Scholar Navis')
-    pdf.save(summarization_pdf_fp)
+    markdown_to_pdf(result,'summarization',os.path.dirname(summarization_pdf_fp))
 
     chatbot.clear()
     chatbot.append([_('总结完成。下面是总结的内容: （不支持对话）') , 
@@ -301,12 +311,15 @@ def 按关键词总结文献(txt, llm_kwargs, plugin_kwargs, chatbot, history, s
                     _('如果不满意生成的结果（例如内容明显缺失），可以使用尝试重新生成') + 
                     '</li></ul>']) 
     
-    chatbot.append([result,download_file(summarization_pdf_fp,_('点击这里下载pdf格式的总结内容'))])
-    
+    chatbot.append([result,generate_download_file(summarization_pdf_fp,_('点击这里下载pdf格式的总结内容'))])
+    chatbot.append(_unusable_pdf_message(lib_dir=this_library_root_dir))
+    # 提醒一下不能对话
+    chatbot.append([_('请注意，本功能不支持对话。'),_('如果要使用对话功能，请使用 <b>与AI交流研究进展</b>')])
     yield from update_ui(chatbot=chatbot, history=[])
 
+execute = 按关键词总结文献 # 用于热更新
 
-def __analyze_abstract_gpt(pdf_manifests_fp: list, keywords: list[str], start_batch: int, total_batch: int, llm_kwargs, GPT_prefer_language, chatbot, history, system_prompt, user_request):
+def _analyze_abstract_gpt(pdf_manifests_fp: list, keywords: list[str], start_batch: int, total_batch: int, llm_kwargs, GPT_prefer_language, chatbot, history, system_prompt, user_request):
     """ 对提供的每个pdf的摘要进行预分析，并将分析结果写到pdf清单（md5.yml）中
         现在主要是用于预分析，以后可能也有其他的功能吧
 
@@ -397,7 +410,7 @@ def __analyze_abstract_gpt(pdf_manifests_fp: list, keywords: list[str], start_ba
                     f.write(yaml.safe_dump(yml_array[yml_index]))
 
 
-def __summarize_all_paper(this_library_fp: str, llm_kwargs, GPT_prefer_language, chatbot, history, system_prompt, user_request):
+def _summarize_all_paper(this_library_fp: str, llm_kwargs, GPT_prefer_language, chatbot, history, system_prompt, user_request):
     '''
     # ! 改成每10个总结内容（数量或许可以更多点？）让LLM进行分析总结。内容如下：
     -   他们的研究方向：........ （尽可能简短，每一个都要有）
@@ -507,16 +520,16 @@ def __summarize_all_paper(this_library_fp: str, llm_kwargs, GPT_prefer_language,
             and without changing the structure of the JSON? Thank you. \
                 Here is the batch of JSONs for you: {"  ".join(batch_analysis_content)}'
 
-    gpt_combine = yield from request_gpt_model_in_new_thread_with_ui_alive(
-        inputs=input,
-        inputs_show_user=_('合并优化中...'),
-        llm_kwargs=llm_kwargs,
-        chatbot=chatbot,
-        history=[],
-        sys_prompt=prompt
-    )
-
-    yield from update_ui_lastest_msg(_('优化完成'), chatbot=chatbot, history=[])
+    # combine = yield from request_gpt_model_in_new_thread_with_ui_alive(
+    #     inputs=input,
+    #     inputs_show_user=_('合并优化中...'),
+    #     llm_kwargs=llm_kwargs,
+    #     chatbot=chatbot,
+    #     history=[],
+    #     sys_prompt=prompt
+    # )
+    # yield from update_ui_lastest_msg(_('优化完成'), chatbot=chatbot, history=[])
+    combine = "  ".join(batch_analysis_content)
 
     #  < ---------------------- 最后的处理，准备输出内容（使用偏好语言） --------------------------- >
 
@@ -524,7 +537,7 @@ def __summarize_all_paper(this_library_fp: str, llm_kwargs, GPT_prefer_language,
             Please remove any duplicated content and then provide a comprehensive summary at the end. \
             Present the result in a visually appealing Markdown format, \
             and please provide me with the processed results directly, without any other information. \
-            The JSON is as follows: {gpt_combine}'
+            The JSON is as follows: {combine}'
     gpt_summary = yield from request_gpt_model_in_new_thread_with_ui_alive(
         inputs=input,
         inputs_show_user=_('最后总结中.....'),
@@ -538,9 +551,53 @@ def __summarize_all_paper(this_library_fp: str, llm_kwargs, GPT_prefer_language,
     return gpt_summary
 
 
+def _unusable_pdf_message(lib_dir:str,unusable_pdf_fp: str = None):
+    # 预处理（得到DOI标题啥的）那里提醒一次
+    # 总结结束那里再提醒一次
+    # 也提供一下下载，让用户知道是哪个文章不能用
+    # 同样的，支持中断
+    
+    unusable_pdf_yml_content = {'latest_datetime':datetime.now().strftime("%Y-%m-%d %H-%M-%S"), # 因为支持中断，所以记录最新的更新日期
+                                'preprocess_done':False, # 所有的预处理完成了吗？
+                                'scholar_navis_version':VERSION,
+                                'reason':'Chinese dissertations, encrypted files, non-PDF files or damaged files',
+                                'list':[]}
+
+    unusable_pdf_yml_fp = os.path.join(lib_dir,'unusable_pdf_list.yml')
+    
+    if not os.path.exists(unusable_pdf_yml_fp):
+        with open(unusable_pdf_yml_fp,'w',encoding='utf-8') as f:
+            f.write(yaml.safe_dump(unusable_pdf_yml_content))
+            
+    # 记录这些不能用的文章，生成一个txt，便于后面的提示和下载
+    with open(unusable_pdf_yml_fp,'r',encoding='utf-8') as f:
+        unusable_pdf_yml_content = yaml.safe_load(f)
+    
+    # 新产生的无用PDF
+    if unusable_pdf_fp:
+        # 把新的，不重复的添加进来
+        if unusable_pdf_fp not in unusable_pdf_yml_content['list']:
+            unusable_pdf_yml_content['list'].append(unusable_pdf_fp)
+            unusable_pdf_yml_content['latest_datetime'] = datetime.now().strftime("%Y-%m-%d %H-%M-%S") # 记录更新日期
+    # 没有新产生的，就用之前保存的提示。反正不能添加新的文章了
+    else:
+        unusable_pdf_yml_content['preprocess_done'] = True
+
+    # 记录咯
+    with open(unusable_pdf_yml_fp,'w',encoding='utf-8') as f:
+        f.write(yaml.safe_dump(unusable_pdf_yml_content))
+
+    if len(unusable_pdf_yml_content['list']) > 0:
+        download_list = '<ul>\n'
+        for file in unusable_pdf_yml_content['list']:
+            download_list +=  f'<li>{generate_download_file(file)}</li>\n'
+        download_list += '\n</ul>'
+        return [_('存在不可使用的PDF（中文学位论文、加密文件、非PDF文件或损坏文件），这些文件不会参与总结。文件如下：'),download_list]
+    else: return [_('全部PDF可用！'),_('不存在不可用的PDF')]
+        
 class Summarize_Articles_Keywords(common_plugin_para):
     def define_arg_selection_menu(self):
-        gui_definition = {}
+        gui_definition = super().define_arg_selection_menu()
         gui_definition.update(self.add_lib_field(False))
         gui_definition.update(self.add_GPT_prefer_language_selector())
         gui_definition.update(self.add_command_selector(['force'], [_('强制重新分析')], [False]))

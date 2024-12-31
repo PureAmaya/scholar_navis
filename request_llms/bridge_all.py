@@ -11,7 +11,13 @@
 import tiktoken, copy, re
 from functools import lru_cache
 from concurrent.futures import ThreadPoolExecutor
-from toolbox import get_conf, trimmed_format_exc, apply_gpt_academic_string_mask, read_one_api_model_name
+from toolbox import trimmed_format_exc
+from shared_utils.text_mask import apply_gpt_academic_string_mask
+from shared_utils.map_names import read_one_api_model_name
+from shared_utils.config_loader import get_conf
+from shared_utils.scholar_navis.multi_lang import _
+
+from .model_info import model_info_class
 
 from .bridge_chatgpt import predict_no_ui_long_connection as chatgpt_noui
 from .bridge_chatgpt import predict as chatgpt_ui
@@ -51,9 +57,9 @@ class LazyloadTiktoken(object):
     @staticmethod
     @lru_cache(maxsize=128)
     def get_encoder(model):
-        print('正在加载tokenizer，如果是第一次运行，可能需要一点时间下载参数')
+        print(_('正在加载tokenizer，如果是第一次运行，可能需要一点时间下载参数'))
         tmp = tiktoken.encoding_for_model(model)
-        print('加载tokenizer完毕')
+        print(_('加载tokenizer完毕'))
         return tmp
 
     def encode(self, *args, **kwargs):
@@ -83,7 +89,7 @@ try:
     API_URL = get_conf("API_URL")
     if API_URL != "https://api.openai.com/v1/chat/completions":
         openai_endpoint = API_URL
-        print("警告！API_URL配置选项将被弃用，请更换为API_URL_REDIRECT配置")
+        print(_("警告！API_URL配置选项将被弃用，请更换为API_URL_REDIRECT配置"))
 except:
     pass
 # 新版配置
@@ -103,10 +109,11 @@ tokenizer_gpt4 = LazyloadTiktoken("gpt-4")
 get_token_num_gpt35 = lambda txt: len(tokenizer_gpt35.encode(txt, disallowed_special=()))
 get_token_num_gpt4 = lambda txt: len(tokenizer_gpt4.encode(txt, disallowed_special=()))
 
-
 # 开始初始化模型
 AVAIL_LLM_MODELS, LLM_MODEL = get_conf("AVAIL_LLM_MODELS", "LLM_MODEL")
 AVAIL_LLM_MODELS = AVAIL_LLM_MODELS + [LLM_MODEL]
+
+
 # -=-=-=-=-=-=- 以下这部分是最早加入的最稳定的模型 -=-=-=-=-=-=-
 model_info = {
     # openai
@@ -968,88 +975,64 @@ if "deepseek-chat" in AVAIL_LLM_MODELS or "deepseek-coder" in AVAIL_LLM_MODELS:
         })
     except:
         print(trimmed_format_exc())
-# -=-=-=-=-=-=- one-api 对齐支持 -=-=-=-=-=-=-
-for model in [m for m in AVAIL_LLM_MODELS if m.startswith("one-api-")]:
-    # 为了更灵活地接入one-api多模型管理界面，设计了此接口，例子：AVAIL_LLM_MODELS = ["one-api-mixtral-8x7b(max_token=6666)"]
-    # 其中
-    #   "one-api-"          是前缀（必要）
-    #   "mixtral-8x7b"      是模型名（必要）
-    #   "(max_token=6666)"  是配置（非必要）
-    try:
-        origin_model_name, max_token_tmp = read_one_api_model_name(model)
-        # 如果是已知模型，则尝试获取其信息
-        original_model_info = model_info.get(origin_model_name.replace("one-api-", "", 1), None)
-    except:
-        print(f"one-api模型 {model} 的 max_token 配置不是整数，请检查配置文件。")
-        continue
-    this_model_info = {
-        "fn_with_ui": chatgpt_ui,
-        "fn_without_ui": chatgpt_noui,
-        "can_multi_thread": True,
-        "endpoint": openai_endpoint,
-        "max_token": max_token_tmp,
-        "tokenizer": tokenizer_gpt35,
-        "token_cnt": get_token_num_gpt35,
-    }
+        
+# 拓展模型等支持
+def extend_llm_support(models: list,label:str):
+    """独立出拓展模型加载（包含聚合LLM平台和本地模型）模块，便于实现用户自定义模型。
 
-    # 同步已知模型的其他信息
-    attribute = "has_multimodal_capacity"
-    if original_model_info is not None and original_model_info.get(attribute, None) is not None: this_model_info.update({attribute: original_model_info.get(attribute, None)})
-    # attribute = "attribute2"
-    # if original_model_info is not None and original_model_info.get(attribute, None) is not None: this_model_info.update({attribute: original_model_info.get(attribute, None)})
-    # attribute = "attribute3"
-    # if original_model_info is not None and original_model_info.get(attribute, None) is not None: this_model_info.update({attribute: original_model_info.get(attribute, None)})
-    model_info.update({model: this_model_info})
+    Args:
+        models (_type_): 模型们（所有的模型的开头应当具有label）。
+            此外，也可以添加 (max_token=1234) 这个token信息
+        label (str): 标签，应当为 'custom- / one-api-'、'vllm-'或'ollama-'
+        
+    Returns:
+        dict (dict): {model_name: this_model_info}
+    """
+    assert label == 'ollama-' or label == 'one-api-' or label == 'custom-' or label == 'vllm-'
+    
+    if label == 'ollama-':
+        from .bridge_ollama import predict_no_ui_long_connection as ollama_noui
+        from .bridge_ollama import predict as ollama_ui
+    
+    dict_ = {}
+    for model in models:
+        try:
+            origin_model_name, max_token_tmp = read_one_api_model_name(model)
+            # 如果是已知模型，则尝试获取其信息
+            original_model_info = model_info.get(origin_model_name.replace(label, "", 1), None)
+        except:
+            print(_("one-api模型 {} 的 max_token 配置不是整数，请检查配置文件").format(model))
+            continue
+        
+        this_model_info = {
+            "fn_with_ui": chatgpt_ui if label != 'ollama-' else ollama_ui,
+            "fn_without_ui": chatgpt_noui if label != 'ollama-'  else ollama_noui,
+            "can_multi_thread": True,
+            "endpoint": openai_endpoint if label != 'ollama-' else ollama_endpoint,
+            "max_token": max_token_tmp,
+            "tokenizer": tokenizer_gpt35,
+            "token_cnt": get_token_num_gpt35,
+        }
+
+        # 同步已知模型的其他信息
+        attribute = "has_multimodal_capacity"
+        if original_model_info is not None and original_model_info.get(attribute, None) is not None: this_model_info.update({attribute: original_model_info.get(attribute, None)})
+        # attribute = "attribute2"
+        # if original_model_info is not None and original_model_info.get(attribute, None) is not None: this_model_info.update({attribute: original_model_info.get(attribute, None)})
+        # attribute = "attribute3"
+        # if original_model_info is not None and original_model_info.get(attribute, None) is not None: this_model_info.update({attribute: original_model_info.get(attribute, None)})
+        dict_.update({model: this_model_info})
+    return dict_
+
+
+# -=-=-=-=-=-=- one-api 对齐支持 -=-=-=-=-=-=-
+model_info.update(extend_llm_support([m for m in AVAIL_LLM_MODELS if m.startswith("one-api-")],'one-api-'))
 
 # -=-=-=-=-=-=- vllm 对齐支持 -=-=-=-=-=-=-
-for model in [m for m in AVAIL_LLM_MODELS if m.startswith("vllm-")]:
-    # 为了更灵活地接入vllm多模型管理界面，设计了此接口，例子：AVAIL_LLM_MODELS = ["vllm-/home/hmp/llm/cache/Qwen1___5-32B-Chat(max_token=6666)"]
-    # 其中
-    #   "vllm-"             是前缀（必要）
-    #   "mixtral-8x7b"      是模型名（必要）
-    #   "(max_token=6666)"  是配置（非必要）
-    try:
-        _, max_token_tmp = read_one_api_model_name(model)
-    except:
-        print(f"vllm模型 {model} 的 max_token 配置不是整数，请检查配置文件。")
-        continue
-    model_info.update({
-        model: {
-            "fn_with_ui": chatgpt_ui,
-            "fn_without_ui": chatgpt_noui,
-            "can_multi_thread": True,
-            "endpoint": openai_endpoint,
-            "max_token": max_token_tmp,
-            "tokenizer": tokenizer_gpt35,
-            "token_cnt": get_token_num_gpt35,
-        },
-    })
+model_info.update(extend_llm_support([m for m in AVAIL_LLM_MODELS if m.startswith("vllm-")],'vllm-'))
+
 # -=-=-=-=-=-=- ollama 对齐支持 -=-=-=-=-=-=-
-for model in [m for m in AVAIL_LLM_MODELS if m.startswith("ollama-")]:
-    from .bridge_ollama import predict_no_ui_long_connection as ollama_noui
-    from .bridge_ollama import predict as ollama_ui
-    break
-for model in [m for m in AVAIL_LLM_MODELS if m.startswith("ollama-")]:
-    # 为了更灵活地接入ollama多模型管理界面，设计了此接口，例子：AVAIL_LLM_MODELS = ["ollama-phi3(max_token=6666)"]
-    # 其中
-    #   "ollama-"           是前缀（必要）
-    #   "phi3"            是模型名（必要）
-    #   "(max_token=6666)"  是配置（非必要）
-    try:
-        _, max_token_tmp = read_one_api_model_name(model)
-    except:
-        print(f"ollama模型 {model} 的 max_token 配置不是整数，请检查配置文件。")
-        continue
-    model_info.update({
-        model: {
-            "fn_with_ui": ollama_ui,
-            "fn_without_ui": ollama_noui,
-            "endpoint": ollama_endpoint,
-            "max_token": max_token_tmp,
-            "tokenizer": tokenizer_gpt35,
-            "token_cnt": get_token_num_gpt35,
-        },
-    })
+model_info.update(extend_llm_support([m for m in AVAIL_LLM_MODELS if m.startswith("ollama-")],'ollama-'))
 
 # -=-=-=-=-=-=- azure模型对齐支持 -=-=-=-=-=-=-
 AZURE_CFG_ARRAY = get_conf("AZURE_CFG_ARRAY") # <-- 用于定义和切换多个azure模型 -->
@@ -1057,7 +1040,7 @@ if len(AZURE_CFG_ARRAY) > 0:
     for azure_model_name, azure_cfg_dict in AZURE_CFG_ARRAY.items():
         # 可能会覆盖之前的配置，但这是意料之中的
         if not azure_model_name.startswith('azure'):
-            raise ValueError("AZURE_CFG_ARRAY中配置的模型必须以azure开头")
+            raise ValueError(_("AZURE_CFG_ARRAY中配置的模型必须以azure开头"))
         endpoint_ = azure_cfg_dict["AZURE_ENDPOINT"] + \
             f'openai/deployments/{azure_cfg_dict["AZURE_ENGINE"]}/chat/completions?api-version=2023-05-15'
         model_info.update({
@@ -1074,6 +1057,9 @@ if len(AZURE_CFG_ARRAY) > 0:
         if azure_model_name not in AVAIL_LLM_MODELS:
             AVAIL_LLM_MODELS += [azure_model_name]
 
+
+# 给model_info封装一个类，添加一些功能，兼容原版代码和添加的自定义模型
+model_info = model_info_class(model_info,extend_llm_support)
 
 # -=-=-=-=-=-=--=-=-=-=-=-=--=-=-=-=-=-=--=-=-=-=-=-=-=-=
 # -=-=-=-=-=-=-=-=-=- ☝️ 以上是模型路由 -=-=-=-=-=-=-=-=-=
@@ -1129,7 +1115,7 @@ def predict_no_ui_long_connection(inputs:str, llm_kwargs:dict, history:list, sys
 
         window_len = len(observe_window)
         assert window_len==3
-        window_mutex = [["", time.time(), ""] for _ in range(n_model)] + [True]
+        window_mutex = [["", time.time(), ""] for _9 in range(n_model)] + [True]
 
         futures = []
         for i in range(n_model):
@@ -1151,7 +1137,7 @@ def predict_no_ui_long_connection(inputs:str, llm_kwargs:dict, history:list, sys
                 chat_string = []
                 for i in range(n_model):
                     color = colors[i%len(colors)]
-                    chat_string.append( f"【{str(models[i])} 说】: <font color=\"{color}\"> {window_mutex[i][0]} </font>" )
+                    chat_string.append( f"【{str(models[i])}】: <font color=\"{color}\"> {window_mutex[i][0]} </font>" )
                 res = '<br/><br/>\n\n---\n\n'.join(chat_string)
                 # # # # # # # # # # #
                 observe_window[0] = res
@@ -1169,7 +1155,7 @@ def predict_no_ui_long_connection(inputs:str, llm_kwargs:dict, history:list, sys
 
         for i, future in enumerate(futures):  # wait and get
             color = colors[i%len(colors)]
-            return_string_collect.append( f"【{str(models[i])} 说】: <font color=\"{color}\"> {future.result()} </font>" )
+            return_string_collect.append( f"【{str(models[i])}】: <font color=\"{color}\"> {future.result()} </font>" )
 
         window_mutex[-1] = False # stop mutex thread
         res = '<br/><br/>\n\n---\n\n'.join(return_string_collect)
@@ -1186,7 +1172,7 @@ def execute_model_override(llm_kwargs, additional_fn, method):
         functional = core_functional.get_core_functions()
         model_override = functional[additional_fn]['ModelOverride']
         if model_override not in model_info:
-            raise ValueError(f"模型覆盖参数 '{model_override}' 指向一个暂不支持的模型，请检查配置文件。")
+            raise ValueError(_("模型覆盖参数 '{}' 指向一个暂不支持的模型，请检查配置文件").fomat(model_override))
         method = model_info[model_override]["fn_with_ui"]
         llm_kwargs['llm_model'] = model_override
         return llm_kwargs, additional_fn, method

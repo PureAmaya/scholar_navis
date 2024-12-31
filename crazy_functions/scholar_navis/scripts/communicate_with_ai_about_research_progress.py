@@ -1,14 +1,13 @@
 import os
 import yaml
-import shutil
 import zipfile
-from .tools.multi_lang import _
-from ...生成多种Mermaid图表 import 生成多种Mermaid图表
+from shared_utils.scholar_navis.other_tools import generate_download_file
+from shared_utils.scholar_navis.multi_lang import _
 from .tools.common_plugin_para import common_plugin_para
-from .tools.article_library_ctrl import check_library_exist_and_assistant,lib_manifest,pdf_yaml,get_tmp_dir_of_this_user,download_file
-from toolbox import CatchException,get_log_folder,get_user,update_ui,update_ui_lastest_msg
-from ...crazy_utils import request_gpt_model_in_new_thread_with_ui_alive,request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency
-
+from .tools.article_library_ctrl import check_library_exist_and_assistant,lib_manifest,pdf_yaml,get_tmp_dir_of_this_user
+from toolbox import CatchException, get_log_folder,get_user,update_ui,update_ui_lastest_msg
+from crazy_functions.crazy_utils import request_gpt_model_in_new_thread_with_ui_alive,request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency
+from ...生成多种Mermaid图表 import 生成多种Mermaid图表
 
 @check_library_exist_and_assistant(accept_nonexistent=False,accept_blank=False)
 @CatchException
@@ -93,12 +92,12 @@ def 与AI交流研究进展(txt: str, llm_kwargs, plugin_kwargs, chatbot, histor
             index = int(command_para)
         except:
             # 参数不是数字，比如全都是空格，或者压根就没有，亦或者是别的奇怪的内容，就用默认的思维导图
-            yield from update_ui_lastest_msg(_('参数 <b>{}</b> 不合适或超出范围，修正为 9（思维导图）'.format(command_para)), chatbot=chatbot, history=history)
+            yield from update_ui_lastest_msg(_('参数 <b>{}</b> 不合适或超出范围，修正为 9（思维导图）').format(command_para), chatbot=chatbot, history=history)
             index = 9
 
         # 尝试调用方法，反正出问题会提醒
         try:
-            yield from 生成多种Mermaid图表(summarization, llm_kwargs, index, chatbot, history, system_prompt, 9961)
+            yield from 生成多种Mermaid图表(summarization, llm_kwargs, {'index':index,'gpt_prefer_lang':GPT_prefer_language}, chatbot, history, system_prompt, 9961)
         except Exception as e:
             yield from update_ui_lastest_msg(_('无法生成图表。具体原因如下: \n{}').format(str(e))
                                             , chatbot=chatbot, history=history)
@@ -154,6 +153,7 @@ def 与AI交流研究进展(txt: str, llm_kwargs, plugin_kwargs, chatbot, histor
         yield from update_ui(chatbot=chatbot, history=history)
         return
 
+execute = 与AI交流研究进展 # 用于热更新
 
 def __find_article_from_summarization(library_root_dir: str, txt: str, gpt_prefer_lang: str, llm_kwargs,system_prompt, chatbot,history):
     """ 从总结中找到自己感兴趣的文章，提供文章下载 + 把这些感兴趣的文章的摘要放到历史记录中便于咨询
@@ -205,9 +205,13 @@ def __find_article_from_summarization(library_root_dir: str, txt: str, gpt_prefe
     # 多线程问GPT哪一篇文章符合用户的兴趣
     for index, content in enumerate(contents):
 
-        i_say = f"Please respond in {gpt_prefer_lang}. Here's the [Article]: “{content}”.\
-            The [Query] is: “{txt}”. The [Query] might be a part of the [Article]. \
-            If so, please reply with 'yes'; if not, please say 'nonono'. Also, please share your reasoning for your decision."
+        i_say = \
+        f'''Please respond in {gpt_prefer_lang}. Here's the [Article]: “{content}”.
+            The [Query] is: “{txt}”. The [Query] might be a part of the [Article]. 
+            The [Query] may not be the original text of the [Article], 
+            but if the meaning expressed is relatively close, the [Query] can also be considered part of the [Article].
+            If so, please reply with 'yes'; if not, please say 'nonono'. Also, please share your reasoning for your decision.
+            '''
         
         i_say_show_user = str(index) # 这里就不是给用户看的，是方便定位文章文件的
         
@@ -239,6 +243,7 @@ def __find_article_from_summarization(library_root_dir: str, txt: str, gpt_prefe
     for index, content in enumerate(gpt_response_collection):
         # 奇数，获取的是gpt_res，里面是GPT的回复 偶数是这个文章的index
         if index % 2 != 0:
+
             # 毕竟有时候AI会发飙..宁可错杀不能放过
             if 'yes' in content:
                 # 找到符合要求的文章
@@ -286,7 +291,7 @@ def __find_article_from_summarization(library_root_dir: str, txt: str, gpt_prefe
                                         \n - {line6}"
                                         ,chatbot,history)
     
-    chatbot.append([_('下载文章：'),download_file(zip_fp)])
+    chatbot.append([_('下载文章：'),generate_download_file(zip_fp)])
     yield from update_ui(chatbot=chatbot,history=history)
     
 
@@ -327,7 +332,7 @@ def __come_up_with_topic(request: str, summarization: str, GPT_prefer_language,l
 
 class Communicate_with_AI_about_research_progress(common_plugin_para):
     def define_arg_selection_menu(self):
-        gui_definition = {}
+        gui_definition = super().define_arg_selection_menu()
         gui_definition.update(self.add_lib_field(
             True, _('选择总结库'), _('可以在总结库中选择文章')))
         

@@ -1,13 +1,15 @@
 import os
 import yaml
 import shutil
-from .tools import pdf_reader
-from .tools.multi_lang import _
+from  shared_utils.scholar_navis.sqlite import SQLiteDatabase
+from shared_utils.scholar_navis import pdf_reader
+from shared_utils.scholar_navis.multi_lang import _
+from shared_utils.scholar_navis.const_and_singleton import SCHOLAR_NAVIS_ROOT_PATH
 from .tools.common_plugin_para import common_plugin_para
 from crazy_functions.pdf_fns.breakdown_txt import breakdown_text_to_satisfy_token_limit
-from toolbox import CatchException,get_user,get_log_folder,update_ui,update_ui_lastest_msg
-from ...crazy_utils import get_files_from_everything,read_and_clean_pdf_text,request_gpt_model_in_new_thread_with_ui_alive
-from .tools.article_library_ctrl import download_file, markdown_to_pdf, db_type,SQLiteDatabase,get_tmp_dir_of_this_user,check_library_exist_and_assistant,get_this_user_library_list,lib_manifest,pdf_yaml,SCHOLAR_NAVIS_ROOT_PATH
+from toolbox import CatchException, generate_download_file,get_user,get_log_folder,update_ui,update_ui_lastest_msg
+from crazy_functions.crazy_utils import get_files_from_everything,read_and_clean_pdf_text,request_gpt_model_in_new_thread_with_ui_alive
+from .tools.article_library_ctrl import markdown_to_pdf, get_tmp_dir_of_this_user,check_library_exist_and_assistant,get_this_user_library_list,lib_manifest,pdf_yaml
 
 
 @check_library_exist_and_assistant(accept_nonexistent=True,accept_blank=True)
@@ -39,8 +41,8 @@ def 精细分析文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, sy
 
     # < --------------------将txt修正成可用路径------------------------- >
 
-    # 如果是上传的文章（仅限pdf格式，不支持zip等），那就没问题了
-    if file_exist:
+    # 如果是上传的文章（仅限pdf格式，不支持zip等），且没有输入总结库的名字，那就没问题了
+    if file_exist and library_name == '':
         txt = pdfs_fp[0]
         if len(pdfs_fp) >= 2 : yield from update_ui_lastest_msg(_('[注意] 上传的文献多于1篇。<b>精细分析时仅使用第一篇文章</b>'), chatbot, history)
 
@@ -115,8 +117,8 @@ def 精细分析文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, sy
                 download_hyperlink = _('下载文章')
                 body_html = f'<details><p><summary><b>{title}</b></br>\
                             <a href="http://dx.doi.org/{doi}" target="_blank">[{press_hyperlink}]</a> \
-                            <a href="javascript:void(0);" onclick="copyText(\'{path}\')">[{copy_hyperlink}]</a> \
-                            <a href="javascript:void(0);" onclick="downloadLink(\'{path}\',\'{title}.pdf\')">[{download_hyperlink}]</a> \
+                            <a href="javascript:void(0);" onclick="navigator.clipboard.writeText(\'{path}\')">[{copy_hyperlink}]</a> \
+                            {generate_download_file(path,download_hyperlink)}\
                             [{doi}] [{filename}]\
                             </summary></p>\
                             <p>{content}</p></details><br>{body_html}'
@@ -162,6 +164,7 @@ def 精细分析文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, sy
     except Exception as e:
         yield from update_ui_lastest_msg(_('分析过程中出错！错误原因是：{}').format(str(e)), chatbot, history)
 
+execute = 精细分析文献 # 用于热更新
 
 def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_prefer_language):
     """精细分析文章
@@ -180,17 +183,22 @@ def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_
     # 看看数据库里面有没有(因为是支持直接复制库内文章的)
     pdf_yml_fp = f'{pdf_fp[:-3]}yml'
     if not os.path.exists(f'{pdf_fp[:-3]}yml'):
-        _1, pdf_yml_fp = pdf_reader.get_pdf_inf(pdf_fp,use_ai_assist,llm_kwargs) # 外部导入的文章（没有yml），临时生成一个
+        # 外部导入的文章（没有yml），临时生成一个yml，顺便检查一下这个PDF能不能用
+        usable,_1, pdf_yml_fp = pdf_reader.get_pdf_inf(pdf_fp,use_ai_assist,llm_kwargs) 
+        if not usable:
+            yield from update_ui_lastest_msg(_('上传的文件 {} 不可用。我们不接受中文学位论文、加密文件、非PDF文件或损坏文件').format(pdf_fp), chatbot, history)
+            return
+        
     with open(pdf_yml_fp , 'r') as yml:
         yaml_content = yaml.safe_load(yml)
         doi = yaml_content[pdf_yaml.doi.value]
         title = yaml_content[pdf_yaml.title.value]
         
-    with SQLiteDatabase(type=db_type.doi_fulltext_ai_understand) as ft:
-        fulltext = ft.select(doi,('fulltext',))
+    with SQLiteDatabase(type='doi_fulltext_ai_understand') as ft:
+        fulltext = ft.easy_select(doi,('fulltext',))
     # 没有的话，只能跑一边AI了
-    if fulltext is None:
-    
+    if not fulltext:
+        
         yield from update_ui_lastest_msg(_('对pdf文件处理中...'), chatbot, history)
         # 获取pdf的内容（可能不含参考文献等内容，所有比正文字号小的都被删掉了）
         pdf_content, _1 = read_and_clean_pdf_text(pdf_fp)
@@ -199,7 +207,7 @@ def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_
 
         for index, content in enumerate(pdf_content_token):
             i_say = f"Please read the passage and retell it in English, emulating the author's writing style and narrative logic. Here's the excerpt: {content}"
-            # 一般第一个就是标题啦
+            # 一般第一页里面就有标题了
             if index == 0: i_say = i_say + f"If you encounter a title, please also repeat it in English."
             i_say_show = _("[{i}/{total}] AI阅读中...").format(i=index+1,total=len(pdf_content_token))
             
@@ -210,8 +218,8 @@ def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_
             history.append(gpt_say_for_fragment)
             
         # 跑完AI，记录一下读到的全文
-        with SQLiteDatabase(type=db_type.doi_fulltext_ai_understand) as ft:
-            ft.insert_ingore(doi,('fulltext',),('\n\n\n'.join(history),))
+        with SQLiteDatabase(type='doi_fulltext_ai_understand') as ft:
+            if doi:ft.insert_ingore(doi,('fulltext',),('\n\n\n'.join(history),))
     
     # 有的话，用它就行
     else:
@@ -241,16 +249,14 @@ def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_
     history.append(f'Please reply to me using {GPT_prefer_language}') # 防止意外，再加一次
     
     # 提供一下下载
-    pdf_path = os.path.join(get_tmp_dir_of_this_user(chatbot,'markdown2pdf',['Fine-grained Analysis of Article']),f'Analysis of {title}.pdf')
-    pdf = markdown_to_pdf(gpt_say_last,f'Analysis of {title}')
-    pdf.save(pdf_path)
-    chatbot.append([_("下载分析结果："),download_file(pdf_path)])
+    pdf_path = markdown_to_pdf(gpt_say_last,f'Analysis of {title}',get_tmp_dir_of_this_user(chatbot,'markdown2pdf',['Fine-grained Analysis of Article']))
+    chatbot.append([_("下载分析结果："),generate_download_file(pdf_path)])
 
     yield from update_ui(chatbot=chatbot,history=history) # 这里的history是分片总结得到的内容
     
 class Fine_Grained_Analysis_of_Article(common_plugin_para):
     def define_arg_selection_menu(self):
-        gui_definition = {}
+        gui_definition = super().define_arg_selection_menu()
         gui_definition.update(self.add_file_upload_field(title=_('选定的文章'),description=_('上传或使用总结库内的文章')))
         gui_definition.update(self.add_lib_field(True, _('选择总结库'), _('查看总结库内的文章')))
         gui_definition.update(self.add_command_selector([],[],[]))

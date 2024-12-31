@@ -1,30 +1,36 @@
-from toolbox import CatchException, update_ui, report_exception
+import os
+from toolbox import CatchException, update_ui, report_exception, update_ui_lastest_msg
 from .crazy_utils import request_gpt_model_in_new_thread_with_ui_alive
 from crazy_functions.plugin_template.plugin_class_template import (
     GptAcademicPluginTemplate,
 )
 from crazy_functions.plugin_template.plugin_class_template import ArgProperty
+from gradio import HTML
+from shared_utils.scholar_navis.other_tools import base64_encode
+from shared_utils.scholar_navis.multi_lang import _
 
 # 以下是每类图表的PROMPT
 SELECT_PROMPT = """
 “{subject}”
 =============
-以上是从文章中提取的摘要,将会使用这些摘要绘制图表。请你选择一个合适的图表类型:
-1 流程图
-2 序列图
-3 类图
-4 饼图
-5 甘特图
-6 状态图
-7 实体关系图
-8 象限提示图
-不需要解释原因，仅需要输出单个不带任何标点符号的数字。
+The above is a summary extracted from the article, which will be used to create charts.
+Please choose a suitable type of chart: 
+1 Flowchart 
+2 Sequence Diagram 
+3 Class Diagram 
+4 Pie Chart 
+5 Gantt Chart 
+6 State Diagram 
+7 Entity Relationship Diagram 
+8 Quadrant Prompt Chart 
+No explanation is needed, just output a single number without any punctuation.
 """
 # 没有思维导图!!!测试发现模型始终会优先选择思维导图
 # 流程图
 PROMPT_1 = """
-请你给出围绕“{subject}”的逻辑关系图，使用mermaid语法，注意需要使用双引号将内容括起来。
-mermaid语法举例：
+Please provide a logical relationship diagram centered around '{subject}', using Mermaid syntax. 
+Note that the content should be enclosed in double quotes. 
+Example of Mermaid syntax:
 ```mermaid
 graph TD
     P("编程") --> L1("Python")
@@ -36,8 +42,8 @@ graph TD
 """
 # 序列图
 PROMPT_2 = """
-请你给出围绕“{subject}”的序列图，使用mermaid语法。
-mermaid语法举例：
+Please provide a sequence diagram centered around '{subject}', using Mermaid syntax. 
+Example of Mermaid syntax:
 ```mermaid
 sequenceDiagram
     participant A as 用户
@@ -50,8 +56,8 @@ sequenceDiagram
 """
 # 类图
 PROMPT_3 = """
-请你给出围绕“{subject}”的类图，使用mermaid语法。
-mermaid语法举例：
+Please provide a class diagram centered around '{subject}', using Mermaid syntax. 
+Example of Mermaid syntax: 
 ```mermaid
 classDiagram
     Class01 <|-- AveryLongClass : Cool
@@ -71,8 +77,9 @@ classDiagram
 """
 # 饼图
 PROMPT_4 = """
-请你给出围绕“{subject}”的饼图，使用mermaid语法，注意需要使用双引号将内容括起来。
-mermaid语法举例：
+Please provide a pie chart centered around '{subject}', using Mermaid syntax. 
+Note that the content should be enclosed in double quotes. 
+Example of Mermaid syntax:
 ```mermaid
 pie title Pets adopted by volunteers
     "狗" : 386
@@ -82,8 +89,9 @@ pie title Pets adopted by volunteers
 """
 # 甘特图
 PROMPT_5 = """
-请你给出围绕“{subject}”的甘特图，使用mermaid语法，注意需要使用双引号将内容括起来。
-mermaid语法举例：
+Please provide a Gantt chart centered around '{subject}', using Mermaid syntax. 
+Note that the content should be enclosed in double quotes. 
+Example of Mermaid syntax:
 ```mermaid
 gantt
     title "项目开发流程"
@@ -99,8 +107,8 @@ gantt
 """
 # 状态图
 PROMPT_6 = """
-请你给出围绕“{subject}”的状态图，使用mermaid语法，注意需要使用双引号将内容括起来。
-mermaid语法举例：
+Please provide a Gantt chart centered around '{subject}', using Mermaid syntax. 
+Note that the content should be enclosed in double quotes. Example of Mermaid syntax:
 ```mermaid
 stateDiagram-v2
    [*] --> "Still"
@@ -113,8 +121,8 @@ stateDiagram-v2
 """
 # 实体关系图
 PROMPT_7 = """
-请你给出围绕“{subject}”的实体关系图，使用mermaid语法。
-mermaid语法举例：
+Please provide an entity relationship diagram centered around '{subject}', using Mermaid syntax. 
+Example of Mermaid syntax:
 ```mermaid
 erDiagram
     CUSTOMER ||--o{ ORDER : places
@@ -136,8 +144,9 @@ erDiagram
 """
 # 象限提示图
 PROMPT_8 = """
-请你给出围绕“{subject}”的象限图，使用mermaid语法，注意需要使用双引号将内容括起来。
-mermaid语法举例：
+Please provide a quadrant diagram centered around '{subject}', using Mermaid syntax.
+Note that the content should be enclosed in double quotes. 
+Example of Mermaid syntax:
 ```mermaid
 graph LR
     A["Hard skill"] --> B("Programming")
@@ -150,8 +159,10 @@ graph LR
 PROMPT_9 = """
 {subject}
 ==========
-请给出上方内容的思维导图，充分考虑其之间的逻辑，使用mermaid语法，注意需要使用双引号将内容括起来。
-mermaid语法举例：
+Please provide a mind map for the above content, 
+taking into full consideration the logic between them, using Mermaid syntax.
+Note that the content should be enclosed in double quotes. 
+Example of Mermaid syntax:
 ```mermaid
 mindmap
   root((mindmap))
@@ -183,6 +194,10 @@ mindmap
 
 
 def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwargs):
+    
+    GPT_prefer_language = plugin_kwargs['gpt_prefer_lang']
+    index = plugin_kwargs['index']
+    
     ############################## <第 0 步，切割输入> ##################################
     # 借用PDF切割中的函数对文本进行切割
     TOKEN_LIMIT_PER_FRAGMENT = 2500
@@ -200,12 +215,12 @@ def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwarg
     results = []
     MAX_WORD_TOTAL = 4096
     n_txt = len(txt)
-    last_iteration_result = "从以下文本中提取摘要。"
+    last_iteration_result = _("从以下文本中提取摘要")
     if n_txt >= 20:
-        print("文章极长，不能达到预期效果")
+        print(_("文章极长，不能达到预期效果"))
     for i in range(n_txt):
         NUM_OF_WORD = MAX_WORD_TOTAL // n_txt
-        i_say = f"Read this section, recapitulate the content of this section with less than {NUM_OF_WORD} words in Chinese: {txt[i]}"
+        i_say = f"Read this section, recapitulate the content of this section with less than {NUM_OF_WORD} words in {GPT_prefer_language}: {txt[i]}"
         i_say_show_user = f"[{i+1}/{n_txt}] Read this section, recapitulate the content of this section with less than {NUM_OF_WORD} words: {txt[i][:200]} ...."
         gpt_say = yield from request_gpt_model_in_new_thread_with_ui_alive(
             i_say,
@@ -216,12 +231,13 @@ def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwarg
                 "The main content of the previous section is?",
                 last_iteration_result,
             ],  # 迭代上一次的结果
-            sys_prompt="Extracts the main content from the text section where it is located for graphing purposes, answer me with Chinese.",  # 提示
+            sys_prompt= f"Extracts the main content from the text section where it is located for graphing purposes, answer me with {GPT_prefer_language}.",  # 提示
         )
         results.append(gpt_say)
         last_iteration_result = gpt_say
     ############################## <第 2 步，根据整理的摘要选择图表类型> ##################################
-    gpt_say = str(plugin_kwargs)  # 将图表类型参数赋值为插件参数
+    gpt_say = str(index)  # 将图表类型参数赋值为插件参数
+
     results_txt = "\n".join(results)  # 合并摘要
     if gpt_say not in [
         "1",
@@ -235,13 +251,13 @@ def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwarg
         "9",
     ]:  # 如插件参数不正确则使用对话模型判断
         i_say_show_user = (
-            f"接下来将判断适合的图表类型,如连续3次判断失败将会使用流程图进行绘制"
+            _("接下来将判断适合的图表类型,如连续3次判断失败将会使用流程图进行绘制")
         )
-        gpt_say = "[Local Message] 收到。"  # 用户提示
+        gpt_say = _("[Local Message] 收到。")  # 用户提示
         chatbot.append([i_say_show_user, gpt_say])
         yield from update_ui(chatbot=chatbot, history=[])  # 更新UI
         i_say = SELECT_PROMPT.format(subject=results_txt)
-        i_say_show_user = f'请判断适合使用的流程图类型,其中数字对应关系为:1-流程图,2-序列图,3-类图,4-饼图,5-甘特图,6-状态图,7-实体关系图,8-象限提示图。由于不管提供文本是什么,模型大概率认为"思维导图"最合适,因此思维导图仅能通过参数调用。'
+        i_say_show_user = _('请判断适合使用的流程图类型,其中数字对应关系为:1-流程图,2-序列图,3-类图,4-饼图,5-甘特图,6-状态图,7-实体关系图,8-象限提示图。由于不管提供文本是什么,模型大概率认为"思维导图"最合适,因此思维导图仅能通过参数调用.')
         for i in range(3):
             gpt_say = yield from request_gpt_model_in_new_thread_with_ui_alive(
                 inputs=i_say,
@@ -284,17 +300,21 @@ def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwarg
         i_say = PROMPT_8.format(subject=results_txt)
     elif gpt_say == "9":
         i_say = PROMPT_9.format(subject=results_txt)
-    i_say_show_user = f"请根据判断结果绘制相应的图表。如需绘制思维导图请使用参数调用,同时过大的图表可能需要复制到在线编辑器中进行渲染。"
+    i_say_show_user = _("请根据判断结果绘制相应的图表。如需绘制思维导图请使用参数调用,同时过大的图表可能需要复制到在线编辑器中进行渲染.")
     gpt_say = yield from request_gpt_model_in_new_thread_with_ui_alive(
-        inputs=i_say,
+        inputs= f'{i_say}\n And answer me with {GPT_prefer_language}.',
         inputs_show_user=i_say_show_user,
         llm_kwargs=llm_kwargs,
         chatbot=chatbot,
         history=[],
         sys_prompt="",
     )
-    history.append(gpt_say)
-    yield from update_ui(chatbot=chatbot, history=history)  # 刷新界面 # 界面更新
+
+    mermaid = '<pre class="mermaid">{}</pre>'.format(gpt_say.replace("'''", "").replace("`", "").replace("mermaid",""))
+    html_b64 =base64_encode(mermaid)
+    chatbot.append([{'role':'user','content':HTML(f'<iframe src="/services/easy_html?base64={html_b64}" sandbox="allow-scripts"></iframe>')},
+                    {'role':'assistant','content':f'<a href = "/services/easy_html?base64={html_b64}" target="_blank">{_("点击查看大图（可能会生成失败！）")}</a>'}])
+    yield from update_ui(chatbot=chatbot, history=history)
 
 
 @CatchException
@@ -315,9 +335,9 @@ def 生成多种Mermaid图表(
     # 基本信息：功能、贡献者
     chatbot.append(
         [
-            "函数插件功能？",
-            "根据当前聊天历史或指定的路径文件(文件内容优先)绘制多种mermaid图表，将会由对话模型首先判断适合的图表类型，随后绘制图表。\
-        \n您也可以使用插件参数指定绘制的图表类型,函数插件贡献者: Menghuan1918",
+            _("函数插件功能？"),
+            _("根据当前聊天历史或指定的路径文件(文件内容优先)绘制多种mermaid图表，将会由对话模型首先判断适合的图表类型，随后绘制图表。\
+        \n您也可以使用插件参数指定绘制的图表类型,函数插件贡献者: Menghuan1918"),
         ]
     )
     yield from update_ui(chatbot=chatbot, history=history)  # 刷新界面
@@ -338,24 +358,24 @@ def 生成多种Mermaid图表(
             report_exception(
                 chatbot,
                 history,
-                a=f"解析项目: {txt}",
-                b=f"找到了.doc文件，但是该文件格式不被支持，请先转化为.docx格式。",
+                a=_("解析项目: {}").format(txt),
+                b=_("找到了.doc文件，但是该文件格式不被支持，请先转化为.docx格式。"),
             )
 
         elif excption == "pdf":
             report_exception(
                 chatbot,
                 history,
-                a=f"解析项目: {txt}",
-                b=f"导入软件依赖失败。使用该模块需要额外依赖，安装方法```pip install --upgrade pymupdf```。",
+                a=_("解析项目: {}").format(txt),
+                b=_("导入软件依赖失败。使用该模块需要额外依赖，安装方法```pip install --upgrade pymupdf```。"),
             )
 
         elif excption == "word_pip":
             report_exception(
                 chatbot,
                 history,
-                a=f"解析项目: {txt}",
-                b=f"导入软件依赖失败。使用该模块需要额外依赖，安装方法```pip install --upgrade python-docx pywin32```。",
+                a=_("解析项目: {}").format(txt),
+                b=_("导入软件依赖失败。使用该模块需要额外依赖，安装方法```pip install --upgrade python-docx pywin32```。"),
             )
 
         yield from update_ui(chatbot=chatbot, history=history)  # 刷新界面
@@ -363,8 +383,8 @@ def 生成多种Mermaid图表(
     else:
         if not file_exist:
             history.append(txt)  # 如输入区不是文件则将输入区内容加入历史记录
-            i_say_show_user = f"首先你从历史记录中提取摘要。"
-            gpt_say = "[Local Message] 收到。"  # 用户提示
+            i_say_show_user = _("首先你从历史记录中提取摘要")
+            gpt_say = _("[Local Message] 收到。")  # 用户提示
             chatbot.append([i_say_show_user, gpt_say])
             yield from update_ui(chatbot=chatbot, history=history)  # 更新UI
             yield from 解析历史输入(
@@ -373,8 +393,8 @@ def 生成多种Mermaid图表(
         else:
             file_num = len(file_manifest)
             for i in range(file_num):  # 依次处理文件
-                i_say_show_user = f"[{i+1}/{file_num}]处理文件{file_manifest[i]}"
-                gpt_say = "[Local Message] 收到。"  # 用户提示
+                i_say_show_user = f"[{i+1}/{file_num}] {_('处理文件: ')} {file_manifest[i]}"
+                gpt_say = _("[Local Message] 收到。")  # 用户提示
                 chatbot.append([i_say_show_user, gpt_say])
                 yield from update_ui(chatbot=chatbot, history=history)  # 更新UI
                 history = []  # 如输入区内容为文件则清空历史记录
@@ -383,7 +403,8 @@ def 生成多种Mermaid图表(
                     history, llm_kwargs, file_manifest, chatbot, plugin_kwargs
                 )
 
-
+# 暂时无用，无需国际化
+#  Temporarily useless, no need for internationalization
 class Mermaid_Gen(GptAcademicPluginTemplate):
     def __init__(self):
         pass
