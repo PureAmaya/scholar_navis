@@ -150,7 +150,7 @@ def define_gui_toolbar(chatbot,help_menu_description):
             
         with gr.Tab(_('更改密码')) as change_pwd_tab:
             username = gr.Textbox(label=_('当前登录用户'),value='',interactive=False)
-            gr.HTML(f'<span style="color:red; font-weight:bold;">{_("请注意，点击确认后立即生效")}</span>')
+            gr.HTML('<span style="color:red; font-weight:bold;">{}</span>'.format(_("请注意，点击确认后立即生效")))
             current_pwd = gr.Textbox(label=_('当前密码'),value='',type='password',max_lines=1,placeholder=_('请输入当前密码'))
             new_pwd = gr.Textbox(label=_('修改密码'),value='',type='password',max_lines=1,placeholder=_('请输入新密码'))
             confirm_pwd = gr.Textbox(label=_('确认修改的密码'),value='',type='password',max_lines=1,placeholder=_('请再次输入新密码'))

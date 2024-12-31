@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-12-27 18:19+0800\n"
-"PO-Revision-Date: 2024-12-28 10:23+0800\n"
+"POT-Creation-Date: 2024-12-31 15:37+0800\n"
+"PO-Revision-Date: 2024-12-31 15:40+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -14,51 +14,51 @@ msgstr ""
 "X-Poedit-KeywordsList: l(\"%s\")\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: auth.py:107
+#: auth.py:94
 msgid "欢迎使用 Scholar Navis"
 msgstr "Welcome to Scholar Navis"
 
-#: auth.py:108
+#: auth.py:95
 msgid "管理员启动了身份验证。请登录或注册以继续"
 msgstr ""
 "The administrator has initiated identity verification. Please log in or "
 "register to proceed."
 
-#: auth.py:109
+#: auth.py:96
 msgid ""
 "API信息在服务端加密; 不登录的情况下API加密储存在localStorage中，请勿泄露"
 msgstr ""
 "API information is encrypted on the server; when not logged in, API "
 "encryption is stored in localStorage. Please do not disclose it."
 
-#: auth.py:110
+#: auth.py:97
 msgid "如果对安全性不放心，请不要使用常用用户名与密码"
 msgstr ""
 "If you are concerned about security, please avoid using common usernames and "
 "passwords."
 
-#: auth.py:156 auth.py:205
+#: auth.py:118 auth.py:167
 msgid "用户名无效"
 msgstr "Username invalid."
 
-#: auth.py:158 auth.py:207
+#: auth.py:120 auth.py:169
 msgid "用户名不能为空"
 msgstr "Username cannot be empty."
 
-#: auth.py:159 auth.py:208
+#: auth.py:121 auth.py:170
 #: shared_utils/scholar_navis/user_account_manager.py:54
 msgid "密码不能为空"
 msgstr "Password cannot be empty."
 
-#: auth.py:161 auth.py:211
+#: auth.py:123 auth.py:173
 msgid "用户名只能包含字母、数字和下划线"
 msgstr "Username can only contain letters, numbers, and underscores."
 
-#: auth.py:162
+#: auth.py:124
 msgid "当前用户不存在"
 msgstr "Current user does not exist."
 
-#: auth.py:163 auth.py:213
+#: auth.py:125 auth.py:175
 #: shared_utils/scholar_navis/user_account_manager.py:58
 msgid "密码不符合要求。至少八位且有大小写字母和数字"
 msgstr ""
@@ -66,97 +66,97 @@ msgstr ""
 "characters long and include uppercase and lowercase letters as well as "
 "numbers."
 
-#: auth.py:164
+#: auth.py:126
 msgid "密码错误"
 msgstr "Password is incorrect."
 
-#: auth.py:195
+#: auth.py:157
 msgid "登录失败，请稍后再试"
 msgstr "Login failed, please try again later."
 
-#: auth.py:197
+#: auth.py:159
 msgid "登陆成功"
 msgstr "Login successful."
 
-#: auth.py:209 shared_utils/scholar_navis/user_account_manager.py:55
+#: auth.py:171 shared_utils/scholar_navis/user_account_manager.py:55
 msgid "请重复输入密码"
 msgstr "Please re-enter your password."
 
-#: auth.py:212
+#: auth.py:174
 msgid "当前用户已存在，请使用其他用户名"
 msgstr "The current username already exists. Please use a different username."
 
-#: auth.py:214 shared_utils/scholar_navis/user_account_manager.py:59
+#: auth.py:176 shared_utils/scholar_navis/user_account_manager.py:59
 msgid "两次输入的密码不一致"
 msgstr "The two passwords entered do not match."
 
-#: auth.py:226
+#: auth.py:188
 msgid "注册失败，请稍后再试"
 msgstr "Registration failed, please try again later."
 
-#: auth.py:228
+#: auth.py:190
 msgid "注册成功，请登录"
 msgstr "Registration successful, please log in."
 
-#: auth.py:231
+#: auth.py:193
 msgid "Scholar Navis 登录授权页"
 msgstr "Scholar Navis Login Authorization Page"
 
-#: auth.py:236
+#: auth.py:198
 msgid "用户名"
 msgstr "Username"
 
-#: auth.py:236
+#: auth.py:198
 msgid "请输入用户名 (不区分大小写)"
 msgstr "Please enter your username (case-insensitive)."
 
-#: auth.py:237
+#: auth.py:199
 msgid "密码"
 msgstr "Password"
 
-#: auth.py:237
+#: auth.py:199
 msgid "至少八位，且有大小写字母与数字"
 msgstr ""
 "At least eight characters, including uppercase letters, lowercase letters, "
 "and numbers."
 
-#: auth.py:238
+#: auth.py:200
 msgid "不自动登录"
 msgstr "Do not log in automatically"
 
-#: auth.py:238
+#: auth.py:200
 msgid "一周内自动登录"
 msgstr "Within one week"
 
-#: auth.py:238
+#: auth.py:200
 msgid "一个月内自动登录"
 msgstr "Within one month"
 
-#: auth.py:238
+#: auth.py:200
 msgid "总是自动登录"
 msgstr "Always"
 
-#: auth.py:239
+#: auth.py:201
 msgid "自动登录"
 msgstr "Auto-login"
 
-#: auth.py:240
+#: auth.py:202
 msgid "确认密码"
 msgstr "Confirm Password"
 
-#: auth.py:240
+#: auth.py:202
 msgid "请再次输入密码"
 msgstr "Please re-enter your password."
 
-#: auth.py:241
+#: auth.py:203
 msgid "登录"
 msgstr "Login"
 
-#: auth.py:242
+#: auth.py:204
 msgid "注册"
 msgstr "Register"
 
-#: auth.py:245
+#: auth.py:207
 msgid "注册登录切换"
 msgstr "Toggle between registration and login"
 
@@ -624,7 +624,7 @@ msgstr ""
 "asked at this point as well): "
 
 #: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:337
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:262
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:261
 msgid "选择总结库"
 msgstr "Select Summary Library"
 
@@ -651,50 +651,51 @@ msgid "在此处输入思维导图类型代码/要溯源的内容/课题拟定�
 msgstr ""
 "Enter mind map type code/traceable content/project requirements formulation"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:169
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:177
 msgid "请重置后再执行"
 msgstr "Please reset and then execute."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:172
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:180
 msgid "任务名称意外丢失，请重新设定"
 msgstr "Task name unexpectedly lost, please reset."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:177
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:184
 msgid "结构和内容要求不能为空"
 msgstr "Structural and content requirements cannot be empty."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:180
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:187
 msgid "目标语言不能为空。请选定目标语言"
 msgstr "The target language cannot be empty. Please select a target language."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:186
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:193
 msgid "工作目录处理失败，请重新设定{}"
 msgstr "Working directory processing failed, please reset {}."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:204
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:631
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:211
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:665
 msgid "任务开始执行"
 msgstr "Task execution started."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:224
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:231
 msgid "任务执行完成"
 msgstr "Task execution completed."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:224
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:231
 msgid "如果要执行新的任务，请重置"
 msgstr "If you want to execute a new task, please reset."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:280
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:287
 msgid "要下载的文件不存在。请尝试下载另一个文件或重新摘取"
 msgstr ""
 "The file to be downloaded does not exist. Please try downloading another "
 "file or re-summarizing."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:303
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:310
 msgid "文件不存在。请上传文件或选择已有文件"
 msgstr "File does not exist. Please upload a file or select an existing one."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:314
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:321
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:336
 msgid ""
 "压缩包中缺少必要文件 {}，但是有pdf文件，将按照新任务执行。如果您的压缩包内只"
 "有pdf，请忽略该提醒"
@@ -703,62 +704,71 @@ msgstr ""
 "files. The task will be executed according to the new task. If your "
 "compressed package only contains PDFs, please ignore this reminder."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:317
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:324
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:339
 msgid "压缩包中缺少必要文件 {}，请重新上传或选择已有文件"
 msgstr ""
 "The necessary file {} is missing in the compressed package. Please re-upload "
 "or select an existing file."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:447
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:473
 msgid "{} 加载pdf成功"
 msgstr "{} successfully loaded PDF."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:451
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:477
 msgid "{} 加载pdf: 失败，后续过程将跳过。原因：{}"
 msgstr ""
 "{} failed to load PDF: the subsequent process will be skipped. Reason: {}"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:458
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:484
 msgid "{} 获取有用句子失败，后续过程将跳过。原因：{}"
 msgstr ""
 "Failed to retrieve useful sentences for {}. The subsequent process will be "
 "skipped. Reason: {}"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:461
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:487
 msgid "{} 获取有用句子成功"
 msgstr "Successfully retrieved useful sentences for {}."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:468
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:494
 msgid "{} 摘取可接受句子失败，后续过程将跳过。原因：{}"
 msgstr ""
 "Failed to extract acceptable sentences for {}. The subsequent process will "
 "be skipped. Reason: {}"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:471
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:497
 msgid "{} 摘取可接受句子成功"
 msgstr "Successfully extracted acceptable sentences for {}."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:478
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:504
 msgid "{} 翻译可接受句子失败，后续过程将跳过。原因：{}"
 msgstr ""
 "Failed to translate acceptable sentences for {}. The subsequent process will "
 "be skipped. Reason: {}"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:481
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:507
 msgid "{} 翻译可接受句子成功"
 msgstr "Successfully translated acceptable sentences for {}."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:656
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:654
+msgid "文件 {} 不存在，跳过"
+msgstr "File {} does not exist, skipping."
+
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:694
 msgid "正在导出结果文件..."
 msgstr "Exporting result file..."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:678
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:716
 msgid "结果文件导出成功。正在导出中间文件..."
 msgstr "Result file exported successfully. Exporting intermediate files..."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:695
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:733
 msgid "中间文件导出完成。正在导出日志..."
 msgstr "Intermediate files exported. Exporting logs..."
+
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:741
+msgid "输出结果失败，原因：{}"
+msgstr "Output failed, reason: {}."
 
 #: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:39
 msgid "现在可以进行单篇文章的精细分析。支持总结库内置文章或上传的其他文章"
@@ -770,18 +780,18 @@ msgstr ""
 msgid "等待指令中..."
 msgstr "Waiting for commands..."
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:48
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:47
 msgid "[注意] 上传的文献多于1篇。<b>精细分析时仅使用第一篇文章</b>"
 msgstr ""
 "[Note] More than one article has been uploaded. <b>Only the first article "
 "will be used for fine-grained analysis</b>"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:64
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:63
 #: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:203
 msgid "该用户没有任何总结库"
 msgstr "The user has no article summarization library"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:66
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:65
 #: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:205
 msgid ""
 "下面是该用户拥有的总结库：\n"
@@ -790,7 +800,7 @@ msgstr ""
 "Below is the summary library owned by this user:\n"
 "\n"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:72
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:71
 msgid ""
 "没有指定任何文章。可以选择上传文章或者从总结库中选择一篇文章进行分析</br></"
 "br>{}"
@@ -799,38 +809,38 @@ msgstr ""
 "select an article from the article summarization library for analysis</br></"
 "br>{}"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:78
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:77
 msgid "没有上传可用的文章，<b>{}</b> 亦不是已有的总结库"
 msgstr ""
 "No available articles uploaded, neither is <b>{}</b> part of the existing "
 "summarization library"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:89
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:88
 msgid "总结库 <b>{}</b> 中不存在任何已经加载完成的文章"
 msgstr "There are no articles loaded in the <b>{}</b> summary library"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:116
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:115
 msgid "访问文章发布页"
 msgstr "Article Publisher Page"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:117
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:116
 msgid "复制文章"
 msgstr "Copy Article"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:118
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:117
 msgid "下载文章"
 msgstr "Download Article"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:132
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:131
 #: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:98
 msgid "总结库"
 msgstr "article summarization library"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:133
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:132
 msgid "包含下面的文章："
 msgstr "includes the following articles:"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:134
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:133
 msgid ""
 "展开文字可以看到文章的预分析结果。如果没有正常显示标题，说明文章标题获取失"
 "败，但不影响后续使用"
@@ -839,11 +849,11 @@ msgstr ""
 "title does not display normally, it indicates that the article title "
 "retrieval has failed, but it does not affect subsequent use"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:135
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:134
 msgid "分析中使用的关键词："
 msgstr "Keywords used in analysis:"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:136
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:135
 msgid ""
 "如果没有正常的显示文章标题，可能是该文章没有doi，或是没有在metadata中设定标"
 "题，此时显示的一般为文件名"
@@ -852,13 +862,13 @@ msgstr ""
 "does not have a DOI, or the title has not been set in the metadata. In this "
 "case, the displayed title is generally the filename"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:137
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:136
 msgid "如果 [访问文章发布页] 不可用，可能是该文章没有doi，也可能是网络错误"
 msgstr ""
 "If [Article Publisher Page] is not available, it may be that the article "
 "does not have a DOI, or there may be a network error"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:152
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:151
 msgid ""
 "尚未输入一个可用的文章。可以选择上传一篇文章，也可以从加载的文章中选择一篇使"
 "用"
@@ -866,52 +876,52 @@ msgstr ""
 "No available articles have been input. You can either upload an article or "
 "select an article from the loaded articles to use"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:154
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:153
 msgid "您可以点击这里"
 msgstr "You can click here"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:154
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:153
 msgid "查阅该总结库包含的文章"
 msgstr "review the articles included in the summary library"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:162
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:161
 msgid "精细分析中..."
 msgstr "In fine-grained analysis of the article.."
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:166
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:165
 msgid "分析过程中出错！错误原因是：{}"
 msgstr "Error occurred during analysis! Error reason is: {}"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:190
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:189
 msgid ""
 "上传的文件 {} 不可用。我们不接受中文学位论文、加密文件、非PDF文件或损坏文件"
 msgstr ""
 "The uploaded file {} is unavailable. We do not accept Chinese doctoral "
 "dissertations, encrypted files, non-PDF files, or corrupted files."
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:203
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:202
 msgid "对pdf文件处理中..."
 msgstr "Processing PDF files..."
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:213
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:212
 #, python-brace-format
 msgid "[{i}/{total}] AI阅读中..."
 msgstr "[{i}/{total}] AI reading in progress..."
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:238
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:237
 msgid "总结中..."
 msgstr "In summary..."
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:245
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:244
 msgid "分析的文章如下："
 msgstr "The analyzed articles are as follows:"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:247
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:246
 msgid "标题可能不准确，跳转连接亦或许无法使用，仅供参考"
 msgstr ""
 "Title may be inaccurate, link may not be functional, for reference only"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:249
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:248
 msgid ""
 "精细分析完成，以下是分析的结果（现在亦可以与AI进行交流，也可以下载分析的结"
 "果）: "
@@ -919,19 +929,19 @@ msgstr ""
 "Fine-grained analysis completed, the following are the analysis results (you "
 "can now also communicate with AI and download the analysis results): "
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:254
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:253
 msgid "下载分析结果："
 msgstr "Download analysis results:"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:261
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:260
 msgid "选定的文章"
 msgstr "Selected articles"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:261
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:260
 msgid "上传或使用总结库内的文章"
 msgstr "Upload or use articles from the summary library"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:262
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:261
 msgid "查看总结库内的文章"
 msgstr "View articles in the summarization library"
 
@@ -1604,7 +1614,7 @@ msgstr ""
 msgid "首先你从历史记录中提取摘要"
 msgstr "First, you extract a summary from the chat history."
 
-#: main.py:8
+#: main.py:9
 msgid ""
 "\n"
 "## gpt_academic：\n"
@@ -1652,70 +1662,70 @@ msgstr ""
 "</br></br>To use a large model, enter your key in the API-KEY field at the "
 "top left corner.\n"
 
-#: main.py:36
+#: main.py:37
 msgid "所有对话记录将自动保存在本地目录{}, 请注意自我隐私保护哦！"
 msgstr ""
 "All conversation records will be automatically saved in the local directory "
 "{}, please be mindful of your privacy!"
 
-#: main.py:111
+#: main.py:108
 msgid "文件上传与设置"
 msgstr "Upload / Settings"
 
-#: main.py:112
+#: main.py:109
 msgid "暗黑模式"
 msgstr "Dark mode"
 
-#: main.py:118
+#: main.py:115
 msgid "对话功能"
 msgstr "Dialogue feature"
 
-#: main.py:121 main.py:260 themes/gui_toolbar.py:242 themes/gui_toolbar.py:248
+#: main.py:118 main.py:259 themes/gui_toolbar.py:242 themes/gui_toolbar.py:248
 #: themes/gui_toolbar.py:253
 msgid "当前模型: {}"
 msgstr "Current model: {}"
 
-#: main.py:127
+#: main.py:124
 msgid "输入区"
 msgstr "Input area"
 
-#: main.py:131 main.py:141
+#: main.py:128 main.py:138
 msgid "提交"
 msgstr "Submit"
 
-#: main.py:143 shared_utils/scholar_navis/gpt_academic_handler.py:186
+#: main.py:140 shared_utils/scholar_navis/gpt_academic_handler.py:186
 msgid "重置"
 msgstr "Reset"
 
-#: main.py:144
+#: main.py:141
 msgid "停止"
 msgstr "Stop"
 
-#: main.py:145
+#: main.py:142
 msgid "清除"
 msgstr "Clear"
 
-#: main.py:147
+#: main.py:144
 msgid "Tip: 按Enter提交, 按Shift+Enter换行"
 msgstr "Tip: Press Enter to submit, press Shift+Enter to insert a newline."
 
-#: main.py:149
+#: main.py:146
 msgid "Scholar Navis 功能区"
 msgstr "Scholar Navis functional area"
 
-#: main.py:152
+#: main.py:149
 msgid "基础功能区"
 msgstr "Basic functional area"
 
-#: main.py:191
+#: main.py:188
 msgid "摘取有用语句"
 msgstr "Extract useful sentences"
 
-#: main.py:224
+#: main.py:223
 msgid "已重置"
 msgstr "Reset completed"
 
-#: main.py:298
+#: main.py:297
 msgid "如果浏览器没有自动打开，请复制并转到以下URL:"
 msgstr ""
 "If the browser does not open automatically, please copy and go to the "
@@ -2021,27 +2031,27 @@ msgstr "Please enter a task name, or use the default name."
 #: shared_utils/scholar_navis/gpt_academic_handler.py:153
 msgid ""
 "请上传包含文章标题与内容的csv文件 or 以往下载的分析文件（.zip）or pdf or pdf"
-"的压缩包（.zip）"
+"的压缩包（.zip/.rar）"
 msgstr ""
 "Please upload a CSV file containing article titles and content, or a "
-"previously downloaded analysis file (.zip), or a PDF, or a zipped PDF "
-"package (.zip)."
+"previously downloaded analysis file (.zip), or a PDF, or a compressed "
+"package of PDFs (.zip/.rar)."
 
 #: shared_utils/scholar_navis/gpt_academic_handler.py:154
 msgid "点击这里下载样例csv文件: {}"
 msgstr "Click here to download a sample CSV file: {}"
 
 #: shared_utils/scholar_navis/gpt_academic_handler.py:158
-msgid "[可选] 增量添加PDF (zip格式)"
-msgstr "[Optional] Incrementally add PDFs (in zip format)"
+msgid "[可选] 增量添加PDF (zip / rar 格式)"
+msgstr "[Optional] Incrementally add PDFs (zip / rar format)"
 
 #: shared_utils/scholar_navis/gpt_academic_handler.py:159
 msgid "- 向摘要任务中添加额外的PDF文章"
 msgstr "- Add additional PDF articles to the summarization task"
 
 #: shared_utils/scholar_navis/gpt_academic_handler.py:160
-msgid "请上传pdf或pdf的压缩包（.zip）"
-msgstr "Upload PDF article(s) or a compressed file"
+msgid "请上传pdf或pdf的压缩包（.zip / .rar）"
+msgstr "Please upload a PDF or a compressed package of PDFs (.zip / .rar)"
 
 #: shared_utils/scholar_navis/gpt_academic_handler.py:162
 msgid "设定分析参数"
@@ -2324,8 +2334,9 @@ msgstr ""
 "file, the input area will be automatically updated to the corresponding path."
 
 #: themes/gui_toolbar.py:78
-msgid "任何文件, 推荐上传压缩文件(zip, tar)"
-msgstr "Any file, it is recommended to upload compressed files (zip, tar)."
+msgid "任何文件, 推荐上传压缩文件(zip, tar, rar)"
+msgstr ""
+"For any file, it is recommended to upload a compressed file (zip, tar, rar)."
 
 #: themes/gui_toolbar.py:79
 msgid "更换模型"
@@ -2382,6 +2393,10 @@ msgstr "Change Password"
 #: themes/gui_toolbar.py:152
 msgid "当前登录用户"
 msgstr "Current logged-in user"
+
+#: themes/gui_toolbar.py:153
+msgid "请注意，点击确认后立即生效"
+msgstr "Please note, it will take effect immediately upon clicking confirm."
 
 #: themes/gui_toolbar.py:154
 msgid "当前密码"
@@ -2543,9 +2558,6 @@ msgstr "[Local Message] Received the following files (uploaded to path: {}): "
 
 #~ msgid "翻译完成！"
 #~ msgstr "Translation complete!"
-
-#~ msgid "翻译失败，原因：{} @ {}"
-#~ msgstr "Translation failed, reason: {} @ {}"
 
 #~ msgid "搭建框架中..."
 #~ msgstr "Setting up framework..."
