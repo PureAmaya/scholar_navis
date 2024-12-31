@@ -406,7 +406,7 @@ class openaccess_download:
         log_fp = os.path.join(tmp_dir,'download_log.log')
         with open(log_fp,"w",encoding='utf-8') as log:
             header = "DATETIME\tPMID\tPMCID\tSTATUS\tINFO"
-            content = f"{header}\n{'\n'.join(self._download_log)}"
+            content = "{}\n{}".format(header, '\n'.join(self._download_log))
             log.write(content)
         
         
