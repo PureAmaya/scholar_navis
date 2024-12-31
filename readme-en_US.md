@@ -7,7 +7,7 @@ A pipeline-based research progress analysis tool based on gpt_academic</i></p>
 
 ### Pre-announcement
 
-This software is developed based on gpt_academic (3.83) and is considered a derivative work. It is compliant with the GNU General Public License v3.0. For detailed information on usage and modifications, please click [here](crazy_functions/scholar_navis/doc/en-US/third-party-lisence.md)
+This software is developed based on gpt_academic (3.83) and is considered a derivative work. It is compliant with the GNU Affero General Public License v3.0. For detailed information on usage and modifications, please click [here](crazy_functions/scholar_navis/doc/en-US/third-party-lisence.md)
 
 ### Brief Introduction
 
@@ -91,7 +91,7 @@ This software is developed based on gpt_academic (3.83) and is considered a deri
 
 - This tool is intended to be used as an aid and must be supplemented with necessary manual checks and processing.<font color=red><b>****We do not recommend using the results directly without any checks or corrections. If any issues arise, the authors of Scholar Navis, their affiliated organizations, the language model service providers, gpt_academic, and any related or derivative content are not liable for any responsibility.****</b></font>
 
-- What you need to know is that GPLv3 provides limitation of liability (the copyright holder is not liable for any damages caused to the user) and does not provide any warranty (the copyright holder also does not warrant the quality of the software). By using this AI service, you are deemed to agree to the aforementioned terms; otherwise, please do not use it.
+- What you need to know is that AGPLv3 provides limitation of liability (the copyright holder is not liable for any damages caused to the user) and does not provide any warranty (the copyright holder also does not warrant the quality of the software). By using this AI service, you are deemed to agree to the aforementioned terms; otherwise, please do not use it.
 
 ### Install
 
@@ -165,7 +165,7 @@ H & G4 --> I[/Understand research progress and gaps\]
 
 ### Copyright Information
 
-- Scholar Navis is distributed under the GPL-3.0 open source license. 
+- Scholar Navis is distributed under the AGPL-3.0 open source license. 
 
 - Because modifications have been made to gpt_academic, it is also necessary to release the modified source code and clearly note the modifications, in accordance with the requirements of the GPL-3.0 license.
 

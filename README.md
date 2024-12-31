@@ -6,7 +6,7 @@
 
 ### 事先说明
 
-本软件基于 gpt_academic（3.83）开发，为其衍生作品。遵守 GNU General Public License v3.0 许可证。详细使用情况和修改内容，可以点击[这里](crazy_functions/scholar_navis/doc/zh-Hans/third-party-lisence.md)
+本软件基于 gpt_academic（3.83）开发，为其衍生作品。遵守 GNU Affero General Public License v3.0 许可证。详细使用情况和修改内容，可以点击[这里](crazy_functions/scholar_navis/doc/zh-Hans/third-party-lisence.md)
 
 ### 简单介绍
 
@@ -87,7 +87,7 @@
 
 * 仅作为辅助工具，务必辅以必要的人工检查和处理。<font color=red><b>**我们不推荐在不加检查、不加修正的情况下，直接采用AI输出的结果。如果发生任何问题，Scholar Navis 作者及其所属组织、语言模型提供服务商、gpt_academic及其有关或衍生内容不负任何责任。**</b>"</font>
 
-* 您需要知道的是，GPLv3提供责任限制（版权人对使用者造成的损失不负任何责任），不提供任何担保（版权人亦不为该软件的品质提供任何担保）。如果使用了本AI服务，则默认同意上述内容，否则请勿使用。
+* 您需要知道的是，AGPLv3提供责任限制（版权人对使用者造成的损失不负任何责任），不提供任何担保（版权人亦不为该软件的品质提供任何担保）。如果使用了本AI服务，则默认同意上述内容，否则请勿使用。
 
 ### 安装过程
 
@@ -161,7 +161,7 @@ A[\确定大致研究方向/] --> B(下载英文文献)
 
 ### 版权信息
 
-- Scholar Navis 遵守 GPL-3.0 license 开源许可证
+- Scholar Navis 遵守 AGPL-3.0 license 开源许可证
 
 - 因为对gpt_academic产生了修改，根据 GPL-3.0 许可证的要求，亦需要发布修改后的源码，并注明修改的内容。
 
