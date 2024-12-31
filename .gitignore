@@ -161,9 +161,10 @@ objdump*
 
 # scholar_navis
 dev/
+dev.py
 notification/
-tmp
-crazy_functions/scholar_navis/data
+tmp/
+data/
 crazy_functions/scholar_navis/scripts/dev
 crazy_functions/scholar_navis/memorandum.txt
 memorandum.txt
