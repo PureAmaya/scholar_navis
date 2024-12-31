@@ -1,51 +1,41 @@
 
-function scholar_navis_init() {
-
-    try {
-        init_custom_api_key();
-    }
-    catch { }
+async function scholar_navis_init(selected_language) {
 
     // 加载pdf优化器（暂时没啦）
     //push_data_to_gradio_component('<iframe src="' + window.location.origin + '/file=themes/scholar_navis/local_pdf_optimizer/local_pdf_optimizer.html" width="100%" height="220px"></iframe>', 'local_pdf_optimizer', 'no_conversion');
 
+    
+    try {// 删除旧版本的自定义内容
+        var custom_api_json = JSON.parse(localStorage.getItem('user_custom_data'))
 
+        if (custom_api_json && typeof custom_api_json === 'object' && !Array.isArray(custom_api_json)) {
+            // 删除 localStorage 中的 user_custom_data
+            localStorage.removeItem('user_custom_data');
 
-    // 使用方法
-    loadResources()
+            // 提醒用户
+            // 先用这个笨方法了。。
+            switch (selected_language) {
+                case 'zh-Hans':
+                    label_head = '旧版本自定义内容已经删除'
+                    break;
+                case 'zh-Hant':
+                    label_head = '舊版本自訂內容已經刪除'
+                    break;
+                case 'en-US':
+                    label_head = 'Old version custom content has been deleted.'
+                    break;
+                default:
+                    label_head = '旧版本自定义内容已经删除: '
+                    break;
+            }
+            alertify.warning(label_head);
+        }
+    }
+    catch (e) {
+        // 忽略错误
+    }               
 
-
-}
-
-
-async function loadResources() {
-    await loadJS('https://cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js');
-    await loadCSS('https://cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css');
-    await loadCSS('https://cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/bootstrap.min.css')
-    check_maintance();
-}
-
-
-
-async function loadCSS(url) {
-    var response = await fetch(url)
-    var css = await response.text()
-    var style = document.createElement('style');
-    style.type = 'text/css';
-    style.appendChild(document.createTextNode(css));
-    document.head.appendChild(style);
-
-}
-
-async function loadJS(url) {
-    var response = await fetch(url)
-    var js = await response.text()
-
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.appendChild(document.createTextNode(js));
-    document.head.appendChild(script);
-
+    check_msg(selected_language);
 }
 
 
@@ -72,57 +62,44 @@ async function getJSON(url) {
     }
 }
 
-// 以后改成继承吧，不过现在也就用这一个，无所谓了
-function double_button_notification(title, msg, ok_label = 'ok', cancel_label = 'cancel',closable = false, ok_fn = null, cancel_fn = null,close_fn = null) {
-    alertify.dialog('confirm')
-        .setting({'movable': false,
-    'closable': closable,
-    'closableByDimmer':closable,
-    'transition': 'fade', 'title': title, 'message': msg ,
-    'labels': { 'ok': ok_label, 'cancel': cancel_label},
-    'pinnable': true, 'modal': true ,
-    'onshow':null, 
-    'onclose': close_fn,
-    'oncancel': cancel_fn,
-    'onok': ok_fn})
-        .show();
+
+// 从 Base64 解码为原始字符串
+function base64ToUtf8(base64) {
+    return decodeURIComponent(window.atob(base64));
 }
 
-async function check_maintance() {
-    var json = await getJSON("/api/notification/maintenance")
+window.modal = [];
 
-    var session_value = parseInt(sessionStorage.getItem('maintenance_show') || '1');
-    var local_value = parseInt(localStorage.getItem('maintenance_show') || '1');
+function BanModalPointEvents() {
+    window.modal.forEach(element => { element.style.pointerEvents = 'none'; });
+    //dropdown_in_modal.forEach(element => {element.style.pointerEvents = 'auto'})
+    // 延迟 0.1 秒后执行 modal 的操作
+    setTimeout(() => {
+        window.modal.forEach(element => {
+            element.style.pointerEvents = 'auto';
+        });
+    }, 100); // 100 毫秒即 0.1 秒
 
-    if (json.state) {
-        // 新的维护刷新
-        var local_hash = localStorage.getItem('maintenance_hash') || '0';
-        if ( ! Object.keys(json).includes('hash')  || local_hash!= json.hash) {local_value = 1; session_value = 1; }
+}
+function find_all_modal() {
+    window.modal = document.querySelectorAll('.modal');
+}
 
-        // 本地维护显示
-        if (session_value == 1 && local_value === 1)
-            {
-                var title = '需要维护';
-                var msg =  `
-                <p>预计开始时间：${json.start_time}；预计时长：${json.estimated_duration}</p>
-    
-                <h3>维护内容：</h3>
-                <p>${json.description}<p>
-            `
-                var ok_label = '确认'
-                var cancel_label = '本次维护不再显示'
-    
-                var ok_fn = () => {sessionStorage.setItem('maintenance_show', '0')}
-                var cancel_fn = () => {localStorage.setItem('maintenance_show', '0')}
-                var close_fn = () => {localStorage.setItem('maintenance_hash', json.hash) }
-
-                double_button_notification(title,msg,ok_label,cancel_label,false,ok_fn,cancel_fn,close_fn)
-        }
-            
+function set_dark_mode(enable) {
+    if (enable) {
+        document.querySelector('body').classList.add('dark');
+    } else {
+        document.querySelectorAll('.dark').forEach(el => el.classList.remove('dark'));
     }
-    // 没有维护，重置
-    else{
-        localStorage.setItem('maintenance_show', '1');
-        sessionStorage.setItem('maintenance_show', '1');
-    }
+}
+function dark_mode_init() {
+    const os_prefer_dark_mode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    let dark_mode_enabled = localStorage.getItem('dark_mode_enabled') === 'true' || os_prefer_dark_mode; // 确保为布尔值
+    set_dark_mode(dark_mode_enabled);
+    localStorage.setItem('dark_mode_enabled', dark_mode_enabled); // 存储布尔值
+}
+function dark_mode_toggle() {
+    let dark_mode_enabled = localStorage.getItem('dark_mode_enabled') === 'true'; // 确保为布尔值
+    set_dark_mode(!dark_mode_enabled);
+    localStorage.setItem('dark_mode_enabled', !dark_mode_enabled); // 存储布尔值
 }

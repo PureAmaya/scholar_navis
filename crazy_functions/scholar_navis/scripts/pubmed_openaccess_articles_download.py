@@ -8,16 +8,17 @@ import threading
 from time import time,sleep
 from datetime import datetime
 from bs4 import BeautifulSoup
-from shared_utils.scholar_navis.sqlite import SQLiteDatabase, db_type
+from shared_utils.scholar_navis.other_tools import generate_download_file
+from shared_utils.scholar_navis.const_and_singleton import get_data_dir
+from shared_utils.scholar_navis.sqlite import SQLiteDatabase
 from shared_utils.scholar_navis.multi_lang import _
-from multiprocessing import cpu_count
 from requests.adapters import HTTPAdapter,Retry
 from shared_utils.config_loader import get_conf
 from concurrent.futures import ThreadPoolExecutor
-from ...crazy_utils import get_files_from_everything
+from crazy_functions.crazy_utils import get_files_from_everything
 from .tools.common_plugin_para import common_plugin_para
-from toolbox import CatchException,update_ui,update_ui_lastest_msg
-from .tools.article_library_ctrl import check_library_exist_and_assistant,generate_download_file,get_data_dir,get_tmp_dir_of_this_user,csv_load
+from toolbox import CatchException, update_ui,update_ui_lastest_msg
+from .tools.article_library_ctrl import check_library_exist_and_assistant,get_tmp_dir_of_this_user,csv_load
 
 
 
@@ -131,36 +132,8 @@ class openaccess_download:
         session.mount('https://', adapter)
         
         if not proxies is None:
-            # 先解析程序所在的地理位置，如果是大陆则使用代理
-            print(_("检测网络情况..."))      
-            yield from update_ui_lastest_msg(_('检测网络情况...'),chatbot=chatbot,history=[])
-            try:
-                response = session.get(url='https://searchplugin.csdn.net/api/v1/ip/get',timeout=(3,3))
-                
-                if response.status_code == 200:
-                    # 解析返回的内容
-                    json_ip = json.loads(response.text)
-                    ip = json_ip['data']['ip'];address = json_ip['data']['address']
-                    print(ip +'   '+address)
-                    
-                    # 如果是中国大陆，尝试启用代理
-                    if '中国' in address:           
-                        # 尝试代理是否生效（以能否访问谷歌为准）
-                        session.proxies = proxies
-                        try:
-                            response = session.get(url='https://www.google.com/',timeout=(3,3))
-                            if response.status_code == 200:  
-                                print(_('代理生效'))
-                            
-                            else : raise ConnectionAbortedError(_('连接超时'))
-                        except : 
-                            print(_('代理服务失效，使用直连'));proxies = None
-                #无法获取地理位置，直接直连
-                else:print(_('地理位置获取失败。使用直连')); proxies = None      
-            except:print(_('网络监测失败。使用直连')); proxies = None      
-        else: print(_('不使用网络代理')) ; proxies = None
-        
-        if not proxies is None:yield from update_ui_lastest_msg(_('下载将使用网络代理'),chatbot=chatbot,history=[])
+            session.proxies = proxies
+            yield from update_ui_lastest_msg(_('下载将使用网络代理'),chatbot=chatbot,history=[])
         else:yield from update_ui_lastest_msg(_('下载不使用网络代理'),chatbot=chatbot,history=[])
 
         
@@ -176,7 +149,7 @@ class openaccess_download:
             self.__multi_thread_request(PMCID,tmp_dir,session)
             
         # 创建并启动线程
-        with ThreadPoolExecutor(max_workers=cpu_count() * 2) as executor:
+        with ThreadPoolExecutor() as self._executor:
             
             # 只有有PMCID的、没有被缓存的才进行下载
             # 这也说明了，不必要下载的其实也在列表里
@@ -185,7 +158,7 @@ class openaccess_download:
                 pmcid = status_dict['PMCID']
                 if  pmcid != '' and status_dict['STATUS'] != 'cached': 
                     self.timer = time() # 这边也加上吧
-                    features.append(executor.submit(thread_task, pmcid,))
+                    features.append(self._executor.submit(thread_task, pmcid,))
             
             print(_('下载中，请等待...'))
             yield from update_ui_lastest_msg(_('下载中，请等待...'),chatbot=chatbot,history=[])
@@ -320,6 +293,8 @@ class openaccess_download:
                     if time() - self.timer > 2:
 
                         self.timeout_terminated = True
+                        self._executor.shutdown(wait=False)
+                        self._executor = None
                         response.close()
                         session.close()
                         print(_('用户终止下载'))
@@ -430,7 +405,9 @@ class openaccess_download:
         # 写入下载日志
         log_fp = os.path.join(tmp_dir,'download_log.log')
         with open(log_fp,"w",encoding='utf-8') as log:
-            log.write('\n'.join(self._download_log))
+            header = "DATETIME\tPMID\tPMCID\tSTATUS\tINFO"
+            content = f"{header}\n{'\n'.join(self._download_log)}"
+            log.write(content)
         
         
         # 更新下载状态
@@ -440,6 +417,14 @@ class openaccess_download:
         self.download_status['failed_pmid'] = failed_files_pmid
         self.download_status['log_fp'] = log_fp
         
+    def _check_lifespan_termination(self):
+        """超时了（该死了）=true
+        """
+        cc = time() - self._time > self.lifespan
+        if cc: 
+            self._executor.shutdown(wait=False)
+            self._executor = None # 貌似这样子可以修复重新进入之前的多线程任务、然后瞬间完成的bug 
+        return cc
 
 @check_library_exist_and_assistant(accept_nonexistent=True,accept_blank=True)
 @CatchException
@@ -501,7 +486,7 @@ def PubMed_OpenAccess文章获取(txt, llm_kwargs, plugin_kwargs, chatbot, histo
         yield from update_ui_lastest_msg(_('正在记录文章信息... ') + _('(文件较大，请等待)'),chatbot,[])
     else:yield from update_ui_lastest_msg(_('正在记录文章信息... '),chatbot,[])
     
-    with  SQLiteDatabase(type=db_type.article_doi_title) as db:
+    with  SQLiteDatabase(type='article_doi_title') as db:
         for index , doi in enumerate(dois):
             if doi is None or doi == '':# 还真有文章没有doi，那就没办法了
                 pass
@@ -578,9 +563,8 @@ execute = PubMed_OpenAccess文章获取 # 用于热更新
 
 class PubMed_Open_Access_Articles_Download(common_plugin_para):
     def define_arg_selection_menu(self):
-        gui_definition = {}
+        gui_definition = super().define_arg_selection_menu()
         gui_definition.update(self.add_file_upload_field(title=_('上传保存的文章列表'),description=_('一般为csv格式')))
-        gui_definition.update(self.add_command_selector([],[],[]))
         return gui_definition
 
     def execute(txt, llm_kwargs, plugin_kwargs, chatbot, history, system_prompt, user_request):

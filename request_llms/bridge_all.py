@@ -11,7 +11,11 @@
 import tiktoken, copy, re
 from functools import lru_cache
 from concurrent.futures import ThreadPoolExecutor
-from toolbox import get_conf, trimmed_format_exc, apply_gpt_academic_string_mask, read_one_api_model_name
+from toolbox import trimmed_format_exc
+from shared_utils.text_mask import apply_gpt_academic_string_mask
+from shared_utils.map_names import read_one_api_model_name
+from shared_utils.config_loader import get_conf
+from shared_utils.scholar_navis.multi_lang import _
 
 from .model_info import model_info_class
 
@@ -53,9 +57,9 @@ class LazyloadTiktoken(object):
     @staticmethod
     @lru_cache(maxsize=128)
     def get_encoder(model):
-        print('正在加载tokenizer，如果是第一次运行，可能需要一点时间下载参数')
+        print(_('正在加载tokenizer，如果是第一次运行，可能需要一点时间下载参数'))
         tmp = tiktoken.encoding_for_model(model)
-        print('加载tokenizer完毕')
+        print(_('加载tokenizer完毕'))
         return tmp
 
     def encode(self, *args, **kwargs):
@@ -85,7 +89,7 @@ try:
     API_URL = get_conf("API_URL")
     if API_URL != "https://api.openai.com/v1/chat/completions":
         openai_endpoint = API_URL
-        print("警告！API_URL配置选项将被弃用，请更换为API_URL_REDIRECT配置")
+        print(_("警告！API_URL配置选项将被弃用，请更换为API_URL_REDIRECT配置"))
 except:
     pass
 # 新版配置
@@ -997,7 +1001,7 @@ def extend_llm_support(models: list,label:str):
             # 如果是已知模型，则尝试获取其信息
             original_model_info = model_info.get(origin_model_name.replace(label, "", 1), None)
         except:
-            print(f"one-api模型 {model} 的 max_token 配置不是整数，请检查配置文件。")
+            print(_("one-api模型 {} 的 max_token 配置不是整数，请检查配置文件").format(model))
             continue
         
         this_model_info = {
@@ -1036,7 +1040,7 @@ if len(AZURE_CFG_ARRAY) > 0:
     for azure_model_name, azure_cfg_dict in AZURE_CFG_ARRAY.items():
         # 可能会覆盖之前的配置，但这是意料之中的
         if not azure_model_name.startswith('azure'):
-            raise ValueError("AZURE_CFG_ARRAY中配置的模型必须以azure开头")
+            raise ValueError(_("AZURE_CFG_ARRAY中配置的模型必须以azure开头"))
         endpoint_ = azure_cfg_dict["AZURE_ENDPOINT"] + \
             f'openai/deployments/{azure_cfg_dict["AZURE_ENGINE"]}/chat/completions?api-version=2023-05-15'
         model_info.update({
@@ -1111,7 +1115,7 @@ def predict_no_ui_long_connection(inputs:str, llm_kwargs:dict, history:list, sys
 
         window_len = len(observe_window)
         assert window_len==3
-        window_mutex = [["", time.time(), ""] for _ in range(n_model)] + [True]
+        window_mutex = [["", time.time(), ""] for _9 in range(n_model)] + [True]
 
         futures = []
         for i in range(n_model):
@@ -1133,7 +1137,7 @@ def predict_no_ui_long_connection(inputs:str, llm_kwargs:dict, history:list, sys
                 chat_string = []
                 for i in range(n_model):
                     color = colors[i%len(colors)]
-                    chat_string.append( f"【{str(models[i])} 说】: <font color=\"{color}\"> {window_mutex[i][0]} </font>" )
+                    chat_string.append( f"【{str(models[i])}】: <font color=\"{color}\"> {window_mutex[i][0]} </font>" )
                 res = '<br/><br/>\n\n---\n\n'.join(chat_string)
                 # # # # # # # # # # #
                 observe_window[0] = res
@@ -1151,7 +1155,7 @@ def predict_no_ui_long_connection(inputs:str, llm_kwargs:dict, history:list, sys
 
         for i, future in enumerate(futures):  # wait and get
             color = colors[i%len(colors)]
-            return_string_collect.append( f"【{str(models[i])} 说】: <font color=\"{color}\"> {future.result()} </font>" )
+            return_string_collect.append( f"【{str(models[i])}】: <font color=\"{color}\"> {future.result()} </font>" )
 
         window_mutex[-1] = False # stop mutex thread
         res = '<br/><br/>\n\n---\n\n'.join(return_string_collect)
@@ -1168,7 +1172,7 @@ def execute_model_override(llm_kwargs, additional_fn, method):
         functional = core_functional.get_core_functions()
         model_override = functional[additional_fn]['ModelOverride']
         if model_override not in model_info:
-            raise ValueError(f"模型覆盖参数 '{model_override}' 指向一个暂不支持的模型，请检查配置文件。")
+            raise ValueError(_("模型覆盖参数 '{}' 指向一个暂不支持的模型，请检查配置文件").fomat(model_override))
         method = model_info[model_override]["fn_with_ui"]
         llm_kwargs['llm_model'] = model_override
         return llm_kwargs, additional_fn, method

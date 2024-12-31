@@ -2,6 +2,7 @@ import time
 import os
 from toolbox import update_ui, get_conf, update_ui_lastest_msg
 from toolbox import check_packages, report_exception, log_chat
+from shared_utils.scholar_navis.multi_lang import _
 
 model_name = 'Qwen'
 
@@ -21,7 +22,7 @@ def predict_no_ui_long_connection(inputs:str, llm_kwargs:dict, history:list=[], 
         if len(observe_window) >= 1:
             observe_window[0] = response
         if len(observe_window) >= 2:
-            if (time.time()-observe_window[1]) > watch_dog_patience: raise RuntimeError("程序终止。")
+            if (time.time()-observe_window[1]) > watch_dog_patience: raise RuntimeError(_("用户停止"))
     return response
 
 def predict(inputs, llm_kwargs, plugin_kwargs, chatbot, history=[], system_prompt='', stream = True, additional_fn=None):
@@ -38,13 +39,13 @@ def predict(inputs, llm_kwargs, plugin_kwargs, chatbot, history=[], system_promp
     try:
         check_packages(["dashscope"])
     except:
-        yield from update_ui_lastest_msg(f"导入软件依赖失败。使用该模型需要额外依赖，安装方法```pip install --upgrade dashscope```。",
+        yield from update_ui_lastest_msg(_("导入软件依赖失败。使用该模型需要额外依赖，安装方法```pip install --upgrade dashscope```"),
                                          chatbot=chatbot, history=history, delay=0)
         return
 
     # 检查DASHSCOPE_API_KEY
     if api_key == "":
-        yield from update_ui_lastest_msg(f"请配置 DASHSCOPE_API_KEY或自定义 通义千问(Qwen) API-KEY",
+        yield from update_ui_lastest_msg(_("请配置 DASHSCOPE_API_KEY或自定义 通义千问(Qwen) API-KEY"),
                                          chatbot=chatbot, history=history, delay=0)
         return
 
@@ -57,14 +58,14 @@ def predict(inputs, llm_kwargs, plugin_kwargs, chatbot, history=[], system_promp
     # 开始接收回复
     from .com_qwenapi import QwenRequestInstance
     sri = QwenRequestInstance(api_key)
-    response = f"[Local Message] 等待{model_name}响应中 ..."
+    response = _("[Local Message] 等待 {} 响应中 ...").format(model_name)
     for response in sri.generate(inputs, llm_kwargs, history, system_prompt):
         chatbot[-1] = (inputs, response)
         yield from update_ui(chatbot=chatbot, history=history)
 
     log_chat(llm_model=llm_kwargs["llm_model"], input_str=inputs, output_str=response)
     # 总结输出
-    if response == f"[Local Message] 等待{model_name}响应中 ...":
-        response = f"[Local Message] {model_name}响应异常 ..."
+    if response == _("[Local Message] 等待 {} 响应中 ...").format(model_name):
+        response = _("[Local Message] {} 响应异常").format(model_name)
     history.extend([inputs, response])
     yield from update_ui(chatbot=chatbot, history=history)

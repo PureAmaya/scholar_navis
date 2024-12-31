@@ -3,7 +3,7 @@ cmd_to_install = "未知" # "`pip install -r request_llms/requirements_qwen.txt`
 
 import os
 from toolbox import ProxyNetworkActivate
-from toolbox import get_conf
+from shared_utils.config_loader import get_conf
 from .local_llm_class import LocalLLMHandle, get_local_llm_predict_fns
 from threading import Thread
 import torch

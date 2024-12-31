@@ -1,15 +1,15 @@
 import os
 import yaml
 import shutil
-from  shared_utils.scholar_navis.sqlite import SQLiteDatabase, db_type
-from .tools import pdf_reader
+from  shared_utils.scholar_navis.sqlite import SQLiteDatabase
+from shared_utils.scholar_navis import pdf_reader
 from shared_utils.scholar_navis.multi_lang import _
-from shared_utils.scholar_navis.const import SCHOLAR_NAVIS_ROOT_PATH
+from shared_utils.scholar_navis.const_and_singleton import SCHOLAR_NAVIS_ROOT_PATH
 from .tools.common_plugin_para import common_plugin_para
 from crazy_functions.pdf_fns.breakdown_txt import breakdown_text_to_satisfy_token_limit
-from toolbox import CatchException,get_user,get_log_folder,update_ui,update_ui_lastest_msg
-from ...crazy_utils import get_files_from_everything,read_and_clean_pdf_text,request_gpt_model_in_new_thread_with_ui_alive
-from .tools.article_library_ctrl import generate_download_file, markdown_to_pdf, get_tmp_dir_of_this_user,check_library_exist_and_assistant,get_this_user_library_list,lib_manifest,pdf_yaml
+from toolbox import CatchException, generate_download_file,get_user,get_log_folder,update_ui,update_ui_lastest_msg
+from crazy_functions.crazy_utils import get_files_from_everything,read_and_clean_pdf_text,request_gpt_model_in_new_thread_with_ui_alive
+from .tools.article_library_ctrl import markdown_to_pdf, get_tmp_dir_of_this_user,check_library_exist_and_assistant,get_this_user_library_list,lib_manifest,pdf_yaml
 
 
 @check_library_exist_and_assistant(accept_nonexistent=True,accept_blank=True)
@@ -43,7 +43,6 @@ def 精细分析文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, sy
 
     # 如果是上传的文章（仅限pdf格式，不支持zip等），且没有输入总结库的名字，那就没问题了
     if file_exist and library_name == '':
-        print(txt)
         txt = pdfs_fp[0]
         if len(pdfs_fp) >= 2 : yield from update_ui_lastest_msg(_('[注意] 上传的文献多于1篇。<b>精细分析时仅使用第一篇文章</b>'), chatbot, history)
 
@@ -118,8 +117,8 @@ def 精细分析文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, sy
                 download_hyperlink = _('下载文章')
                 body_html = f'<details><p><summary><b>{title}</b></br>\
                             <a href="http://dx.doi.org/{doi}" target="_blank">[{press_hyperlink}]</a> \
-                            <a href="javascript:void(0);" onclick="copyText(\'{path}\')">[{copy_hyperlink}]</a> \
-                            <a href="javascript:void(0);" onclick="downloadLink(\'{path}\',\'{title}.pdf\')">[{download_hyperlink}]</a> \
+                            <a href="javascript:void(0);" onclick="navigator.clipboard.writeText(\'{path}\')">[{copy_hyperlink}]</a> \
+                            {generate_download_file(path,download_hyperlink)}\
                             [{doi}] [{filename}]\
                             </summary></p>\
                             <p>{content}</p></details><br>{body_html}'
@@ -195,8 +194,8 @@ def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_
         doi = yaml_content[pdf_yaml.doi.value]
         title = yaml_content[pdf_yaml.title.value]
         
-    with SQLiteDatabase(type=db_type.doi_fulltext_ai_understand) as ft:
-        fulltext = ft.select(doi,('fulltext',))
+    with SQLiteDatabase(type='doi_fulltext_ai_understand') as ft:
+        fulltext = ft.easy_select(doi,('fulltext',))
     # 没有的话，只能跑一边AI了
     if not fulltext:
         
@@ -219,7 +218,7 @@ def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_
             history.append(gpt_say_for_fragment)
             
         # 跑完AI，记录一下读到的全文
-        with SQLiteDatabase(type=db_type.doi_fulltext_ai_understand) as ft:
+        with SQLiteDatabase(type='doi_fulltext_ai_understand') as ft:
             if doi:ft.insert_ingore(doi,('fulltext',),('\n\n\n'.join(history),))
     
     # 有的话，用它就行
@@ -257,7 +256,7 @@ def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_
     
 class Fine_Grained_Analysis_of_Article(common_plugin_para):
     def define_arg_selection_menu(self):
-        gui_definition = {}
+        gui_definition = super().define_arg_selection_menu()
         gui_definition.update(self.add_file_upload_field(title=_('选定的文章'),description=_('上传或使用总结库内的文章')))
         gui_definition.update(self.add_lib_field(True, _('选择总结库'), _('查看总结库内的文章')))
         gui_definition.update(self.add_command_selector([],[],[]))

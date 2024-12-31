@@ -1,7 +1,7 @@
 import os
 from toolbox import CatchException, report_exception, get_log_folder, gen_time_str, check_packages
 from toolbox import update_ui, promote_file_to_downloadzone, update_ui_lastest_msg, disable_auto_promotion
-from toolbox import write_history_to_file, promote_file_to_downloadzone, get_conf, extract_archive
+from toolbox import write_history_to_file, promote_file_to_downloadzone, extract_archive
 from crazy_functions.pdf_fns.parse_pdf import parse_pdf, translate_pdf
 
 def 解析PDF_基于GROBID(file_manifest, project_folder, llm_kwargs, plugin_kwargs, chatbot, history, system_prompt, grobid_url):

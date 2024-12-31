@@ -2,12 +2,16 @@
 
 import os
 import gettext
-from .sn_config import CONFIG
-from .const import SCHOLAR_NAVIS_ROOT_PATH
+from shared_utils.config_loader import get_conf
+from .const_and_singleton import GPT_ACADEMIC_ROOT_PATH,SUPPORT_DISPLAY_LANGUAGE
+
+LANGUAGE_DISPLAY = get_conf('LANGUAGE_DISPLAY')
 
 class _i18n:
     def __init__(self) -> None:
-        pass
+        if LANGUAGE_DISPLAY not in SUPPORT_DISPLAY_LANGUAGE:
+            print(_(f'{LANGUAGE_DISPLAY} 是无效的语言设定，将使用默认语言 zh-Hans（简体中文）'))
+            LANGUAGE_DISPLAY = 'zh-Hans'
 
     def __init__(self):
         self.update()
@@ -17,14 +21,15 @@ class _i18n:
 
     def update(self):
         # 更新语言环境
-        i18n_root_path = os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'i18n')
-        selected_lang_dir = os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'i18n',CONFIG['language_display'])
-        # 语言不存在，临时用中文语言包吧
-        if not  os.path.exists(selected_lang_dir):CONFIG['language_display'] = 'zh-Hans'
-        self.trans = gettext.translation('Scholar_Navis', i18n_root_path, [CONFIG['language_display']])
+        i18n_root_path = os.path.join(GPT_ACADEMIC_ROOT_PATH,'i18n')
+        #selected_lang_dir = os.path.join(GPT_ACADEMIC_ROOT_PATH,'i18n',LANGUAGE_DISPLAY)
+        self.trans = gettext.translation('Scholar_Navis', i18n_root_path, [LANGUAGE_DISPLAY])
 
 i18n = _i18n()
 _ = i18n.gettext
+
+selected_language = LANGUAGE_DISPLAY
+'''目前选定的语言（显示）'''
 
 
 '''

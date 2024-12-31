@@ -3,10 +3,11 @@ cmd_to_install = "`pip install -r request_llms/requirements_chatglm.txt`"
 
 
 from transformers import AutoModelForCausalLM, AutoTokenizer, TextIteratorStreamer
-from toolbox import update_ui, get_conf, ProxyNetworkActivate
+from toolbox import update_ui, ProxyNetworkActivate
 from multiprocessing import Process, Pipe
 from .local_llm_class import LocalLLMHandle, get_local_llm_predict_fns
 from threading import Thread
+from shared_utils.config_loader import get_conf
 
 
 # ------------------------------------------------------------------------------------------------------------------------

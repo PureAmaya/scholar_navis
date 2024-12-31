@@ -34,7 +34,7 @@ import functools
 import re
 import pickle
 import time
-from toolbox import get_conf
+from shared_utils.config_loader import get_conf
 
 CACHE_ONLY = os.environ.get('CACHE_ONLY', False)
 
@@ -525,7 +525,7 @@ def step_2_core_key_translate():
                     
 def  step_ex_scholar_navis():
 
-    from shared_utils.scholar_navis.const import SCHOLAR_NAVIS_ROOT_PATH
+    from shared_utils.scholar_navis.const_and_singleton import SCHOLAR_NAVIS_ROOT_PATH
     import subprocess
     import shutil
     

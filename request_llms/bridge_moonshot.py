@@ -7,9 +7,9 @@ import os
 import time
 import logging
 
-from toolbox import get_conf, update_ui, log_chat
+from toolbox import update_ui, log_chat
 from toolbox import ChatBotWithCookies
-
+from shared_utils.scholar_navis.multi_lang import _
 import requests
 
 
@@ -121,7 +121,7 @@ class MoonShotInit:
 def msg_handle_error(llm_kwargs, chunk_decoded):
     use_ket = llm_kwargs.get('use-key', '')
     api_key_encryption = use_ket[:8] + '****' + use_ket[-5:]
-    openai_website = f' 请登录OpenAI查看详情 https://platform.openai.com/signup  api-key: `{api_key_encryption}`'
+    openai_website = f' {_("请登录OpenAI查看详情")} https://platform.openai.com/signup  api-key: `{api_key_encryption}`'
     error_msg = ''
     if "does not exist" in chunk_decoded:
         error_msg = f"[Local Message] Model {llm_kwargs['llm_model']} does not exist. 模型不存在, 或者您没有获得体验资格."

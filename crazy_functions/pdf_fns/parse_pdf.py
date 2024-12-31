@@ -2,7 +2,7 @@ from functools import lru_cache
 from toolbox import gen_time_str
 from toolbox import promote_file_to_downloadzone
 from toolbox import write_history_to_file, promote_file_to_downloadzone
-from toolbox import get_conf
+from shared_utils.config_loader import get_conf
 from toolbox import ProxyNetworkActivate
 from shared_utils.colorful import *
 import requests

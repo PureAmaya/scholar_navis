@@ -3,17 +3,18 @@ import yaml
 import glob
 import shutil
 from datetime import datetime
-from shared_utils.scholar_navis.sn_config import VERSION
+from shared_utils.scholar_navis.other_tools import generate_download_file
+from shared_utils.scholar_navis.const_and_singleton import VERSION
 from time import sleep,time
-from .tools import pdf_reader
+from shared_utils.scholar_navis import pdf_reader
 from shared_utils.scholar_navis.multi_lang import _
 from multiprocessing import cpu_count
 from threading import Lock
 from concurrent.futures import ThreadPoolExecutor
 from .tools.common_plugin_para import common_plugin_para
 from toolbox import CatchException, get_log_folder, get_user, update_ui, update_ui_lastest_msg
-from .tools.article_library_ctrl import check_library_exist_and_assistant, generate_download_file, lib_manifest, pdf_yaml,markdown_to_pdf
-from ...crazy_utils import request_gpt_model_in_new_thread_with_ui_alive, request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency
+from .tools.article_library_ctrl import check_library_exist_and_assistant, lib_manifest, pdf_yaml,markdown_to_pdf
+from crazy_functions.crazy_utils import request_gpt_model_in_new_thread_with_ui_alive, request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency
 
 lock = Lock()
 
@@ -67,9 +68,9 @@ def 按关键词总结文献(txt, llm_kwargs, plugin_kwargs, chatbot, history, s
 
     # 判断本工具的工作流是否完成（该有的文件有了，该移动走的文件移走了）。
     # 防止重重复预处理
-    pdfs_in_cache = glob.glob(f"{cache_dir}/*.pdf")
-    pdf_yamls_in_cache = glob.glob(f"{cache_dir}/*.yml")
-    pdfs_in_repo = glob.glob(f"{repo_dir}/*.pdf")  # 测试过了，路径不存在返回[]
+    pdfs_in_cache = glob.glob(os.path.join(cache_dir,"*.pdf"))
+    pdf_yamls_in_cache = glob.glob(os.path.join(cache_dir,"*.yml"))
+    pdfs_in_repo =  glob.glob(os.path.join(repo_dir,"*.pdf")) # 测试过了，路径不存在返回[]
     workflow_done = os.path.exists(summarization_file_fp)
 
     # 完成了所有的工作
@@ -596,7 +597,7 @@ def _unusable_pdf_message(lib_dir:str,unusable_pdf_fp: str = None):
         
 class Summarize_Articles_Keywords(common_plugin_para):
     def define_arg_selection_menu(self):
-        gui_definition = {}
+        gui_definition = super().define_arg_selection_menu()
         gui_definition.update(self.add_lib_field(False))
         gui_definition.update(self.add_GPT_prefer_language_selector())
         gui_definition.update(self.add_command_selector(['force'], [_('强制重新分析')], [False]))

@@ -1,11 +1,9 @@
 from shared_utils.scholar_navis.multi_lang import _
-from toolbox import HotReload
+from shared_utils.scholar_navis.const_and_singleton import SUPPORT_DISPLAY_LANGUAGE,GPT_SUPPORT_LAMGUAGE
 from shared_utils.config_loader import get_conf
-from shared_utils.scholar_navis.sn_config import CONFIG, GPT_SUPPORT_LAMGUAGE
-# from .article_library_ctrl import get_def_user_library_list
 from crazy_functions.plugin_template.plugin_class_template import GptAcademicPluginTemplate, ArgProperty
 
-AUTHENTICATION = get_conf('AUTHENTICATION')
+AUTHENTICATION,LANGUAGE_GPT_PREFER,PRIORITIZE_USE_AI_ASSISTANCE = get_conf('AUTHENTICATION','LANGUAGE_GPT_PREFER','PRIORITIZE_USE_AI_ASSISTANCE')
 NEED_PARA_INDICATOR = _('需要参数')
 
 # ! 后续考虑一下用js的方式暂存输入的内容
@@ -112,7 +110,7 @@ class common_plugin_para(GptAcademicPluginTemplate):
         always_field =True # 先暂时总是使用输入框吧，啥时候前端的下拉列表是动态的再去掉这个
         
         # 如果没有设定用户（也没有总是要求输入框），即所谓的默认用户，就使用下拉式的总结库选择栏
-        if len(AUTHENTICATION) == 0 and (not always_field):
+        if not AUTHENTICATION and (not always_field):
             all = [_('不选择')]
             all.extend(get_def_user_library_list())
             para = {'title':title,'description':description,'options':all,'default_value':_('不选择'),'type':"dropdown"}
@@ -128,7 +126,7 @@ class common_plugin_para(GptAcademicPluginTemplate):
             gui_definition直接可以用的参数
         """
         try:
-            index = GPT_SUPPORT_LAMGUAGE.index(CONFIG['language_GPT_prefer'])
+            index = GPT_SUPPORT_LAMGUAGE.index(LANGUAGE_GPT_PREFER)
         except:
             index = GPT_SUPPORT_LAMGUAGE.index('English')
         
@@ -136,7 +134,7 @@ class common_plugin_para(GptAcademicPluginTemplate):
         return {'gpt_prefer_lang':ArgProperty(**para).model_dump_json()}
     
     def add_use_AI_assistant_selector(self):
-        if CONFIG['prioritize_use_AI_assistance']:default = _('启用')
+        if PRIORITIZE_USE_AI_ASSISTANCE:default = _('启用')
         else:default = _('禁用')
         
         para = {'title':_('使用AI辅助功能'),'description':_('AI补全信息，速度较慢'),'options':[_('启用'),_('禁用')],'default_value':default,'type':"dropdown"}
@@ -150,7 +148,7 @@ class common_plugin_para(GptAcademicPluginTemplate):
         - add_command_para_field: 如果命令需要参数，添加一个这个
 
         """
-        raise NotImplementedError("没有重写define_arg_selection_menu")
+        return self.add_command_selector([],[],[])
     
         
     

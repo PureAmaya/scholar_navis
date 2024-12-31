@@ -22,6 +22,8 @@
 
 - 除gpt_academic內置的對話、學術功能之外，Scholar Navis 修改或新引入了多項功能。該工具包含有五個工具：[`PubMed OpenAccess文章獲取`](crazy_functions/scholar_navis/doc/zh-Hant/PubMed-Open-Access-Articles-Download.md)、[`緩存pdf文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Cache-PDF-Articles.md)、[`按關鍵詞分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Summarize-Articles-by-Keywords.md)、[`與AI交流研究進展`](crazy_functions/scholar_navis/doc/zh-Hant/Communicate-with-AI-about-Research-Progress.md)、[`精細分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Fine-grained-Analysis-of-Article.md)，這五項功能組成了最主要的分析管線，是scholar navis目前最為重要的工作流程，幫助從一個廣泛的研究方向一次性了解多篇文章，再從這些文章中找到更有價值的文章，從中進行了解和學習；自定義語言輸出，模型分析過程中使用英語，輸出結果時使用目標語言，打破語言壁壘，快速獲取重要學術信息；基於大語言模型的本地化多語言支持；自定義提供商、API-KEY、模型功能；為一些需要訪問LLM或者是需要文獻信息、網絡請求的部分，設計了緩存機制，減少因為請求而產生的额外耗时；通過大語言模型的文字理解能力，更好的識別文章的doi、標題；自带文件清理機制，適時刪除過期文件。
 
+- 此外，Scholar Navis 也有`摘取有用語句`功能，使用它可以很方便地從大量文章中摘取符合自己要求的語句（並提供翻譯，便於閱讀），對撰寫摘要、綜述和資料收集方面很有幫助。
+
 ### 設計初衷
 
 - 許每人都能以低成本的價格使用高效能的 GPT 工具，無需擔心網絡和其他條件限制。
@@ -40,7 +42,7 @@
 
 - 使用簡單。每個可能的使用場景均有其對應的說明文件。
 
-- 支持中文和英語雙語言顯示。（GPT則支持多種語言，<b>**不同GPT對不同語言的支援能力有所不同，GPT的理解能力也會有差異**</b>）可以使用 `multi_language.py` 自行翻譯 gpt_academic。此外，非簡體中文語言可能會有無法點擊“提交”按鈕的問題，此時可以打開`界面外觀 -> 漂浮輸入區`進行暂时性的替代。該問題尚不清楚如何修復。
+- 支持中文和英語雙語言顯示。（GPT則支持多種語言，<b>**不同GPT對不同語言的支援能力有所不同，GPT的理解能力也會有差異**</b>）。
 
 - 指令化。使用一些特定的指令，實現不同的功能。
 
@@ -93,25 +95,31 @@
 
 ### 安裝過程
 
+#### 直接安裝
+
 1. 直接下載本項目，並安裝好 Python。
 
 > 對於 Windows 10 及其以上版本的使用者，也可以嘗試應用商店中的 Python。
 > 如果還需要 Python 進行其他開發或運行其他應用，推薦使用 conda
 > 如果您正在使用 Linux，相信您有能力自行解決安裝中出現的所有問題
 
-2. 確保 Python 正常安裝後，運行 `setup.py` 即可完成配置與安裝（通常情況下已經安裝完成）。配置過程中，主要是對於顯示語言和 GPT 偏好語言進行設置（GPT 偏好語言在程序中也可以進行選擇） 
+2. 確保Python正常安裝後，根據`requirements.txt`完成安裝（通常使用命令 `pip install -r requirements.txt` 實現）。
 
-3. 根據需要，自行修改 `config_private.py` 中的配置內容，尤其是 `API_KEY`（含其他提供商的），並將該 API 所需的模型填寫到 `AVAIL_LLM_MODELS` 中。具體操作說明可以參考[項目配置說明](https://github.com/binary-husky/gpt_academic/wiki/%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E)
+#### Docker 安裝
 
-4. 如果您需要將 Scholar Navis 安裝到其他 gpt_academic 中，可以将 `scholar_navis` 文件夾移動到 `crazy_functions` 中，並運行安裝程序 `setup.py`；如果安裝程序運行異常、或安裝後無法正常運行，可以參考對於 `config_private.py` 和 `crazy_functional.py` 的修改，自行安裝，並手動安裝相關依賴庫。
+        待補充...
 
-5. 此外，[docs](docs) 文件夾中含有多個 gpt_academic 的所有文檔，也可以查閱這些文檔（或訪問[GitHub 頁面](https://github.com/binary-husky/gpt_academic)），非常有益！
+#### 配置
 
-6. 關於 gpt_academic 的其他語言選項：可以參考 [gpt_academic/multi_language.py](https://github.com/binary-husky/gpt_academic/blob/master/multi_language.py) 或使用其他已經翻譯完成的 gpt_academic（Scholar Navis 對 gpt_academic 的修改相當少，可以輕鬆進行移植）。
+1. 根據需要，自行修改`config_private.py`中的配置內容，或者是使用同名的環境變量進行配置。讀取優先級：環境變量 ＞ config_private.py ＞ config.py。config.py在每次更新時可能被覆蓋，不推薦在此文件中修改配置。
 
-7. 也可以使用我們的在線服務。[簡體中文版（中國大陸優化）](https://cn.scholarnavis.com/)、[英文版](https://scholarnavis.com/)。二者除了顯示語言不同和伺服器所在地、線路不同外，其他功能均一致，且均關閉了PubMed OA文章下載功能，且無法上傳200MiB以上的文件。 
+2. 此外，[docs](docs) 文件夾中含有多個 gpt_academic 的所有文檔，也可以查閱這些文檔（或訪問[GitHub 頁面](https://github.com/binary-husky/gpt_academic)），非常有益！
+
+3. 也可以使用我們的在線服務。[簡體中文版（中國大陸優化）](https://cn.scholarnavis.com/)、[英文版](https://scholarnavis.com/)。二者除了顯示語言不同和伺服器所在地、線路不同外，其他功能均一致。 
 
 ### 使用教程
+
+#### 對話部分
 
 1. 運行 `main.py` 启用 gpt_academic，在打開的網頁的右側，應當能看到 Scholar Navis 的5個方塊，點擊後可以看到使用提示。<img title="" src="docs/img/scholar_navis_functions -  zh-Hant.png" alt="" data-align="inline" width="448"> <img title="" src="docs/img/function_ui -  zh-Hant.png" alt="" width="130">
 
@@ -141,43 +149,19 @@ H & G4 --> I[/了解研究進展和缺口\]
 
 6. 當然，也可以使用 gpt_academic 其他的功能進行處理。如果覺得有用，最好可以給原項目一個 star！
 
-### 簡易開發者文檔
+#### 摘取有用語句
 
-**在 `crazy_functions\scholar_navis` 文件夾中，除了運行 Scholar Navis 正常運行所需的腳本外，還有以下的文件（夹）：data、i18n、config.yml 和 version。使用過程中如果遇到一些問題，或者是其他情況，可以對這裡進行調整**
+1. 頁面中有較為詳細的教程文字。通常情況下，上傳PDF（或PDF壓縮包，可選）、上傳額外的PDF（或壓縮包）、設定好針對摘取句子時的內容要求、設定好結構要求（可以理解成滿足內容要求的文本，在行文上的要求）、翻譯語言和最大並行數，即可執行。
 
-- `data` 文件夾的內容：
+2. 運行過程中，會不斷輸出日誌，當任務尚未結束時，日誌會有動畫指示。
 
-- `pubmedOA_download`：僅用於儲存使用內置工具下載的文章，減少不必要的重複下載（當該文件夾中存在名為 PMCID 的 pdf 文件時，則下載器跳過下載，直接使用該緩存）
+3. 下載文件時，通常下載結果文件即可。
 
-- `article_doi_title.db`：儲存著所有由 PubMed 下載器、元數據讀取、AI 辅助獲取、正則表達式獲取的 doi 和標題的對應關係。用於在展示文章時，輸出文章標題，並提供跳轉到文章發布頁的功能。當數據庫中有儲存時，會跳過對 doi 和 title 的獲取和解析。
+4. 當需要再次運行時，需要先重置。
 
-- `doi_fulltext_ai_understand.db`：儲存著精細分析文章時，AI 閱讀文章的內容。當精細分析文章的 doi 命中時，則直接使用緩存的内容，減少訪問 LLM 的次數
+### 開發者文檔
 
-- `i18n`：`gettext` 所需的國際化文本（僅限於 Scholar Navis，不適用於 gpt_academic）。
-
-- `config.yml`：儲存著 GPT 偏好語言和顯示語言設定。
-
-- `version`：它儲存着Scholar Navis的版本號，這個版本號與gpt_academic的版本號不同。 
-
-**用戶上傳的文章、分析過程中產生的各類文件和緩存，均儲存在 `gpt_log` 中**
-
-- gpt_academic 支持多用戶，如果沒有設置用戶，則所有的處理均以 `default_user` 用戶進行。
-- `gpt_log\ {用户名} \scholar_navis` 中儲存着產生的各類總結庫。總結庫為進行某一領域方向分析的一個單位。
--  `cache` 文件夾：儲存着新導入的、尚未進行預分析（按照指定的關鍵詞分析文章摘要）、未進行總結的文章，但是他們可能已經進行了預處理（即有同名的 yml 文件，獲取 doi 和標題）。
--  `repository` 文件夾：儲存着所有已經處理完成的文章。
--  `summarization.pdf/txt`：儲存着按照指定關鍵詞分析的结果。pdf僅用於展示給用戶，後續如果需要用到分析結果，只會用 `summarization.txt`
--  `lib_manifest.yml`：儲存着該總結庫的名稱、關鍵詞和該總結庫生成時 Scholar Navis 的版本號。總結库名稱應當與所在文件夾一致。
-- `unusable_pdf_list.yml`：記錄無法使用的文件列表。 
-
-**根目錄中添加的一些特殊目錄和文件**
-
-- `tmp`：Scholar Navis功能運行過程中產生的臨時文件。將來也可能包括其他臨時文件
-
-- `notification`：用於製作簡易的通知。在內部創建一個`notification.txt`即可將通知內容顯示在網頁上了，支持html，不支援熱更新。
-
-- `web_services`：用於使用一些基於HTML + JS + CSS的服務。目前使用pdf.js作為pdf viewer，提供在線的PDF展示與下載功能。
-
-- `setup.py`：負責在config_private.py、crazy_funcitonal.py中註冊Scholar Navis的工作管線；配置部分多語言選項和語言偏好；配置部分選項；安裝依賴（requirements.txt）。支持使用參數調整語言和選項，可以使用 -h 命令查看（僅英文）。
+        待補充...
 
 ### 版權信息
 

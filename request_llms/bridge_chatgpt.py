@@ -16,10 +16,12 @@ import logging
 import traceback
 import requests
 import random
+from shared_utils.config_loader import get_conf
+from shared_utils.scholar_navis.multi_lang import _
 
 # config_private.py放自己的秘密如API和代理网址
 # 读取时首先看是否存在私密的config_private配置文件（不受git管控），如果有，则覆盖原config文件
-from toolbox import get_conf, update_ui, is_any_api_key, select_api_key, what_keys, clip_history
+from toolbox import update_ui, is_any_api_key, select_api_key, what_keys, clip_history
 from toolbox import trimmed_format_exc, is_the_upload_folder, read_one_api_model_name, log_chat
 from toolbox import ChatBotWithCookies, have_any_recent_upload_image_files, encode_image
 proxies, TIMEOUT_SECONDS, MAX_RETRY, API_ORG, AZURE_CFG_ARRAY = \
@@ -122,7 +124,7 @@ def verify_endpoint(endpoint):
         检查endpoint是否可用
     """
     if "你亲手写的api名称" in endpoint:
-        raise ValueError("Endpoint不正确, 请检查AZURE_ENDPOINT的配置! 当前的Endpoint为:" + endpoint)
+        raise ValueError(_("Endpoint不正确, 请检查AZURE_ENDPOINT的配置! 当前的Endpoint为:") + endpoint)
     return endpoint
 
 def predict_no_ui_long_connection(inputs:str, llm_kwargs:dict, history:list=[], sys_prompt:str="", observe_window:list=None, console_slience:bool=False):
@@ -153,7 +155,7 @@ def predict_no_ui_long_connection(inputs:str, llm_kwargs:dict, history:list=[], 
             retry += 1
             traceback.print_exc()
             if retry > MAX_RETRY: raise TimeoutError
-            if MAX_RETRY!=0: print(f'请求超时，正在重试 ({retry}/{MAX_RETRY}) ……')
+            if MAX_RETRY!=0: print(f'{_("请求超时，正在重试")} ({retry}/{MAX_RETRY}) ……')
 
     stream_response = response.iter_lines()
     result = ''
@@ -169,11 +171,11 @@ def predict_no_ui_long_connection(inputs:str, llm_kwargs:dict, history:list=[], 
         if not chunk_decoded.startswith('data:'):
             error_msg = get_full_error(chunk, stream_response).decode()
             if "reduce the length" in error_msg:
-                raise ConnectionAbortedError("OpenAI拒绝了请求:" + error_msg)
+                raise ConnectionAbortedError(_("OpenAI拒绝了请求: ") + error_msg)
             elif """type":"upstream_error","param":"307""" in error_msg:
-                raise ConnectionAbortedError("正常结束，但显示Token不足，导致输出不完整，请削减单次输入的文本量。")
+                raise ConnectionAbortedError(_("正常结束，但显示Token不足，导致输出不完整，请削减单次输入的文本量"))
             else:
-                raise RuntimeError("OpenAI拒绝了请求：" + error_msg)
+                raise RuntimeError(_("OpenAI拒绝了请求: ") + error_msg)
         if ('data: [DONE]' in chunk_decoded): break # api2d 正常完成
         # 提前读取一些信息 （用于判断异常）
         if has_choices and not choice_valid:
@@ -194,12 +196,12 @@ def predict_no_ui_long_connection(inputs:str, llm_kwargs:dict, history:list=[], 
                 # 看门狗，如果超过期限没有喂狗，则终止
                 if len(observe_window) >= 2:
                     if (time.time()-observe_window[1]) > watch_dog_patience:
-                        raise RuntimeError("用户取消了程序。")
-        else: raise RuntimeError("意外Json结构："+delta)
+                        raise RuntimeError(_("用户取消了程序"))
+        else: raise RuntimeError(_("意外Json结构：")+delta)
     if json_data and json_data['finish_reason'] == 'content_filter':
-        raise RuntimeError("由于提问含不合规内容被Azure过滤。")
+        raise RuntimeError(_("由于提问含不合规内容被Azure过滤"))
     if json_data and json_data['finish_reason'] == 'length':
-        raise ConnectionAbortedError("正常结束，但显示Token不足，导致输出不完整，请削减单次输入的文本量。")
+        raise ConnectionAbortedError(_("正常结束，但显示Token不足，导致输出不完整，请削减单次输入的文本量"))
     return result
 
 
@@ -217,12 +219,12 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot:ChatBotWith
     from .bridge_all import model_info
     if is_any_api_key(inputs):
         chatbot._cookies['api_key'] = inputs
-        chatbot.append(("输入已识别为openai的api_key", what_keys(inputs)))
+        chatbot.append((_("输入已识别为openai的api_key"), what_keys(inputs)))
         yield from update_ui(chatbot=chatbot, history=history, msg="api_key已导入") # 刷新界面
         return
     elif not is_any_api_key(chatbot._cookies['api_key']):
-        chatbot.append((inputs, "缺少api_key。\n\n1. 临时解决方案：直接在输入区键入api_key，然后回车提交。\n\n2. 长效解决方案：在上方的`API_KEY`中输入您的api-key。"))
-        yield from update_ui(chatbot=chatbot, history=history, msg="缺少api_key") # 刷新界面
+        chatbot.append((inputs, _("缺少api_key，可以在上方进行自定义，或者联系管理员更新配置文件")))
+        yield from update_ui(chatbot=chatbot, history=history, msg=_("缺少api_key")) # 刷新界面
         return
 
     user_input = inputs
@@ -245,14 +247,14 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot:ChatBotWith
 
     # check mis-behavior
     if is_the_upload_folder(user_input):
-        chatbot[-1] = (inputs, f"[Local Message] 检测到操作错误！当您上传文档之后，需点击“**函数插件区**”按钮进行处理，请勿点击“提交”按钮或者“基础功能区”按钮。")
+        chatbot[-1] = (inputs, f"[Local Message] {_('检测到操作错误！当您上传文档之后，需点击相关功能按钮进行处理，请勿点击“提交”按钮')}")
         yield from update_ui(chatbot=chatbot, history=history, msg="正常") # 刷新界面
         time.sleep(2)
 
     try:
         headers, payload = generate_payload(inputs, llm_kwargs, history, system_prompt, image_base64_array, has_multimodal_capacity, stream)
     except RuntimeError as e:
-        chatbot[-1] = (inputs, f"您提供的api-key不满足要求，不包含任何可用于{llm_kwargs['llm_model']}的api-key。您可能选择了错误的模型或请求源。")
+        chatbot[-1] = (inputs, _("您提供的api-key不满足要求，不包含任何可用于{}的api-key。您可能选择了错误的模型或请求源").format(llm_kwargs['llm_model']))
         yield from update_ui(chatbot=chatbot, history=history, msg="api-key不满足要求") # 刷新界面
         return
 
@@ -262,7 +264,7 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot:ChatBotWith
     except:
         tb_str = '```\n' + trimmed_format_exc() + '```'
         chatbot[-1] = (inputs, tb_str)
-        yield from update_ui(chatbot=chatbot, history=history, msg="Endpoint不满足要求") # 刷新界面
+        yield from update_ui(chatbot=chatbot, history=history, msg=_("Endpoint不满足要求")) # 刷新界面
         return
 
     # 加入历史
@@ -280,8 +282,8 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot:ChatBotWith
         except:
             retry += 1
             chatbot[-1] = ((chatbot[-1][0], timeout_bot_msg))
-            retry_msg = f"，正在重试 ({retry}/{MAX_RETRY}) ……" if MAX_RETRY > 0 else ""
-            yield from update_ui(chatbot=chatbot, history=history, msg="请求超时"+retry_msg) # 刷新界面
+            retry_msg = f". Retrying ({retry}/{MAX_RETRY}) ……" if MAX_RETRY > 0 else ""
+            yield from update_ui(chatbot=chatbot, history=history, msg=_("请求超时") +retry_msg) # 刷新界面
             if retry > MAX_RETRY: raise TimeoutError
 
     gpt_replying_buffer = ""
@@ -298,11 +300,11 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot:ChatBotWith
                 error_msg = chunk_decoded
                 # 首先排除一个one-api没有done数据包的第三方Bug情形
                 if len(gpt_replying_buffer.strip()) > 0 and len(error_msg) == 0:
-                    yield from update_ui(chatbot=chatbot, history=history, msg="检测到有缺陷的非OpenAI官方接口，建议选择更稳定的接口。")
+                    yield from update_ui(chatbot=chatbot, history=history, msg=_("检测到有缺陷的非OpenAI官方接口，建议选择更稳定的接口"))
                     break
                 # 其他情况，直接返回报错
                 chatbot, history = handle_error(inputs, llm_kwargs, chatbot, history, chunk_decoded, error_msg)
-                yield from update_ui(chatbot=chatbot, history=history, msg="非OpenAI官方接口返回了错误:" + chunk.decode()) # 刷新界面
+                yield from update_ui(chatbot=chatbot, history=history, msg=_("非OpenAI官方接口返回了错误:") + chunk.decode()) # 刷新界面
                 return
 
             # 提前读取一些信息 （用于判断异常）
@@ -319,7 +321,7 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot:ChatBotWith
                         continue
                     if ('data: [DONE]' not in chunk_decoded) and len(chunk_decoded) > 0 and (chunkjson is None):
                         # 传递进来一些奇怪的东西
-                        raise ValueError(f'无法读取以下数据，请检查配置。\n\n{chunk_decoded}')
+                        raise ValueError(f'{_("无法读取以下数据，请检查配置. ")}\n\n{chunk_decoded}')
                     # 前者是API2D的结束条件，后者是OPENAI的结束条件
                     if ('data: [DONE]' in chunk_decoded) or (len(chunkjson['choices'][0]["delta"]) == 0):
                         # 判定为数据流的结束，gpt_replying_buffer也写完了
@@ -344,18 +346,18 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot:ChatBotWith
                     chatbot[-1] = (history[-2], history[-1])
                     yield from update_ui(chatbot=chatbot, history=history, msg=status_text) # 刷新界面
                 except Exception as e:
-                    yield from update_ui(chatbot=chatbot, history=history, msg="Json解析不合常规") # 刷新界面
+                    yield from update_ui(chatbot=chatbot, history=history, msg=_("Json解析不合常规")) # 刷新界面
                     chunk = get_full_error(chunk, stream_response)
                     chunk_decoded = chunk.decode()
                     error_msg = chunk_decoded
                     chatbot, history = handle_error(inputs, llm_kwargs, chatbot, history, chunk_decoded, error_msg)
-                    yield from update_ui(chatbot=chatbot, history=history, msg="Json异常" + error_msg) # 刷新界面
+                    yield from update_ui(chatbot=chatbot, history=history, msg=_("Json异常") + error_msg) # 刷新界面
                     print(error_msg)
                     return
 
 def handle_error(inputs, llm_kwargs, chatbot, history, chunk_decoded, error_msg):
     from .bridge_all import model_info
-    openai_website = ' 请登录OpenAI查看详情 https://platform.openai.com/signup'
+    openai_website = f' {_("请登录OpenAI查看详情")} https://platform.openai.com/signup'
     if "reduce the length" in error_msg:
         if len(history) >= 2: history[-1] = ""; history[-2] = "" # 清除当前溢出的输入：history[-2] 是本次输入, history[-1] 是本次输出
         history = clip_history(inputs=inputs, history=history, tokenizer=model_info[llm_kwargs['llm_model']]['tokenizer'],
@@ -380,7 +382,7 @@ def handle_error(inputs, llm_kwargs, chatbot, history, chunk_decoded, error_msg)
     else:
         from toolbox import regular_txt_to_markdown
         tb_str = '```\n' + trimmed_format_exc() + '```'
-        chatbot[-1] = (chatbot[-1][0], f"[Local Message] 异常 \n\n{tb_str} \n\n{regular_txt_to_markdown(chunk_decoded)}")
+        chatbot[-1] = (chatbot[-1][0], f"[Local Message] Error: \n\n{tb_str} \n\n{regular_txt_to_markdown(chunk_decoded)}")
     return chatbot, history
 
 def generate_payload(inputs:str, llm_kwargs:dict, history:list, system_prompt:str, image_base64_array:list=[], has_multimodal_capacity:bool=False, stream:bool=True):
@@ -388,7 +390,7 @@ def generate_payload(inputs:str, llm_kwargs:dict, history:list, system_prompt:st
     整合所有信息，选择LLM模型，生成http请求，为发送请求做准备
     """
     if not is_any_api_key(llm_kwargs['api_key']):
-        raise AssertionError("你提供了错误的API_KEY。\n\n1. 临时解决方案：直接在输入区键入api_key，然后回车提交。\n\n2. 长效解决方案：在config.py中配置。")
+        raise AssertionError(_("错误的api_key，请进行修改：可以在上方进行自定义，或者联系管理员更新配置文件"))
 
     if llm_kwargs['llm_model'].startswith('vllm-'):
         api_key = 'no-api-key'
@@ -481,10 +483,10 @@ def generate_payload(inputs:str, llm_kwargs:dict, history:list, system_prompt:st
         model = llm_kwargs['llm_model'][len('api2d-'):]
     if llm_kwargs['llm_model'].startswith('one-api-'):
         model = llm_kwargs['llm_model'][len('one-api-'):]
-        model, _ = read_one_api_model_name(model)
+        model, _I = read_one_api_model_name(model)
     if llm_kwargs['llm_model'].startswith('vllm-'):
         model = llm_kwargs['llm_model'][len('vllm-'):]
-        model, _ = read_one_api_model_name(model)
+        model, _I = read_one_api_model_name(model)
     if model == "gpt-3.5-random": # 随机选择, 绕过openai访问频率限制
         model = random.choice([
             "gpt-3.5-turbo",

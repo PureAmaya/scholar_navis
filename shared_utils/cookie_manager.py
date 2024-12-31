@@ -5,7 +5,7 @@ from typing import Callable
 def load_web_cookie_cache__fn_builder(customize_btns, cookies, predefined_btns)->Callable:
     def load_web_cookie_cache(persistent_cookie_, cookies_):
         import gradio as gr
-        from themes.theme import load_dynamic_theme, to_cookie_str, from_cookie_str, assign_user_uuid
+        from themes.theme import  from_cookie_str
 
         ret = {}
         for k in customize_btns:

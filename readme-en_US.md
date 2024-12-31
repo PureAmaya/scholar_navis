@@ -23,6 +23,8 @@ This software is developed based on gpt_academic (3.83) and is considered a deri
 
 - In addition to the built-in conversation and academic functions of gpt_academic, Scholar Navis has modified or introduced several new features. The tool includes five tools:[`PubMed Open Access Articles Download`](crazy_functions/scholar_navis/doc/en-US/PubMed-Open-Access-Articles-Download.md), [`Cache PDF Articles`](crazy_functions/scholar_navis/doc/en-US/Cache-PDF-Articles.md), [`Summarize Articles by Keywords`](crazy_functions/scholar_navis/doc/en-US/Summarize-Articles-by-Keywords.md), [`Communicate with AI about Research Progress`](crazy_functions/scholar_navis/doc/en-US/Communicate-with-AI-about-Research-Progress.md), and [`Fine-grained Analysis of Article`](crazy_functions/scholar_navis/doc/en-US/Fine-grained-Analysis-of-Article.md). These five features make up the main analysis pipeline, which is currently the most important workflow for Scholar Navis, helping to understand multiple articles at once from a broad research direction, and then find more valuable articles among them for understanding and learning; customizable language output, using English during the model analysis process and the target language for output, breaking down language barriers, and quickly obtaining important academic information; localized multilingual support based on large language models; customizable providers, API-KEYs, and model functions; designed a caching mechanism for parts that require access to LLMs or need literature information and network requests to reduce additional time spent on requests; better identification of article DOIs and titles through the text comprehension capabilities of large language models; includes a file cleanup mechanism to delete expired files in a timely manner.
 
+- Additionally, Scholar Navis features a `Extract Useful Sentences` function, which allows users to conveniently extract sentences that meet their requirements from a large number of articles (and provides translations for easier reading). This is particularly helpful for writing summaries, reviews, and collecting materials.
+
 ### Design Intent
 
 - To make it possible for everyone to have access to a low-cost, high-efficiency GPT tool without worrying about network or other constraints.
@@ -41,7 +43,7 @@ This software is developed based on gpt_academic (3.83) and is considered a deri
 
 - User-friendly. Each possible use scenario has its corresponding help document.
 
-- Supports both Chinese and English languages. (GPT supports multiple languages, **but the ability to understand different languages may vary among different GPTs** ) You can use `multi_language.py` to translate gpt_academic yourself. Additionally, non-Simplified Chinese languages may encounter issues where the "submit" button cannot be clicked. In such cases, you can temporarily use the `Interface Appearance -> Floating Input Area` as an alternative. The exact fix for this issue is not yet known.
+- Supports both Chinese and English languages. (GPT supports multiple languages, **but the ability to understand different languages may vary among different GPTs** ) . 
 
 - Command-based. Specific commands can be used to achieve different functions.
 
@@ -93,25 +95,31 @@ This software is developed based on gpt_academic (3.83) and is considered a deri
 
 ### Install
 
+#### Direct Installation
+
 1. Directly download this project and install Python.
    
    > For users of Windows 10 and above, you can also try Python from the Microsoft Store.
    > If you need Python for other development or to run other applications, it is recommended to use Conda.
    > If you are using Linux, you should be able to resolve any installation issues on your own.
 
-2. Once Python is installed correctly, run `setup.py` to complete the configuration and installation (usually, it will be installed automatically). During the configuration process, it primarily involves setting the display language and the preferred GPT language (the preferred GPT language can also be selected within the program).
+2. After ensuring Python is properly installed, complete the installation based on `requirements.txt` (typically achieved using the command `pip install -r requirements.txt`).
 
-3. As needed, modify the configuration content in `config_private.py`, especially the `API_KEY` (including keys from other providers), and fill in the required model for the API in `AVAIL_LLM_MODELS`. Detailed instructions can be found in the [Project Configuration Instructions](https://github.com/binary-husky/gpt_academic/wiki/%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E).
+#### Docker Installation
 
-4. If you need to install Scholar Navis into another gpt_academic, move the `scholar_navis` folder to the `crazy_functions` directory and run the installation program `setup.py`; if the installation program runs abnormally or if it does not run properly after installation, refer to the modifications for `config_private.py` and `crazy_functional.py` to install it yourself and manually install the required libraries.
+        To be continued...
 
-5. Additionally, the [docs](docs) folder contains all the documentation for gpt_academic, and you can also refer to these documents (or visit the [GitHub page](https://github.com/binary-husky/gpt_academic)), which are very helpful!
+#### Configuration
 
-6. Regarding gpt_academic's language options: you can refer to [gpt_academic/multi_language.py](https://github.com/binary-husky/gpt_academic/blob/master/multi_language.py) or use other translated versions of gpt_academic (Scholar Navis makes minimal modifications to gpt_academic, making it easy to port).
+1. Modify the settings in `config_private.py` as needed, or use environment variables with the same names for configuration. The priority for reading configurations is: Environment Variables > config_private.py > config.py. The config.py file may be overwritten during updates, so it is not recommended to modify configurations in this file.
 
-7. You can also use our online service. [Simplified Chinese Version (Optimized for Mainland China)](https://cn.scholarnavis.com/)、[English Version](https://scholarnavis.com/). Both versions are identical in terms of functionality, with the only differences being the display language and the location of the servers and the routes. Additionally, both versions have disabled the PubMed OA article download feature and do not allow the upload of files larger than 200MiB. 
+2. Additionally, the [docs](docs) folder contains all the documentation for gpt_academic, and you can also refer to these documents (or visit the [GitHub page](https://github.com/binary-husky/gpt_academic)), which are very helpful!
+
+3. You can also use our online service. [Simplified Chinese Version (Optimized for Mainland China)](https://cn.scholarnavis.com/)、[English Version](https://scholarnavis.com/). Both versions are identical in terms of functionality, with the only differences being the display language and the location of the servers and the routes. 
 
 ### User Guide
+
+#### Conversation Section
 
 1. Run `main.py` to enable gpt_academic, and on the right side of the opened web page, you should see five blocks of Scholar Navis. Clicking on them will display usage tips.
    
@@ -141,43 +149,19 @@ H & G4 --> I[/Understand research progress and gaps\]
 4. In addition, users can also enter their own key in the `API-KEY` at the upper left corner, use other relay service providers, or add additional custom models. 
 5. Of course, you can also use other features of gpt_academic to process it. If you find it useful, it's best to give the original project a star!
 
-### Simple Developer Documentation
+#### Extract Useful Sentences
 
-**In the `crazy_functions\scholar_navis` folder, in addition to the scripts required for the normal operation of Scholar Navis, there are also the following files/folders: data, i18n, config.yml, and version. If you encounter any issues or other situations during use, you can adjust them here:**
+1. The page contains detailed tutorial text. Typically, uploading a PDF (or a PDF zip file, optional), uploading additional PDFs (or zip files), setting content requirements for sentence extraction, setting structural requirements (which can be understood as the stylistic requirements for text that meets the content requirements), selecting the translation language, and setting the maximum parallelism will allow execution.
 
-- Content of the `data` folder: 
-  
-  - `pubmedOA_download`:  These are used to store articles downloaded using built-in tools, reducing unnecessary repeated downloads (the downloader skips the download and uses the cached file directly if a PDF file named PMCID exists in this folder).
-  
-  - `article_doi_title.db`: This stores the correspondence between doi and titles obtained from the PubMed downloader, metadata reading, AI-assisted acquisition, and regular expression extraction. It is used to display article titles and provide a function to jump to the article's publication page. When there is stored data in the database, it skips the acquisition and parsing of doi and title.
-  
-  - `doi_fulltext_ai_understand.db`:  This stores the content read by AI when performing detailed analysis of articles. When a detailed analysis of an article's doi matches, it directly uses the cached content, reducing the number of times the LLM is accessed.
+2. During operation, logs are continuously output. When the task is not yet completed, the logs will have an animation indicator.
 
-- `i18n`: Internationalization text required by `gettext` (limited to Scholar Navis, not applicable to gpt_academic).
+3. When downloading files, usually downloading the result file is sufficient.
 
-- `config.yml`: Stores GPT preference language and display language settings.
+4. When needing to run again, a reset is required first.
 
-- `version`: It contains the version number of Scholar Navis, which is different from the version number of gpt_academic. 
+### Developer Documentation
 
-**The articles uploaded by users, various files generated during the analysis process, and cache are all stored in the `gpt_log` folder.**
-
-- gpt_academic supports multiple users. If no user is specified, all processing is done under the `default_user` account.
-- The `gpt_log\ {username} \scholar_navis` folder stores various summary libraries. A summary library is a unit for analyzing a specific field or direction.
-- `cache` folder: Stores newly imported articles that have not yet been pre-analyzed (analyzed based on specified keywords for article abstracts), and have not been summarized, although they may have been preprocessed (i.e., there are the same name yml files, which obtain doi and title).
-- `repository` folder: Stores all articles that have been processed.
-- `summarization.pdf/txt`: Stores the results of the analysis based on specified keywords. The pdf is used solely for display to the user, while the `summarization.txt` is used for any subsequent use of the analysis results.
-- `lib_manifest.yml`: Stores the name of the summary library, the keywords, and the version number of Scholar Navis at the time the summary library was generated. The summary library name should match the name of the folder it is in.
-- `unusable_pdf_list.yml`: Records a list of files that are not usable. 
-
-**Special Directories and Files Added in the Root Directory**
-
-- `tmp`: Temporary files generated during the operation of Scholar Navis. In the future, it may also include other temporary files.
-
-- `notification`: Used for creating simple notifications. Creating a `notification.txt` inside will display the notification content on the web page. It supports HTML but not hot updates.
-
-- `web_services`: Used for utilizing services based on HTML + JS + CSS. Currently, it uses pdf.js as a PDF viewer to provide online PDF display and download features.
-
-- `setup.py`: Responsible for registering Scholar Navis's workflow in `config_private.py` and `crazy_funcitonal.py`; configuring some multilingual options and language preferences; configuring some options; and installing dependencies (requirements.txt). It supports adjusting languages and options using parameters and can display help information with the `-h` command (only in English).
+        To be continued...
 
 ### Copyright Information
 

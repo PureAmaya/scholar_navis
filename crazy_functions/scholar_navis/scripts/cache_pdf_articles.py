@@ -3,8 +3,8 @@ import yaml
 import glob
 import shutil
 from shared_utils.scholar_navis.multi_lang import _
-from shared_utils.scholar_navis.sn_config import VERSION
-from ...crazy_utils import get_files_from_everything
+from shared_utils.scholar_navis.const_and_singleton import VERSION
+from crazy_functions.crazy_utils import get_files_from_everything
 from .tools.common_plugin_para import common_plugin_para
 from .tools.article_library_ctrl import check_library_exist_and_assistant, lib_manifest
 from toolbox import CatchException, get_log_folder, get_user, update_ui, update_ui_lastest_msg
@@ -214,7 +214,7 @@ execute = 缓存pdf文献 # 用于热更新
 
 class pdf_cacher(common_plugin_para):
     def define_arg_selection_menu(self):
-        gui_definition = {}
+        gui_definition = super().define_arg_selection_menu()
         gui_definition.update(self.add_file_upload_field(
             description=_('上传1篇pdf文献或多篇pdf的压缩包')))
         gui_definition.update(self.add_lib_field(

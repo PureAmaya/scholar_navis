@@ -8,8 +8,14 @@ from enum import Enum
 from shared_utils.scholar_navis.multi_lang import _
 from functools import wraps
 from datetime import datetime
-from shared_utils.scholar_navis.sn_config import CONFIG,VERSION
-from shared_utils.scholar_navis.const import SCHOLAR_NAVIS_ROOT_PATH,GPT_ACADEMIC_ROOT_PATH
+from shared_utils.config_loader import get_conf
+from shared_utils.scholar_navis.const_and_singleton import VERSION
+from shared_utils.scholar_navis.const_and_singleton import SCHOLAR_NAVIS_ROOT_PATH,GPT_ACADEMIC_ROOT_PATH
+    # 不适合放在外面的
+from toolbox import ChatBotWithCookies, update_ui, get_log_folder, get_user
+
+LANGUAGE_GPT_PREFER,LANGUAGE_DISPLAY = get_conf('LANGUAGE_GPT_PREFER','LANGUAGE_DISPLAY')
+
 
 class lib_manifest(Enum):# 单纯为了规范yaml的名称
     library_name = 'library_name'
@@ -29,6 +35,11 @@ _forbidden_contain = ( '\\', '/', ':', ';', '(', ')', '<', '>', '\"', '\'', '|',
 _forbidden_startwith = ('.', '-', '+')
 
 
+# 允许用户通过输入框访问的文件夹（与files路由一致）
+PATH_PRIVATE_UPLOAD, PATH_LOGGING = get_conf('PATH_PRIVATE_UPLOAD', 'PATH_LOGGING')
+allowed_dirs = (PATH_PRIVATE_UPLOAD,PATH_LOGGING,'tmp')
+
+
 def check_library_exist_and_assistant(accept_nonexistent=False,accept_blank = False):
     """
         - 检测总结库是否存在，总结库名称输入检验合法性
@@ -39,11 +50,7 @@ def check_library_exist_and_assistant(accept_nonexistent=False,accept_blank = Fa
         accept_nonexistent (bool, optional): 允许总结库不存在吗。如果允许，则不会检查与处理总结库是否存在
         accept_blank (bool, optional): 允许总结库输入框为空吗。如果允许，则不会检查与处理总结库栏为空的情况
     """
-    
-    # 不适合放在外面的
-    from toolbox import ChatBotWithCookies, update_ui, get_log_folder, get_user
 
-    
     
     def decorate(f):
         @wraps(f)
@@ -58,6 +65,27 @@ def check_library_exist_and_assistant(accept_nonexistent=False,accept_blank = Fa
             
             plugin_kwargs = args[2]
             txt: str = args[0].strip() #去除无用空格等不可见字符 即所谓的 main_input
+            username = username=get_user(chatbot)
+            
+            # 禁止一些内容的开头
+            if any(txt.startswith(char) for char in _forbidden_contain):# 注意用的是禁止包含
+                chatbot.append([_("无法使用的文字对话，请重新输入。"),_('无法以这些内容开头：{}').format(', '.join(_forbidden_contain))])
+                yield from update_ui(chatbot=chatbot, history=[])
+                return
+            
+            # 防止访问其他不能访问的路径
+            if os.path.exists(txt):
+                txt = os.path.relpath(txt)
+                # 小于三级目录的（以gpt_log为例，结构式gpt_log/user/function_dir），都不能直接访问
+                if len(txt.split(os.sep)) < 3  or not any(txt.startswith(char) for char in allowed_dirs):
+                    chatbot.append([_("无效的文件访问请求，请重新输入"),_('路径：{} 未授权或是功能性目录').format(txt)])
+                    yield from update_ui(chatbot=chatbot, history=[])
+                    return
+                if txt.split(os.sep)[1] != username:
+                    chatbot.append([_("无效的文件访问请求，请重新输入"),_('路径：{} 的所有权不在当前用户').format(txt)])
+                    yield from update_ui(chatbot=chatbot, history=[])
+                    return
+            
 
             # 命令（及其参数）修订
             if ':' in plugin_kwargs['command'] :#有一说一，只要是可用的命令，肯定会有英文冒号2333
@@ -68,7 +96,7 @@ def check_library_exist_and_assistant(accept_nonexistent=False,accept_blank = Fa
             plugin_kwargs['command_para'] = plugin_kwargs.get('command_para','').strip()
             
             # 语言设定修订
-            plugin_kwargs['gpt_prefer_lang'] = plugin_kwargs.get('gpt_prefer_lang',CONFIG['language_GPT_prefer'])
+            plugin_kwargs['gpt_prefer_lang'] = plugin_kwargs.get('gpt_prefer_lang',LANGUAGE_GPT_PREFER)
 
             # AI辅助修订
             ai_assist_text = plugin_kwargs.get('ai_assist',_('禁用'))
@@ -78,6 +106,7 @@ def check_library_exist_and_assistant(accept_nonexistent=False,accept_blank = Fa
             plugin_kwargs['lib'] = plugin_kwargs.get('lib','').strip()
             library_name :str = plugin_kwargs['lib']
             
+            # 总结库名称合法性检查
             if any(library_name.startswith(char) for char in _forbidden_startwith) or any(
                 char in library_name for char in _forbidden_contain):
                 ban_inf = _('<ul><li>不能含有以下字符：{forbidden}</li><li>不能以{forbidden_start}开头</li></ul>').format(forbidden=" ".join(_forbidden_contain),forbidden_start = " ".join(_forbidden_startwith))
@@ -87,12 +116,11 @@ def check_library_exist_and_assistant(accept_nonexistent=False,accept_blank = Fa
                 return
 
             # 获取工具的根目录（即没有进入到某一个具体的总结库里面）
-            tool_root = get_log_folder(user=get_user(
-                chatbot), plugin_name='scholar_navis')
+            tool_root = get_log_folder(username, plugin_name='scholar_navis')
             this_library_fp = os.path.join(tool_root, library_name)
             
             # 插件的文档文件夹
-            doc_dir = os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'doc',CONFIG['language_display']) 
+            doc_dir = os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'doc',LANGUAGE_DISPLAY) 
                 
             # < --------------------通用型用户命令解析--------------------- >
             doc_fp = ''
@@ -278,36 +306,7 @@ def _get_dir(root_dir: str, sub_dir: list[str] , create_datetime_dir: bool):
 
     return dir
 
-def generate_download_file(file_path:str,txt:str = None):
-    """生成下载链接（PDF则为跳转到在线服务）
-
-    Args:
-        file_path (str): 需要下载的文件路径
-        txt (str, optional): 超链接显示的文本. 默认为下载文件的basename.
-
-    Returns:
-        str: html的href
-    """
-    # 为什么要把绝对路径转换为相对路径：下载连接更短，然后可以减少暴露，或许安全点？
-    if os.path.isabs(file_path):
-        file_path = os.path.relpath(file_path,os.getcwd())
-
-        
-    if not txt:txt = os.path.basename(file_path)
-        
-        
-    if file_path.startswith('gpt_log') and file_path.lower().endswith('.pdf'):
-        return f'<a href="services/pdf_viewer/web/viewer.html?file={file_path}" target="_blank">{txt}</a>'
-    else:    
-        return f'<a href="file={file_path}" target="_blank">{txt}</a>'
-
-def get_data_dir(root_dir: str, sub_dir: list[str] = []):
-    root_dir = os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'data',root_dir)
-    # SCHOLAR_NAVIS_ROOT_PATH/data/root_dir/sub_dir
-    return _get_dir(create_datetime_dir=False,root_dir=root_dir,sub_dir=sub_dir)
-
 def get_tmp_dir_of_this_user(chatbot,root_dir: str, sub_dir: list[str] = [],create_datetime_dir=True):
-    from toolbox import get_user
     this_user_tmp_dir = os.path.join('tmp',get_user(chatbot))
     sub_dir.insert(0,root_dir)
     # tmp/user/2024-08-29 09-53-20/root_dir/sub_dir

@@ -1,4 +1,4 @@
-from toolbox import update_ui, get_conf, trimmed_format_exc, get_log_folder
+from toolbox import update_ui, trimmed_format_exc, get_log_folder
 import os
 
 

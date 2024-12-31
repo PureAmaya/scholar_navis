@@ -1,355 +1,220 @@
-Scholar Navis 使用 GPL-3.0 license 许可证
+Scholar Navis 使用 AGPL-3.0 license 许可证
 
 ----------------------------
 
-下面是**在 gpt_academic 基础上，额外添加的**第三方项目（除gpt_academic外，均未发生任何源码的修改）：
+**第三方包与项目：**
 
-| 第三方库或工具                                                                                 | 许可证                | 使用策略                                                             |
-| --------------------------------------------------------------------------------------- | ------------------ | ---------------------------------------------------------------- |
-| <a href="https://github.com/binary-husky/gpt_academic" target="_blank">GPT Academic</a> | GPL-3.0 license    | 作为该工具的插件，无法独立运行。针对gpt_academic详细的修改内容和使用策略请见下文。                  |
-| <a href="https://pypi.org/project/PyYAML" target="_blank">PyYAML</a>                    | MIT License        | 使用库，yaml文件解析                                                     |
-| <a href="https://pypi.org/project/beautifulsoup4" target="_blank">beautifulsoup4</a>    | MIT License        | 使用库，网络请求处理                                                       |
-| <a href="https://pypi.org/project/requests/" target="_blank">requests</a>               | Apache-2.0 license | 使用库，网络请求                                                         |
-| <a href="https://pypi.org/project/python-docx" target="_blank">python-docx</a>          | MIT License        | 使用库，解析docx并获取文本内容，将makrdown转换为word（所所属功能仍在测试，目前不可用）              |
-| <a href="https://pypi.org/project/PyMuPDF/" target="_blank">PyMuPDF</a>                 | AGPL-3.0 license   | 使用库，将HTML转换为pdf                                                  |
-| <a href="https://github.com/marktext/marktext" target="_blank">MarkText</a>             | MIT License        | 使用该软件将markdown转换为HTML，并对HTML进行了修改                                |
-| <a href="https://github.com/mozilla/pdf.js" target="_blank">PDF.js</a>                  | Apache-2.0 license | 直接使用其Prebuilt软件包。源码没有发生修改，用于在线浏览PDF。完整的内容位于`web_services\pdf.js` |
-| <a href="https://github.com/MohammadYounes/AlertifyJS" target="_blank">AlertifyJS</a>   | GPL-3.0 license    | 使用库，用于制作通知                                                       |
-| <a href="https://github.com/twbs/bootstrap" target="_blank">Bootstrap</a>               | MIT License        | 使用库，用于AlertifyJS的CSS样式                                           |
+- gpt_academic: GPL-3.0（含有修改，见下文）
+
+- aiofiles: Apache-2.0 license
+
+- aiohttp: Apache-2.0 license
+
+- alertifyJS:  GPL-3.0 license
+
+- argon2-cffi: MIT License
+
+- beautifulsoup4: MIT License
+
+- Bootstrap: MIT License
+
+- Bootstrap Icons: MIT License
+
+- colorama: BSD License
+
+- dashscope: Apache-2.0 license
+
+- fastapi：MIT License
+
+- fitz (pymupdf)：GNU AFFERO GPL 3.0
+
+- gradio：Apache-2.0 license
+
+- gradio_modal：Apache-2.0 license
+
+- latex2mathml：MIT License (MIT)
+
+- Markdown：BSD-3-Clause license
+
+- Mermaid: MIT license
+
+- numpy：BSD License
+
+- pandas：BSD-3-Clause license
+
+- pydantic：MIT License
+
+- pymdown-extensions: MIT License
+
+- PyPDF2：BSD License
+
+- python_docx：MIT License
+
+- PyYAML：MIT License
+
+- rarfile：ISC License
+
+- Requests：Apache-2.0 license
+
+- rich：MIT License
+
+- rjsmin: Apache-2.0 license
+
+- starlette：BSD License
+
+- tiktoken：MIT License
+
+- uvicorn：BSD License (BSD-3-Clause)
+
+- websockets：BSD License (BSD-3-Clause)
+
+- zhipuai：unknown
 
 **gpt_academic中产生修改的部分如下：**
 
-- 原则上是尽可能减少对于 gpt_academic 的修改，以方便移植或使用其他的版本。
+- crazy_functions/pdf_fns/parse_pdf_grobid.py （未进行国际化，修改于12月28日）
 
-- 因为对 gpt_academic 的源码产生了修改（主要是使其能够调用 Scholar Navis 并使用一些新加的功能或机制），受限于GPL-3.0的约束，需要将 gpt_academic 的源码一并发布，并且亦需注明修改内容。
+- crazy_functions/pdf_fns/parse_pdf.py   （未进行国际化，修改于12月28日）
 
-- 通常情况下，新添加的代码**文件**，如果没有对原有代码产生修改，则不列出。
+- crazy_functions/pdf_fns/report_gen_html.py  （修改于12月28日）
 
-- 删除了所有与docker有关的文件，因为目前Scholar Navis 还不支持docker。
+- request_llms/生成多种Mermaid图表.py  （修改于12月28日）
 
-- `main.py`: 60行，发生修改。
-  
-  ```python
-   # original
-  from themes.theme import js_code_for_toggle_darkmode, js_code_for_persistent_cookie_init
-   # motified
-  from themes.theme import js_code_for_persistent_cookie_init
-  ```
+- request_llms/crazy_utils.py  （修改于12月28日）
 
-- `main.py`: 约63行处添加了以下内容。这样做可以实现简易的通知显示。
-  
-  ```python
-  # SCHOAR NAVIS 
-  sn_version_fp = os.path.join(os.path.dirname(__file__),'crazy_functions','scholar_navis','version')
-  if os.path.exists(sn_version_fp):
-      with open(sn_version_fp,'r',encoding='utf-8') as f:
-           title_html = f"<br><h1 align=\"center\">Scholar Navis {f.read()} (GPT 学术优化 {get_current_version()})</h1>{theme_declaration}"
-   else:title_html = f"<br><h1 align=\"center\">Scholar Navis</h1>{theme_declaration}"
-  
-  notification_fp = os.path.join(os.path.dirname(__file__),'notification','notification.txt')
-  if os.path.exists(notification_fp):
-      with open(notification_fp,'r',encoding='utf-8') as f:
-          title_html = title_html + f'<p style="text-align: left; margin-left: 20px; margin-right: 20px;">{f.read()}</p>'
-  ```
+- request_llms/bridge_all.py   （修改于12月28日）
 
-- `main.py`: 约67行，添加下述内容，用于 scholar navis版本号显示。
-  
-  ```python
-     ... 上略 ...
-           title_html = f"<br><h1 align=\"center\">GPT 学术优化 {get_current_version()} (Scholar Navis {f.read()})</h1>{theme_declaration}"
-      else:title_html = f"<br><h1 align=\"center\">GPT 学术优化 {get_current_version()}</h1>{theme_declaration}"
-  ```
+- request_llms/bridge_chatglm.py  （未进行国际化，修改于12月28日）
 
-- `main.py`: 约111行，发生修改，用于区别这是修改版。
-  
-  ```python
-   # original
-   with gr.Blocks(title="GPT 学术优化", theme=set_theme, analytics_enabled=False, css=advanced_css) as app_block:
-   # motified
-   with gr.Blocks(title="GPT 学术优化 (Scholar Navis 修改版)", theme=set_theme, analytics_enabled=False, css=advanced_css) as app_block:
-  ```
+- request_llms/bridge_chatglm3.py  （未进行国际化，修改于12月28日）
 
-- `main.py`：120行添加AI警告  
-  
-  ```python
-  gr.HTML('<strong>下方内容为 AI 生成，不代表任何立场，可能存在片面甚至错误。仅供参考，开发者及其组织不负任何责任。</strong>')
-  ```
+- request_llms/bridge_chatglmft.py  （未进行国际化，修改于12月28日）
 
-- `main.py`: 约196行，发生修改，接入自定义API-KEY功能，把一些js移出.py合并入相应的.js中。
-  
-  ```python
-  # original
-  checkboxes, checkboxes_2, max_length_sl, theme_dropdown, system_prompt, file_upload_2, md_dropdown, top_p, temperature = \
-              define_gui_toolbar(AVAIL_LLM_MODELS, LLM_MODEL, INIT_SYS_PROMPT, THEME, AVAIL_THEMES, ADD_WAIFU, help_menu_description, js_code_for_toggle_darkmode)
-   # motified
-  checkboxes, checkboxes_2, max_length_sl, theme_dropdown, system_prompt, file_upload_2, md_dropdown, top_p, temperature,custom_api_key = \
-              define_gui_toolbar(AVAIL_LLM_MODELS, LLM_MODEL, INIT_SYS_PROMPT, THEME, AVAIL_THEMES, ADD_WAIFU, help_menu_description)
-  ```
+- request_llms/bridge_chatglmonnx.py   （未进行国际化，修改于12月28日）
 
-- `main.py`: 约229行，发生修改，接入自定义API-KEY功能，把一些js移出.py合并入相应的.js中。
-  
-  ```python
-   # original
-   input_combo = [cookies, max_length_sl, md_dropdown, txt, txt2, top_p, temperature, chatbot, history, system_prompt, plugin_advanced_arg]
-          input_combo_order = ["cookies", "max_length_sl", "md_dropdown", "txt", "txt2", "top_p", "temperature", "chatbot", "history", "system_prompt", "plugin_advanced_arg"]
-    # motified
-   input_combo = [cookies, max_length_sl, md_dropdown, txt, txt2, top_p, temperature, chatbot, history, system_prompt, plugin_advanced_arg,custom_api_key]
-          input_combo_order = ["cookies", "max_length_sl", "md_dropdown", "txt", "txt2", "top_p", "temperature", "chatbot", "history", "system_prompt", "plugin_advanced_arg",'custom_api_key']
-  ```
+- request_llms/bridge_chatgpt_vision.py     （未进行国际化，修改于12月28日）
 
-- `main.py`：362行，注释掉了自动更新程序
-  
-  ```python
-  def auto_updates(): time.sleep(0); # auto_update() scholar naivs由于修改了代码，所以需要禁用自动更新
-  ```
+- request_llms/bridge_chatgpt_website.py   （未进行国际化，修改于12月28日）
 
-- `config.py`：第65行添加新内容:
-  
-  ```python
-  # 允许用户自行设定API和URL重定向（储存在localstorage中）
-  ALLOW_CUSTOM_API_KEY = True
-  ```
+- request_llms/bridge_chatgpt.py     （修改于12月28日）
 
-- `config.py`：默认模型（LLM_MODEL）更改为“glm-4-flash”；为AVAIL_LLM_MODELS添加了GLM系列、qwen系列、moonshot系列和deepseek系列模型，并补充了一些gpt模型（均为原gpt_academic已经支持的模型）；询问多个模型（MULTI_QUERY_LLM_MODELS）更改为更廉价的模型“gpt-3.5-turbo&glm-4-flash”
+- request_llms/bridge_claude.py（未进行国际化，修改于12月28日）
 
-- `config_private.py`：约118行处产生了以下修改内容。`setup.py`亦可以产生下述修改，或产生一个含有下述修改内容的config_private.py。这样子修改是为了用户可以通过gpt_academic的web服务使用 Scholar Navis
-  
-  ```python
-  # 原始内容：
-  DEFAULT_FN_GROUPS = ['对话', '编程', '学术', '智能体']
-  
-  # 修改后的内容：
-  DEFAULT_FN_GROUPS = ['Scholar Navis']
-  
-  # 有的时候修改后的内容可能会包含原始的内容，例如：
-  DEFAULT_FN_GROUPS = ['Scholar Navis','对话', '编程', '学术', '智能体']
-  ```
+- request_llms/bridge_cohere.py   （未进行国际化，修改于12月28日）
 
-- `crazy_functional.py`：约400行处添加了下面的内容。`setup.py`亦可以产生下述修改。这样修改是为了gpt_academic能够使用 Scholar Navis
-  
-  ```python
-  ###### SCHOLAR NAVIS START ########
-  from shared_utils.scholar_navis.gpt_academic_handler import registrator
-  function_plugins = registrator(function_plugins)
-  ##### SCHOLAR NAVIS END - UNINSTALL: DELETE THESE ######
-  ```
+- request_llms/bridge_deepseekcoder.py  （未进行国际化，修改于12月28日）
 
-- `toolbox.py`：添加import
-  
-  ```python
-  from shared_utils.scholar_navis.user_custom_manager import get_api_key,get_url_redirect
-  from shared_utils.scholar_navis.statistics import user_useage_log
-  ```
+- request_llms/bridge_google_gemini.py   （未进行国际化，修改于12月28日）
 
-- `toolbox.py`：decorated 方法添加参数 user_custom_data: dict  
+- request_llms/bridge_jittorllms.py   （未进行国际化，修改于12月28日）
 
-- `toolbox.py`：第40行，添加  from shared_utils.statistics import user_useage_log
+- request_llms/bridge_jittorllms_llama.py     （未进行国际化，修改于12月28日）
 
-- `toolbox.py`：98行添加如下内容：
-  
-  ```python
-    # 获取openai用的api
-   api_key = get_api_key(user_custom_data,"API_KEY",True)
-   url_redirect = get_url_redirect('API_URL_REDIRECT',user_custom_data)
-   # 方便获取其他供应商的api_key
-   def get_other_provider_api_key(provider_api_type:str):return get_api_key(user_custom_data,provider_api_type,True)
-  
-      if llm_model.startswith('custom-'):
-         # 自定义模型使用openai兼容方案，覆盖一些openai的设定
-         api_key = get_api_key(user_custom_data,"CUSTOM_API_KEY")
-         url_redirect = get_url_redirect('CUSTOM_REDIRECT',user_custom_data)
-  
-      # 空输入会报错
-      if not txt_passon:txt_passon = ' ' 
-  ```
+- request_llms/bridge_jittorllms_pangualpha.py   （未进行国际化，修改于12月28日）
 
-- `toolbox.py`：第147行，添加下述内容：
-  
-  ```python
-  # 记录日志
-  user_useage_log(request,user_name,llm_model,f.__name__,system_prompt,txt_passon)
-  ```
+- request_llms/bridge_jittorllms_rwkv.py    （未进行国际化，修改于12月28日）
 
-- `toolbox.py`:对cookies和llm_kwargs的键值进行了修改，并且为llm_kwargs添加了新的键值对 
+- request_llms/bridge_llama2.py （未进行国际化，修改于12月28日）
 
-- `toolbox.py`：约517行添加了修正文字编码的内容，用于修复解压后产生的乱码
-  
-  ```python
-  def correct_code_error(str:str):
-      try:
-          cp437_code = str.encode('cp437')
-          try:
-              return cp437_code.decode('gbk')
-          except:
-              try:
-                  return cp437_code.decode('utf-8')
-              except:return str
-      except:
-          return str
-  ```
+- request_llms/bridge_moonshot.py  （修改于12月28日）
 
-- `toolbox.py`：约564行，修改如下： 
-  
-  ```python
-      # 整理文件集合 输出消息
-      files = glob.glob(f"{target_path_base}/**/*", recursive=True)
-      moved_files = []
-      for fp in files: # 修复不受cp437支持而产生的乱码
-          if os.path.isfile(fp):
-              basename = correct_code_error(os.path.basename(fp))
-              correct_fp = os.path.join(os.path.dirname(fp),basename)
-              os.rename(fp,correct_fp)
-              moved_files.append(correct_fp)
-          else:moved_files.append(fp)
-  ```
+- request_llms/bridge_qwen.py  （修改于12月28日）
 
-- `multi_language.py`：具体修改如下。这里添加这些内容是为了在翻译gpt_academic后，Scholar Navis 可以正常运行
-  
-  ```python
-  # 43行
-  # 原始
-  blacklist = ['multi-language', CACHE_FOLDER, '.git', 'private_upload', 'multi_language.py', 'build', '.github', '.vscode', '__pycache__', 'venv']
-  # 修改后
-  blacklist = ['multi-language', CACHE_FOLDER, '.git', 'private_upload', 'multi_language.py', 'build', '.github', '.vscode', '__pycache__', 'venv','scholar_navis']
-  
-  # 约526行，添加了如下内容
-  def  step_ex_scholar_navis():
-      ```添加的代码```
-  
-  # 588行，添加了如下内容
-  step_ex_scholar_navis()
-  
-  # 此外为了适应开发环境，还添加了一些有关于开发版本的多语言策略，基本上在源码中有注明修改
-  ```
+- request_llms/bridge_zhipu.py  （修改于12月28日）
 
-- `themes/init.js`：第六行添加 scholar_navis_init(); 约第九行处，注释掉了有关welcomeMessage的内容（因为这些内容可能会引发bug）
-  
-  ```js
-  // 以下被注释掉的部分则为修改的部分
-  
-      // 加载欢迎页面
-      // 因为欢迎界面有BUG，所以就暂时去掉了
-      //const welcomeMessage = new WelcomeMessage();
-      //welcomeMessage.begin_render();
-      chatbotIndicator = gradioApp().querySelector('#gpt-chatbot > div.wrap');
-      var chatbotObserver = new MutationObserver(() => {
-          chatbotContentChanged(1);
-          //welcomeMessage.update();
-      });
-  ```
+- request_llms/oai_std_model_template.py  （修改于12月28日）
 
-- `themes/common.css`：末尾添加了用于HTML的summary的样式内容，已经在源码中注明
+- shared_utils/config_loader.py  （修改于12月28日）
 
-- `themes/common.js`：约758行，发生修改：
-  
-  ```js
-  // original
-  const always_preserve = 2;
-  // motified
-  const always_preserve = btn_list.length;
-  ```
+- shared_utils/cookie_manager.py  （修改于12月28日）
 
-- `themes/common.js`：约1340行，将原来在theme.py中的黑暗模式代码（function js_code_for_toggle_darkmode）移动至此
+- shared_utils/fastapi_server.py  （修改于12月28日）
 
-- `themes/common.py`：约3行，添加用户启用自定义功能的获取方法
-  
-  ```python
-  # original
-  CODE_HIGHLIGHT, ADD_WAIFU, LAYOUT = get_conf("CODE_HIGHLIGHT", "ADD_WAIFU", "LAYOUT")
-  # motified
-  CODE_HIGHLIGHT, ADD_WAIFU, LAYOUT,ALLOW_CUSTOM_API_KEY = get_conf("CODE_HIGHLIGHT", "ADD_WAIFU", "LAYOUT",'ALLOW_CUSTOM_API_KEY')
-  ```
+- shared_utils/key_pattern_manager.py  （修改于12月28日）
 
-- `themes/common.py`：约35行，注释掉"themes/welcome.js",取消欢迎界面（有bug）
+- themes/svg: 删除了原有的图形，添加了来自的<a href="https://icons.getbootstrap.com/" target="_blank">Bootstrap Icons</a>图片  （修改于12月28日）
 
-- `themes/common.py`：约35和38行，添加载入scholar_navis初始化js和自定义API-KEY功能的js
-  
-  ```python
-  "themes/scholar_navis/scholar_navis_init.js"
-  if ALLOW_CUSTOM_API_KEY:common_js_path_list.append("themes/scholar_navis/custom_api_key.js")
-  ```
+- themes/common.js  （修改于12月28日）
 
-- `themes/gui_advanced_plugin_class.py`：约3、45行，添加高级插件热加载功能支持（热加载为gpt_acadmic自有功能）
-  
-  ```python
-  # line 3: HotReload added
-  from toolbox import format_io, find_free_port, on_file_uploaded, on_report_generated, get_conf, ArgsGeneralWrapper, DummyWith,HotReload
-  # line 45 original:
-  plugin_exe = plugin_obj.execute
-  # line 45 motified:
-  if plugins[which_plugin].get('ClassHotReload',False):
-  ```
+- themes/gui_advanced_plugin_class.py  （修改于12月28日）
 
-- `themes/gui_toolbar.py`：添加import；第9行定义的define_gui_toolbar去除js_code_for_toggle_darkmode参数；第7行，添加 ALLOW_CUSTOM_API_KEY = get_conf('ALLOW_CUSTOM_API_KEY')；define_gui_toolbar的返回值添加user_custom_data参数
+- themes/gui_toolbar.py  （修改于12月28日）
 
-- `themes/gui_toolbar.py`：17行添加 as model_switch_tab，用于显示添加的自定义模型：
-  
-  ```python
-  with gr.Tab("更换模型", elem_id="interact-panel") as model_switch_tab:
-  ```
+- themes/init.js  （修改于12月28日）
 
-- `themes/gui_toolbar.py`：第30行添加 新的gradio.tab：API-KEY；末尾定义新的方法_add_custom_model用于添加自定义模型
+- themes/theme.py  （修改于12月28日）
 
-- `themes/theme.py`：移除原有的黑暗模式代码（js_code_for_toggle_darkmode），并入common.js中
+- check_proxy.py (仅添加本地化支持，修改于12月28日)
 
-- `request_llms/bridge_all.py`：引入了model_info_class取代了以往的model_info，并提供自定义的功能（兼容原有功能）；引入了extend_llm_support函数，取代旧有的api2d、llama、vllm对齐，并为自定义模型提供支持。
+- config.py  （修改于12月28日）
 
-- `request_llms/bridge_chatgpt.py`：约31行，添加_get_url_redirect_and_check，用于决定是否能够使用API自定义重定向功能，并且该功能取代了原有的verify_endpoint
+- core_functional.py (仅添加本地化支持，修改于12月28日)
 
-- `request_llms/bridge_chatgpt.py`：约218行，发生修改，给用户提示添加自定义模型/api的提醒
-  
-  ```python
-  # original
-  chatbot.append((inputs, "缺少api_key。\n\n1. 临时解决方案：直接在输入区键入api_key，然后回车提交。\n\n2. 长效解决方案：在config.py中配置。"))
-  # motified
-  chatbot.append((inputs, "缺少api_key。\n\n1. 临时解决方案：直接在输入区键入api_key，然后回车提交。\n\n2. 长效解决方案：在上方的`API_KEY`中输入您的api-key。"))
-  ```
+- crazy_functional.py  （修改于12月28日）
 
-- `request_llms/bridge_chatgpt.py`：约478行，添加自定义模型便签裁剪
-  
-  ```python
-  if llm_kwargs['llm_model'].startswith('custom-'):
-          model = llm_kwargs['llm_model'][len('custom-'):]
-  ```
+- toolbox.py  （修改于12月28日）
 
-- `request_llms/bridge_moonshot.py`：约18-21行、158行、175行，添加api_key参数，用于使用自定义api-key。
+**scholar navis也删除了这些文件和关联的代码：**
 
-- `request_llms/bridge_moonshot.py`：约153行、174行，修复原有的空输入报错问题
-  
-  ```python
-  if not inputs:inputs = ' ' # 空白输入报错
-  ```
+精简整个程序，在保证兼容性的前提下，保留与论文识别提取和翻译有关的功能。
 
-- `request_llms/bridge_qwen.py`：约18行、35行、46行、56行，添加api_key参数，用于使用自定义api-key。
+- crazy_functions/SourceCode_Comment.py  （修改于12月28日）
 
-- `request_llms/com_qwenapi.py`：约9行、16行、20行，添加api_key参数，用于使用自定义api-key。
+- crazy_fcuntions/SourceCode_Analyse.py  （修改于12月28日）
 
-- `request_llms/bridge_zhipu.py`：约10行、31行、37行、65行、97行，添加api_key参数，用于使用自定义api-key。
+- crazy_functions/Image_Generate.py  （修改于12月28日）
 
-- `request_llms/com_zhipuglm.py`：约24行，添加api_key参数，用于使用自定义api-key。
+- crazy_functions/Image_Generate_Wrap.py  （修改于12月28日）
 
-- `request_llms/oai_std_model_template.py`：约153行、268行，添加api_key参数，用于使用自定义api-key。
+- crazy_functions/chatglm微调工具.py  （修改于12月28日）
 
-- `request_llms/oai_std_model_template.py`：约132行，删除了原有的API-KEY获取方法。
+- crazy_functions/总结音视频.py  （修改于12月28日）
 
-- `request_llms/model_info.py`：为上文提到的model.info的取代组件，除了支持原list的功能外，还支持自定义模型的调用
+- crazy_functions/知识库问答.py  （修改于12月28日）
 
-- `shared_utils/fastapi_server.py`：约216行，为web添加在线服务功能（目前仅仅是pdf.js的在线浏览功能） 
-  
-  ```python
-      # web api和服务
-      from .scholar_navis_web_services import enable_api,enable_services
-      enable_api(gradio_app);enable_services(gradio_app)
-  ```
+- crazy_functions/语音助手.py  （修改于12月28日）
 
-- `shared_utils/key_pattern_manager.py`：约70行，添加自定义模型支持；约73行，添加内容，让自定义模型也能支持非标准的api2d的api
-  
-  ```python
-  # line 70
-  if llm_model.startswith('gpt-') or llm_model.startswith('one-api-') or llm_model.startswith('custom-'):
-  # line 73
-  if is_api2d_key(k): avail_key_list.append(k)
-  ```
+- crazy_functions/生成函数注释.py  （修改于12月28日）
+
+- crazy_functions/命令行助手.py  （修改于12月28日）
+
+- crazy_functions/解析JupyterNotebook.py  （修改于12月28日）
+
+- crazy_functions/交互功能函数模板.py  （修改于12月28日）
+
+- crazy_functions/互动小游戏.py  （修改于12月28日）
+
+- crazy_functions/函数动态生成.py  （修改于12月28日）
+
+- crazy_functions/高级功能函数模板.py  （修改于12月28日）
+
+- crazy_functions/辅助功能.py  （修改于12月28日）
+
+- crazy_functions/多智能体.py  （修改于12月28日）
+
+- crazy_functions/数学动画生成manim.py  （修改于12月28日）
+
+- crazy_functions/agent_fns  （修改于12月28日）
+
+- crazy_functions/ast_fns  （修改于12月28日）
+
+- crazy_functions/diagram_fns  （修改于12月28日）
+
+- crazy_functions/game_fns  （修改于12月28日）
+
+- crazy_functions/gen_fns  （修改于12月28日）
+
+- crazy_functions/multi_stage  （修改于12月28日）
+
+- crazy_functions/vector_fns  （修改于12月28日）
+
+- tests (目录)  （修改于12月28日）
+
+- themes/gradios.py  （修改于12月28日）
+
+- themes/green.py  （修改于12月28日）
+
+- themes/gui_floating_menu.py  （修改于12月28日）
 
 **gpt_academic的使用策略**：
 
@@ -369,9 +234,9 @@ Scholar Navis 使用 GPL-3.0 license 许可证
 
 - 模块热加载
 
-- 保留了gpt_academic几乎全部的功能和插件
-
 **Scholar Navis 独立于 gpt_academic 的功能**：
+
+- 支持最新版的gradio和特性
 
 - 文件管理：插件文件夹（scholar_navis）内部的文件管理、总结库自身的管理
 
@@ -401,14 +266,16 @@ Scholar Navis 使用 GPL-3.0 license 许可证
 
 - 精细分析文章的处理逻辑和LLM请求逻辑、以及总结库文章包含列表（HTML）设计
 
-- PubMed OA 文章的多线程下载（在线服务关闭，仅限本地部署）
+- PubMed OA 文章的多线程下载
+
+- 用户登录、注册、信息的保存与记录（敏感尽可能进行了加密）。支持匿名使用（敏感信息也在本地进行了加密）
 
 - 面向用户的API自定义与模型自定义添加功能
 
 - 上传文件和产生文件的定时清理
 
-- 用户使用请求日志记录
+- web服务：在线PDF浏览（基于pdf.js）
 
-- web服务：在线PDF浏览
+- API服务：简易通知
 
-- API服务：简易维护提醒
+- 摘取有用的语句，并提供翻译以便阅读
