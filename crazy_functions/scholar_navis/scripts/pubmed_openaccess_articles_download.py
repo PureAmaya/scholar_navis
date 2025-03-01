@@ -1,3 +1,7 @@
+'''
+Author: scholar_navis@PureAmaya
+'''
+
 import os
 import json
 import shutil

@@ -1,3 +1,14 @@
+/*
+'''
+Original Author: gpt_academic@binary-husky
+
+Modified by PureAmaya on 2024-12-28
+- Some features are implemented by the Gradio component.
+- Due to the upgrade to Gradio 5, some functionalities have become invalid and have been removed.
+'''
+*/
+
+
 // 标志位
 enable_tts = false;
 

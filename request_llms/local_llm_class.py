@@ -1,3 +1,7 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
+
 import time
 import threading
 from toolbox import update_ui, Singleton

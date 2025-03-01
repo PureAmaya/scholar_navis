@@ -1,3 +1,7 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
+
 def is_full_width_char(ch):
     """判断给定的单个字符是否是全角字符"""
     if '\u4e00' <= ch <= '\u9fff':

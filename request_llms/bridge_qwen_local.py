@@ -1,3 +1,8 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
+
+
 model_name = "Qwen_Local"
 cmd_to_install = "`pip install -r request_llms/requirements_qwen_local.txt`"
 

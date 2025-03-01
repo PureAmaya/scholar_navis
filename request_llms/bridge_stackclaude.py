@@ -1,3 +1,8 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
+
+
 from .bridge_newbingfree import preprocess_newbing_out, preprocess_newbing_out_simple
 from multiprocessing import Process, Pipe
 from toolbox import update_ui, get_conf, trimmed_format_exc

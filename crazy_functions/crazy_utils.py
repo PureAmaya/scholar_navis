@@ -1,3 +1,18 @@
+'''
+Original Author: gpt_academic@binary-husky
+
+Modified by PureAmaya on 2025-3-1
+- Add a 1.1-second delay between each task in the multi-threaded service to address the issue of certain services allowing only one access per second.
+- Add some omitted, untranslated text.
+
+
+Modified by PureAmaya on 2024-12-28
+- Compatible with custom API functionality on the web.
+- Add localization support.
+- Fix potential errors caused by empty input.
+
+'''
+
 from toolbox import update_ui,trimmed_format_exc, get_max_token, Singleton, update_ui_lastest_msg
 from shared_utils.scholar_navis.multi_lang import _
 from shared_utils.char_visual_effect import scolling_visual_effect
@@ -225,17 +240,24 @@ def request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency(
     watch_dog_patience = 5
 
     # 子线程任务
-    def _req_gpt(index, inputs, history, sys_prompt):
+    def _req_gpt(index, inputs, history, sys_prompt,max_workers):
         gpt_say = ""
         retry_op = retry_times_at_unknown_error
         exceeded_cnt = 0
-        mutable[index][2] = "执行中"
+        mutable[index][2] = _("执行中")
         detect_timeout = lambda: len(mutable[index]) >= 2 and (time.time()-mutable[index][1]) > watch_dog_patience
         while True:
             # watchdog error
             if detect_timeout(): raise RuntimeError(_("检测到程序终止"))
             try:
                 # 【第一种情况】：顺利完成
+
+                # 每个任务之间差个1.1s，因为有的服务限制是每秒一次请求...，反正1秒也无所谓
+                sleep_time = index
+                while sleep_time >= 0:
+                    sleep_time -= max_workers
+                time.sleep((sleep_time + max_workers) * 1.1)
+
                 gpt_say = predict_no_ui_long_connection(
                     inputs=inputs, llm_kwargs=llm_kwargs, history=history,
                     sys_prompt=sys_prompt, observe_window=mutable[index], console_slience=True
@@ -291,7 +313,7 @@ def request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency(
                     return gpt_say # 放弃
 
     # 异步任务开始
-    futures = [executor.submit(_req_gpt, index, inputs, history, sys_prompt) for index, inputs, history, sys_prompt in zip(
+    futures = [executor.submit(_req_gpt, index, inputs, history, sys_prompt,max_workers) for index, inputs, history, sys_prompt in zip(
         range(len(inputs_array)), inputs_array, history_array, sys_prompt_array)]
     cnt = 0
 

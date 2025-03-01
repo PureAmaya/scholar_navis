@@ -1,3 +1,13 @@
+'''
+Original Author: gpt_academic@binary-husky
+
+Modified by PureAmaya on 2024-12-28
+- Add i18n support
+- Significant modifications for updating to Gradio 5.
+- To ensure compatibility, support and interfaces for existing features have been removed.
+- Adjust HTML footer, title, copyright, help documentation, AI warning, etc.
+'''
+
 import gradio_compatibility_layer as gr
 import json
 from toolbox import ArgsGeneralWrapper, HotReload

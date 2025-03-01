@@ -1,3 +1,7 @@
+'''
+Author: scholar_navis@PureAmaya
+'''
+
 import re
 from functools import lru_cache
 import json
@@ -14,6 +18,7 @@ class callable_dict(dict):
 DEFAULT_USER_CUSTOM = {
     'API_KEY':'',
     'API_URL_REDIRECT':['',''], # openai的
+    'XAI_API_KEY':'',
     "ZHIPUAI_API_KEY":'',
     "DASHSCOPE_API_KEY":'',
     "MOONSHOT_API_KEY":'',
@@ -24,17 +29,9 @@ DEFAULT_USER_CUSTOM = {
     
     }
 
-# 目前还没有用到的api正则表达式判定
-api_type_patterns ={
-    'openai':r"sk-[a-zA-Z0-9]{48}$|sk-proj-[a-zA-Z0-9]{48}$|sess-[a-zA-Z0-9]{40}$",
-    'azure':r"[a-zA-Z0-9]{32}$",
-    'api2d':r"fk[a-zA-Z0-9]{6}-[a-zA-Z0-9]{32}$",
-    'cohere':r"[a-zA-Z0-9]{40}$",
-    'zhipu':r'^[a-zA-Z0-9]{32}\.[a-zA-Z0-9]{16}$',
-    'short_openai':r"^sk-[a-zA-Z0-9]{32}$"
-}
 
 SUPPORT_API_PROVIDER = { 'OpenAI':'API_KEY',
+                        'Grok':'XAI_API_KEY',
                         '智谱(zhipu/glm)':'ZHIPUAI_API_KEY',
                         '通义千问(dashscope/qwen)':'DASHSCOPE_API_KEY',
                         '月之暗面(moonshot)':'MOONSHOT_API_KEY',

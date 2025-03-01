@@ -1,3 +1,14 @@
+'''
+Original Author: gpt_academic@binary-husky
+
+Modified by PureAmaya on 2025-02-21
+- Compatible with DeepSeek's inference model(R1)
+
+Modified by PureAmaya on 2024-12-28
+- Compatible with custom API functionality on the web.
+- Add localization support.
+'''
+
 import json
 import time
 import logging
@@ -5,6 +16,8 @@ import traceback
 import requests
 from shared_utils.config_loader import get_conf
 from shared_utils.scholar_navis.multi_lang import _
+from gradio_compatibility_layer import HTML
+from shared_utils.advanced_markdown_format import md2html
 
 # config_private.py放自己的秘密如API和代理网址
 # 读取时首先看是否存在私密的config_private配置文件（不受git管控），如果有，则覆盖原config文件
@@ -40,32 +53,41 @@ def decode_chunk(chunk):
     用于解读"content"和"finish_reason"的内容
     """
     chunk = chunk.decode()
-    respose = ""
+    response = ""
+    reasoning_content = ""
     finish_reason = "False"
     try:
         chunk = json.loads(chunk[6:])
     except:
-        respose = ""
+        response = ""
         finish_reason = chunk
     # 错误处理部分
     if "error" in chunk:
-        respose = "API_ERROR"
+        response = "API_ERROR"
         try:
             chunk = json.loads(chunk)
             finish_reason = chunk["error"]["code"]
         except:
             finish_reason = "API_ERROR"
-        return respose, finish_reason
+        return response, reasoning_content, finish_reason
 
     try:
-        respose = chunk["choices"][0]["delta"]["content"]
+        response = chunk["choices"][0]["delta"]["content"]
+    except:
+        pass
+    try:
+        reasoning_content = chunk["choices"][0]["delta"]["reasoning_content"]
     except:
         pass
     try:
         finish_reason = chunk["choices"][0]["finish_reason"]
     except:
         pass
-    return respose, finish_reason
+
+    if not response:response = ""
+    if not reasoning_content:reasoning_content = ""
+
+    return response, reasoning_content, finish_reason
 
 
 def generate_message(input, model, key, history, max_output_token, system_prompt, temperature):
@@ -210,9 +232,9 @@ def get_predict_function(
                 break
             except requests.exceptions.ConnectionError:
                 chunk = next(stream_response)  # 失败了，重试一次？再失败就没办法了。
-            response_text, finish_reason = decode_chunk(chunk)
+            response_text, reasoning_content,finish_reason = decode_chunk(chunk)
             # 返回的数据流第一次为空，继续等待
-            if response_text == "" and finish_reason != "False":
+            if reasoning_content == '' and response_text == "" and finish_reason != "False":
                 continue
             if response_text == "API_ERROR" and (
                 finish_reason != "False" or finish_reason != "stop"
@@ -228,7 +250,7 @@ def get_predict_function(
                     if finish_reason == "stop":
                         logging.info(f"[response] {result}")
                         break
-                    result += response_text
+                    if response_text:result += response_text
                     if not console_slience:
                         print(response_text, end="")
                     if observe_window is not None:
@@ -240,6 +262,7 @@ def get_predict_function(
                             if (time.time() - observe_window[1]) > watch_dog_patience:
                                 raise RuntimeError("用户取消了程序。")
                 except Exception as e:
+                    traceback.print_exc()
                     chunk = get_full_error(chunk, stream_response)
                     chunk_decoded = chunk.decode()
                     error_msg = chunk_decoded
@@ -343,6 +366,7 @@ def get_predict_function(
                     raise TimeoutError
 
         gpt_replying_buffer = ""
+        gpt_reasoning_buffer = ''
 
         stream_response = response.iter_lines()
         while True:
@@ -352,9 +376,9 @@ def get_predict_function(
                 break
             except requests.exceptions.ConnectionError:
                 chunk = next(stream_response)  # 失败了，重试一次？再失败就没办法了。
-            response_text, finish_reason = decode_chunk(chunk)
+            response_text,reasoning_content, finish_reason = decode_chunk(chunk)
             # 返回的数据流第一次为空，继续等待
-            if response_text == "" and finish_reason != "False":
+            if reasoning_content == '' and response_text == "" and finish_reason != "False":
                 status_text = f"finish_reason: {finish_reason}"
                 yield from update_ui(
                     chatbot=chatbot, history=history, msg=status_text
@@ -383,11 +407,30 @@ def get_predict_function(
                     if finish_reason == "stop":
                         logging.info(f"[response] {gpt_replying_buffer}")
                         break
+
                     status_text = f"finish_reason: {finish_reason}"
-                    gpt_replying_buffer += response_text
+                    if response_text:gpt_replying_buffer += response_text
+                    if reasoning_content:gpt_reasoning_buffer += reasoning_content
                     # 如果这里抛出异常，一般是文本过长，详情见get_full_error的输出
                     history[-1] = gpt_replying_buffer
-                    chatbot[-1] = (history[-2], history[-1])
+
+                    # 兼容深度思考
+                    if gpt_reasoning_buffer:
+                        chatbot_assistant =HTML(f''' 
+                        <p>
+                        <details open>
+                        <summary>{_('深度思考')}</summary>
+                        <blockquote><p>
+                        {md2html(gpt_reasoning_buffer)}
+                        </p></blockquote>
+                        </details>  
+                        </p>
+                        {md2html(gpt_replying_buffer)}
+                        ''')
+
+                    else:chatbot_assistant = history[-1]
+
+                    chatbot[-1] = (history[-2], chatbot_assistant)
                     yield from update_ui(
                         chatbot=chatbot, history=history, msg=status_text
                     )  # 刷新界面
@@ -402,7 +445,7 @@ def get_predict_function(
                         f"[Local Message] {_('解析错误,获得以下报错信息：')}\n" + chunk_decoded,
                     )
                     yield from update_ui(
-                        chatbot=chatbot, history=history, msg=_("Json异常") + chunk_decoded
+                        chatbot=chatbot, history=history, msg=_("Json异常") + e
                     )  # 刷新界面
                     print(chunk_decoded)
                     return

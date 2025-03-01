@@ -1,3 +1,6 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
 
 import time
 import threading

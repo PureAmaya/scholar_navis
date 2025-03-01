@@ -1,3 +1,7 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
+
 import re
 from functools import lru_cache
 

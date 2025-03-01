@@ -1,3 +1,7 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
+
 model_name = "ChatGLM3"
 cmd_to_install = "`pip install -r request_llms/requirements_chatglm.txt`"
 

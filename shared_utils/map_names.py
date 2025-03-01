@@ -1,3 +1,10 @@
+'''
+Original Author: gpt_academic@binary-husky
+
+Modified by PureAmaya on 2025-02-21
+- Modify the default max_token, 4096 → 128000
+'''
+
 import re
 mapping_dic = {
     # "qianfan": "qianfan（文心一言大模型）",
@@ -30,5 +37,5 @@ def read_one_api_model_name(model: str):
         max_token_tmp = int(max_token_tmp)
         model = re.sub(max_token_pattern, "", model)  # 从原字符串中删除 "(max_token=...)"
     else:
-        max_token_tmp = 4096
+        max_token_tmp = 128000
     return model, max_token_tmp

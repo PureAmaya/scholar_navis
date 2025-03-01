@@ -1,3 +1,7 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
+
 import os, json, base64
 from pydantic import BaseModel, Field
 from textwrap import dedent

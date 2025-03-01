@@ -1,3 +1,12 @@
+'''
+Original Author: gpt_academic@binary-husky
+
+Modified by PureAmaya on 2024-12-28
+- Add i18n support
+- Due to the removal of certain features/replacement by gradio components, the corresponding code has been removed.
+'''
+
+
 import base64
 import uuid
 import json

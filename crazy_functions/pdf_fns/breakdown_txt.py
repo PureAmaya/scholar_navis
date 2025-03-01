@@ -1,3 +1,7 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
+
 from crazy_functions.ipc_fns.mp import run_in_subprocess_with_timeout
 
 def force_breakdown(txt, limit, get_token_fn):

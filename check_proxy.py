@@ -1,3 +1,13 @@
+'''
+Original Author: gpt_academic@binary-husky
+
+Modified by PureAmaya on 2025-02-21
+- Remove redundant features: warm_up_modules()
+
+Modified by PureAmaya on 2024-12-28
+- Add i18n support
+'''
+
 from shared_utils.scholar_navis.multi_lang import _
 
 
@@ -114,17 +124,6 @@ def get_current_version():
     except:
         current_version = ""
     return current_version
-
-
-def warm_up_modules():
-    print(_('正在执行一些模块的预热 ...'))
-    from toolbox import ProxyNetworkActivate
-    from request_llms.bridge_all import model_info
-    with ProxyNetworkActivate("Warmup_Modules"):
-        enc = model_info["gpt-3.5-turbo"]['tokenizer']
-        enc.encode("模块预热", disallowed_special=())
-        enc = model_info["gpt-4"]['tokenizer']
-        enc.encode("模块预热", disallowed_special=())
 
 def warm_up_vectordb():
     print(_('正在执行一些模块的预热 ...'))

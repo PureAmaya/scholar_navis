@@ -1,3 +1,19 @@
+'''
+Original Author: gpt_academic@binary-husky
+
+Modified by PureAmaya on 2025-02-27
+- Remove redundant features: warm_up_modules()
+- Added privacy and security tips.
+- Remove the loading of common functions.(core_functional.py)
+- Remove log privacy reminder (as user input and output content have not been recorded for a long time).
+
+Modified by PureAmaya on 2024-12-28
+- Add i18n support
+- Significant modifications for updating to Gradio 5.
+- To ensure compatibility, support and interfaces for existing features have been removed.
+- Adjust HTML footer, title, copyright, help documentation, AI warning, etc.
+'''
+
 import os, json; os.environ['no_proxy'] = '*' # 避免代理网络产生意外污染
 from shared_utils.scholar_navis.gpt_academic_handler import common_functions_panel_registrator,extract_useful_sentenses_panel
 from themes.scholar_navis.html_head_manager import head
@@ -24,17 +40,6 @@ Github源代码开源和更新[地址](https://github.com/binary-husky/gpt_acade
 </br></br>要使用大模型，请在左上角的 API-KEY 中输入您的密钥。
 """)
 
-
-def enable_log(PATH_LOGGING):
-    import logging
-    admin_log_path = os.path.join(PATH_LOGGING, "admin")
-    os.makedirs(admin_log_path, exist_ok=True)
-    log_dir = os.path.join(admin_log_path, "chat_secrets.log")
-    try:logging.basicConfig(filename=log_dir, level=logging.INFO, encoding="utf-8", format="%(asctime)s %(levelname)-8s %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
-    except:logging.basicConfig(filename=log_dir, level=logging.INFO,  format="%(asctime)s %(levelname)-8s %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
-    # Disable logging output from the 'httpx' logger
-    logging.getLogger("httpx").setLevel(logging.WARNING)
-    print(_("所有对话记录将自动保存在本地目录{}, 请注意自我隐私保护哦！").format(log_dir))
 
 def main():
     import gradio_compatibility_layer as gr
@@ -71,10 +76,6 @@ def main():
     # 对话、日志记录（暂时先不要）
     #if CONFIG['enable_user_usage_log']:enable_log(PATH_LOGGING)
 
-    # 一些普通功能模块
-    from core_functional import get_core_functions
-    functional = get_core_functions()
-
     # 高级函数插件
     from crazy_functional import get_crazy_functions
     DEFAULT_FN_GROUPS = [] #get_conf('DEFAULT_FN_GROUPS') 目前用不到分组了
@@ -87,7 +88,7 @@ def main():
     #gr.Chatbot.postprocess = format_io
 
     # 代理与自动更新
-    from check_proxy import check_proxy,warm_up_modules
+    from check_proxy import check_proxy
     proxy_info = check_proxy(proxies)
 
     # 切换布局
@@ -103,13 +104,15 @@ def main():
     predefined_btns = {}
     from shared_utils.cookie_manager import make_cookie_cache, make_history_cache
     from themes.common import theme
-    with gr.Blocks(title="Scholar Navis", head=head(), theme=theme,analytics_enabled=False,delete_cache=(86400, 86400)) as app_block:
+    with gr.Blocks(title="Scholar Navis", head=head(), theme=theme,analytics_enabled=False,delete_cache=(10800, 18000)) as app_block:
         with gr.Row():
-            floating_panel_switch_btn = gr.Button(value=_("文件上传与设置"),icon=os.path.join('themes','svg','gear.svg'),elem_id='floating_panel_switch_btn') # 的新浮动面板按钮
+            floating_panel_switch_btn = gr.Button(value=_("上传与设置"),icon=os.path.join('themes','svg','gear.svg'),elem_id='floating_panel_switch_btn') # 的新浮动面板按钮
             dark_mode_btn = gr.Button(_('暗黑模式'),icon=os.path.join('themes','svg','dark_mode_toggle.svg'), elem_id='dark_mode_toggle')
             
         gr.HTML(title_html)
         gr.HTML('<strong>{}</strong>'.format(_("下方内容为 AI 生成，不代表任何立场，可能存在片面甚至错误。仅供参考，开发者及其组织不负任何责任")))
+        gr.HTML('<strong>{}</strong>'.format(_('联网系统信息安全无法得到充分保证，最好是个人、小组织内使用，保证服务提供者可信，并且敏感信息最好不要上传。另外，当启用登录功能时，服务商能够储存您api-key，不推荐使用来路不明、不受信任的服务商')))
+
         cookies, web_cookie_cache = make_cookie_cache() # 定义 后端state（cookies）、前端（web_cookie_cache）两兄弟
 
         with gr.Tab(_('对话功能'),id = '0'):
@@ -146,18 +149,7 @@ def main():
                     with gr.Accordion(_("Scholar Navis 功能区"), open=True, elem_id="sn-panel"):
                         plugins = common_functions_panel_registrator(plugins)
                     
-                    with gr.Accordion(_("基础功能区"), open=True, elem_id="basic-panel",render=False,visible=False):
-                        with gr.Row(equal_height=True):
-                            for k in range(NUM_CUSTOM_BASIC_BTN):# 不敢删（
-                                customize_btn = gr.Button("自定义按钮" + str(k+1), visible=False, variant="secondary", info_str=f'基础功能区: 自定义按钮')
-                                customize_btn.style(size="sm")
-                                customize_btns.update({"自定义按钮" + str(k+1): customize_btn})
-                            for k in functional:
-                                if ("Visible" in functional[k]) and (not functional[k]["Visible"]): continue
-                                variant = functional[k]["Color"] if "Color" in functional[k] else "secondary"
-                                functional[k]["Button"] = gr.Button(k, variant=variant, info_str=f'基础功能区: {k}')
-                                functional[k]["Button"].style(size="sm")
-                                predefined_btns.update({k: functional[k]["Button"]})
+
 
                     with gr.Accordion("函数插件区", open=False, elem_id="plugin-panel",visible=False):# 给按钮加功能
                         with gr.Row():
@@ -217,7 +209,7 @@ def main():
         txt.submit(
             None, [multiplex_sel], None, js="""(multiplex_sel)=>multiplex_function_begin(multiplex_sel)""")
         multiplex_sel.select(
-            None, [multiplex_sel], None, js=f"""(multiplex_sel)=>run_multiplex_shift(multiplex_sel)""")
+            None, [multiplex_sel], None, js="""(multiplex_sel)=>run_multiplex_shift(multiplex_sel)""")
         cancel_handles.append(submit_btn.click(**predict_args))
         resetBtn.click(None, None, [chatbot, history, status], js=js_code_reset)   # 先在前端快速清除chatbot&status
         reset_server_side_args = (lambda history: ('',[], [], _("已重置"), json.dumps(history)), [history], [txt,chatbot, history, status, history_cache])
@@ -225,11 +217,7 @@ def main():
         clearBtn.click(None, None, [txt,txt], js=js_code_clear)
         if AUTO_CLEAR_TXT:
             submit_btn.click(None, None, [txt,txt], js=js_code_clear)
-        # 基础功能区的回调函数注册
-        for k in functional:
-            if ("Visible" in functional[k]) and (not functional[k]["Visible"]): continue
-            click_handle = functional[k]["Button"].click(fn=ArgsGeneralWrapper(predict), inputs=[*input_combo, gr.State(True), gr.State(k)], outputs=output_combo)
-            cancel_handles.append(click_handle)
+
         for btn in customize_btns.values():
             click_handle = btn.click(fn=ArgsGeneralWrapper(predict), inputs=[*input_combo, gr.State(True), gr.State(btn.value)], outputs=output_combo)
             cancel_handles.append(click_handle)
@@ -252,7 +240,7 @@ def main():
             
             
         # 函数插件-下拉菜单与随变按钮的互动（新版-更流畅）
-        dropdown.select(None, [dropdown], None, js=f"""(dropdown)=>run_dropdown_shift(dropdown)""")
+        dropdown.select(None, [dropdown], None, js="""(dropdown)=>run_dropdown_shift(dropdown)""")
 
         # 模型切换时的回调
         def on_md_dropdown_changed(k):
@@ -298,9 +286,7 @@ def main():
         print(f"http://localhost:{PORT}\n")
 
         def open_browser(): time.sleep(2); webbrowser.open_new_tab(f"http://localhost:{PORT}")
-        def warm_up_mods(): time.sleep(6); warm_up_modules()
 
-        threading.Thread(target=warm_up_mods, name="warm-up",daemon=True).start() # 预热tiktoken模块
         if get_conf('AUTO_OPEN_BROWSER'):
             threading.Thread(target=open_browser, name="open-browser", daemon=True).start() # 打开浏览器页面
 

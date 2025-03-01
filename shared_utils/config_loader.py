@@ -1,3 +1,14 @@
+'''
+Original Author: gpt_academic@binary-husky
+
+Modified by PureAmaya on 2025-02-21
+- Remove redundant features: warm_up_modules()
+
+Modified by PureAmaya on 2024-12-28
+- Add i18n support
+- Due to the support for custom features, the detection of empty API-KEYs has been removed.
+'''
+
 import importlib
 import time
 import os

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-12-31 15:41+0800\n"
-"PO-Revision-Date: 2024-12-31 15:41+0800\n"
+"POT-Creation-Date: 2025-03-01 11:18+0800\n"
+"PO-Revision-Date: 2025-03-01 11:18+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -14,210 +14,176 @@ msgstr ""
 "X-Poedit-KeywordsList: l(\"%s\")\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:94
-#| msgid "欢迎使用Scholar Navis"
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:98
 msgid "欢迎使用 Scholar Navis"
 msgstr "欢迎使用 Scholar Navis"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:95
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:99
 msgid "管理员启动了身份验证。请登录或注册以继续"
 msgstr "管理员启动了身份验证。请登录或注册以继续"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:96
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:100
 msgid "API信息在服务端加密; 不登录的情况下API加密储存在localStorage中，请勿泄露"
 msgstr "API信息在服务端加密; 不登录的情况下API加密储存在localStorage中，请勿泄露"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:97
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:101
 msgid "如果对安全性不放心，请不要使用常用用户名与密码"
 msgstr "如果对安全性不放心，请不要使用常用用户名与密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:118
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:167
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:122
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:171
 msgid "用户名无效"
 msgstr "用户名无效"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:120
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:169
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:124
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:173
 msgid "用户名不能为空"
 msgstr "用户名不能为空"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:121
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:170
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/user_account_manager.py⁩:54
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:125
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:174
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/user_account_manager.py⁩:57
 msgid "密码不能为空"
 msgstr "密码不能为空"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:123
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:173
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:127
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:177
 msgid "用户名只能包含字母、数字和下划线"
 msgstr "用户名只能包含字母、数字和下划线"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:124
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:128
 msgid "当前用户不存在"
 msgstr "当前用户不存在"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:125
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:175
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/user_account_manager.py⁩:58
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:129
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:179
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/user_account_manager.py⁩:61
 msgid "密码不符合要求。至少八位且有大小写字母和数字"
 msgstr "密码不符合要求。至少八位且有大小写字母和数字"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:126
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:130
 msgid "密码错误"
 msgstr "密码错误"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:157
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:161
 msgid "登录失败，请稍后再试"
 msgstr "登录失败，请稍后再试"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:159
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:163
 msgid "登陆成功"
 msgstr "登陆成功"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:171
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/user_account_manager.py⁩:55
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:175
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/user_account_manager.py⁩:58
 msgid "请重复输入密码"
 msgstr "请重复输入密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:174
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:178
 msgid "当前用户已存在，请使用其他用户名"
 msgstr "当前用户已存在，请使用其他用户名"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:176
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/user_account_manager.py⁩:59
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:180
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/user_account_manager.py⁩:62
 msgid "两次输入的密码不一致"
 msgstr "两次输入的密码不一致"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:188
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:192
 msgid "注册失败，请稍后再试"
 msgstr "注册失败，请稍后再试"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:190
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:194
 msgid "注册成功，请登录"
 msgstr "注册成功，请登录"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:193
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:197
 msgid "Scholar Navis 登录授权页"
 msgstr "Scholar Navis 登录授权页"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:198
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:202
 msgid "用户名"
 msgstr "用户名"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:198
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:202
 msgid "请输入用户名 (不区分大小写)"
 msgstr "请输入用户名 (不区分大小写)"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:199
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:203
 msgid "密码"
 msgstr "密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:199
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:203
 msgid "至少八位，且有大小写字母与数字"
 msgstr "至少八位，且有大小写字母与数字"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:200
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:204
 msgid "不自动登录"
 msgstr "不自动登录"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:200
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:204
 msgid "一周内自动登录"
 msgstr "一周内自动登录"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:200
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:204
 msgid "一个月内自动登录"
 msgstr "一个月内自动登录"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:200
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:204
 msgid "总是自动登录"
 msgstr "总是自动登录"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:201
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:205
 msgid "自动登录"
 msgstr "自动登录"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:202
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:206
 msgid "确认密码"
 msgstr "确认密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:202
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:206
 msgid "请再次输入密码"
 msgstr "请再次输入密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:203
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:207
 msgid "登录"
 msgstr "登录"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:204
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:208
 msgid "注册"
 msgstr "注册"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:207
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:211
 msgid "注册登录切换"
 msgstr "注册登录切换"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/check_proxy.py⁩:120
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/check_proxy.py⁩:130
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/check_proxy.py⁩:129
 msgid "正在执行一些模块的预热 ..."
 msgstr "正在执行一些模块的预热 ..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/core_functional.py⁩:14
-msgid "学术语料润色"
-msgstr "学术语料润色"
-
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/core_functional.py⁩:42
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/core_functional.py⁩:175
-msgid "总结绘制脑图"
-msgstr "总结绘制脑图"
-
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/core_functional.py⁩:72
-msgid "查找语法错误"
-msgstr "查找语法错误"
-
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/core_functional.py⁩:93
-msgid "中译英"
-msgstr "中译英"
-
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/core_functional.py⁩:99
-msgid "学术英中互译"
-msgstr "学术英中互译"
-
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/core_functional.py⁩:120
-msgid "英译中"
-msgstr "英译中"
-
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/core_functional.py⁩:127
-msgid "找图片"
-msgstr "找图片"
-
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/core_functional.py⁩:135
-msgid "解释代码"
-msgstr "解释代码"
-
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/core_functional.py⁩:141
-msgid "参考文献转Bib"
-msgstr "参考文献转Bib"
-
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:94
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:236
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:267
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:284
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:109
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:251
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:289
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:306
 msgid "检测到程序终止"
 msgstr "检测到程序终止"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:219
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:234
 msgid "请开始多线程操作"
 msgstr "请开始多线程操作"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:222
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:237
 msgid "等待中"
 msgstr "等待中"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:243
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:247
+#| msgid "执行"
+msgid "执行中"
+msgstr "执行中"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:265
 msgid "已成功"
 msgstr "已成功"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:262
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:284
 msgid ""
 "此线程失败前收到的回答：\n"
 "\n"
@@ -225,109 +191,108 @@ msgstr ""
 "此线程失败前收到的回答：\n"
 "\n"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:263
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:285
 msgid "输入过长已放弃"
 msgstr "输入过长已放弃"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:277
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:299
 msgid "OpenAI绑定信用卡可解除频率限制"
 msgstr "OpenAI绑定信用卡可解除频率限制"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:288
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:310
 msgid "已失败"
 msgstr "已失败"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:320
-#| msgid "多线程操作完成"
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:342
 msgid "多线程操作已经开始，完成情况:"
 msgstr "多线程操作已经开始，完成情况:"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:428
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:450
 msgid "抱歉, 我们暂时无法解析此PDF文档: {}."
 msgstr "抱歉, 我们暂时无法解析此PDF文档: {}."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:553
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:575
 msgid "无法下载资源{}，请检查."
 msgstr "无法下载资源{}，请检查."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:585
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:607
 msgid "正在执行命令 {}"
 msgstr "正在执行命令 {}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:601
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:623
 msgid "正在解析论文, 请稍候。进度：正在排队, 等待线程锁..."
 msgstr "正在解析论文, 请稍候。进度：正在排队, 等待线程锁..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:609
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:631
 msgid "正在解析论文, 请稍候。进度：正在加载NOUGAT... （提示：首次运行需要花费较长时间下载NOUGAT参数）"
 msgstr "正在解析论文, 请稍候。进度：正在加载NOUGAT... （提示：首次运行需要花费较长时间下载NOUGAT参数）"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:616
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:638
 msgid "Nougat解析论文失败"
 msgstr "Nougat解析论文失败"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:44
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:48
 msgid "<b>{}</b> 是一个不存在的总结库"
 msgstr "<b>{}</b> 是一个不存在的总结库"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:45
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:49
 msgid "可以通过上传文章（含压缩包）的方式创建新的总结库"
 msgstr "可以通过上传文章（含压缩包）的方式创建新的总结库"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:50
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:54
 msgid "即将创建一个新的总结库：<b>{}</b>"
 msgstr "即将创建一个新的总结库：<b>{}</b>"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:51
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:55
 msgid "库内将包含您上传的所有文章"
 msgstr "库内将包含您上传的所有文章"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:92
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:111
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:96
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:115
 msgid "流程警告："
 msgstr "流程警告："
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:92
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:96
 msgid "当前总结库已经总结完毕，无法添加新的文章"
 msgstr "当前总结库已经总结完毕，无法添加新的文章"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:101
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:105
 msgid "<b>{}</b>文献总结库目前的关键词如下"
 msgstr "<b>{}</b>文献总结库目前的关键词如下"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:103
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:107
 msgid "目前没有关键词。请创建新的关键词，将用于分析总结"
 msgstr "目前没有关键词。请创建新的关键词，将用于分析总结"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:111
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:115
 msgid "当前总结库已经总结完毕，无法更新关键词"
 msgstr "当前总结库已经总结完毕，无法更新关键词"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:119
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:123
 msgid "该总结库已损坏：缺少lib_manifest.yml"
 msgstr "该总结库已损坏：缺少lib_manifest.yml"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:120
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:124
 msgid "请尝试重新创建该总结库"
 msgstr "请尝试重新创建该总结库"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:127
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:131
 msgid "缺乏关键词，无法总结分析"
 msgstr "缺乏关键词，无法总结分析"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:128
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:132
 msgid "可以使用 <b>key + 关键词</b> 命令设定新的关键词"
 msgstr "可以使用 <b>key + 关键词</b> 命令设定新的关键词"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:136
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:140
 msgid "不存在任何可用pdf，无法总结分析"
 msgstr "不存在任何可用pdf，无法总结分析"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:137
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:141
 msgid "可以使用 <b>缓存pdf文献</b> 缓存新的文章。"
 msgstr "可以使用 <b>缓存pdf文献</b> 缓存新的文章。"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:142
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:146
 #, python-brace-format
 msgid ""
 "所有的工序已经完成，该工具的流程结束。<ul><li>已导入pdf数量：{in_cache}(缓存中), {in_repo}(库中)</li><li>关键词：{keywords}</"
@@ -336,31 +301,31 @@ msgstr ""
 "所有的工序已经完成，该工具的流程结束。<ul><li>已导入pdf数量：{in_cache}(缓存中), {in_repo}(库中)</li><li>关键词：{keywords}</"
 "li></ul>"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:144
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:148
 msgid "在使用 <b>按关键词总结文献</b> 进行AI总结之前，您可以选择继续添加文章、修改关键词。"
 msgstr "在使用 <b>按关键词总结文献</b> 进行AI总结之前，您可以选择继续添加文章、修改关键词。"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:148
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:152
 msgid "该总结库已经完成了总结分析。无法添加新的文章或修改关键词。如果要修改请新建总结库"
 msgstr "该总结库已经完成了总结分析。无法添加新的文章或修改关键词。如果要修改请新建总结库"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:149
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:153
 msgid "关于总结内容等信息，请使用 <b>按关键词总结文献</b> 查看"
 msgstr "关于总结内容等信息，请使用 <b>按关键词总结文献</b> 查看"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:155
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:159
 msgid "没有上传pdf，或者尚未上传任何文件，该步骤跳过..."
 msgstr "没有上传pdf，或者尚未上传任何文件，该步骤跳过..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:156
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:160
 msgid "如果想要添加新的文章，请先上传文件再执行本功能。"
 msgstr "如果想要添加新的文章，请先上传文件再执行本功能。"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:172
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:176
 msgid "pdf加载成功"
 msgstr "pdf加载成功"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:173
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:177
 #, python-brace-format
 msgid ""
 "本次<b>上传{upload_count}篇</b>文章，<b>新加载{new_count}篇</b>文章，<b>总计{cache_count}篇</b>文章存在于缓存中待分析（已有"
@@ -369,57 +334,57 @@ msgstr ""
 "本次<b>上传{upload_count}篇</b>文章，<b>新加载{new_count}篇</b>文章，<b>总计{cache_count}篇</b>文章存在于缓存中待分析（已有"
 "<b>{repo}篇</b>文章分析完毕）"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:194
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:198
 #, python-brace-format
 msgid "关键词已更新</br></br><b>现在的关键词为：</b></br>{new}</br></br><b>此前的关键词为：</b></br>{old}"
 msgstr "关键词已更新</br></br><b>现在的关键词为：</b></br>{new}</br></br><b>此前的关键词为：</b></br>{old}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:200
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:204
 msgid "已存在关键词，不会进行修改（如果还没有总结，可以试试关键词强制更新）</br></br><b>现在的关键词为：</b></br>{}"
 msgstr "已存在关键词，不会进行修改（如果还没有总结，可以试试关键词强制更新）</br></br><b>现在的关键词为：</b></br>{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:208
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:212
 #, python-brace-format
 msgid "关键词已更新</br></br><b>现在的关键词为：</b></br>{new}"
 msgstr "关键词已更新</br></br><b>现在的关键词为：</b></br>{new}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:219
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:223
 msgid "上传1篇pdf文献或多篇pdf的压缩包"
 msgstr "上传1篇pdf文献或多篇pdf的压缩包"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:221
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:225
 msgid "创建或选择总结库"
 msgstr "创建或选择总结库"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:221
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:225
 msgid "如要创建新的总结库，请输入一个新名字"
 msgstr "如要创建新的总结库，请输入一个新名字"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:223
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:227
 msgid "查询或更新关键词"
 msgstr "查询或更新关键词"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:223
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:227
 msgid "强制更新关键词"
 msgstr "强制更新关键词"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:225
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/cache_pdf_articles.py⁩:229
 msgid "在此处输入用于更新的关键词（中英文逗号分割）"
 msgstr "在此处输入用于更新的关键词（中英文逗号分割）"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:55
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:59
 msgid "读取总结文件失败！具体原因如下："
 msgstr "读取总结文件失败！具体原因如下："
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:59
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:63
 msgid "出现问题"
 msgstr "出现问题"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:59
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:63
 msgid "该总结库不含总结文件，可能是尚未完成总结或者意外删除？可以尝试重新总结"
 msgstr "该总结库不含总结文件，可能是尚未完成总结或者意外删除？可以尝试重新总结"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:70
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:74
 msgid ""
 "如果有问道某些内容的出处、来源，或者是其他的你不知道的内容、没有给你提供的内容时，请说“如果要确定详细的内容或者是寻找来源，请使"
 "用 find 命令 和 精细分析文献 功能"
@@ -427,7 +392,7 @@ msgstr ""
 "如果有问道某些内容的出处、来源，或者是其他的你不知道的内容、没有给你提供的内容时，请说“如果要确定详细的内容或者是寻找来源，请使"
 "用 find 命令 和 精细分析文献 功能"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:75
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:79
 #, python-brace-format
 msgid ""
 "现在可以直接与AI交流总结的内容。也可以使用帮助指令查询还可以做些什么 \n"
@@ -438,7 +403,7 @@ msgstr ""
 "\n"
 "总结库 <b>{name}</b> 在 <b>{key}</b> 方面的总结如下："
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:85
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:89
 #, python-brace-format
 msgid ""
 "尝试绘制图表（可能会作图失败，那时就多运行几次吧）...\n"
@@ -449,15 +414,15 @@ msgstr ""
 "\n"
 "总结库 <b>{name}</b> 在 <b>{key}</b> 方面的总结如下：<details><summary><u>展开以检视总结的内容...</u></summary>{ov}</details>"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:87
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:91
 msgid "等待绘制....."
 msgstr "等待绘制....."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:95
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:99
 msgid "参数 <b>{}</b> 不合适或超出范围，修正为 9（思维导图）"
 msgstr "参数 <b>{}</b> 不合适或超出范围，修正为 9（思维导图）"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:102
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:106
 msgid ""
 "无法生成图表。具体原因如下: \n"
 "{}"
@@ -465,20 +430,20 @@ msgstr ""
 "无法生成图表。具体原因如下: \n"
 "{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:108
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:112
 msgid "开始查找可能是来源的文章... "
 msgstr "开始查找可能是来源的文章... "
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:108
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:126
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:112
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:130
 msgid "请等待..."
 msgstr "请等待..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:113
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:117
 msgid "请输入希望溯源的内容"
 msgstr "请输入希望溯源的内容"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:120
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:124
 msgid ""
 "无法溯源。具体原因如下: \n"
 "{}"
@@ -486,11 +451,11 @@ msgstr ""
 "无法溯源。具体原因如下: \n"
 "{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:126
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:130
 msgid "尝试拟定课题中..."
 msgstr "尝试拟定课题中..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:137
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:141
 msgid ""
 "拟定课题出错了！错误原因是：\n"
 "{}"
@@ -498,15 +463,15 @@ msgstr ""
 "拟定课题出错了！错误原因是：\n"
 "{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:258
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:266
 msgid "搜索完成！暂时没有找到与搜索内容相匹配的文章。可以多尝试几次（<b>不排除AI出问题</b>），或与AI对总结内容进行交流"
 msgstr "搜索完成！暂时没有找到与搜索内容相匹配的文章。可以多尝试几次（<b>不排除AI出问题</b>），或与AI对总结内容进行交流"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:280
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:288
 msgid "搜索完成！"
 msgstr "搜索完成！"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:281
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:289
 msgid ""
 "有 <b>{}</b> 篇文章可能符合期望。在下面可以下载这些文章（以及选中的理由），此外现在<b>可以直接进行对话</b>、了解<b>这几篇</b>文"
 "章了"
@@ -514,191 +479,193 @@ msgstr ""
 "有 <b>{}</b> 篇文章可能符合期望。在下面可以下载这些文章（以及选中的理由），此外现在<b>可以直接进行对话</b>、了解<b>这几篇</b>文"
 "章了"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:282
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:290
 msgid "对话文章仅包含摘要，如果要细致分析请使用 <b>精细分析文献</b> 工具"
 msgstr "对话文章仅包含摘要，如果要细致分析请使用 <b>精细分析文献</b> 工具"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:283
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:291
 msgid "由于人工智能的能力各不相同，<b>回答的理由可能并不能使人满意</b>，请仔细鉴别"
 msgstr "由于人工智能的能力各不相同，<b>回答的理由可能并不能使人满意</b>，请仔细鉴别"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:284
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:292
 msgid "当对结果不满意时，可以重新搜索一次"
 msgstr "当对结果不满意时，可以重新搜索一次"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:285
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:293
 msgid "[文章]：指文献。[搜索内容]：指左上角输入的、需要搜索的内容"
 msgstr "[文章]：指文献。[搜索内容]：指左上角输入的、需要搜索的内容"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:294
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:302
 msgid "下载文章："
 msgstr "下载文章："
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:321
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:329
 msgid "课题拟定中..."
 msgstr "课题拟定中..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:321
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:329
 msgid "拟定要求: {}"
 msgstr "拟定要求: {}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:327
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:335
 msgid "课题拟定完成！"
 msgstr "课题拟定完成！"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:328
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:336
 msgid "下面是AI拟定的课题及其理由（此时亦可以追问）: "
 msgstr "下面是AI拟定的课题及其理由（此时亦可以追问）: "
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:337
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:261
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:345
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:263
 msgid "选择总结库"
 msgstr "选择总结库"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:337
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:345
 msgid "可以在总结库中选择文章"
 msgstr "可以在总结库中选择文章"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:340
-msgid "绘制思维导图 [gpt_acadmic内置功能，语言偏好可能无效]"
-msgstr "绘制思维导图 [gpt_acadmic内置功能，语言偏好可能无效]"
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:348
+msgid "绘制思维导图"
+msgstr "绘制思维导图"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:340
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:348
 msgid "寻找总结内容来源"
 msgstr "寻找总结内容来源"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:340
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:348
 msgid "拟定课题"
 msgstr "拟定课题"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:343
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py⁩:351
 msgid "在此处输入思维导图类型代码/要溯源的内容/课题拟定要求"
 msgstr "在此处输入思维导图类型代码/要溯源的内容/课题拟定要求"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:177
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:175
 msgid "请重置后再执行"
 msgstr "请重置后再执行"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:180
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:178
 msgid "任务名称意外丢失，请重新设定"
 msgstr "任务名称意外丢失，请重新设定"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:184
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:182
 msgid "结构和内容要求不能为空"
 msgstr "结构和内容要求不能为空"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:187
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:185
 msgid "目标语言不能为空。请选定目标语言"
 msgstr "目标语言不能为空。请选定目标语言"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:193
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:191
 msgid "工作目录处理失败，请重新设定{}"
 msgstr "工作目录处理失败，请重新设定{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:211
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:665
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:209
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:675
 msgid "任务开始执行"
 msgstr "任务开始执行"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:231
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:229
 msgid "任务执行完成"
 msgstr "任务执行完成"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:231
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:229
 msgid "如果要执行新的任务，请重置"
 msgstr "如果要执行新的任务，请重置"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:287
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:285
 msgid "要下载的文件不存在。请尝试下载另一个文件或重新摘取"
 msgstr "要下载的文件不存在。请尝试下载另一个文件或重新摘取"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:310
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:308
 msgid "文件不存在。请上传文件或选择已有文件"
 msgstr "文件不存在。请上传文件或选择已有文件"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:321
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:336
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:319
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:334
 msgid "压缩包中缺少必要文件 {}，但是有pdf文件，将按照新任务执行。如果您的压缩包内只有pdf，请忽略该提醒"
 msgstr "压缩包中缺少必要文件 {}，但是有pdf文件，将按照新任务执行。如果您的压缩包内只有pdf，请忽略该提醒"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:324
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:339
-#| msgid "压缩包中缺少必要文件{}，请重新上传或选择已有文件"
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:322
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:337
 msgid "压缩包中缺少必要文件 {}，请重新上传或选择已有文件"
 msgstr "压缩包中缺少必要文件 {}，请重新上传或选择已有文件"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:473
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:477
 msgid "{} 加载pdf成功"
 msgstr "{} 加载pdf成功"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:477
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:481
 msgid "{} 加载pdf: 失败，后续过程将跳过。原因：{}"
 msgstr "{} 加载pdf: 失败，后续过程将跳过。原因：{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:484
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:488
 msgid "{} 获取有用句子失败，后续过程将跳过。原因：{}"
 msgstr "{} 获取有用句子失败，后续过程将跳过。原因：{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:487
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:491
 msgid "{} 获取有用句子成功"
 msgstr "{} 获取有用句子成功"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:494
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:498
 msgid "{} 摘取可接受句子失败，后续过程将跳过。原因：{}"
 msgstr "{} 摘取可接受句子失败，后续过程将跳过。原因：{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:497
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:501
 msgid "{} 摘取可接受句子成功"
 msgstr "{} 摘取可接受句子成功"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:504
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:508
 msgid "{} 翻译可接受句子失败，后续过程将跳过。原因：{}"
 msgstr "{} 翻译可接受句子失败，后续过程将跳过。原因：{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:507
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:511
 msgid "{} 翻译可接受句子成功"
 msgstr "{} 翻译可接受句子成功"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:654
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:522
+msgid "用户终止提取有用语句"
+msgstr "用户终止提取有用语句"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:663
 msgid "文件 {} 不存在，跳过"
 msgstr "文件 {} 不存在，跳过"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:694
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:704
 msgid "正在导出结果文件..."
 msgstr "正在导出结果文件..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:716
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:726
 msgid "结果文件导出成功。正在导出中间文件..."
 msgstr "结果文件导出成功。正在导出中间文件..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:733
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:743
 msgid "中间文件导出完成。正在导出日志..."
 msgstr "中间文件导出完成。正在导出日志..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:741
-#| msgid "翻译失败，原因：{} @ {}"
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:751
 msgid "输出结果失败，原因：{}"
 msgstr "输出结果失败，原因：{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:39
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:44
 msgid "现在可以进行单篇文章的精细分析。支持总结库内置文章或上传的其他文章"
 msgstr "现在可以进行单篇文章的精细分析。支持总结库内置文章或上传的其他文章"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:39
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:44
 msgid "等待指令中..."
 msgstr "等待指令中..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:47
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:52
 msgid "[注意] 上传的文献多于1篇。<b>精细分析时仅使用第一篇文章</b>"
 msgstr "[注意] 上传的文献多于1篇。<b>精细分析时仅使用第一篇文章</b>"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:63
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:203
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:68
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:205
 msgid "该用户没有任何总结库"
 msgstr "该用户没有任何总结库"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:65
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:205
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:70
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:207
 msgid ""
 "下面是该用户拥有的总结库：\n"
 "\n"
@@ -706,211 +673,219 @@ msgstr ""
 "下面是该用户拥有的总结库：\n"
 "\n"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:71
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:76
 msgid "没有指定任何文章。可以选择上传文章或者从总结库中选择一篇文章进行分析</br></br>{}"
 msgstr "没有指定任何文章。可以选择上传文章或者从总结库中选择一篇文章进行分析</br></br>{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:77
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:82
 msgid "没有上传可用的文章，<b>{}</b> 亦不是已有的总结库"
 msgstr "没有上传可用的文章，<b>{}</b> 亦不是已有的总结库"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:88
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:93
 msgid "总结库 <b>{}</b> 中不存在任何已经加载完成的文章"
 msgstr "总结库 <b>{}</b> 中不存在任何已经加载完成的文章"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:115
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:120
 msgid "访问文章发布页"
 msgstr "访问文章发布页"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:116
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:121
 msgid "复制文章"
 msgstr "复制文章"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:117
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:122
 msgid "下载文章"
 msgstr "下载文章"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:131
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:98
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:136
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:97
 msgid "总结库"
 msgstr "总结库"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:132
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:137
 msgid "包含下面的文章："
 msgstr "包含下面的文章："
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:133
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:138
 msgid "展开文字可以看到文章的预分析结果。如果没有正常显示标题，说明文章标题获取失败，但不影响后续使用"
 msgstr "展开文字可以看到文章的预分析结果。如果没有正常显示标题，说明文章标题获取失败，但不影响后续使用"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:134
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:139
 msgid "分析中使用的关键词："
 msgstr "分析中使用的关键词："
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:135
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:140
 msgid "如果没有正常的显示文章标题，可能是该文章没有doi，或是没有在metadata中设定标题，此时显示的一般为文件名"
 msgstr "如果没有正常的显示文章标题，可能是该文章没有doi，或是没有在metadata中设定标题，此时显示的一般为文件名"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:136
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:141
 msgid "如果 [访问文章发布页] 不可用，可能是该文章没有doi，也可能是网络错误"
 msgstr "如果 [访问文章发布页] 不可用，可能是该文章没有doi，也可能是网络错误"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:151
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:156
 msgid "尚未输入一个可用的文章。可以选择上传一篇文章，也可以从加载的文章中选择一篇使用"
 msgstr "尚未输入一个可用的文章。可以选择上传一篇文章，也可以从加载的文章中选择一篇使用"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:153
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:158
 msgid "您可以点击这里"
 msgstr "您可以点击这里"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:153
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:158
 msgid "查阅该总结库包含的文章"
 msgstr "查阅该总结库包含的文章"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:161
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:166
 msgid "精细分析中..."
 msgstr "精细分析中..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:165
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:170
 msgid "分析过程中出错！错误原因是：{}"
 msgstr "分析过程中出错！错误原因是：{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:189
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:195
 msgid "上传的文件 {} 不可用。我们不接受中文学位论文、加密文件、非PDF文件或损坏文件"
 msgstr "上传的文件 {} 不可用。我们不接受中文学位论文、加密文件、非PDF文件或损坏文件"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:202
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:203
 msgid "对pdf文件处理中..."
 msgstr "对pdf文件处理中..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:212
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:216
 #, python-brace-format
 msgid "[{i}/{total}] AI阅读中..."
 msgstr "[{i}/{total}] AI阅读中..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:237
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:228
+msgid "对pdf文件完成"
+msgstr "对pdf文件完成"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:239
 msgid "总结中..."
 msgstr "总结中..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:244
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:246
 msgid "分析的文章如下："
 msgstr "分析的文章如下："
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:246
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:248
 msgid "标题可能不准确，跳转连接亦或许无法使用，仅供参考"
 msgstr "标题可能不准确，跳转连接亦或许无法使用，仅供参考"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:248
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:250
 msgid "精细分析完成，以下是分析的结果（现在亦可以与AI进行交流，也可以下载分析的结果）: "
 msgstr "精细分析完成，以下是分析的结果（现在亦可以与AI进行交流，也可以下载分析的结果）: "
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:253
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:255
 msgid "下载分析结果："
 msgstr "下载分析结果："
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:260
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:262
 msgid "选定的文章"
 msgstr "选定的文章"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:260
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:262
 msgid "上传或使用总结库内的文章"
 msgstr "上传或使用总结库内的文章"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:261
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:263
 msgid "查看总结库内的文章"
 msgstr "查看总结库内的文章"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:114
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py⁩:264
+msgid "AI预先阅读内容"
+msgstr "AI预先阅读内容"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:118
 msgid "完成已有文章的检查"
 msgstr "完成已有文章的检查"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:118
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:122
 msgid "所有需要下载的文章已经缓存"
 msgstr "所有需要下载的文章已经缓存"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:136
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:140
 msgid "下载将使用网络代理"
 msgstr "下载将使用网络代理"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:137
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:141
 msgid "下载不使用网络代理"
 msgstr "下载不使用网络代理"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:163
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:164
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:167
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:168
 msgid "下载中，请等待..."
 msgstr "下载中，请等待..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:168
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:172
 msgid "当前下载进度"
 msgstr "当前下载进度"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:169
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:173
 msgid "下载数"
 msgstr "下载数"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:169
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:173
 msgid "已经存在的文章不含在内"
 msgstr "已经存在的文章不含在内"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:170
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:174
 msgid "完成百分比"
 msgstr "完成百分比"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:171
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:175
 msgid "不使用网络代理"
 msgstr "不使用网络代理"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:171
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:175
 msgid "使用网络代理"
 msgstr "使用网络代理"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:186
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:190
 msgid "所有文件下载完成"
 msgstr "所有文件下载完成"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:230
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:234
 msgid "api解析失败"
 msgstr "api解析失败"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:236
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:240
 msgid "api解析成功"
 msgstr "api解析成功"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:300
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:301
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:304
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:305
 msgid "用户终止下载"
 msgstr "用户终止下载"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:438
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:442
 msgid "上传您在PubMed中保存的csv格式的引文（citations）文件以执行新的下载任务"
 msgstr "上传您在PubMed中保存的csv格式的引文（citations）文件以执行新的下载任务"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:439
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:443
 msgid "按下 <b>停止</b> 按钮以终止该下载进程"
 msgstr "按下 <b>停止</b> 按钮以终止该下载进程"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:440
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:444
 msgid "下载的时间比较耗时，可以打开新的页面进行ai对话"
 msgstr "下载的时间比较耗时，可以打开新的页面进行ai对话"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:441
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:445
 msgid "<font color=red>[提醒]</font> 当前一次下载任务终止后，再次运行可能会显示出之前的下载内容，尚未知如何修复。可以尝试`重置`"
 msgstr "<font color=red>[提醒]</font> 当前一次下载任务终止后，再次运行可能会显示出之前的下载内容，尚未知如何修复。可以尝试`重置`"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:442
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:446
 msgid "批量从PubMed上下载 OpenAccess 文章"
 msgstr "批量从PubMed上下载 OpenAccess 文章"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:451
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:455
 msgid "正在处理..."
 msgstr "正在处理..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:456
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:460
 msgid "注意，上传的文件不是可用的csv文件"
 msgstr "注意，上传的文件不是可用的csv文件"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:470
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:474
 msgid ""
 "读取出错！可能是文件内容缺失或错误，请检查\"PMID\", \"PMCID\", \"Title\", \"DOI\"及其内容是否是使用英文逗号分割，以及内容是否正"
 "确"
@@ -918,84 +893,84 @@ msgstr ""
 "读取出错！可能是文件内容缺失或错误，请检查\"PMID\", \"PMCID\", \"Title\", \"DOI\"及其内容是否是使用英文逗号分割，以及内容是否正"
 "确"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:474
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:478
 msgid "上传的文件中，缺少 \"PMID\", \"PMCID\", \"Title\", \"DOI\"其中的若干项目，或拼写错误，请检查"
 msgstr "上传的文件中，缺少 \"PMID\", \"PMCID\", \"Title\", \"DOI\"其中的若干项目，或拼写错误，请检查"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:486
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:487
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:490
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:491
 msgid "正在记录文章信息... "
 msgstr "正在记录文章信息... "
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:486
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:490
 msgid "(文件较大，请等待)"
 msgstr "(文件较大，请等待)"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:496
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:500
 msgid "文章信息记录完成"
 msgstr "文章信息记录完成"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:503
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:507
 msgid "正在下载文章..."
 msgstr "正在下载文章..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:513
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:517
 msgid "出现错误。请检查上传的csv是否正确、代理格式是否正确、网络条件是否良好或其他可能存在的问题"
 msgstr "出现错误。请检查上传的csv是否正确、代理格式是否正确、网络条件是否良好或其他可能存在的问题"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:543
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:547
 msgid "此次 PubMed Open Access 下载任务执行完成"
 msgstr "此次 PubMed Open Access 下载任务执行完成"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:544
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:548
 msgid "下载成功的文章"
 msgstr "下载成功的文章"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:545
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:549
 msgid "下载失败的文章"
 msgstr "下载失败的文章"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:546
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:550
 msgid "下载成功率"
 msgstr "下载成功率"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:547
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:551
 msgid "如果下载失败，则需要手动下载"
 msgstr "如果下载失败，则需要手动下载"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:548
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:552
 msgid "为什么会这样"
 msgstr "为什么会这样"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:549
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:553
 msgid "点击获取下载的文章"
 msgstr "点击获取下载的文章"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:549
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:553
 msgid "点击获取下载日志"
 msgstr "点击获取下载日志"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:550
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:554
 msgid "可以直接将下载完成的文章进行分析: 用<b>缓存pdf文献</b>开始总结分析这些文章"
 msgstr "可以直接将下载完成的文章进行分析: 用<b>缓存pdf文献</b>开始总结分析这些文章"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:567
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:571
 msgid "上传保存的文章列表"
 msgstr "上传保存的文章列表"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:567
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py⁩:571
 msgid "一般为csv格式"
 msgstr "一般为csv格式"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:62
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:68
 msgid "总结终止。没有找到可用的关键词"
 msgstr "总结终止。没有找到可用的关键词"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:63
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:69
 msgid "请在 <b>缓存pdf文献</b> 中设定关键词"
 msgstr "请在 <b>缓存pdf文献</b> 中设定关键词"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:86
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:92
 #, python-brace-format
 msgid ""
 "总结库 <b>{name}</b> 已经分析完毕，可以使用<b>与AI交流研究进展</b>进一步了解该方面的研究现状，如果得到了某篇感兴趣的文章，也可"
@@ -1004,60 +979,58 @@ msgstr ""
 "总结库 <b>{name}</b> 已经分析完毕，可以使用<b>与AI交流研究进展</b>进一步了解该方面的研究现状，如果得到了某篇感兴趣的文章，也可"
 "以使用 <b>精细分析文献</b> 进行精读"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:87
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:93
 msgid "参考关键词"
 msgstr "参考关键词"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:88
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:94
 msgid "如果对分析结果不满意，可以选择强制重新分析（仅对最终总结生效）"
 msgstr "如果对分析结果不满意，可以选择强制重新分析（仅对最终总结生效）"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:90
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:96
 msgid ""
 "<b>注意：</b>执行此操作会<font color=red>删除此前的总结</font>（不会影响预处理和预分析的结果）。如果对此前的总结不满意再使用! "
 msgstr ""
 "<b>注意：</b>执行此操作会<font color=red>删除此前的总结</font>（不会影响预处理和预分析的结果）。如果对此前的总结不满意再使用! "
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:91
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:97
 msgid "下面是此前的总结内容: "
 msgstr "下面是此前的总结内容: "
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:102
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:314
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:108
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:324
 msgid "点击这里下载pdf格式的总结内容"
 msgstr "点击这里下载pdf格式的总结内容"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:106
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:317
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:112
 msgid "请注意，本功能不支持对话。"
 msgstr "请注意，本功能不支持对话。"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:106
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:317
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:112
 msgid "如果要使用对话功能，请使用 <b>与AI交流研究进展</b>"
 msgstr "如果要使用对话功能，请使用 <b>与AI交流研究进展</b>"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:111
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:117
 msgid "现在将对{}中的文献进行总结分析"
 msgstr "现在将对{}中的文献进行总结分析"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:112
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:118
 msgid "分析参考的关键词是 {}。为加快速度，默认 <b>仅对摘要</b> 进行总结"
 msgstr "分析参考的关键词是 {}。为加快速度，默认 <b>仅对摘要</b> 进行总结"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:123
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:129
 msgid "该总结库中没有任何可用的pdf文章。如果需要进行总结分析，请先使用 <b>缓存pdf文献</b> 添加新的文章"
 msgstr "该总结库中没有任何可用的pdf文章。如果需要进行总结分析，请先使用 <b>缓存pdf文献</b> 添加新的文章"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:129
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:135
 msgid "没有新的文章需要预处理或已预处理完成"
 msgstr "没有新的文章需要预处理或已预处理完成"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:130
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:136
 msgid "目前已经有<b>{}篇文章</b>预处理完毕，即将进行下一步操作..."
 msgstr "目前已经有<b>{}篇文章</b>预处理完毕，即将进行下一步操作..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:199
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:205
 #, python-brace-format
 msgid ""
 "目前有{pdf_count}篇文章处于缓存中（实际需要预处理{jb}篇，{done}篇已经完成流程），即将使用{cpu}个线程进行预处理。全部预处理完成"
@@ -1066,56 +1039,64 @@ msgstr ""
 "目前有{pdf_count}篇文章处于缓存中（实际需要预处理{jb}篇，{done}篇已经完成流程），即将使用{cpu}个线程进行预处理。全部预处理完成"
 "后就会使用GPT进行汇总分析..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:201
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:207
 msgid "预处理中...."
 msgstr "预处理中...."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:210
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:216
 #, python-brace-format
 msgid "任务分组 [{done_num}/{task_total}] 预处理中..."
 msgstr "任务分组 [{done_num}/{task_total}] 预处理中..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:224
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:230
 msgid "缓存文章预处理完成"
 msgstr "缓存文章预处理完成"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:235
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:241
 msgid "现在开始使用GPT进行预先分析，每5个文章一组,总共有<b>{}</b>篇文章"
 msgstr "现在开始使用GPT进行预先分析，每5个文章一组,总共有<b>{}</b>篇文章"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:236
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:242
 msgid "此过程中可以随时关闭该页面，下次会从 <b>中断的分组</b> 开始"
 msgstr "此过程中可以随时关闭该页面，下次会从 <b>中断的分组</b> 开始"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:244
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:250
 msgid "分析终止！因为某些原因，程序并没有找到可以总结分析的内容"
 msgstr "分析终止！因为某些原因，程序并没有找到可以总结分析的内容"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:284
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:290
 msgid "移动文件时出错：{}"
 msgstr "移动文件时出错：{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:290
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:296
 msgid "正在总结，总结过程中，请不要关闭该页面..."
 msgstr "正在总结，总结过程中，请不要关闭该页面..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:290
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:296
 msgid "处理中...."
 msgstr "处理中...."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:307
-msgid "总结完成。下面是总结的内容: （不支持对话）"
-msgstr "总结完成。下面是总结的内容: （不支持对话）"
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:317
+msgid "总结完成。下面是总结的内容:"
+msgstr "总结完成。下面是总结的内容:"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:309
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:319
 msgid "围绕着关键词：{}"
 msgstr "围绕着关键词：{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:311
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:321
 msgid "如果不满意生成的结果（例如内容明显缺失），可以使用尝试重新生成"
 msgstr "如果不满意生成的结果（例如内容明显缺失），可以使用尝试重新生成"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:372
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:328
+msgid "工作完成。目前也可以进行对话"
+msgstr "工作完成。目前也可以进行对话"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:329
+msgid "或者是使用 <b>与AI交流研究进展</b> 进一步深入的分析"
+msgstr "或者是使用 <b>与AI交流研究进展</b> 进一步深入的分析"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:386
 #, python-brace-format
 msgid ""
 "[批次进度：{a}/{b}] 请对这篇文章的摘要进行总结概括\n"
@@ -1126,81 +1107,81 @@ msgstr ""
 "\n"
 "围绕: {key}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:499
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:513
 msgid "处理中..."
 msgstr "处理中..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:510
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:524
 msgid "多线程操作完成"
 msgstr "多线程操作完成"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:543
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:557
 msgid "最后总结中....."
 msgstr "最后总结中....."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:550
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:564
 msgid "总结完成"
 msgstr "总结完成"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:595
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:609
 msgid "存在不可使用的PDF（中文学位论文、加密文件、非PDF文件或损坏文件），这些文件不会参与总结。文件如下："
 msgstr "存在不可使用的PDF（中文学位论文、加密文件、非PDF文件或损坏文件），这些文件不会参与总结。文件如下："
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:596
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:610
 msgid "全部PDF可用！"
 msgstr "全部PDF可用！"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:596
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:610
 msgid "不存在不可用的PDF"
 msgstr "不存在不可用的PDF"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:603
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py⁩:617
 msgid "强制重新分析"
 msgstr "强制重新分析"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:72
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:74
 msgid "无法使用的文字对话，请重新输入。"
 msgstr "无法使用的文字对话，请重新输入。"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:72
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:74
 msgid "无法以这些内容开头：{}"
 msgstr "无法以这些内容开头：{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:81
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:85
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:83
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:87
 msgid "无效的文件访问请求，请重新输入"
 msgstr "无效的文件访问请求，请重新输入"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:81
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:83
 msgid "路径：{} 未授权或是功能性目录"
 msgstr "路径：{} 未授权或是功能性目录"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:85
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:87
 msgid "路径：{} 的所有权不在当前用户"
 msgstr "路径：{} 的所有权不在当前用户"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:102
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:104
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:138
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:140
 msgid "禁用"
 msgstr "禁用"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:103
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:105
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:137
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:140
 msgid "启用"
 msgstr "启用"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:112
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:114
 #, python-brace-format
 msgid "<ul><li>不能含有以下字符：{forbidden}</li><li>不能以{forbidden_start}开头</li></ul>"
 msgstr "<ul><li>不能含有以下字符：{forbidden}</li><li>不能以{forbidden_start}开头</li></ul>"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:113
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:115
 msgid "该名称`{}`无法使用，详细说明如下: "
 msgstr "该名称`{}`无法使用，详细说明如下: "
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:132
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:134
 msgid ""
 "Scholar Navis (ver.{}) \n"
 "关于文档如下。完整版可以参见github发布页"
@@ -1208,101 +1189,109 @@ msgstr ""
 "Scholar Navis (ver.{}) \n"
 "关于文档如下。完整版可以参见github发布页"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:141
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:143
 msgid "Scholar Navis 使用到的第三方库: "
 msgstr "Scholar Navis 使用到的第三方库: "
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:151
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:53
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:153
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:54
 msgid "与AI交流研究进展"
 msgstr "与AI交流研究进展"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:155
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:39
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:157
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:40
 msgid "按关键词总结文献"
 msgstr "按关键词总结文献"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:159
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:25
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:161
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:26
 msgid "缓存pdf文献"
 msgstr "缓存pdf文献"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:162
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:67
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:164
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:68
 msgid "精细分析文献"
 msgstr "精细分析文献"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:167
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:82
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:169
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:83
 msgid "PubMed_OpenAccess文章获取"
 msgstr "PubMed_OpenAccess文章获取"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:172
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:174
 msgid "更好的文章润色"
 msgstr "更好的文章润色"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:186
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:188
 msgid "<b>{}</b>的帮助文档如下: "
 msgstr "<b>{}</b>的帮助文档如下: "
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:198
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:200
 msgid "总结库 <b>{}</b> 不存在，请检查输入是否准确"
 msgstr "总结库 <b>{}</b> 不存在，请检查输入是否准确"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:198
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:200
 msgid "没有输入总结库名称"
 msgstr "没有输入总结库名称"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:212
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:214
 msgid "不能进行正常操作。下面是有关信息: "
 msgstr "不能进行正常操作。下面是有关信息: "
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:7
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:222
+msgid "请注意，您使用的是推理模型，效果较好，但是速度可能较慢。由于需要多次请求，请注意您的余额充足！"
+msgstr "请注意，您使用的是推理模型，效果较好，但是速度可能较慢。由于需要多次请求，请注意您的余额充足！"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py⁩:223
+msgid "如果不是推理模型，请忽略此警告。"
+msgstr "如果不是推理模型，请忽略此警告。"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:12
 msgid "需要参数"
 msgstr "需要参数"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:42
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:41
 msgid "文件上传路径或网址"
 msgstr "文件上传路径或网址"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:42
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:41
 msgid "请上传文件后，再点击该插件"
 msgstr "请上传文件后，再点击该插件"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:69
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:72
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:68
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:71
 msgid "无"
 msgstr "无"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:82
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:81
 msgid "帮助文档"
 msgstr "帮助文档"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:83
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:82
 msgid "版权信息"
 msgstr "版权信息"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:84
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:83
 msgid "关于"
 msgstr "关于"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:85
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:84
 msgid "辅助指令"
 msgstr "辅助指令"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:85
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:84
 msgid "使用辅助指令可以实现额外的操作"
 msgstr "使用辅助指令可以实现额外的操作"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:89
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:88
 msgid "指令参数"
 msgstr "指令参数"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:89
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:88
 msgid "如需要，在此处输入辅助指令的参数"
 msgstr "如需要，在此处输入辅助指令的参数"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:98
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:97
 msgid "选择总结库进行操作"
 msgstr "选择总结库进行操作"
 
@@ -1327,26 +1316,25 @@ msgstr "使用AI辅助功能"
 msgid "AI补全信息，速度较慢"
 msgstr "AI补全信息，速度较慢"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:218
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:233
 msgid "从以下文本中提取摘要"
 msgstr "从以下文本中提取摘要"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:220
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:235
 msgid "文章极长，不能达到预期效果"
 msgstr "文章极长，不能达到预期效果"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:254
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:269
 msgid "接下来将判断适合的图表类型,如连续3次判断失败将会使用流程图进行绘制"
 msgstr "接下来将判断适合的图表类型,如连续3次判断失败将会使用流程图进行绘制"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:256
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:387
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:397
-#| msgid "[Local Message] {} 响应异常"
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:271
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:422
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:432
 msgid "[Local Message] 收到。"
 msgstr "[Local Message] 收到。"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:260
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:275
 msgid ""
 "请判断适合使用的流程图类型,其中数字对应关系为:1-流程图,2-序列图,3-类图,4-饼图,5-甘特图,6-状态图,7-实体关系图,8-象限提示图。由于"
 "不管提供文本是什么,模型大概率认为\"思维导图\"最合适,因此思维导图仅能通过参数调用."
@@ -1354,15 +1342,31 @@ msgstr ""
 "请判断适合使用的流程图类型,其中数字对应关系为:1-流程图,2-序列图,3-类图,4-饼图,5-甘特图,6-状态图,7-实体关系图,8-象限提示图。由于"
 "不管提供文本是什么,模型大概率认为\"思维导图\"最合适,因此思维导图仅能通过参数调用."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:303
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:318
 msgid "请根据判断结果绘制相应的图表。如需绘制思维导图请使用参数调用,同时过大的图表可能需要复制到在线编辑器中进行渲染."
 msgstr "请根据判断结果绘制相应的图表。如需绘制思维导图请使用参数调用,同时过大的图表可能需要复制到在线编辑器中进行渲染."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:338
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:337
+msgid "点击查看大图（可能会生成失败！）"
+msgstr "点击查看大图（可能会生成失败！）"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:347
+msgid "上方为生成的图形"
+msgstr "上方为生成的图形"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:347
+msgid "如果生成失败，可以点击这里查看AI返回的内容并自行修复"
+msgstr "如果生成失败，可以点击这里查看AI返回的内容并自行修复"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:350
+msgid "此外，您还可以对于绘制的图形进行问答。"
+msgstr "此外，您还可以对于绘制的图形进行问答。"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:373
 msgid "函数插件功能？"
 msgstr "函数插件功能？"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:339
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:374
 msgid ""
 "根据当前聊天历史或指定的路径文件(文件内容优先)绘制多种mermaid图表，将会由对话模型首先判断适合的图表类型，随后绘制图"
 "表。        \n"
@@ -1372,29 +1376,29 @@ msgstr ""
 "表。        \n"
 "您也可以使用插件参数指定绘制的图表类型,函数插件贡献者: Menghuan1918"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:361
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:369
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:377
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:396
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:404
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:412
 msgid "解析项目: {}"
 msgstr "解析项目: {}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:362
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:397
 msgid "找到了.doc文件，但是该文件格式不被支持，请先转化为.docx格式。"
 msgstr "找到了.doc文件，但是该文件格式不被支持，请先转化为.docx格式。"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:370
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:405
 msgid "导入软件依赖失败。使用该模块需要额外依赖，安装方法```pip install --upgrade pymupdf```。"
 msgstr "导入软件依赖失败。使用该模块需要额外依赖，安装方法```pip install --upgrade pymupdf```。"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:378
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:413
 msgid "导入软件依赖失败。使用该模块需要额外依赖，安装方法```pip install --upgrade python-docx pywin32```。"
 msgstr "导入软件依赖失败。使用该模块需要额外依赖，安装方法```pip install --upgrade python-docx pywin32```。"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:386
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/生成多种Mermaid图表.py⁩:421
 msgid "首先你从历史记录中提取摘要"
 msgstr "首先你从历史记录中提取摘要"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:9
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:25
 msgid ""
 "\n"
 "## gpt_academic：\n"
@@ -1430,253 +1434,264 @@ msgstr ""
 "</br></br>如何语音对话: 请阅读Wiki\n"
 "</br></br>要使用大模型，请在左上角的 API-KEY 中输入您的密钥。\n"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:37
-msgid "所有对话记录将自动保存在本地目录{}, 请注意自我隐私保护哦！"
-msgstr "所有对话记录将自动保存在本地目录{}, 请注意自我隐私保护哦！"
-
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:108
-msgid "文件上传与设置"
-msgstr "文件上传与设置"
-
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:109
+msgid "上传与设置"
+msgstr "上传与设置"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:110
 msgid "暗黑模式"
 msgstr "暗黑模式"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:115
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:113
+msgid "下方内容为 AI 生成，不代表任何立场，可能存在片面甚至错误。仅供参考，开发者及其组织不负任何责任"
+msgstr "下方内容为 AI 生成，不代表任何立场，可能存在片面甚至错误。仅供参考，开发者及其组织不负任何责任"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:114
+msgid ""
+"联网系统信息安全无法得到充分保证，最好是个人、小组织内使用，保证服务提供者可信，并且敏感信息最好不要上传。另外，当启用登录功能"
+"时，服务商能够储存您api-key，不推荐使用来路不明、不受信任的服务商"
+msgstr ""
+"联网系统信息安全无法得到充分保证，最好是个人、小组织内使用，保证服务提供者可信，并且敏感信息最好不要上传。另外，当启用登录功能"
+"时，服务商能够储存您api-key，不推荐使用来路不明、不受信任的服务商"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:118
 msgid "对话功能"
 msgstr "对话功能"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:118
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:259
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:242
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:248
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:253
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:121
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:247
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:266
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:272
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:277
 msgid "当前模型: {}"
 msgstr "当前模型: {}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:124
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:127
 msgid "输入区"
 msgstr "输入区"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:128
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:138
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:131
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:141
 msgid "提交"
 msgstr "提交"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:140
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:186
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:143
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:187
 msgid "重置"
 msgstr "重置"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:141
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:144
 msgid "停止"
 msgstr "停止"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:142
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:145
 msgid "清除"
 msgstr "清除"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:144
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:147
 msgid "Tip: 按Enter提交, 按Shift+Enter换行"
 msgstr "Tip: 按Enter提交, 按Shift+Enter换行"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:146
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:149
 msgid "Scholar Navis 功能区"
 msgstr "Scholar Navis 功能区"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:149
-msgid "基础功能区"
-msgstr "基础功能区"
-
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:188
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:180
 msgid "摘取有用语句"
 msgstr "摘取有用语句"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:223
-#| msgid "重置"
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:215
 msgid "已重置"
 msgstr "已重置"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:297
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:285
 msgid "如果浏览器没有自动打开，请复制并转到以下URL:"
 msgstr "如果浏览器没有自动打开，请复制并转到以下URL:"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:60
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:70
 msgid "正在加载tokenizer，如果是第一次运行，可能需要一点时间下载参数"
 msgstr "正在加载tokenizer，如果是第一次运行，可能需要一点时间下载参数"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:62
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:72
 msgid "加载tokenizer完毕"
 msgstr "加载tokenizer完毕"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:92
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:102
 msgid "警告！API_URL配置选项将被弃用，请更换为API_URL_REDIRECT配置"
 msgstr "警告！API_URL配置选项将被弃用，请更换为API_URL_REDIRECT配置"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:1004
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:764
 msgid "one-api模型 {} 的 max_token 配置不是整数，请检查配置文件"
 msgstr "one-api模型 {} 的 max_token 配置不是整数，请检查配置文件"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:1043
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:655
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:803
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:661
 msgid "AZURE_CFG_ARRAY中配置的模型必须以azure开头"
 msgstr "AZURE_CFG_ARRAY中配置的模型必须以azure开头"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:1175
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:863
+msgid "历史记录参数必须是List, 但是现在的类型是{}"
+msgstr "历史记录参数必须是List, 但是现在的类型是{}"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:949
 msgid "模型覆盖参数 '{}' 指向一个暂不支持的模型，请检查配置文件"
 msgstr "模型覆盖参数 '{}' 指向一个暂不支持的模型，请检查配置文件"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:127
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:976
+msgid "历史记录参数必须是List"
+msgstr "历史记录参数必须是List"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:136
 msgid "Endpoint不正确, 请检查AZURE_ENDPOINT的配置! 当前的Endpoint为:"
 msgstr "Endpoint不正确, 请检查AZURE_ENDPOINT的配置! 当前的Endpoint为:"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:174
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:178
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:183
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:187
 msgid "OpenAI拒绝了请求: "
 msgstr "OpenAI拒绝了请求: "
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:176
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:204
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:185
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:213
 msgid "正常结束，但显示Token不足，导致输出不完整，请削减单次输入的文本量"
 msgstr "正常结束，但显示Token不足，导致输出不完整，请削减单次输入的文本量"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:199
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:208
 msgid "用户取消了程序"
 msgstr "用户取消了程序"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:200
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:209
 msgid "意外Json结构："
 msgstr "意外Json结构："
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:202
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:211
 msgid "由于提问含不合规内容被Azure过滤"
 msgstr "由于提问含不合规内容被Azure过滤"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:222
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt_vision.py⁩:81
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:231
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt_vision.py⁩:85
 msgid "输入已识别为openai的api_key"
 msgstr "输入已识别为openai的api_key"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:226
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:235
 msgid "缺少api_key，可以在上方进行自定义，或者联系管理员更新配置文件"
 msgstr "缺少api_key，可以在上方进行自定义，或者联系管理员更新配置文件"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:227
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:236
 msgid "缺少api_key"
 msgstr "缺少api_key"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:257
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:266
 msgid "您提供的api-key不满足要求，不包含任何可用于{}的api-key。您可能选择了错误的模型或请求源"
 msgstr "您提供的api-key不满足要求，不包含任何可用于{}的api-key。您可能选择了错误的模型或请求源"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:267
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:276
 msgid "Endpoint不满足要求"
 msgstr "Endpoint不满足要求"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:286
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:340
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:295
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:363
 msgid "请求超时"
 msgstr "请求超时"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:303
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:313
 msgid "检测到有缺陷的非OpenAI官方接口，建议选择更稳定的接口"
 msgstr "检测到有缺陷的非OpenAI官方接口，建议选择更稳定的接口"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:307
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:317
 msgid "非OpenAI官方接口返回了错误:"
 msgstr "非OpenAI官方接口返回了错误:"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:349
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:247
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:396
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:379
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:270
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:439
 msgid "Json解析不合常规"
 msgstr "Json解析不合常规"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:354
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:405
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:384
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:448
 msgid "Json异常"
 msgstr "Json异常"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:393
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:423
 msgid "错误的api_key，请进行修改：可以在上方进行自定义，或者联系管理员更新配置文件"
 msgstr "错误的api_key，请进行修改：可以在上方进行自定义，或者联系管理员更新配置文件"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt_vision.py⁩:85
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt_vision.py⁩:89
 msgid "缺少api_key，请在 config.py 中配置或在上方进行自定义"
 msgstr "缺少api_key，请在 config.py 中配置或在上方进行自定义"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_qwen.py⁩:25
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_qwen.py⁩:33
 msgid "用户停止"
 msgstr "用户停止"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_qwen.py⁩:42
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_qwen.py⁩:50
 msgid "导入软件依赖失败。使用该模型需要额外依赖，安装方法```pip install --upgrade dashscope```"
 msgstr "导入软件依赖失败。使用该模型需要额外依赖，安装方法```pip install --upgrade dashscope```"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_qwen.py⁩:48
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_qwen.py⁩:56
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/com_qwenapi.py⁩:30
 msgid "请配置 DASHSCOPE_API_KEY或自定义 通义千问(Qwen) API-KEY"
 msgstr "请配置 DASHSCOPE_API_KEY或自定义 通义千问(Qwen) API-KEY"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_qwen.py⁩:61
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_qwen.py⁩:68
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_qwen.py⁩:69
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_qwen.py⁩:76
 msgid "[Local Message] 等待 {} 响应中 ..."
 msgstr "[Local Message] 等待 {} 响应中 ..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_qwen.py⁩:69
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_qwen.py⁩:77
 msgid "[Local Message] {} 响应异常"
 msgstr "[Local Message] {} 响应异常"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_zhipu.py⁩:35
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_zhipu.py⁩:42
 msgid "请配置ZHIPUAI_API_KEY或自定义 智谱(Zhipu) API-KEY"
 msgstr "请配置ZHIPUAI_API_KEY或自定义 智谱(Zhipu) API-KEY"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_zhipu.py⁩:45
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_zhipu.py⁩:52
 msgid "程序终止"
 msgstr "程序终止"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_zhipu.py⁩:62
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_zhipu.py⁩:69
 msgid "导入软件依赖失败。使用该模型需要额外依赖，安装方法```pip install --upgrade zhipuai```"
 msgstr "导入软件依赖失败。使用该模型需要额外依赖，安装方法```pip install --upgrade zhipuai```"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_zhipu.py⁩:82
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_zhipu.py⁩:89
 msgid "上下文长度超过glm-4v上限2000tokens，注意图片大约占用1,047个tokens"
 msgstr "上下文长度超过glm-4v上限2000tokens，注意图片大约占用1,047个tokens"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_zhipu.py⁩:87
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_zhipu.py⁩:94
 msgid "没有检测到任何近期上传的图像文件，请上传jpg格式的图片，此外，请注意拓展名需要小写"
 msgstr "没有检测到任何近期上传的图像文件，请上传jpg格式的图片，此外，请注意拓展名需要小写"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:157
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:271
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:179
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:294
 msgid "APIKEY为空,请检查配置文件的{}"
 msgstr "APIKEY为空,请检查配置文件的{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:224
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:246
 msgid "API异常,请检测终端输出。可能的原因是: {}"
 msgstr "API异常,请检测终端输出。可能的原因是: {}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:283
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:306
 msgid "等待响应"
 msgstr "等待响应"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:372
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:396
 msgid "[Local Message] {},获得以下报错信息：\n"
 msgstr "[Local Message] {},获得以下报错信息：\n"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:378
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:402
 msgid "API异常: "
 msgstr "API异常: "
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/fastapi_server.py⁩:84
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/fastapi_server.py⁩:91
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/fastapi_server.py⁩:165
 msgid "您没有访问该目录/文件的权限"
 msgstr "您没有访问该目录/文件的权限"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/key_pattern_manager.py⁩:59
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/key_pattern_manager.py⁩:73
 msgid "检测到： OpenAI Key {} 个, Azure Key {} 个, API2D Key {} 个"
 msgstr "检测到： OpenAI Key {} 个, Azure Key {} 个, API2D Key {} 个"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/key_pattern_manager.py⁩:85
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/key_pattern_manager.py⁩:99
 msgid ""
 "您提供的api-key不满足要求，不包含任何可用于{}的api-key。您可能选择了错误的模型或请求源（左上角更换模型菜单中可切换其他模型或请"
 "求源）"
@@ -1684,211 +1699,203 @@ msgstr ""
 "您提供的api-key不满足要求，不包含任何可用于{}的api-key。您可能选择了错误的模型或请求源（左上角更换模型菜单中可切换其他模型或请"
 "求源）"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:105
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:106
 msgid "Scholar Navis 文章总结分析工具"
 msgstr "Scholar Navis 文章总结分析工具"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:141
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:142
 msgid "使用此功能，批量从文章中获取有用的语句（保留原文便于快速查阅），并将其翻译成更熟悉的语言（便于阅读）"
 msgstr "使用此功能，批量从文章中获取有用的语句（保留原文便于快速查阅），并将其翻译成更熟悉的语言（便于阅读）"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:142
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:143
 msgid "适用于撰写文章摘要、前沿等内容。也可用于快速的文章学习"
 msgstr "适用于撰写文章摘要、前沿等内容。也可用于快速的文章学习"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:143
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:144
 msgid "AI可能犯错或不完整，仍需要人工校对或人工检索原文章!"
 msgstr "AI可能犯错或不完整，仍需要人工校对或人工检索原文章!"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:144
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:145
 msgid "注意：文件过大时，可能会导致程序卡顿，并且处理速度会很慢。请耐心等待"
 msgstr "注意：文件过大时，可能会导致程序卡顿，并且处理速度会很慢。请耐心等待"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:145
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:146
 msgid "仅限本地使用。如果要中断任务，务必点击下方的“终止”按钮，否则任务无法结束"
 msgstr "仅限本地使用。如果要中断任务，务必点击下方的“终止”按钮，否则任务无法结束"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:148
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:149
 msgid "新建摘要任务或导入已有任务"
 msgstr "新建摘要任务或导入已有任务"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:149
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:150
 msgid "- 新建任务时，推荐手动准备资源。第一列是文章标题，第二列是文章原文，需要有表头，以csv文件储存"
 msgstr "- 新建任务时，推荐手动准备资源。第一列是文章标题，第二列是文章原文，需要有表头，以csv文件储存"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:150
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:151
 msgid "- 新建任务时，也可以直接上传PDF（支持压缩包），使用该自动工具获取文章资源（效果稍差）"
 msgstr "- 新建任务时，也可以直接上传PDF（支持压缩包），使用该自动工具获取文章资源（效果稍差）"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:151
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:152
 msgid "- 已经发生摘取行为后无法使用此功能"
 msgstr "- 已经发生摘取行为后无法使用此功能"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:152
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:153
 msgid "任务名称"
 msgstr "任务名称"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:152
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:153
 msgid "输入任务名称，否则使用默认名称"
 msgstr "输入任务名称，否则使用默认名称"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:153
-#| msgid "请上传包含文章标题与内容的csv文件 or 以往下载的分析文件（.zip）or pdf or pdf的压缩包（.zip）"
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:154
 msgid "请上传包含文章标题与内容的csv文件 or 以往下载的分析文件（.zip）or pdf or pdf的压缩包（.zip/.rar）"
 msgstr "请上传包含文章标题与内容的csv文件 or 以往下载的分析文件（.zip）or pdf or pdf的压缩包（.zip/.rar）"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:154
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:155
 msgid "点击这里下载样例csv文件: {}"
 msgstr "点击这里下载样例csv文件: {}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:158
-#| msgid "[可选] 增量添加PDF (zip格式)"
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:159
 msgid "[可选] 增量添加PDF (zip / rar 格式)"
 msgstr "[可选] 增量添加PDF (zip / rar 格式)"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:159
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:160
 msgid "- 向摘要任务中添加额外的PDF文章"
 msgstr "- 向摘要任务中添加额外的PDF文章"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:160
-#| msgid "请上传pdf或pdf的压缩包（.zip）"
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:161
 msgid "请上传pdf或pdf的压缩包（.zip / .rar）"
 msgstr "请上传pdf或pdf的压缩包（.zip / .rar）"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:162
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:163
 msgid "设定分析参数"
 msgstr "设定分析参数"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:163
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:164
 msgid "关于AI的调整请使用页面顶部的设置"
 msgstr "关于AI的调整请使用页面顶部的设置"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:165
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:166
 msgid "内容要求"
 msgstr "内容要求"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:165
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:166
 msgid "输入对于内容的总体要求"
 msgstr "输入对于内容的总体要求"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:166
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:167
 msgid "结构要求"
 msgstr "结构要求"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:166
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:167
 msgid "输入对于行文结构的要求（一行一个）"
 msgstr "输入对于行文结构的要求（一行一个）"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:169
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:170
 msgid "请选择翻译语言"
 msgstr "请选择翻译语言"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:170
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:171
 msgid "最大并发数"
 msgstr "最大并发数"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:170
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:171
 msgid "越大提取越快。过大可能会遇到问题"
 msgstr "越大提取越快。过大可能会遇到问题"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:172
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:173
 msgid "选择操作步骤"
 msgstr "选择操作步骤"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:173
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:174
 msgid "执行"
 msgstr "执行"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:175
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:176
 msgid "获取结果"
 msgstr "获取结果"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:176
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:177
 msgid "- 注意，当运行出错或超时（例如请求达到上限、网络问题），会自动结束任务，并输出结果"
 msgstr "- 注意，当运行出错或超时（例如请求达到上限、网络问题），会自动结束任务，并输出结果"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:177
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:178
 msgid "- 可以选择“停止”，下载全部文件后，重新运行摘取功能。会继续之前的进度进行摘取"
 msgstr "- 可以选择“停止”，下载全部文件后，重新运行摘取功能。会继续之前的进度进行摘取"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:178
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:179
 msgid "- <b>在显示下载按钮之前，都是未完成的状态！</b>"
 msgstr "- <b>在显示下载按钮之前，都是未完成的状态！</b>"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:179
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:180
 msgid "- 摘取完成后（无论成功与否），需要点击“重置”按钮以开启新一轮的摘取"
 msgstr "- 摘取完成后（无论成功与否），需要点击“重置”按钮以开启新一轮的摘取"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:181
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:182
 msgid "全部下载(包含摘取结果，便于后续添加新文章)"
 msgstr "全部下载(包含摘取结果，便于后续添加新文章)"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:182
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:183
 msgid "仅下载结果"
 msgstr "仅下载结果"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:185
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:186
 msgid "终止"
 msgstr "终止"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:188
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:189
 msgid "日志"
 msgstr "日志"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:221
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:222
 msgid "Scholar Navis 加载失败"
 msgstr "Scholar Navis 加载失败"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/multi_lang.py⁩:13
-#, python-brace-format
-msgid "{LANGUAGE_DISPLAY} 是无效的语言设定，将使用默认语言 zh-Hans（简体中文）"
-msgstr "{LANGUAGE_DISPLAY} 是无效的语言设定，将使用默认语言 zh-Hans（简体中文）"
-
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/user_account_manager.py⁩:53
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/user_account_manager.py⁩:56
 msgid "当前密码不能为空"
 msgstr "当前密码不能为空"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/user_account_manager.py⁩:57
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/user_account_manager.py⁩:60
 msgid "当前密码错误"
 msgstr "当前密码错误"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/user_account_manager.py⁩:71
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/user_account_manager.py⁩:74
 msgid "密码修改失败，请稍后再试"
 msgstr "密码修改失败，请稍后再试"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_advanced_plugin_class.py⁩:14
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_advanced_plugin_class.py⁩:16
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_advanced_plugin_class.py⁩:23
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_advanced_plugin_class.py⁩:24
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_advanced_plugin_class.py⁩:26
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_advanced_plugin_class.py⁩:33
 msgid "请输入"
 msgstr "请输入"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_advanced_plugin_class.py⁩:19
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_advanced_plugin_class.py⁩:29
 msgid "选择插件参数"
 msgstr "选择插件参数"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_advanced_plugin_class.py⁩:33
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_advanced_plugin_class.py⁩:43
 msgid "使用说明"
 msgstr "使用说明"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_advanced_plugin_class.py⁩:34
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_advanced_plugin_class.py⁩:44
 msgid "在 <b>辅助指令</b> 中，可以看到每个功能根据不同需求而写的详细说明"
 msgstr "在 <b>辅助指令</b> 中，可以看到每个功能根据不同需求而写的详细说明"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_advanced_plugin_class.py⁩:37
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_advanced_plugin_class.py⁩:47
 msgid "确认参数并执行"
 msgstr "确认参数并执行"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_advanced_plugin_class.py⁩:40
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:159
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_advanced_plugin_class.py⁩:50
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:182
 msgid "取消"
 msgstr "取消"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_advanced_plugin_class.py⁩:45
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_advanced_plugin_class.py⁩:50
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_advanced_plugin_class.py⁩:55
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_advanced_plugin_class.py⁩:60
 msgid "未选定任何插件"
 msgstr "未选定任何插件"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:14
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:31
 msgid ""
 "\n"
 "<p>在此处自定义您的api-key，访问更多模型。</p>\n"
@@ -1898,13 +1905,14 @@ msgid ""
 "\n"
 "<p>\n"
 "OpenAI重定向服务只适用于OpenAI的大部分模型<br>\n"
-"如果要使用重定向服务的其他模型，请使用 <em>自定义</em> 功能\n"
+"如果要重定向使用其他模型，请使用 <em>自定义</em> 功能\n"
 "</p>\n"
 "\n"
 "<details>\n"
 "<summary>点击查看 API-KEY 获取地址</summary>\n"
 "<ul>\n"
 "<li><a href=\"https://platform.openai.com/api-keys\" target=\"_blank\">OpenAI</a>：GPT系列模型</li>\n"
+"<li><a href=\"https://console.x.ai/\" target=\"_blank\">Grok</a>：Grok系列模型</li>\n"
 "<li><a href=\"https://open.bigmodel.cn/usercenter/apikeys\" target=\"_blank\">智谱(Zhipu)</a>：GLM系列模型</li>\n"
 "<li><a href=\"https://bailian.console.aliyun.com/?apiKey=1#/api-key\" target=\"_blank\">通义千问(Qwen)</a>：qwen系列模型</li>\n"
 "<li><a href=\"https://platform.moonshot.cn/console/api-keys\" target=\"_blank\">月之暗面(Moonshot)</a>：moonshot系列模型</li>\n"
@@ -1920,13 +1928,14 @@ msgstr ""
 "\n"
 "<p>\n"
 "OpenAI重定向服务只适用于OpenAI的大部分模型<br>\n"
-"如果要使用重定向服务的其他模型，请使用 <em>自定义</em> 功能\n"
+"如果要重定向使用其他模型，请使用 <em>自定义</em> 功能\n"
 "</p>\n"
 "\n"
 "<details>\n"
 "<summary>点击查看 API-KEY 获取地址</summary>\n"
 "<ul>\n"
 "<li><a href=\"https://platform.openai.com/api-keys\" target=\"_blank\">OpenAI</a>：GPT系列模型</li>\n"
+"<li><a href=\"https://console.x.ai/\" target=\"_blank\">Grok</a>：Grok系列模型</li>\n"
 "<li><a href=\"https://open.bigmodel.cn/usercenter/apikeys\" target=\"_blank\">智谱(Zhipu)</a>：GLM系列模型</li>\n"
 "<li><a href=\"https://bailian.console.aliyun.com/?apiKey=1#/api-key\" target=\"_blank\">通义千问(Qwen)</a>：qwen系列模型</li>\n"
 "<li><a href=\"https://platform.moonshot.cn/console/api-keys\" target=\"_blank\">月之暗面(Moonshot)</a>：moonshot系列模型</li>\n"
@@ -1934,7 +1943,7 @@ msgstr ""
 "</ul>\n"
 "</details>\n"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:38
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:56
 msgid ""
 "\n"
 "<p>使用该功能添加自定义模型或使用openAI重定向服务。\n"
@@ -1949,6 +1958,9 @@ msgid ""
 "<li><a href=\"https://api2d.com/\" target=\"_blank\">API2d</a>：支持多功能接口，中国大陆优化</li>\n"
 "<li><a href=\"https://aiproxy.io/\" target=\"_blank\">AI Proxy</a>：位于新加坡，支持英文页面，支持大部分支付方式</li>\n"
 "<li><a href=\"https://aihubmix.com/\" target=\"_blank\">AI HUB MIX</a>：中国大陆优化</li>\n"
+"<li><a href=\"https://bailian.console.aliyun.com/#/model-market\" target=\"_blank\">阿里云百炼</a>：支持多种模型，有英文界面</"
+"li>\n"
+"<li><a href=\"https://cloud.siliconflow.cn/models\" target=\"_blank\">硅基流动</a>：支持多种模型，有英文界面</li>\n"
 "<li>使用其他第三方<a href=\"https://github.com/songquanpeng/one-api\" target=\"_blank\">oneapi</a>服务</li>\n"
 "<li>使用其他第三方<a href=\"https://github.com/open-webui/open-webui\" target=\"_blank\">llama</a>服务</li>\n"
 "</ul>\n"
@@ -1967,180 +1979,233 @@ msgstr ""
 "<li><a href=\"https://api2d.com/\" target=\"_blank\">API2d</a>：支持多功能接口，中国大陆优化</li>\n"
 "<li><a href=\"https://aiproxy.io/\" target=\"_blank\">AI Proxy</a>：位于新加坡，支持英文页面，支持大部分支付方式</li>\n"
 "<li><a href=\"https://aihubmix.com/\" target=\"_blank\">AI HUB MIX</a>：中国大陆优化</li>\n"
+"<li><a href=\"https://bailian.console.aliyun.com/#/model-market\" target=\"_blank\">阿里云百炼</a>：支持多种模型，有英文界面</"
+"li>\n"
+"<li><a href=\"https://cloud.siliconflow.cn/models\" target=\"_blank\">硅基流动</a>：支持多种模型，有英文界面</li>\n"
 "<li>使用其他第三方<a href=\"https://github.com/songquanpeng/one-api\" target=\"_blank\">oneapi</a>服务</li>\n"
 "<li>使用其他第三方<a href=\"https://github.com/open-webui/open-webui\" target=\"_blank\">llama</a>服务</li>\n"
 "</ul>\n"
 "</details>\n"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:65
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:85
 msgid "LLM_MODEL 没有设定，需要一个默认的模型"
 msgstr "LLM_MODEL 没有设定，需要一个默认的模型"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:67
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:87
 msgid "INIT_SYS_PROMPT 没有设定，需要一个默认的系统提示"
 msgstr "INIT_SYS_PROMPT 没有设定，需要一个默认的系统提示"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:69
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:89
 msgid "AVAIL_LLM_MODELS 没有设定，需要一个可用模型列表"
 msgstr "AVAIL_LLM_MODELS 没有设定，需要一个可用模型列表"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:74
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:94
 msgid "上传文件"
 msgstr "上传文件"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:77
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:97
 msgid "请上传本地文件 / 压缩包以供使用。请注意: 上传文件后会自动把输入区修改为相应路径"
 msgstr "请上传本地文件 / 压缩包以供使用。请注意: 上传文件后会自动把输入区修改为相应路径"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:78
-#| msgid "任何文件, 推荐上传压缩文件(zip, tar)"
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:98
 msgid "任何文件, 推荐上传压缩文件(zip, tar, rar)"
 msgstr "任何文件, 推荐上传压缩文件(zip, tar, rar)"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:79
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:99
 msgid "更换模型"
 msgstr "更换模型"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:80
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:100
+msgid "<p>推荐使用高并发服务商 (即速率限制较为宽松)</p>"
+msgstr "<p>推荐使用高并发服务商 (即速率限制较为宽松)</p>"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:103
 msgid "更换LLM模型/请求源"
 msgstr "更换LLM模型/请求源"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:84
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:103
+msgid "推理模型(o1,o3,r1)速度较慢，但是效果较好"
+msgstr "推理模型(o1,o3,r1)速度较慢，但是效果较好"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:107
 msgid "留空时使用默认prompt: {}"
 msgstr "留空时使用默认prompt: {}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:116
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:139
 msgid "选择服务商"
 msgstr "选择服务商"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:116
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:139
 msgid "仅用于api自定义，不影响模型选择"
 msgstr "仅用于api自定义，不影响模型选择"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:117
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:140
 msgid "不输入则使用内置API KEY"
 msgstr "不输入则使用内置API KEY"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:117
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:140
 msgid "自定义API-KEY"
 msgstr "自定义API-KEY"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:120
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:143
 msgid "自定义重定向"
 msgstr "自定义重定向"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:121
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:144
 msgid "重定向路径"
 msgstr "重定向路径"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:123
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:146
 msgid "自定义模型"
 msgstr "自定义模型"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:123
-#| msgid "此处输入非内置模型（一行一个，刷新后生效）"
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:146
 msgid "此处输入非内置模型（一行一个）"
 msgstr "此处输入非内置模型（一行一个）"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:148
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:171
 msgid "帮助"
 msgstr "帮助"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:151
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:174
 msgid "更改密码"
 msgstr "更改密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:152
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:175
 msgid "当前登录用户"
 msgstr "当前登录用户"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:153
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:176
 msgid "请注意，点击确认后立即生效"
 msgstr "请注意，点击确认后立即生效"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:154
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:177
 msgid "当前密码"
 msgstr "当前密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:154
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:177
 msgid "请输入当前密码"
 msgstr "请输入当前密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:155
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:178
 msgid "修改密码"
 msgstr "修改密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:155
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:178
 msgid "请输入新密码"
 msgstr "请输入新密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:156
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:179
 msgid "确认修改的密码"
 msgstr "确认修改的密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:156
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:179
 msgid "请再次输入新密码"
 msgstr "请再次输入新密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:158
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:181
 msgid "确认修改"
 msgstr "确认修改"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:160
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:183
 msgid "退出登录"
 msgstr "退出登录"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:204
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:227
 msgid "自定义数据加载失败，使用默认值"
 msgstr "自定义数据加载失败，使用默认值"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:241
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:265
 msgid "参数加载失败，使用默认值"
 msgstr "参数加载失败，使用默认值"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:213
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:219
 msgid "检测到**滞留的缓存文档**，请及时处理"
 msgstr "检测到**滞留的缓存文档**，请及时处理"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:213
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:219
 msgid "请及时点击“**保存当前对话**”获取所有滞留文档"
 msgstr "请及时点击“**保存当前对话**”获取所有滞留文档"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:219
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:225
 msgid "正常"
 msgstr "正常"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:301
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:307
 msgid "插件调度异常:\n"
 msgstr "插件调度异常:\n"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:307
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:313
 msgid "插件调度异常"
 msgstr "插件调度异常"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:592
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:598
 msgid "... (省略{}个文件的显示) ..."
 msgstr "... (省略{}个文件的显示) ..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:597
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:600
+msgid "文件"
+msgstr "文件"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:603
 msgid "我上传了文件，请查收"
 msgstr "我上传了文件，请查收"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:599
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:605
 msgid "调用路径参数已自动修正到: "
 msgstr "调用路径参数已自动修正到: "
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:600
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:606
 msgid "现在您点击任意函数插件时，以上文件将被作为输入参数"
 msgstr "现在您点击任意函数插件时，以上文件将被作为输入参数"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:601
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:607
 msgid "请注意，当上述文件名出现异常时，请检查您的压缩包是否为UTF-8或CP437编码"
 msgstr "请注意，当上述文件名出现异常时，请检查您的压缩包是否为UTF-8或CP437编码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:603
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:609
 msgid "[Local Message] 收到以下文件 （上传到路径：{}）: "
 msgstr "[Local Message] 收到以下文件 （上传到路径：{}）: "
+
+#, python-brace-format
+#~ msgid "{LANGUAGE_DISPLAY} 是无效的语言设定，将使用默认语言 zh-Hans（简体中文）"
+#~ msgstr "{LANGUAGE_DISPLAY} 是无效的语言设定，将使用默认语言 zh-Hans（简体中文）"
+
+#~ msgid "学术语料润色"
+#~ msgstr "学术语料润色"
+
+#~ msgid "总结绘制脑图"
+#~ msgstr "总结绘制脑图"
+
+#~ msgid "查找语法错误"
+#~ msgstr "查找语法错误"
+
+#~ msgid "中译英"
+#~ msgstr "中译英"
+
+#~ msgid "学术英中互译"
+#~ msgstr "学术英中互译"
+
+#~ msgid "英译中"
+#~ msgstr "英译中"
+
+#~ msgid "找图片"
+#~ msgstr "找图片"
+
+#~ msgid "解释代码"
+#~ msgstr "解释代码"
+
+#~ msgid "参考文献转Bib"
+#~ msgstr "参考文献转Bib"
+
+#~ msgid "绘制思维导图 [gpt_acadmic内置功能，语言偏好可能无效]"
+#~ msgstr "绘制思维导图 [gpt_acadmic内置功能，语言偏好可能无效]"
+
+#~ msgid "所有对话记录将自动保存在本地目录{}, 请注意自我隐私保护哦！"
+#~ msgstr "所有对话记录将自动保存在本地目录{}, 请注意自我隐私保护哦！"
+
+#~ msgid "基础功能区"
+#~ msgstr "基础功能区"
 
 #~ msgid "此方法只能在主线程中调用"
 #~ msgstr "此方法只能在主线程中调用"

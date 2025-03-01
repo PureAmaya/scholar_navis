@@ -1,9 +1,12 @@
+'''
+Author: scholar_navis@PureAmaya
+'''
+
 import os
 import json
+import traceback
 import aiofiles
 import hashlib
-from fastapi import FastAPI,Request
-from datetime import datetime
 from fastapi import Depends
 from fastapi.responses import FileResponse,PlainTextResponse,JSONResponse,HTMLResponse
 from .other_tools import base64_decode
@@ -86,6 +89,7 @@ def enable_api(app):
                 json_.setdefault('hash',hashlib.md5(a.encode('utf-8')).hexdigest())
                 return JSONResponse(json_)
         except:
+            traceback.print_exc()
             os.makedirs(NOTIFICATION_ROOT_PATH,exist_ok=True)
             async with aiofiles.open(maintenance_json_fp,'w',encoding='utf-8') as f:
                 await f.write(json.dumps(maintenance_json))

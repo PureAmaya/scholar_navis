@@ -1,3 +1,7 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
+
 from toolbox import get_conf
 import threading
 import logging

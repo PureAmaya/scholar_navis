@@ -1,3 +1,7 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
+
 from toolbox import get_conf, get_pictures_list, encode_image
 import base64
 import datetime

@@ -1,3 +1,7 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
+
 from functools import lru_cache
 from toolbox import gen_time_str
 from toolbox import promote_file_to_downloadzone

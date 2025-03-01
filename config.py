@@ -1,3 +1,18 @@
+'''
+Original Author: gpt_academic@binary-husky
+
+Modified by PureAmaya on 2025-02-28
+- New models have been configured.
+- Add grok support
+- Since some models have been removed, the related configurations have also been removed here.
+- Since delays have been added to both multi-threaded and single-threaded tasks, the default value of DEFAULT_WORKER_NUM has been appropriately increased to speed up the process.
+
+Modified by PureAmaya on 2024-12-28
+- Add some new configurations.
+- Remove some unnecessary configurations.
+- Add English annotations.
+'''
+
 """
     以下所有配置也都支持利用环境变量覆写，环境变量配置格式见docker-compose.yml。
     读取优先级：环境变量 > config_private.py > config.py
@@ -36,31 +51,26 @@ else:
 
 # [step 3]>> 模型选择是 (注意: LLM_MODEL是默认选中的模型, 它*必须*被包含在AVAIL_LLM_MODELS列表中 )
 # [step 3]>> Model selection is (Note: LLM_MODEL is the default selected model and it must be included in the AVAIL_LLM_MODELS list)
-LLM_MODEL = "gpt-4o-mini" # 可选 / Optional ↓↓↓
-AVAIL_LLM_MODELS = ["gpt-4-1106-preview", "gpt-4-turbo-preview", "gpt-4-vision-preview",
-                    "gpt-4o", "gpt-4o-mini", "gpt-4-turbo", "gpt-4-turbo-2024-04-09",
-                    "gpt-3.5-turbo-1106", "gpt-3.5-turbo-16k", "gpt-3.5-turbo", "azure-gpt-3.5",
-                    "gpt-4", "gpt-4-32k", "azure-gpt-4",
-                    "glm-4v", "glm-3-turbo","glm-4-0520", "glm-4-air", "glm-4-airx", "glm-4-flash",
-                    "qwen-turbo", "qwen-plus", "qwen-max",
-                    "moonshot-v1-128k", "moonshot-v1-32k", "moonshot-v1-8k",
-                    "deepseek-chat" ,"deepseek-coder",
+LLM_MODEL = "deepseek-chat" # 可选 / Optional ↓↓↓
+AVAIL_LLM_MODELS = ["gpt-4o", "gpt-4o-mini", "o1",'o1-mini','o1-preview','o3-mini','gpt-4.5-preview',
+                    "grok-2",
+                    "glm-4-plus","glm-4-airx","glm-4-air","glm-4-flashx","glm-zero-preview",
+                    "moonshot-v1-8k","moonshot-v1-32k","moonshot-v1-128k", 
+                    "qwen-max","qwen-plus","qwen-turbo",
+                    "deepseek-chat","deepseek-reasoner"
                     ]
 # --- --- --- ---
 # P.S. 其他可用的模型还包括 / Other available models include:
 # AVAIL_LLM_MODELS = [
-#   "gemini-pro",
-#   "glm-4-0520", "glm-4-air", "glm-4-airx", "glm-4-flash",
-#   "qianfan", "deepseekcoder",
-#   "spark", "sparkv2", "sparkv3", "sparkv3.5", "sparkv4",
-#   "qwen-turbo", "qwen-plus", "qwen-max", "qwen-local",
-#   "moonshot-v1-128k", "moonshot-v1-32k", "moonshot-v1-8k",
-#   "gpt-3.5-turbo-0613", "gpt-3.5-turbo-16k-0613", "gpt-3.5-turbo-0125", "gpt-4o-2024-05-13"
-#   "claude-3-haiku-20240307","claude-3-sonnet-20240229","claude-3-opus-20240229", "claude-2.1", "claude-instant-1.2",
-#   "moss", "llama2", "chatglm_onnx", "internlm", "jittorllms_pangualpha", "jittorllms_llama","chatglm3",
-#   "deepseek-chat" ,"deepseek-coder",
-#   "yi-34b-chat-0205","yi-34b-chat-200k","yi-large","yi-medium","yi-spark","yi-large-turbo","yi-large-preview",
-# ]
+#   'azure-gpt-3.5',"azure-gpt-4",
+#   "chatglm","chatglm2","chatglm3","chatglmft","chatglm_onnx"
+#   "jittorllms_rwkv","jittorllms_llama","jittorllms_pangualpha",
+#   "moss","stack-claude","internlm","qwen-local",'llama2',"deepseekcoder"
+#   "gemini-2.0-flash","gemini-1.5-pro","gemini-1.5-flash","gemini-1.5-flash-8b", # 目前还不支持自定义 / Currently not supported
+#   "cohere-command-r-plus","cohere-command-r","cohere-command","cohere-command-light","cohere-c4ai-aya-expanse-8b","cohere-c4ai-aya-expanse-32b",  # 目前还不支持自定义 / Currently not supported
+#   'claude-3-5-sonnet-latest','claude-3-5-haiku-latest','claude-3-opus-latest', # 目前还不支持自定义 / Currently not supported
+#   
+
 # --- --- --- ---
 # 此外，您还可以在接入one-api/vllm/ollama时，
 # 使用"one-api-*","vllm-*","ollama-*"前缀直接使用非标准方式接入的模型，例如
@@ -85,7 +95,7 @@ API_URL_REDIRECT = {}
 # 一言以蔽之：免费（5刀）用户填3，OpenAI绑了信用卡的用户可以填 16 或者更高。提高限制请查询：https://platform.openai.com/docs/guides/rate-limits/overview
 # In the multi-threading function plugin, the default allows how many threads to access OpenAI simultaneously. Free trial users are limited to 3 requests per minute, while Pay-as-you-go users are limited to 3,500 requests per minute.
 # In short: Free ($5) users fill in 3, and users with a credit card linked to OpenAI can fill in 16 or higher. To increase the limit, please check: https://platform.openai.com/docs/guides/rate-limits/overview
-DEFAULT_WORKER_NUM = 3
+DEFAULT_WORKER_NUM = 5
 
 # 默认的系统提示词（system prompt）
 INIT_SYS_PROMPT = "Serve me as a writing and programming assistant."
@@ -133,12 +143,6 @@ QWEN_LOCAL_MODEL_SELECTION = "Qwen/Qwen-1_8B-Chat-Int8"
 DASHSCOPE_API_KEY = "" # 阿里灵积云API_KEY
 
 
-# 百度千帆（LLM_MODEL="qianfan"）
-BAIDU_CLOUD_API_KEY = ''
-BAIDU_CLOUD_SECRET_KEY = ''
-BAIDU_CLOUD_QIANFAN_MODEL = 'ERNIE-Bot'    # 可选 "ERNIE-Bot-4"(文心大模型4.0), "ERNIE-Bot"(文心一言), "ERNIE-Bot-turbo", "BLOOMZ-7B", "Llama-2-70B-Chat", "Llama-2-13B-Chat", "Llama-2-7B-Chat", "ERNIE-Speed-128K", "ERNIE-Speed-8K", "ERNIE-Lite-8K"
-
-
 # 如果使用ChatGLM2微调模型，请把 LLM_MODEL="chatglmft"，并在此处指定模型路径
 # f using the ChatGLM2 fine-tuned model, set LLM_MODEL="ChatGLMft" and specify the model path here.
 CHATGLM_PTUNING_CHECKPOINT = "" # 例如"/home/hmp/ChatGLM2-6B/ptuning/output/6b-pt-128-1e-2/checkpoint-100"
@@ -160,8 +164,8 @@ CONCURRENT_COUNT = 100
 AUTO_CLEAR_TXT = False
 
 
-# 启用登录功能（不启用时则以default_user身份访问）
-# Enable login function (disabled by default, default_user access if not enabled)
+# [step 4] 启用登录功能（不启用时则以default_user身份访问）
+# [step 4] Enable login function (disabled by default, default_user access if not enabled)
 AUTHENTICATION = False
 
 
@@ -231,14 +235,12 @@ YIMODEL_API_KEY = ""
 DEEPSEEK_API_KEY = ""
 
 
-# 紫东太初大模型 https://ai-maas.wair.ac.cn
-# TAICHU API KEY
-TAICHU_API_KEY = ""
-
-
 # Google Gemini API-Key
 GEMINI_API_KEY = ''
 
+
+# grok API
+XAI_API_KEY= ''
 
 # HUGGINGFACE的TOKEN，下载LLAMA时起作用 https://huggingface.co/docs/hub/security-tokens
 # Huggingface Token, which is useful when downloading LLAMA (https://huggingface.co/docs/hub/security-tokens)
@@ -279,44 +281,52 @@ PLUGIN_HOT_RELOAD = False
 
 ##### Scholar Navis 添加的配置 #####
 
+# [step 5]
 # 模型显示偏好语言，通常只要模型支持该语言就可以。用户可以自行选择
 # The language preference for displaying models, which is usually only required if the model supports it.
 # User can choose their own preference.
-# e.g. '简体中文','繁體中文','English','日本語','Français','Deutsch','Русский','العربية','Español'
+# e.g. '简体中文','繁體中文','English','日本語','Français','Deutsch','Русский,"العربية",Español'
 LANGUAGE_GPT_PREFER = '简体中文' 
 
+# [step 6]
 # WEB和程序的显示语言。基于gettext制作，可以自己修改或添加其他语言
 # The language of the WEB and program display. Based on gettext, it can be modified or added to other languages.
 # 目前可用：'zh-Hans','zh-Hant','en-US'
 LANGUAGE_DISPLAY = 'zh-Hans'
 
-# 是否自动清理临时文件（/tmp）（目前不含gradio的临时文件，仅包含用户产生的）
-# Whether to automatically clean up temporary files (/tmp) (currently excluding gradio's temporary files
+# [step 7]
+# 是否自动清理临时文件（tmp）（目前不含gradio的临时文件，仅包含用户产生的）
+# Whether to automatically clean up temporary files (tmp) (currently excluding gradio's temporary files
 # only including user-generated files).
 AUTO_CLEAR_TMP = True
 
-# 是否自动清理过时用户日志文件（/gpt_log/用户名/ ,存在超过一天）
-# Whether to automatically clean up outdated user log files (/gpt_log/username/, which exist for more than one day).
+# [step 8]
+# 是否自动清理过时用户日志文件（gpt_log/用户名/ ,存在超过5小时）
+# Whether to automatically clean up outdated user log files (gpt_log/username/, which exist for more than 5 hours).
 AUTO_CLEAR_GPT_LOG_DIR = False
 
-# 是否自动清理私有上传文件（/private_upload/用户名/，存在超过一天）
-# Whether to automatically clean up private upload files (/private_upload/username/, which exist for more than one day).
+# [step 9]
+# 是否自动清理私有上传文件（private_upload/用户名/，存在超过3小时）
+# Whether to automatically clean up private upload files (private_upload/username/, which exist for more than 3 hours).
 AUTO_CLEAR_PRIVATE_UPLOAD = False
 
+# [step 10]
 # 是否启用Pubmed下载器，通过官方API快速下载选定的OA论文。如果担心封禁，请勿开启
 # Whether to enable the Pubmed downloader, which can quickly download selected OA papers through the official API.
 ENABLE_PUBMED_DOWNLOADER = True
 
+# [step 11]
 # 偏好AI辅助获取文章信息的功能（可以通过LLM获取文章标题与doi），用户可自行关闭
 # The preferred AI assistance function for obtaining article information (you can get the article title and doi through the LLM).
 # Users can turn it off themselves.
 PRIORITIZE_USE_AI_ASSISTANCE = True
 
-
+# [step 12]
 # 摘取有用句子的最大线程数，用户可以选择<= 32的值
 # The maximum number of threads for extracting useful sentences, users can choose a value <= 32.
 EXTRACT_USEFUL_SENTENCES_THREADS_MAX_NUM = 32
 
+# [step 13]
 # 目前仅用于匿名登录的自定义和参数储存用的密钥，请修改为自己的最强密钥
 # The secret key used for custom and parameter storage for anonymous login, please change it to your own strongest secret key.
 SECRET = 'Please change it to your own strongest secret key'

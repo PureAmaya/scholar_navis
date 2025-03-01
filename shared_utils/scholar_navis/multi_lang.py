@@ -1,4 +1,6 @@
-# ! 后续，这个会慢慢的取代gpt_academic自带的multi_language.py，逐步用一套体系完成多语言的开发
+'''
+Author: scholar_navis@PureAmaya
+'''
 
 import os
 import gettext
@@ -9,11 +11,10 @@ LANGUAGE_DISPLAY = get_conf('LANGUAGE_DISPLAY')
 
 class _i18n:
     def __init__(self) -> None:
+        global LANGUAGE_DISPLAY
         if LANGUAGE_DISPLAY not in SUPPORT_DISPLAY_LANGUAGE:
-            print(_(f'{LANGUAGE_DISPLAY} 是无效的语言设定，将使用默认语言 zh-Hans（简体中文）'))
+            print(f'{LANGUAGE_DISPLAY} 是无效的语言设定，将使用默认语言 zh-Hans（简体中文）\n{LANGUAGE_DISPLAY} is invalid language, defaulting to zh-Hans (Simplified Chinese).')
             LANGUAGE_DISPLAY = 'zh-Hans'
-
-    def __init__(self):
         self.update()
 
     def gettext(self,msg:str):

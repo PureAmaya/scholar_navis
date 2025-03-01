@@ -1,4 +1,6 @@
-# 由 scholar_navis添加
+'''
+Author: scholar_navis@PureAmaya
+'''
 
 class model_info_class:
     def __init__(self,data: dict,fn):
@@ -10,16 +12,16 @@ class model_info_class:
         self._data = data  # 内部使用一个字典来存储数据
         self.fn =fn
     
-    def __getitem__(self, key:str):
+    def __getitem__(self, model:str):
         
-        if key in self._data:
-            return self._data[key] # 返回的是fn_with_ui，fn_without_ui这些
+        if model in self._data:
+            return self._data[model] # 返回的是fn_with_ui，fn_without_ui这些
         else: # 如果不存在，通过fn返回
-            if key.startswith('ollama-'): label = 'ollama-'
-            elif key.startswith('one-api-'): label = 'one-api-'
-            elif key.startswith('vllm-'): label = 'vllm-'
-            elif key.startswith('custom-'): label = 'custom-'
-            return self.fn([key],label)[key]
+            if model.startswith('ollama-'): label = 'ollama-'
+            elif model.startswith('one-api-'): label = 'one-api-'
+            elif model.startswith('vllm-'): label = 'vllm-'
+            elif model.startswith('custom-'): label = 'custom-'
+            return self.fn([model],label)[model]
             
     def __setitem__(self, key, value):
         self._data[key] = value

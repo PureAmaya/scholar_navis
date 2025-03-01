@@ -89,7 +89,11 @@ This software is developed based on gpt_academic (3.83) and is considered a deri
 
 - If the generated content does not meet your requirements, you can try running the process multiple times.
 
+- Some features may require multiple requests to the model. Please ensure that the model has a relatively lenient rate limit and that your balance is sufficient.
+
 - This tool is intended to be used as an aid and must be supplemented with necessary manual checks and processing.<font color=red><b>****We do not recommend using the results directly without any checks or corrections. If any issues arise, the authors of Scholar Navis, their affiliated organizations, the language model service providers, gpt_academic, and any related or derivative content are not liable for any responsibility.****</b></font>
+
+- **The information security of connected systems cannot be fully guaranteed. It is best used by individuals or within small organizations, ensuring the service providers are trustworthy. It is advised not to upload sensitive information. Additionally, when enabling the login feature, the service provider may store your API key. It is not recommended to use unknown or untrusted service providers.**
 
 - What you need to know is that AGPLv3 provides limitation of liability (the copyright holder is not liable for any damages caused to the user) and does not provide any warranty (the copyright holder also does not warrant the quality of the software). By using this AI service, you are deemed to agree to the aforementioned terms; otherwise, please do not use it.
 
@@ -151,13 +155,15 @@ H & G4 --> I[/Understand research progress and gaps\]
 
 #### Extract Useful Sentences
 
-1. The page contains detailed tutorial text. Typically, uploading a PDF (or a PDF zip file, optional), uploading additional PDFs (or zip files), setting content requirements for sentence extraction, setting structural requirements (which can be understood as the stylistic requirements for text that meets the content requirements), selecting the translation language, and setting the maximum parallelism will allow execution.
+1. Using this feature allows you to quickly extract desired original sentences and their translations from a large number of articles, making it easier to compile and write content.
 
-2. During operation, logs are continuously output. When the task is not yet completed, the logs will have an animation indicator.
+2. The page contains detailed tutorial text. Typically, uploading a PDF (or a PDF zip file, optional), uploading additional PDFs (or zip files), setting content requirements for sentence extraction, setting structural requirements (which can be understood as the stylistic requirements for text that meets the content requirements), selecting the translation language, and setting the maximum parallelism will allow execution.
 
-3. When downloading files, usually downloading the result file is sufficient.
+3. During operation, logs are continuously output. When the task is not yet completed, the logs will have an animation indicator.
 
-4. When needing to run again, a reset is required first.
+4. When downloading files, usually downloading the result file is sufficient.
+
+5. When needing to run again, a reset is required first.
 
 ### Developer Documentation
 

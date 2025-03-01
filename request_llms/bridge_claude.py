@@ -1,3 +1,7 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
+
 # 借鉴了 https://github.com/GaiZhenbiao/ChuanhuChatGPT 项目
 
 """

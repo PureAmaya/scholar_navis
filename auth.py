@@ -1,3 +1,7 @@
+'''
+Author: scholar_navis@PureAmaya
+'''
+
 from datetime import datetime,timedelta
 import gradio as gr
 from shared_utils.scholar_navis.const_and_singleton import footer
@@ -132,7 +136,7 @@ def login(username_input,password_input,remember_me_input):
         # 获取旧的过期时间
         if check_user_token(old_token)[0]: 
             token = old_token 
-            # 如果原用户token没过期
+            # 如果原用户token没过期，读取服务器里的过期时间
             with SQLiteDatabase('user_account') as db:
                 old_expiry_time  = db.easy_select(username_input,("token_expiry"))
                 old_expiry_time =  datetime.strptime(old_expiry_time, '%Y-%m-%d %H:%M:%S')
