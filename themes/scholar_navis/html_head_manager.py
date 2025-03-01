@@ -20,8 +20,6 @@ local_js = get_common_html_javascript_code()
 if LANGUAGE_DISPLAY == "zh-Hans":
     js = [
         '<script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/AlertifyJS/1.13.1/alertify.min.js"></script>',
-        '<script async src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/mermaid/8.14.0/mermaid.min.js"></script>',
-        '<script async src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/mathjax/3.2.0/es5/tex-mml-chtml.min.js"></script>'
     ]
     css = [
         '<link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/AlertifyJS/1.13.1/css/alertify.min.css">',

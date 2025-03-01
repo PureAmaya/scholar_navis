@@ -1,211 +1,137 @@
-Scholar Navis 使用 AGPL-3.0 license 授權證
+Scholar Navis 使用 AGPL-3.0 許可證。
 
-**此為翻譯版本，僅供參考。如有衝突，以簡體中文版為準。**
+**此翻譯版本僅供參考，一切以簡體中文版為準。**
 
 ---
 
 **第三方套件與專案：**
 
-- gpt_academic: GPL-3.0（含有修改，見下文）
+- gpt_academic: GPL-3.0（含有修改，見原始碼檔案頭）
 
-- aiofiles: Apache-2.0 license
+- aiohttp: Apache-2.0 許可證
 
-- aiohttp: Apache-2.0 license
+- alertifyJS: GPL-3.0 許可證
 
-- alertifyJS:  GPL-3.0 license
+- argon2-cffi: MIT 許可證
 
-- argon2-cffi: MIT License
+- beautifulsoup4: MIT 許可證
 
-- beautifulsoup4: MIT License
+- Bootstrap Icons: MIT 許可證
 
-- Bootstrap: MIT License
+- colorama: BSD 許可證
 
-- Bootstrap Icons: MIT License
+- dashscope: Apache-2.0 許可證
 
-- colorama: BSD License
+- fastapi：MIT 許可證
 
-- dashscope: Apache-2.0 license
+- gradio：Apache-2.0 許可證
 
-- fastapi：MIT License
+- gradio_modal：Apache-2.0 許可證
 
-- fitz (pymupdf)：GNU AFFERO GPL 3.0
+- latex2mathml：MIT 許可證 (MIT)
 
-- gradio：Apache-2.0 license
+- Markdown：BSD-3-Clause 許可證
 
-- gradio_modal：Apache-2.0 license
+- MathJax: Apache-2.0 license
 
-- latex2mathml：MIT License (MIT)
+- Mermaid: MIT 許可證
 
-- Markdown：BSD-3-Clause license
+- pandas：BSD-3-Clause 許可證
 
-- Mermaid: MIT license
+- pydantic：MIT 許可證
 
-- numpy：BSD License
+- pymdown-extensions: MIT 許可證
 
-- pandas：BSD-3-Clause license
+- PyMuPDF: GNU AFFERO GPL 3.0
 
-- pydantic：MIT License
+- python_docx：MIT 許可證
 
-- pymdown-extensions: MIT License
+- PyYAML：MIT 許可證
 
-- PyPDF2：BSD License
+- rarfile：ISC 許可證
 
-- python_docx：MIT License
+- Requests：Apache-2.0 許可證
 
-- PyYAML：MIT License
+- rich：MIT 許可證
 
-- rarfile：ISC License
+- rjsmin: Apache-2.0 許可證
 
-- Requests：Apache-2.0 license
+- SourceHanSansSC-VF.otf.woff2: SIL OPEN FONT LICENSE Version 1.1
 
-- rich：MIT License
+- tiktoken：MIT 許可證
 
-- rjsmin: Apache-2.0 license
+- uvicorn：BSD 許可證 (BSD-3-Clause)
 
-- starlette：BSD License
+- websockets：BSD 許可證 (BSD-3-Clause)
 
-- tiktoken：MIT License
+- zhipuai：未知
 
-- uvicorn：BSD License (BSD-3-Clause)
+**gpt_academic 的使用策略：**
 
-- websockets：BSD License (BSD-3-Clause)
+- 對 gpt_academic 原始碼的更改均位於每個檔案的開頭
 
-- zhipuai：unknown
+- 訪問 AI：多執行緒和單執行緒對於多個 AI 的訪問，以及其中發生的網路處理、token 限制、和訪問 AI 所需的 API 及其所需文字內容的整合。
 
-**在 `gpt_academic` 中，以下文件於12月28日進行了修改：**
+- 網頁服務（基於 gradio）。包含但不限於登入、多用戶管理、用戶界面、cookie 管理、插件選擇和參數修改、markdown 解析、捕捉錯誤後網頁呈現、前後端通訊、檔案上傳和下載以及 Scholar Navis 用到的 HTML 的連結和跳轉。
 
-- `crazy_functions/pdf_fns/parse_pdf_grobid.py` （未國際化）
-- `crazy_functions/pdf_fns/parse_pdf.py` （未國際化）
-- `crazy_functions/pdf_fns/report_gen_html.py`
-- `request_llms/生成多种Mermaid图表.py`
-- `request_llms/crazy_utils.py`
-- `request_llms/bridge_all.py`
-- `request_llms/bridge_chatglm.py` （未國際化）
-- `request_llms/bridge_chatglm3.py` （未國際化）
-- `request_llms/bridge_chatglmft.py` （未國際化）
-- `request_llms/bridge_chatglmonnx.py` （未國際化）
-- `request_llms/bridge_chatgpt_vision.py` （未國際化）
-- `request_llms/bridge_chatgpt_website.py` （未國際化）
-- `request_llms/bridge_chatgpt.py`
-- `request_llms/bridge_claude.py` （未國際化）
-- `request_llms/bridge_cohere.py` （未國際化）
-- `request_llms/bridge_deepseekcoder.py` （未國際化）
-- `request_llms/bridge_google_gemini.py` （未國際化）
-- `request_llms/bridge_jittorllms.py` （未國際化）
-- `request_llms/bridge_jittorllms_llama.py` （未國際化）
-- `request_llms/bridge_jittorllms_pangualpha.py` （未國際化）
-- `request_llms/bridge_jittorllms_rwkv.py` （未國際化）
-- `request_llms/bridge_llama2.py` （未國際化）
-- `request_llms/bridge_moonshot.py`
-- `request_llms/bridge_qwen.py`
-- `request_llms/bridge_zhipu.py`
-- `request_llms/oai_std_model_template.py`
-- `shared_utils/config_loader.py`
-- `shared_utils/cookie_manager.py`
-- `shared_utils/fastapi_server.py`
-- `shared_utils/key_pattern_manager.py`
-- `themes/svg`: 刪除原有圖形，新增來自 [Bootstrap Icons](https://icons.getbootstrap.com/) 的圖片
-- `themes/common.js`
-- `themes/gui_advanced_plugin_class.py`
-- `themes/gui_toolbar.py`
-- `themes/init.js`
-- `themes/theme.py`
-- `check_proxy.py` （僅添加本地化支持）
-- `config.py`
-- `core_functional.py` （僅添加本地化支持）
-- `crazy_functional.py`
-- `toolbox.py`
+- 檔案管理：gpt_academic 所屬檔案/資料夾的處理和使用、PDF 全文獲取
 
-**scholar navis** 也刪除了以下文件及相關代碼，並在保證兼容性的前提下，精簡了程序，保留了與論文識別提取和翻譯相關的功能 （12月28日）：
-
-- `crazy_functions/SourceCode_Comment.py`
-- `crazy_functions/SourceCode_Analyse.py`
-- `crazy_functions/Image_Generate.py`
-- `crazy_functions/Image_Generate_Wrap.py`
-- `crazy_functions/chatglm微调工具.py`
-- `crazy_functions/总结音视频.py`
-- `crazy_functions/知识库问答.py`
-- `crazy_functions/语音助手.py`
-- `crazy_functions/生成函数注释.py`
-- `crazy_functions/命令行助手.py`
-- `crazy_functions/解析JupyterNotebook.py`
-- `crazy_functions/交互功能函数模板.py`
-- `crazy_functions/互动小游戏.py`
-- `crazy_functions/函数动态生成.py`
-- `crazy_functions/高级功能函数模板.py`
-- `crazy_functions/辅助功能.py`
-- `crazy_functions/多智能体.py`
-- `crazy_functions/数学动画生成manim.py`
-- `crazy_functions/agent_fns`
-- `crazy_functions/ast_fns`
-- `crazy_functions/diagram_fns`
-- `crazy_functions/game_fns`
-- `crazy_functions/gen_fns`
-- `crazy_functions/multi_stage`
-- `crazy_functions/vector_fns`
-- `tests` （目錄）
-- `themes/gradios.py`
-- `themes/green.py`
-- `themes/gui_floating_menu.py`
-
-**gpt_academic 的使用策略**：
-
-- 存取 AI：多線程和單線程對多個 AI 的存取，以及其中發生的網絡處理、token 限制、和存取 AI 所需的 API 及其所需文本內容的整合。
-
-- 網絡服務（基於 gradio）。包含但不限於登錄、多用戶管理、用戶界面、cookie 管理、插件選擇和參數修改、markdown 解析、捕捉錯誤後網頁呈現、前后端通訊、文件上傳和下載以及 Scholar Navis 用到的 HTML 的鏈接和跳轉。
-
-- Markdown轉HTML
-
-- 文件管理：gpt_academic 所屬文件/資料夾的處理和使用、PDF 全文獲取。
-
-- 調試：控制台輸出彩色內容。
+- 除錯：控制台輸出彩色內容。
 
 - 繪製思維導圖 @Menghuan1918
 
-- 為了確保兼容性，參考了對於多線程中止的處理邏輯。
+- 為了保證兼容性，參考了對於多執行緒中止的處理邏輯
 
-- 模組熱替換 
+- 模組熱加載
 
-**Scholar Navis 獨立於 gpt_academic 的功能**：
+**Scholar Navis 獨立於 gpt_academic （3.83） 的功能：**
 
-- 支援最新版的 Gradio 及其特性
+- 支援最新版的 gradio 和特性
 
-- 文件管理：插件資料夾（scholar_navis）內部的文件管理、總結庫自身的管理。
+- 檔案管理：插件資料夾（scholar_navis）內部的檔案管理、總結庫自身的管理
 
-- 配置文件和版本管理。
+- 配置檔案和版本管理
 
-- Sqlite3 數據庫的通訊和管理。
+- Sqlite3 資料庫的通信和管理
 
-- 使用與 gpt_academic 独立的 markdown 轉 pdf 功能。
+- 使用與 gpt_academic 獨立的 markdown 轉 pdf 功能
 
-- csv、yaml 文件解析。
+- csv、yaml 檔案解析
 
-- 适用于 gpt_academic 的 Scholar Navis 安裝器（含有安裝依賴庫的功能）。
+- 適用於 gpt_academic 的 Scholar Navis 安裝器（含有安裝依賴庫的功能）
 
-- Scholar Navis 插件的多元語言（國際化）顯示與多元語言翻譯工具（支援 po 和 mo 格式） 
+- Scholar Navis 插件的多語言（國際化）顯示與多語言翻譯工具（支援 po 和 mo 格式）
 
-- 為了那些需要訪問LLM（大型語言模型）或需要文獻信息、進行網絡請求的部分，我們設計了緩存機制，以減少因為請求而產生的額外耗時。  
+- 為一些需要訪問 LLM 或者是需要文獻資訊、網路請求的部分，設計了快取機制，減少因為請求而產生的額外耗時
 
-- 獲取論文的元數據、第一頁內容、摘要、DOI 號和標題（其中通過 LLM 獲取的部分是通過 gpt_academic 結行的）。
+- 獲取論文的元數據、第一頁內容、摘要、doi 號和標題（其中通過 LLM 獲取的部分是通過 gpt_academic 進行的）
 
-- 文章修飾處理邏輯、LLM 請求邏輯，markdown 轉 word（仍在測試）。
+- 文章潤色處理邏輯及其 LLM 請求邏輯，markdown 轉 word（仍在測試）
 
-- 將上傳的 pdf 作為總結庫進行管理和關鍵詞設定。
+- 將上傳的 pdf 作為總結庫進行管理和關鍵字設定
 
-- 基於關鍵詞的批量文章總結分析和 LLM 請求邏輯。
+- 基於關鍵字的批次文章總結分析和 LLM 請求邏輯
 
-- 与 AI 交流的邏輯，包含擬定課題、尋找文章來源、直接交流的處理邏輯和 LLM 請求邏輯。
+- 與 AI 交流的邏輯，包含擬定課題、尋找文章來源、直接交流的處理邏輯和 LLM 請求邏輯
 
-- 精細分析文章的處理邏輯和 LLM 請求邏輯、以及總結庫文章包含列表（HTML）設計。 
-
-- 用戶登錄、註冊、信息的保存與記錄（敏感信息盡可能進行了加密）。支援匿名使用（敏感信息也在本地進行了加密）。
+- 精細分析文章的處理邏輯和 LLM 請求邏輯、以及總結庫文章包含列表（HTML）設計
 
 - PubMed OA 文章的多執行緒下載
 
-- 面向用戶的 API 自定義與模型自定義功能添加
+- 用戶登入、註冊、資訊的保存與記錄（敏感盡可能進行了加密）。支援匿名使用（敏感資訊也在本地進行了加密）**（但是伺服器可以通過一些方法得到這些敏感內容）**
 
-- 網絡服務：在線PDF瀏覽（基於 `pdf.js`）
+- 面向用戶的 API 自定義與模型自定義添加功能
+
+- 上傳檔案和產生檔案的定時清理
+
+- 網頁服務：在線 PDF 瀏覽（基於 pdf.js）
 
 - API 服務：簡易通知
 
-- 摘取有用的语句，并提供翻译以便阅读 
+- 摘取有用的語句，並提供翻譯以便閱讀
+
+- 行動端適配
+
+- 支持推理模型，支持更新的模型
+
+- 簡體中文用戶將自動使用國內的 JS 靜態資源

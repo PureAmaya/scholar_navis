@@ -4,9 +4,7 @@ Scholar Navis 使用 AGPL-3.0 license 许可证
 
 **第三方包与项目：**
 
-- gpt_academic: GPL-3.0（含有修改，见下文）
-
-- aiofiles: Apache-2.0 license
+- gpt_academic: GPL-3.0（含有修改，见源码文件头）
 
 - aiohttp: Apache-2.0 license
 
@@ -15,8 +13,6 @@ Scholar Navis 使用 AGPL-3.0 license 许可证
 - argon2-cffi: MIT License
 
 - beautifulsoup4: MIT License
-
-- Bootstrap: MIT License
 
 - Bootstrap Icons: MIT License
 
@@ -34,6 +30,8 @@ Scholar Navis 使用 AGPL-3.0 license 许可证
 
 - Markdown：BSD-3-Clause license
 
+- MathJax: Apache-2.0 license
+
 - Mermaid: MIT license
 
 - pandas：BSD-3-Clause license
@@ -43,8 +41,6 @@ Scholar Navis 使用 AGPL-3.0 license 许可证
 - pymdown-extensions: MIT License
 
 - PyMuPDF: GNU AFFERO GPL 3.0
-
-- PyPDF2：BSD License
 
 - python_docx：MIT License
 
@@ -58,17 +54,13 @@ Scholar Navis 使用 AGPL-3.0 license 许可证
 
 - rjsmin: Apache-2.0 license
 
-- SourceHanSansSC啊啊啊
-
-- starlette：BSD License
+- SourceHanSansSC-VF.otf.woff2: SIL OPEN FONT LICENSE Version 1.1
 
 - tiktoken：MIT License
 
 - uvicorn：BSD License (BSD-3-Clause)
 
 - websockets：BSD License (BSD-3-Clause)
-
-- pip install xhtml2pdf: Apache Software License
 
 - zhipuai：unknown
 
@@ -79,8 +71,6 @@ Scholar Navis 使用 AGPL-3.0 license 许可证
 - 访问AI：多线程和单线程对于多个AI的访问，以及其中发生的网络处理、token限制、和访问AI所需的API及其所需文本内容的整合。
 
 - web服务（基于gradio）。包含但不限于登录、多用户管理、用户界面、cookie管理、插件选择和参数修改、markdown解析、捕捉错误后网页呈现、前后端通讯、文件上传和下载以及 Scholar Navis 用到的HTML的链接和跳转。
-
-- Markdown转HTML
 
 - 文件管理：gpt_academic所属文件/文件夹的处理和使用、PDF全文获取
 
@@ -141,3 +131,5 @@ Scholar Navis 使用 AGPL-3.0 license 许可证
 - 移动端适配
 
 - 支持推理模型，支持更新的模型
+
+- 简体中文用户将自动使用国内的JS静态资源

@@ -1,24 +1,20 @@
-Scholar Navis is licensed under the AGPL-3.0 license.
+Scholar Navis uses the AGPL-3.0 license.
 
-**A translated version for reference only. In case of conflict, the Simplified Chinese version shall be considered as the authoritative one.**
+**This translation is for reference only; the Simplified Chinese version shall prevail.**
 
-----------------------------
+---
 
 **Third-party packages and projects:**
 
-- gpt_academic: GPL-3.0（Contains revisions, see below.）
-
-- aiofiles: Apache-2.0 license
+- gpt_academic: GPL-3.0 (with modifications, see source code file headers)
 
 - aiohttp: Apache-2.0 license
 
-- alertifyJS:  GPL-3.0 license
+- alertifyJS: GPL-3.0 license
 
 - argon2-cffi: MIT License
 
 - beautifulsoup4: MIT License
-
-- Bootstrap: MIT License
 
 - Bootstrap Icons: MIT License
 
@@ -26,188 +22,116 @@ Scholar Navis is licensed under the AGPL-3.0 license.
 
 - dashscope: Apache-2.0 license
 
-- fastapi：MIT License
+- fastapi: MIT License
 
-- fitz (pymupdf)：GNU AFFERO GPL 3.0
+- gradio: Apache-2.0 license
 
-- gradio：Apache-2.0 license
+- gradio_modal: Apache-2.0 license
 
-- gradio_modal：Apache-2.0 license
+- latex2mathml: MIT License
 
-- latex2mathml：MIT License (MIT)
+- Markdown: BSD-3-Clause license
 
-- Markdown：BSD-3-Clause license
+- MathJax: Apache-2.0 license
 
 - Mermaid: MIT license
 
-- numpy：BSD License
+- pandas: BSD-3-Clause license
 
-- pandas：BSD-3-Clause license
-
-- pydantic：MIT License
+- pydantic: MIT License
 
 - pymdown-extensions: MIT License
 
-- PyPDF2：BSD License
+- PyMuPDF: GNU AFFERO GPL 3.0
 
-- python_docx：MIT License
+- python_docx: MIT License
 
-- PyYAML：MIT License
+- PyYAML: MIT License
 
-- rarfile：ISC License
+- rarfile: ISC License
 
-- Requests：Apache-2.0 license
+- Requests: Apache-2.0 license
 
-- rich：MIT License
+- rich: MIT License
 
 - rjsmin: Apache-2.0 license
 
-- starlette：BSD License
+- SourceHanSansSC-VF.otf.woff2: SIL OPEN FONT LICENSE Version 1.1
 
-- tiktoken：MIT License
+- tiktoken: MIT License
 
-- uvicorn：BSD License (BSD-3-Clause)
+- uvicorn: BSD License (BSD-3-Clause)
 
-- websockets：BSD License (BSD-3-Clause)
+- websockets: BSD License (BSD-3-Clause)
 
-- zhipuai：unknown
+- zhipuai: unknown
 
-**The following files in `gpt_academic` were modified on December 28th:**
+**Usage strategy for gpt_academic:**
 
-- `crazy_functions/pdf_fns/parse_pdf_grobid.py` (not internationalized)
-- `crazy_functions/pdf_fns/parse_pdf.py` (not internationalized)
-- `crazy_functions/pdf_fns/report_gen_html.py`
-- `request_llms/生成多种Mermaid图表.py`
-- `request_llms/crazy_utils.py`
-- `request_llms/bridge_all.py`
-- `request_llms/bridge_chatglm.py` (not internationalized)
-- `request_llms/bridge_chatglm3.py` (not internationalized)
-- `request_llms/bridge_chatglmft.py` (not internationalized)
-- `request_llms/bridge_chatglmonnx.py` (not internationalized)
-- `request_llms/bridge_chatgpt_vision.py` (not internationalized)
-- `request_llms/bridge_chatgpt_website.py` (not internationalized)
-- `request_llms/bridge_chatgpt.py`
-- `request_llms/bridge_claude.py` (not internationalized)
-- `request_llms/bridge_cohere.py` (not internationalized)
-- `request_llms/bridge_deepseekcoder.py` (not internationalized)
-- `request_llms/bridge_google_gemini.py` (not internationalized)
-- `request_llms/bridge_jittorllms.py` (not internationalized)
-- `request_llms/bridge_jittorllms_llama.py` (not internationalized)
-- `request_llms/bridge_jittorllms_pangualpha.py` (not internationalized)
-- `request_llms/bridge_jittorllms_rwkv.py` (not internationalized)
-- `request_llms/bridge_llama2.py` (not internationalized)
-- `request_llms/bridge_moonshot.py`
-- `request_llms/bridge_qwen.py`
-- `request_llms/bridge_zhipu.py`
-- `request_llms/oai_std_model_template.py`
-- `shared_utils/config_loader.py`
-- `shared_utils/cookie_manager.py`
-- `shared_utils/fastapi_server.py`
-- `shared_utils/key_pattern_manager.py`
-- `themes/svg`: Removed existing graphics and added images from [Bootstrap Icons](https://icons.getbootstrap.com/)
-- `themes/common.js`
-- `themes/gui_advanced_plugin_class.py`
-- `themes/gui_toolbar.py`
-- `themes/init.js`
-- `themes/theme.py`
-- `check_proxy.py` (only added localization support)
-- `config.py`
-- `core_functional.py` (only added localization support)
-- `crazy_functional.py`
-- `toolbox.py`
+- Changes to the gpt_academic source code are located at the beginning of each file.
 
-**scholar navis** also removed the following files and associated code, streamlining the program while maintaining compatibility and retaining features related to paper recognition, extraction, and translation:
+- Access to AI: Multi-threading and single-threading for accessing multiple AIs, including network processing, token limits, and integration of APIs and required text content for accessing AIs.
 
-- `crazy_functions/SourceCode_Comment.py`
-- `crazy_functions/SourceCode_Analyse.py`
-- `crazy_functions/Image_Generate.py`
-- `crazy_functions/Image_Generate_Wrap.py`
-- `crazy_functions/chatglm微调工具.py`
-- `crazy_functions/总结音视频.py`
-- `crazy_functions/知识库问答.py`
-- `crazy_functions/语音助手.py`
-- `crazy_functions/生成函数注释.py`
-- `crazy_functions/命令行助手.py`
-- `crazy_functions/解析JupyterNotebook.py`
-- `crazy_functions/交互功能函数模板.py`
-- `crazy_functions/互动小游戏.py`
-- `crazy_functions/函数动态生成.py`
-- `crazy_functions/高级功能函数模板.py`
-- `crazy_functions/辅助功能.py`
-- `crazy_functions/多智能体.py`
-- `crazy_functions/数学动画生成manim.py`
-- `crazy_functions/agent_fns`
-- `crazy_functions/ast_fns`
-- `crazy_functions/diagram_fns`
-- `crazy_functions/game_fns`
-- `crazy_functions/gen_fns`
-- `crazy_functions/multi_stage`
-- `crazy_functions/vector_fns`
-- `tests` (directory)
-- `themes/gradios.py`
-- `themes/green.py`
-- `themes/gui_floating_menu.py`
+- Web services (based on gradio). Includes but is not limited to login, multi-user management, user interface, cookie management, plugin selection and parameter modification, markdown parsing, error handling, front-end and back-end communication, file upload and download, and HTML links and jumps used by Scholar Navis.
 
-**gpt_academic Usage Strategies**:
+- File management: Handling and usage of files/folders belonging to gpt_academic, full-text PDF retrieval.
 
-- Accessing AI: Multithreading and single-threading for accessing multiple AIs, including network processing, token limitations, and the integration of API required for accessing AI and the necessary text content.
+- Debugging: Colored console output.
 
-- Web Service (based on gradio): This includes but is not limited to login, multi-user management, user interface, cookie management, plugin selection and parameter modification, markdown parsing, error capture with web page presentation, frontend and backend communication, file upload and download, and HTML links and redirections used by Scholar Navis.
+- Drawing mind maps @Menghuan1918
 
-- Convert Markdown to HTML
+- To ensure compatibility, referenced the handling logic for multi-threading termination.
 
-- File Management: Handling and usage of files/folders belonging to gpt_academic, as well as PDF full-text retrieval.
+- Module hot reloading.
 
-- Debugging: Console output with colored content.
+**Scholar Navis features independent of gpt_academic (3.83):**
 
-- Drawing Mind Maps @Menghuan1918
+- Supports the latest version of gradio and its features.
 
-- To ensure compatibility, the logic for handling thread interruption was referenced.
+- File management: Internal file management of the plugin folder (scholar_navis), management of the summary library itself.
 
-- Hot Module Replacement
+- Configuration file and version management.
 
-**Scholar Navis Functions Independent of gpt_academic**:
+- Sqlite3 database communication and management.
 
-- Supports the Latest Version of Gradio and Its Features
+- Uses an independent markdown to PDF conversion function from gpt_academic.
 
-- File Management: File management within the plugin folder (scholar_navis) and management of the summary library itself.
+- csv, yaml file parsing.
 
-- Configuration file and version management
+- Scholar Navis installer for gpt_academic (includes dependency library installation).
 
-- Communication and Management of Sqlite3 Database
+- Multi-language (internationalization) display for Scholar Navis plugins and multi-language translation tools (supports po and mo formats).
 
-- Independent markdown to PDF conversion functionality from gpt_academic
+- Designed a caching mechanism for parts requiring access to LLM or literature information, network requests, to reduce additional time consumption caused by requests.
 
-- Parsing of csv, yaml files
+- Retrieval of paper metadata, first page content, abstract, doi, and title (the part obtained through LLM is done via gpt_academic).
 
-- Installer for Scholar Navis compatible with gpt_academic (including functionality to install dependency libraries)
+- Article polishing logic and LLM request logic, markdown to word conversion (still in testing).
 
-- Scholar Navis plugin's multilingual (internationalization) display and multilingual translation tool (supports po and mo formats) 
+- Management of uploaded PDFs as a summary library and keyword setting.
 
-- A caching mechanism has been designed for parts that require access to LLMs or need literature information and network requests to reduce the additional time spent due to requests.  
+- Batch article summary analysis based on keywords and LLM request logic.
 
-- Retrieval of metadata, first page content, abstract, DOI number, and title of papers (where part obtained through LLM is done via gpt_academic)
+- Logic for communicating with AI, including proposing topics, finding article sources, direct communication logic, and LLM request logic.
 
-- Article polishing processing logic, LLM request logic, markdown to word (still in testing)
+- Detailed article analysis logic and LLM request logic, and HTML design for summary library article lists.
 
-- Management of uploaded PDFs as a summary library and setting of keywords
+- Multi-threaded download of PubMed OA articles.
 
-- Batch article summary analysis and LLM request logic based on keywords
+- User login, registration, information saving and recording (sensitive information is encrypted as much as possible). Supports anonymous use (sensitive information is also encrypted locally) ** (however, the server can obtain this sensitive content through certain methods).**
 
-- Logic for interacting with AI, including topic formulation, finding article sources, direct communication processing logic, and LLM request logic
+- User-facing API customization and model customization features.
 
-- Logic for in-depth analysis of articles and LLM request logic, as well as design of the summary library article list (HTML)
+- Scheduled cleanup of uploaded and generated files.
 
-- Multithreaded download of PubMed OA articles
+- Web service: Online PDF viewing (based on pdf.js).
 
-- User Login, Registration, and Information Storage (Sensitive Data Encrypted Where Possible). Supports anonymous usage (Sensitive Information Also Encrypted Locally)
+- API service: Simple notifications.
 
-- Customization of user-facing APIs and model customization features added
+- Extraction of useful sentences and provision of translations for easy reading.
 
-- Scheduled cleanup of uploaded files and generated file 
+- Mobile device adaptation.
 
-- Web service: Online PDF viewing (Based on `pdf.js`)
+- Supports inference models, supports updated models.
 
-- API Service: Simple Notification
-
-- Extract useful sentences and provide translations for reading. 
+- Simplified Chinese users will automatically use domestic JS static resources.
