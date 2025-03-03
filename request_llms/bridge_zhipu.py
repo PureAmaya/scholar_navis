@@ -1,3 +1,10 @@
+'''
+Original Author: gpt_academic@binary-husky
+
+Modified by PureAmaya on 2024-12-28
+- Compatible with custom API functionality on the web.
+'''
+
 import time
 import os
 from toolbox import update_ui, get_conf, update_ui_lastest_msg, log_chat

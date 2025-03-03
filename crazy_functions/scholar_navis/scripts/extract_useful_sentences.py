@@ -1,8 +1,11 @@
+'''
+Author: scholar_navis@PureAmaya
+'''
+
 import os
 import csv
 import json
 import shutil
-import threading
 import gradio as gr
 from threading import Lock
 from zipfile import ZipFile
@@ -10,15 +13,14 @@ from rarfile import RarFile
 from time import time,sleep
 from pandas import read_excel
 from datetime import datetime
-from typing import List, Literal
-from collections import namedtuple
+from typing import Literal
 from ...crazy_utils import get_files_from_everything
 from concurrent.futures import ThreadPoolExecutor
 from shared_utils.scholar_navis.multi_lang import _
 from shared_utils.scholar_navis.pdf_reader import get_pdf_content
 from request_llms.bridge_all import predict_no_ui_long_connection 
 from shared_utils.scholar_navis.other_tools import generate_random_string
-from shared_utils.scholar_navis.user_custom_manager import DEFAULT_USER_CUSTOM,get_url_redirect,get_api_key
+from shared_utils.scholar_navis.user_custom_manager import get_url_redirect,get_api_key
 
 
 ARTICLE_CSV_FILENAME = 'articles_content.csv'
@@ -90,10 +92,6 @@ class for_gradio:
             con_updater = gr.update(value = content_requirements, interactive= not bool(content_requirements.strip()))
             lang_updater = gr.update(value = target_language, interactive= not bool(target_language.strip()))
             return stru_updater,con_updater,lang_updater
-    
-    @staticmethod
-    def initial_all_fields():
-        pass
 
     @staticmethod
     def llm_kwargs_combiner(request: gr.Request, cookies,md_dropdown,top_p,temperature,user_custom_data):
@@ -125,7 +123,7 @@ class for_gradio:
         return llm_kwargs
 
     @staticmethod
-    def create_or_load_task(request: gr.Request,cookies,task_name,create_or_load_task):
+    def create_or_load_task(request: gr.Request,cookies,task_name,create_or_load_task_path):
         """ 当上传旧的任务或者创建新的任务时，使用它
 
         Returns:
@@ -134,7 +132,7 @@ class for_gradio:
         if not cookies:cookies = {}
         
         # 加载上传的文件
-        new_cookies,sturcture_requirements,content_requirements,target_language = for_gradio.create_or_load(request,cookies,create_or_load_task,task_name)
+        new_cookies,sturcture_requirements,content_requirements,target_language = for_gradio.create_or_load(request,cookies,create_or_load_task_path,task_name)
         # 调整参数可编辑性
         sturcture_requirements,content_requirements,target_language = for_gradio.para_disable_user_edition(sturcture_requirements,content_requirements,target_language)
         # 显示后续内容
@@ -460,10 +458,16 @@ class worker:
                 return key in self._result_json
             else:raise ValueError('type参数错误')
         
-    def _exec_multithread(self,pdf_file_fp,title,content):
+    def _exec_multithread(self,pdf_file_fp,title,content,index):
         if title: title_to_print = self._title_splice_in_log(title)
         else: title_to_print = ''
-        
+
+         # 每个任务之间差个1.1s，因为有的服务限制是每秒一次请求...，反正1秒也无所谓
+        sleep_time = index
+        while sleep_time >= 0:
+            sleep_time -= self._max_workers
+        sleep((sleep_time + self._max_workers) * 1.1)
+
         # 首先，把新加的pdf导入到最开始的csv中（如果有的话）
         if self._check_lifespan_termination('一开始的'):return
         if pdf_file_fp:
@@ -513,9 +517,10 @@ class worker:
 
         cc = time() - self._time > self.lifespan
         if cc: 
-            exit()
             if self._executor:self._executor.shutdown(wait=False)
             self._executor = None # 貌似这样子可以修复重新进入之前的多线程任务、然后瞬间完成的bug 
+            print(_('用户终止提取有用语句'))
+            exit()
         return cc
 
     def _convert_pdf_to_article_csv_line(self,pdf_fp:str):
@@ -649,11 +654,16 @@ class worker:
         task_fn = self._exec_multithread
         task_para_list = []
         a,pdf_list, b = get_files_from_everything(os.path.join(self.work_path,'pdf'),'.pdf')
+        task_index = 0
+
         for pdf_fp in pdf_list:
-            if os.path.isfile(pdf_fp):task_para_list.append((pdf_fp,None,None))
+            if os.path.isfile(pdf_fp):
+                task_para_list.append((pdf_fp,None,None,task_index))
+                task_index += 1
             else: gr.Warning(_('文件 {} 不存在，跳过').format(pdf_fp))
         for task_target in self._articles.items():
-            task_para_list.append((None,task_target[0],task_target[1]))
+            task_para_list.append((None,task_target[0],task_target[1],task_index))
+            task_index += 1
         with ThreadPoolExecutor(max_workers=self._max_workers) as self._executor:
             self._time = time()
             features = []
@@ -753,7 +763,7 @@ def gradio_func(**kwargs):
     
     # step 0 新建摘要任务或导入已有任务
     task_name:gr.Textbox = kwargs['task_name']
-    create_or_load_task :gr.File = kwargs['create_or_load_task']
+    create_or_load_task_uploader :gr.File = kwargs['create_or_load_task']
     below_accordion:gr.Accordion = kwargs['below_accordion']
     
     # step 1 增量添加PDF
@@ -780,7 +790,7 @@ def gradio_func(**kwargs):
     task_name.change(fn=for_gradio.update_task_name,inputs=[cookies,task_name],outputs=cookies)
     
     # 上传或新建任务
-    create_or_load_task.upload(fn=for_gradio.create_or_load_task,inputs=[cookies,task_name,create_or_load_task],outputs=[cookies,stru_requirements,content_requirements,language,below_accordion]).success(
+    create_or_load_task_uploader.upload(fn=for_gradio.create_or_load_task,inputs=[cookies,task_name,create_or_load_task_uploader],outputs=[cookies,stru_requirements,content_requirements,language,below_accordion]).success(
         fn=lambda:gr.update(visible=True),outputs=below_accordion
     )
     # 删除上传的文件
@@ -789,13 +799,13 @@ def gradio_func(**kwargs):
         'inputs':None,
         'outputs':below_accordion,
     }
-    create_or_load_task.delete(**delete_clear_file)
-    create_or_load_task.clear(**delete_clear_file)
+    create_or_load_task_uploader.delete(**delete_clear_file)
+    create_or_load_task_uploader.clear(**delete_clear_file)
     
     # ミッション　スタート
     exec_1 = task_exec_btn.click(fn=for_gradio.before_start_task,inputs=[cookies,stru_requirements,content_requirements,language],outputs=[cookies,task_exec_btn,cancel_btn]).success(
         fn=for_gradio.execute_task,
-        inputs=[cookies,md_dropdown,top_p,temperature,log,user_custom_data,create_or_load_task,upload_extra_pdf,language,stru_requirements,content_requirements,max_workers],
+        inputs=[cookies,md_dropdown,top_p,temperature,log,user_custom_data,create_or_load_task_uploader,upload_extra_pdf,language,stru_requirements,content_requirements,max_workers],
         outputs=[log,all_files_dl,result_file_dl],
     )
     
@@ -809,4 +819,4 @@ def gradio_func(**kwargs):
     
     cancel_btn.click(**cancel_event)
     # 重置按钮
-    reset_btn.click(**cancel_event).success(fn=for_gradio.reset,inputs=[cookies,md_dropdown,user_custom_data],outputs=[cookies,task_exec_btn,cancel_btn,below_accordion,stru_requirements,content_requirements,language,task_name,create_or_load_task,upload_extra_pdf,all_files_dl,result_file_dl,log])
+    reset_btn.click(**cancel_event).success(fn=for_gradio.reset,inputs=[cookies,md_dropdown,user_custom_data],outputs=[cookies,task_exec_btn,cancel_btn,below_accordion,stru_requirements,content_requirements,language,task_name,create_or_load_task_uploader,upload_extra_pdf,all_files_dl,result_file_dl,log])

@@ -1,4 +1,19 @@
+'''
+Original Author: gpt_academic@binary-husky
+
+Modified by PureAmaya on 2025-02-27
+- Adjusted the chatbot's output. 
+- It can now engage in conversations about drawing content.
+- Adjusted the regular expression, and now the graphics are displaying correctly.
+
+Modified by PureAmaya on 2024-12-28
+- Add localization support.
+- Added multilingual drawing support
+- Due to the upgrade to Gradio 5, the functionality for small image previews and viewing larger images has also been modified.
+'''
+
 import os
+import re
 from toolbox import CatchException, update_ui, report_exception, update_ui_lastest_msg
 from .crazy_utils import request_gpt_model_in_new_thread_with_ui_alive
 from crazy_functions.plugin_template.plugin_class_template import (
@@ -220,7 +235,7 @@ def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwarg
         print(_("文章极长，不能达到预期效果"))
     for i in range(n_txt):
         NUM_OF_WORD = MAX_WORD_TOTAL // n_txt
-        i_say = f"Read this section, recapitulate the content of this section with less than {NUM_OF_WORD} words in {GPT_prefer_language}: {txt[i]}"
+        i_say = f"Read this section, recapitulate the content of this section with less than {NUM_OF_WORD} words in English: {txt[i]}"
         i_say_show_user = f"[{i+1}/{n_txt}] Read this section, recapitulate the content of this section with less than {NUM_OF_WORD} words: {txt[i][:200]} ...."
         gpt_say = yield from request_gpt_model_in_new_thread_with_ui_alive(
             i_say,
@@ -256,7 +271,7 @@ def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwarg
         gpt_say = _("[Local Message] 收到。")  # 用户提示
         chatbot.append([i_say_show_user, gpt_say])
         yield from update_ui(chatbot=chatbot, history=[])  # 更新UI
-        i_say = SELECT_PROMPT.format(subject=results_txt)
+        i_say = {SELECT_PROMPT.format(subject=results_txt)}
         i_say_show_user = _('请判断适合使用的流程图类型,其中数字对应关系为:1-流程图,2-序列图,3-类图,4-饼图,5-甘特图,6-状态图,7-实体关系图,8-象限提示图。由于不管提供文本是什么,模型大概率认为"思维导图"最合适,因此思维导图仅能通过参数调用.')
         for i in range(3):
             gpt_say = yield from request_gpt_model_in_new_thread_with_ui_alive(
@@ -302,7 +317,7 @@ def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwarg
         i_say = PROMPT_9.format(subject=results_txt)
     i_say_show_user = _("请根据判断结果绘制相应的图表。如需绘制思维导图请使用参数调用,同时过大的图表可能需要复制到在线编辑器中进行渲染.")
     gpt_say = yield from request_gpt_model_in_new_thread_with_ui_alive(
-        inputs= f'{i_say}\n And answer me with {GPT_prefer_language}.',
+        inputs= f'{i_say}\n And answer me with Markdown and {GPT_prefer_language}.',
         inputs_show_user=i_say_show_user,
         llm_kwargs=llm_kwargs,
         chatbot=chatbot,
@@ -310,10 +325,31 @@ def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwarg
         sys_prompt="",
     )
 
-    mermaid = '<pre class="mermaid">{}</pre>'.format(gpt_say.replace("'''", "").replace("`", "").replace("mermaid",""))
+    # 在chatbot中添加预览图表，并支持跳转到大窗口查看
+    # 这里有点乱，先这样吧
+    pattern = r'mermaid(.*?)```'
+    match = re.findall(pattern, gpt_say, re.DOTALL)[0]
+
+    # 小图与大图跳转
+    mermaid = '<pre class="mermaid">{}</pre>'.format(match)
     html_b64 =base64_encode(mermaid)
     chatbot.append([{'role':'user','content':HTML(f'<iframe src="/services/easy_html?base64={html_b64}" sandbox="allow-scripts"></iframe>')},
-                    {'role':'assistant','content':f'<a href = "/services/easy_html?base64={html_b64}" target="_blank">{_("点击查看大图（可能会生成失败！）")}</a>'}])
+                    {'role':'assistant','content':'<a href = "/services/easy_html?base64={}" target="_blank">{}</a>'.format(html_b64,_("点击查看大图（可能会生成失败！）"))}])
+    
+    # 提示
+    substitute_html = HTML(
+        '''
+        <p>{}</p>
+        <details>
+        <summary>{}</summary>
+        {}
+        </details>
+            '''.format(_("上方为生成的图形"),_("如果生成失败，可以点击这里查看AI返回的内容并自行修复"),gpt_say.replace("\n", "</br>"))
+        )
+    chatbot.append([{'role':'user','content':substitute_html},
+                    {'role':'assistant','content':_("此外，您还可以对于绘制的图形进行问答。")}])
+    history.append(gpt_say)
+    history.extend(results)
     yield from update_ui(chatbot=chatbot, history=history)
 
 
@@ -330,7 +366,6 @@ def 生成多种Mermaid图表(
     system_prompt   给gpt的静默提醒
     web_port        当前软件运行的端口号
     """
-    import os
 
     # 基本信息：功能、贡献者
     chatbot.append(

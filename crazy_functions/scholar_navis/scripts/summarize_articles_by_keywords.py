@@ -1,8 +1,14 @@
+'''
+Author: scholar_navis@PureAmaya
+'''
+
 import os
+import re
 import yaml
 import glob
 import shutil
 from datetime import datetime
+from shared_utils.advanced_markdown_format import md2pdf
 from shared_utils.scholar_navis.other_tools import generate_download_file
 from shared_utils.scholar_navis.const_and_singleton import VERSION
 from time import sleep,time
@@ -13,7 +19,7 @@ from threading import Lock
 from concurrent.futures import ThreadPoolExecutor
 from .tools.common_plugin_para import common_plugin_para
 from toolbox import CatchException, get_log_folder, get_user, update_ui, update_ui_lastest_msg
-from .tools.article_library_ctrl import check_library_exist_and_assistant, lib_manifest, pdf_yaml,markdown_to_pdf
+from .tools.article_library_ctrl import check_library_exist_and_assistant, lib_manifest, pdf_yaml
 from crazy_functions.crazy_utils import request_gpt_model_in_new_thread_with_ui_alive, request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency
 
 lock = Lock()
@@ -98,7 +104,7 @@ def 按关键词总结文献(txt, llm_kwargs, plugin_kwargs, chatbot, history, s
                 summarization_content = file.read()
                 # 假如pdf没了，生成一个
                 if not os.path.exists(summarization_pdf_fp):
-                    markdown_to_pdf(summarization_content,'summarization',os.path.dirname(summarization_pdf_fp))
+                    md2pdf(summarization_content,'summarization',os.path.dirname(summarization_pdf_fp))
                 chatbot.append([summarization_content,generate_download_file(summarization_pdf_fp,_('点击这里下载pdf格式的总结内容'))])
                 # 提醒一下不能用的PDF
                 chatbot.append(_unusable_pdf_message(this_library_root_dir))
@@ -292,8 +298,12 @@ def 按关键词总结文献(txt, llm_kwargs, plugin_kwargs, chatbot, history, s
 
     result = yield from _summarize_all_paper(this_library_root_dir, llm_kwargs, GPT_prefer_language, chatbot, [], system_prompt, user_request)
 
-    # 四个🐎。去除代码块
-    result = result.replace('```','')
+    # 去除代码块，仅保留需要的内容
+    try:
+        pattern = r'```(.*?)```'
+        result = re.findall(pattern, result, re.DOTALL)[0]
+    except:
+        result = result.replace('```','')
 
     # 写成txt
     with open(summarization_file_fp, 'w', encoding='utf-8') as f:
@@ -301,10 +311,10 @@ def 按关键词总结文献(txt, llm_kwargs, plugin_kwargs, chatbot, history, s
 
     # pdf推送下载
     if os.path.exists(summarization_pdf_fp): os.remove(summarization_pdf_fp)
-    markdown_to_pdf(result,'summarization',os.path.dirname(summarization_pdf_fp))
+    md2pdf(result,'summarization',os.path.dirname(summarization_pdf_fp))
 
     chatbot.clear()
-    chatbot.append([_('总结完成。下面是总结的内容: （不支持对话）') , 
+    chatbot.append([_('总结完成。下面是总结的内容:') , 
                     '<ul><li>' +
                     _('围绕着关键词：{}').format(", ".join(keywords)) +
                     '</li><li>' +
@@ -314,8 +324,11 @@ def 按关键词总结文献(txt, llm_kwargs, plugin_kwargs, chatbot, history, s
     chatbot.append([result,generate_download_file(summarization_pdf_fp,_('点击这里下载pdf格式的总结内容'))])
     chatbot.append(_unusable_pdf_message(lib_dir=this_library_root_dir))
     # 提醒一下不能对话
-    chatbot.append([_('请注意，本功能不支持对话。'),_('如果要使用对话功能，请使用 <b>与AI交流研究进展</b>')])
-    yield from update_ui(chatbot=chatbot, history=[])
+    chatbot.append([
+        {'role':'user','content':_('工作完成。目前也可以进行对话')},
+        {'role':'assistant','content':_('或者是使用 <b>与AI交流研究进展</b> 进一步深入的分析')}
+                ])
+    yield from update_ui(chatbot=chatbot, history=[result])
 
 execute = 按关键词总结文献 # 用于热更新
 
@@ -367,7 +380,8 @@ def _analyze_abstract_gpt(pdf_manifests_fp: list, keywords: list[str], start_bat
                 In addition, if the text mentions any experimental flaws, unmet objectives, \
                 or the innovative aspects of the experiment, please also summarize those.\
                 While ensuring accuracy and comprehensiveness, \
-                use English to condense the summary content as much as possible."
+                use English to condense the summary content as much as possible.\
+                When necessary, tables, charts, and other forms can be used for presentation."
 
         i_say_show_user = _("[批次进度：{a}/{b}] 请对这篇文章的摘要进行总结概括\n\n围绕: {key}").format(
             a=start_batch, b=total_batch, key=', '.join(keywords))
@@ -486,16 +500,16 @@ def _summarize_all_paper(this_library_fp: str, llm_kwargs, GPT_prefer_language, 
     for content in batch_content:
 
         input = f'There are now five research topics: {content}. Please answer my questions based on these topics:\
-                1. What are the research directions of these studies? please provide a brief answer for each.\
-                2. What are the commonalities among these studies?\
-                3. What are the differences among these studies?\
-                4. What innovative aspects do these studies have?\
-                5. What conclusions have these studies drawn (as detailed as possible)?\
-                6. What issues, errors, or shortcomings have been mentioned in these studies?'
+                1. What are the research directions of these studies? please provide a brief answer for each. (as much as possible) (the overall direction and focus of the research, highlighting the main themes and objectives.)\
+                2. What are the commonalities among these studies? (s common trends, methodologies, and findings across the articles, providing insights into the shared knowledge and consensus within the field.)\
+                3. What are the differences among these studies? (the differences in approaches, methodologies, and findings, helping to understand the diversity and varying perspectives in the research.)\
+                4. What innovative aspects do these studies have? (novel contributions and innovations within the articles, highlighting new ideas, methodologies, and discoveries that advance the field.)\
+                5. What conclusions have these studies drawn (as detailed as possible)? (the key conclusions and outcomes of the studies, providing a clear overview of the findings)\
+                6. What issues, errors, or shortcomings have been mentioned in these studies? (any issues, limitations, or errors in the research, offering critical insights that can help in evaluating the robustness and reliability of the studies.)'
 
         prompt_array.append(prompt)
         input_array.append(input)
-        history_array.append('')
+        history_array.append([])
         inputs_show_user_array.append(_('处理中...'))
 
     gpt_say = yield from request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency(

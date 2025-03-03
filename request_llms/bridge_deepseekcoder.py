@@ -1,3 +1,7 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
+
 model_name = "deepseek-coder-6.7b-instruct"
 cmd_to_install = "未知" # "`pip install -r request_llms/requirements_qwen.txt`"
 

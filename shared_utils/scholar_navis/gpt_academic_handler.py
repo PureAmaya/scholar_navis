@@ -1,3 +1,7 @@
+'''
+Author: scholar_navis@PureAmaya
+'''
+
 import sys
 import gradio as gr
 from .multi_lang import _
@@ -5,10 +9,7 @@ from shared_utils.config_loader import get_conf
 from .const_and_singleton import GPT_SUPPORT_LAMGUAGE
 from old_file_clear import start_clear_old_files
 from .other_tools import generate_text_file_download
-try:
-    from shared_utils.colorful import print亮黄
-except:
-    from shared_utils.colorful import PrintBrightYellow as print亮黄
+from shared_utils.colorful import print亮黄
 
 ENABLE_PUBMED_DOWNLOADER,EXTRACT_USEFUL_SENTENCES_THREADS_MAX_NUM=get_conf('ENABLE_PUBMED_DOWNLOADER','EXTRACT_USEFUL_SENTENCES_THREADS_MAX_NUM')
 
@@ -151,7 +152,7 @@ Sample Title,"This cell is used to input all the text to be extracted from the a
                     _('- 已经发生摘取行为后无法使用此功能'))
     task_name = gr.Textbox(value='',label=_('任务名称'),placeholder=_('输入任务名称，否则使用默认名称'))
     create_or_load_task = gr.File(label=_('请上传包含文章标题与内容的csv文件 or 以往下载的分析文件（.zip）or pdf or pdf的压缩包（.zip/.rar）'),file_types=['.zip','.rar','.csv','.pdf','.xls','.xlsx'])
-    gr.HTML(value=_('点击这里下载样例csv文件: {}').format(generate_text_file_download(template_content,'template','.csv','utf-8-sig')))
+    gr.HTML(value=_('点击这里下载样例csv文件: {}').format(generate_text_file_download(template_content,'extract_useful_sentences_template','.csv','utf-8-sig',True)))
     
     with gr.Accordion(visible=False) as below_accordion:
     

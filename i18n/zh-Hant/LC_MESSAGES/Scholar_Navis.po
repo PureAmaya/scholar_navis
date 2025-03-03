@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-12-31 16:34+0800\n"
-"PO-Revision-Date: 2024-12-31 16:35+0800\n"
+"POT-Creation-Date: 2025-03-01 11:20+0800\n"
+"PO-Revision-Date: 2025-03-01 11:22+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_TW\n"
@@ -15,199 +15,167 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: ../scholar_navis(github) - 副本\n"
 
-#: auth.py:94
+#: auth.py:98
 msgid "欢迎使用 Scholar Navis"
 msgstr "歡迎使用 Scholar Navis"
 
-#: auth.py:95
+#: auth.py:99
 msgid "管理员启动了身份验证。请登录或注册以继续"
 msgstr "管理員啟動了身份驗證。請登錄或註冊以繼續"
 
-#: auth.py:96
+#: auth.py:100
 msgid ""
 "API信息在服务端加密; 不登录的情况下API加密储存在localStorage中，请勿泄露"
 msgstr "API信息在服務端加密；未登錄時API加密儲存在localStorage中，請勿洩露"
 
-#: auth.py:97
+#: auth.py:101
 msgid "如果对安全性不放心，请不要使用常用用户名与密码"
 msgstr "如果對安全性不放心，請勿使用常用用戶名與密碼"
 
-#: auth.py:118 auth.py:167
+#: auth.py:122 auth.py:171
 msgid "用户名无效"
 msgstr "用戶名無效"
 
-#: auth.py:120 auth.py:169
+#: auth.py:124 auth.py:173
 msgid "用户名不能为空"
 msgstr "用戶名不能為空"
 
-#: auth.py:121 auth.py:170
-#: shared_utils/scholar_navis/user_account_manager.py:54
+#: auth.py:125 auth.py:174
+#: shared_utils/scholar_navis/user_account_manager.py:57
 msgid "密码不能为空"
 msgstr "密碼不能為空"
 
-#: auth.py:123 auth.py:173
+#: auth.py:127 auth.py:177
 msgid "用户名只能包含字母、数字和下划线"
 msgstr "用戶名只能包含字母、數字和下劃線"
 
-#: auth.py:124
+#: auth.py:128
 msgid "当前用户不存在"
 msgstr "當前用戶不存在"
 
-#: auth.py:125 auth.py:175
-#: shared_utils/scholar_navis/user_account_manager.py:58
+#: auth.py:129 auth.py:179
+#: shared_utils/scholar_navis/user_account_manager.py:61
 msgid "密码不符合要求。至少八位且有大小写字母和数字"
 msgstr "密碼不符合要求。至少八位且有大小寫字母和數字"
 
-#: auth.py:126
+#: auth.py:130
 msgid "密码错误"
 msgstr "密碼錯誤"
 
-#: auth.py:157
+#: auth.py:161
 msgid "登录失败，请稍后再试"
 msgstr "登入失敗，請稍後再試"
 
-#: auth.py:159
+#: auth.py:163
 msgid "登陆成功"
 msgstr "登錄成功"
 
-#: auth.py:171 shared_utils/scholar_navis/user_account_manager.py:55
+#: auth.py:175 shared_utils/scholar_navis/user_account_manager.py:58
 msgid "请重复输入密码"
 msgstr "請重複輸入密碼"
 
-#: auth.py:174
+#: auth.py:178
 msgid "当前用户已存在，请使用其他用户名"
 msgstr "當前用戶已存在，請使用其他用戶名"
 
-#: auth.py:176 shared_utils/scholar_navis/user_account_manager.py:59
+#: auth.py:180 shared_utils/scholar_navis/user_account_manager.py:62
 msgid "两次输入的密码不一致"
 msgstr "兩次輸入的密碼不一致"
 
-#: auth.py:188
+#: auth.py:192
 msgid "注册失败，请稍后再试"
 msgstr "註冊失敗，請稍後再試"
 
-#: auth.py:190
+#: auth.py:194
 msgid "注册成功，请登录"
 msgstr "註冊成功，請登錄"
 
-#: auth.py:193
+#: auth.py:197
 msgid "Scholar Navis 登录授权页"
 msgstr "Scholar Navis 登錄授權頁"
 
-#: auth.py:198
+#: auth.py:202
 msgid "用户名"
 msgstr "用戶名"
 
-#: auth.py:198
+#: auth.py:202
 msgid "请输入用户名 (不区分大小写)"
 msgstr "請輸入用戶名（不區分大小寫）"
 
-#: auth.py:199
+#: auth.py:203
 msgid "密码"
 msgstr "密碼"
 
-#: auth.py:199
+#: auth.py:203
 msgid "至少八位，且有大小写字母与数字"
 msgstr "至少八位，且有大小寫字母與數字"
 
-#: auth.py:200
+#: auth.py:204
 msgid "不自动登录"
 msgstr "不自動登入"
 
-#: auth.py:200
+#: auth.py:204
 msgid "一周内自动登录"
 msgstr "一周內自動登錄"
 
-#: auth.py:200
+#: auth.py:204
 msgid "一个月内自动登录"
 msgstr "一個月內自動登錄"
 
-#: auth.py:200
+#: auth.py:204
 msgid "总是自动登录"
 msgstr "總是自動登錄"
 
-#: auth.py:201
+#: auth.py:205
 msgid "自动登录"
 msgstr "自動登錄"
 
-#: auth.py:202
+#: auth.py:206
 msgid "确认密码"
 msgstr "確認密碼"
 
-#: auth.py:202
+#: auth.py:206
 msgid "请再次输入密码"
 msgstr "請重複輸入密碼"
 
-#: auth.py:203
+#: auth.py:207
 msgid "登录"
 msgstr "登入"
 
-#: auth.py:204
+#: auth.py:208
 msgid "注册"
 msgstr "註冊"
 
-#: auth.py:207
+#: auth.py:211
 msgid "注册登录切换"
 msgstr "註冊登錄切換"
 
-#: check_proxy.py:120 check_proxy.py:130
+#: check_proxy.py:129
 msgid "正在执行一些模块的预热 ..."
 msgstr "正在執行一些模組的預熱 ..."
 
-#: core_functional.py:14
-msgid "学术语料润色"
-msgstr "學術語料潤色"
-
-#: core_functional.py:42 core_functional.py:175
-msgid "总结绘制脑图"
-msgstr "总结绘制脑图"
-
-#: core_functional.py:72
-msgid "查找语法错误"
-msgstr "查找語法錯誤"
-
-#: core_functional.py:93
-msgid "中译英"
-msgstr "中譯英"
-
-#: core_functional.py:99
-msgid "学术英中互译"
-msgstr "學術英中互譯"
-
-#: core_functional.py:120
-msgid "英译中"
-msgstr "英譯中"
-
-#: core_functional.py:127
-msgid "找图片"
-msgstr "找圖片"
-
-#: core_functional.py:135
-msgid "解释代码"
-msgstr "解釋代碼"
-
-#: core_functional.py:141
-msgid "参考文献转Bib"
-msgstr "參考文獻轉Bib"
-
-#: crazy_functions/crazy_utils.py:94 crazy_functions/crazy_utils.py:236
-#: crazy_functions/crazy_utils.py:267 crazy_functions/crazy_utils.py:284
+#: crazy_functions/crazy_utils.py:109 crazy_functions/crazy_utils.py:251
+#: crazy_functions/crazy_utils.py:289 crazy_functions/crazy_utils.py:306
 msgid "检测到程序终止"
 msgstr "檢測到程序終止"
 
-#: crazy_functions/crazy_utils.py:219
+#: crazy_functions/crazy_utils.py:234
 msgid "请开始多线程操作"
 msgstr "請開始多線程操作"
 
-#: crazy_functions/crazy_utils.py:222
+#: crazy_functions/crazy_utils.py:237
 msgid "等待中"
 msgstr "等待中"
 
-#: crazy_functions/crazy_utils.py:243
+#: crazy_functions/crazy_utils.py:247
+msgid "执行中"
+msgstr "執行中"
+
+#: crazy_functions/crazy_utils.py:265
 msgid "已成功"
 msgstr "已成功"
 
-#: crazy_functions/crazy_utils.py:262
+#: crazy_functions/crazy_utils.py:284
 msgid ""
 "此线程失败前收到的回答：\n"
 "\n"
@@ -215,39 +183,39 @@ msgstr ""
 "此線程失敗前收到的回答：\n"
 "\n"
 
-#: crazy_functions/crazy_utils.py:263
+#: crazy_functions/crazy_utils.py:285
 msgid "输入过长已放弃"
 msgstr "輸入過長已放棄"
 
-#: crazy_functions/crazy_utils.py:277
+#: crazy_functions/crazy_utils.py:299
 msgid "OpenAI绑定信用卡可解除频率限制"
 msgstr "OpenAI綁定信用卡可解除頻率限制"
 
-#: crazy_functions/crazy_utils.py:288
+#: crazy_functions/crazy_utils.py:310
 msgid "已失败"
 msgstr "已失敗"
 
-#: crazy_functions/crazy_utils.py:320
+#: crazy_functions/crazy_utils.py:342
 msgid "多线程操作已经开始，完成情况:"
 msgstr "多執行緒操作已經開始，完成情況:"
 
-#: crazy_functions/crazy_utils.py:428
+#: crazy_functions/crazy_utils.py:450
 msgid "抱歉, 我们暂时无法解析此PDF文档: {}."
 msgstr "抱歉, 我們暫時無法解析此PDF文檔: {}."
 
-#: crazy_functions/crazy_utils.py:553
+#: crazy_functions/crazy_utils.py:575
 msgid "无法下载资源{}，请检查."
 msgstr "無法下載資源{}，請檢查。"
 
-#: crazy_functions/crazy_utils.py:585
+#: crazy_functions/crazy_utils.py:607
 msgid "正在执行命令 {}"
 msgstr "正在執行命令 {}"
 
-#: crazy_functions/crazy_utils.py:601
+#: crazy_functions/crazy_utils.py:623
 msgid "正在解析论文, 请稍候。进度：正在排队, 等待线程锁..."
 msgstr "正在解析論文，請稍候。進度：正在排隊，等待線程鎖..."
 
-#: crazy_functions/crazy_utils.py:609
+#: crazy_functions/crazy_utils.py:631
 msgid ""
 "正在解析论文, 请稍候。进度：正在加载NOUGAT... （提示：首次运行需要花费较长时"
 "间下载NOUGAT参数）"
@@ -255,72 +223,72 @@ msgstr ""
 "正在解析論文，請稍候。進度：正在加載NOUGAT...（提示：首次運行需要花費較長時"
 "間下載NOUGAT參數）"
 
-#: crazy_functions/crazy_utils.py:616
+#: crazy_functions/crazy_utils.py:638
 msgid "Nougat解析论文失败"
 msgstr "Nougat解析論文失敗"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:44
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:48
 msgid "<b>{}</b> 是一个不存在的总结库"
 msgstr "<b>{}</b> 是一個不存在的總結庫"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:45
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:49
 msgid "可以通过上传文章（含压缩包）的方式创建新的总结库"
 msgstr "可以通過上傳文章（含壓縮包）的方式建立新的總結庫"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:50
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:54
 msgid "即将创建一个新的总结库：<b>{}</b>"
 msgstr "即將建立一個新的總結庫：<b>{}</b>"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:51
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:55
 msgid "库内将包含您上传的所有文章"
 msgstr "庫內將包含您上傳的所有文章"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:92
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:111
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:96
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:115
 msgid "流程警告："
 msgstr "流程警告："
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:92
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:96
 msgid "当前总结库已经总结完毕，无法添加新的文章"
 msgstr "當前總結庫已經總結完畢，無法添加新的文章"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:101
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:105
 msgid "<b>{}</b>文献总结库目前的关键词如下"
 msgstr "<b>{}</b>文獻總結庫目前之關鍵詞如下"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:103
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:107
 msgid "目前没有关键词。请创建新的关键词，将用于分析总结"
 msgstr "目前沒有關鍵詞。請建立新的關鍵詞，將用於分析總結"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:111
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:115
 msgid "当前总结库已经总结完毕，无法更新关键词"
 msgstr "目前摘要庫已經完成總結，無法更新關鍵詞"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:119
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:123
 msgid "该总结库已损坏：缺少lib_manifest.yml"
 msgstr "該總結庫已損壞：缺少lib_manifest.yml"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:120
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:124
 msgid "请尝试重新创建该总结库"
 msgstr "請嘗試重新建立該總結庫"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:127
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:131
 msgid "缺乏关键词，无法总结分析"
 msgstr "缺乏關鍵詞，無法總結分析"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:128
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:132
 msgid "可以使用 <b>key + 关键词</b> 命令设定新的关键词"
 msgstr "可以使用 <b>key + 關鍵詞</b> 命令設定新的關鍵詞"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:136
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:140
 msgid "不存在任何可用pdf，无法总结分析"
 msgstr "不存在任何可用PDF，無法總結分析"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:137
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:141
 msgid "可以使用 <b>缓存pdf文献</b> 缓存新的文章。"
 msgstr "可以使用的 <b>快取pdf文獻</b> 快取新的文章。"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:142
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:146
 #, python-brace-format
 msgid ""
 "所有的工序已经完成，该工具的流程结束。<ul><li>已导入pdf数量：{in_cache}(缓存"
@@ -329,7 +297,7 @@ msgstr ""
 "所有工序已經完成，該工具的流程結束。<ul><li>已導入pdf數量：{in_cache}(快取"
 "中), {in_repo}(庫中)</li><li>關鍵詞：{keywords}</li></ul>"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:144
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:148
 msgid ""
 "在使用 <b>按关键词总结文献</b> 进行AI总结之前，您可以选择继续添加文章、修改"
 "关键词。"
@@ -337,7 +305,7 @@ msgstr ""
 "在使用 <b>按关键词總結文献</b> 進行AI總結之前，您可以选择繼續添加文章、修改"
 "關鍵詞。"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:148
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:152
 msgid ""
 "该总结库已经完成了总结分析。无法添加新的文章或修改关键词。如果要修改请新建总"
 "结库"
@@ -345,23 +313,23 @@ msgstr ""
 "該總結庫已經完成了總結分析。無法添加新的文章或修改關鍵詞。如果要修改，請新建"
 "總結庫"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:149
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:153
 msgid "关于总结内容等信息，请使用 <b>按关键词总结文献</b> 查看"
 msgstr "關於總結內容等信息，請使用《按關鍵詞總結文獻》查看"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:155
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:159
 msgid "没有上传pdf，或者尚未上传任何文件，该步骤跳过..."
 msgstr "沒有上傳pdf，或者尚未上傳任何文件，該步驟跳過…"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:156
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:160
 msgid "如果想要添加新的文章，请先上传文件再执行本功能。"
 msgstr "若要新增文章，請先上傳文件再執行本功能。"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:172
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:176
 msgid "pdf加载成功"
 msgstr "pdf載入成功"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:173
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:177
 #, python-brace-format
 msgid ""
 "本次<b>上传{upload_count}篇</b>文章，<b>新加载{new_count}篇</b>文章，<b>总计"
@@ -371,7 +339,7 @@ msgstr ""
 "{cache_count}篇</b>文章存在於快取中等待分析（已有<b>{repo}篇</b>文章分析完"
 "畢）"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:194
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:198
 #, python-brace-format
 msgid ""
 "关键词已更新</br></br><b>现在的关键词为：</b></br>{new}</br></br><b>此前的关"
@@ -380,7 +348,7 @@ msgstr ""
 "關鍵詞已更新</br></br><b>現在的關鍵詞為：</b></br>{new}</br></br><b>此前的關"
 "鍵詞為：</b></br>{old}"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:200
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:204
 msgid ""
 "已存在关键词，不会进行修改（如果还没有总结，可以试试关键词强制更新）</br></"
 "br><b>现在的关键词为：</b></br>{}"
@@ -388,48 +356,48 @@ msgstr ""
 "已存在關鍵詞，不會進行修改（如果還沒有總結，可以試試關鍵詞強制更新）</br></"
 "br><b>現在的關鍵詞為：</b></br>{}"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:208
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:212
 #, python-brace-format
 msgid "关键词已更新</br></br><b>现在的关键词为：</b></br>{new}"
 msgstr "關鍵詞已更新</br></br><b>現在的關鍵詞為：</b></br>{new}"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:219
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:223
 msgid "上传1篇pdf文献或多篇pdf的压缩包"
 msgstr "上傳1篇PDF文獻或多篇PDF的壓縮包"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:221
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:225
 msgid "创建或选择总结库"
 msgstr "建立或選擇摘要庫"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:221
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:225
 msgid "如要创建新的总结库，请输入一个新名字"
 msgstr "若要建立新的總結庫，請輸入一個新名稱"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:223
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:227
 msgid "查询或更新关键词"
 msgstr "查詢或更新關鍵詞"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:223
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:227
 msgid "强制更新关键词"
 msgstr "強制更新關鍵詞"
 
-#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:225
+#: crazy_functions/scholar_navis/scripts/cache_pdf_articles.py:229
 msgid "在此处输入用于更新的关键词（中英文逗号分割）"
 msgstr "在此處輸入用於更新的關鍵詞（中英文逗號分隔）"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:55
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:59
 msgid "读取总结文件失败！具体原因如下："
 msgstr "讀取總結檔案失敗！具體原因如下："
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:59
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:63
 msgid "出现问题"
 msgstr "出現問題"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:59
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:63
 msgid "该总结库不含总结文件，可能是尚未完成总结或者意外删除？可以尝试重新总结"
 msgstr "该總結庫不含總結文件，可能是尚未完成總結或意外刪除？可以嘗試重新總結"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:70
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:74
 msgid ""
 "如果有问道某些内容的出处、来源，或者是其他的你不知道的内容、没有给你提供的内"
 "容时，请说“如果要确定详细的内容或者是寻找来源，请使用 find 命令 和 精细分析"
@@ -439,7 +407,7 @@ msgstr ""
 "時，請說「如果要確定詳細的內容或者是尋找來源，請使用 find 命令 和 精細分析文"
 "獻 功能」"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:75
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:79
 #, python-brace-format
 msgid ""
 "现在可以直接与AI交流总结的内容。也可以使用帮助指令查询还可以做些什么 \n"
@@ -450,7 +418,7 @@ msgstr ""
 "\n"
 "總結庫 <b>{name}</b> 在 <b>{key}</b> 方面的總結如下："
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:85
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:89
 #, python-brace-format
 msgid ""
 "尝试绘制图表（可能会作图失败，那时就多运行几次吧）...\n"
@@ -463,15 +431,15 @@ msgstr ""
 "總結庫 <b>{name}</b> 在 <b>{key}</b> 方面的總結如下：<details><summary><u>展"
 "開以檢視總結的內容...</u></summary>{ov}</details>"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:87
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:91
 msgid "等待绘制....."
 msgstr "等待繪製....."
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:95
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:99
 msgid "参数 <b>{}</b> 不合适或超出范围，修正为 9（思维导图）"
 msgstr "參數 <b>{}</b> 不適合或超出範圍，修正為 9（思維導圖）"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:102
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:106
 msgid ""
 "无法生成图表。具体原因如下: \n"
 "{}"
@@ -479,20 +447,20 @@ msgstr ""
 "無法生成圖表。具體原因如下: \n"
 "{}"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:108
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:112
 msgid "开始查找可能是来源的文章... "
 msgstr "開始查找可能為來源的文章..."
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:108
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:126
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:112
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:130
 msgid "请等待..."
 msgstr "請等待…"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:113
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:117
 msgid "请输入希望溯源的内容"
 msgstr "請輸入希望溯源的內容"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:120
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:124
 msgid ""
 "无法溯源。具体原因如下: \n"
 "{}"
@@ -500,11 +468,11 @@ msgstr ""
 "無法溯源。具體原因如下: \n"
 "{}"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:126
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:130
 msgid "尝试拟定课题中..."
 msgstr "嘗試撰定課題中…"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:137
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:141
 msgid ""
 "拟定课题出错了！错误原因是：\n"
 "{}"
@@ -512,7 +480,7 @@ msgstr ""
 "拟定課題出錯了！錯誤原因是：\n"
 "{}"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:258
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:266
 msgid ""
 "搜索完成！暂时没有找到与搜索内容相匹配的文章。可以多尝试几次（<b>不排除AI出"
 "问题</b>），或与AI对总结内容进行交流"
@@ -520,11 +488,11 @@ msgstr ""
 "搜尋完成！暫時沒有找到與搜尋內容相匹配的文章。可以多嘗試几次（<b>不排除AI出"
 "問題</b>），或與AI對總結內容進行交流"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:280
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:288
 msgid "搜索完成！"
 msgstr "搜索完成！"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:281
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:289
 msgid ""
 "有 <b>{}</b> 篇文章可能符合期望。在下面可以下载这些文章（以及选中的理由），"
 "此外现在<b>可以直接进行对话</b>、了解<b>这几篇</b>文章了"
@@ -532,112 +500,112 @@ msgstr ""
 "有 <b>{}</b> 篇文章可能符合期望。在下载區可以找到它們（以及選中的理由），此"
 "外現在<b>可以直接進行對話</b>、了解<b>這幾篇</b>文章了"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:282
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:290
 msgid "对话文章仅包含摘要，如果要细致分析请使用 <b>精细分析文献</b> 工具"
 msgstr "對話文章僅包含摘要，若要詳盡分析請使用<b>精細分析文獻</b>工具"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:283
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:291
 msgid ""
 "由于人工智能的能力各不相同，<b>回答的理由可能并不能使人满意</b>，请仔细鉴别"
 msgstr ""
 "由於人工智慧的能力各不相同，<b>回答的理由可能並不能使人滿意</b>，請仔細辨別"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:284
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:292
 msgid "当对结果不满意时，可以重新搜索一次"
 msgstr "當對結果不满意時，可以重新搜尋一次"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:285
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:293
 msgid "[文章]：指文献。[搜索内容]：指左上角输入的、需要搜索的内容"
 msgstr "[文章]：指文献。[搜索内容]：指左上角輸入的、需要搜索的内容"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:294
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:302
 msgid "下载文章："
 msgstr "下載文章："
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:321
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:329
 msgid "课题拟定中..."
 msgstr "課題籌劃中..."
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:321
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:329
 msgid "拟定要求: {}"
 msgstr "訂定要求: {}"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:327
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:335
 msgid "课题拟定完成！"
 msgstr "題目規劃完成！"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:328
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:336
 msgid "下面是AI拟定的课题及其理由（此时亦可以追问）: "
 msgstr "以下是AI擬定的課題及其理由（此時亦可以追问）:"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:337
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:261
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:345
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:263
 msgid "选择总结库"
 msgstr "選擇總結庫"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:337
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:345
 msgid "可以在总结库中选择文章"
 msgstr "可以在總結庫中选择文章"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:340
-msgid "绘制思维导图 [gpt_acadmic内置功能，语言偏好可能无效]"
-msgstr "繪製思維導圖 [gpt_acadmic內置功能，語言偏好可能無效]"
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:348
+msgid "绘制思维导图"
+msgstr "繪製思維導圖"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:340
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:348
 msgid "寻找总结内容来源"
 msgstr "尋找總結內容來源"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:340
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:348
 msgid "拟定课题"
 msgstr "鋟定題目"
 
-#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:343
+#: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:351
 msgid "在此处输入思维导图类型代码/要溯源的内容/课题拟定要求"
 msgstr "在此处输入思見簡折書類型代码 / 要溯源的内容 / 課題拟定要求"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:177
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:175
 msgid "请重置后再执行"
 msgstr "請重置後再執行。"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:180
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:178
 msgid "任务名称意外丢失，请重新设定"
 msgstr "任務名稱意外丟失，請重新設定。"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:184
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:182
 msgid "结构和内容要求不能为空"
 msgstr "結構和內容要求不能為空。"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:187
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:185
 msgid "目标语言不能为空。请选定目标语言"
 msgstr "目標語言不能為空。請選定目標語言。"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:193
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:191
 msgid "工作目录处理失败，请重新设定{}"
 msgstr "工作目錄處理失敗，請重新設定 {}。"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:211
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:665
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:209
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:675
 msgid "任务开始执行"
 msgstr "任務開始執行。"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:231
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:229
 msgid "任务执行完成"
 msgstr "任務執行完成。"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:231
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:229
 msgid "如果要执行新的任务，请重置"
 msgstr "如果要執行新的任務，請重置。"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:287
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:285
 msgid "要下载的文件不存在。请尝试下载另一个文件或重新摘取"
 msgstr "要下載的文件不存在。請嘗試下載另一個文件或重新摘取。"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:310
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:308
 msgid "文件不存在。请上传文件或选择已有文件"
 msgstr "文件不存在。請上傳文件或選擇已有文件。"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:321
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:336
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:319
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:334
 msgid ""
 "压缩包中缺少必要文件 {}，但是有pdf文件，将按照新任务执行。如果您的压缩包内只"
 "有pdf，请忽略该提醒"
@@ -645,82 +613,86 @@ msgstr ""
 "壓縮包中缺少必要的文件 {}，但含有 PDF 文件，將按照新任務執行。若您的壓縮包內"
 "只有 PDF，請忽略此提醒。"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:324
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:339
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:322
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:337
 msgid "压缩包中缺少必要文件 {}，请重新上传或选择已有文件"
 msgstr "壓縮包中缺少必要文件 {}，請重新上傳或選擇已有文件。"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:473
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:477
 msgid "{} 加载pdf成功"
 msgstr "{} 加載PDF成功。"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:477
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:481
 msgid "{} 加载pdf: 失败，后续过程将跳过。原因：{}"
 msgstr "{} 加載PDF失敗，後續過程將跳過。原因：{}"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:484
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:488
 msgid "{} 获取有用句子失败，后续过程将跳过。原因：{}"
 msgstr "{} 獲取有用句子失敗，後續過程將跳過。原因：{}"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:487
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:491
 msgid "{} 获取有用句子成功"
 msgstr "{} 獲取有用句子成功。"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:494
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:498
 msgid "{} 摘取可接受句子失败，后续过程将跳过。原因：{}"
 msgstr "{} 摘取可接受句子失敗，後續過程將跳過。原因：{}"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:497
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:501
 msgid "{} 摘取可接受句子成功"
 msgstr "{} 摘取可接受句子成功。"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:504
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:508
 msgid "{} 翻译可接受句子失败，后续过程将跳过。原因：{}"
 msgstr "{} 翻譯可接受句子失敗，後續過程將跳過。原因：{}"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:507
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:511
 msgid "{} 翻译可接受句子成功"
 msgstr "{} 翻譯可接受句子成功。"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:654
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:522
+msgid "用户终止提取有用语句"
+msgstr "用戶終止提取有用語句"
+
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:663
 msgid "文件 {} 不存在，跳过"
 msgstr "檔案 {} 不存在，跳過"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:694
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:704
 msgid "正在导出结果文件..."
 msgstr "正在導出結果文件..."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:716
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:726
 msgid "结果文件导出成功。正在导出中间文件..."
 msgstr "結果文件導出成功。正在導出中間文件..."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:733
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:743
 msgid "中间文件导出完成。正在导出日志..."
 msgstr "中間文件導出完成。正在導出日誌..."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:741
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:751
 msgid "输出结果失败，原因：{}"
 msgstr "輸出結果失敗，原因：{}"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:39
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:44
 msgid "现在可以进行单篇文章的精细分析。支持总结库内置文章或上传的其他文章"
 msgstr "現在可以進行單篇文章的精细分析。支援總結庫內置文章或上傳的其他文章"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:39
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:44
 msgid "等待指令中..."
 msgstr "等待指令中..."
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:47
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:52
 msgid "[注意] 上传的文献多于1篇。<b>精细分析时仅使用第一篇文章</b>"
 msgstr "[注意] 上傳的文獻多於1篇。<b>精细分析時僅使用第一篇文章</b>"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:63
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:203
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:68
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:205
 msgid "该用户没有任何总结库"
 msgstr "該用戶沒有任何總結庫"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:65
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:205
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:70
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:207
 msgid ""
 "下面是该用户拥有的总结库：\n"
 "\n"
@@ -728,43 +700,43 @@ msgstr ""
 "下面是该使用者所擁有的總結庫：\n"
 "\n"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:71
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:76
 msgid ""
 "没有指定任何文章。可以选择上传文章或者从总结库中选择一篇文章进行分析</br></"
 "br>{}"
 msgstr ""
 "未指定任何文章。可選擇上傳文章或從總結庫中選擇一篇文章進行分析</br></br>{}"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:77
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:82
 msgid "没有上传可用的文章，<b>{}</b> 亦不是已有的总结库"
 msgstr "沒有上傳可用的文章，<b>{}</b>也非既有的總結庫"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:88
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:93
 msgid "总结库 <b>{}</b> 中不存在任何已经加载完成的文章"
 msgstr "總結庫 <b>{}</b> 中不存在任何已經加载完成的文章"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:115
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:120
 msgid "访问文章发布页"
 msgstr "請訪問文章發布頁"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:116
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:121
 msgid "复制文章"
 msgstr "複製文章"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:117
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:122
 msgid "下载文章"
 msgstr "下載文章"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:131
-#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:98
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:136
+#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:97
 msgid "总结库"
 msgstr "總結庫"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:132
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:137
 msgid "包含下面的文章："
 msgstr "若包含以下文章："
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:133
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:138
 msgid ""
 "展开文字可以看到文章的预分析结果。如果没有正常显示标题，说明文章标题获取失"
 "败，但不影响后续使用"
@@ -772,11 +744,11 @@ msgstr ""
 "展開文字可以看到文章的預分析結果。如果没有正常顯示標題，說明文章標題獲取失"
 "敗，但不影響後續使用"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:134
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:139
 msgid "分析中使用的关键词："
 msgstr "分析中使用之關鍵詞："
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:135
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:140
 msgid ""
 "如果没有正常的显示文章标题，可能是该文章没有doi，或是没有在metadata中设定标"
 "题，此时显示的一般为文件名"
@@ -784,11 +756,11 @@ msgstr ""
 "如果没有正常的顯示文章標題，可能是該文章沒有DOI，或是沒有在元數據中設定標"
 "題，此時顯示的一般為檔案名"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:136
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:141
 msgid "如果 [访问文章发布页] 不可用，可能是该文章没有doi，也可能是网络错误"
 msgstr "如果[訪問文章發布頁]不可用，可能是該文章沒有DOI，也可能是網絡錯誤"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:151
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:156
 msgid ""
 "尚未输入一个可用的文章。可以选择上传一篇文章，也可以从加载的文章中选择一篇使"
 "用"
@@ -796,148 +768,156 @@ msgstr ""
 "尚未輸入一個可用的文章。可以選擇上傳一篇文章，也可以從加載的文章中選擇一篇使"
 "用"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:153
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:158
 msgid "您可以点击这里"
 msgstr "您可以點擊此處"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:153
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:158
 msgid "查阅该总结库包含的文章"
 msgstr "請查閱該總結庫包含的文章"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:161
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:166
 msgid "精细分析中..."
 msgstr "精細分析中…"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:165
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:170
 msgid "分析过程中出错！错误原因是：{}"
 msgstr "分析過程中出錯！錯誤原因是：{}"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:189
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:195
 msgid ""
 "上传的文件 {} 不可用。我们不接受中文学位论文、加密文件、非PDF文件或损坏文件"
 msgstr ""
 "上傳的檔案{}無法使用。我們不接受中文學位論文、加密檔案、非PDF檔案或損壞檔案"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:202
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:203
 msgid "对pdf文件处理中..."
 msgstr "對pdf文件處理中..."
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:212
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:216
 #, python-brace-format
 msgid "[{i}/{total}] AI阅读中..."
 msgstr "[{i}/{total}] AI閱讀中..."
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:237
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:228
+msgid "对pdf文件完成"
+msgstr "對 PDF 文件完成。"
+
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:239
 msgid "总结中..."
 msgstr "總結中..."
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:244
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:246
 msgid "分析的文章如下："
 msgstr "分析的文章如下："
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:246
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:248
 msgid "标题可能不准确，跳转连接亦或许无法使用，仅供参考"
 msgstr "標題可能不準確，跳轉鏈接亦或許無法使用，僅供參考"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:248
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:250
 msgid ""
 "精细分析完成，以下是分析的结果（现在亦可以与AI进行交流，也可以下载分析的结"
 "果）: "
 msgstr ""
 "精細分析完成，以下是分析結果（現今亦可與AI進行交流，亦可下載分析結果）:"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:253
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:255
 msgid "下载分析结果："
 msgstr "下載分析結果："
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:260
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:262
 msgid "选定的文章"
 msgstr "選定的文章"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:260
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:262
 msgid "上传或使用总结库内的文章"
 msgstr "上傳或使用總結庫內的文章"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:261
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:263
 msgid "查看总结库内的文章"
 msgstr "檢視總結庫內的文章"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:114
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:264
+msgid "AI预先阅读内容"
+msgstr "AI預先閱讀內容"
+
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:118
 msgid "完成已有文章的检查"
 msgstr "完成已有文章的檢查"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:118
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:122
 msgid "所有需要下载的文章已经缓存"
 msgstr "所有需要下載的文章已經緩存"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:136
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:140
 msgid "下载将使用网络代理"
 msgstr "載入將使用網絡代理"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:137
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:141
 msgid "下载不使用网络代理"
 msgstr "下載不使用網絡代理"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:163
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:164
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:167
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:168
 msgid "下载中，请等待..."
 msgstr "下載中，請等待…"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:168
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:172
 msgid "当前下载进度"
 msgstr "當前下載進度"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:169
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:173
 msgid "下载数"
 msgstr "下載數"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:169
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:173
 msgid "已经存在的文章不含在内"
 msgstr "已經存在的文章不含在其中"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:170
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:174
 msgid "完成百分比"
 msgstr "完成百分比"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:171
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:175
 msgid "不使用网络代理"
 msgstr "不使用網絡代理"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:171
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:175
 msgid "使用网络代理"
 msgstr "使用網絡代理"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:186
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:190
 msgid "所有文件下载完成"
 msgstr "所有文件下載完成"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:230
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:234
 msgid "api解析失败"
 msgstr "api解析失敗"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:236
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:240
 msgid "api解析成功"
 msgstr "API 解析成功"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:300
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:301
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:304
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:305
 msgid "用户终止下载"
 msgstr "用戶終止下載"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:438
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:442
 msgid "上传您在PubMed中保存的csv格式的引文（citations）文件以执行新的下载任务"
 msgstr ""
 "請上傳您在PubMed中保存的csv格式之引文（citations）檔案以執行新的下載任務"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:439
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:443
 msgid "按下 <b>停止</b> 按钮以终止该下载进程"
 msgstr "按下<b>停止</b>按鈕以終止該下載進程"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:440
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:444
 msgid "下载的时间比较耗时，可以打开新的页面进行ai对话"
 msgstr "下載的時間較為耗時，可以打開新的頁面進行AI對話"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:441
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:445
 msgid ""
 "<font color=red>[提醒]</font> 当前一次下载任务终止后，再次运行可能会显示出之"
 "前的下载内容，尚未知如何修复。可以尝试`重置`"
@@ -945,19 +925,19 @@ msgstr ""
 "<font color=red>[提醒]</font> 當前一次下載任務終止後，再次運行可能會顯示出之"
 "前的下載內容，尚未知如何修復。可以嘗試「重置」"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:442
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:446
 msgid "批量从PubMed上下载 OpenAccess 文章"
 msgstr "批次從PubMed上下載OpenAccess文章"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:451
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:455
 msgid "正在处理..."
 msgstr "處理中…"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:456
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:460
 msgid "注意，上传的文件不是可用的csv文件"
 msgstr "請注意，上傳的文檔不是可用的csv文件"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:470
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:474
 msgid ""
 "读取出错！可能是文件内容缺失或错误，请检查\"PMID\", \"PMCID\", \"Title\", "
 "\"DOI\"及其内容是否是使用英文逗号分割，以及内容是否正确"
@@ -965,7 +945,7 @@ msgstr ""
 "讀取出錯！可能是文件內容缺失或錯誤，請檢查\"PMID\", \"PMCID\", \"Title\", "
 "\"DOI\"及其內容是否是使用英文逗號分割，以及內容是否正確"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:474
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:478
 msgid ""
 "上传的文件中，缺少 \"PMID\", \"PMCID\", \"Title\", \"DOI\"其中的若干项目，或"
 "拼写错误，请检查"
@@ -973,24 +953,24 @@ msgstr ""
 "上傳的文件中，缺少\"PMID\", \"PMCID\", \"Title\", \"DOI\"其中的若干项目，或"
 "拼寫錯誤，請檢查"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:486
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:487
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:490
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:491
 msgid "正在记录文章信息... "
 msgstr "正在記錄文章信息……"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:486
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:490
 msgid "(文件较大，请等待)"
 msgstr "(檔案較大，請等待)"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:496
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:500
 msgid "文章信息记录完成"
 msgstr "文章資訊記錄完成"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:503
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:507
 msgid "正在下载文章..."
 msgstr "正在下載文章..."
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:513
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:517
 msgid ""
 "出现错误。请检查上传的csv是否正确、代理格式是否正确、网络条件是否良好或其他"
 "可能存在的问题"
@@ -998,61 +978,61 @@ msgstr ""
 "出現錯誤。請檢查上傳的CSV是否正確、代理格式是否正確、網絡條件是否良好或其他"
 "可能存在的问题"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:543
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:547
 msgid "此次 PubMed Open Access 下载任务执行完成"
 msgstr "此次 PubMed Open Access 下載任務執行完成"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:544
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:548
 msgid "下载成功的文章"
 msgstr "下載成功的文章"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:545
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:549
 msgid "下载失败的文章"
 msgstr "下載失敗的文章"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:546
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:550
 msgid "下载成功率"
 msgstr "下載成功率"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:547
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:551
 msgid "如果下载失败，则需要手动下载"
 msgstr "如果下載失敗，則需要手動下載"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:548
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:552
 msgid "为什么会这样"
 msgstr "為何會這樣"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:549
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:553
 msgid "点击获取下载的文章"
 msgstr "點擊以取得下載之文章"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:549
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:553
 msgid "点击获取下载日志"
 msgstr "點擊以獲取下載日誌"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:550
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:554
 msgid ""
 "可以直接将下载完成的文章进行分析: 用<b>缓存pdf文献</b>开始总结分析这些文章"
 msgstr ""
 "可以直接將下載完成的文章進行分析：用<b>緩存PDF文獻</b>開始總結分析這些文章"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:567
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:571
 msgid "上传保存的文章列表"
 msgstr "上傳保存的文章清單"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:567
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:571
 msgid "一般为csv格式"
 msgstr "一般為csv格式"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:62
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:68
 msgid "总结终止。没有找到可用的关键词"
 msgstr "總結終止。未找到可用之關鍵字"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:63
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:69
 msgid "请在 <b>缓存pdf文献</b> 中设定关键词"
 msgstr "請在 <b>緩存pdf文獻</b> 中設定關鍵詞"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:86
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:92
 #, python-brace-format
 msgid ""
 "总结库 <b>{name}</b> 已经分析完毕，可以使用<b>与AI交流研究进展</b>进一步了解"
@@ -1063,15 +1043,15 @@ msgstr ""
 "該方面的研究現狀，如果得到某篇感興趣的文章，也可以使用 <b>精細分析文獻</b> "
 "於精讀"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:87
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:93
 msgid "参考关键词"
 msgstr "參考關鍵詞"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:88
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:94
 msgid "如果对分析结果不满意，可以选择强制重新分析（仅对最终总结生效）"
 msgstr "如果對分析結果不滿意，可以選擇強制重新分析（僅對最終總結生效）。"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:90
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:96
 msgid ""
 "<b>注意：</b>执行此操作会<font color=red>删除此前的总结</font>（不会影响预处"
 "理和预分析的结果）。如果对此前的总结不满意再使用! "
@@ -1079,34 +1059,32 @@ msgstr ""
 "<b>注意：</b>執行此操作會<font color=red>刪除此前的總結</font>（不會影響預處"
 "理和預分析的結果）。如果對此前的總結不滿意再使用！"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:91
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:97
 msgid "下面是此前的总结内容: "
 msgstr "以下是此前的總結內容："
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:102
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:314
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:108
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:324
 msgid "点击这里下载pdf格式的总结内容"
 msgstr "點擊這裡下載PDF格式的總結內容"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:106
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:317
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:112
 msgid "请注意，本功能不支持对话。"
 msgstr "請注意，本功能不支援對話。"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:106
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:317
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:112
 msgid "如果要使用对话功能，请使用 <b>与AI交流研究进展</b>"
 msgstr "若要使用對話功能，請使用 <b>與AI交流研究進展</b>"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:111
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:117
 msgid "现在将对{}中的文献进行总结分析"
 msgstr "現在將對{}中的文獻進行總結分析"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:112
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:118
 msgid "分析参考的关键词是 {}。为加快速度，默认 <b>仅对摘要</b> 进行总结"
 msgstr "分析參考的关键字是 {}。為加快速度，默認 <b>僅對摘要</b> 進行總結"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:123
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:129
 msgid ""
 "该总结库中没有任何可用的pdf文章。如果需要进行总结分析，请先使用 <b>缓存pdf文"
 "献</b> 添加新的文章"
@@ -1114,15 +1092,15 @@ msgstr ""
 "該總結庫中沒有任何可用的 PDF 文章。如果需要进行總結分析，請先使用 <b>快取 "
 "PDF 文獻</b> 添加新的文章"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:129
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:135
 msgid "没有新的文章需要预处理或已预处理完成"
 msgstr "沒有新的文章需要預處理或已預處理完成"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:130
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:136
 msgid "目前已经有<b>{}篇文章</b>预处理完毕，即将进行下一步操作..."
 msgstr "目前已經有<b>{}篇文章</b>預處理完畢，即將進行下一步操作..."
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:199
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:205
 #, python-brace-format
 msgid ""
 "目前有{pdf_count}篇文章处于缓存中（实际需要预处理{jb}篇，{done}篇已经完成流"
@@ -1133,56 +1111,64 @@ msgstr ""
 "程），即將使用{cpu}個線程進行預處理。全部預處理完成後就会使用GPT進行匯總分"
 "析..."
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:201
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:207
 msgid "预处理中...."
 msgstr "預處理中...."
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:210
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:216
 #, python-brace-format
 msgid "任务分组 [{done_num}/{task_total}] 预处理中..."
 msgstr "任務分組 [{done_num}/{task_total}] 預處理中..."
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:224
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:230
 msgid "缓存文章预处理完成"
 msgstr "暫存文章預處理完成"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:235
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:241
 msgid "现在开始使用GPT进行预先分析，每5个文章一组,总共有<b>{}</b>篇文章"
 msgstr "現在開始使用GPT進行預先分析，每5篇文章一組，總共有<b>{}</b>篇文章"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:236
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:242
 msgid "此过程中可以随时关闭该页面，下次会从 <b>中断的分组</b> 开始"
 msgstr "此過程中可以隨時關閉該頁面，下次會從＜b＞中斷的分组＜/b＞開始"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:244
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:250
 msgid "分析终止！因为某些原因，程序并没有找到可以总结分析的内容"
 msgstr "分析終止！因為某些原因，程序并未找到可以總結分析的内容"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:284
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:290
 msgid "移动文件时出错：{}"
 msgstr "移動文件時出錯：{}"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:290
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:296
 msgid "正在总结，总结过程中，请不要关闭该页面..."
 msgstr "正在總結，總結過程中，請不要關閉該頁面…"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:290
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:296
 msgid "处理中...."
 msgstr "處理中...."
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:307
-msgid "总结完成。下面是总结的内容: （不支持对话）"
-msgstr "總結完成。以下是總結內容：（不支持對話）"
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:317
+msgid "总结完成。下面是总结的内容:"
+msgstr "總結完成。以下是總結的内容："
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:309
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:319
 msgid "围绕着关键词：{}"
 msgstr "關於關鍵詞：{}"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:311
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:321
 msgid "如果不满意生成的结果（例如内容明显缺失），可以使用尝试重新生成"
 msgstr "如果對生產的結果不满意（例如內容明顯缺失），可以嘗試重新生成"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:372
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:328
+msgid "工作完成。目前也可以进行对话"
+msgstr "工作完成。目前也可以進行對話"
+
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:329
+msgid "或者是使用 <b>与AI交流研究进展</b> 进一步深入的分析"
+msgstr "或者是使用 <b>與AI交流研究進展</b> 進一步深入的分析"
+
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:386
 #, python-brace-format
 msgid ""
 "[批次进度：{a}/{b}] 请对这篇文章的摘要进行总结概括\n"
@@ -1193,23 +1179,23 @@ msgstr ""
 "\n"
 "環繞: {key}"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:499
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:513
 msgid "处理中..."
 msgstr "處理中..."
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:510
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:524
 msgid "多线程操作完成"
 msgstr "多線程操作完成。"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:543
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:557
 msgid "最后总结中....."
 msgstr "最後總結中……"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:550
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:564
 msgid "总结完成"
 msgstr "總結完成"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:595
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:609
 msgid ""
 "存在不可使用的PDF（中文学位论文、加密文件、非PDF文件或损坏文件），这些文件不"
 "会参与总结。文件如下："
@@ -1217,52 +1203,52 @@ msgstr ""
 "存在不適用之PDF（中文學位論文、加密文件、非PDF文件或損壞文件），此等文件不參"
 "與總結。文件如下："
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:596
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:610
 msgid "全部PDF可用！"
 msgstr "全部PDF可用！"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:596
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:610
 msgid "不存在不可用的PDF"
 msgstr "不存在不可用的PDF"
 
-#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:603
+#: crazy_functions/scholar_navis/scripts/summarize_articles_by_keywords.py:617
 msgid "强制重新分析"
 msgstr "強制重新分析"
 
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:72
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:74
 msgid "无法使用的文字对话，请重新输入。"
 msgstr "無法使用的文字對話，請重新輸入。"
 
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:72
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:74
 msgid "无法以这些内容开头：{}"
 msgstr "無法以這些內容開頭：{}"
 
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:81
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:85
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:83
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:87
 msgid "无效的文件访问请求，请重新输入"
 msgstr "無效的文件訪問請求，請重新輸入。"
 
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:81
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:83
 msgid "路径：{} 未授权或是功能性目录"
 msgstr "路徑：{} 未授權或是功能性目錄。"
 
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:85
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:87
 msgid "路径：{} 的所有权不在当前用户"
 msgstr "路徑：{} 的所有權不在當前用戶。"
 
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:102
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:104
 #: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:138
 #: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:140
 msgid "禁用"
 msgstr "禁用"
 
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:103
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:105
 #: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:137
 #: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:140
 msgid "启用"
 msgstr "啟用"
 
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:112
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:114
 #, python-brace-format
 msgid ""
 "<ul><li>不能含有以下字符：{forbidden}</li><li>不能以{forbidden_start}开头</"
@@ -1271,11 +1257,11 @@ msgstr ""
 "<ul><li>不能含有以下字符：{forbidden}</li><li>不能以{forbidden_start}开头</"
 "li></ul>"
 
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:113
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:115
 msgid "该名称`{}`无法使用，详细说明如下: "
 msgstr "该名稱`{}`無法使用，詳細說明如下："
 
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:132
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:134
 msgid ""
 "Scholar Navis (ver.{}) \n"
 "关于文档如下。完整版可以参见github发布页"
@@ -1283,101 +1269,113 @@ msgstr ""
 "Scholar Navis（ver.{}）\n"
 "關於文檔如下。完整版可參考Github發布頁"
 
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:141
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:143
 msgid "Scholar Navis 使用到的第三方库: "
 msgstr "Scholar Navis 使用到的第三方庫:"
 
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:151
-#: shared_utils/scholar_navis/gpt_academic_handler.py:53
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:153
+#: shared_utils/scholar_navis/gpt_academic_handler.py:54
 msgid "与AI交流研究进展"
 msgstr "與AI交流研究進展"
 
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:155
-#: shared_utils/scholar_navis/gpt_academic_handler.py:39
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:157
+#: shared_utils/scholar_navis/gpt_academic_handler.py:40
 msgid "按关键词总结文献"
 msgstr "按關鍵詞摘要文獻"
 
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:159
-#: shared_utils/scholar_navis/gpt_academic_handler.py:25
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:161
+#: shared_utils/scholar_navis/gpt_academic_handler.py:26
 msgid "缓存pdf文献"
 msgstr "緩存 PDF 文獻"
 
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:162
-#: shared_utils/scholar_navis/gpt_academic_handler.py:67
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:164
+#: shared_utils/scholar_navis/gpt_academic_handler.py:68
 msgid "精细分析文献"
 msgstr "精緻分析文獻"
 
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:167
-#: shared_utils/scholar_navis/gpt_academic_handler.py:82
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:169
+#: shared_utils/scholar_navis/gpt_academic_handler.py:83
 msgid "PubMed_OpenAccess文章获取"
 msgstr "PubMed_OpenAccess 文章獲取"
 
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:172
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:174
 msgid "更好的文章润色"
 msgstr "更佳之文章修飾"
 
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:186
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:188
 msgid "<b>{}</b>的帮助文档如下: "
 msgstr "<b>{}</b>的幫助文檔如下："
 
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:198
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:200
 msgid "总结库 <b>{}</b> 不存在，请检查输入是否准确"
 msgstr "總結庫 <b>{}</b> 不存在，請檢查輸入是否準確"
 
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:198
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:200
 msgid "没有输入总结库名称"
 msgstr "沒有輸入總結庫名稱"
 
-#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:212
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:214
 msgid "不能进行正常操作。下面是有关信息: "
 msgstr "無法進行正常操作。以下為相關信息："
 
-#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:7
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:222
+msgid ""
+"请注意，您使用的是推理模型，效果较好，但是速度可能较慢。由于需要多次请求，请"
+"注意您的余额充足！"
+msgstr ""
+"請注意，您使用的是推理模型，效果較好，但是速度可能較慢。由於需要多次請求，請"
+"注意您的餘額充足！"
+
+#: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:223
+msgid "如果不是推理模型，请忽略此警告。"
+msgstr "如果不是推理模型，請忽略此警告。"
+
+#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:12
 msgid "需要参数"
 msgstr "需要參數"
 
-#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:42
+#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:41
 msgid "文件上传路径或网址"
 msgstr "文件上傳路徑或網址"
 
-#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:42
+#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:41
 msgid "请上传文件后，再点击该插件"
 msgstr "請上傳文件後，再點擊此插件"
 
-#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:69
-#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:72
+#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:68
+#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:71
 msgid "无"
 msgstr "無"
 
-#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:82
+#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:81
 msgid "帮助文档"
 msgstr "幫助文檔"
 
-#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:83
+#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:82
 msgid "版权信息"
 msgstr "版權資訊"
 
-#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:84
+#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:83
 msgid "关于"
 msgstr "有關"
 
-#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:85
+#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:84
 msgid "辅助指令"
 msgstr "輔助指令"
 
-#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:85
+#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:84
 msgid "使用辅助指令可以实现额外的操作"
 msgstr "使用輔助指令可實現額外的操作"
 
-#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:89
+#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:88
 msgid "指令参数"
 msgstr "指令參數"
 
-#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:89
+#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:88
 msgid "如需要，在此处输入辅助指令的参数"
 msgstr "如有需要，在此處輸入輔助指令的參數"
 
-#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:98
+#: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:97
 msgid "选择总结库进行操作"
 msgstr "請選擇總結庫進行操作"
 
@@ -1402,25 +1400,25 @@ msgstr "使用AI輔助功能"
 msgid "AI补全信息，速度较慢"
 msgstr "AI補全資訊，速度較慢"
 
-#: crazy_functions/生成多种Mermaid图表.py:218
+#: crazy_functions/生成多种Mermaid图表.py:233
 msgid "从以下文本中提取摘要"
 msgstr "從以下文本中提取摘要"
 
-#: crazy_functions/生成多种Mermaid图表.py:220
+#: crazy_functions/生成多种Mermaid图表.py:235
 msgid "文章极长，不能达到预期效果"
 msgstr "文章過於冗長，無法達到預期效果。"
 
-#: crazy_functions/生成多种Mermaid图表.py:254
+#: crazy_functions/生成多种Mermaid图表.py:269
 msgid "接下来将判断适合的图表类型,如连续3次判断失败将会使用流程图进行绘制"
 msgstr "接下來將判斷適合的圖表類型，如連續3次判斷失敗將會使用流程圖進行繪製。"
 
-#: crazy_functions/生成多种Mermaid图表.py:256
-#: crazy_functions/生成多种Mermaid图表.py:387
-#: crazy_functions/生成多种Mermaid图表.py:397
+#: crazy_functions/生成多种Mermaid图表.py:271
+#: crazy_functions/生成多种Mermaid图表.py:422
+#: crazy_functions/生成多种Mermaid图表.py:432
 msgid "[Local Message] 收到。"
 msgstr "[Local Message] 收到。"
 
-#: crazy_functions/生成多种Mermaid图表.py:260
+#: crazy_functions/生成多种Mermaid图表.py:275
 msgid ""
 "请判断适合使用的流程图类型,其中数字对应关系为:1-流程图,2-序列图,3-类图,4-饼"
 "图,5-甘特图,6-状态图,7-实体关系图,8-象限提示图。由于不管提供文本是什么,模型"
@@ -1430,7 +1428,7 @@ msgstr ""
 "4-餅圖，5-甘特圖，6-狀態圖，7-實體關係圖，8-象限提示圖。由於無論提供的文本是"
 "什麼，模型大概率認為\"思維導圖\"最合適，因此思維導圖僅能通過參數調用。"
 
-#: crazy_functions/生成多种Mermaid图表.py:303
+#: crazy_functions/生成多种Mermaid图表.py:318
 msgid ""
 "请根据判断结果绘制相应的图表。如需绘制思维导图请使用参数调用,同时过大的图表"
 "可能需要复制到在线编辑器中进行渲染."
@@ -1438,11 +1436,27 @@ msgstr ""
 "請根據判斷結果繪製相應的圖表。如需繪製思維導圖請使用參數調用，同時過大的圖表"
 "可能需要複製到在線編輯器中進行渲染。"
 
-#: crazy_functions/生成多种Mermaid图表.py:338
+#: crazy_functions/生成多种Mermaid图表.py:337
+msgid "点击查看大图（可能会生成失败！）"
+msgstr "點擊查看大圖（可能會生成失敗！）"
+
+#: crazy_functions/生成多种Mermaid图表.py:347
+msgid "上方为生成的图形"
+msgstr "上方為生成的圖形"
+
+#: crazy_functions/生成多种Mermaid图表.py:347
+msgid "如果生成失败，可以点击这里查看AI返回的内容并自行修复"
+msgstr "如果生成失敗，可以點擊這裡查看AI返回的內容並自行修復"
+
+#: crazy_functions/生成多种Mermaid图表.py:350
+msgid "此外，您还可以对于绘制的图形进行问答。"
+msgstr "此外，您還可以對於繪製的圖形進行問答。"
+
+#: crazy_functions/生成多种Mermaid图表.py:373
 msgid "函数插件功能？"
 msgstr "函數插件功能？"
 
-#: crazy_functions/生成多种Mermaid图表.py:339
+#: crazy_functions/生成多种Mermaid图表.py:374
 msgid ""
 "根据当前聊天历史或指定的路径文件(文件内容优先)绘制多种mermaid图表，将会由对"
 "话模型首先判断适合的图表类型，随后绘制图表。        \n"
@@ -1452,17 +1466,17 @@ msgstr ""
 "對話模型首先判斷適合的圖表類型，隨後繪製圖表。        \n"
 "您也可以使用插件參數指定繪製的圖表類型，函數插件貢獻者：Menghuan1918"
 
-#: crazy_functions/生成多种Mermaid图表.py:361
-#: crazy_functions/生成多种Mermaid图表.py:369
-#: crazy_functions/生成多种Mermaid图表.py:377
+#: crazy_functions/生成多种Mermaid图表.py:396
+#: crazy_functions/生成多种Mermaid图表.py:404
+#: crazy_functions/生成多种Mermaid图表.py:412
 msgid "解析项目: {}"
 msgstr "解析項目：{}"
 
-#: crazy_functions/生成多种Mermaid图表.py:362
+#: crazy_functions/生成多种Mermaid图表.py:397
 msgid "找到了.doc文件，但是该文件格式不被支持，请先转化为.docx格式。"
 msgstr "找到了.doc文件，但是該文件格式不被支援，請先轉化為.docx格式。"
 
-#: crazy_functions/生成多种Mermaid图表.py:370
+#: crazy_functions/生成多种Mermaid图表.py:405
 msgid ""
 "导入软件依赖失败。使用该模块需要额外依赖，安装方法```pip install --upgrade "
 "pymupdf```。"
@@ -1470,7 +1484,7 @@ msgstr ""
 "導入軟件依賴失敗。使用該模塊需要額外依賴，安裝方法```pip install --upgrade "
 "pymupdf```。"
 
-#: crazy_functions/生成多种Mermaid图表.py:378
+#: crazy_functions/生成多种Mermaid图表.py:413
 msgid ""
 "导入软件依赖失败。使用该模块需要额外依赖，安装方法```pip install --upgrade "
 "python-docx pywin32```。"
@@ -1478,11 +1492,11 @@ msgstr ""
 "導入軟件依賴失敗。使用該模塊需要額外依賴，安裝方法```pip install --upgrade "
 "python-docx pywin32```。"
 
-#: crazy_functions/生成多种Mermaid图表.py:386
+#: crazy_functions/生成多种Mermaid图表.py:421
 msgid "首先你从历史记录中提取摘要"
 msgstr "首先你從歷史記錄中提取摘要"
 
-#: main.py:9
+#: main.py:25
 msgid ""
 "\n"
 "## gpt_academic：\n"
@@ -1526,19 +1540,15 @@ msgstr ""
 "</br></br>如何語音對話：請閱讀Wiki\n"
 "</br></br>要使用大模型，請在左上角的 API-KEY 中輸入您的密钥。\n"
 
-#: main.py:37
-msgid "所有对话记录将自动保存在本地目录{}, 请注意自我隐私保护哦！"
-msgstr "所有對話記錄將自動保存在本地目錄{}，請注意自我隱私保護哦！"
-
-#: main.py:108
-msgid "文件上传与设置"
-msgstr "文件上傳與設置"
-
 #: main.py:109
+msgid "上传与设置"
+msgstr "上傳與設置"
+
+#: main.py:110
 msgid "暗黑模式"
 msgstr "暗黑模式"
 
-#: main.py:112
+#: main.py:113
 msgid ""
 "下方内容为 AI 生成，不代表任何立场，可能存在片面甚至错误。仅供参考，开发者及"
 "其组织不负任何责任"
@@ -1546,120 +1556,134 @@ msgstr ""
 "下方內容為 AI 生成，不代表任何立場，可能存在片面甚至錯誤。僅供參考，開發者及"
 "其組織不負任何責任"
 
-#: main.py:115
+#: main.py:114
+msgid ""
+"联网系统信息安全无法得到充分保证，最好是个人、小组织内使用，保证服务提供者可"
+"信，并且敏感信息最好不要上传。另外，当启用登录功能时，服务商能够储存您api-"
+"key，不推荐使用来路不明、不受信任的服务商"
+msgstr ""
+"聯網系統信息安全無法得到充分保證，最好是個人、小組織內使用，保證服務提供者可"
+"信，並且敏感信息最好不要上傳。另外，當啟用登錄功能時，服務商能夠儲存您api-"
+"key，不推薦使用來路不明、不受信任的服務商。"
+
+#: main.py:118
 msgid "对话功能"
 msgstr "對話功能"
 
-#: main.py:118 main.py:259 themes/gui_toolbar.py:242 themes/gui_toolbar.py:248
-#: themes/gui_toolbar.py:253
+#: main.py:121 main.py:247 themes/gui_toolbar.py:266 themes/gui_toolbar.py:272
+#: themes/gui_toolbar.py:277
 msgid "当前模型: {}"
 msgstr "當前模型：{}"
 
-#: main.py:124
+#: main.py:127
 msgid "输入区"
 msgstr "輸入區"
 
-#: main.py:128 main.py:138
+#: main.py:131 main.py:141
 msgid "提交"
 msgstr "提交"
 
-#: main.py:140 shared_utils/scholar_navis/gpt_academic_handler.py:186
+#: main.py:143 shared_utils/scholar_navis/gpt_academic_handler.py:187
 msgid "重置"
 msgstr "重置"
 
-#: main.py:141
+#: main.py:144
 msgid "停止"
 msgstr "停止"
 
-#: main.py:142
+#: main.py:145
 msgid "清除"
 msgstr "清除"
 
-#: main.py:144
+#: main.py:147
 msgid "Tip: 按Enter提交, 按Shift+Enter换行"
 msgstr "提示：按Enter鍵提交，按Shift+Enter換行"
 
-#: main.py:146
+#: main.py:149
 msgid "Scholar Navis 功能区"
 msgstr "Scholar Navis 功能區"
 
-#: main.py:149
-msgid "基础功能区"
-msgstr "基礎功能區"
-
-#: main.py:188
+#: main.py:180
 msgid "摘取有用语句"
 msgstr "摘取有用語句"
 
-#: main.py:223
+#: main.py:215
 msgid "已重置"
 msgstr "已重置"
 
-#: main.py:297
+#: main.py:285
 msgid "如果浏览器没有自动打开，请复制并转到以下URL:"
 msgstr "如果瀏覽器沒有自動打開，請複製並轉到以下URL："
 
-#: request_llms/bridge_all.py:60
+#: request_llms/bridge_all.py:70
 msgid "正在加载tokenizer，如果是第一次运行，可能需要一点时间下载参数"
 msgstr "正在加載tokenizer，如果是第一次運行，可能需要一點時間下載參數"
 
-#: request_llms/bridge_all.py:62
+#: request_llms/bridge_all.py:72
 msgid "加载tokenizer完毕"
 msgstr "加載tokenizer完畢"
 
-#: request_llms/bridge_all.py:92
+#: request_llms/bridge_all.py:102
 msgid "警告！API_URL配置选项将被弃用，请更换为API_URL_REDIRECT配置"
 msgstr "警告！API_URL配置選項將被棄用，請更換為API_URL_REDIRECT配置"
 
-#: request_llms/bridge_all.py:1004
+#: request_llms/bridge_all.py:764
 msgid "one-api模型 {} 的 max_token 配置不是整数，请检查配置文件"
 msgstr "警告！API_URL配置選項將被棄用，請更換為API_URL_REDIRECT配置。"
 
-#: request_llms/bridge_all.py:1043 toolbox.py:655
+#: request_llms/bridge_all.py:803 toolbox.py:661
 msgid "AZURE_CFG_ARRAY中配置的模型必须以azure开头"
 msgstr "AZURE_CFG_ARRAY中配置的模型必須以azure開頭"
 
-#: request_llms/bridge_all.py:1175
+#: request_llms/bridge_all.py:863
+msgid "历史记录参数必须是List, 但是现在的类型是{}"
+msgstr "歷史記錄參數必須是List, 但是現在的類型是{}"
+
+#: request_llms/bridge_all.py:949
 msgid "模型覆盖参数 '{}' 指向一个暂不支持的模型，请检查配置文件"
 msgstr "模型覆蓋參數 '{}' 指向一個暫不支援的模型，請檢查配置文件"
 
-#: request_llms/bridge_chatgpt.py:127
+#: request_llms/bridge_all.py:976
+msgid "历史记录参数必须是List"
+msgstr "歷史記錄參數必須是List"
+
+#: request_llms/bridge_chatgpt.py:136
 msgid "Endpoint不正确, 请检查AZURE_ENDPOINT的配置! 当前的Endpoint为:"
 msgstr "Endpoint不正確，請檢查AZURE_ENDPOINT的配置！當前的Endpoint為："
 
-#: request_llms/bridge_chatgpt.py:174 request_llms/bridge_chatgpt.py:178
+#: request_llms/bridge_chatgpt.py:183 request_llms/bridge_chatgpt.py:187
 msgid "OpenAI拒绝了请求: "
 msgstr "OpenAI拒絕了請求："
 
-#: request_llms/bridge_chatgpt.py:176 request_llms/bridge_chatgpt.py:204
+#: request_llms/bridge_chatgpt.py:185 request_llms/bridge_chatgpt.py:213
 msgid "正常结束，但显示Token不足，导致输出不完整，请削减单次输入的文本量"
 msgstr "正常結束，但顯示Token不足，導致輸出不完整，請削減單次輸入的文本量"
 
-#: request_llms/bridge_chatgpt.py:199
+#: request_llms/bridge_chatgpt.py:208
 msgid "用户取消了程序"
 msgstr "用戶取消了程序"
 
-#: request_llms/bridge_chatgpt.py:200
+#: request_llms/bridge_chatgpt.py:209
 msgid "意外Json结构："
 msgstr "意外Json結構："
 
-#: request_llms/bridge_chatgpt.py:202
+#: request_llms/bridge_chatgpt.py:211
 msgid "由于提问含不合规内容被Azure过滤"
 msgstr "由於提問含不規範內容被Azure過濾"
 
-#: request_llms/bridge_chatgpt.py:222 request_llms/bridge_chatgpt_vision.py:81
+#: request_llms/bridge_chatgpt.py:231 request_llms/bridge_chatgpt_vision.py:85
 msgid "输入已识别为openai的api_key"
 msgstr "輸入已識別為openai的api_key"
 
-#: request_llms/bridge_chatgpt.py:226
+#: request_llms/bridge_chatgpt.py:235
 msgid "缺少api_key，可以在上方进行自定义，或者联系管理员更新配置文件"
 msgstr "缺少api_key，可以在上方進行自定義，或者聯繫管理員更新配置文件"
 
-#: request_llms/bridge_chatgpt.py:227
+#: request_llms/bridge_chatgpt.py:236
 msgid "缺少api_key"
 msgstr "缺少api_key"
 
-#: request_llms/bridge_chatgpt.py:257
+#: request_llms/bridge_chatgpt.py:266
 msgid ""
 "您提供的api-key不满足要求，不包含任何可用于{}的api-key。您可能选择了错误的模"
 "型或请求源"
@@ -1667,49 +1691,49 @@ msgstr ""
 "您提供的api-key不满足要求，不包含任何可用于{}的api-key。您可能选择了错误的模"
 "型或请求源"
 
-#: request_llms/bridge_chatgpt.py:267
+#: request_llms/bridge_chatgpt.py:276
 msgid "Endpoint不满足要求"
 msgstr "Endpoint不滿足要求"
 
-#: request_llms/bridge_chatgpt.py:286
-#: request_llms/oai_std_model_template.py:340
+#: request_llms/bridge_chatgpt.py:295
+#: request_llms/oai_std_model_template.py:363
 msgid "请求超时"
 msgstr "請求超時"
 
-#: request_llms/bridge_chatgpt.py:303
+#: request_llms/bridge_chatgpt.py:313
 msgid "检测到有缺陷的非OpenAI官方接口，建议选择更稳定的接口"
 msgstr "檢測到有缺陷的非OpenAI官方接口，建議選擇更穩定的接口"
 
-#: request_llms/bridge_chatgpt.py:307
+#: request_llms/bridge_chatgpt.py:317
 msgid "非OpenAI官方接口返回了错误:"
 msgstr "非OpenAI官方接口返回了錯誤："
 
-#: request_llms/bridge_chatgpt.py:349
-#: request_llms/oai_std_model_template.py:247
-#: request_llms/oai_std_model_template.py:396
+#: request_llms/bridge_chatgpt.py:379
+#: request_llms/oai_std_model_template.py:270
+#: request_llms/oai_std_model_template.py:439
 msgid "Json解析不合常规"
 msgstr "Json解析不合常規"
 
-#: request_llms/bridge_chatgpt.py:354
-#: request_llms/oai_std_model_template.py:405
+#: request_llms/bridge_chatgpt.py:384
+#: request_llms/oai_std_model_template.py:448
 msgid "Json异常"
 msgstr "Json異常"
 
-#: request_llms/bridge_chatgpt.py:393
+#: request_llms/bridge_chatgpt.py:423
 msgid ""
 "错误的api_key，请进行修改：可以在上方进行自定义，或者联系管理员更新配置文件"
 msgstr ""
 "錯誤的api_key，請進行修改：可以在上方進行自定義，或者聯繫管理員更新配置文件"
 
-#: request_llms/bridge_chatgpt_vision.py:85
+#: request_llms/bridge_chatgpt_vision.py:89
 msgid "缺少api_key，请在 config.py 中配置或在上方进行自定义"
 msgstr "缺少api_key，請在 config.py 中配置或在上方進行自定義"
 
-#: request_llms/bridge_qwen.py:25
+#: request_llms/bridge_qwen.py:33
 msgid "用户停止"
 msgstr "用戶停止"
 
-#: request_llms/bridge_qwen.py:42
+#: request_llms/bridge_qwen.py:50
 msgid ""
 "导入软件依赖失败。使用该模型需要额外依赖，安装方法```pip install --upgrade "
 "dashscope```"
@@ -1717,27 +1741,27 @@ msgstr ""
 "導入軟件依賴失敗。使用該模型需要額外依賴，安裝方法```pip install --upgrade "
 "dashscope```"
 
-#: request_llms/bridge_qwen.py:48
+#: request_llms/bridge_qwen.py:56 request_llms/com_qwenapi.py:30
 msgid "请配置 DASHSCOPE_API_KEY或自定义 通义千问(Qwen) API-KEY"
 msgstr "請配置 DASHSCOPE_API_KEY 或自定義 通義千問(Qwen) API-KEY"
 
-#: request_llms/bridge_qwen.py:61 request_llms/bridge_qwen.py:68
+#: request_llms/bridge_qwen.py:69 request_llms/bridge_qwen.py:76
 msgid "[Local Message] 等待 {} 响应中 ..."
 msgstr "[Local Message] 等待 {} 响應中 ..."
 
-#: request_llms/bridge_qwen.py:69
+#: request_llms/bridge_qwen.py:77
 msgid "[Local Message] {} 响应异常"
 msgstr "[Local Message] {} 响應異常"
 
-#: request_llms/bridge_zhipu.py:35
+#: request_llms/bridge_zhipu.py:42
 msgid "请配置ZHIPUAI_API_KEY或自定义 智谱(Zhipu) API-KEY"
 msgstr "請配置ZHIPUAI_API_KEY或自定義 智譜(Zhipu) API-KEY"
 
-#: request_llms/bridge_zhipu.py:45
+#: request_llms/bridge_zhipu.py:52
 msgid "程序终止"
 msgstr "程序終止"
 
-#: request_llms/bridge_zhipu.py:62
+#: request_llms/bridge_zhipu.py:69
 msgid ""
 "导入软件依赖失败。使用该模型需要额外依赖，安装方法```pip install --upgrade "
 "zhipuai```"
@@ -1745,11 +1769,11 @@ msgstr ""
 "導入軟件依賴失敗。使用該模型需要額外依賴，安裝方法```pip install --upgrade "
 "zhipuai```"
 
-#: request_llms/bridge_zhipu.py:82
+#: request_llms/bridge_zhipu.py:89
 msgid "上下文长度超过glm-4v上限2000tokens，注意图片大约占用1,047个tokens"
 msgstr "上下文長度超過glm-4v上限2000tokens，注意图片大約佔用1,047個tokens"
 
-#: request_llms/bridge_zhipu.py:87
+#: request_llms/bridge_zhipu.py:94
 msgid ""
 "没有检测到任何近期上传的图像文件，请上传jpg格式的图片，此外，请注意拓展名需"
 "要小写"
@@ -1757,36 +1781,36 @@ msgstr ""
 "沒有檢測到任何近期上傳的圖像文件，請上傳jpg格式的图片，此外，請注意拓展名需"
 "要小寫"
 
-#: request_llms/oai_std_model_template.py:157
-#: request_llms/oai_std_model_template.py:271
+#: request_llms/oai_std_model_template.py:179
+#: request_llms/oai_std_model_template.py:294
 msgid "APIKEY为空,请检查配置文件的{}"
 msgstr "APIKEY為空，請檢查配置文件的{}"
 
-#: request_llms/oai_std_model_template.py:224
+#: request_llms/oai_std_model_template.py:246
 msgid "API异常,请检测终端输出。可能的原因是: {}"
 msgstr "API異常，請檢測終端輸出。可能的原因是：{}"
 
-#: request_llms/oai_std_model_template.py:283
+#: request_llms/oai_std_model_template.py:306
 msgid "等待响应"
 msgstr "等待響應"
 
-#: request_llms/oai_std_model_template.py:372
+#: request_llms/oai_std_model_template.py:396
 msgid "[Local Message] {},获得以下报错信息：\n"
 msgstr "[Local Message] {}，獲得以下報錯信息：\n"
 
-#: request_llms/oai_std_model_template.py:378
+#: request_llms/oai_std_model_template.py:402
 msgid "API异常: "
 msgstr "API異常："
 
-#: shared_utils/fastapi_server.py:84 shared_utils/fastapi_server.py:91
+#: shared_utils/fastapi_server.py:165
 msgid "您没有访问该目录/文件的权限"
 msgstr "您沒有訪問該目錄/文件的權限"
 
-#: shared_utils/key_pattern_manager.py:59
+#: shared_utils/key_pattern_manager.py:73
 msgid "检测到： OpenAI Key {} 个, Azure Key {} 个, API2D Key {} 个"
 msgstr "檢測到：OpenAI Key {} 個，Azure Key {} 個，API2D Key {} 個"
 
-#: shared_utils/key_pattern_manager.py:85
+#: shared_utils/key_pattern_manager.py:99
 msgid ""
 "您提供的api-key不满足要求，不包含任何可用于{}的api-key。您可能选择了错误的模"
 "型或请求源（左上角更换模型菜单中可切换其他模型或请求源）"
@@ -1794,11 +1818,11 @@ msgstr ""
 "您提供的api-key不滿足要求，不包含任何可用於{}的api-key。您可能選擇了錯誤的模"
 "型或請求源（左上角更換模型菜單中可切換其他模型或請求源）"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:105
+#: shared_utils/scholar_navis/gpt_academic_handler.py:106
 msgid "Scholar Navis 文章总结分析工具"
 msgstr "學者維薩 文章總結分析工具"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:141
+#: shared_utils/scholar_navis/gpt_academic_handler.py:142
 msgid ""
 "使用此功能，批量从文章中获取有用的语句（保留原文便于快速查阅），并将其翻译成"
 "更熟悉的语言（便于阅读）"
@@ -1806,29 +1830,29 @@ msgstr ""
 "使用此功能，批量從文章中獲取有用的語句（保留原文以便於快速查閱），並將其翻譯"
 "成更熟悉的語言（便於閱讀）"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:142
+#: shared_utils/scholar_navis/gpt_academic_handler.py:143
 msgid "适用于撰写文章摘要、前沿等内容。也可用于快速的文章学习"
 msgstr "適用於撰寫文章摘要、前沿等內容。也可用於快速的文章學習"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:143
+#: shared_utils/scholar_navis/gpt_academic_handler.py:144
 msgid "AI可能犯错或不完整，仍需要人工校对或人工检索原文章!"
 msgstr "AI可能犯錯或不完整，仍需要人工校對或人工检索原文章！"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:144
+#: shared_utils/scholar_navis/gpt_academic_handler.py:145
 msgid "注意：文件过大时，可能会导致程序卡顿，并且处理速度会很慢。请耐心等待"
 msgstr "注意：文件過大時，可能會導致程序卡頓，並且處理速度會很慢。請耐心等待"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:145
+#: shared_utils/scholar_navis/gpt_academic_handler.py:146
 msgid ""
 "仅限本地使用。如果要中断任务，务必点击下方的“终止”按钮，否则任务无法结束"
 msgstr ""
 "僅限本地使用。如果要中斷任務，務必點擊下方的“終止”按鈕，否則任務無法結束"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:148
+#: shared_utils/scholar_navis/gpt_academic_handler.py:149
 msgid "新建摘要任务或导入已有任务"
 msgstr "新建摘要任務或導入已有任務"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:149
+#: shared_utils/scholar_navis/gpt_academic_handler.py:150
 msgid ""
 "- 新建任务时，推荐手动准备资源。第一列是文章标题，第二列是文章原文，需要有表"
 "头，以csv文件储存"
@@ -1836,7 +1860,7 @@ msgstr ""
 "- 新建任務時，推薦手動準備資源。第一列是文章標題，第二列是文章原文，需要有表"
 "頭，以csv文件儲存"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:150
+#: shared_utils/scholar_navis/gpt_academic_handler.py:151
 msgid ""
 "- 新建任务时，也可以直接上传PDF（支持压缩包），使用该自动工具获取文章资源"
 "（效果稍差）"
@@ -1844,19 +1868,19 @@ msgstr ""
 "- 新建任務時，也可以直接上傳PDF（支持壓縮包），使用該自動工具獲取文章資源"
 "（效果稍差）"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:151
+#: shared_utils/scholar_navis/gpt_academic_handler.py:152
 msgid "- 已经发生摘取行为后无法使用此功能"
 msgstr "- 已經發生摘取行為後無法使用此功能"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:152
+#: shared_utils/scholar_navis/gpt_academic_handler.py:153
 msgid "任务名称"
 msgstr "任務名稱"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:152
+#: shared_utils/scholar_navis/gpt_academic_handler.py:153
 msgid "输入任务名称，否则使用默认名称"
 msgstr "輸入任務名稱，否則使用默認名稱"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:153
+#: shared_utils/scholar_navis/gpt_academic_handler.py:154
 msgid ""
 "请上传包含文章标题与内容的csv文件 or 以往下载的分析文件（.zip）or pdf or pdf"
 "的压缩包（.zip/.rar）"
@@ -1864,71 +1888,71 @@ msgstr ""
 "請上傳包含文章標題與內容的CSV文件，或以往下載的分析文件（.zip），或PDF，或"
 "PDF的壓縮包（.zip/.rar）"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:154
+#: shared_utils/scholar_navis/gpt_academic_handler.py:155
 msgid "点击这里下载样例csv文件: {}"
 msgstr "點擊這裡下載樣例csv文件：{}"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:158
+#: shared_utils/scholar_navis/gpt_academic_handler.py:159
 msgid "[可选] 增量添加PDF (zip / rar 格式)"
 msgstr "[可選] 增量添加PDF（zip / rar 格式）"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:159
+#: shared_utils/scholar_navis/gpt_academic_handler.py:160
 msgid "- 向摘要任务中添加额外的PDF文章"
 msgstr "- 向摘要任務中添加額外的PDF文章"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:160
+#: shared_utils/scholar_navis/gpt_academic_handler.py:161
 msgid "请上传pdf或pdf的压缩包（.zip / .rar）"
 msgstr "請上傳PDF或PDF的壓縮包（.zip / .rar）"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:162
+#: shared_utils/scholar_navis/gpt_academic_handler.py:163
 msgid "设定分析参数"
 msgstr "設定分析參數"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:163
+#: shared_utils/scholar_navis/gpt_academic_handler.py:164
 msgid "关于AI的调整请使用页面顶部的设置"
 msgstr "關於AI的調整請使用頁面頂部的設置"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:165
+#: shared_utils/scholar_navis/gpt_academic_handler.py:166
 msgid "内容要求"
 msgstr "內容要求"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:165
+#: shared_utils/scholar_navis/gpt_academic_handler.py:166
 msgid "输入对于内容的总体要求"
 msgstr "輸入對於內容的總體要求"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:166
+#: shared_utils/scholar_navis/gpt_academic_handler.py:167
 msgid "结构要求"
 msgstr "結構要求"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:166
+#: shared_utils/scholar_navis/gpt_academic_handler.py:167
 msgid "输入对于行文结构的要求（一行一个）"
 msgstr "輸入對於行文結構的要求（一行一個）"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:169
+#: shared_utils/scholar_navis/gpt_academic_handler.py:170
 msgid "请选择翻译语言"
 msgstr "請選擇翻譯語言"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:170
+#: shared_utils/scholar_navis/gpt_academic_handler.py:171
 msgid "最大并发数"
 msgstr "最大並發數"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:170
+#: shared_utils/scholar_navis/gpt_academic_handler.py:171
 msgid "越大提取越快。过大可能会遇到问题"
 msgstr "越大提取越快。過大可能會遇到問題"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:172
+#: shared_utils/scholar_navis/gpt_academic_handler.py:173
 msgid "选择操作步骤"
 msgstr "選擇操作步驟"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:173
+#: shared_utils/scholar_navis/gpt_academic_handler.py:174
 msgid "执行"
 msgstr "執行"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:175
+#: shared_utils/scholar_navis/gpt_academic_handler.py:176
 msgid "获取结果"
 msgstr "獲取結果"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:176
+#: shared_utils/scholar_navis/gpt_academic_handler.py:177
 msgid ""
 "- 注意，当运行出错或超时（例如请求达到上限、网络问题），会自动结束任务，并输"
 "出结果"
@@ -1936,91 +1960,84 @@ msgstr ""
 "- 注意，當運行出錯或超時（例如請求達到上限、網絡問題），會自動結束任務，並輸"
 "出結果"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:177
+#: shared_utils/scholar_navis/gpt_academic_handler.py:178
 msgid ""
 "- 可以选择“停止”，下载全部文件后，重新运行摘取功能。会继续之前的进度进行摘取"
 msgstr ""
 "- 可以選擇“停止”，下載全部文件後，重新運行摘取功能。會繼續之前的進度進行摘取"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:178
+#: shared_utils/scholar_navis/gpt_academic_handler.py:179
 msgid "- <b>在显示下载按钮之前，都是未完成的状态！</b>"
 msgstr "- <b>在顯示下載按鈕之前，都是未完成的状态！</b>"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:179
+#: shared_utils/scholar_navis/gpt_academic_handler.py:180
 msgid "- 摘取完成后（无论成功与否），需要点击“重置”按钮以开启新一轮的摘取"
 msgstr "- 摘取完成後（無論成功與否），需要點擊“重置”按鈕以開啟新一轮的摘取"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:181
+#: shared_utils/scholar_navis/gpt_academic_handler.py:182
 msgid "全部下载(包含摘取结果，便于后续添加新文章)"
 msgstr "全部下載（包含摘取結果，便於後續添加新文章）"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:182
+#: shared_utils/scholar_navis/gpt_academic_handler.py:183
 msgid "仅下载结果"
 msgstr "僅下載結果"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:185
+#: shared_utils/scholar_navis/gpt_academic_handler.py:186
 msgid "终止"
 msgstr "終止"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:188
+#: shared_utils/scholar_navis/gpt_academic_handler.py:189
 msgid "日志"
 msgstr "日誌"
 
-#: shared_utils/scholar_navis/gpt_academic_handler.py:221
+#: shared_utils/scholar_navis/gpt_academic_handler.py:222
 msgid "Scholar Navis 加载失败"
 msgstr "Scholar Navis 加載失敗"
 
-#: shared_utils/scholar_navis/multi_lang.py:13
-#, python-brace-format
-msgid ""
-"{LANGUAGE_DISPLAY} 是无效的语言设定，将使用默认语言 zh-Hans（简体中文）"
-msgstr ""
-"{LANGUAGE_DISPLAY} 是無效的語言設置，將使用默認語言 zh-Hans（簡體中文）"
-
-#: shared_utils/scholar_navis/user_account_manager.py:53
+#: shared_utils/scholar_navis/user_account_manager.py:56
 msgid "当前密码不能为空"
 msgstr "當前密碼不能為空"
 
-#: shared_utils/scholar_navis/user_account_manager.py:57
+#: shared_utils/scholar_navis/user_account_manager.py:60
 msgid "当前密码错误"
 msgstr "當前密碼錯誤"
 
-#: shared_utils/scholar_navis/user_account_manager.py:71
+#: shared_utils/scholar_navis/user_account_manager.py:74
 msgid "密码修改失败，请稍后再试"
 msgstr "密碼修改失敗，請稍後再試"
 
-#: themes/gui_advanced_plugin_class.py:14
-#: themes/gui_advanced_plugin_class.py:16
-#: themes/gui_advanced_plugin_class.py:23
+#: themes/gui_advanced_plugin_class.py:24
+#: themes/gui_advanced_plugin_class.py:26
+#: themes/gui_advanced_plugin_class.py:33
 msgid "请输入"
 msgstr "請輸入"
 
-#: themes/gui_advanced_plugin_class.py:19
+#: themes/gui_advanced_plugin_class.py:29
 msgid "选择插件参数"
 msgstr "選擇插件參數"
 
-#: themes/gui_advanced_plugin_class.py:33
+#: themes/gui_advanced_plugin_class.py:43
 msgid "使用说明"
 msgstr "使用說明"
 
-#: themes/gui_advanced_plugin_class.py:34
+#: themes/gui_advanced_plugin_class.py:44
 msgid "在 <b>辅助指令</b> 中，可以看到每个功能根据不同需求而写的详细说明"
 msgstr "在 <b>輔助指令</b> 中，可以看見每個功能根據不同需求而寫的詳細說明"
 
-#: themes/gui_advanced_plugin_class.py:37
+#: themes/gui_advanced_plugin_class.py:47
 msgid "确认参数并执行"
 msgstr "確認參數並執行"
 
-#: themes/gui_advanced_plugin_class.py:40 themes/gui_toolbar.py:159
+#: themes/gui_advanced_plugin_class.py:50 themes/gui_toolbar.py:182
 msgid "取消"
 msgstr "取消"
 
-#: themes/gui_advanced_plugin_class.py:45
-#: themes/gui_advanced_plugin_class.py:50
+#: themes/gui_advanced_plugin_class.py:55
+#: themes/gui_advanced_plugin_class.py:60
 msgid "未选定任何插件"
 msgstr "未選定任何插件"
 
-#: themes/gui_toolbar.py:14
+#: themes/gui_toolbar.py:31
 msgid ""
 "\n"
 "<p>在此处自定义您的api-key，访问更多模型。</p>\n"
@@ -2030,7 +2047,7 @@ msgid ""
 "\n"
 "<p>\n"
 "OpenAI重定向服务只适用于OpenAI的大部分模型<br>\n"
-"如果要使用重定向服务的其他模型，请使用 <em>自定义</em> 功能\n"
+"如果要重定向使用其他模型，请使用 <em>自定义</em> 功能\n"
 "</p>\n"
 "\n"
 "<details>\n"
@@ -2038,6 +2055,8 @@ msgid ""
 "<ul>\n"
 "<li><a href=\"https://platform.openai.com/api-keys\" "
 "target=\"_blank\">OpenAI</a>：GPT系列模型</li>\n"
+"<li><a href=\"https://console.x.ai/\" target=\"_blank\">Grok</a>：Grok系列模"
+"型</li>\n"
 "<li><a href=\"https://open.bigmodel.cn/usercenter/apikeys\" "
 "target=\"_blank\">智谱(Zhipu)</a>：GLM系列模型</li>\n"
 "<li><a href=\"https://bailian.console.aliyun.com/?apiKey=1#/api-key\" "
@@ -2050,14 +2069,14 @@ msgid ""
 "</details>\n"
 msgstr ""
 "\n"
-"<p>在此處自定義您的api-key，訪問更多模型。</p>\n"
+"<p>在此處自定義您的 API 金鑰，訪問更多模型。</p>\n"
 "<p>\n"
-"目前僅OpenAI支持使用其他重定向服務<br>\n"
+"目前僅 OpenAI 支援使用其他重定向服務<br>\n"
 "其他提供商均使用的是官方服務<br></p>\n"
 "\n"
 "<p>\n"
-"OpenAI重定向服務只適用於OpenAI的大部分模型<br>\n"
-"如果要使用重定向服務的其他模型，請使用 <em>自定義</em> 功能\n"
+"OpenAI 重定向服務僅適用於 OpenAI 的大部分模型<br>\n"
+"如果要重定向使用其他模型，請使用 <em>自定義 </em>功能\n"
 "</p>\n"
 "\n"
 "<details>\n"
@@ -2065,8 +2084,10 @@ msgstr ""
 "<ul>\n"
 "<li><a href=\"https://platform.openai.com/api-keys\" "
 "target=\"_blank\">OpenAI</a>：GPT系列模型</li>\n"
+"<li><a href=\"https://console.x.ai/\" target=\"_blank\">Grok</a>：Grok系列模"
+"型</li>\n"
 "<li><a href=\"https://open.bigmodel.cn/usercenter/apikeys\" "
-"target=\"_blank\">智譜(Zhipu)</a>：GLM系列模型</li>\n"
+"target=\"_blank\">智譜Zhipu)</a>：GLM系列模型</li>\n"
 "<li><a href=\"https://bailian.console.aliyun.com/?apiKey=1#/api-key\" "
 "target=\"_blank\">通義千問(Qwen)</a>：qwen系列模型</li>\n"
 "<li><a href=\"https://platform.moonshot.cn/console/api-keys\" "
@@ -2076,7 +2097,7 @@ msgstr ""
 "</ul>\n"
 "</details>\n"
 
-#: themes/gui_toolbar.py:38
+#: themes/gui_toolbar.py:56
 msgid ""
 "\n"
 "<p>使用该功能添加自定义模型或使用openAI重定向服务。\n"
@@ -2094,6 +2115,10 @@ msgid ""
 "坡，支持英文页面，支持大部分支付方式</li>\n"
 "<li><a href=\"https://aihubmix.com/\" target=\"_blank\">AI HUB MIX</a>：中国"
 "大陆优化</li>\n"
+"<li><a href=\"https://bailian.console.aliyun.com/#/model-market\" "
+"target=\"_blank\">阿里云百炼</a>：支持多种模型，有英文界面</li>\n"
+"<li><a href=\"https://cloud.siliconflow.cn/models\" target=\"_blank\">硅基流"
+"动</a>：支持多种模型，有英文界面</li>\n"
 "<li>使用其他第三方<a href=\"https://github.com/songquanpeng/one-api\" "
 "target=\"_blank\">oneapi</a>服务</li>\n"
 "<li>使用其他第三方<a href=\"https://github.com/open-webui/open-webui\" "
@@ -2102,45 +2127,49 @@ msgid ""
 "</details>\n"
 msgstr ""
 "\n"
-"<p>使用該功能添加自定義模型或使用openAI重定向服務。\n"
-"<br>自定義模型將使用 custom- 前綴，並使用本頁面的信息發送請求\n"
-"如果僅需使用openAI重定向服務，請在 <em>OpenAI</em> 項目中修改重定向地址\n"
+"<p>使用該功能添加自定義模型或使用 OpenAI 重定向服務。\n"
+"<br>自定義模型將使用 \"custom-\" 前綴，並使用本頁面的信息發送請求\n"
+"如果僅需使用 OpenAI 重定向服務，請在 <em>OpenAI</em>  項目中修改重定向地址\n"
 "</p>\n"
 "\n"
 "<details>\n"
 "<summary>點擊查看 第三方中轉服務</summary>\n"
-"<em>使用前請閱讀中轉服務的幫助文檔</em>\n"
+"<em>使用前請閱讀中轉服務的幫助文件</em>\n"
 "<ul>\n"
-"<li><a href=\"https://api2d.com/\" target=\"_blank\">API2d</a>：支持多功能接"
-"口，中國大陸優化</li>\n"
+"<li><a href=\"https://api2d.com/\" target=\"_blank\">API2d</a>：支援多功能接"
+"口，針對中國大陸進行優化</li>\n"
 "<li><a href=\"https://aiproxy.io/\" target=\"_blank\">AI Proxy</a>：位於新加"
-"坡，支持英文頁面，支持大部分支付方式</li>\n"
+"坡，支援英文頁面，並接受大部分支付方式</li>\n"
 "<li><a href=\"https://aihubmix.com/\" target=\"_blank\">AI HUB MIX</a>：中國"
 "大陸優化</li>\n"
-"<li>使用其他第三方<a href=\"https://github.com/songquanpeng/one-api\" "
+"<li><a href=\"https://bailian.console.aliyun.com/#/model-market\" "
+"target=\"_blank\">阿里雲百煉</a>：支援多種模型，並提供英文介面</li>\n"
+"<li><a href=\"https://cloud.siliconflow.cn/models\" target=\"_blank\">矽基流"
+"動</a>：支援多種模型，並提供英文介面</li>\n"
+"<li>使用其他第三方服務<a href=\"https://github.com/songquanpeng/one-api\" "
 "target=\"_blank\">oneapi</a>服務</li>\n"
-"<li>使用其他第三方<a href=\"https://github.com/open-webui/open-webui\" "
+"<li>使用其他第三方服務<a href=\"https://github.com/open-webui/open-webui\" "
 "target=\"_blank\">llama</a>服務</li>\n"
 "</ul>\n"
 "</details>\n"
 
-#: themes/gui_toolbar.py:65
+#: themes/gui_toolbar.py:85
 msgid "LLM_MODEL 没有设定，需要一个默认的模型"
 msgstr "LLM_MODEL 沒有設定，需要一個默認模型。"
 
-#: themes/gui_toolbar.py:67
+#: themes/gui_toolbar.py:87
 msgid "INIT_SYS_PROMPT 没有设定，需要一个默认的系统提示"
 msgstr "INIT_SYS_PROMPT 沒有設定，需要一個默認的系統提示。"
 
-#: themes/gui_toolbar.py:69
+#: themes/gui_toolbar.py:89
 msgid "AVAIL_LLM_MODELS 没有设定，需要一个可用模型列表"
 msgstr "AVAIL_LLM_MODELS 沒有設定，需要一個可用模型列表。"
 
-#: themes/gui_toolbar.py:74
+#: themes/gui_toolbar.py:94
 msgid "上传文件"
 msgstr "上傳文件"
 
-#: themes/gui_toolbar.py:77
+#: themes/gui_toolbar.py:97
 msgid ""
 "请上传本地文件 / 压缩包以供使用。请注意: 上传文件后会自动把输入区修改为相应"
 "路径"
@@ -2148,272 +2177,169 @@ msgstr ""
 "請上傳本地文件 / 壓縮包以供使用。請注意：上傳文件後會自動把輸入區修改為相應"
 "路徑。"
 
-#: themes/gui_toolbar.py:78
+#: themes/gui_toolbar.py:98
 msgid "任何文件, 推荐上传压缩文件(zip, tar, rar)"
 msgstr "任何文件，推薦上傳壓縮文件（zip, tar, rar）"
 
-#: themes/gui_toolbar.py:79
+#: themes/gui_toolbar.py:99
 msgid "更换模型"
 msgstr "更換模型"
 
-#: themes/gui_toolbar.py:80
+#: themes/gui_toolbar.py:100
+msgid "<p>推荐使用高并发服务商 (即速率限制较为宽松)</p>"
+msgstr "<p>推薦使用高併發服務商 (即速率限制較為寬鬆)</p>"
+
+#: themes/gui_toolbar.py:103
 msgid "更换LLM模型/请求源"
 msgstr "更換LLM模型/請求源"
 
-#: themes/gui_toolbar.py:84
+#: themes/gui_toolbar.py:103
+msgid "推理模型(o1,o3,r1)速度较慢，但是效果较好"
+msgstr "推理模型(o1,o3,r1)速度較慢，但是效果較好"
+
+#: themes/gui_toolbar.py:107
 msgid "留空时使用默认prompt: {}"
 msgstr "留空時使用默認prompt: {}"
 
-#: themes/gui_toolbar.py:116
+#: themes/gui_toolbar.py:139
 msgid "选择服务商"
 msgstr "選擇服務商"
 
-#: themes/gui_toolbar.py:116
+#: themes/gui_toolbar.py:139
 msgid "仅用于api自定义，不影响模型选择"
 msgstr "僅用於api自定義，不影響模型選擇"
 
-#: themes/gui_toolbar.py:117
+#: themes/gui_toolbar.py:140
 msgid "不输入则使用内置API KEY"
 msgstr "不輸入則使用內置API KEY"
 
-#: themes/gui_toolbar.py:117
+#: themes/gui_toolbar.py:140
 msgid "自定义API-KEY"
 msgstr "自定義API-KEY"
 
-#: themes/gui_toolbar.py:120
+#: themes/gui_toolbar.py:143
 msgid "自定义重定向"
 msgstr "自定義重定向"
 
-#: themes/gui_toolbar.py:121
+#: themes/gui_toolbar.py:144
 msgid "重定向路径"
 msgstr "重定向路徑"
 
-#: themes/gui_toolbar.py:123
+#: themes/gui_toolbar.py:146
 msgid "自定义模型"
 msgstr "自定義模型"
 
-#: themes/gui_toolbar.py:123
+#: themes/gui_toolbar.py:146
 msgid "此处输入非内置模型（一行一个）"
 msgstr "此處輸入非內置模型（一行一個）"
 
-#: themes/gui_toolbar.py:148
+#: themes/gui_toolbar.py:171
 msgid "帮助"
 msgstr "幫助"
 
-#: themes/gui_toolbar.py:151
+#: themes/gui_toolbar.py:174
 msgid "更改密码"
 msgstr "更改密碼"
 
-#: themes/gui_toolbar.py:152
+#: themes/gui_toolbar.py:175
 msgid "当前登录用户"
 msgstr "當前登錄用戶"
 
-#: themes/gui_toolbar.py:153
+#: themes/gui_toolbar.py:176
 msgid "请注意，点击确认后立即生效"
 msgstr "請注意，點擊確認後立即生效"
 
-#: themes/gui_toolbar.py:154
+#: themes/gui_toolbar.py:177
 msgid "当前密码"
 msgstr "當前密碼"
 
-#: themes/gui_toolbar.py:154
+#: themes/gui_toolbar.py:177
 msgid "请输入当前密码"
 msgstr "請輸入當前密碼"
 
-#: themes/gui_toolbar.py:155
+#: themes/gui_toolbar.py:178
 msgid "修改密码"
 msgstr "修改密碼"
 
-#: themes/gui_toolbar.py:155
+#: themes/gui_toolbar.py:178
 msgid "请输入新密码"
 msgstr "請輸入新密碼"
 
-#: themes/gui_toolbar.py:156
+#: themes/gui_toolbar.py:179
 msgid "确认修改的密码"
 msgstr "確認修改的密碼"
 
-#: themes/gui_toolbar.py:156
+#: themes/gui_toolbar.py:179
 msgid "请再次输入新密码"
 msgstr "請再次輸入新密碼"
 
-#: themes/gui_toolbar.py:158
+#: themes/gui_toolbar.py:181
 msgid "确认修改"
 msgstr "確認修改"
 
-#: themes/gui_toolbar.py:160
+#: themes/gui_toolbar.py:183
 msgid "退出登录"
 msgstr "退出登錄"
 
-#: themes/gui_toolbar.py:204
+#: themes/gui_toolbar.py:227
 msgid "自定义数据加载失败，使用默认值"
 msgstr "自定義數據加載失敗，使用默認值"
 
-#: themes/gui_toolbar.py:241
+#: themes/gui_toolbar.py:265
 msgid "参数加载失败，使用默认值"
 msgstr "參數加載失敗，使用默認值"
 
-#: toolbox.py:213
+#: toolbox.py:219
 msgid "检测到**滞留的缓存文档**，请及时处理"
 msgstr "檢測到**瀾留的緩存文檔**，請及時處理"
 
-#: toolbox.py:213
+#: toolbox.py:219
 msgid "请及时点击“**保存当前对话**”获取所有滞留文档"
 msgstr "請及時點擊“**保存當前對話**”獲取所有瀾留文檔"
 
-#: toolbox.py:219
+#: toolbox.py:225
 msgid "正常"
 msgstr "正常"
 
-#: toolbox.py:301
+#: toolbox.py:307
 msgid "插件调度异常:\n"
 msgstr "插件調度異常:\n"
 
-#: toolbox.py:307
+#: toolbox.py:313
 msgid "插件调度异常"
 msgstr "插件調度異常"
 
-#: toolbox.py:592
+#: toolbox.py:598
 msgid "... (省略{}个文件的显示) ..."
 msgstr "... (省略{}個文件的顯示) ..."
 
-#: toolbox.py:594
+#: toolbox.py:600
 msgid "文件"
 msgstr "文件"
 
-#: toolbox.py:597
+#: toolbox.py:603
 msgid "我上传了文件，请查收"
 msgstr "我上傳了文件，請查收"
 
-#: toolbox.py:599
+#: toolbox.py:605
 msgid "调用路径参数已自动修正到: "
-msgstr "調用路徑參數已自動修正到: "
+msgstr "調用路徑參數已自動修正到："
 
-#: toolbox.py:600
+#: toolbox.py:606
 msgid "现在您点击任意函数插件时，以上文件将被作为输入参数"
-msgstr "現在，當您點擊任意函數插件時，以上文件將被作為輸入參數。"
+msgstr "現在您點擊任意函數插件時，以上文件將被作為輸入參數"
 
-#: toolbox.py:601
+#: toolbox.py:607
 msgid "请注意，当上述文件名出现异常时，请检查您的压缩包是否为UTF-8或CP437编码"
 msgstr ""
-"請注意，當上述文件名出現異常時，請檢查您的壓縮包是否為UTF-8或CP437編碼。"
+"請注意，當上述文件名出現異常時，請檢查您的壓縮包是否為 UTF-8 或 CP437 編碼"
 
-#: toolbox.py:603
+#: toolbox.py:609
 msgid "[Local Message] 收到以下文件 （上传到路径：{}）: "
 msgstr "[Local Message] 收到以下文件（上傳到路徑：{}）："
 
-#~ msgid "此方法只能在主线程中调用"
-#~ msgstr "此方法只能在主線程中調用"
-
-#~ msgid "加载了 {} 篇文章的有用语句"
-#~ msgstr "加載了 {} 篇文章的有用語句"
-
-#~ msgid "开始处理pdf: {}"
-#~ msgstr "開始處理PDF: {}"
-
-#~ msgid "文件不存在：{}"
-#~ msgstr "文件不存在：{}"
-
-#~ msgid "{} 自动获取文章内容完成"
-#~ msgstr "{} 自動獲取文章內容完成"
-
-#~ msgid "没有摘取有用语句的文章，请先运行任务1"
-#~ msgstr "沒有摘取有用語句的文章，請先運行任務1"
-
-#~ msgid "获取到 {} 个已经摘取有用语句的文章"
-#~ msgstr "獲取到 {} 個已經摘取有用語句的文章"
-
-#~ msgid "用户中断，正在终止..."
-#~ msgstr "用戶中斷，正在終止..."
-
-#~ msgid "正在终止..."
-#~ msgstr "正在終止..."
-
-#~ msgid "任务完成!"
-#~ msgstr "任務完成!"
-
+#, python-brace-format
 #~ msgid ""
-#~ "请注意，可能需要多次输出才能得到比较理想的结果。也可以得到多个结果后，进"
-#~ "行人工汇总"
+#~ "{LANGUAGE_DISPLAY} 是无效的语言设定，将使用默认语言 zh-Hans（简体中文）"
 #~ msgstr ""
-#~ "請注意，可能需要多次輸出才能得到比較理想的结果。也可以得到多個結果後，進"
-#~ "行人工匯總。"
-
-#~ msgid "{} 获取完毕，跳过..."
-#~ msgstr "{} 獲取完畢，跳過..."
-
-#~ msgid "{} 处理完毕"
-#~ msgstr "{} 處理完畢"
-
-#~ msgid "{} 处理失败，原因：{} @ {}"
-#~ msgstr "{} 處理失敗，原因：{} @ {}"
-
-#~ msgid "{} 已完成，跳过..."
-#~ msgstr "{} 已完成，跳過..."
-
-#~ msgid "{} 完成摘要可用语句获取"
-#~ msgstr "{} 完成摘要可用語句獲取"
-
-#~ msgid "{} 生成摘要失败，原因：{} @ {}"
-#~ msgstr "{} 生成摘要失敗，原因：{} @ {}"
-
-#~ msgid "导出摘要可用语句到文件中..."
-#~ msgstr "導出摘要可用語句到文件中..."
-
-#~ msgid "开始翻译... (自动跳过已有翻译)"
-#~ msgstr "開始翻譯... (自動跳過已有翻譯)"
-
-#~ msgid "开始翻译 {}..."
-#~ msgstr "開始翻譯 {}..."
-
-#~ msgid "翻译完成！"
-#~ msgstr "翻譯完成！"
-
-#~ msgid "搭建框架中..."
-#~ msgstr "搭建框架中..."
-
-#~ msgid "将有 {} 篇文章参与框架搭建"
-#~ msgstr "將有 {} 篇文章參與框架搭建"
-
-#~ msgid "框架生成失败，请检查摘要生成的要求是否正确"
-#~ msgstr "框架生成失敗，請檢查摘要生成的要求是否正確"
-
-#~ msgid "框架生成完成，输出结果到文件"
-#~ msgstr "框架生成完成，輸出結果到文件"
-
-#~ msgid "{} 正在运行..."
-#~ msgstr "{} 正在運行..."
-
-#~ msgid "主进程被中断，正在退出..."
-#~ msgstr "主進程被中斷，正在退出..."
-
-#~ msgid "选定任务全部结束"
-#~ msgstr "選定任務全部結束"
-
-#~ msgid "请填写结构要求和内容要求"
-#~ msgstr "請填寫結構要求與內容要求。"
-
-#~ msgid "此模块只能作为脚本运行"
-#~ msgstr "此模塊只能作為腳本運行"
-
-#~ msgid ""
-#~ "\n"
-#~ "    请选择任务：\n"
-#~ "    0. 退出程序\n"
-#~ "    1. 摘取有用语句\n"
-#~ "    2. 获取摘要可用语句\n"
-#~ "    3. 导出结果\n"
-#~ "    4. 搭建思路框架\n"
-#~ "    5. 一键运行\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "請選擇任務：\n"
-#~ "0. 退出程序\n"
-#~ "1. 摘取有用語句\n"
-#~ "2. 獲取摘要可用語句\n"
-#~ "3. 導出結果\n"
-#~ "4. 搭建思路上架\n"
-#~ "5. 一鍵運行"
-
-#~ msgid "输入错误，请重新输入"
-#~ msgstr "輸入錯誤，請重新輸入。"
+#~ "{LANGUAGE_DISPLAY} 是無效的語言設置，將使用默認語言 zh-Hans（簡體中文）"

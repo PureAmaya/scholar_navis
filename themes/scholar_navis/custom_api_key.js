@@ -1,4 +1,4 @@
-// 由 Scholar Navis 添加
+// 由 Scholar Navis 添加 @ 2022-03-16 16:25:50PureAmaya
 // 不会玩js emm，有些地方先凑合吧
 // 后续考虑用gr.BrowserState()代替localStorage读写
 

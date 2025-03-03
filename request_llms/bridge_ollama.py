@@ -1,3 +1,7 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
+
 # 借鉴自同目录下的bridge_chatgpt.py
 
 """

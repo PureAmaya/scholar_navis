@@ -1,3 +1,4 @@
+/* Author: scholar_navis@PureAmaya */
 
 async function scholar_navis_init(selected_language) {
 
@@ -92,6 +93,7 @@ function set_dark_mode(enable) {
         document.querySelectorAll('.dark').forEach(el => el.classList.remove('dark'));
     }
 }
+
 function dark_mode_init() {
     const os_prefer_dark_mode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     let dark_mode_enabled = localStorage.getItem('dark_mode_enabled') === 'true' || os_prefer_dark_mode; // 确保为布尔值

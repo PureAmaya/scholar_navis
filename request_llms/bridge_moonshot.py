@@ -1,7 +1,15 @@
+'''
+Original Author: gpt_academic@Spike
+
+Modified by PureAmaya on 2024-12-28
+- Compatible with custom API functionality on the web.
+- Add localization support.
+'''
 # encoding: utf-8
 # @Time   : 2024/3/3
 # @Author : Spike
 # @Descr   :
+
 import json
 import os
 import time

@@ -14,9 +14,7 @@ Typically, the summary includes the following points:
 
 - Issues or errors encountered in the research
 
-<br>Please note, <font color=red>this feature does not support AI interaction on its own. This means that during communication, the summary content will not be included.</font>
-
-Once the summary is executed, it cannot be modified.
+<br>Please note, <font color=red>Please note that once the summary is executed, the keywords cannot be modified.</font>  Simple dialogue is allowed.
 
 <br>
 

@@ -1,7 +1,11 @@
+'''
+Author: scholar_navis@PureAmaya
+'''
+
 import os
 import yaml
 import shutil
-from  shared_utils.scholar_navis.sqlite import SQLiteDatabase
+from shared_utils.advanced_markdown_format import md2pdf
 from shared_utils.scholar_navis import pdf_reader
 from shared_utils.scholar_navis.multi_lang import _
 from shared_utils.scholar_navis.const_and_singleton import SCHOLAR_NAVIS_ROOT_PATH
@@ -9,7 +13,7 @@ from .tools.common_plugin_para import common_plugin_para
 from crazy_functions.pdf_fns.breakdown_txt import breakdown_text_to_satisfy_token_limit
 from toolbox import CatchException, generate_download_file,get_user,get_log_folder,update_ui,update_ui_lastest_msg
 from crazy_functions.crazy_utils import get_files_from_everything,read_and_clean_pdf_text,request_gpt_model_in_new_thread_with_ui_alive
-from .tools.article_library_ctrl import markdown_to_pdf, get_tmp_dir_of_this_user,check_library_exist_and_assistant,get_this_user_library_list,lib_manifest,pdf_yaml
+from .tools.article_library_ctrl import get_tmp_dir_of_this_user,check_library_exist_and_assistant,get_this_user_library_list,lib_manifest,pdf_yaml
 
 
 @check_library_exist_and_assistant(accept_nonexistent=True,accept_blank=True)
@@ -27,6 +31,7 @@ def 精细分析文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, sy
 
     library_name = plugin_kwargs['lib']
     GPT_prefer_language = plugin_kwargs['gpt_prefer_lang']
+    pre_read = plugin_kwargs['command'] == 'pre_read'
 
     # 工具的根目录与各种目录
     tool_root = get_log_folder(user=get_user(
@@ -160,13 +165,13 @@ def 精细分析文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, sy
     # < --------------------提交给AI，进行后续的处理------------------------- >
     yield from update_ui_lastest_msg(_('精细分析中...'), chatbot, history)
     try:
-        yield from __analyse_pdf(pdf_fp=txt, llm_kwargs=llm_kwargs, chatbot=chatbot, history=history, use_ai_assist = plugin_kwargs['ai_assist'], GPT_prefer_language = GPT_prefer_language)
+        yield from __analyse_pdf(pdf_fp=txt, llm_kwargs=llm_kwargs, chatbot=chatbot, history=history, use_ai_assist = True, GPT_prefer_language = GPT_prefer_language,pre_read=pre_read)
     except Exception as e:
         yield from update_ui_lastest_msg(_('分析过程中出错！错误原因是：{}').format(str(e)), chatbot, history)
 
 execute = 精细分析文献 # 用于热更新
 
-def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_prefer_language):
+def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_prefer_language,pre_read):
     """精细分析文章
 
     Args:
@@ -176,6 +181,7 @@ def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_
         history (_type_): _description_
         system_prompt (_type_): _description_
         user_request (_type_): _description_
+        pre_read (boolean): 是否让AI先阅读内容（否的话就把全文直接全喂给AI）
     """
     history = []
     
@@ -194,14 +200,12 @@ def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_
         doi = yaml_content[pdf_yaml.doi.value]
         title = yaml_content[pdf_yaml.title.value]
         
-    with SQLiteDatabase(type='doi_fulltext_ai_understand') as ft:
-        fulltext = ft.easy_select(doi,('fulltext',))
-    # 没有的话，只能跑一边AI了
-    if not fulltext:
-        
-        yield from update_ui_lastest_msg(_('对pdf文件处理中...'), chatbot, history)
-        # 获取pdf的内容（可能不含参考文献等内容，所有比正文字号小的都被删掉了）
-        pdf_content, _1 = read_and_clean_pdf_text(pdf_fp)
+    yield from update_ui_lastest_msg(_('对pdf文件处理中...'), chatbot, history)
+    # 获取pdf的内容（可能不含参考文献等内容，所有比正文字号小的都被删掉了）
+    pdf_content, _1 = read_and_clean_pdf_text(pdf_fp)
+
+    # 允许预先阅读在这么做
+    if pre_read:
         # 满足LLM的token要求进行切割
         pdf_content_token = breakdown_text_to_satisfy_token_limit(txt=pdf_content, limit=2048, llm_model=llm_kwargs['llm_model'])
 
@@ -216,22 +220,20 @@ def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_
                                                                             history=[], # 分段总结的时候，不需要历史记录
                                                                             sys_prompt='As a native speaker, grab the key points, please.')
             history.append(gpt_say_for_fragment)
-            
-        # 跑完AI，记录一下读到的全文
-        with SQLiteDatabase(type='doi_fulltext_ai_understand') as ft:
-            if doi:ft.insert_ingore(doi,('fulltext',),('\n\n\n'.join(history),))
     
-    # 有的话，用它就行
+    # 不允许预先阅读，直接把所有的内容给AI
     else:
-        history = fulltext[0].split('\n\n\n')
+        history = [pdf_content.replace('\n','').replace('\r','')]
+        
+    yield from update_ui_lastest_msg(_('对pdf文件完成'), chatbot, history)
     
-    # 最后的总结    
+    # 最后的总结（就是要这个内容）
     i_say = f'''Please read the above content and provide me with its title, 
         including both the original language and the {GPT_prefer_language}. 
         Also, please give me a detailed and accurate summary of the content in {GPT_prefer_language}, 
         along with the introduction or research background, the experimental methods, the conclusions, 
         the innovative aspects of the experiment, and its limitations and deficiencies. 
-        Additionally, inform me about the author's writing style and narrative logic, 
+        Additionally, inform me about the author's writing style writing style(including narrative logic and stylistic suggestions), 
         so I can get some advice for my own writing. '''
         
     i_say_show = _("总结中...")
@@ -249,19 +251,19 @@ def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_
     history.append(f'Please reply to me using {GPT_prefer_language}') # 防止意外，再加一次
     
     # 提供一下下载
-    pdf_path = markdown_to_pdf(gpt_say_last,f'Analysis of {title}',get_tmp_dir_of_this_user(chatbot,'markdown2pdf',['Fine-grained Analysis of Article']))
+    pdf_path = md2pdf(gpt_say_last,f'Analysis of {title}',get_tmp_dir_of_this_user(chatbot,'markdown2pdf',['Fine-grained Analysis of Article']))
     chatbot.append([_("下载分析结果："),generate_download_file(pdf_path)])
 
     yield from update_ui(chatbot=chatbot,history=history) # 这里的history是分片总结得到的内容
-    
+
 class Fine_Grained_Analysis_of_Article(common_plugin_para):
     def define_arg_selection_menu(self):
         gui_definition = super().define_arg_selection_menu()
         gui_definition.update(self.add_file_upload_field(title=_('选定的文章'),description=_('上传或使用总结库内的文章')))
         gui_definition.update(self.add_lib_field(True, _('选择总结库'), _('查看总结库内的文章')))
-        gui_definition.update(self.add_command_selector([],[],[]))
+        gui_definition.update(self.add_command_selector(['pre_read'],[_('AI预先阅读内容')],[False]))
         gui_definition.update(self.add_GPT_prefer_language_selector())
-        gui_definition.update(self.add_use_AI_assistant_selector())
+        #gui_definition.update(self.add_use_AI_assistant_selector()) 默认启用
         return gui_definition
 
     def execute(txt, llm_kwargs, plugin_kwargs, chatbot, history, system_prompt, user_request):

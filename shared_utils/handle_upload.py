@@ -1,3 +1,10 @@
+'''
+Original Author: gpt_academic@binary-husky
+
+Modified by PureAmaya on 2024-12-28
+- Fix the issue of possible garbled characters when extracting compressed files.
+'''
+
 import importlib
 import time
 import inspect

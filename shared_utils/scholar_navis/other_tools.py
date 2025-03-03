@@ -1,3 +1,7 @@
+'''
+Author: scholar_navis@PureAmaya
+'''
+
 import os
 import base64
 import urllib
@@ -14,21 +18,18 @@ def generate_random_string(length=16,chars=string.ascii_lowercase + string.digit
     random_string = ''.join(random.choice(chars) for _ in range(length))
     return random_string
 
-# 生成16位随机字符串
-random_string = generate_random_string()
-print(random_string)
 
-
-def generate_text_file_download(content:str,file_name:str,file_type:str='.txt',encoding='utf-8'):
+def generate_text_file_download(content:str,file_name:str,file_type:str='.txt',encoding='utf-8',permanent=False):
     if not file_type.startswith('.'): file_type = '.' + file_type
     
-    tmp_dir = os.path.join('tmp','shared','files')
+    if permanent:dir = os.path.join('data','shared','files')
+    else:dir = os.path.join('tmp','shared','files')
     
-    os.makedirs(tmp_dir,exist_ok=True)
-    with open(os.path.join(tmp_dir,file_name+file_type),'w',encoding=encoding) as f:
+    os.makedirs(dir,exist_ok=True)
+    with open(os.path.join(dir,file_name+file_type),'w',encoding=encoding) as f:
         f.write(content)
     
-    return generate_download_file(os.path.join(tmp_dir,file_name+file_type))
+    return generate_download_file(os.path.join(dir,file_name+file_type))
 
 
 def generate_download_file(file_path:str,txt:str = None):
@@ -48,7 +49,6 @@ def generate_download_file(file_path:str,txt:str = None):
 
     if not txt:txt = os.path.basename(file_path)
 
-    print(f'other_tools.generate_download_file:  {file_path}')
     if file_path.lower().endswith('.pdf'):
         return f'<a href="/services/pdf_viewer/web/viewer.html?file={file_path}" target="_blank">{txt}</a>'
     else:

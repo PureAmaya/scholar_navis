@@ -1,3 +1,7 @@
+'''
+Author: scholar_navis@PureAmaya
+'''
+
 import os
 import yaml
 import zipfile
@@ -207,10 +211,13 @@ def __find_article_from_summarization(library_root_dir: str, txt: str, gpt_prefe
 
         i_say = \
         f'''Please respond in {gpt_prefer_lang}. Here's the [Article]: “{content}”.
-            The [Query] is: “{txt}”. The [Query] might be a part of the [Article]. 
-            The [Query] may not be the original text of the [Article], 
-            but if the meaning expressed is relatively close, the [Query] can also be considered part of the [Article].
-            If so, please reply with 'yes'; if not, please say 'nonono'. Also, please share your reasoning for your decision.
+            The [Query] is: “{txt}”.  
+            [Query] may not be the exact wording from the [Article],
+            but as long as the meanings are similar or there is some connection between the two, 
+            [Query] can be considered a part of the [Article].
+            If the two can be considered as part of each other or related, please reply with 'yes'; 
+            if they are completely unrelated, please reply with 'nonono'. 
+            Also, please share your reasoning for your decision.
             '''
         
         i_say_show_user = str(index) # 这里就不是给用户看的，是方便定位文章文件的
@@ -219,7 +226,7 @@ def __find_article_from_summarization(library_root_dir: str, txt: str, gpt_prefe
         inputs_array.append(i_say)
         inputs_show_user_array.append(i_say_show_user)
         history_array.append([])  # 因为是对每个文章的摘要单独进行总结的，所以这里不需要上下文也能分析
-        sys_prompt_array.append("Make sure to let me know the reason for such a decision.")
+        sys_prompt_array.append(f"Make sure to let me know the reason for such a decision. Please respond in {gpt_prefer_lang}.")
 
     # 多线程请求GPT
     if inputs_array is []:     # 针对这个关键词，如果所有文章都已经单独分析过了，那么inputs_array就是空，也就没有必要请求GPT了
@@ -245,6 +252,7 @@ def __find_article_from_summarization(library_root_dir: str, txt: str, gpt_prefe
         if index % 2 != 0:
 
             # 毕竟有时候AI会发飙..宁可错杀不能放过
+            # After all, sometimes AI can go rogue — it's better to be safe than sorry.
             if 'yes' in content:
                 # 找到符合要求的文章
                 filenames_meet_requirement.append(filenames[int(gpt_response_collection[index - 1])])
@@ -312,7 +320,7 @@ def __come_up_with_topic(request: str, summarization: str, GPT_prefer_language,l
 
     # 输入给AI的内容：
     i_say = f'please answer me in {GPT_prefer_language}. \
-        Now, I hope you can help me identify several topics. \
+        Now, I hope you can help me identify some topics. \
         The requirements for determining the topics are: {request}; \
         the information available for use in topic determination (these are also the experiences of predecessors) is as follows: {summarization}'
 
@@ -322,7 +330,7 @@ def __come_up_with_topic(request: str, summarization: str, GPT_prefer_language,l
         llm_kwargs=llm_kwargs,
         chatbot=chatbot,
         history=[],
-        sys_prompt=f'You are good at determining topics. When you give me topics, please reply in Markdown format and inform me of the reasons for drafting the topic.'
+        sys_prompt=f'You are a professional professor skilled in proposing innovative topics. Now, I need some inspiration; please suggest several valuable and research-aligned topics for me. When you give me topics, please reply in Markdown format and inform me of the reasons for drafting the topic.'
     )
     yield from update_ui_lastest_msg(_('课题拟定完成！'),chatbot=chatbot,history=[])
     chatbot.append([_('下面是AI拟定的课题及其理由（此时亦可以追问）: '), gpt_say])
@@ -337,7 +345,7 @@ class Communicate_with_AI_about_research_progress(common_plugin_para):
             True, _('选择总结库'), _('可以在总结库中选择文章')))
         
         gui_definition.update(self.add_command_selector(
-            ['draw', 'find','topic'], [_('绘制思维导图 [gpt_acadmic内置功能，语言偏好可能无效]'), _('寻找总结内容来源'),_('拟定课题')], [True,True, True]))
+            ['draw', 'find','topic'], [_('绘制思维导图'), _('寻找总结内容来源'),_('拟定课题')], [True,True, True]))
         
         gui_definition.update(self.add_command_para_field(
             description=_('在此处输入思维导图类型代码/要溯源的内容/课题拟定要求')))

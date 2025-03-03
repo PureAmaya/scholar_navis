@@ -1,3 +1,7 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
+
 from crazy_functions.crazy_utils import read_and_clean_pdf_text, get_files_from_everything
 import os
 import re

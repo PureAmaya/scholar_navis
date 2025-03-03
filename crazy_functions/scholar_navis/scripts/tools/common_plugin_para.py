@@ -1,5 +1,10 @@
+'''
+Author: scholar_navis@PureAmaya
+'''
+
+from abc import ABC, abstractmethod
 from shared_utils.scholar_navis.multi_lang import _
-from shared_utils.scholar_navis.const_and_singleton import SUPPORT_DISPLAY_LANGUAGE,GPT_SUPPORT_LAMGUAGE
+from shared_utils.scholar_navis.const_and_singleton import GPT_SUPPORT_LAMGUAGE
 from shared_utils.config_loader import get_conf
 from crazy_functions.plugin_template.plugin_class_template import GptAcademicPluginTemplate, ArgProperty
 
@@ -8,19 +13,13 @@ NEED_PARA_INDICATOR = _('需要参数')
 
 # ! 后续考虑一下用js的方式暂存输入的内容
 
-class common_plugin_para(GptAcademicPluginTemplate):
+class common_plugin_para(GptAcademicPluginTemplate,ABC):
     """再次封装的插件面板（
         只需要重写define_arg_selection_menu和execute就行
         减少不必要的重复劳动（
 
     """
-    
-    def __init__(self):
-        """
-        请注意`execute`会执行在不同的线程中，因此您在定义和使用类变量时，应当慎之又慎！
-        """
-        
-        
+
     def __link_command(self,command:str,command_natural_language:str,need_para: bool):
         """ 注册命令（将自然语言与命令本体连接起来）
             连接后形如： help: 帮助文档
@@ -53,7 +52,7 @@ class common_plugin_para(GptAcademicPluginTemplate):
         return  {"main_input":ArgProperty(title=title, description=description , default_value="", type="string").model_dump_json()} # 主输入，自动从输入框同步
     
     def add_command_selector(self,command: list[str],command_natural_lang: list[str],need_command_para: list[bool],default_value:str = None):
-        """添加命令用的东西。默认的命令已经添加了
+        """添加命令用的东西。默认的命令已经添加了  plugin_kwargs['command']
         help license about 这些东西就已经有啦
 
         Args:
@@ -111,6 +110,7 @@ class common_plugin_para(GptAcademicPluginTemplate):
         
         # 如果没有设定用户（也没有总是要求输入框），即所谓的默认用户，就使用下拉式的总结库选择栏
         if not AUTHENTICATION and (not always_field):
+            pass
             all = [_('不选择')]
             all.extend(get_def_user_library_list())
             para = {'title':title,'description':description,'options':all,'default_value':_('不选择'),'type':"dropdown"}
@@ -151,7 +151,7 @@ class common_plugin_para(GptAcademicPluginTemplate):
         return self.add_command_selector([],[],[])
     
         
-    
+    @abstractmethod
     def execute(txt, llm_kwargs, plugin_kwargs, chatbot, history, system_prompt, user_request):
         """ 开一个新的线程执行该方法
             (check_library_exist_and_assistant负责处理就行，execute只要执行该执行的方法就行)
@@ -163,7 +163,7 @@ class common_plugin_para(GptAcademicPluginTemplate):
         - plugin_kwargs['gpt_prefer_lang']: GPT偏好语言
         - plugin_kwargs['ai_assist']: AI辅助获取文献信息
         """
-        raise NotImplementedError("没有重写execute")
+        pass
     
     
 

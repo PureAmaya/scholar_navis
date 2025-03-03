@@ -1,3 +1,7 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
+
 from multiprocessing import Pipe, Queue
 import time
 import threading

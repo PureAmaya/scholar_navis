@@ -1,4 +1,9 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
+
 # 借鉴了 https://github.com/GaiZhenbiao/ChuanhuChatGPT 项目
+
 
 """
     该文件中主要包含三个函数

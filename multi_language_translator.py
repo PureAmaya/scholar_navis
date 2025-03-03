@@ -1,3 +1,8 @@
+'''
+Author: scholar_navis@PureAmaya
+'''
+
+
 import os
 from time import sleep
 from shared_utils.scholar_navis.const_and_singleton import GPT_ACADEMIC_ROOT_PATH
@@ -13,7 +18,7 @@ lang_to_translate = '繁体中文'  # 需要翻译成的语言（告知LLM）
 lang_to_translate_code = 'zh-Hant' # 目标语言代码 zh-Hant / zh-Hans / en-US
 max = 10 # 每次翻译po的最大条数
 
-model = 'custom-gpt-4o-mini' 
+model = 'deepseek-chat' 
 '''
 所需模型
 暂时只支持gpt_academic模型，后续会支持自定义模型

@@ -1,3 +1,6 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
 
 from transformers import AutoModel, AutoTokenizer
 import time

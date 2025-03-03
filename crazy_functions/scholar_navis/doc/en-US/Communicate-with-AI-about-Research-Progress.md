@@ -42,10 +42,10 @@ After running the tool, you can directly ask questions about the summary content
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Select summary library           | Enter the name of the summary library for the mind map                                                                                                                                                                                                                     |
 | Instruction parameters           | Please enter a number: 1 - Flowchart, 2 - Sequence Diagram, 3 - Class Diagram, 4 - Pie Chart, 5 - Gantt Chart, 6 - State Diagram, 7 - Entity-Relationship Diagram, 8 - Quadrant Prompt Diagram, 9 - Mind Map (default, if no number is entered, this graphic will be used) |
-| Adjust GPT's language preference | Invalid                                                                                                                                                                                                                                                                    |
-| Auxiliary instructions           | Select <u>draw: Create Mind Map [Built-in Function of gpt_academic, language preference may be ineffective] (parameters required)</u>                                                                                                                                      |
+| Adjust GPT's language preference | You can adjust it according to your reading needs and AI capabilities. By default, GPT will respond in the selected language. Generally, the default setting is fine.                                                                                                      |
+| Auxiliary instructions           | Select <u>draw: Create Mind Map (parameters required)</u>                                                                                                                                                                                                                  |
 
-Please note that this feature calls a built-in function of gpt_academic (provided by [Menghuan1918](https://github.com/Menghuan1918)), and Scholar Navis cannot adjust the language of GPT's response.
+This feature invokes the built-in functionality of gpt_academic (provided to gpt_academic by [Menghuan1918](https://github.com/Menghuan1918)), but Scholar Navis allows for dialogue.
 
 <br>4. **Trace Summary Content (Find Source Articles)**
 

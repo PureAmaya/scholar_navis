@@ -1,9 +1,12 @@
+'''
+Author: scholar_navis@PureAmaya
+'''
+
 import os
 import csv
 import yaml
 import shutil
 import codecs
-import pymupdf
 from enum import Enum
 from shared_utils.scholar_navis.multi_lang import _
 from functools import wraps
@@ -11,7 +14,6 @@ from datetime import datetime
 from shared_utils.config_loader import get_conf
 from shared_utils.scholar_navis.const_and_singleton import VERSION
 from shared_utils.scholar_navis.const_and_singleton import SCHOLAR_NAVIS_ROOT_PATH,GPT_ACADEMIC_ROOT_PATH
-    # 不适合放在外面的
 from toolbox import ChatBotWithCookies, update_ui, get_log_folder, get_user
 
 LANGUAGE_GPT_PREFER,LANGUAGE_DISPLAY = get_conf('LANGUAGE_GPT_PREFER','LANGUAGE_DISPLAY')
@@ -188,7 +190,7 @@ def check_library_exist_and_assistant(accept_nonexistent=False,accept_blank = Fa
                 return
 
             # < --------------------高级参数筛查（现在由一个修饰器统一实现）------------------------ >
-            # ! 乱（
+            # ! 乱（但能用
 
             # 只有不接受accept_blank时，才检测是否为空白
             # 只有不接受“总结库不存在”的时候，才检测是否存在这个总结库
@@ -206,15 +208,23 @@ def check_library_exist_and_assistant(accept_nonexistent=False,accept_blank = Fa
                     for manifest_fp in list:
                         with open( manifest_fp,'r') as file:
                             name = yaml.safe_load(file)[lib_manifest.library_name.value]
-                        if not name is None:
+                        if name is not None:
                             show_to_user = show_to_user + "- "+f"{name}\n"
 
                 chatbot.append([_("不能进行正常操作。下面是有关信息: "), show_to_user])
                 yield from update_ui(chatbot=chatbot, history=[])  # 刷新界面
                 return
             
+            # < ------------------ 推理模型给用户一个警告，但是不影响使用---------------------- >
+            llm_kwargs = args[1]
+            model_name = llm_kwargs.get('llm_model','')
+            if 'reason' in model_name.lower() or 'r1' in model_name.lower() or 'o1' in model_name.lower() or 'o3' in model_name.lower():
+                chatbot.append([_("请注意，您使用的是推理模型，效果较好，但是速度可能较慢。由于需要多次请求，请注意您的余额充足！"), 
+                                '{} {}'.format(model_name,_("如果不是推理模型，请忽略此警告。"))])
+                yield from update_ui(chatbot=chatbot, history=[])  # 刷新界面
+
             # 正常情况下，就调用原函数
-            yield from f(txt, args[1], plugin_kwargs, chatbot, [], args[5], args[6]) # 反正history已经是[]了
+            yield from f(txt, llm_kwargs, plugin_kwargs, chatbot, [], args[5], args[6]) # 反正history已经是[]了
             
         return wrapper
     return decorate
@@ -251,34 +261,6 @@ def get_this_user_library_list(tool_root: str):
                 list.append(os.path.join(root, file_fp))
 
     return list
-
-
-def markdown_to_pdf(text:str,title:str,save_dir:str):
-    from shared_utils.advanced_markdown_format import markdown_convertion
-    
-    filename = title
-    if any(filename.startswith(char) for char in _forbidden_startwith):
-        filename = filename[1:]
-    
-    for char in _forbidden_contain:
-        if char in filename:filename = filename.replace(char,'_')
-    
-    fp = os.path.join(save_dir,f"{filename}.pdf")
-    HTML =  markdown_convertion(text)
-    A4 = pymupdf.paper_rect("A4")  # size of a page
-    WHERE = A4 + (36, 36, -36, -36)  # leave borders of 0.5 inches
-    story =  pymupdf.Story(html=HTML)  # make the story
-    writer = pymupdf.DocumentWriter(fp)  # make the writer
-    pno = 0 # current page number
-    more = 1  # will be set to 0 when done
-    while more:  # loop until all story content is processed
-        dev = writer.begin_page(A4)  # make a device to write on the page
-        more, filled = story.place(WHERE)  # compute content positions on page
-        story.draw(dev)
-        writer.end_page()
-        pno += 1  # increase page number
-    writer.close()  # close output file
-    return fp
 
 
 def csv_load(file_fp:str):

@@ -1,3 +1,14 @@
+'''
+Original Author: gpt_academic@binary-husky
+
+Modified by PureAmaya on 2025-02-21
+- Compatible with DeepSeek's inference model(R1)
+
+Modified by PureAmaya on 2024-12-28
+- Added support for API-key type determination in custom models  
+- Added internationalization
+'''
+
 import re
 import os
 from shared_utils.scholar_navis.multi_lang import _
@@ -5,6 +16,9 @@ from shared_utils.scholar_navis.multi_lang import _
 pj = os.path.join
 default_user_name = 'default_user'
 
+def _is_openai_model(model_name):
+    model_name = model_name.strip().lower()
+    return model_name == 'o1' or model_name == 'o3' or model_name.startswith('gpt-') or model_name.startswith('o1-') or model_name.startswith('o3-')
 
 def is_openai_api_key(key):
     CUSTOM_API_KEY_PATTERN = '' # get_conf('CUSTOM_API_KEY_PATTERN') 暂时无用
@@ -64,7 +78,7 @@ def select_api_key(keys, llm_model):
     avail_key_list = []
     key_list = keys.split(',')
 
-    if llm_model.startswith('gpt-') or llm_model.startswith('one-api-') or llm_model.startswith('custom-'):
+    if _is_openai_model(llm_model) or llm_model.startswith('one-api-') or llm_model.startswith('custom-'):
         for k in key_list:
             if is_openai_api_key(k): avail_key_list.append(k)
             if is_api2d_key(k): avail_key_list.append(k) # api2d用的不是标准openai，自定义的时候会找不到api

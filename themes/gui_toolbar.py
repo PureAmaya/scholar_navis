@@ -1,3 +1,20 @@
+'''
+Original Author: gpt_academic@binary-husky
+
+Modified by PureAmaya on 2025-02-24
+- Remove redundant features: warm_up_modules()
+- Add information about SiliconFlow and Alibaba Cloud Bailian.
+- Add prompt information: The inference model is slow; it is recommended to use a high-concurrency service provider.
+
+Modified by PureAmaya on 2024-12-28
+- Add i18n support
+- Significant modifications for updating to Gradio 5.
+- To ensure compatibility, support and interfaces for existing features have been removed.
+- Added custom model functionality
+- Some features (e.g., temperature value adjustment) have deprecated their JS implementation and replaced them with Gradio components.
+- Add simple user account information management.
+'''
+
 import copy
 import json
 import gradio_compatibility_layer as gr
@@ -19,13 +36,14 @@ NORMAL_HELP_MSG = _('''
 
 <p>
 OpenAI重定向服务只适用于OpenAI的大部分模型<br>
-如果要使用重定向服务的其他模型，请使用 <em>自定义</em> 功能
+如果要重定向使用其他模型，请使用 <em>自定义</em> 功能
 </p>
 
 <details>
 <summary>点击查看 API-KEY 获取地址</summary>
 <ul>
 <li><a href="https://platform.openai.com/api-keys" target="_blank">OpenAI</a>：GPT系列模型</li>
+<li><a href="https://console.x.ai/" target="_blank">Grok</a>：Grok系列模型</li>
 <li><a href="https://open.bigmodel.cn/usercenter/apikeys" target="_blank">智谱(Zhipu)</a>：GLM系列模型</li>
 <li><a href="https://bailian.console.aliyun.com/?apiKey=1#/api-key" target="_blank">通义千问(Qwen)</a>：qwen系列模型</li>
 <li><a href="https://platform.moonshot.cn/console/api-keys" target="_blank">月之暗面(Moonshot)</a>：moonshot系列模型</li>
@@ -48,6 +66,8 @@ CUSTOM_HELP_MSG = _('''
 <li><a href="https://api2d.com/" target="_blank">API2d</a>：支持多功能接口，中国大陆优化</li>
 <li><a href="https://aiproxy.io/" target="_blank">AI Proxy</a>：位于新加坡，支持英文页面，支持大部分支付方式</li>
 <li><a href="https://aihubmix.com/" target="_blank">AI HUB MIX</a>：中国大陆优化</li>
+<li><a href="https://bailian.console.aliyun.com/#/model-market" target="_blank">阿里云百炼</a>：支持多种模型，有英文界面</li>
+<li><a href="https://cloud.siliconflow.cn/models" target="_blank">硅基流动</a>：支持多种模型，有英文界面</li>
 <li>使用其他第三方<a href="https://github.com/songquanpeng/one-api" target="_blank">oneapi</a>服务</li>
 <li>使用其他第三方<a href="https://github.com/open-webui/open-webui" target="_blank">llama</a>服务</li>
 </ul>
@@ -77,7 +97,10 @@ def define_gui_toolbar(chatbot,help_menu_description):
             gr.Markdown(_("请上传本地文件 / 压缩包以供使用。请注意: 上传文件后会自动把输入区修改为相应路径"))
             file_upload_2 = gr.Files(label=_("任何文件, 推荐上传压缩文件(zip, tar, rar)"), file_count="multiple", elem_id="elem_upload_float")
         with gr.Tab(_("更换模型"), elem_id="interact-panel") as model_switch_tab:
-            md_dropdown:gr.Dropdown = gr.Dropdown(AVAIL_LLM_MODELS, value=LLM_MODEL, elem_id="elem_model_sel",elem_classes='dropdown_in_modal',label=_("更换LLM模型/请求源")).style(container=False)
+            gr.HTML(_('<p>推荐使用高并发服务商 (即速率限制较为宽松)</p>'))
+            md_dropdown:gr.Dropdown = gr.Dropdown(AVAIL_LLM_MODELS, value=LLM_MODEL, 
+                                                elem_id="elem_model_sel",elem_classes='dropdown_in_modal',
+                                                label=_("更换LLM模型/请求源"),info=_('推理模型(o1,o3,r1)速度较慢，但是效果较好')).style(container=False)
             top_p = gr.Slider(minimum=-0, maximum=1.0, value=1.0, step=0.01,interactive=True, label="Top-p (nucleus sampling)",elem_id="elem_top")
             temperature = gr.Slider(minimum=-0, maximum=2.0, value=1.0, step=0.01, interactive=True, label="Temperature", elem_id="elem_temperature")
             max_length_sl = gr.Slider(minimum=256, maximum=1024*32, value=4096, step=128, interactive=True, label="Local LLM MaxLength",)
@@ -211,6 +234,7 @@ def _load_custom_model(user_custom_data):
     custom_model_list = user_custom_data.get('CUSTOM_MODELS',[])
     new_list = copy.deepcopy(AVAIL_LLM_MODELS)
     for model in custom_model_list:
+        model = model.strip()
         if not model.startswith('custom-'): model = 'custom-' + model
         if model not in new_list:
             new_list.append(model)

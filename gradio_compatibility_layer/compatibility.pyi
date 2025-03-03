@@ -1,5 +1,8 @@
+'''
+Author: scholar_navis@PureAmaya
+'''
+
 import gradio as gr
-from gradio.events import Dependency
 
 class Textbox(gr.Textbox):
     def style(self,**kwargs):
@@ -9,6 +12,7 @@ class Textbox(gr.Textbox):
     from gradio.blocks import Block
     if TYPE_CHECKING:
         from gradio.components import Timer
+        
 class Row(gr.Row):
     def style(self,**kwargs):
         self.equal_height = kwargs['equal_height']
@@ -17,7 +21,6 @@ class Row(gr.Row):
     from gradio.blocks import Block
     if TYPE_CHECKING:
         from gradio.components import Timer
-
     
 class Button(gr.Button):
     def __init__(self, value = "Run", *, every = None, inputs = None, variant = "secondary", size = None, icon = None, link = None, visible = True, interactive = True, elem_id = None, elem_classes = None, render = True, key = None, scale = None, min_width = None,info_str=None):
@@ -64,10 +67,5 @@ class CheckboxGroup(gr.CheckboxGroup):
 class Chatbot(gr.Chatbot):
     def append(msg):
         super().append(msg)
-        print(type(msg))
-    from typing import Callable, Literal, Sequence, Any, TYPE_CHECKING
-    from gradio.blocks import Block
-    if TYPE_CHECKING:
-        from gradio.components import Timer
 
     

@@ -1,3 +1,7 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
+
 from toolbox import get_log_folder
 from toolbox import update_ui, promote_file_to_downloadzone
 from toolbox import write_history_to_file, promote_file_to_downloadzone

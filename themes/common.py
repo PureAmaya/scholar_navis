@@ -1,9 +1,18 @@
+'''
+Original Author: gpt_academic@binary-husky
+
+Modified by PureAmaya on 2024-12-28
+- Add Gradio 5 theme
+- Remove some redundant features
+- Add scholar_naivs js
+- Some JS functionalities have been moved here (and implemented using Gradio components).
+'''
+
 from shared_utils.config_loader import get_conf
 from functools import lru_cache
 import base64
 import json
 import gradio as gr
-LAYOUT = get_conf("LAYOUT")
 
 theme = gr.themes.Base(
         secondary_hue="indigo",
@@ -25,7 +34,10 @@ theme = gr.themes.Base(
 
 def minimize_js(common_js_path):
     try:
-        import rjsmin, hashlib, glob, os
+        import rjsmin
+        import hashlib
+        import glob
+        import os
         # clean up old minimized js files, matching `common_js_path + '.min.*'`
         for old_min_js in glob.glob(common_js_path + '.min.*.js'):
             os.remove(old_min_js)
@@ -81,13 +93,6 @@ def register_advanced_plugin_init_code(key, code):
 
 plugin_init_info_lib = {}
 
-def register_advanced_plugin_init_code(key, code):
-    # 检查 key 是否在插件初始化信息库中
-    if key not in plugin_init_info_lib:
-        plugin_init_info_lib[key] = {}
-
-    # 将代码存储在字典中
-    plugin_init_info_lib[key]['secondary_menu_code'] = code
 
 def call_plugin(plugin,advance_arg_input_legacy):
     gui_args = {}

@@ -1,3 +1,7 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
+
 from toolbox import update_ui, trimmed_format_exc, get_log_folder
 import os
 

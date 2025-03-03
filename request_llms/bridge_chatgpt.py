@@ -1,12 +1,14 @@
-"""
-    该文件中主要包含三个函数
+'''
+Original Author: gpt_academic@binary-husky
 
-    不具备多线程能力的函数：
-    1. predict: 正常对话时使用，具备完备的交互功能，不可多线程
+Modified by PureAmaya on 2025-02-27
+- Compatible with DeepSeek's inference model(R1)
+- Remove unnecessary print
 
-    具备多线程调用能力的函数
-    2. predict_no_ui_long_connection：支持多线程
-"""
+Modified by PureAmaya on 2024-12-28
+- Compatible with custom API functionality on the web.
+- Compatible with custom model features that meet Openai standards.
+'''
 
 import json
 import os
@@ -18,6 +20,8 @@ import requests
 import random
 from shared_utils.config_loader import get_conf
 from shared_utils.scholar_navis.multi_lang import _
+from gradio_compatibility_layer import HTML
+from shared_utils.advanced_markdown_format import md2html
 
 # config_private.py放自己的秘密如API和代理网址
 # 读取时首先看是否存在私密的config_private配置文件（不受git管控），如果有，则覆盖原config文件
@@ -106,16 +110,21 @@ def decode_chunk(chunk):
     choice_valid = False
     has_content = False
     has_role = False
+    has_reason = False
     try:
         chunkjson = json.loads(chunk_decoded[6:])
         has_choices = 'choices' in chunkjson
         if has_choices: choice_valid = (len(chunkjson['choices']) > 0)
         if has_choices and choice_valid: has_content = ("content" in chunkjson['choices'][0]["delta"])
         if has_content: has_content = (chunkjson['choices'][0]["delta"]["content"] is not None)
+        has_reason = (chunkjson['choices'][0]["delta"]["reasoning_content"])
         if has_choices and choice_valid: has_role = "role" in chunkjson['choices'][0]["delta"]
     except:
         pass
-    return chunk_decoded, chunkjson, has_choices, choice_valid, has_content, has_role
+
+
+
+    return chunk_decoded, chunkjson, has_choices, choice_valid,has_reason, has_content, has_role
 
 from functools import lru_cache
 @lru_cache(maxsize=32)
@@ -166,7 +175,7 @@ def predict_no_ui_long_connection(inputs:str, llm_kwargs:dict, history:list=[], 
             break
         except requests.exceptions.ConnectionError:
             chunk = next(stream_response) # 失败了，重试一次？再失败就没办法了。
-        chunk_decoded, chunkjson, has_choices, choice_valid, has_content, has_role = decode_chunk(chunk)
+        chunk_decoded, chunkjson, has_choices, choice_valid,has_reason, has_content, has_role = decode_chunk(chunk)
         if len(chunk_decoded)==0: continue
         if not chunk_decoded.startswith('data:'):
             error_msg = get_full_error(chunk, stream_response).decode()
@@ -188,7 +197,7 @@ def predict_no_ui_long_connection(inputs:str, llm_kwargs:dict, history:list=[], 
         if (not has_content) and (not has_role): continue # raise RuntimeError("发现不标准的第三方接口："+delta)
         if has_content: # has_role = True/False
             result += delta["content"]
-            if not console_slience: print(delta["content"], end='')
+            if not console_slience: pass #print(delta["content"], end='')
             if observe_window is not None:
                 # 观测窗，把已经获取的数据显示出去
                 if len(observe_window) >= 1:
@@ -287,6 +296,7 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot:ChatBotWith
             if retry > MAX_RETRY: raise TimeoutError
 
     gpt_replying_buffer = ""
+    gpt_reasoning_buffer = ""
 
     is_head_of_the_stream = True
     if stream:
@@ -308,7 +318,7 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot:ChatBotWith
                 return
 
             # 提前读取一些信息 （用于判断异常）
-            chunk_decoded, chunkjson, has_choices, choice_valid, has_content, has_role = decode_chunk(chunk)
+            chunk_decoded, chunkjson, has_choices, choice_valid, has_reason,has_content, has_role = decode_chunk(chunk)
 
             if is_head_of_the_stream and (r'"object":"error"' not in chunk_decoded) and (r"content" not in chunk_decoded):
                 # 数据流的第一帧不携带content
@@ -334,6 +344,8 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot:ChatBotWith
                     if has_content:
                         # 正常情况
                         gpt_replying_buffer = gpt_replying_buffer + chunkjson['choices'][0]["delta"]["content"]
+                    elif has_reason:
+                        gpt_reasoning_buffer += chunkjson['choices'][0]["delta"]["reasoning_content"]
                     elif has_role:
                         # 一些第三方接口的出现这样的错误，兼容一下吧
                         continue
@@ -343,7 +355,25 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot:ChatBotWith
                         gpt_replying_buffer = gpt_replying_buffer + chunkjson['choices'][0]["delta"]["content"]
 
                     history[-1] = gpt_replying_buffer
-                    chatbot[-1] = (history[-2], history[-1])
+
+                    # 兼容深度思考
+                    if gpt_reasoning_buffer:
+                        chatbot_assistant =HTML(f''' 
+                        <p>
+                        <details open>
+                        <summary>{_('深度思考')}</summary>
+                        <blockquote><p>
+                        {md2html(gpt_reasoning_buffer)}
+                        </p></blockquote>
+                        </details>  
+                        </p>
+                        {md2html(gpt_replying_buffer)}
+                        ''')
+
+                    else:chatbot_assistant = history[-1]
+
+                    chatbot[-1] = (history[-2], chatbot_assistant)
+
                     yield from update_ui(chatbot=chatbot, history=history, msg=status_text) # 刷新界面
                 except Exception as e:
                     yield from update_ui(chatbot=chatbot, history=history, msg=_("Json解析不合常规")) # 刷新界面
@@ -506,10 +536,14 @@ def generate_payload(inputs:str, llm_kwargs:dict, history:list, system_prompt:st
         "n": 1,
         "stream": stream,
     }
-    # try:
-    #     print(f" {llm_kwargs['llm_model']} : {conversation_cnt} : {inputs[:100]} ..........")
-    # except:
-    #     print('输入中可能存在乱码。')
+    try:
+        print(f'brige_gpt len(conversation_cnt)  {conversation_cnt}')
+        print(f'brige_gpt len(history)  {len(history)}')
+        #print(f'brige_gpt len(inputs)  {len(inputs)}')
+        print(f" {llm_kwargs['llm_model']} : {conversation_cnt} : {inputs[:100]} ..........")
+    except:
+        traceback.print_exc()
+        print('输入中可能存在乱码。')
     return headers,payload
 
 

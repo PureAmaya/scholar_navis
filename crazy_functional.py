@@ -1,3 +1,10 @@
+'''
+Original Author: gpt_academic@binary-husky
+
+Modified by PureAmaya on 2024-12-28
+- To ensure compatibility, all original features have been removed, retaining only the functionalities added by scholar_naivs.
+'''
+
 
 def get_crazy_functions():
 

@@ -1,12 +1,22 @@
+'''
+Original Author: gpt_academic@binary-husky
+
+Modified by PureAmaya on 2025-02-26
+- Adjust ChatBotWithCookies for better readability |
+- Remove already removed imports
+- Remove function: check_repeat_upload()
+
+Modified by PureAmaya on 2024-12-28
+- Due to the update to Gradio 5, compatibility with scholar_navis required adding and removing some features and functions.
+- Adjust chatbotWithCookie to make it compatible with the new chatbot.
+'''
 
 import importlib
-import json
 import time
 import inspect
 import re
 import os
 import base64
-import traceback
 import gradio_compatibility_layer as gradio
 import shutil
 import glob
@@ -18,15 +28,9 @@ from shared_utils.config_loader import get_conf
 from shared_utils.config_loader import set_conf
 from shared_utils.config_loader import set_multi_conf
 from shared_utils.config_loader import read_single_conf_with_lru_cache
-from shared_utils.advanced_markdown_format import format_io
-from shared_utils.advanced_markdown_format import markdown_convertion
 from shared_utils.key_pattern_manager import select_api_key
 from shared_utils.key_pattern_manager import is_any_api_key
 from shared_utils.key_pattern_manager import what_keys
-from shared_utils.connect_void_terminal import get_chat_handle
-from shared_utils.connect_void_terminal import get_plugin_handle
-from shared_utils.connect_void_terminal import get_plugin_default_kwargs
-from shared_utils.connect_void_terminal import get_chat_default_kwargs
 from shared_utils.scholar_navis.other_tools import generate_download_file
 from shared_utils.text_mask import apply_gpt_academic_string_mask
 from shared_utils.text_mask import build_gpt_academic_masked_string
@@ -59,7 +63,7 @@ default_user_name = "default_user"
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 """
 
-
+# 有些乱
 class ChatBotWithCookies(list):
     def __init__(self, cookie):
         """
@@ -99,15 +103,16 @@ class ChatBotWithCookies(list):
         else:raise ValueError("Invalid value type")
         
     def __setitem__(self, index:int, value): 
-        if type(value) == dict or type(value) == gradio.ChatMessage:# 正常的ChatMessage
+        if isinstance(value, (gradio.ChatMessage,dict)):# 正常的ChatMessage
             super().__setitem__(index, value)
-        elif type(value) == list or type(value) == set or type(value) == tuple and len(value) == 2:
+        elif isinstance(value, (list,set,tuple)) and len(value) == 2:
             # 兼容旧版的[(,)]
-            if index < 0:index = index * 2;index += len(self)
+            if index < 0:index = index * 2
             elif index >= 0:index = index  * 2
 
             super().__setitem__(index, self._convert_to_gr_msg('user',value[0]))
             super().__setitem__(index + 1, self._convert_to_gr_msg('assistant',value[1]))
+
         else:
             raise ValueError("Invalid value type")
     
@@ -121,13 +126,14 @@ class ChatBotWithCookies(list):
             list: [(0,1)]
         """
         
-        if index < 0:index = index * 2;index += len(self)
+        if index < 0:index = index * 2
         elif index >= 0:index = index  * 2
         return [super().__getitem__(index),super().__getitem__(index + 1)]
     
     def _convert_to_gr_msg(self,role:Literal['user','assistant'],obj):
         if not obj:obj = ''
         if isinstance(obj, gradio.ChatMessage):return gradio.ChatMessage(role,obj.content) 
+        elif isinstance(obj,(gradio.Markdown,gradio.HTML)):return gradio.ChatMessage(role,obj) 
         elif isinstance(obj,dict):
             if 'role' in obj and 'content' in obj:
                 return gradio.ChatMessage(role,obj['content'])
@@ -987,43 +993,6 @@ def map_file_to_sha256(file_path):
 
     return sha_hash
 
-
-def check_repeat_upload(new_pdf_path, pdf_hash):
-    '''
-    检查历史上传的文件是否与新上传的文件相同，如果相同则返回(True, 重复文件路径)，否则返回(False，None)
-    '''
-    from toolbox import get_conf
-    import PyPDF2
-
-    user_upload_dir = os.path.dirname(os.path.dirname(new_pdf_path))
-    file_name = os.path.basename(new_pdf_path)
-
-    file_manifest = [f for f in glob.glob(f'{user_upload_dir}/**/{file_name}', recursive=True)]
-
-    for saved_file in file_manifest:
-        with open(new_pdf_path, 'rb') as file1, open(saved_file, 'rb') as file2:
-            reader1 = PyPDF2.PdfFileReader(file1)
-            reader2 = PyPDF2.PdfFileReader(file2)
-
-            # 比较页数是否相同
-            if reader1.getNumPages() != reader2.getNumPages():
-                continue
-
-            # 比较每一页的内容是否相同
-            for page_num in range(reader1.getNumPages()):
-                page1 = reader1.getPage(page_num).extractText()
-                page2 = reader2.getPage(page_num).extractText()
-                if page1 != page2:
-                    continue
-
-        maybe_project_dir = glob.glob('{}/**/{}'.format(get_log_folder(), pdf_hash + ".tag"), recursive=True)
-
-
-        if len(maybe_project_dir) > 0:
-            return True, os.path.dirname(maybe_project_dir[0])
-
-    # 如果所有页的内容都相同，返回 True
-    return False, None
 
 def log_chat(llm_model: str, input_str: str, output_str: str):
     try:

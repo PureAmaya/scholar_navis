@@ -1,3 +1,7 @@
+'''
+Original Author: gpt_academic@binary-husky
+'''
+
 model_name = "ChatGLM-ONNX"
 cmd_to_install = "`pip install -r request_llms/requirements_chatglm_onnx.txt`"
 
