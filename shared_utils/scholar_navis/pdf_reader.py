@@ -7,9 +7,12 @@ import re
 import yaml
 import json
 import pymupdf
+from urllib.parse import quote
 from request_llms.bridge_all import predict_no_ui_long_connection
 from shared_utils.scholar_navis.sqlite import SQLiteDatabase
 from crazy_functions.scholar_navis.scripts.tools.article_library_ctrl import pdf_yaml
+from shared_utils.scholar_navis.other_tools import fix_problematic_text
+
 
 def get_pdf_content(pdf_path,page_range: tuple | int,allow_ai_assist,llmkwargs = None):
     if allow_ai_assist and llmkwargs is None:
@@ -237,6 +240,8 @@ def _get_pdf_doi_and_title(document:pymupdf.Document,default_doi:str='',default_
     Returns:
         tuple: doi,title
     """
+    doi = '';title=''
+
     first_page_text = document.load_page(0).get_textpage().extractText()
     try:
         doi :str = re.findall(r'10\.\d{4,}/.+', first_page_text)[0].strip()
@@ -258,8 +263,8 @@ def _get_pdf_doi_and_title(document:pymupdf.Document,default_doi:str='',default_
             else:# 数据库有记录
                 title = title_tuple[0]
     except:title = default_title
-    
-    return doi,title
+
+    return quote(doi,encoding="utf-8"),fix_problematic_text(title)
 
 def _get_inf_AI_assistant(pdf_first_page: str,llm_kwargs):
     """使用AI辅助获取标题和doi号

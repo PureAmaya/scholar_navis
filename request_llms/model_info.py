@@ -33,6 +33,9 @@ class model_info_class:
     def __contains__(self, key):
         return key in self._data
     
+    def __str__(self):
+        return str(self._data)
+    
     def get(self, key, default=None):
         return self._data.get(key, default)
     

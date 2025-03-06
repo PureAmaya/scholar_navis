@@ -358,17 +358,17 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot:ChatBotWith
 
                     # 兼容深度思考
                     if gpt_reasoning_buffer:
-                        chatbot_assistant =HTML(f''' 
+                        chatbot_assistant =HTML(''' 
                         <p>
                         <details open>
-                        <summary>{_('深度思考')}</summary>
+                        <summary>{}</summary>
                         <blockquote><p>
-                        {md2html(gpt_reasoning_buffer)}
+                        {}
                         </p></blockquote>
                         </details>  
                         </p>
-                        {md2html(gpt_replying_buffer)}
-                        ''')
+                        {}
+                        '''.format(_('深度思考'),md2html(gpt_reasoning_buffer),md2html(gpt_replying_buffer)))
 
                     else:chatbot_assistant = history[-1]
 
@@ -537,9 +537,6 @@ def generate_payload(inputs:str, llm_kwargs:dict, history:list, system_prompt:st
         "stream": stream,
     }
     try:
-        print(f'brige_gpt len(conversation_cnt)  {conversation_cnt}')
-        print(f'brige_gpt len(history)  {len(history)}')
-        #print(f'brige_gpt len(inputs)  {len(inputs)}')
         print(f" {llm_kwargs['llm_model']} : {conversation_cnt} : {inputs[:100]} ..........")
     except:
         traceback.print_exc()

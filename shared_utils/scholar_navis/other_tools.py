@@ -3,10 +3,12 @@ Author: scholar_navis@PureAmaya
 '''
 
 import os
+import re
 import base64
 import urllib
 import random
 import string
+from urllib.parse import quote
 
 def generate_random_string(length=16,chars=string.ascii_lowercase + string.digits,seed=None):
     # 随机选择字符并生成字符串
@@ -67,3 +69,10 @@ def base64_decode(encoded_string:str):
     decoded_bytes = base64.b64decode(encoded_string)
     decoded_string = decoded_bytes.decode('utf-8')  # 将字节转换为字符串
     return decoded_string
+
+def fix_problematic_text(text:str):
+    # 修复错误的Unicode转义（如&_x02010_）
+    text = re.sub(r'&_x0([0-9a-fA-F]{4})_', lambda m: chr(int(m.group(1), 16)), text)
+    text = text.replace(" ", "_").replace("&", "and").replace('/','_').replace('/','_').replace('=','_')
+    text = re.sub(r'[^\w\-_.]', '_', text)
+    return text

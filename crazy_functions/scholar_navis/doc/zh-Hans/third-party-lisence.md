@@ -18,8 +18,6 @@ Scholar Navis 使用 AGPL-3.0 license 许可证
 
 - colorama: BSD License
 
-- dashscope: Apache-2.0 license
-
 - fastapi：MIT License
 
 - gradio：Apache-2.0 license

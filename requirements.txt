@@ -2,9 +2,8 @@ aiohttp==3.11.11
 argon2-cffi==23.1.0
 beautifulsoup4==4.12.3
 colorama==0.4.6
-dashscope==1.22.1
 fastapi==0.115.6
-gradio==5.9.1
+gradio==5.20.0
 gradio_modal==0.0.4
 latex2mathml==3.77.0
 Markdown==3.7
