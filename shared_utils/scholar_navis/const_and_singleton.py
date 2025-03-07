@@ -123,7 +123,7 @@ footer = """
             </svg>
                 Powered by 
                 <a href="https://www.gradio.app/" target="_blank">Gradio</a>
-                <span class="version">ver. 5.9.1</span>
+                <span class="version">ver. 5.20.0</span>
         </p>
     </div>
 </footer>

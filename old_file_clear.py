@@ -17,10 +17,12 @@ from shared_utils.config_loader import get_conf
 # private_upload:private_upload\default_user\2024-08-29-09-48-56\files
 
 
-# 运行之前，清除一下缓存
-if os.path.exists('tmp'):shutil.rmtree('tmp')
-
 AUTO_CLEAR_TMP,AUTO_CLEAR_GPT_LOG_DIR,AUTO_CLEAR_PRIVATE_UPLOAD = get_conf('AUTO_CLEAR_TMP','AUTO_CLEAR_GPT_LOG_DIR','AUTO_CLEAR_PRIVATE_UPLOAD')
+
+# 运行之前，清除一下缓存
+try:
+    if os.path.exists('tmp'):shutil.rmtree('tmp')
+except Exception as e:print(f"couldn't remove directory: {e}")
 
 thread_cycle_interval = 300
 '''清理线程循环间隔（默认300）'''
