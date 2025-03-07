@@ -333,7 +333,3 @@ EXTRACT_USEFUL_SENTENCES_THREADS_MAX_NUM = 32
 # 目前仅用于匿名登录的自定义和参数储存用的密钥，请修改为自己的最强密钥
 # The secret key used for custom and parameter storage for anonymous login, please change it to your own strongest secret key.
 SECRET = 'Please change it to your own strongest secret key'
-
-# gradio的临时文件夹位置。最好不要修改。
-# The temporary folder location of gradio. It is recommended not to modify.
-GRADIO_TEMP_DIR = 'gradio_temp'
