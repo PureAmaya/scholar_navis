@@ -173,3 +173,4 @@ crazy_functions/scholar_navis/config.yml
 local_llm_function.py
 ast_tools.py
 *tmp
+*temp
