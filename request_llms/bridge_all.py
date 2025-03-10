@@ -1,9 +1,8 @@
 '''
 Original Author: gpt_academic@binary-husky
 
-Modified by PureAmaya on 2025-03-06
-- Add model: qwq-plus
-
+Modified by PureAmaya on 2025-03-10
+- Add model: qwq-plus, claude-3-7-sonnet-latest
 
 Modified by PureAmaya on 2025-02-27
 - Remove models: qianfan, taichu, newbing, yi, spark
@@ -444,10 +443,20 @@ for model in AVAIL_LLM_MODELS:
 
 # -=-=-=-=-=-=- 以下部分是新加入的模型，可能附带额外依赖 -=-=-=-=-=-=-
 # claude家族
-claude_models = ['claude-3-5-sonnet-latest','claude-3-5-haiku-latest','claude-3-opus-latest']
+claude_models = ['claude-3-5-sonnet-latest','claude-3-5-haiku-latest','claude-3-7-sonnet-latest']
 if any(item in claude_models for item in AVAIL_LLM_MODELS):
     from .bridge_claude import predict_no_ui_long_connection as claude_noui
     from .bridge_claude import predict as claude_ui
+    model_info.update({
+        "claude-3-7-sonnet-latest": {
+            "fn_with_ui": claude_ui,
+            "fn_without_ui": claude_noui,
+            "endpoint": claude_endpoint,
+            "max_token": 200000,
+            "tokenizer": tokenizer_gpt35,
+            "token_cnt": get_token_num_gpt35,
+        },
+    })
     model_info.update({
         "claude-3-5-sonnet-latest": {
             "fn_with_ui": claude_ui,
@@ -460,16 +469,6 @@ if any(item in claude_models for item in AVAIL_LLM_MODELS):
     })
     model_info.update({
         "claude-3-5-haiku-latest": {
-            "fn_with_ui": claude_ui,
-            "fn_without_ui": claude_noui,
-            "endpoint": claude_endpoint,
-            "max_token": 200000,
-            "tokenizer": tokenizer_gpt35,
-            "token_cnt": get_token_num_gpt35,
-        },
-    })
-    model_info.update({
-        "claude-3-opus-latest": {
             "fn_with_ui": claude_ui,
             "fn_without_ui": claude_noui,
             "endpoint": claude_endpoint,

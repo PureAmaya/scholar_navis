@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-03-01 11:18+0800\n"
-"PO-Revision-Date: 2025-03-01 11:22+0800\n"
+"POT-Creation-Date: 2025-03-07 21:11+0800\n"
+"PO-Revision-Date: 2025-03-07 21:12+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -1630,7 +1630,7 @@ msgstr ""
 msgid "首先你从历史记录中提取摘要"
 msgstr "First, you extract a summary from the chat history."
 
-#: main.py:25
+#: main.py:31
 msgid ""
 "\n"
 "## gpt_academic：\n"
@@ -1678,15 +1678,15 @@ msgstr ""
 "</br></br>To use a large model, enter your key in the API-KEY field at the "
 "top left corner.\n"
 
-#: main.py:109
+#: main.py:113
 msgid "上传与设置"
 msgstr "Upload and Settings"
 
-#: main.py:110
+#: main.py:114
 msgid "暗黑模式"
 msgstr "Dark mode"
 
-#: main.py:113
+#: main.py:117
 msgid ""
 "下方内容为 AI 生成，不代表任何立场，可能存在片面甚至错误。仅供参考，开发者及"
 "其组织不负任何责任"
@@ -1695,7 +1695,7 @@ msgstr ""
 "be one-sided or even incorrect. For reference only, the developers and their "
 "organization bear no responsibility."
 
-#: main.py:114
+#: main.py:118
 msgid ""
 "联网系统信息安全无法得到充分保证，最好是个人、小组织内使用，保证服务提供者可"
 "信，并且敏感信息最好不要上传。另外，当启用登录功能时，服务商能够储存您api-"
@@ -1708,94 +1708,94 @@ msgstr ""
 "your API key. It is not recommended to use untrusted or unknown service "
 "providers."
 
-#: main.py:118
+#: main.py:122
 msgid "对话功能"
 msgstr "Dialogue feature"
 
-#: main.py:121 main.py:247 themes/gui_toolbar.py:266 themes/gui_toolbar.py:272
+#: main.py:125 main.py:251 themes/gui_toolbar.py:266 themes/gui_toolbar.py:272
 #: themes/gui_toolbar.py:277
 msgid "当前模型: {}"
 msgstr "Current model: {}"
 
-#: main.py:127
+#: main.py:131
 msgid "输入区"
 msgstr "Input area"
 
-#: main.py:131 main.py:141
+#: main.py:135 main.py:145
 msgid "提交"
 msgstr "Submit"
 
-#: main.py:143 shared_utils/scholar_navis/gpt_academic_handler.py:187
+#: main.py:147 shared_utils/scholar_navis/gpt_academic_handler.py:187
 msgid "重置"
 msgstr "Reset"
 
-#: main.py:144
+#: main.py:148
 msgid "停止"
 msgstr "Stop"
 
-#: main.py:145
+#: main.py:149
 msgid "清除"
 msgstr "Clear"
 
-#: main.py:147
+#: main.py:151
 msgid "Tip: 按Enter提交, 按Shift+Enter换行"
 msgstr "Tip: Press Enter to submit, press Shift+Enter to insert a newline."
 
-#: main.py:149
+#: main.py:153
 msgid "Scholar Navis 功能区"
 msgstr "Scholar Navis functional area"
 
-#: main.py:180
+#: main.py:184
 msgid "摘取有用语句"
 msgstr "Extract useful sentences"
 
-#: main.py:215
+#: main.py:219
 msgid "已重置"
 msgstr "Reset completed"
 
-#: main.py:285
+#: main.py:289
 msgid "如果浏览器没有自动打开，请复制并转到以下URL:"
 msgstr ""
 "If the browser does not open automatically, please copy and go to the "
 "following URL:"
 
-#: request_llms/bridge_all.py:70
+#: request_llms/bridge_all.py:74
 msgid "正在加载tokenizer，如果是第一次运行，可能需要一点时间下载参数"
 msgstr ""
 "Loading tokenizer, if it's the first run, it may take some time to download "
 "the parameters."
 
-#: request_llms/bridge_all.py:72
+#: request_llms/bridge_all.py:76
 msgid "加载tokenizer完毕"
 msgstr "Tokenizer loading complete."
 
-#: request_llms/bridge_all.py:102
+#: request_llms/bridge_all.py:106
 msgid "警告！API_URL配置选项将被弃用，请更换为API_URL_REDIRECT配置"
 msgstr ""
 "Warning! The API_URL configuration option will be deprecated. Please replace "
 "it with API_URL_REDIRECT configuration."
 
-#: request_llms/bridge_all.py:764
+#: request_llms/bridge_all.py:785
 msgid "one-api模型 {} 的 max_token 配置不是整数，请检查配置文件"
 msgstr ""
 "The max_token configuration for the one-api model {} is not an integer. "
 "Please check the configuration file."
 
-#: request_llms/bridge_all.py:803 toolbox.py:661
+#: request_llms/bridge_all.py:824 toolbox.py:660
 msgid "AZURE_CFG_ARRAY中配置的模型必须以azure开头"
 msgstr "The model configured in AZURE_CFG_ARRAY must start with azure."
 
-#: request_llms/bridge_all.py:863
+#: request_llms/bridge_all.py:884
 msgid "历史记录参数必须是List, 但是现在的类型是{}"
 msgstr " The history parameter must be a List, but the current type is {}."
 
-#: request_llms/bridge_all.py:949
+#: request_llms/bridge_all.py:970
 msgid "模型覆盖参数 '{}' 指向一个暂不支持的模型，请检查配置文件"
 msgstr ""
 "The model override parameter '{}' points to a model that is not currently "
 "supported. Please check the configuration file."
 
-#: request_llms/bridge_all.py:976
+#: request_llms/bridge_all.py:997
 msgid "历史记录参数必须是List"
 msgstr "The history parameter must be a List."
 
@@ -1870,14 +1870,19 @@ msgstr ""
 msgid "非OpenAI官方接口返回了错误:"
 msgstr "The non-OpenAI official interface returned an error:"
 
+#: request_llms/bridge_chatgpt.py:371
+#: request_llms/oai_std_model_template.py:429
+msgid "深度思考"
+msgstr "Deep thinking"
+
 #: request_llms/bridge_chatgpt.py:379
 #: request_llms/oai_std_model_template.py:270
-#: request_llms/oai_std_model_template.py:439
+#: request_llms/oai_std_model_template.py:440
 msgid "Json解析不合常规"
 msgstr "Json parsing is unconventional."
 
 #: request_llms/bridge_chatgpt.py:384
-#: request_llms/oai_std_model_template.py:448
+#: request_llms/oai_std_model_template.py:449
 msgid "Json异常"
 msgstr "Json exception."
 
@@ -1893,31 +1898,6 @@ msgid "缺少api_key，请在 config.py 中配置或在上方进行自定义"
 msgstr ""
 "api_key is missing. Please configure it in config.py or customize it at the "
 "top."
-
-#: request_llms/bridge_qwen.py:33
-msgid "用户停止"
-msgstr "User stopped."
-
-#: request_llms/bridge_qwen.py:50
-msgid ""
-"导入软件依赖失败。使用该模型需要额外依赖，安装方法```pip install --upgrade "
-"dashscope```"
-msgstr ""
-"Failed to import software dependencies. This model requires additional "
-"dependencies. You can install them using the following command: `pip install "
-"--upgrade dashscope`."
-
-#: request_llms/bridge_qwen.py:56 request_llms/com_qwenapi.py:30
-msgid "请配置 DASHSCOPE_API_KEY或自定义 通义千问(Qwen) API-KEY"
-msgstr "Please configure DASHSCOPE_API_KEY or customize the Qwen API-KEY."
-
-#: request_llms/bridge_qwen.py:69 request_llms/bridge_qwen.py:76
-msgid "[Local Message] 等待 {} 响应中 ..."
-msgstr "[Local Message] Waiting for {} response..."
-
-#: request_llms/bridge_qwen.py:77
-msgid "[Local Message] {} 响应异常"
-msgstr "[Local Message] {} response exception."
 
 #: request_llms/bridge_zhipu.py:42
 msgid "请配置ZHIPUAI_API_KEY或自定义 智谱(Zhipu) API-KEY"
@@ -1950,12 +1930,14 @@ msgstr ""
 "No recently uploaded image files detected. Please upload images in jpg "
 "format, and also note that the file extension should be in lowercase."
 
-#: request_llms/oai_std_model_template.py:179
+#: request_llms/oai_std_model_template.py:181
 #: request_llms/oai_std_model_template.py:294
-msgid "APIKEY为空,请检查配置文件的{}"
-msgstr "API KEY is empty, please check the {} in the configuration file."
+msgid "APIKEY为空,请检查配置文件的{}。或者可以自定义 {} API-KEY"
+msgstr ""
+"APIKEY is empty, please check the configuration {}. Alternatively, you can "
+"customize {} API-KEY."
 
-#: request_llms/oai_std_model_template.py:246
+#: request_llms/oai_std_model_template.py:248
 msgid "API异常,请检测终端输出。可能的原因是: {}"
 msgstr "API exception, please check terminal output. Possible cause: {}"
 
@@ -2509,45 +2491,65 @@ msgstr ""
 msgid "正常"
 msgstr "OK"
 
-#: toolbox.py:307
+#: toolbox.py:306
 msgid "插件调度异常:\n"
 msgstr "Plugin scheduling exception:\n"
 
-#: toolbox.py:313
+#: toolbox.py:312
 msgid "插件调度异常"
 msgstr "Plugin scheduling exception."
 
-#: toolbox.py:598
+#: toolbox.py:597
 msgid "... (省略{}个文件的显示) ..."
 msgstr "... (omitting the display of {} files) ..."
 
-#: toolbox.py:600
+#: toolbox.py:599
 msgid "文件"
 msgstr "File(s)"
 
-#: toolbox.py:603
+#: toolbox.py:602
 msgid "我上传了文件，请查收"
 msgstr "I have uploaded the file, please check it."
 
-#: toolbox.py:605
+#: toolbox.py:604
 msgid "调用路径参数已自动修正到: "
 msgstr "The invocation path parameter has been automatically corrected to: "
 
-#: toolbox.py:606
+#: toolbox.py:605
 msgid "现在您点击任意函数插件时，以上文件将被作为输入参数"
 msgstr ""
 "Now, when you click on any function plugin, the above file will be used as "
 "the input parameter."
 
-#: toolbox.py:607
+#: toolbox.py:606
 msgid "请注意，当上述文件名出现异常时，请检查您的压缩包是否为UTF-8或CP437编码"
 msgstr ""
 "lease note, if the above file name appears abnormal, check whether your "
 "compressed package is encoded in UTF-8 or CP437."
 
-#: toolbox.py:609
+#: toolbox.py:608
 msgid "[Local Message] 收到以下文件 （上传到路径：{}）: "
 msgstr "[Local Message] Received the following files (uploaded to path: {}): "
+
+#~ msgid "用户停止"
+#~ msgstr "User stopped."
+
+#~ msgid ""
+#~ "导入软件依赖失败。使用该模型需要额外依赖，安装方法```pip install --"
+#~ "upgrade dashscope```"
+#~ msgstr ""
+#~ "Failed to import software dependencies. This model requires additional "
+#~ "dependencies. You can install them using the following command: `pip "
+#~ "install --upgrade dashscope`."
+
+#~ msgid "请配置 DASHSCOPE_API_KEY或自定义 通义千问(Qwen) API-KEY"
+#~ msgstr "Please configure DASHSCOPE_API_KEY or customize the Qwen API-KEY."
+
+#~ msgid "[Local Message] 等待 {} 响应中 ..."
+#~ msgstr "[Local Message] Waiting for {} response..."
+
+#~ msgid "[Local Message] {} 响应异常"
+#~ msgstr "[Local Message] {} response exception."
 
 #, python-brace-format
 #~ msgid ""

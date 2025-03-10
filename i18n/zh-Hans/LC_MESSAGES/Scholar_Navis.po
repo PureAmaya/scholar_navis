@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-03-01 11:18+0800\n"
-"PO-Revision-Date: 2025-03-01 11:18+0800\n"
+"POT-Creation-Date: 2025-03-07 21:11+0800\n"
+"PO-Revision-Date: 2025-03-07 21:12+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -175,7 +175,6 @@ msgid "等待中"
 msgstr "等待中"
 
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/crazy_utils.py⁩:247
-#| msgid "执行"
 msgid "执行中"
 msgstr "执行中"
 
@@ -1398,7 +1397,7 @@ msgstr "导入软件依赖失败。使用该模块需要额外依赖，安装方
 msgid "首先你从历史记录中提取摘要"
 msgstr "首先你从历史记录中提取摘要"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:25
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:31
 msgid ""
 "\n"
 "## gpt_academic：\n"
@@ -1434,19 +1433,19 @@ msgstr ""
 "</br></br>如何语音对话: 请阅读Wiki\n"
 "</br></br>要使用大模型，请在左上角的 API-KEY 中输入您的密钥。\n"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:109
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:113
 msgid "上传与设置"
 msgstr "上传与设置"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:110
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:114
 msgid "暗黑模式"
 msgstr "暗黑模式"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:113
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:117
 msgid "下方内容为 AI 生成，不代表任何立场，可能存在片面甚至错误。仅供参考，开发者及其组织不负任何责任"
 msgstr "下方内容为 AI 生成，不代表任何立场，可能存在片面甚至错误。仅供参考，开发者及其组织不负任何责任"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:114
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:118
 msgid ""
 "联网系统信息安全无法得到充分保证，最好是个人、小组织内使用，保证服务提供者可信，并且敏感信息最好不要上传。另外，当启用登录功能"
 "时，服务商能够储存您api-key，不推荐使用来路不明、不受信任的服务商"
@@ -1454,90 +1453,90 @@ msgstr ""
 "联网系统信息安全无法得到充分保证，最好是个人、小组织内使用，保证服务提供者可信，并且敏感信息最好不要上传。另外，当启用登录功能"
 "时，服务商能够储存您api-key，不推荐使用来路不明、不受信任的服务商"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:118
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:122
 msgid "对话功能"
 msgstr "对话功能"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:121
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:247
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:125
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:251
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:266
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:272
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:277
 msgid "当前模型: {}"
 msgstr "当前模型: {}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:127
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:131
 msgid "输入区"
 msgstr "输入区"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:131
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:141
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:135
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:145
 msgid "提交"
 msgstr "提交"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:143
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:147
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:187
 msgid "重置"
 msgstr "重置"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:144
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:148
 msgid "停止"
 msgstr "停止"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:145
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:149
 msgid "清除"
 msgstr "清除"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:147
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:151
 msgid "Tip: 按Enter提交, 按Shift+Enter换行"
 msgstr "Tip: 按Enter提交, 按Shift+Enter换行"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:149
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:153
 msgid "Scholar Navis 功能区"
 msgstr "Scholar Navis 功能区"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:180
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:184
 msgid "摘取有用语句"
 msgstr "摘取有用语句"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:215
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:219
 msgid "已重置"
 msgstr "已重置"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:285
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:289
 msgid "如果浏览器没有自动打开，请复制并转到以下URL:"
 msgstr "如果浏览器没有自动打开，请复制并转到以下URL:"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:70
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:74
 msgid "正在加载tokenizer，如果是第一次运行，可能需要一点时间下载参数"
 msgstr "正在加载tokenizer，如果是第一次运行，可能需要一点时间下载参数"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:72
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:76
 msgid "加载tokenizer完毕"
 msgstr "加载tokenizer完毕"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:102
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:106
 msgid "警告！API_URL配置选项将被弃用，请更换为API_URL_REDIRECT配置"
 msgstr "警告！API_URL配置选项将被弃用，请更换为API_URL_REDIRECT配置"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:764
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:785
 msgid "one-api模型 {} 的 max_token 配置不是整数，请检查配置文件"
 msgstr "one-api模型 {} 的 max_token 配置不是整数，请检查配置文件"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:803
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:661
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:824
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:660
 msgid "AZURE_CFG_ARRAY中配置的模型必须以azure开头"
 msgstr "AZURE_CFG_ARRAY中配置的模型必须以azure开头"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:863
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:884
 msgid "历史记录参数必须是List, 但是现在的类型是{}"
 msgstr "历史记录参数必须是List, 但是现在的类型是{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:949
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:970
 msgid "模型覆盖参数 '{}' 指向一个暂不支持的模型，请检查配置文件"
 msgstr "模型覆盖参数 '{}' 指向一个暂不支持的模型，请检查配置文件"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:976
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:997
 msgid "历史记录参数必须是List"
 msgstr "历史记录参数必须是List"
 
@@ -1601,14 +1600,19 @@ msgstr "检测到有缺陷的非OpenAI官方接口，建议选择更稳定的接
 msgid "非OpenAI官方接口返回了错误:"
 msgstr "非OpenAI官方接口返回了错误:"
 
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:371
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:429
+msgid "深度思考"
+msgstr "深度思考"
+
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:379
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:270
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:439
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:440
 msgid "Json解析不合常规"
 msgstr "Json解析不合常规"
 
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt.py⁩:384
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:448
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:449
 msgid "Json异常"
 msgstr "Json异常"
 
@@ -1619,28 +1623,6 @@ msgstr "错误的api_key，请进行修改：可以在上方进行自定义，�
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_chatgpt_vision.py⁩:89
 msgid "缺少api_key，请在 config.py 中配置或在上方进行自定义"
 msgstr "缺少api_key，请在 config.py 中配置或在上方进行自定义"
-
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_qwen.py⁩:33
-msgid "用户停止"
-msgstr "用户停止"
-
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_qwen.py⁩:50
-msgid "导入软件依赖失败。使用该模型需要额外依赖，安装方法```pip install --upgrade dashscope```"
-msgstr "导入软件依赖失败。使用该模型需要额外依赖，安装方法```pip install --upgrade dashscope```"
-
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_qwen.py⁩:56
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/com_qwenapi.py⁩:30
-msgid "请配置 DASHSCOPE_API_KEY或自定义 通义千问(Qwen) API-KEY"
-msgstr "请配置 DASHSCOPE_API_KEY或自定义 通义千问(Qwen) API-KEY"
-
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_qwen.py⁩:69
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_qwen.py⁩:76
-msgid "[Local Message] 等待 {} 响应中 ..."
-msgstr "[Local Message] 等待 {} 响应中 ..."
-
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_qwen.py⁩:77
-msgid "[Local Message] {} 响应异常"
-msgstr "[Local Message] {} 响应异常"
 
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_zhipu.py⁩:42
 msgid "请配置ZHIPUAI_API_KEY或自定义 智谱(Zhipu) API-KEY"
@@ -1662,12 +1644,13 @@ msgstr "上下文长度超过glm-4v上限2000tokens，注意图片大约占用1,
 msgid "没有检测到任何近期上传的图像文件，请上传jpg格式的图片，此外，请注意拓展名需要小写"
 msgstr "没有检测到任何近期上传的图像文件，请上传jpg格式的图片，此外，请注意拓展名需要小写"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:179
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:181
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:294
-msgid "APIKEY为空,请检查配置文件的{}"
-msgstr "APIKEY为空,请检查配置文件的{}"
+#| msgid "APIKEY为空,请检查配置文件的{}"
+msgid "APIKEY为空,请检查配置文件的{}。或者可以自定义 {} API-KEY"
+msgstr "APIKEY为空,请检查配置文件的{}。或者可以自定义 {} API-KEY"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:246
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:248
 msgid "API异常,请检测终端输出。可能的原因是: {}"
 msgstr "API异常,请检测终端输出。可能的原因是: {}"
 
@@ -2131,41 +2114,56 @@ msgstr "请及时点击“**保存当前对话**”获取所有滞留文档"
 msgid "正常"
 msgstr "正常"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:307
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:306
 msgid "插件调度异常:\n"
 msgstr "插件调度异常:\n"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:313
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:312
 msgid "插件调度异常"
 msgstr "插件调度异常"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:598
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:597
 msgid "... (省略{}个文件的显示) ..."
 msgstr "... (省略{}个文件的显示) ..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:600
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:599
 msgid "文件"
 msgstr "文件"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:603
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:602
 msgid "我上传了文件，请查收"
 msgstr "我上传了文件，请查收"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:605
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:604
 msgid "调用路径参数已自动修正到: "
 msgstr "调用路径参数已自动修正到: "
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:606
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:605
 msgid "现在您点击任意函数插件时，以上文件将被作为输入参数"
 msgstr "现在您点击任意函数插件时，以上文件将被作为输入参数"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:607
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:606
 msgid "请注意，当上述文件名出现异常时，请检查您的压缩包是否为UTF-8或CP437编码"
 msgstr "请注意，当上述文件名出现异常时，请检查您的压缩包是否为UTF-8或CP437编码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:609
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:608
 msgid "[Local Message] 收到以下文件 （上传到路径：{}）: "
 msgstr "[Local Message] 收到以下文件 （上传到路径：{}）: "
+
+#~ msgid "用户停止"
+#~ msgstr "用户停止"
+
+#~ msgid "导入软件依赖失败。使用该模型需要额外依赖，安装方法```pip install --upgrade dashscope```"
+#~ msgstr "导入软件依赖失败。使用该模型需要额外依赖，安装方法```pip install --upgrade dashscope```"
+
+#~ msgid "请配置 DASHSCOPE_API_KEY或自定义 通义千问(Qwen) API-KEY"
+#~ msgstr "请配置 DASHSCOPE_API_KEY或自定义 通义千问(Qwen) API-KEY"
+
+#~ msgid "[Local Message] 等待 {} 响应中 ..."
+#~ msgstr "[Local Message] 等待 {} 响应中 ..."
+
+#~ msgid "[Local Message] {} 响应异常"
+#~ msgstr "[Local Message] {} 响应异常"
 
 #, python-brace-format
 #~ msgid "{LANGUAGE_DISPLAY} 是无效的语言设定，将使用默认语言 zh-Hans（简体中文）"
