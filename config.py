@@ -1,6 +1,9 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-03-06
+- Add models: claude-3-7-sonnet-latest, qwen-long and qwq-plus.
+
 Modified by PureAmaya on 2025-02-28
 - New models have been configured.
 - Add grok support
@@ -56,7 +59,7 @@ AVAIL_LLM_MODELS = ["gpt-4o", "gpt-4o-mini", "o1",'o1-mini','o1-preview','o3-min
                     "grok-2",
                     "glm-4-plus","glm-4-airx","glm-4-air","glm-4-flashx","glm-zero-preview",
                     "moonshot-v1-8k","moonshot-v1-32k","moonshot-v1-128k", 
-                    "qwen-max","qwen-plus","qwen-turbo",
+                    'qwq-plus',"qwen-max","qwen-plus","qwen-turbo",'qwen-long',
                     "deepseek-chat","deepseek-reasoner"
                     ]
 # --- --- --- ---
@@ -68,7 +71,7 @@ AVAIL_LLM_MODELS = ["gpt-4o", "gpt-4o-mini", "o1",'o1-mini','o1-preview','o3-min
 #   "moss","stack-claude","internlm","qwen-local",'llama2',"deepseekcoder"
 #   "gemini-2.0-flash","gemini-1.5-pro","gemini-1.5-flash","gemini-1.5-flash-8b", # 目前还不支持自定义 / Currently not supported
 #   "cohere-command-r-plus","cohere-command-r","cohere-command","cohere-command-light","cohere-c4ai-aya-expanse-8b","cohere-c4ai-aya-expanse-32b",  # 目前还不支持自定义 / Currently not supported
-#   'claude-3-5-sonnet-latest','claude-3-5-haiku-latest','claude-3-opus-latest', # 目前还不支持自定义 / Currently not supported
+#   'claude-3-5-sonnet-latest','claude-3-5-haiku-latest','claude-3-7-sonnet-latest', # 目前还不支持自定义 / Currently not supported
 #   
 
 # --- --- --- ---

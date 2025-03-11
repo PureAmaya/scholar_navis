@@ -1,6 +1,10 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-03-06
+- Remove unnecessary print.
+- Due to Alibaba Cloud's introduction of a new inference model, the Qwen series models have been moved here. User-friendly names have also been added for distinction.
+
 Modified by PureAmaya on 2025-02-21
 - Compatible with DeepSeek's inference model(R1)
 
@@ -129,15 +133,13 @@ def generate_message(input, model, key, history, max_output_token, system_prompt
         "stream": True,
         "max_tokens": max_output_token,
     }
-    try:
-        print(f" {model} : {conversation_cnt} : {input[:100]} ..........")
-    except:
-        print("输入中可能存在乱码。")
+
     return headers, playload
 
 
 def get_predict_function(
         api_key_conf_name,
+        friendly_name,
         max_output_token,
         disable_proxy = False
     ):
@@ -176,7 +178,7 @@ def get_predict_function(
         APIKEY = llm_kwargs['custom_api_key'](api_key_conf_name)
         watch_dog_patience = 5  # 看门狗的耐心，设置5秒不准咬人(咬的也不是人
         if len(APIKEY) == 0:
-            raise RuntimeError(_("APIKEY为空,请检查配置文件的{}").format(APIKEY))
+            raise RuntimeError(_("APIKEY为空,请检查配置文件的{}。或者可以自定义 {} API-KEY").format(api_key_conf_name,friendly_name))
         if inputs == "":
             inputs = "你好👋"
         headers, playload = generate_message(
@@ -251,8 +253,6 @@ def get_predict_function(
                         logging.info(f"[response] {result}")
                         break
                     if response_text:result += response_text
-                    if not console_slience:
-                        print(response_text, end="")
                     if observe_window is not None:
                         # 观测窗，把已经获取的数据显示出去
                         if len(observe_window) >= 1:
@@ -291,7 +291,7 @@ def get_predict_function(
         """
         APIKEY = llm_kwargs['custom_api_key'](api_key_conf_name)
         if len(APIKEY) == 0:
-            raise RuntimeError(_("APIKEY为空,请检查配置文件的{}".format(APIKEY)))
+            raise RuntimeError(_("APIKEY为空,请检查配置文件的{}。或者可以自定义 {} API-KEY").format(api_key_conf_name,friendly_name))
         if inputs == "":
             inputs = "你好👋"
         if additional_fn is not None:
@@ -416,17 +416,18 @@ def get_predict_function(
 
                     # 兼容深度思考
                     if gpt_reasoning_buffer:
-                        chatbot_assistant =HTML(f''' 
+                        chatbot_assistant =HTML(''' 
                         <p>
                         <details open>
-                        <summary>{_('深度思考')}</summary>
+                        <summary>{}</summary>
                         <blockquote><p>
-                        {md2html(gpt_reasoning_buffer)}
+                        {}
                         </p></blockquote>
                         </details>  
                         </p>
-                        {md2html(gpt_replying_buffer)}
-                        ''')
+                        {}
+                        '''.format(_('深度思考'),md2html(gpt_reasoning_buffer),md2html(gpt_replying_buffer))
+                        )
 
                     else:chatbot_assistant = history[-1]
 

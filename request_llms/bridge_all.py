@@ -1,6 +1,9 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-03-10
+- Add model: qwq-plus, claude-3-7-sonnet-latest
+
 Modified by PureAmaya on 2025-02-27
 - Remove models: qianfan, taichu, newbing, yi, spark
 - Add model: grok-2, gpt-4.5-preview
@@ -440,10 +443,20 @@ for model in AVAIL_LLM_MODELS:
 
 # -=-=-=-=-=-=- 以下部分是新加入的模型，可能附带额外依赖 -=-=-=-=-=-=-
 # claude家族
-claude_models = ['claude-3-5-sonnet-latest','claude-3-5-haiku-latest','claude-3-opus-latest']
+claude_models = ['claude-3-5-sonnet-latest','claude-3-5-haiku-latest','claude-3-7-sonnet-latest']
 if any(item in claude_models for item in AVAIL_LLM_MODELS):
     from .bridge_claude import predict_no_ui_long_connection as claude_noui
     from .bridge_claude import predict as claude_ui
+    model_info.update({
+        "claude-3-7-sonnet-latest": {
+            "fn_with_ui": claude_ui,
+            "fn_without_ui": claude_noui,
+            "endpoint": claude_endpoint,
+            "max_token": 200000,
+            "tokenizer": tokenizer_gpt35,
+            "token_cnt": get_token_num_gpt35,
+        },
+    })
     model_info.update({
         "claude-3-5-sonnet-latest": {
             "fn_with_ui": claude_ui,
@@ -456,16 +469,6 @@ if any(item in claude_models for item in AVAIL_LLM_MODELS):
     })
     model_info.update({
         "claude-3-5-haiku-latest": {
-            "fn_with_ui": claude_ui,
-            "fn_without_ui": claude_noui,
-            "endpoint": claude_endpoint,
-            "max_token": 200000,
-            "tokenizer": tokenizer_gpt35,
-            "token_cnt": get_token_num_gpt35,
-        },
-    })
-    model_info.update({
-        "claude-3-opus-latest": {
             "fn_with_ui": claude_ui,
             "fn_without_ui": claude_noui,
             "endpoint": claude_endpoint,
@@ -608,50 +611,67 @@ if "qwen-local" in AVAIL_LLM_MODELS:
     except:
         print(trimmed_format_exc())
 # -=-=-=-=-=-=- 通义-在线模型 -=-=-=-=-=-=-
-if "qwen-turbo" in AVAIL_LLM_MODELS or "qwen-plus" in AVAIL_LLM_MODELS or "qwen-max" in AVAIL_LLM_MODELS or "qwen-long" in AVAIL_LLM_MODELS:   # zhipuai
-    try:
-        from .bridge_qwen import predict_no_ui_long_connection as qwen_noui
-        from .bridge_qwen import predict as qwen_ui
+try:
+    qwen_noui, qwen_ui = get_predict_function(
+    api_key_conf_name="DASHSCOPE_API_KEY",friendly_name='通义千问(dashscope/qwen)', max_output_token=8192, disable_proxy=False
+        )
+    if 'qwq-plus' in AVAIL_LLM_MODELS:
         model_info.update({
-            "qwen-max": {
+            "qwq-plus": {
                 "fn_with_ui": qwen_ui,
                 "fn_without_ui": qwen_noui,
                 "can_multi_thread": True,
-                "endpoint": None,
-                "max_token": 30720,
+                "endpoint": 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions',
+                "max_token": 98304,
                 "tokenizer": tokenizer_gpt35,
                 "token_cnt": get_token_num_gpt35,
-            },
-            "qwen-plus": {
-                "fn_with_ui": qwen_ui,
-                "fn_without_ui": qwen_noui,
-                "can_multi_thread": True,
-                "endpoint": None,
-                "max_token": 131072,
-                "tokenizer": tokenizer_gpt35,
-                "token_cnt": get_token_num_gpt35,
-            },
-            "qwen-turbo": {
-                "fn_with_ui": qwen_ui,
-                "fn_without_ui": qwen_noui,
-                "can_multi_thread": True,
-                "endpoint": None,
-                "max_token": 1000000,
-                "tokenizer": tokenizer_gpt35,
-                "token_cnt": get_token_num_gpt35,
-            },
-            "qwen-long": {
-                "fn_with_ui": qwen_ui,
-                "fn_without_ui": qwen_noui,
-                "can_multi_thread": True,
-                "endpoint": None,
-                "max_token": 1000000,
-                "tokenizer": tokenizer_gpt35,
-                "token_cnt": get_token_num_gpt35,
-            },
-        })
-    except:
-        print(trimmed_format_exc())
+            }})
+    if 'qwen-max' in AVAIL_LLM_MODELS:
+        model_info.update({
+        "qwen-max": {
+            "fn_with_ui": qwen_ui,
+            "fn_without_ui": qwen_noui,
+            "can_multi_thread": True,
+            "endpoint": 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions',
+            "max_token": 30720,
+            "tokenizer": tokenizer_gpt35,
+            "token_cnt": get_token_num_gpt35,
+        }})
+    if 'qwen-plus' in AVAIL_LLM_MODELS:
+        model_info.update({
+        "qwen-plus": {
+            "fn_with_ui": qwen_ui,
+            "fn_without_ui": qwen_noui,
+            "can_multi_thread": True,
+            "endpoint": 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions',
+            "max_token": 131072,
+            "tokenizer": tokenizer_gpt35,
+            "token_cnt": get_token_num_gpt35,
+        }})
+    if 'qwen-turbo' in AVAIL_LLM_MODELS:
+        model_info.update({
+        "qwen-turbo": {
+            "fn_with_ui": qwen_ui,
+            "fn_without_ui": qwen_noui,
+            "can_multi_thread": True,
+            "endpoint": 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions',
+            "max_token": 1000000,
+            "tokenizer": tokenizer_gpt35,
+        }})
+    if 'qwen-long' in AVAIL_LLM_MODELS:
+        model_info.update({
+        "qwen-long": {
+            "fn_with_ui": qwen_ui,
+            "fn_without_ui": qwen_noui,
+            "can_multi_thread": True,
+            "endpoint": 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions',
+            "max_token": 1000000,
+            "tokenizer": tokenizer_gpt35,
+            "token_cnt": get_token_num_gpt35,
+        }})
+except:
+    print(trimmed_format_exc())
+
 if "llama2" in AVAIL_LLM_MODELS:   # llama2
     try:
         from .bridge_llama2 import predict_no_ui_long_connection as llama2_noui
@@ -690,7 +710,7 @@ if "deepseekcoder" in AVAIL_LLM_MODELS:   # deepseekcoder
 if "deepseek-chat" in AVAIL_LLM_MODELS or "deepseek-reasoner" in AVAIL_LLM_MODELS:
     try:
         deepseekapi_noui, deepseekapi_ui = get_predict_function(
-            api_key_conf_name="DEEPSEEK_API_KEY", max_output_token=8192, disable_proxy=False
+            api_key_conf_name="DEEPSEEK_API_KEY", friendly_name='深度求索(deepseek)',max_output_token=8192, disable_proxy=False
             )
         model_info.update({
             "deepseek-chat":{
@@ -720,7 +740,7 @@ if "deepseek-chat" in AVAIL_LLM_MODELS or "deepseek-reasoner" in AVAIL_LLM_MODEL
 if "grok-2" in AVAIL_LLM_MODELS:
     try:
         grok_noui, grok_ui = get_predict_function(
-            api_key_conf_name="XAI_API_KEY", max_output_token=8192, disable_proxy=False
+            api_key_conf_name="XAI_API_KEY",friendly_name='Grok', max_output_token=8192, disable_proxy=False
             )
         model_info.update({
             "grok-2":{

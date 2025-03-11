@@ -164,7 +164,7 @@ Sample Title,"This cell is used to input all the text to be extracted from the a
         gr.Markdown(_('关于AI的调整请使用页面顶部的设置'))
         with gr.Row(equal_height=True):
             content_requirements = gr.Textbox(value='',label=_('内容要求'),placeholder=_('输入对于内容的总体要求'),lines=3); 
-            stru_requirements = gr.Textbox(value='',label=_('结构要求'),placeholder=_('输入对于行文结构的要求（一行一个）'),lines=3); 
+            stru_requirements = gr.Textbox(value='',label=_('结构要求'),placeholder=_('输入对于行文结构的要求（一行一个）\n也可视为对内容的分类'),lines=3); 
         with gr.Row():
             support_language = list(GPT_SUPPORT_LAMGUAGE);support_language.insert(0,'')
             language = gr.Dropdown(value='简体中文',label=_('请选择翻译语言'), choices=support_language,allow_custom_value=False)

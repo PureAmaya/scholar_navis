@@ -1,6 +1,12 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-03-07
+- Add the temporary environment variable GRADIO_TEMP_DIR.
+- The deletion of the Gradio cache has been canceled. However, as a result, the Gradio cache folder is now located in the working directory for easier management.
+- Remove some unnecessary settings.
+
+
 Modified by PureAmaya on 2025-02-27
 - Remove redundant features: warm_up_modules()
 - Added privacy and security tips.
@@ -52,10 +58,8 @@ def main():
     # 读取配置
     proxies, WEB_PORT, LLM_MODEL, CONCURRENT_COUNT, AUTHENTICATION = get_conf('proxies', 'WEB_PORT', 'LLM_MODEL', 'CONCURRENT_COUNT', 'AUTHENTICATION')
     CHATBOT_HEIGHT, LAYOUT, AVAIL_LLM_MODELS, AUTO_CLEAR_TXT = get_conf('CHATBOT_HEIGHT', 'LAYOUT', 'AVAIL_LLM_MODELS', 'AUTO_CLEAR_TXT')
-    AUTO_CLEAR_TXT, PATH_LOGGING = get_conf( 'AUTO_CLEAR_TXT', 'PATH_LOGGING')
-    NUM_CUSTOM_BASIC_BTN = 0
+    AUTO_CLEAR_TXT= get_conf( 'AUTO_CLEAR_TXT')
     SSL_KEYFILE, SSL_CERTFILE = get_conf('SSL_KEYFILE', 'SSL_CERTFILE')
-
     
     if LLM_MODEL not in AVAIL_LLM_MODELS: AVAIL_LLM_MODELS += [LLM_MODEL]
 
@@ -104,7 +108,7 @@ def main():
     predefined_btns = {}
     from shared_utils.cookie_manager import make_cookie_cache, make_history_cache
     from themes.common import theme
-    with gr.Blocks(title="Scholar Navis", head=head(), theme=theme,analytics_enabled=False,delete_cache=(10800, 18000)) as app_block:
+    with gr.Blocks(title="Scholar Navis", head=head(), theme=theme,analytics_enabled=False) as app_block:
         with gr.Row():
             floating_panel_switch_btn = gr.Button(value=_("上传与设置"),icon=os.path.join('themes','svg','gear.svg'),elem_id='floating_panel_switch_btn') # 的新浮动面板按钮
             dark_mode_btn = gr.Button(_('暗黑模式'),icon=os.path.join('themes','svg','dark_mode_toggle.svg'), elem_id='dark_mode_toggle')

@@ -132,13 +132,13 @@ class ChatBotWithCookies(list):
     
     def _convert_to_gr_msg(self,role:Literal['user','assistant'],obj):
         if not obj:obj = ''
-        if isinstance(obj, gradio.ChatMessage):return gradio.ChatMessage(role,obj.content) 
-        elif isinstance(obj,(gradio.Markdown,gradio.HTML)):return gradio.ChatMessage(role,obj) 
+        if isinstance(obj, gradio.ChatMessage):return gradio.ChatMessage(role=role,content=obj.content) 
+        elif isinstance(obj,(gradio.Markdown,gradio.HTML)):return gradio.ChatMessage(role=role,content=obj) 
         elif isinstance(obj,dict):
             if 'role' in obj and 'content' in obj:
-                return gradio.ChatMessage(role,obj['content'])
-            else:return gradio.ChatMessage(role,str(obj))
-        elif isinstance(obj,str):return gradio.ChatMessage(role,obj)
+                return gradio.ChatMessage(role=role,content=obj['content'])
+            else:return gradio.ChatMessage(role=role,content=str(obj))
+        elif isinstance(obj,str):return gradio.ChatMessage(role=role,content=obj)
         else:raise ValueError("Invalid value type")
         
 INIT_SYS_PROMPT = get_conf('INIT_SYS_PROMPT')
@@ -251,7 +251,6 @@ def update_ui(chatbot:ChatBotWithCookies, history, msg=_("正常"), **kwargs):  
     else:
         chatbot_gr = gradio.update(value=chatbot)
     '''
-    
     yield cookies,chatbot, history, msg
 
 
