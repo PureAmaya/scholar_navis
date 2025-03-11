@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-03-07 21:11+0800\n"
-"PO-Revision-Date: 2025-03-07 21:16+0800\n"
+"POT-Creation-Date: 2025-03-11 22:12+0800\n"
+"PO-Revision-Date: 2025-03-11 22:13+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_TW\n"
@@ -1615,35 +1615,35 @@ msgstr "已重置"
 msgid "如果浏览器没有自动打开，请复制并转到以下URL:"
 msgstr "如果瀏覽器沒有自動打開，請複製並轉到以下URL："
 
-#: request_llms/bridge_all.py:74
+#: request_llms/bridge_all.py:73
 msgid "正在加载tokenizer，如果是第一次运行，可能需要一点时间下载参数"
 msgstr "正在加載tokenizer，如果是第一次運行，可能需要一點時間下載參數"
 
-#: request_llms/bridge_all.py:76
+#: request_llms/bridge_all.py:75
 msgid "加载tokenizer完毕"
 msgstr "加載tokenizer完畢"
 
-#: request_llms/bridge_all.py:106
+#: request_llms/bridge_all.py:105
 msgid "警告！API_URL配置选项将被弃用，请更换为API_URL_REDIRECT配置"
 msgstr "警告！API_URL配置選項將被棄用，請更換為API_URL_REDIRECT配置"
 
-#: request_llms/bridge_all.py:785
+#: request_llms/bridge_all.py:784
 msgid "one-api模型 {} 的 max_token 配置不是整数，请检查配置文件"
 msgstr "警告！API_URL配置選項將被棄用，請更換為API_URL_REDIRECT配置。"
 
-#: request_llms/bridge_all.py:824 toolbox.py:660
+#: request_llms/bridge_all.py:823 toolbox.py:660
 msgid "AZURE_CFG_ARRAY中配置的模型必须以azure开头"
 msgstr "AZURE_CFG_ARRAY中配置的模型必須以azure開頭"
 
-#: request_llms/bridge_all.py:884
+#: request_llms/bridge_all.py:883
 msgid "历史记录参数必须是List, 但是现在的类型是{}"
 msgstr "歷史記錄參數必須是List, 但是現在的類型是{}"
 
-#: request_llms/bridge_all.py:970
+#: request_llms/bridge_all.py:969
 msgid "模型覆盖参数 '{}' 指向一个暂不支持的模型，请检查配置文件"
 msgstr "模型覆蓋參數 '{}' 指向一個暫不支援的模型，請檢查配置文件"
 
-#: request_llms/bridge_all.py:997
+#: request_llms/bridge_all.py:996
 msgid "历史记录参数必须是List"
 msgstr "歷史記錄參數必須是List"
 
@@ -1906,8 +1906,12 @@ msgid "结构要求"
 msgstr "結構要求"
 
 #: shared_utils/scholar_navis/gpt_academic_handler.py:167
-msgid "输入对于行文结构的要求（一行一个）"
-msgstr "輸入對於行文結構的要求（一行一個）"
+msgid ""
+"输入对于行文结构的要求（一行一个）\n"
+"也可视为对内容的分类"
+msgstr ""
+"輸入對於行文結構的要求（一行一個）\n"
+"也可視為對內容的分類"
 
 #: shared_utils/scholar_navis/gpt_academic_handler.py:170
 msgid "请选择翻译语言"
