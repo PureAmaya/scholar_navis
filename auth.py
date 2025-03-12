@@ -97,13 +97,15 @@ setCookie_js =\
 
 welcome_1 = _('欢迎使用 Scholar Navis')
 welcome_2 = _('管理员启动了身份验证。请登录或注册以继续')
-welcome_3 = _('API信息在服务端加密; 不登录的情况下API加密储存在localStorage中，请勿泄露')
-welcome_4 = _('如果对安全性不放心，请不要使用常用用户名与密码')
+welcome_3 = _('API信息经过一定的加密并存储在服务端; 不登录的情况下API加密储存在localStorage中，请勿泄露')
+welcome_4 = _('如果对安全性不放心，请不要使用常用用户名与密码，最好使用单独的API-KEY进行访问')
+welcome_5 = _('请注意，服务端可能能够拿到您的API-KEY数据，请不要登录不受信任的服务商，推荐自己部署以确保安全')
 welcome = f'''
         <h1>{welcome_1}</h1>
         <p>{welcome_2}</p>
         <p>{welcome_3}</p>
         <p><strong>{welcome_4}</strong></p>
+        <p><strong>{welcome_5}</strong></p>
         <br>
 '''
 
