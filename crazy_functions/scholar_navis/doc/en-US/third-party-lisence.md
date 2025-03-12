@@ -20,6 +20,8 @@ Scholar Navis uses the AGPL-3.0 license.
 
 - colorama: BSD License
 
+- cryptography: Apache-2.0 license
+
 - fastapi: MIT License
 
 - gradio: Apache-2.0 license

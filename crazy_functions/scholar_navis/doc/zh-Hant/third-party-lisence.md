@@ -20,6 +20,8 @@ Scholar Navis 使用 AGPL-3.0 許可證。
 
 - colorama: BSD 許可證
 
+- cryptography: Apache-2.0 許可證
+
 - fastapi：MIT 許可證
 
 - gradio：Apache-2.0 許可證
