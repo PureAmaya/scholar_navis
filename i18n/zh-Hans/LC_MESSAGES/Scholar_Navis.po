@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-03-07 21:11+0800\n"
-"PO-Revision-Date: 2025-03-07 21:12+0800\n"
+"POT-Creation-Date: 2025-03-12 11:24+0800\n"
+"PO-Revision-Date: 2025-03-12 11:24+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -23,135 +23,141 @@ msgid "管理员启动了身份验证。请登录或注册以继续"
 msgstr "管理员启动了身份验证。请登录或注册以继续"
 
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:100
-msgid "API信息在服务端加密; 不登录的情况下API加密储存在localStorage中，请勿泄露"
-msgstr "API信息在服务端加密; 不登录的情况下API加密储存在localStorage中，请勿泄露"
+#| msgid "API信息在服务端加密; 不登录的情况下API加密储存在localStorage中，请勿泄露"
+msgid "API信息经过一定的加密并存储在服务端; 不登录的情况下API加密储存在localStorage中，请勿泄露"
+msgstr "API信息经过一定的加密并存储在服务端; 不登录的情况下API加密储存在localStorage中，请勿泄露"
 
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:101
-msgid "如果对安全性不放心，请不要使用常用用户名与密码"
-msgstr "如果对安全性不放心，请不要使用常用用户名与密码"
+#| msgid "如果对安全性不放心，请不要使用常用用户名与密码"
+msgid "如果对安全性不放心，请不要使用常用用户名与密码，最好使用单独的API-KEY进行访问"
+msgstr "如果对安全性不放心，请不要使用常用用户名与密码，最好使用单独的API-KEY进行访问"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:122
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:171
-msgid "用户名无效"
-msgstr "用户名无效"
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:102
+msgid "请注意，服务端可能能够拿到您的API-KEY数据，请不要登录不受信任的服务商，推荐自己部署以确保安全"
+msgstr "请注意，服务端可能能够拿到您的API-KEY数据，请不要登录不受信任的服务商，推荐自己部署以确保安全"
 
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:124
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:173
+msgid "用户名无效"
+msgstr "用户名无效"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:126
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:175
 msgid "用户名不能为空"
 msgstr "用户名不能为空"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:125
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:174
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:127
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:176
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/user_account_manager.py⁩:57
 msgid "密码不能为空"
 msgstr "密码不能为空"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:127
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:177
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:129
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:179
 msgid "用户名只能包含字母、数字和下划线"
 msgstr "用户名只能包含字母、数字和下划线"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:128
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:130
 msgid "当前用户不存在"
 msgstr "当前用户不存在"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:129
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:179
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:131
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:181
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/user_account_manager.py⁩:61
 msgid "密码不符合要求。至少八位且有大小写字母和数字"
 msgstr "密码不符合要求。至少八位且有大小写字母和数字"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:130
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:132
 msgid "密码错误"
 msgstr "密码错误"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:161
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:163
 msgid "登录失败，请稍后再试"
 msgstr "登录失败，请稍后再试"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:163
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:165
 msgid "登陆成功"
 msgstr "登陆成功"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:175
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:177
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/user_account_manager.py⁩:58
 msgid "请重复输入密码"
 msgstr "请重复输入密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:178
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:180
 msgid "当前用户已存在，请使用其他用户名"
 msgstr "当前用户已存在，请使用其他用户名"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:180
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:182
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/user_account_manager.py⁩:62
 msgid "两次输入的密码不一致"
 msgstr "两次输入的密码不一致"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:192
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:194
 msgid "注册失败，请稍后再试"
 msgstr "注册失败，请稍后再试"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:194
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:196
 msgid "注册成功，请登录"
 msgstr "注册成功，请登录"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:197
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:199
 msgid "Scholar Navis 登录授权页"
 msgstr "Scholar Navis 登录授权页"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:202
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:204
 msgid "用户名"
 msgstr "用户名"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:202
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:204
 msgid "请输入用户名 (不区分大小写)"
 msgstr "请输入用户名 (不区分大小写)"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:203
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:205
 msgid "密码"
 msgstr "密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:203
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:205
 msgid "至少八位，且有大小写字母与数字"
 msgstr "至少八位，且有大小写字母与数字"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:204
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:206
 msgid "不自动登录"
 msgstr "不自动登录"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:204
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:206
 msgid "一周内自动登录"
 msgstr "一周内自动登录"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:204
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:206
 msgid "一个月内自动登录"
 msgstr "一个月内自动登录"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:204
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:206
 msgid "总是自动登录"
 msgstr "总是自动登录"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:205
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:207
 msgid "自动登录"
 msgstr "自动登录"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:206
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:208
 msgid "确认密码"
 msgstr "确认密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:206
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:208
 msgid "请再次输入密码"
 msgstr "请再次输入密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:207
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:209
 msgid "登录"
 msgstr "登录"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:208
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:210
 msgid "注册"
 msgstr "注册"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:211
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:213
 msgid "注册登录切换"
 msgstr "注册登录切换"
 
@@ -1459,9 +1465,9 @@ msgstr "对话功能"
 
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:125
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/main.py⁩:251
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:266
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:272
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:277
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:278
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:283
 msgid "当前模型: {}"
 msgstr "当前模型: {}"
 
@@ -1507,36 +1513,36 @@ msgstr "已重置"
 msgid "如果浏览器没有自动打开，请复制并转到以下URL:"
 msgstr "如果浏览器没有自动打开，请复制并转到以下URL:"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:74
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:73
 msgid "正在加载tokenizer，如果是第一次运行，可能需要一点时间下载参数"
 msgstr "正在加载tokenizer，如果是第一次运行，可能需要一点时间下载参数"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:76
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:75
 msgid "加载tokenizer完毕"
 msgstr "加载tokenizer完毕"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:106
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:105
 msgid "警告！API_URL配置选项将被弃用，请更换为API_URL_REDIRECT配置"
 msgstr "警告！API_URL配置选项将被弃用，请更换为API_URL_REDIRECT配置"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:785
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:784
 msgid "one-api模型 {} 的 max_token 配置不是整数，请检查配置文件"
 msgstr "one-api模型 {} 的 max_token 配置不是整数，请检查配置文件"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:824
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:823
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:660
 msgid "AZURE_CFG_ARRAY中配置的模型必须以azure开头"
 msgstr "AZURE_CFG_ARRAY中配置的模型必须以azure开头"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:884
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:883
 msgid "历史记录参数必须是List, 但是现在的类型是{}"
 msgstr "历史记录参数必须是List, 但是现在的类型是{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:970
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:969
 msgid "模型覆盖参数 '{}' 指向一个暂不支持的模型，请检查配置文件"
 msgstr "模型覆盖参数 '{}' 指向一个暂不支持的模型，请检查配置文件"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:997
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/bridge_all.py⁩:996
 msgid "历史记录参数必须是List"
 msgstr "历史记录参数必须是List"
 
@@ -1646,7 +1652,6 @@ msgstr "没有检测到任何近期上传的图像文件，请上传jpg格式的
 
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:181
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/request_llms/oai_std_model_template.py⁩:294
-#| msgid "APIKEY为空,请检查配置文件的{}"
 msgid "APIKEY为空,请检查配置文件的{}。或者可以自定义 {} API-KEY"
 msgstr "APIKEY为空,请检查配置文件的{}。或者可以自定义 {} API-KEY"
 
@@ -1681,6 +1686,14 @@ msgid ""
 msgstr ""
 "您提供的api-key不满足要求，不包含任何可用于{}的api-key。您可能选择了错误的模型或请求源（左上角更换模型菜单中可切换其他模型或请"
 "求源）"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/encrypt.py⁩:15
+msgid "请先在配置文件中设置SECRET_KEY！"
+msgstr "请先在配置文件中设置SECRET_KEY！"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/encrypt.py⁩:17
+msgid "SECRET_KEY长度必须大于等于16！"
+msgstr "SECRET_KEY长度必须大于等于16！"
 
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:106
 msgid "Scholar Navis 文章总结分析工具"
@@ -1771,8 +1784,13 @@ msgid "结构要求"
 msgstr "结构要求"
 
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:167
-msgid "输入对于行文结构的要求（一行一个）"
-msgstr "输入对于行文结构的要求（一行一个）"
+#| msgid "输入对于行文结构的要求（一行一个）"
+msgid ""
+"输入对于行文结构的要求（一行一个）\n"
+"也可视为对内容的分类"
+msgstr ""
+"输入对于行文结构的要求（一行一个）\n"
+"也可视为对内容的分类"
 
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:170
 msgid "请选择翻译语言"
@@ -1869,7 +1887,7 @@ msgid "确认参数并执行"
 msgstr "确认参数并执行"
 
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_advanced_plugin_class.py⁩:50
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:182
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:186
 msgid "取消"
 msgstr "取消"
 
@@ -1878,7 +1896,7 @@ msgstr "取消"
 msgid "未选定任何插件"
 msgstr "未选定任何插件"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:31
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:35
 msgid ""
 "\n"
 "<p>在此处自定义您的api-key，访问更多模型。</p>\n"
@@ -1926,7 +1944,7 @@ msgstr ""
 "</ul>\n"
 "</details>\n"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:56
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:60
 msgid ""
 "\n"
 "<p>使用该功能添加自定义模型或使用openAI重定向服务。\n"
@@ -1970,135 +1988,135 @@ msgstr ""
 "</ul>\n"
 "</details>\n"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:85
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:89
 msgid "LLM_MODEL 没有设定，需要一个默认的模型"
 msgstr "LLM_MODEL 没有设定，需要一个默认的模型"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:87
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:91
 msgid "INIT_SYS_PROMPT 没有设定，需要一个默认的系统提示"
 msgstr "INIT_SYS_PROMPT 没有设定，需要一个默认的系统提示"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:89
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:93
 msgid "AVAIL_LLM_MODELS 没有设定，需要一个可用模型列表"
 msgstr "AVAIL_LLM_MODELS 没有设定，需要一个可用模型列表"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:94
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:98
 msgid "上传文件"
 msgstr "上传文件"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:97
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:101
 msgid "请上传本地文件 / 压缩包以供使用。请注意: 上传文件后会自动把输入区修改为相应路径"
 msgstr "请上传本地文件 / 压缩包以供使用。请注意: 上传文件后会自动把输入区修改为相应路径"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:98
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:102
 msgid "任何文件, 推荐上传压缩文件(zip, tar, rar)"
 msgstr "任何文件, 推荐上传压缩文件(zip, tar, rar)"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:99
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:103
 msgid "更换模型"
 msgstr "更换模型"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:100
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:104
 msgid "<p>推荐使用高并发服务商 (即速率限制较为宽松)</p>"
 msgstr "<p>推荐使用高并发服务商 (即速率限制较为宽松)</p>"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:103
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:107
 msgid "更换LLM模型/请求源"
 msgstr "更换LLM模型/请求源"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:103
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:107
 msgid "推理模型(o1,o3,r1)速度较慢，但是效果较好"
 msgstr "推理模型(o1,o3,r1)速度较慢，但是效果较好"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:107
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:111
 msgid "留空时使用默认prompt: {}"
 msgstr "留空时使用默认prompt: {}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:139
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:143
 msgid "选择服务商"
 msgstr "选择服务商"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:139
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:143
 msgid "仅用于api自定义，不影响模型选择"
 msgstr "仅用于api自定义，不影响模型选择"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:140
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:144
 msgid "不输入则使用内置API KEY"
 msgstr "不输入则使用内置API KEY"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:140
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:144
 msgid "自定义API-KEY"
 msgstr "自定义API-KEY"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:143
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:147
 msgid "自定义重定向"
 msgstr "自定义重定向"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:144
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:148
 msgid "重定向路径"
 msgstr "重定向路径"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:146
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:150
 msgid "自定义模型"
 msgstr "自定义模型"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:146
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:150
 msgid "此处输入非内置模型（一行一个）"
 msgstr "此处输入非内置模型（一行一个）"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:171
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:175
 msgid "帮助"
 msgstr "帮助"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:174
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:178
 msgid "更改密码"
 msgstr "更改密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:175
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:179
 msgid "当前登录用户"
 msgstr "当前登录用户"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:176
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:180
 msgid "请注意，点击确认后立即生效"
 msgstr "请注意，点击确认后立即生效"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:177
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:181
 msgid "当前密码"
 msgstr "当前密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:177
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:181
 msgid "请输入当前密码"
 msgstr "请输入当前密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:178
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:182
 msgid "修改密码"
 msgstr "修改密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:178
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:182
 msgid "请输入新密码"
 msgstr "请输入新密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:179
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:183
 msgid "确认修改的密码"
 msgstr "确认修改的密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:179
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:183
 msgid "请再次输入新密码"
 msgstr "请再次输入新密码"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:181
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:185
 msgid "确认修改"
 msgstr "确认修改"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:183
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:187
 msgid "退出登录"
 msgstr "退出登录"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:227
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:232
 msgid "自定义数据加载失败，使用默认值"
 msgstr "自定义数据加载失败，使用默认值"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:265
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/themes/gui_toolbar.py⁩:271
 msgid "参数加载失败，使用默认值"
 msgstr "参数加载失败，使用默认值"
 

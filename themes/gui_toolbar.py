@@ -1,6 +1,9 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-03-12
+- Add certain encryption measures for users' custom information and large model parameters.
+
 Modified by PureAmaya on 2025-02-24
 - Remove redundant features: warm_up_modules()
 - Add information about SiliconFlow and Alibaba Cloud Bailian.
@@ -21,6 +24,7 @@ import gradio_compatibility_layer as gr
 from shared_utils.scholar_navis.sqlite import SQLiteDatabase
 from shared_utils.config_loader import get_conf
 from shared_utils.scholar_navis.user_account_manager import change_password
+from shared_utils.scholar_navis.encrypt import encrypt,decrypt
 from shared_utils.scholar_navis.user_custom_manager import DEFAULT_USER_CUSTOM,SUPPORT_API_PROVIDER,splice_config_url_direct
 from gradio_modal import Modal
 from shared_utils.scholar_navis.multi_lang import _
@@ -221,7 +225,8 @@ def _init_custom_function(request:gr.Request,local_storage):
         else:
             # 登录了，选择用数据库保存
             with SQLiteDatabase('user_account') as db:
-                user_custom_data = db.easy_select(request.username,'user_custom_data')
+                user_custom_data :str = db.easy_select(request.username,'user_custom_data')
+                user_custom_data = decrypt(user_custom_data)
                 user_custom_data = json.loads(user_custom_data)
     except: 
         gr.Warning(_('自定义数据加载失败，使用默认值'))  
@@ -247,7 +252,7 @@ def _save_user_custom_data(request:gr.Request,user_custom_data:dict):
     else:
         # 登录了，选择用数据库保存，localStorage不做任何修改
         with SQLiteDatabase('user_account') as db:
-            db.update(request.username,'user_custom_data',json.dumps(user_custom_data))
+            db.update(request.username,'user_custom_data',encrypt(json.dumps(user_custom_data)))
             return gr.update()
 
 def _load_llm_kwargs(request:gr.Request,local_storage):
@@ -259,6 +264,7 @@ def _load_llm_kwargs(request:gr.Request,local_storage):
             # 登录了，读取数据库内的用户数据
             with SQLiteDatabase('user_account') as db:
                 llm_kwargs = db.easy_select(request.username,'llm_kwargs')
+                llm_kwargs = decrypt(llm_kwargs)
                 llm_kwargs = json.loads(llm_kwargs)
     except: 
         llm_kwargs = {'model':LLM_MODEL,'top_p':1.0,'temperature':1.0,'max_length':4096,'prompt':INIT_SYS_PROMPT}
@@ -273,7 +279,7 @@ def _save_llm_kwargs(request:gr.Request,model,top_p,temperature,max_length,promp
     else:
         # 登录了，选择用数据库保存，localStorage不做更改
         with SQLiteDatabase('user_account') as db:
-            db.update(request.username,'llm_kwargs',json.dumps(llm_kwargs))
+            db.update(request.username,'llm_kwargs',encrypt(json.dumps(llm_kwargs)))
             return gr.update(label=_("当前模型: {}").format(model)),gr.update()
 
 def check_input_invaild(inputs:str):

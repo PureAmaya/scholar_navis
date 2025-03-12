@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-03-11 22:14+0800\n"
-"PO-Revision-Date: 2025-03-11 22:14+0800\n"
+"POT-Creation-Date: 2025-03-12 11:22+0800\n"
+"PO-Revision-Date: 2025-03-12 11:23+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -26,39 +26,50 @@ msgstr ""
 
 #: auth.py:100
 msgid ""
-"API信息在服务端加密; 不登录的情况下API加密储存在localStorage中，请勿泄露"
+"API信息经过一定的加密并存储在服务端; 不登录的情况下API加密储存在localStorage"
+"中，请勿泄露"
 msgstr ""
-"API information is encrypted on the server; when not logged in, API "
-"encryption is stored in localStorage. Please do not disclose it."
+"API information is encrypted and stored on the server; when not logged in, "
+"the API encryption is stored in localStorage. Please do not disclose it."
 
 #: auth.py:101
-msgid "如果对安全性不放心，请不要使用常用用户名与密码"
+msgid ""
+"如果对安全性不放心，请不要使用常用用户名与密码，最好使用单独的API-KEY进行访问"
 msgstr ""
 "If you are concerned about security, please avoid using common usernames and "
-"passwords."
+"passwords. It is best to use a separate API-KEY for access."
 
-#: auth.py:122 auth.py:171
+#: auth.py:102
+msgid ""
+"请注意，服务端可能能够拿到您的API-KEY数据，请不要登录不受信任的服务商，推荐自"
+"己部署以确保安全"
+msgstr ""
+"Please note that the server may be able to access your API-KEY data. Do not "
+"log in to untrusted service providers. It is recommended to deploy it "
+"yourself to ensure security."
+
+#: auth.py:124 auth.py:173
 msgid "用户名无效"
 msgstr "Username invalid."
 
-#: auth.py:124 auth.py:173
+#: auth.py:126 auth.py:175
 msgid "用户名不能为空"
 msgstr "Username cannot be empty."
 
-#: auth.py:125 auth.py:174
+#: auth.py:127 auth.py:176
 #: shared_utils/scholar_navis/user_account_manager.py:57
 msgid "密码不能为空"
 msgstr "Password cannot be empty."
 
-#: auth.py:127 auth.py:177
+#: auth.py:129 auth.py:179
 msgid "用户名只能包含字母、数字和下划线"
 msgstr "Username can only contain letters, numbers, and underscores."
 
-#: auth.py:128
+#: auth.py:130
 msgid "当前用户不存在"
 msgstr "Current user does not exist."
 
-#: auth.py:129 auth.py:179
+#: auth.py:131 auth.py:181
 #: shared_utils/scholar_navis/user_account_manager.py:61
 msgid "密码不符合要求。至少八位且有大小写字母和数字"
 msgstr ""
@@ -66,97 +77,97 @@ msgstr ""
 "characters long and include uppercase and lowercase letters as well as "
 "numbers."
 
-#: auth.py:130
+#: auth.py:132
 msgid "密码错误"
 msgstr "Password is incorrect."
 
-#: auth.py:161
+#: auth.py:163
 msgid "登录失败，请稍后再试"
 msgstr "Login failed, please try again later."
 
-#: auth.py:163
+#: auth.py:165
 msgid "登陆成功"
 msgstr "Login successful."
 
-#: auth.py:175 shared_utils/scholar_navis/user_account_manager.py:58
+#: auth.py:177 shared_utils/scholar_navis/user_account_manager.py:58
 msgid "请重复输入密码"
 msgstr "Please re-enter your password."
 
-#: auth.py:178
+#: auth.py:180
 msgid "当前用户已存在，请使用其他用户名"
 msgstr "The current username already exists. Please use a different username."
 
-#: auth.py:180 shared_utils/scholar_navis/user_account_manager.py:62
+#: auth.py:182 shared_utils/scholar_navis/user_account_manager.py:62
 msgid "两次输入的密码不一致"
 msgstr "The two passwords entered do not match."
 
-#: auth.py:192
+#: auth.py:194
 msgid "注册失败，请稍后再试"
 msgstr "Registration failed, please try again later."
 
-#: auth.py:194
+#: auth.py:196
 msgid "注册成功，请登录"
 msgstr "Registration successful, please log in."
 
-#: auth.py:197
+#: auth.py:199
 msgid "Scholar Navis 登录授权页"
 msgstr "Scholar Navis Login Authorization Page"
 
-#: auth.py:202
+#: auth.py:204
 msgid "用户名"
 msgstr "Username"
 
-#: auth.py:202
+#: auth.py:204
 msgid "请输入用户名 (不区分大小写)"
 msgstr "Please enter your username (case-insensitive)."
 
-#: auth.py:203
+#: auth.py:205
 msgid "密码"
 msgstr "Password"
 
-#: auth.py:203
+#: auth.py:205
 msgid "至少八位，且有大小写字母与数字"
 msgstr ""
 "At least eight characters, including uppercase letters, lowercase letters, "
 "and numbers."
 
-#: auth.py:204
+#: auth.py:206
 msgid "不自动登录"
 msgstr "Do not log in automatically"
 
-#: auth.py:204
+#: auth.py:206
 msgid "一周内自动登录"
 msgstr "Within one week"
 
-#: auth.py:204
+#: auth.py:206
 msgid "一个月内自动登录"
 msgstr "Within one month"
 
-#: auth.py:204
+#: auth.py:206
 msgid "总是自动登录"
 msgstr "Always"
 
-#: auth.py:205
+#: auth.py:207
 msgid "自动登录"
 msgstr "Auto-login"
 
-#: auth.py:206
+#: auth.py:208
 msgid "确认密码"
 msgstr "Confirm Password"
 
-#: auth.py:206
+#: auth.py:208
 msgid "请再次输入密码"
 msgstr "Please re-enter your password."
 
-#: auth.py:207
+#: auth.py:209
 msgid "登录"
 msgstr "Login"
 
-#: auth.py:208
+#: auth.py:210
 msgid "注册"
 msgstr "Register"
 
-#: auth.py:211
+#: auth.py:213
 msgid "注册登录切换"
 msgstr "Toggle between registration and login"
 
@@ -1712,8 +1723,8 @@ msgstr ""
 msgid "对话功能"
 msgstr "Dialogue feature"
 
-#: main.py:125 main.py:251 themes/gui_toolbar.py:266 themes/gui_toolbar.py:272
-#: themes/gui_toolbar.py:277
+#: main.py:125 main.py:251 themes/gui_toolbar.py:272 themes/gui_toolbar.py:278
+#: themes/gui_toolbar.py:283
 msgid "当前模型: {}"
 msgstr "Current model: {}"
 
@@ -1971,6 +1982,14 @@ msgstr ""
 "request source (you can switch to other models or request sources in the "
 "model switch menu at the top left corner)."
 
+#: shared_utils/scholar_navis/encrypt.py:15
+msgid "请先在配置文件中设置SECRET_KEY！"
+msgstr "Please set the SECRET_KEY in the configuration file first!"
+
+#: shared_utils/scholar_navis/encrypt.py:17
+msgid "SECRET_KEY长度必须大于等于16！"
+msgstr "The SECRET_KEY length must be at least 16 characters!"
+
 #: shared_utils/scholar_navis/gpt_academic_handler.py:106
 msgid "Scholar Navis 文章总结分析工具"
 msgstr ""
@@ -2208,7 +2227,7 @@ msgstr ""
 msgid "确认参数并执行"
 msgstr "Confirm parameters and execute"
 
-#: themes/gui_advanced_plugin_class.py:50 themes/gui_toolbar.py:182
+#: themes/gui_advanced_plugin_class.py:50 themes/gui_toolbar.py:186
 msgid "取消"
 msgstr "Cancel"
 
@@ -2217,7 +2236,7 @@ msgstr "Cancel"
 msgid "未选定任何插件"
 msgstr "No plugin selected."
 
-#: themes/gui_toolbar.py:31
+#: themes/gui_toolbar.py:35
 msgid ""
 "\n"
 "<p>在此处自定义您的api-key，访问更多模型。</p>\n"
@@ -2278,7 +2297,7 @@ msgstr ""
 "</ul>\n"
 "</details>\n"
 
-#: themes/gui_toolbar.py:56
+#: themes/gui_toolbar.py:60
 msgid ""
 "\n"
 "<p>使用该功能添加自定义模型或使用openAI重定向服务。\n"
@@ -2341,23 +2360,23 @@ msgstr ""
 "</ul>\n"
 "</details>\n"
 
-#: themes/gui_toolbar.py:85
+#: themes/gui_toolbar.py:89
 msgid "LLM_MODEL 没有设定，需要一个默认的模型"
 msgstr "LLM_MODEL is not set, a default model is needed."
 
-#: themes/gui_toolbar.py:87
+#: themes/gui_toolbar.py:91
 msgid "INIT_SYS_PROMPT 没有设定，需要一个默认的系统提示"
 msgstr "INIT_SYS_PROMPT is not set, a default system prompt is needed."
 
-#: themes/gui_toolbar.py:89
+#: themes/gui_toolbar.py:93
 msgid "AVAIL_LLM_MODELS 没有设定，需要一个可用模型列表"
 msgstr "AVAIL_LLM_MODELS is not set, a list of available models is needed."
 
-#: themes/gui_toolbar.py:94
+#: themes/gui_toolbar.py:98
 msgid "上传文件"
 msgstr "Upload File"
 
-#: themes/gui_toolbar.py:97
+#: themes/gui_toolbar.py:101
 msgid ""
 "请上传本地文件 / 压缩包以供使用。请注意: 上传文件后会自动把输入区修改为相应路"
 "径"
@@ -2365,119 +2384,119 @@ msgstr ""
 "Please upload a local file or zip package for use. Note: After uploading the "
 "file, the input area will be automatically updated to the corresponding path."
 
-#: themes/gui_toolbar.py:98
+#: themes/gui_toolbar.py:102
 msgid "任何文件, 推荐上传压缩文件(zip, tar, rar)"
 msgstr ""
 "For any file, it is recommended to upload a compressed file (zip, tar, rar)."
 
-#: themes/gui_toolbar.py:99
+#: themes/gui_toolbar.py:103
 msgid "更换模型"
 msgstr "Change Model"
 
-#: themes/gui_toolbar.py:100
+#: themes/gui_toolbar.py:104
 msgid "<p>推荐使用高并发服务商 (即速率限制较为宽松)</p>"
 msgstr ""
 "<p>It is recommended to use high-concurrency service providers (i.e., those "
 "with more lenient rate limits).</p>"
 
-#: themes/gui_toolbar.py:103
+#: themes/gui_toolbar.py:107
 msgid "更换LLM模型/请求源"
 msgstr "Change LLM Model/Request Source"
 
-#: themes/gui_toolbar.py:103
+#: themes/gui_toolbar.py:107
 msgid "推理模型(o1,o3,r1)速度较慢，但是效果较好"
 msgstr ""
 "Inference models (o1, o3, r1) are slower but deliver better performance."
 
-#: themes/gui_toolbar.py:107
+#: themes/gui_toolbar.py:111
 msgid "留空时使用默认prompt: {}"
 msgstr "Leave blank to use the default prompt: {}"
 
-#: themes/gui_toolbar.py:139
+#: themes/gui_toolbar.py:143
 msgid "选择服务商"
 msgstr "Select Service Provider"
 
-#: themes/gui_toolbar.py:139
+#: themes/gui_toolbar.py:143
 msgid "仅用于api自定义，不影响模型选择"
 msgstr "Used only for API customization, does not affect model selection."
 
-#: themes/gui_toolbar.py:140
+#: themes/gui_toolbar.py:144
 msgid "不输入则使用内置API KEY"
 msgstr "If not entered, use the built-in API KEY."
 
-#: themes/gui_toolbar.py:140
+#: themes/gui_toolbar.py:144
 msgid "自定义API-KEY"
 msgstr "Custom API-KEY"
 
-#: themes/gui_toolbar.py:143
+#: themes/gui_toolbar.py:147
 msgid "自定义重定向"
 msgstr "Custom Redirect"
 
-#: themes/gui_toolbar.py:144
+#: themes/gui_toolbar.py:148
 msgid "重定向路径"
 msgstr "Redirection Path"
 
-#: themes/gui_toolbar.py:146
+#: themes/gui_toolbar.py:150
 msgid "自定义模型"
 msgstr "Custom Model"
 
-#: themes/gui_toolbar.py:146
+#: themes/gui_toolbar.py:150
 msgid "此处输入非内置模型（一行一个）"
 msgstr "Enter non-built-in models here (one per line)."
 
-#: themes/gui_toolbar.py:171
+#: themes/gui_toolbar.py:175
 msgid "帮助"
 msgstr "Help"
 
-#: themes/gui_toolbar.py:174
+#: themes/gui_toolbar.py:178
 msgid "更改密码"
 msgstr "Change Password"
 
-#: themes/gui_toolbar.py:175
+#: themes/gui_toolbar.py:179
 msgid "当前登录用户"
 msgstr "Current logged-in user"
 
-#: themes/gui_toolbar.py:176
+#: themes/gui_toolbar.py:180
 msgid "请注意，点击确认后立即生效"
 msgstr "Please note, it will take effect immediately upon clicking confirm."
 
-#: themes/gui_toolbar.py:177
+#: themes/gui_toolbar.py:181
 msgid "当前密码"
 msgstr "Current Password"
 
-#: themes/gui_toolbar.py:177
+#: themes/gui_toolbar.py:181
 msgid "请输入当前密码"
 msgstr "Please enter your current password."
 
-#: themes/gui_toolbar.py:178
+#: themes/gui_toolbar.py:182
 msgid "修改密码"
 msgstr "Change Password"
 
-#: themes/gui_toolbar.py:178
+#: themes/gui_toolbar.py:182
 msgid "请输入新密码"
 msgstr "Please enter a new password."
 
-#: themes/gui_toolbar.py:179
+#: themes/gui_toolbar.py:183
 msgid "确认修改的密码"
 msgstr "Confirm the modified password."
 
-#: themes/gui_toolbar.py:179
+#: themes/gui_toolbar.py:183
 msgid "请再次输入新密码"
 msgstr "Please enter the new password again."
 
-#: themes/gui_toolbar.py:181
+#: themes/gui_toolbar.py:185
 msgid "确认修改"
 msgstr "Confirm Changes"
 
-#: themes/gui_toolbar.py:183
+#: themes/gui_toolbar.py:187
 msgid "退出登录"
 msgstr "Logout"
 
-#: themes/gui_toolbar.py:227
+#: themes/gui_toolbar.py:232
 msgid "自定义数据加载失败，使用默认值"
 msgstr "Custom data loading failed, using default values."
 
-#: themes/gui_toolbar.py:265
+#: themes/gui_toolbar.py:271
 msgid "参数加载失败，使用默认值"
 msgstr "Parameter loading failed, using default values."
 
