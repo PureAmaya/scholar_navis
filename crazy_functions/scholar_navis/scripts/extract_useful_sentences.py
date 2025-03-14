@@ -58,7 +58,7 @@ class for_gradio:
         """创建或上传新的项目时更新gr
 
         Returns:
-            cookies,sturcture_requirements,content_requirements,target_language
+            cookies,content_classification,content_requirements,target_language
         """
         # 更新一下任务名称
         cookies = for_gradio.update_task_name(request,cookies,task_name)
@@ -80,16 +80,16 @@ class for_gradio:
                         with rf.open(file) as f:
                             parameter_dict:dict = json.loads(f.read().decode('utf-8'))
         
-        sturcture_requirements = parameter_dict.get('sturcture_requirements','')
+        content_classification = parameter_dict.get('content_classification','')
         content_requirements = parameter_dict.get('content_requirements','')
         target_language = parameter_dict.get('target_language','')
         
-        return cookies,sturcture_requirements,content_requirements,target_language
+        return cookies,content_classification,content_requirements,target_language
         
     
     @staticmethod
-    def para_disable_user_edition(sturcture_requirements,content_requirements,target_language):
-            classification_updater = gr.update(value = sturcture_requirements, interactive= not bool(sturcture_requirements.strip()))
+    def para_disable_user_edition(content_classification,content_requirements,target_language):
+            classification_updater = gr.update(value = content_classification, interactive= not bool(content_classification.strip()))
             con_updater = gr.update(value = content_requirements, interactive= not bool(content_requirements.strip()))
             lang_updater = gr.update(value = target_language, interactive= not bool(target_language.strip()))
             return classification_updater,con_updater,lang_updater
@@ -128,19 +128,19 @@ class for_gradio:
         """ 当上传旧的任务或者创建新的任务时，使用它
 
         Returns:
-            _cookies,sturcture_requirements,content_requirements,target_language,below_accordion_updater
+            _cookies,content_classification,content_requirements,target_language,below_accordion_updater
         """
         if not cookies:cookies = {}
         
         # 加载上传的文件
-        new_cookies,sturcture_requirements,content_requirements,target_language = for_gradio.create_or_load(request,cookies,create_or_load_task_path,task_name)
+        new_cookies,content_classification,content_requirements,target_language = for_gradio.create_or_load(request,cookies,create_or_load_task_path,task_name)
         # 调整参数可编辑性
-        sturcture_requirements,content_requirements,target_language = for_gradio.para_disable_user_edition(sturcture_requirements,content_requirements,target_language)
+        content_classification,content_requirements,target_language = for_gradio.para_disable_user_edition(content_classification,content_requirements,target_language)
         # 显示后续内容
         below_accordion_updater = gr.update(visible=True)
         # 更新cookies
         cookies.update(new_cookies)
-        return  cookies,sturcture_requirements,content_requirements,target_language,below_accordion_updater
+        return  cookies,content_classification,content_requirements,target_language,below_accordion_updater
     
     @staticmethod
     def reset(cookie,md_dropdown,user_custom_data):
@@ -180,7 +180,7 @@ class for_gradio:
         
         
         if not content_classification.strip() or not content_requirements.strip():
-            raise gr.Error(_('结构和内容要求不能为空'),duration=5)
+            raise gr.Error(_('内容分类和内容要求不能为空'),duration=5)
         
         if not lang.strip():
             raise gr.Error(_('目标语言不能为空。请选定目标语言'),duration=5)
@@ -420,7 +420,7 @@ class worker:
         self._target_language = target_language
         
         #####  记录参数  ##########
-        self._parameter_json = {'sturcture_requirements':'\n'.join(self._content_classification)}
+        self._parameter_json = {'content_classification':'\n'.join(self._content_classification)}
         self._parameter_json.update({'content_requirements':self._content_requirements})
         self._parameter_json.update({'target_language':self._target_language})
         
@@ -492,7 +492,7 @@ class worker:
             self._update_log('info',_('{} 获取有用句子成功').format(title_to_print))
             with lock:self._useful_sentences_json.update({title:result})
             
-        # 摘取可以接受的句子（根据结构要求摘取和整理句子）
+        # 摘取可以接受的句子（根据内容分类摘取和整理句子）
         if self._check_lifespan_termination('摘取可接受句子'):return
         success,title,result = self._extract_acceptable_sentences(title,result)
         if not success:

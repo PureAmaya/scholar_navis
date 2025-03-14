@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-03-12 11:22+0800\n"
-"PO-Revision-Date: 2025-03-12 11:23+0800\n"
+"POT-Creation-Date: 2025-03-14 22:04+0800\n"
+"PO-Revision-Date: 2025-03-14 22:04+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -628,51 +628,51 @@ msgid "在此处输入思维导图类型代码/要溯源的内容/课题拟定�
 msgstr ""
 "Enter mind map type code/traceable content/project requirements formulation"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:175
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:176
 msgid "请重置后再执行"
 msgstr "Please reset and then execute."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:178
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:179
 msgid "任务名称意外丢失，请重新设定"
 msgstr "Task name unexpectedly lost, please reset."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:182
-msgid "结构和内容要求不能为空"
-msgstr "Structural and content requirements cannot be empty."
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:183
+msgid "内容分类和内容要求不能为空"
+msgstr "Content classification and content requirements cannot be empty."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:185
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:186
 msgid "目标语言不能为空。请选定目标语言"
 msgstr "The target language cannot be empty. Please select a target language."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:191
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:192
 msgid "工作目录处理失败，请重新设定{}"
 msgstr "Working directory processing failed, please reset {}."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:209
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:675
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:210
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:676
 msgid "任务开始执行"
 msgstr "Task execution started."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:229
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:230
 msgid "任务执行完成"
 msgstr "Task execution completed."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:229
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:230
 msgid "如果要执行新的任务，请重置"
 msgstr "If you want to execute a new task, please reset."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:285
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:286
 msgid "要下载的文件不存在。请尝试下载另一个文件或重新摘取"
 msgstr ""
 "The file to be downloaded does not exist. Please try downloading another "
 "file or re-summarizing."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:308
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:309
 msgid "文件不存在。请上传文件或选择已有文件"
 msgstr "File does not exist. Please upload a file or select an existing one."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:319
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:334
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:320
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:335
 msgid ""
 "压缩包中缺少必要文件 {}，但是有pdf文件，将按照新任务执行。如果您的压缩包内只"
 "有pdf，请忽略该提醒"
@@ -681,73 +681,73 @@ msgstr ""
 "files. The task will be executed according to the new task. If your "
 "compressed package only contains PDFs, please ignore this reminder."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:322
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:337
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:323
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:338
 msgid "压缩包中缺少必要文件 {}，请重新上传或选择已有文件"
 msgstr ""
 "The necessary file {} is missing in the compressed package. Please re-upload "
 "or select an existing file."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:477
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:478
 msgid "{} 加载pdf成功"
 msgstr "{} successfully loaded PDF."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:481
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:482
 msgid "{} 加载pdf: 失败，后续过程将跳过。原因：{}"
 msgstr ""
 "{} failed to load PDF: the subsequent process will be skipped. Reason: {}"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:488
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:489
 msgid "{} 获取有用句子失败，后续过程将跳过。原因：{}"
 msgstr ""
 "Failed to retrieve useful sentences for {}. The subsequent process will be "
 "skipped. Reason: {}"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:491
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:492
 msgid "{} 获取有用句子成功"
 msgstr "Successfully retrieved useful sentences for {}."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:498
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:499
 msgid "{} 摘取可接受句子失败，后续过程将跳过。原因：{}"
 msgstr ""
 "Failed to extract acceptable sentences for {}. The subsequent process will "
 "be skipped. Reason: {}"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:501
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:502
 msgid "{} 摘取可接受句子成功"
 msgstr "Successfully extracted acceptable sentences for {}."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:508
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:509
 msgid "{} 翻译可接受句子失败，后续过程将跳过。原因：{}"
 msgstr ""
 "Failed to translate acceptable sentences for {}. The subsequent process will "
 "be skipped. Reason: {}"
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:511
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:512
 msgid "{} 翻译可接受句子成功"
 msgstr "Successfully translated acceptable sentences for {}."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:522
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:523
 msgid "用户终止提取有用语句"
 msgstr "User terminated the extraction of useful sentences."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:663
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:664
 msgid "文件 {} 不存在，跳过"
 msgstr "File {} does not exist, skipping."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:704
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:705
 msgid "正在导出结果文件..."
 msgstr "Exporting result file..."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:726
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:729
 msgid "结果文件导出成功。正在导出中间文件..."
 msgstr "Result file exported successfully. Exporting intermediate files..."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:743
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:746
 msgid "中间文件导出完成。正在导出日志..."
 msgstr "Intermediate files exported. Exporting logs..."
 
-#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:751
+#: crazy_functions/scholar_navis/scripts/extract_useful_sentences.py:754
 msgid "输出结果失败，原因：{}"
 msgstr "Output failed, reason: {}."
 
@@ -1518,8 +1518,8 @@ msgid "调整GPT偏好语言"
 msgstr "Adjust GPT's language preference"
 
 #: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:133
-msgid "默认为设定的偏好语言"
-msgstr "Default to the set preferred language"
+msgid "LLM通常会按照此语言进行回答"
+msgstr "LLMs typically respond in this language"
 
 #: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:140
 msgid "使用AI辅助功能"
@@ -2103,20 +2103,28 @@ msgid "内容要求"
 msgstr "Content requirements"
 
 #: shared_utils/scholar_navis/gpt_academic_handler.py:166
-msgid "输入对于内容的总体要求"
-msgstr "Enter overall requirements for the content."
+msgid ""
+"输入对于内容的总体要求\n"
+"例如：与雄性不育相关"
+msgstr ""
+"Input the overall requirements for the content\n"
+"For example: related to male sterility"
 
 #: shared_utils/scholar_navis/gpt_academic_handler.py:167
-msgid "结构要求"
-msgstr "Structure requirements"
+msgid "内容分类"
+msgstr "Content classification"
 
 #: shared_utils/scholar_navis/gpt_academic_handler.py:167
 msgid ""
-"输入对于行文结构的要求（一行一个）\n"
-"也可视为对内容的分类"
+"一行一个分类\n"
+"例如：\n"
+"介绍雄性不育机理\n"
+"说明雄性不育危害"
 msgstr ""
-"Enter requirements for the structure of the text (one per line).\n"
-"It can also be regarded as a classification of content."
+"One category per line\n"
+"For example: \n"
+"Introduction to the mechanism of male sterility\n"
+"Explanation of the hazards of male sterility"
 
 #: shared_utils/scholar_navis/gpt_academic_handler.py:170
 msgid "请选择翻译语言"
@@ -2553,6 +2561,19 @@ msgstr ""
 #: toolbox.py:608
 msgid "[Local Message] 收到以下文件 （上传到路径：{}）: "
 msgstr "[Local Message] Received the following files (uploaded to path: {}): "
+
+#~ msgid "默认为设定的偏好语言"
+#~ msgstr "Default to the set preferred language"
+
+#~ msgid "结构要求"
+#~ msgstr "Structure requirements"
+
+#~ msgid ""
+#~ "输入对于行文结构的要求（一行一个）\n"
+#~ "也可视为对内容的分类"
+#~ msgstr ""
+#~ "Enter requirements for the structure of the text (one per line).\n"
+#~ "It can also be regarded as a classification of content."
 
 #~ msgid "用户停止"
 #~ msgstr "User stopped."
