@@ -1,6 +1,11 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-03-18
+- Fix the issue of content not displaying properly due to incorrect parameter settings for ChatMessage in update_ui_lastest_msg.
+    (issue #9)
+
+
 Modified by PureAmaya on 2025-02-26
 - Adjust ChatBotWithCookies for better readability |
 - Remove already removed imports
@@ -262,7 +267,7 @@ def update_ui_lastest_msg(lastmsg:str, chatbot:ChatBotWithCookies, history:list,
     
     if len(chatbot) == 0:chatbot.append(["update_ui_last_msg", lastmsg])
     
-    chatbot[-1] = gradio.ChatMessage('assistant', lastmsg)
+    chatbot[-1] = gradio.ChatMessage(role='assistant', content=lastmsg)
     yield from update_ui(chatbot=chatbot, history=history)
     time.sleep(delay)
 
