@@ -1,6 +1,9 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-03-18
+- Change the local JS to defer loading to ensure the correct loading sequence.
+
 Modified by PureAmaya on 2024-12-28
 - Add Gradio 5 theme
 - Remove some redundant features
@@ -62,11 +65,12 @@ def get_common_html_javascript_code():
     js = "\n"
     common_js_path_list = [
         "themes/common.js",
-        "themes/init.js",
         "themes/scholar_navis/notify.js",
-        "themes/scholar_navis/scholar_navis_init.js"
+        "themes/scholar_navis/custom_api_key.js",
+        "themes/scholar_navis/scholar_navis_init.js",
+        "themes/init.js",
     ]
-    common_js_path_list.append("themes/scholar_navis/custom_api_key.js")
+    # 解释：除init.js外，其余的js要么是第三方的独立库，要么就是封装的方法
 
     for common_js_path in common_js_path_list:
         if '.min.' not in common_js_path:
@@ -74,7 +78,7 @@ def get_common_html_javascript_code():
         else:
             minimized_js_path = common_js_path
         jsf = f"/file={minimized_js_path}"
-        js += f"""<script src="{jsf}"></script>\n"""
+        js += f"""<script defer src="{jsf}"></script>\n"""
 
     return js
 
