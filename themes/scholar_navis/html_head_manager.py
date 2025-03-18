@@ -19,7 +19,9 @@ local_js = get_common_html_javascript_code()
 
 if LANGUAGE_DISPLAY == "zh-Hans":
     js = [
-        '<script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/AlertifyJS/1.13.1/alertify.min.js"></script>',
+        '<script defer src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/AlertifyJS/1.13.1/alertify.min.js"></script>',
+        '<script async src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/mermaid/8.14.0/mermaid.min.js"></script>',
+        '<script async src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/mathjax/3.2.0/es5/tex-mml-chtml.min.js"></script>'
     ]
     css = [
         '<link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/AlertifyJS/1.13.1/css/alertify.min.css">',
@@ -29,7 +31,7 @@ if LANGUAGE_DISPLAY == "zh-Hans":
     ]
 else:
     js = [
-        '<script src="https://fastly.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>',
+        '<script defer src="https://fastly.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>',
         '<script async src="https://fastly.jsdelivr.net/npm/mermaid@11.3.0/dist/mermaid.min.js"></script>',
         '<script async src="https://fastly.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js"></script>'
     ]

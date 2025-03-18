@@ -1,6 +1,6 @@
 /* Author: scholar_navis@PureAmaya */
 
-async function scholar_navis_init(selected_language) {
+async function scholar_navis_init() {
 
     // 加载pdf优化器（暂时没啦）
     //push_data_to_gradio_component('<iframe src="' + window.location.origin + '/file=themes/scholar_navis/local_pdf_optimizer/local_pdf_optimizer.html" width="100%" height="220px"></iframe>', 'local_pdf_optimizer', 'no_conversion');
@@ -15,20 +15,7 @@ async function scholar_navis_init(selected_language) {
 
             // 提醒用户
             // 先用这个笨方法了。。
-            switch (selected_language) {
-                case 'zh-Hans':
-                    label_head = '旧版本自定义内容已经删除'
-                    break;
-                case 'zh-Hant':
-                    label_head = '舊版本自訂內容已經刪除'
-                    break;
-                case 'en-US':
-                    label_head = 'Old version custom content has been deleted.'
-                    break;
-                default:
-                    label_head = '旧版本自定义内容已经删除: '
-                    break;
-            }
+            label_head = 'Old version custom content has been deleted.'
             alertify.warning(label_head);
         }
     }
@@ -36,7 +23,8 @@ async function scholar_navis_init(selected_language) {
         // 忽略错误
     }               
 
-    check_msg(selected_language);
+    // 检查维护信息
+    await check_msg();
 }
 
 

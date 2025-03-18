@@ -21,7 +21,7 @@ function double_button_notification(title, msg, ok_label = 'ok', cancel_label = 
 
 
 // 维护通知
-async function check_msg(language) {
+async function check_msg() {
 
     var json = await getJSON("/api/notification/msg")
 
@@ -38,8 +38,8 @@ async function check_msg(language) {
             var title = json.title;
             var msg = json.message;
             
-            var ok_label = '确认 / Confirm'
-            var cancel_label = '不再显示 / Do not show again'
+            var ok_label = 'Confirm'
+            var cancel_label = 'Do not show again'
 
             var ok_fn = () => { sessionStorage.setItem('maintenance_show', '0') }
             var cancel_fn = () => { localStorage.setItem('maintenance_show', '0') }

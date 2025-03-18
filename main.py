@@ -1,6 +1,9 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-03-18
+- The initialization of JS is handed over to JS itself for execution.
+
 Modified by PureAmaya on 2025-03-07
 - Add the temporary environment variable GRADIO_TEMP_DIR.
 - The deletion of the Gradio cache has been canceled. However, as a result, the Gradio cache folder is now located in the working directory for easier management.
@@ -275,13 +278,7 @@ def main():
         # 暗黑模式切换
         dark_mode_btn.click(None,None,None,js="""dark_mode_toggle""")
 
-        # 初始化（前端）
-        jjjs = '{}{}{}'.format('async function aaaa() { await GptAcademicJavaScriptInit("',selected_language,'")  }')
         for event in init_event_list:app_block.load(**event)
-        app_block.load(None, inputs=None, 
-                    outputs=None,#[system_prompt,top_p,temperature,md_dropdown,chatbot], 
-                    js=jjjs)
-
     # Gradio的inbrowser触发不太稳定，回滚代码到原始的浏览器打开函数
     def run_delayed_tasks():
         import threading, webbrowser, time
