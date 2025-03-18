@@ -21,6 +21,7 @@ from shared_utils.scholar_navis.pdf_reader import get_pdf_content
 from request_llms.bridge_all import predict_no_ui_long_connection 
 from shared_utils.scholar_navis.other_tools import generate_random_string
 from shared_utils.scholar_navis.user_custom_manager import get_url_redirect,get_api_key
+from shared_utils.scholar_navis.const_and_singleton import VERSION
 
 
 ARTICLE_CSV_FILENAME = 'articles_content.csv'
@@ -57,7 +58,7 @@ class for_gradio:
         """创建或上传新的项目时更新gr
 
         Returns:
-            cookies,sturcture_requirements,content_requirements,target_language
+            cookies,content_classification,content_requirements,target_language
         """
         # 更新一下任务名称
         cookies = for_gradio.update_task_name(request,cookies,task_name)
@@ -79,19 +80,19 @@ class for_gradio:
                         with rf.open(file) as f:
                             parameter_dict:dict = json.loads(f.read().decode('utf-8'))
         
-        sturcture_requirements = parameter_dict.get('sturcture_requirements','')
+        content_classification = parameter_dict.get('content_classification','')
         content_requirements = parameter_dict.get('content_requirements','')
         target_language = parameter_dict.get('target_language','')
         
-        return cookies,sturcture_requirements,content_requirements,target_language
+        return cookies,content_classification,content_requirements,target_language
         
     
     @staticmethod
-    def para_disable_user_edition(sturcture_requirements,content_requirements,target_language):
-            stru_updater = gr.update(value = sturcture_requirements, interactive= not bool(sturcture_requirements.strip()))
+    def para_disable_user_edition(content_classification,content_requirements,target_language):
+            classification_updater = gr.update(value = content_classification, interactive= not bool(content_classification.strip()))
             con_updater = gr.update(value = content_requirements, interactive= not bool(content_requirements.strip()))
             lang_updater = gr.update(value = target_language, interactive= not bool(target_language.strip()))
-            return stru_updater,con_updater,lang_updater
+            return classification_updater,con_updater,lang_updater
 
     @staticmethod
     def llm_kwargs_combiner(request: gr.Request, cookies,md_dropdown,top_p,temperature,user_custom_data):
@@ -127,19 +128,19 @@ class for_gradio:
         """ 当上传旧的任务或者创建新的任务时，使用它
 
         Returns:
-            _cookies,sturcture_requirements,content_requirements,target_language,below_accordion_updater
+            _cookies,content_classification,content_requirements,target_language,below_accordion_updater
         """
         if not cookies:cookies = {}
         
         # 加载上传的文件
-        new_cookies,sturcture_requirements,content_requirements,target_language = for_gradio.create_or_load(request,cookies,create_or_load_task_path,task_name)
+        new_cookies,content_classification,content_requirements,target_language = for_gradio.create_or_load(request,cookies,create_or_load_task_path,task_name)
         # 调整参数可编辑性
-        sturcture_requirements,content_requirements,target_language = for_gradio.para_disable_user_edition(sturcture_requirements,content_requirements,target_language)
+        content_classification,content_requirements,target_language = for_gradio.para_disable_user_edition(content_classification,content_requirements,target_language)
         # 显示后续内容
         below_accordion_updater = gr.update(visible=True)
         # 更新cookies
         cookies.update(new_cookies)
-        return  cookies,sturcture_requirements,content_requirements,target_language,below_accordion_updater
+        return  cookies,content_classification,content_requirements,target_language,below_accordion_updater
     
     @staticmethod
     def reset(cookie,md_dropdown,user_custom_data):
@@ -153,7 +154,7 @@ class for_gradio:
         exec_btn_updater = gr.update(visible=True)
         cancel_btn  = gr.update(visible=False)
         below_accordion = gr.update(visible=False)
-        stru_requirements = gr.update(value='',interactive=True)
+        content_classification = gr.update(value='',interactive=True)
         content_requirements = gr.update(value='',interactive=True)
         language = gr.update(value='简体中文',interactive=True)
         task_name  = gr.update(value='',interactive=True)
@@ -162,10 +163,10 @@ class for_gradio:
         all_files_dl_updater = gr.update(value=None,visible=False)
         result_file_dl_updater = gr.update(value=None,visible=False)
         log = gr.update(value='')
-        return cookie,exec_btn_updater,cancel_btn,below_accordion,stru_requirements,content_requirements,language,task_name,create_or_load_task,upload_extra_pdf,all_files_dl_updater,result_file_dl_updater,log
+        return cookie,exec_btn_updater,cancel_btn,below_accordion,content_classification,content_requirements,language,task_name,create_or_load_task,upload_extra_pdf,all_files_dl_updater,result_file_dl_updater,log
 
     @staticmethod
-    def before_start_task(cookies,stru_requirements,content_requirements,lang):
+    def before_start_task(cookies,content_classification,content_requirements,lang):
         """运行前进行一些检查。成功了再运行
 
         Returns:
@@ -178,8 +179,8 @@ class for_gradio:
             raise gr.Error(_('任务名称意外丢失，请重新设定'),duration=5)
         
         
-        if not stru_requirements.strip() or not content_requirements.strip():
-            raise gr.Error(_('结构和内容要求不能为空'),duration=5)
+        if not content_classification.strip() or not content_requirements.strip():
+            raise gr.Error(_('内容分类和内容要求不能为空'),duration=5)
         
         if not lang.strip():
             raise gr.Error(_('目标语言不能为空。请选定目标语言'),duration=5)
@@ -199,7 +200,7 @@ class for_gradio:
         return cookies,exec_btn_updater,cancel_btn_updater
 
     @staticmethod
-    def execute_task(request: gr.Request,cookies:dict,md_dropdown,top_p,temperature,log,user_custom_data,create_or_load_task,upload_extra_pdf,target_language,structure_requirements,content_requirements,max_workers):
+    def execute_task(request: gr.Request,cookies:dict,md_dropdown,top_p,temperature,log,user_custom_data,create_or_load_task,upload_extra_pdf,target_language,content_classification,content_requirements,max_workers):
         """ 执行任务
 
         Yields:
@@ -210,7 +211,7 @@ class for_gradio:
 
         llm_kwargs = for_gradio.llm_kwargs_combiner(request,cookies,md_dropdown,top_p,temperature,user_custom_data)
         
-        task_worker = worker(cookies,log,llm_kwargs,create_or_load_task,upload_extra_pdf,content_requirements,structure_requirements,target_language,max_workers)
+        task_worker = worker(cookies,log,llm_kwargs,create_or_load_task,upload_extra_pdf,content_requirements,content_classification,target_language,max_workers)
         
         # 开始执行与结果输出
         for log in task_worker.deploy():
@@ -286,7 +287,7 @@ class worker:
         
         return file_path
     
-    def __init__(self,cookies,logger,llm_kwargs,create_or_load_task,add_extra_pdf, content_requirements,structure_requirements:str,target_language,max_workers):
+    def __init__(self,cookies,logger,llm_kwargs,create_or_load_task,add_extra_pdf, content_requirements,content_classification:str,target_language,max_workers):
         self.work_path = cookies.get('extract_sentences_work_path') # 这样子的话，再修改任务名就没用了233
         tmp_dir = os.path.join(self.work_path,'tmp');os.makedirs(tmp_dir,exist_ok=True)
         self._logger = logger
@@ -411,15 +412,15 @@ class worker:
         #######   读取参数   ##########    
         self._llm_kwargs = llm_kwargs
         self._content_requirements = content_requirements
-        self._structure_requirements = []
+        self._content_classification = []
         # 修正可能含有的空行
-        for line in structure_requirements.split('\n'):
-            if line.strip():self._structure_requirements.append(line.strip())
+        for line in content_classification.split('\n'):
+            if line.strip():self._content_classification.append(line.strip())
         self._max_workers = max_workers
         self._target_language = target_language
         
         #####  记录参数  ##########
-        self._parameter_json = {'sturcture_requirements':'\n'.join(self._structure_requirements)}
+        self._parameter_json = {'content_classification':'\n'.join(self._content_classification)}
         self._parameter_json.update({'content_requirements':self._content_requirements})
         self._parameter_json.update({'target_language':self._target_language})
         
@@ -491,7 +492,7 @@ class worker:
             self._update_log('info',_('{} 获取有用句子成功').format(title_to_print))
             with lock:self._useful_sentences_json.update({title:result})
             
-        # 摘取可以接受的句子（根据结构要求摘取和整理句子）
+        # 摘取可以接受的句子（根据内容分类摘取和整理句子）
         if self._check_lifespan_termination('摘取可接受句子'):return
         success,title,result = self._extract_acceptable_sentences(title,result)
         if not success:
@@ -597,7 +598,7 @@ class worker:
         try:
             if self._check_already_exist_inf('acceptable_sentences',title) or not useful_sentences.strip():return True,title,''
             
-            for requirement in self._structure_requirements:
+            for requirement in self._content_classification:
                 if self._check_lifespan_termination('可接受内部'):return
                 this_prompt = prompt.format(requirement)
                 success,a = self._request_llm(this_prompt,useful_sentences)
@@ -630,7 +631,7 @@ class worker:
             
             prompt = f'Please translate the following text into {self._target_language}'
             
-            for requirement in self._structure_requirements:
+            for requirement in self._content_classification:
                 if self._check_lifespan_termination('翻译内部1'):return
                 
                 this_requirement_sentences = acceptable_sentences.get(requirement,[]) # {要求 : [每个句子的List]}
@@ -708,10 +709,12 @@ class worker:
             with open(self._result_csv_fp,'a',encoding='utf-8-sig',newline='') as f:
                 writer = csv.writer(f)
                 # 一开始先加一个表头
-                writer.writerow(['title','structure_requirements','original_sentence','translated_sentence'])
+                writer.writerow(['datetime',datetime.now().strftime("%Y-%m-%d %H:%M:%S"),'scholar navis version',VERSION])
+                writer.writerow(['Content Requirements',self._content_requirements,'',''])
+                writer.writerow(['Qualified Article Title','Content Classification','Original Sentences','Translated Sentences'])
                 for title,content in self._result_json.items():
                     csv_line = [] 
-                    for requirement in self._structure_requirements:
+                    for requirement in self._content_classification:
 
                         if isinstance(content,str):continue # 可能是空的字符，不知道为啥
                         if not content[requirement] is []:
@@ -771,7 +774,7 @@ def gradio_func(**kwargs):
     
     # step 2 设定分析参数 
     content_requirements:gr.Textbox = kwargs['content_requirements']
-    stru_requirements:gr.Textbox = kwargs['stru_requirements']
+    content_classification:gr.Textbox = kwargs['content_classification']
     language:gr.Dropdown = kwargs['language']
     max_workers:gr.Slider = kwargs['max_workers']
     
@@ -790,7 +793,7 @@ def gradio_func(**kwargs):
     task_name.change(fn=for_gradio.update_task_name,inputs=[cookies,task_name],outputs=cookies)
     
     # 上传或新建任务
-    create_or_load_task_uploader.upload(fn=for_gradio.create_or_load_task,inputs=[cookies,task_name,create_or_load_task_uploader],outputs=[cookies,stru_requirements,content_requirements,language,below_accordion]).success(
+    create_or_load_task_uploader.upload(fn=for_gradio.create_or_load_task,inputs=[cookies,task_name,create_or_load_task_uploader],outputs=[cookies,content_classification,content_requirements,language,below_accordion]).success(
         fn=lambda:gr.update(visible=True),outputs=below_accordion
     )
     # 删除上传的文件
@@ -803,9 +806,9 @@ def gradio_func(**kwargs):
     create_or_load_task_uploader.clear(**delete_clear_file)
     
     # ミッション　スタート
-    exec_1 = task_exec_btn.click(fn=for_gradio.before_start_task,inputs=[cookies,stru_requirements,content_requirements,language],outputs=[cookies,task_exec_btn,cancel_btn]).success(
+    exec_1 = task_exec_btn.click(fn=for_gradio.before_start_task,inputs=[cookies,content_classification,content_requirements,language],outputs=[cookies,task_exec_btn,cancel_btn]).success(
         fn=for_gradio.execute_task,
-        inputs=[cookies,md_dropdown,top_p,temperature,log,user_custom_data,create_or_load_task_uploader,upload_extra_pdf,language,stru_requirements,content_requirements,max_workers],
+        inputs=[cookies,md_dropdown,top_p,temperature,log,user_custom_data,create_or_load_task_uploader,upload_extra_pdf,language,content_classification,content_requirements,max_workers],
         outputs=[log,all_files_dl,result_file_dl],
     )
     
@@ -819,4 +822,4 @@ def gradio_func(**kwargs):
     
     cancel_btn.click(**cancel_event)
     # 重置按钮
-    reset_btn.click(**cancel_event).success(fn=for_gradio.reset,inputs=[cookies,md_dropdown,user_custom_data],outputs=[cookies,task_exec_btn,cancel_btn,below_accordion,stru_requirements,content_requirements,language,task_name,create_or_load_task_uploader,upload_extra_pdf,all_files_dl,result_file_dl,log])
+    reset_btn.click(**cancel_event).success(fn=for_gradio.reset,inputs=[cookies,md_dropdown,user_custom_data],outputs=[cookies,task_exec_btn,cancel_btn,below_accordion,content_classification,content_requirements,language,task_name,create_or_load_task_uploader,upload_extra_pdf,all_files_dl,result_file_dl,log])

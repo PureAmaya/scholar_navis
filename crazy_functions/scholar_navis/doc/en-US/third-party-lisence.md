@@ -6,67 +6,41 @@ Scholar Navis uses the AGPL-3.0 license.
 
 **Third-party packages and projects:**
 
-- gpt_academic: GPL-3.0 (with modifications, see source code file headers)
+| Name                         | License               | Remarks                                                                                           |
+| ---------------------------- | --------------------- | ------------------------------------------------------------------------------------------------- |
+| gpt_academic                 | GPL-3.0               | Modifications occurred, please see the header area of the original gpt_academic file for details. |
+| aiohttp                      | Apache-2.0            |                                                                                                   |
+| alertifyJS                   | GPL-3.0               |                                                                                                   |
+| argon2-cffi                  | MIT License           |                                                                                                   |
+| beautifulsoup4               | MIT License           |                                                                                                   |
+| Bootstrap Icons              | MIT License           |                                                                                                   |
+| colorama                     | BSD License           |                                                                                                   |
+| cryptography                 | Apache-2.0            |                                                                                                   |
+| fastapi                      | MIT License           |                                                                                                   |
+| gradio                       | Apache-2.0            |                                                                                                   |
+| gradio_modal                 | Apache-2.0            |                                                                                                   |
+| latex2mathml                 | MIT License           |                                                                                                   |
+| Markdown                     | BSD-3-Clause          |                                                                                                   |
+| MathJax                      | Apache-2.0            |                                                                                                   |
+| Mermaid                      | MIT License           |                                                                                                   |
+| pandas                       | BSD-3-Clause          |                                                                                                   |
+| PDF.js                       | Apache-2.0            |                                                                                                   |
+| pydantic                     | MIT License           |                                                                                                   |
+| pymdown-extensions           | MIT License           |                                                                                                   |
+| PyMuPDF                      | GNU AFFERO GPL 3.0    |                                                                                                   |
+| python_docx                  | MIT License           |                                                                                                   |
+| PyYAML                       | MIT License           |                                                                                                   |
+| rarfile                      | ISC License           |                                                                                                   |
+| Requests                     | Apache-2.0            |                                                                                                   |
+| rich                         | MIT License           |                                                                                                   |
+| rjsmin                       | Apache-2.0            |                                                                                                   |
+| SourceHanSansSC-VF.otf.woff2 | SIL OPEN FONT LICENSE | Version 1.1                                                                                       |
+| tiktoken                     | MIT License           |                                                                                                   |
+| uvicorn                      | BSD-3-Clause          |                                                                                                   |
+| websockets                   | BSD-3-Clause          |                                                                                                   |
+| zhipuai                      | unknown               | https://pypi.org/project/zhipuai/                                                                 |
 
-- aiohttp: Apache-2.0 license
-
-- alertifyJS: GPL-3.0 license
-
-- argon2-cffi: MIT License
-
-- beautifulsoup4: MIT License
-
-- Bootstrap Icons: MIT License
-
-- colorama: BSD License
-
-- cryptography: Apache-2.0 license
-
-- fastapi: MIT License
-
-- gradio: Apache-2.0 license
-
-- gradio_modal: Apache-2.0 license
-
-- latex2mathml: MIT License
-
-- Markdown: BSD-3-Clause license
-
-- MathJax: Apache-2.0 license
-
-- Mermaid: MIT license
-
-- pandas: BSD-3-Clause license
-
-- pydantic: MIT License
-
-- pymdown-extensions: MIT License
-
-- PyMuPDF: GNU AFFERO GPL 3.0
-
-- python_docx: MIT License
-
-- PyYAML: MIT License
-
-- rarfile: ISC License
-
-- Requests: Apache-2.0 license
-
-- rich: MIT License
-
-- rjsmin: Apache-2.0 license
-
-- SourceHanSansSC-VF.otf.woff2: SIL OPEN FONT LICENSE Version 1.1
-
-- tiktoken: MIT License
-
-- uvicorn: BSD License (BSD-3-Clause)
-
-- websockets: BSD License (BSD-3-Clause)
-
-- zhipuai: unknown
-
-**Usage strategy for gpt_academic:**
+**Usage strategy for gpt_academic (3.83):**
 
 - Changes to the gpt_academic source code are located at the beginning of each file.
 

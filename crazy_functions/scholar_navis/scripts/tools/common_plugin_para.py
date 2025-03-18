@@ -130,7 +130,7 @@ class common_plugin_para(GptAcademicPluginTemplate,ABC):
         except:
             index = GPT_SUPPORT_LAMGUAGE.index('English')
         
-        para = {'title':_('调整GPT偏好语言'),'description':_('默认为设定的偏好语言'),'options':GPT_SUPPORT_LAMGUAGE,'default_value':GPT_SUPPORT_LAMGUAGE[index],'type':"dropdown"}
+        para = {'title':_('调整GPT偏好语言'),'description':_('LLM通常会按照此语言进行回答'),'options':GPT_SUPPORT_LAMGUAGE,'default_value':GPT_SUPPORT_LAMGUAGE[index],'type':"dropdown"}
         return {'gpt_prefer_lang':ArgProperty(**para).model_dump_json()}
     
     def add_use_AI_assistant_selector(self):

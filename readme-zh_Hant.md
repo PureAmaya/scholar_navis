@@ -127,31 +127,13 @@
 
 1. 運行 `main.py` 启用 gpt_academic，在打開的網頁的右側，應當能看到 Scholar Navis 的5個方塊，點擊後可以看到使用提示。<img title="" src="docs/img/scholar_navis_functions -  zh-Hant.png" alt="" data-align="inline" width="448"> <img title="" src="docs/img/function_ui -  zh-Hant.png" alt="" width="130">
 
-2. 5個插件（[`PubMed OpenAccess文章獲取`](crazy_functions/scholar_navis/doc/zh-Hant/PubMed-Open-Access-Articles-Download.md)、[`緩存pdf文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Cache-PDF-Articles.md)、[`按關鍵詞分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Summarize-Articles-by-Keywords.md)、[`與AI交流研究進展`](crazy_functions/scholar_navis/doc/zh-Hant/Communicate-with-AI-about-Research-Progress.md)、[`精細分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Fine-grained-Analysis-of-Article.md)）其均內置了簡潔的操作指南和功能作用，切換到該工具，`輔助指令` -> `help: 帮助文檔`即可查看。
+2. 6個插件（[`PubMed OpenAccess文章獲取`](crazy_functions/scholar_navis/doc/zh-Hant/PubMed-Open-Access-Articles-Download.md)、[`緩存pdf文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Cache-PDF-Articles.md)、[`按關鍵詞分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Summarize-Articles-by-Keywords.md)、[`與AI交流研究進展`](crazy_functions/scholar_navis/doc/zh-Hant/Communicate-with-AI-about-Research-Progress.md)、[`精細分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Fine-grained-Analysis-of-Article.md)和`摘取有用語句`）其均內置了簡潔的操作指南和功能作用，切換到該工具，`輔助指令` -> `help: 帮助文檔`即可查看。
 
-3. 作為一種流水線式工具，一般而言的使用流程為（共四大步，每個功能前均有編號）：
+3. 如果需要上傳文件，通常為先上傳再運行某個功能。
 
-```mermaid
-graph TD
-A[\確定大體研究方向/] --> B(下載英文文獻)
-B -->|PubMed可用| C(使用 PubMed OpenAccess 文章獲取)
-B -->|PubMed檢索不到| D(自行下載文章)
-C --> |OA文章足夠使用| E[緩存pdf文獻]
-C --> |還需要補充文章, 非OA或PubMed檢索不到| D
+4. 此外，用戶也可以在左上角的`「API-KEY」`中輸入自己的密鑰，使用其他中轉服務商，或者是添加額外的自定義模型。
 
-D --> E[緩存pdf文獻]
-E --> |通過關鍵詞約束分析方向 | F[按關鍵詞分析文獻]
-F --> G[針對總結內容進行淺層次, 寬方面的交流 :與AI交流研究進展]
-G --> G1(繪製思維導圖) & G2(查找總結來源文章) & G3(規劃題目) & G4(直接進行交流)
-G1 & G2 & G3 -->  H[深入精細分析某一篇文章, 並進行對話交流]
-H & G4 --> I[/了解研究進展和缺口\]
-```
-
-4. 如果需要上傳文件，通常為先上傳再運行某個功能。
-
-5. 此外，用戶也可以在左上角的`「API-KEY」`中輸入自己的密鑰，使用其他中轉服務商，或者是添加額外的自定義模型。
-
-6. 當然，也可以使用 gpt_academic 其他的功能進行處理。如果覺得有用，最好可以給原項目一個 star！
+5. 當然，也可以使用 gpt_academic 其他的功能進行處理。如果覺得有用，最好可以給原項目一個 star！
 
 #### 摘取有用語句
 
@@ -164,6 +146,38 @@ H & G4 --> I[/了解研究進展和缺口\]
 4. 下載文件時，通常下載結果文件即可。
 
 5. 當需要再次運行時，需要先重置。
+
+#### 功能關係圖
+
+```mermaid
+flowchart TD
+A[\擬定大致研究方向/] --> B(下載文獻)
+B -->|通過PubMed| C[PubMed_OpenAccess文章獲取_]
+B -->|不通過PubMed| D(自行下載文章)
+C --> |OA文章足夠使用| preE(完成文章收集)
+preE --> E[緩存pdf文獻]
+C --> |還需要補充文章, 非OA或PubMed檢索不到| D
+
+D --> preE
+E --> |通過關鍵詞約束分析方向 | F[按關鍵詞分析文獻]
+F --> G[與AI交流研究進展]
+G --> G1(繪製思維導圖) & G2(查找總結來源文章) & G3(擬定課題) & G4(直接進行交流)
+G1 & G2 & G3 --> H(對話交流, 深入探討)
+H --> |發現關鍵文章| J[精細分析文獻]
+
+preE --> extract1[摘取有用語句]
+extract1 --> |設定好內容要求與分類| extract2(有用的語句)
+extract2 --> extract_title(感興趣的文章) & extract_sentences(感興趣的原句) & extract_trans(翻譯的結果)
+extract_title & extract_sentences & extract_trans --> extract3(閱讀與篩選)
+
+H & J & G4 & extract3--> I[/了解研究進展和缺口\]
+
+class C,E,F,G,J,extract1 function;
+class A,I start_and_termination;
+
+classDef function fill:#ffffff, stroke:#3b82f6, stroke-width:2px, color:#000, font-weight:bold;
+classDef start_and_termination fill:#ffffff, stroke:#64748b, stroke-width:3px, font-weight:bold;
+```
 
 ### 開發者文檔
 

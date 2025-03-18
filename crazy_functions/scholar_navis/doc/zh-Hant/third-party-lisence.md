@@ -6,67 +6,41 @@ Scholar Navis 使用 AGPL-3.0 許可證。
 
 **第三方套件與專案：**
 
-- gpt_academic: GPL-3.0（含有修改，見原始碼檔案頭）
+| 名稱                           | 許可證                   | 備註                                |
+| ---------------------------- | --------------------- | --------------------------------- |
+| gpt_academic                 | GPL-3.0               | 發生修改，修改請參見原gpt_academic檔案的头部區域    |
+| aiohttp                      | Apache-2.0            |                                   |
+| alertifyJS                   | GPL-3.0               |                                   |
+| argon2-cffi                  | MIT License           |                                   |
+| beautifulsoup4               | MIT License           |                                   |
+| Bootstrap Icons              | MIT License           |                                   |
+| colorama                     | BSD License           |                                   |
+| cryptography                 | Apache-2.0            |                                   |
+| fastapi                      | MIT License           |                                   |
+| gradio                       | Apache-2.0            |                                   |
+| gradio_modal                 | Apache-2.0            |                                   |
+| latex2mathml                 | MIT License           |                                   |
+| Markdown                     | BSD-3-Clause          |                                   |
+| MathJax                      | Apache-2.0            |                                   |
+| Mermaid                      | MIT License           |                                   |
+| pandas                       | BSD-3-Clause          |                                   |
+| PDF.js                       | Apache-2.0            |                                   |
+| pydantic                     | MIT License           |                                   |
+| pymdown-extensions           | MIT License           |                                   |
+| PyMuPDF                      | GNU AFFERO GPL 3.0    |                                   |
+| python_docx                  | MIT License           |                                   |
+| PyYAML                       | MIT License           |                                   |
+| rarfile                      | ISC License           |                                   |
+| Requests                     | Apache-2.0            |                                   |
+| rich                         | MIT License           |                                   |
+| rjsmin                       | Apache-2.0            |                                   |
+| SourceHanSansSC-VF.otf.woff2 | SIL OPEN FONT LICENSE | Version 1.1                       |
+| tiktoken                     | MIT License           |                                   |
+| uvicorn                      | BSD-3-Clause          |                                   |
+| websockets                   | BSD-3-Clause          |                                   |
+| zhipuai                      | unknown               | https://pypi.org/project/zhipuai/ |
 
-- aiohttp: Apache-2.0 許可證
-
-- alertifyJS: GPL-3.0 許可證
-
-- argon2-cffi: MIT 許可證
-
-- beautifulsoup4: MIT 許可證
-
-- Bootstrap Icons: MIT 許可證
-
-- colorama: BSD 許可證
-
-- cryptography: Apache-2.0 許可證
-
-- fastapi：MIT 許可證
-
-- gradio：Apache-2.0 許可證
-
-- gradio_modal：Apache-2.0 許可證
-
-- latex2mathml：MIT 許可證 (MIT)
-
-- Markdown：BSD-3-Clause 許可證
-
-- MathJax: Apache-2.0 license
-
-- Mermaid: MIT 許可證
-
-- pandas：BSD-3-Clause 許可證
-
-- pydantic：MIT 許可證
-
-- pymdown-extensions: MIT 許可證
-
-- PyMuPDF: GNU AFFERO GPL 3.0
-
-- python_docx：MIT 許可證
-
-- PyYAML：MIT 許可證
-
-- rarfile：ISC 許可證
-
-- Requests：Apache-2.0 許可證
-
-- rich：MIT 許可證
-
-- rjsmin: Apache-2.0 許可證
-
-- SourceHanSansSC-VF.otf.woff2: SIL OPEN FONT LICENSE Version 1.1
-
-- tiktoken：MIT 許可證
-
-- uvicorn：BSD 許可證 (BSD-3-Clause)
-
-- websockets：BSD 許可證 (BSD-3-Clause)
-
-- zhipuai：未知
-
-**gpt_academic 的使用策略：**
+**gpt_academic (3.83) 的使用策略：**
 
 - 對 gpt_academic 原始碼的更改均位於每個檔案的開頭
 

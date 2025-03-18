@@ -163,8 +163,8 @@ Sample Title,"This cell is used to input all the text to be extracted from the a
         gr.Markdown('### 2. ' + _('设定分析参数'))
         gr.Markdown(_('关于AI的调整请使用页面顶部的设置'))
         with gr.Row(equal_height=True):
-            content_requirements = gr.Textbox(value='',label=_('内容要求'),placeholder=_('输入对于内容的总体要求'),lines=3); 
-            stru_requirements = gr.Textbox(value='',label=_('结构要求'),placeholder=_('输入对于行文结构的要求（一行一个）\n也可视为对内容的分类'),lines=3); 
+            content_requirements = gr.Textbox(value='',label=_('内容要求'),placeholder=_('输入对于内容的总体要求\n例如：与雄性不育相关'),lines=3); 
+            content_classification = gr.Textbox(value='',label=_('内容分类'),placeholder=_('一行一个分类\n例如：\n介绍雄性不育机理\n说明雄性不育危害'),lines=3); 
         with gr.Row():
             support_language = list(GPT_SUPPORT_LAMGUAGE);support_language.insert(0,'')
             language = gr.Dropdown(value='简体中文',label=_('请选择翻译语言'), choices=support_language,allow_custom_value=False)
@@ -195,7 +195,7 @@ Sample Title,"This cell is used to input all the text to be extracted from the a
         'below_accordion':below_accordion,
         'add_pdf': add_pdf,
         'content_requirements': content_requirements,
-        'stru_requirements': stru_requirements,
+        'content_classification': content_classification,
         'language': language,
         'max_workers': max_workers,
         'task_exec_btn':task_exec_btn,

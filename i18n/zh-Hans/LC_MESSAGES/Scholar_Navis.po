@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-03-12 11:24+0800\n"
-"PO-Revision-Date: 2025-03-12 11:24+0800\n"
+"POT-Creation-Date: 2025-03-14 22:04+0800\n"
+"PO-Revision-Date: 2025-03-14 22:05+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -23,12 +23,10 @@ msgid "管理员启动了身份验证。请登录或注册以继续"
 msgstr "管理员启动了身份验证。请登录或注册以继续"
 
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:100
-#| msgid "API信息在服务端加密; 不登录的情况下API加密储存在localStorage中，请勿泄露"
 msgid "API信息经过一定的加密并存储在服务端; 不登录的情况下API加密储存在localStorage中，请勿泄露"
 msgstr "API信息经过一定的加密并存储在服务端; 不登录的情况下API加密储存在localStorage中，请勿泄露"
 
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/auth.py⁩:101
-#| msgid "如果对安全性不放心，请不要使用常用用户名与密码"
 msgid "如果对安全性不放心，请不要使用常用用户名与密码，最好使用单独的API-KEY进行访问"
 msgstr "如果对安全性不放心，请不要使用常用用户名与密码，最好使用单独的API-KEY进行访问"
 
@@ -545,110 +543,111 @@ msgstr "拟定课题"
 msgid "在此处输入思维导图类型代码/要溯源的内容/课题拟定要求"
 msgstr "在此处输入思维导图类型代码/要溯源的内容/课题拟定要求"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:175
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:176
 msgid "请重置后再执行"
 msgstr "请重置后再执行"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:178
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:179
 msgid "任务名称意外丢失，请重新设定"
 msgstr "任务名称意外丢失，请重新设定"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:182
-msgid "结构和内容要求不能为空"
-msgstr "结构和内容要求不能为空"
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:183
+#| msgid "结构和内容要求不能为空"
+msgid "内容分类和内容要求不能为空"
+msgstr "内容分类和内容要求不能为空"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:185
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:186
 msgid "目标语言不能为空。请选定目标语言"
 msgstr "目标语言不能为空。请选定目标语言"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:191
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:192
 msgid "工作目录处理失败，请重新设定{}"
 msgstr "工作目录处理失败，请重新设定{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:209
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:675
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:210
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:676
 msgid "任务开始执行"
 msgstr "任务开始执行"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:229
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:230
 msgid "任务执行完成"
 msgstr "任务执行完成"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:229
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:230
 msgid "如果要执行新的任务，请重置"
 msgstr "如果要执行新的任务，请重置"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:285
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:286
 msgid "要下载的文件不存在。请尝试下载另一个文件或重新摘取"
 msgstr "要下载的文件不存在。请尝试下载另一个文件或重新摘取"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:308
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:309
 msgid "文件不存在。请上传文件或选择已有文件"
 msgstr "文件不存在。请上传文件或选择已有文件"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:319
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:334
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:320
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:335
 msgid "压缩包中缺少必要文件 {}，但是有pdf文件，将按照新任务执行。如果您的压缩包内只有pdf，请忽略该提醒"
 msgstr "压缩包中缺少必要文件 {}，但是有pdf文件，将按照新任务执行。如果您的压缩包内只有pdf，请忽略该提醒"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:322
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:337
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:323
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:338
 msgid "压缩包中缺少必要文件 {}，请重新上传或选择已有文件"
 msgstr "压缩包中缺少必要文件 {}，请重新上传或选择已有文件"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:477
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:478
 msgid "{} 加载pdf成功"
 msgstr "{} 加载pdf成功"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:481
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:482
 msgid "{} 加载pdf: 失败，后续过程将跳过。原因：{}"
 msgstr "{} 加载pdf: 失败，后续过程将跳过。原因：{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:488
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:489
 msgid "{} 获取有用句子失败，后续过程将跳过。原因：{}"
 msgstr "{} 获取有用句子失败，后续过程将跳过。原因：{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:491
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:492
 msgid "{} 获取有用句子成功"
 msgstr "{} 获取有用句子成功"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:498
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:499
 msgid "{} 摘取可接受句子失败，后续过程将跳过。原因：{}"
 msgstr "{} 摘取可接受句子失败，后续过程将跳过。原因：{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:501
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:502
 msgid "{} 摘取可接受句子成功"
 msgstr "{} 摘取可接受句子成功"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:508
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:509
 msgid "{} 翻译可接受句子失败，后续过程将跳过。原因：{}"
 msgstr "{} 翻译可接受句子失败，后续过程将跳过。原因：{}"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:511
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:512
 msgid "{} 翻译可接受句子成功"
 msgstr "{} 翻译可接受句子成功"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:522
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:523
 msgid "用户终止提取有用语句"
 msgstr "用户终止提取有用语句"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:663
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:664
 msgid "文件 {} 不存在，跳过"
 msgstr "文件 {} 不存在，跳过"
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:704
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:705
 msgid "正在导出结果文件..."
 msgstr "正在导出结果文件..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:726
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:729
 msgid "结果文件导出成功。正在导出中间文件..."
 msgstr "结果文件导出成功。正在导出中间文件..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:743
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:746
 msgid "中间文件导出完成。正在导出日志..."
 msgstr "中间文件导出完成。正在导出日志..."
 
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:751
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/extract_useful_sentences.py⁩:754
 msgid "输出结果失败，原因：{}"
 msgstr "输出结果失败，原因：{}"
 
@@ -1310,8 +1309,8 @@ msgid "调整GPT偏好语言"
 msgstr "调整GPT偏好语言"
 
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:133
-msgid "默认为设定的偏好语言"
-msgstr "默认为设定的偏好语言"
+msgid "LLM通常会按照此语言进行回答"
+msgstr "LLM通常会按照此语言进行回答"
 
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py⁩:140
 msgid "使用AI辅助功能"
@@ -1776,21 +1775,29 @@ msgid "内容要求"
 msgstr "内容要求"
 
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:166
-msgid "输入对于内容的总体要求"
-msgstr "输入对于内容的总体要求"
-
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:167
-msgid "结构要求"
-msgstr "结构要求"
-
-#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:167
-#| msgid "输入对于行文结构的要求（一行一个）"
+#| msgid "输入对于内容的总体要求"
 msgid ""
-"输入对于行文结构的要求（一行一个）\n"
-"也可视为对内容的分类"
+"输入对于内容的总体要求\n"
+"例如：与雄性不育相关"
 msgstr ""
-"输入对于行文结构的要求（一行一个）\n"
-"也可视为对内容的分类"
+"输入对于内容的总体要求\n"
+"例如：与雄性不育相关"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:167
+msgid "内容分类"
+msgstr "内容分类"
+
+#: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:167
+msgid ""
+"一行一个分类\n"
+"例如：\n"
+"介绍雄性不育机理\n"
+"说明雄性不育危害"
+msgstr ""
+"一行一个分类\n"
+"例如：\n"
+"介绍雄性不育机理\n"
+"说明雄性不育危害"
 
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/shared_utils/scholar_navis/gpt_academic_handler.py⁩:170
 msgid "请选择翻译语言"
@@ -2167,6 +2174,20 @@ msgstr "请注意，当上述文件名出现异常时，请检查您的压缩包
 #: ⁨泛用 - AI工具现状调查/scholar_navis(github)/toolbox.py⁩:608
 msgid "[Local Message] 收到以下文件 （上传到路径：{}）: "
 msgstr "[Local Message] 收到以下文件 （上传到路径：{}）: "
+
+#~ msgid "默认为设定的偏好语言"
+#~ msgstr "默认为设定的偏好语言"
+
+#~ msgid "结构要求"
+#~ msgstr "结构要求"
+
+#~| msgid "输入对于行文结构的要求（一行一个）"
+#~ msgid ""
+#~ "输入对于行文结构的要求（一行一个）\n"
+#~ "也可视为对内容的分类"
+#~ msgstr ""
+#~ "输入对于行文结构的要求（一行一个）\n"
+#~ "也可视为对内容的分类"
 
 #~ msgid "用户停止"
 #~ msgstr "用户停止"

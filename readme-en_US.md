@@ -129,28 +129,12 @@ This software is developed based on gpt_academic (3.83) and is considered a deri
    
    <img title="" src="docs/img/scholar_navis_functions - en-US.png" alt="" data-align="inline" width="401"> <img title="" src="docs/img/function_ui - en-US.png" alt="" width="159">
 
-2. There are 5 plugins ([`PubMed Open Access Articles Download`](crazy_functions/scholar_navis/doc/en-US/PubMed-Open-Access-Articles-Download.md), [`Cache PDF Articles`](crazy_functions/scholar_navis/doc/en-US/Cache-PDF-Articles.md), [`Summarize Articles by Keywords`](crazy_functions/scholar_navis/doc/en-US/Summarize-Articles-by-Keywords.md), [`Communicate with AI about Research Progress`](crazy_functions/scholar_navis/doc/en-US/Communicate-with-AI-about-Research-Progress.md), and[ `Fine-grained Analysis of Article`](crazy_functions/scholar_navis/doc/en-US/Fine-grained-Analysis-of-Article.md)) each of which comes with a simple operation guide and function description. To switch to the tool, go to `Auxiliary Commands` -> `help: help document` to view it.
-
-3. As a pipeline tool, the general usage process is as follows (consisting of four major steps, with each function numbered):
-
-```mermaid
-graph TD
-A[\Define a general research direction/] --> B(Download English literature)
-B --> |PubMed accessible| C(Obtain OpenAccess articles via PubMed)
-B --> |PubMed not accessible| D(Download articles manually)
-C --> |OA articles are sufficient| E[Cache PDF rticles]
-C --> |Need additional articles, not OA or not found in PubMed| D
-
-D --> E[CCache PDF rticles]
-E --> |Constrained analysis by keywords| F[Summarize articles by keywords]
-F --> G[Engage in superficial, broad discussions on summarized content : Communicate with AI about research progress]
-G --> G1(Create a mind map) & G2(Seek out summarized source articles) & G3(Formulate a topic) & G4(Directly engage in communication)
-G1 & G2 & G3 --> H[In-depth and detailed analysis of a single article, and engage in dialogue]
-H & G4 --> I[/Understand research progress and gaps\]
-```
+2. There are 6 plugins ([`PubMed Open Access Articles Download`](crazy_functions/scholar_navis/doc/en-US/PubMed-Open-Access-Articles-Download.md), [`Cache PDF Articles`](crazy_functions/scholar_navis/doc/en-US/Cache-PDF-Articles.md), [`Summarize Articles by Keywords`](crazy_functions/scholar_navis/doc/en-US/Summarize-Articles-by-Keywords.md), [`Communicate with AI about Research Progress`](crazy_functions/scholar_navis/doc/en-US/Communicate-with-AI-about-Research-Progress.md), [ `Fine-grained Analysis of Article`](crazy_functions/scholar_navis/doc/en-US/Fine-grained-Analysis-of-Article.md) and `Extract useful Sentences`) each of which comes with a simple operation guide and function description. To switch to the tool, go to `Auxiliary Commands` -> `help: help document` to view it.
 
 3. Typically, if you need to upload a file, you would upload it before running a specific feature.
+
 4. In addition, users can also enter their own key in the `API-KEY` at the upper left corner, use other relay service providers, or add additional custom models. 
+
 5. Of course, you can also use other features of gpt_academic to process it. If you find it useful, it's best to give the original project a star!
 
 #### Extract Useful Sentences
@@ -164,6 +148,38 @@ H & G4 --> I[/Understand research progress and gaps\]
 4. When downloading files, usually downloading the result file is sufficient.
 
 5. When needing to run again, a reset is required first.
+
+#### Functional Relationship Diagram
+
+```mermaid
+flowchart TD
+A[\Define \n research direction ./] --> B(Download articles)
+B -->|Through PubMed| C[PubMed Open Access  .\n Articles Download]
+B -->|Not via PubMed| D(Download articles manually)
+C --> |OA articles sufficient| preE(Complete article collection)
+preE --> E[Cache PDF Articles]
+C --> |Supplement non-OA/non-PubMed articles| D
+
+D --> preE
+E --> |Through keyword constraint analysis| F[Summarize Articles .\n by keywords]
+F --> G[Communicate with AI \n about Research Progress .]
+G --> G1(Draw mind map) & G2(Find source articles) & G3(Propose research topics) & G4(Communication)
+G1 & G2 & G3 --> H(Engage in dialogue \n for in-depth discussion)
+H --> |Identify key articles| J[Fine-grained Analysis of Article .]
+
+preE --> extract1[Extract Useful Sentences  .]
+extract1 --> |Set content requirements & classification| extract2(Relevant sentences with criteria)
+extract2 --> extract_title(Interesting articles) & extract_sentences(Original sentences) & extract_trans(Translation results)
+extract_title & extract_sentences & extract_trans --> extract3(Read and screen)
+
+H & J & G4 & extract3 --> I[/Understand \n research progress and gaps .\]
+
+class C,E,F,G,J,extract1 function;
+class A,I start_and_termination;
+
+classDef function fill:#ffffff, stroke:#3b82f6, stroke-width:2px, color:#000, font-weight:bold;
+classDef start_and_termination fill:#ffffff, stroke:#64748b, stroke-width:3px, font-weight:bold;
+```
 
 ### Developer Documentation
 

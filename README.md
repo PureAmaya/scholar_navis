@@ -125,28 +125,12 @@
    
    <img title="" src="docs/img/scholar_navis_functions.png" alt="" data-align="inline" width="448"> <img title="" src="docs/img/function_ui.png" alt="" width="130">
 
-2. 5个插件（[`PubMed OpenAccess文章获取`](crazy_functions/scholar_navis/doc/zh-Hans/PubMed-Open-Access-Articles-Download.md)、[`缓存pdf文献`](crazy_functions/scholar_navis/doc/zh-Hans/Cache-PDF-Articles.md)、[`按关键词分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Summarize-Articles-by-Keywords.md)、[`与AI交流研究进展`](crazy_functions/scholar_navis/doc/zh-Hans/Communicate-with-AI-about-Research-Progress.md)、[`精细分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Fine-grained-Analysis-of-Article.md)）其均内置了简洁的操作指南和功能作用，切换到该工具，`辅助指令` -> `help: 帮助文档`即可查看。
-
-3. 作为一种流水线式工具，一般而言的使用流程为（共四大步，每个功能前均有编号）：
-
-```mermaid
-graph TD
-A[\确定大致研究方向/] --> B(下载英文文献)
- B -->|PubMed可用| C(使用 PubMed OpenAccess文章获取)
- B -->|PubMed检索不到| D(自行下载文章)
- C --> |OA文章足够使用| E[缓存pdf文献]
- C --> |还需要补充文章, 非OA或PubMed检索不到| D
-
- D --> E[缓存pdf文献]
- E --> |通过关键词约束分析方向 | F[按关键词分析文献]
- F --> G[针对总结内容进行浅层次, 宽方面的交流 : 与AI交流研究进展]
- G --> G1(绘制思维导图) & G2(查找总结来源文章) & G3(拟定课题) & G4(直接进行交流)
- G1 & G2 & G3 -->  H[深入精细分析某一篇文章, 并进行对话交流]
- H & G4 --> I[/了解研究进展和缺口\]
-```
+2. 6个插件（[`PubMed OpenAccess文章获取`](crazy_functions/scholar_navis/doc/zh-Hans/PubMed-Open-Access-Articles-Download.md)、[`缓存pdf文献`](crazy_functions/scholar_navis/doc/zh-Hans/Cache-PDF-Articles.md)、[`按关键词分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Summarize-Articles-by-Keywords.md)、[`与AI交流研究进展`](crazy_functions/scholar_navis/doc/zh-Hans/Communicate-with-AI-about-Research-Progress.md)、[`精细分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Fine-grained-Analysis-of-Article.md)和`摘取有用语句`）其均内置了简洁的操作指南和功能作用，切换到该工具，`辅助指令` -> `help: 帮助文档`即可查看。
 
 3. 如果需要上传文件，通常为先上传再运行某一个功能。
+
 4. 此外，用户也可以在左上角的`API-KEY`中输入自己的密钥，使用其他中转服务商，或者是添加额外的自定义模型。
+
 5. 当然，也可以使用gpt_academic其他的功能进行处理。如果感觉有用，最好可以给原项目一个star！
 
 #### 摘取有用语句
@@ -160,6 +144,40 @@ A[\确定大致研究方向/] --> B(下载英文文献)
 4. 下载文件时，通常下载结果文件即可。
 
 5. 当需要再次运行时，需要先重置。
+
+#### 功能关系图
+
+```mermaid
+flowchart TD
+A[\拟定大致研究方向/] --> B(下载文献)
+ B -->|通过PubMed| C[PubMed_OpenAccess文章获取_]
+ B -->|不通过PubMed| D(自行下载文章)
+ C --> |OA文章足够使用| preE(完成文章收集)
+ preE --> E[缓存pdf文献]
+ C --> |还需要补充文章, 非OA或PubMed检索不到| D
+
+D --> preE
+ E --> |通过关键词约束分析方向 | F[按关键词分析文献]
+ F --> G[与AI交流研究进展]
+ G --> G1(绘制思维导图) & G2(查找总结来源文章) & G3(拟定课题) & G4(直接进行交流)
+ G1 & G2 & G3 --> H(对话交流, 深入探讨)
+ H --> |发现关键文章| J[精细分析文献]
+
+preE --> extract1[摘取有用语句]
+ extract1 --> |设定好内容要求与分类| extract2(有用的语句)
+ extract2 --> extract_title(感兴趣的文章) & extract_sentences(感兴趣的原句) & extract_trans(翻译的结果)
+ extract_title & extract_sentences & extract_trans --> extract3(阅读与筛选)
+
+H & J & G4 & extract3--> I[/了解研究进展和缺口\]
+
+
+
+class C,E,F,G,J,extract1 function;
+class A,I start_and_termination;
+
+classDef function fill:#ffffff, stroke:#3b82f6, stroke-width:2px, color:#000, font-weight:bold;
+classDef start_and_termination fill:#ffffff, stroke:#64748b, stroke-width:3px, font-weight:bold;
+```
 
 ### 开发者文档
 

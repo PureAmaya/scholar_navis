@@ -40,7 +40,7 @@ try:
     with open(os.path.join(GPT_ACADEMIC_ROOT_PATH, "version"), "r") as f:
         VERSION = f.read().strip()
 except:
-    VERSION = "1.0.0_release"
+    VERSION = "1.0.0"
 
 
 if __name__ == "__main__":

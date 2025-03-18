@@ -157,7 +157,7 @@ def request_gpt_model_in_new_thread_with_ui_alive(
             break
         yield from update_ui_lastest_msg(mutable[0],chatbot=chatbot, history=[],delay=refresh_interval/2) # 刷新界面
 
-    final_result = future.result()
+    final_result :str = future.result()
     yield from update_ui_lastest_msg(final_result,chatbot=chatbot, history=[],delay=refresh_interval/2) # 如果最后成功了，则删除报错信息
     return final_result
 
