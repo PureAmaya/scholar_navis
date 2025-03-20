@@ -17,7 +17,7 @@ class _i18n:
             LANGUAGE_DISPLAY = 'zh-Hans'
         self.update()
 
-    def gettext(self,msg:str):
+    def gettext(self,msg:str) -> str:
         return self.trans.gettext(msg)
 
     def update(self):

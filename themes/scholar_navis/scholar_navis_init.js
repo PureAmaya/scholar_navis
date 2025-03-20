@@ -93,3 +93,23 @@ function dark_mode_toggle() {
     set_dark_mode(!dark_mode_enabled);
     localStorage.setItem('dark_mode_enabled', !dark_mode_enabled); // 存储布尔值
 }
+
+function submitForm(endpoint,input_name,input_value) {
+    // 创建一个隐藏的表单，直接提交到服务器
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = endpoint; // 服务器端的处理路径
+    form.target = '_blank'; // 在新窗口打开
+    
+    // 添加隐藏的 input 字段，传递 base64 数据
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = input_name;
+    input.value = input_value;
+    form.appendChild(input);
+    
+    // 将表单添加到文档并提交
+    document.body.appendChild(form);
+    form.submit();
+}
+

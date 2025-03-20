@@ -1,6 +1,9 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-03-19
+- Change to using the POST method to display the drawing content.
+
 Modified by PureAmaya on 2025-02-27
 - Adjusted the chatbot's output. 
 - It can now engage in conversations about drawing content.
@@ -21,7 +24,7 @@ from crazy_functions.plugin_template.plugin_class_template import (
 )
 from crazy_functions.plugin_template.plugin_class_template import ArgProperty
 from gradio import HTML
-from shared_utils.scholar_navis.other_tools import base64_encode
+from shared_utils.scholar_navis.other_tools import base64_encode,generate_base64_html_webpage
 from shared_utils.scholar_navis.multi_lang import _
 
 # 以下是每类图表的PROMPT
@@ -333,8 +336,8 @@ def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwarg
     # 小图与大图跳转
     mermaid = '<pre class="mermaid">{}</pre>'.format(match)
     html_b64 =base64_encode(mermaid)
-    chatbot.append([{'role':'user','content':HTML(f'<iframe src="/services/easy_html?base64={html_b64}" sandbox="allow-scripts"></iframe>')},
-                    {'role':'assistant','content':'<a href = "/services/easy_html?base64={}" target="_blank">{}</a>'.format(html_b64,_("点击查看大图（可能会生成失败！）"))}])
+    chatbot.append([{'role':'user','content':_('请点击查看绘制结果')},
+                    {'role':'assistant','content':generate_base64_html_webpage(html_b64,_("点击查看大图"))}])
     
     # 提示
     substitute_html = HTML(

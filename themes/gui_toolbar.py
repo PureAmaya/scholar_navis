@@ -1,6 +1,9 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-03-19
+- Restrict file upload types. Only allow csv, rar, zip, and pdf.
+
 Modified by PureAmaya on 2025-03-12
 - Add certain encryption measures for users' custom information and large model parameters.
 
@@ -99,7 +102,7 @@ def define_gui_toolbar(chatbot,help_menu_description):
             # gr.HTML(value='1',elem_id='local_pdf_optimizer',label='pdf优化器')
             # gr.Markdown('------------------------------------------')
             gr.Markdown(_("请上传本地文件 / 压缩包以供使用。请注意: 上传文件后会自动把输入区修改为相应路径"))
-            file_upload_2 = gr.Files(label=_("任何文件, 推荐上传压缩文件(zip, tar, rar)"), file_count="multiple", elem_id="elem_upload_float")
+            file_upload_2 = gr.Files(label=_("支持 zip, rar, pdf, csv"), file_count="multiple", elem_id="elem_upload_float",file_types=['.zip','.rar','.pdf','.csv'])
         with gr.Tab(_("更换模型"), elem_id="interact-panel") as model_switch_tab:
             gr.HTML(_('<p>推荐使用高并发服务商 (即速率限制较为宽松)</p>'))
             md_dropdown:gr.Dropdown = gr.Dropdown(AVAIL_LLM_MODELS, value=LLM_MODEL, 

@@ -1,20 +1,19 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-03-19
+- Remove unused imports.
+- Add internationalization support.
+- Add exception handling for zip decompression.
+
 Modified by PureAmaya on 2024-12-28
 - Fix the issue of possible garbled characters when extracting compressed files.
 '''
-
-import importlib
-import time
-import inspect
-import re
 import os
-import base64
-import gradio
+import zipfile
+import tarfile
 import shutil
-import glob
-from shared_utils.config_loader import get_conf
+from shared_utils.scholar_navis.multi_lang import _
 
 def html_local_file(file):
     base_path = os.path.dirname(__file__)  # 项目目录
@@ -53,7 +52,6 @@ def zip_extract_member_new(self, member, targetpath, pwd):
     """Extract the ZipInfo object 'member' to a physical
         file on the path targetpath.
     """
-    import zipfile
     if not isinstance(member, zipfile.ZipInfo):
         member = self.getinfo(member)
 
@@ -95,20 +93,21 @@ def zip_extract_member_new(self, member, targetpath, pwd):
 
 
 def extract_archive(file_path, dest_dir):
-    import zipfile
-    import tarfile
-    import os
 
     # Get the file extension of the input file
     file_extension = os.path.splitext(file_path)[1]
 
     # Extract the archive based on its extension
     if file_extension == ".zip":
-        with zipfile.ZipFile(file_path, "r") as zipobj:
-            #zipobj._extract_member = lambda a,b,c: zip_extract_member_new(zipobj, a,b,c)    # 修复中文乱码的问题
-            zipobj.extractall(path=dest_dir)
-            print("Successfully extracted zip archive to {}".format(dest_dir))
-
+        try:
+            with zipfile.ZipFile(file_path, "r") as zipobj:
+                #zipobj._extract_member = lambda a,b,c: zip_extract_member_new(zipobj, a,b,c)    # 修复中文乱码的问题
+                zipobj.extractall(path=dest_dir)
+                print("Successfully extracted zip archive to {}".format(dest_dir))
+        except:
+            print("Failed to extract zip archive to {}".format(dest_dir))
+            return '\n\n{}'.format(_("解压失败! 请检查压缩文件是否损坏。"))
+        
     elif file_extension in [".tar", ".gz", ".bz2"]:
         with tarfile.open(file_path, "r:*") as tarobj:
             # 清理提取路径，移除任何不安全的元素
@@ -133,7 +132,7 @@ def extract_archive(file_path, dest_dir):
                 print("Successfully extracted rar archive to {}".format(dest_dir))
         except:
             print("Rar format requires additional dependencies to install")
-            return "\n\n解压失败! 需要安装pip install rarfile来解压rar文件。建议：使用zip压缩格式。"
+            return '\n\n{}'.format(_("解压失败! 需要安装pip install rarfile来解压rar文件。建议：使用zip压缩格式。"))
 
     # 第三方库，需要预先pip install py7zr
     elif file_extension == ".7z":

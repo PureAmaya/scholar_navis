@@ -7,7 +7,8 @@ import json
 import traceback
 import aiofiles
 import hashlib
-from fastapi import Depends
+from functools import wraps
+from fastapi import Depends, Form
 from fastapi.responses import FileResponse,PlainTextResponse,JSONResponse,HTMLResponse
 from .other_tools import base64_decode
 from bs4 import BeautifulSoup
@@ -22,8 +23,8 @@ maintenance_json : dict = {
 
 def enable_services(app,get_user):
     @app.get("/services/pdf_viewer/{path:path}")
+    @check_login(Depends(get_user))
     async def pdf_viewer(path:str,user = Depends(get_user)):
-        if not user: return PlainTextResponse('bad request. Not login.',status_code=401)
 
         if path.startswith('web/gpt_log'):realpath = path[4:]
         elif path.startswith('web/tmp'):realpath = path[4:]
@@ -35,10 +36,9 @@ def enable_services(app,get_user):
             return FileResponse(realpath)
         else: return PlainTextResponse('bad request. No file found.',status_code=400)
     
-    @app.get("/services/easy_html")
-    async def easy_html(base64:str,user = Depends(get_user)):
-        if not user: return PlainTextResponse('bad request. Not login.',status_code=401)
-        
+    @app.post("/services/easy_html")
+    @check_login(Depends(get_user))
+    async def easy_html(base64: str = Form()):
         try:
             js ='<script src="https://fastly.jsdelivr.net/npm/mermaid@11.3.0/dist/mermaid.min.js"></script>' 
             # 现在只有mermiad那边用到JS了，就单独给他加一个好了
@@ -59,23 +59,29 @@ def enable_services(app,get_user):
             '''
             
             head = f'<head><meta charset="UTF-8"><title>Scholar Navis Easy HTML</title>{css}</head>'
-            head_iframe = f'<head>{js}</head>'.replace('\'','"')
-            body_iframe = f'<body>{base64_decode(base64)}</body>'.replace('\'','"')
+            head_iframe = f'<head>{js}</head>'
+            body_iframe = f'<body>{base64_decode(base64)}</body>'
+            
             # 去除所有的所有不需要的script标签
-            soup = BeautifulSoup(body_iframe, 'lxml')
+            soup = BeautifulSoup(body_iframe, 'html.parser')
             for script in soup.find_all('script'):script.decompose()
             body_iframe = str(soup)
-            iframe = f'<iframe sandbox="allow-scripts" srcdoc=\'{head_iframe + body_iframe}\'></iframe>'
+            
+            iframe = f'<iframe sandbox="allow-popups allow-scripts" srcdoc=\'{head_iframe + body_iframe}\'></iframe>'
             body = f'<body>{iframe}</body>'
             
-            html = f'<!DOCTYPE html><html>{head}{body}</html>'
+            #html = f'<!DOCTYPE html><html>{head}{body}</html>'
+            html = f'<!DOCTYPE html><html>{head}{head_iframe}{body_iframe}</html>' # 暂时不用iframe了得了
             return HTMLResponse(html)
-        except Exception as e: return PlainTextResponse(f'invaild request parameter.\n\n{str(e)}',status_code=400)
+        except Exception as e: 
+            traceback.print_exc()
+            return PlainTextResponse(f'invaild request parameter.\n\n{str(e)}',status_code=400)
     
     
-def enable_api(app):
+def enable_api(app,get_user):
     
     @app.get("/api/notification/msg")
+    @check_login(Depends(get_user))
     async def notification_maintenance():
         maintenance_json_fp = os.path.join(NOTIFICATION_ROOT_PATH ,'msg.json')
         try:
@@ -103,3 +109,13 @@ def enable_api(app):
         if os.path.isfile(realpath):
             return FileResponse(realpath,media_type='image/svg+xml')
         else: return PlainTextResponse('bad request',status_code=400)
+
+
+def check_login(user):
+    def decorator(func):
+        @wraps(func)
+        async def wrapper(*args, **kwargs):
+            if not user: return PlainTextResponse('bad request. Not login.',status_code=401)
+            else: return await func(*args, **kwargs)
+        return wrapper
+    return decorator
