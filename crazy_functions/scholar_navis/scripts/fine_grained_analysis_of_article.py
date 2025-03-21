@@ -125,7 +125,7 @@ def 精细分析文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, sy
                 <details><p><summary><b>{title}</b></br>
                             <a href="http://dx.doi.org/{doi}" target="_blank">[{press_hyperlink}]</a> 
                             <a href="javascript:void(0);" onclick="navigator.clipboard.writeText({path1})">[{copy_hyperlink}]</a>
-                            {generate_download_file(path,download_hyperlink)}
+                            {generate_download_file(path,download_hyperlink,True)}
                             [{doi}] [{filename}]
                             </summary></p>
                             <p>{content}</p></details><br>{body_html}'
@@ -143,7 +143,8 @@ def 精细分析文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, sy
         line_3 = _('如果没有正常的显示文章标题，可能是该文章没有doi，或是没有在metadata中设定标题，此时显示的一般为文件名')
         line_4 = _('如果 [访问文章发布页] 不可用，可能是该文章没有doi，也可能是网络错误')
 
-        body_html = f'''</head><body><article class="markdown-body"><p>{library_indicator}&nbsp;<strong>{library_name}</strong>&nbsp;{title_text}</p>
+        body_html = f'''<h1 align=\"center\">In-library Articles Viewer</h1>
+                    </head><body><article class="markdown-body"><p>{library_indicator}&nbsp;<strong>{library_name}</strong>&nbsp;{title_text}</p>
                     <ul><li>{line_1}</li>
                     <li>{line_2} {keywords}</li>
                     <li>{line_3}</li>
@@ -151,21 +152,12 @@ def 精细分析文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, sy
                     </ul><hr>{body_html}</article></body></html>
                     '''
 
-        # 之后在缓存文件夹中，新建一个html，用于显示所有的文章信息
-        html_tmp_fp = os.path.join(get_tmp_dir_of_this_user(chatbot,'html',[]),f'{library_name}_show_all_article.html')
-        shutil.copy(os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'scripts','res','all_articles.html'),html_tmp_fp)
-        with open(html_tmp_fp,'a' ,encoding='utf-8') as f:
-            f.write(body_html)
-        
-        full_html = '' 
-        with open(html_tmp_fp,'r',encoding='utf-8') as f:
-            full_html = f.read()
-        full_html = base64_encode(full_html)
+        body_html = base64_encode(body_html)
 
         chatbot.append([_("尚未输入一个可用的文章。可以选择上传一篇文章，也可以从加载的文章中选择一篇使用"),
                         '{hyper_link} {do_what}'
-                        .format(hyper_link=generate_base64_html_webpage(full_html,indicator=_('您可以点击这里')),
-                                do_what=_('查阅该总结库包含的文章')),
+                        .format(hyper_link=generate_base64_html_webpage(body_html,indicator=_('您可以点击这里启动 In-library Articles Viewer')),
+                                do_what=_('以查阅该总结库包含的文章')),
                         ])
         
         yield from update_ui(chatbot, history)

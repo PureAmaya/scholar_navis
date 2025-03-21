@@ -33,7 +33,7 @@ def generate_text_file_download(content:str,file_name:str,file_type:str='.txt',e
     return generate_download_file(os.path.join(dir,file_name+file_type))
 
 
-def generate_download_file(file_path:str,txt:str = None,):
+def generate_download_file(file_path:str,txt:str = None,force_use_href=False):
     """生成下载链接
 
     Args:
@@ -51,8 +51,16 @@ def generate_download_file(file_path:str,txt:str = None,):
 
     if not txt:txt = os.path.basename(file_path)
 
-    if file_path.lower().endswith('.pdf'):
+    if (not force_use_href) and file_path.lower().endswith('.pdf'):
         return f'<a href="/services/pdf_viewer/web/viewer.html?file={file_path}" target="_blank">{txt}</a>'
+
+        a = '<a href="javascript:void(0)" onclick="submitForm({endpoint},{input_name},{input_value})">{indicator} </a>'.format(
+        endpoint = "'/services/pdf_viewer'",
+        input_name = "'path'",
+        input_value = f"'{file_path}'",
+        indicator=txt)
+        return a
+
     else:
         return f'<a href="/file={file_path}" target="_blank">{txt}</a>'
     

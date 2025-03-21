@@ -24,7 +24,7 @@ maintenance_json : dict = {
 def enable_services(app,get_user):
     @app.get("/services/pdf_viewer/{path:path}")
     @check_login(Depends(get_user))
-    async def pdf_viewer(path:str,user = Depends(get_user)):
+    async def pdf_viewer(path:str):
 
         if path.startswith('web/gpt_log'):realpath = path[4:]
         elif path.startswith('web/tmp'):realpath = path[4:]

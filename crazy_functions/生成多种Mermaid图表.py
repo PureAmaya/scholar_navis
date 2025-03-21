@@ -1,6 +1,9 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-03-21
+- When viewing the original GPT output in mermaid format, switch to using the markdown-to-html conversion method.
+
 Modified by PureAmaya on 2025-03-19
 - Change to using the POST method to display the drawing content.
 
@@ -26,6 +29,7 @@ from crazy_functions.plugin_template.plugin_class_template import ArgProperty
 from gradio import HTML
 from shared_utils.scholar_navis.other_tools import base64_encode,generate_base64_html_webpage
 from shared_utils.scholar_navis.multi_lang import _
+from shared_utils.advanced_markdown_format import md2html
 
 # 以下是每类图表的PROMPT
 SELECT_PROMPT = """
@@ -347,7 +351,7 @@ def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwarg
         <summary>{}</summary>
         {}
         </details>
-            '''.format(_("上方为生成的图形"),_("如果生成失败，可以点击这里查看AI返回的内容并自行修复"),gpt_say.replace("\n", "</br>"))
+            '''.format(_("上方为生成的图形"),_("如果生成失败，可以点击这里查看AI返回的内容并自行修复"),md2html(gpt_say))
         )
     chatbot.append([{'role':'user','content':substitute_html},
                     {'role':'assistant','content':_("此外，您还可以对于绘制的图形进行问答。")}])
