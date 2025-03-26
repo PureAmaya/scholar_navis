@@ -1,5 +1,5 @@
 '''
-Original Author: gpt_academic@binary-husky
+Original Author: gpt_academic@binary-husky & Menghuan1918
 
 Modified by PureAmaya on 2025-03-21
 - When viewing the original GPT output in mermaid format, switch to using the markdown-to-html conversion method.
