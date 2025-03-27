@@ -5,10 +5,9 @@ Author: scholar_navis@PureAmaya
 import os
 import re
 import base64
-import urllib
 import random
 import string
-from urllib.parse import quote
+from urllib.parse import quote,unquote
 
 def generate_random_string(length=16,chars=string.ascii_lowercase + string.digits,seed=None):
     # 随机选择字符并生成字符串
@@ -34,12 +33,13 @@ def generate_text_file_download(content:str,file_name:str,file_type:str='.txt',e
     return generate_download_file(os.path.join(dir,file_name+file_type))
 
 
-def generate_download_file(file_path:str,txt:str = None):
+def generate_download_file(file_path:str,txt:str = None,force_use_href=False):
     """生成下载链接
 
     Args:
         file_path (str): 需要下载的文件路径（原始路径 or tmp缓存路径均可）。
         txt (str, optional): 超链接显示的文本. 默认为下载文件的basename.
+        force_use_href (bool, optional): 是否强制使用href链接，即使是PDF文件也使用href链接. 默认为False.
 
     Returns:
         str: html的href，有a标签，如果是PDF则导入到内置的在线服务
@@ -51,21 +51,41 @@ def generate_download_file(file_path:str,txt:str = None):
 
     if not txt:txt = os.path.basename(file_path)
 
-    if file_path.lower().endswith('.pdf'):
+    if (not force_use_href) and file_path.lower().endswith('.pdf'):
         return f'<a href="/services/pdf_viewer/web/viewer.html?file={file_path}" target="_blank">{txt}</a>'
+
+        a = '<a href="javascript:void(0)" onclick="submitForm({endpoint},{input_name},{input_value})">{indicator} </a>'.format(
+        endpoint = "'/services/pdf_viewer'",
+        input_name = "'path'",
+        input_value = f"'{file_path}'",
+        indicator=txt)
+        return a
+
     else:
         return f'<a href="/file={file_path}" target="_blank">{txt}</a>'
+    
+def generate_base64_html_webpage(base64_content:str,indicator:str = ''):
+    a = '<a href="javascript:void(0)" onclick="submitForm({endpoint},{input_name},{input_value})">{indicator} </a>'.format(
+        endpoint = "'/services/easy_html'",
+        input_name = "'base64'",
+        input_value = f"'{base64_content}'",
+        indicator=indicator)
+    return a
+    
 
-def base64_encode(original_string:str):
+  
+
+def base64_encode(original_string:str) -> str : 
     # 编码：将字符串转换为字节，再进行Base64编码
     # 使用UTF-8编码
-    encoded_bytes = base64.b64encode(original_string.strip().encode('utf-8'))
+    encoded_bytes = base64.b64encode(original_string.encode('utf-8'))
     encoded_string = encoded_bytes.decode('utf-8')  # 将字节转换回字符串
-    encoded_string = urllib.parse.quote(encoded_string)
+    encoded_string = quote(encoded_string,encoding='utf-8')
     return encoded_string
 
 def base64_decode(encoded_string:str):
     # 解码：将Base64字符串解码为字节，再转换为原字符串
+    encoded_string = unquote(encoded_string,encoding='utf-8')
     decoded_bytes = base64.b64decode(encoded_string)
     decoded_string = decoded_bytes.decode('utf-8')  # 将字节转换为字符串
     return decoded_string

@@ -1,6 +1,9 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-03-19
+- Provide authentication for some APIs.
+
 Modified by PureAmaya on 2025-02-28
 - Add middleware for font acquisition.
 - Close Login Interface Queue.
@@ -171,7 +174,7 @@ def start_app(app_block:gr.Blocks, authenticator:gr.Blocks,CONCURRENT_COUNT, AUT
     
     # scholar navis的web api和服务
     from .scholar_navis.scholar_navis_web_services import enable_api,enable_services
-    enable_api(gradio_app);enable_services(gradio_app,get_user)
+    enable_api(gradio_app,get_user);enable_services(gradio_app,get_user)
 
     # --- --- favicon and block fastapi api reference routes --- ---
 

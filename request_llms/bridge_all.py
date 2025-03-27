@@ -32,13 +32,13 @@ Modified by PureAmaya on 2024-12-28
 import tiktoken, copy, re
 from functools import lru_cache
 from concurrent.futures import ThreadPoolExecutor
-from toolbox import trimmed_format_exc
+from toolbox import trimmed_format_exc,update_ui
 from shared_utils.text_mask import apply_gpt_academic_string_mask
 from shared_utils.map_names import read_one_api_model_name
 from shared_utils.config_loader import get_conf
 from shared_utils.scholar_navis.multi_lang import _
 import threading, time, copy
-from .model_info import model_info_class
+from .scholar_navis.model_info import model_info_class
 
 from .bridge_chatgpt import predict_no_ui_long_connection as chatgpt_noui
 from .bridge_chatgpt import predict as chatgpt_ui
@@ -60,6 +60,7 @@ from .bridge_cohere import predict as cohere_ui
 from .bridge_cohere import predict_no_ui_long_connection as cohere_noui
 
 from .oai_std_model_template import get_predict_function
+
 
 colors = ['#FF00FF', '#00FFFF', '#FF0000', '#990099', '#009999', '#990044']
 
@@ -897,6 +898,15 @@ def predict_no_ui_long_connection(inputs:str, llm_kwargs:dict, history:list, sys
     if len(history) % 2 == 1:
         history.append('.')
 
+        # 检查输入长度
+    accessible,msg1,msg2 = check_actual_inputs_length(inputs=inputs,history=history,
+                                            token_cnt = model_info[llm_kwargs['llm_model']]['token_cnt'],
+                                            max_token = model_info[llm_kwargs['llm_model']]['max_token'])
+
+    if not accessible:
+        raise ConnectionAbortedError(f'{msg1}. {msg2}') # 兼容crazy_utils.py的异常处理
+        
+
     if '&' not in model:
         # 如果只询问“一个”大语言模型（多数情况）：
         method = model_info[model]["fn_without_ui"]
@@ -999,6 +1009,16 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot,
     if len(history) % 2 == 1:
         history.append('.')
 
+    # 检查输入长度
+    accessible,msg1,msg2 = check_actual_inputs_length(inputs=inputs,history=history,
+                                            token_cnt = model_info[llm_kwargs['llm_model']]['token_cnt'],
+                                            max_token = model_info[llm_kwargs['llm_model']]['max_token'])
+
+    if not accessible:
+        chatbot.append([msg1,msg2])
+        yield from update_ui(chatbot, history, msg=_('过长的输入'))
+        return
+
     inputs = apply_gpt_academic_string_mask(inputs, mode="show_llm")
 
     method = model_info[llm_kwargs['llm_model']]["fn_with_ui"]  # 如果这里报错，检查config中的AVAIL_LLM_MODELS选项
@@ -1008,3 +1028,12 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot,
 
     yield from method(inputs, llm_kwargs, plugin_kwargs, chatbot, history, system_prompt, stream, additional_fn)
 
+
+def check_actual_inputs_length(inputs:str,history:list,token_cnt,max_token):
+    actual_input = f'{inputs}\n{"\n".join(history)}'
+    threshold = int(0.95 * max_token)
+    if token_cnt(actual_input) > threshold:
+        msg1 =  _('输入过长，请使用支持更多token限制的模型，或者是减少/分批输入。程序已终止.')
+        msg2 = _('模型的最大允许长度的阈值: {} tokens, 当前输入的长度为: {} tokens').format(threshold,token_cnt(actual_input))
+        return False, msg1, msg2
+    return True, None, None

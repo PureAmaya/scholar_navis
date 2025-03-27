@@ -1,5 +1,11 @@
 '''
-Original Author: gpt_academic@binary-husky
+Original Author: gpt_academic@binary-husky & Menghuan1918
+
+Modified by PureAmaya on 2025-03-21
+- When viewing the original GPT output in mermaid format, switch to using the markdown-to-html conversion method.
+
+Modified by PureAmaya on 2025-03-19
+- Change to using the POST method to display the drawing content.
 
 Modified by PureAmaya on 2025-02-27
 - Adjusted the chatbot's output. 
@@ -21,8 +27,9 @@ from crazy_functions.plugin_template.plugin_class_template import (
 )
 from crazy_functions.plugin_template.plugin_class_template import ArgProperty
 from gradio import HTML
-from shared_utils.scholar_navis.other_tools import base64_encode
+from shared_utils.scholar_navis.other_tools import base64_encode,generate_base64_html_webpage
 from shared_utils.scholar_navis.multi_lang import _
+from shared_utils.advanced_markdown_format import md2html
 
 # 以下是每类图表的PROMPT
 SELECT_PROMPT = """
@@ -333,8 +340,8 @@ def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwarg
     # 小图与大图跳转
     mermaid = '<pre class="mermaid">{}</pre>'.format(match)
     html_b64 =base64_encode(mermaid)
-    chatbot.append([{'role':'user','content':HTML(f'<iframe src="/services/easy_html?base64={html_b64}" sandbox="allow-scripts"></iframe>')},
-                    {'role':'assistant','content':'<a href = "/services/easy_html?base64={}" target="_blank">{}</a>'.format(html_b64,_("点击查看大图（可能会生成失败！）"))}])
+    chatbot.append([{'role':'user','content':_('请点击查看绘制结果')},
+                    {'role':'assistant','content':generate_base64_html_webpage(html_b64,_("点击查看大图"))}])
     
     # 提示
     substitute_html = HTML(
@@ -344,7 +351,7 @@ def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwarg
         <summary>{}</summary>
         {}
         </details>
-            '''.format(_("上方为生成的图形"),_("如果生成失败，可以点击这里查看AI返回的内容并自行修复"),gpt_say.replace("\n", "</br>"))
+            '''.format(_("上方为生成的图形"),_("如果生成失败，可以点击这里查看AI返回的内容并自行修复"),md2html(gpt_say))
         )
     chatbot.append([{'role':'user','content':substitute_html},
                     {'role':'assistant','content':_("此外，您还可以对于绘制的图形进行问答。")}])

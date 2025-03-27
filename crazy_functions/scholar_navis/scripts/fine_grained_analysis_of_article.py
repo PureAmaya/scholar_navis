@@ -4,17 +4,16 @@ Author: scholar_navis@PureAmaya
 
 import os
 import yaml
-import shutil
+from shared_utils.scholar_navis.other_tools import base64_encode,generate_base64_html_webpage
 from shared_utils.advanced_markdown_format import md2pdf
 from shared_utils.scholar_navis import pdf_reader
 from shared_utils.scholar_navis.multi_lang import _
-from shared_utils.scholar_navis.const_and_singleton import SCHOLAR_NAVIS_ROOT_PATH
 from .tools.common_plugin_para import common_plugin_para
 from crazy_functions.pdf_fns.breakdown_txt import breakdown_text_to_satisfy_token_limit
 from toolbox import CatchException, generate_download_file,get_user,get_log_folder,update_ui,update_ui_lastest_msg
 from crazy_functions.crazy_utils import get_files_from_everything,read_and_clean_pdf_text,request_gpt_model_in_new_thread_with_ui_alive
 from .tools.article_library_ctrl import get_tmp_dir_of_this_user,check_library_exist_and_assistant,get_this_user_library_list,lib_manifest,pdf_yaml
-
+from shared_utils.advanced_markdown_format import md2html
 
 @check_library_exist_and_assistant(accept_nonexistent=True,accept_blank=True)
 @CatchException
@@ -106,27 +105,24 @@ def 精细分析文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, sy
                 # 如果title没有，就用文件名吧
                 if title == 'None' or title is None: title = filename
                 doi = yml[pdf_yaml.doi.value]
-                '''  这个是旧版的，先留着
-                doi_html = f'<a href="http://dx.doi.org/{doi}" target="_blank">[访问文章发布页...]</a>'          
-            analyed_pdf_list_html = f'<details><summary>{title}  {doi_html} </summary>{content}</details></br>{analyed_pdf_list_html}'
-        chatbot.append([f"尚未输入一个可用的文章。可以选择上传一篇文章，也可以从加载的文章中选择一篇使用。",
-                        f'总结库 <b>{archive_name}</b> 包含下面的文章：</br>展开文字可以看到文章的预分析结果。\
-                        使用时可以直接复制该文字</br></br><div style="height:500px;overflow-y:auto">{analyed_pdf_list_html}</div>'])
-        '''     
+
                 # 先把控件（其实是超链接）准备好
                 # 就是显示的内容和辅助用的按钮
                 path = os.path.relpath(pdf_fp)[:-3] +'pdf'#yaml替换成pdf
                 path = path.replace('\\','/')
+                path1 = f"'{path}'"
                 press_hyperlink = _('访问文章发布页')
                 copy_hyperlink = _('复制文章')
-                download_hyperlink = _('下载文章')
-                body_html = f'<details><p><summary><b>{title}</b></br>\
-                            <a href="http://dx.doi.org/{doi}" target="_blank">[{press_hyperlink}]</a> \
-                            <a href="javascript:void(0);" onclick="navigator.clipboard.writeText(\'{path}\')">[{copy_hyperlink}]</a> \
-                            {generate_download_file(path,download_hyperlink)}\
-                            [{doi}] [{filename}]\
-                            </summary></p>\
-                            <p>{content}</p></details><br>{body_html}'
+                download_hyperlink = _('[下载文章]')
+                body_html = f'''
+                <details><p><summary><b>{title}</b><br>
+                            <a href="http://dx.doi.org/{doi}" target="_blank">[{press_hyperlink}]</a> 
+                            <a href="javascript:void(0);" onclick="navigator.clipboard.writeText({path1})">[{copy_hyperlink}]</a>
+                            {generate_download_file(path,download_hyperlink,True)}
+                            [{doi}] [{filename}]
+                            </summary></p>
+                            <p>{md2html(content)}</p></details><br>{body_html}'
+                '''
 
         # 再获取一下关键词
         with open(os.path.join(this_library_fp,'lib_manifest.yml'),'r') as f:
@@ -140,22 +136,23 @@ def 精细分析文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, sy
         line_3 = _('如果没有正常的显示文章标题，可能是该文章没有doi，或是没有在metadata中设定标题，此时显示的一般为文件名')
         line_4 = _('如果 [访问文章发布页] 不可用，可能是该文章没有doi，也可能是网络错误')
 
-        body_html = f'</head><body><article class="markdown-body"><p>{library_indicator }&nbsp;<strong>{library_name}</strong>&nbsp;{title_text}</p>\
-                    <ul><li>{line_1}</li>\
-                    <li>{line_2} {keywords}</li>\
-                    <li>{line_3}</li>\
-                    <li>{line_4}</li>\
-                    </ul><hr>{body_html}</article></body></html>'
+        # ! 这里也挺乱的，以后再改
+        body_html = f'''
+                    <h1 align=\"center\">In-library Articles Viewer</h1>
+                    <p>{library_indicator}&nbsp;<strong>{library_name}</strong>&nbsp;{title_text}</p>
+                    <ul><li>{line_1}</li>
+                    <li>{line_2} {keywords}</li>
+                    <li>{line_3}</li>
+                    <li>{line_4}</li>
+                    </ul><hr>{body_html}
+                    '''
 
-        # 之后在缓存文件夹中，新建一个html，用于显示所有的文章信息
-        html_tmp_fp = os.path.join(get_tmp_dir_of_this_user(chatbot,'html',[]),f'{library_name}_show_all_article.html')
-        shutil.copy(os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'scripts','res','all_articles.html'),html_tmp_fp)
-        with open(html_tmp_fp,'a' ,encoding='utf-8') as f:
-            f.write(body_html)
-            
+        body_html = base64_encode(body_html)
+
         chatbot.append([_("尚未输入一个可用的文章。可以选择上传一篇文章，也可以从加载的文章中选择一篇使用"),
-                        '<ul><li><a href="/file={file_path}" target="_blank">{indicator} </a>{do_what}</li>'
-                        .format(file_path = os.path.relpath(html_tmp_fp),indicator=_('您可以点击这里'),do_what=_('查阅该总结库包含的文章')),
+                        '{hyper_link} {do_what}'
+                        .format(hyper_link=generate_base64_html_webpage(body_html,indicator=_('您可以点击这里启动 In-library Articles Viewer')),
+                                do_what=_('以查阅该总结库包含的文章')),
                         ])
         
         yield from update_ui(chatbot, history)
@@ -207,7 +204,7 @@ def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_
     # 允许预先阅读在这么做
     if pre_read:
         # 满足LLM的token要求进行切割
-        pdf_content_token = breakdown_text_to_satisfy_token_limit(txt=pdf_content, limit=2048, llm_model=llm_kwargs['llm_model'])
+        pdf_content_token = breakdown_text_to_satisfy_token_limit(txt=pdf_content, limit=4096, llm_model=llm_kwargs['llm_model'])
 
         for index, content in enumerate(pdf_content_token):
             i_say = f"Please read the passage and retell it in English, emulating the author's writing style and narrative logic. Here's the excerpt: {content}"
@@ -228,13 +225,19 @@ def __analyse_pdf(pdf_fp: str, llm_kwargs, chatbot, history, use_ai_assist, GPT_
     yield from update_ui_lastest_msg(_('对pdf文件完成'), chatbot, history)
     
     # 最后的总结（就是要这个内容）
-    i_say = f'''Please read the above content and provide me with its title, 
+    i_say = f'''Please read the above article and provide me with its title, 
         including both the original language and the {GPT_prefer_language}. 
-        Also, please give me a detailed and accurate summary of the content in {GPT_prefer_language}, 
-        along with the introduction or research background, the experimental methods, the conclusions, 
-        the innovative aspects of the experiment, and its limitations and deficiencies. 
-        Additionally, inform me about the author's writing style writing style(including narrative logic and stylistic suggestions), 
-        so I can get some advice for my own writing. '''
+        Also, please give me a detailed and accurate summary of the article in {GPT_prefer_language}, 
+        along with the below content:
+        1. Introduction: Research question/hypothesis clarity, Motivation and significance of the study, Structure of the paper
+        2. Research Background: Domain overview and current gaps/controversies, Theoretical/practical relevance
+        3. Methods: Methodological rigor and validity, Reproducibility of experiments, Control of variables and assumptions, Tools/techniques used
+        4. Results/Data: Data reliability and sources, Clear presentation of findings, Alignment of results with hypotheses
+        5. Conclusions: Answering the research question, Summary of key findings, Contributions to theory/practice, Future research directions
+        6. Innovation: Theoretical, methodological, or applied novelty, Justification and validation of innovations
+        7. Limitations: Acknowledged weaknesses (e.g., sample bias, method flaws), Impact on conclusions, Proposed improvements
+        8. Writing Style: Logical flow and coherence, Clarity and conciseness of language, Adherence to academic standards (formatting, citations)
+        '''
         
     i_say_show = _("总结中...")
     gpt_say_last = yield from request_gpt_model_in_new_thread_with_ui_alive(i_say, i_say_show, llm_kwargs, chatbot,

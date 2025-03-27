@@ -1,5 +1,6 @@
 '''
 Author: scholar_navis@PureAmaya
+很乱，以后慢慢整理）（
 '''
 
 # 该插件的根目录
@@ -8,7 +9,7 @@ from argon2 import PasswordHasher
 
 ph = PasswordHasher()
 
-SUPPORT_DISPLAY_LANGUAGE = ("zh-Hans", "zh-Hant", "en-US")
+
 GPT_SUPPORT_LAMGUAGE = (
     "简体中文",
     "繁體中文",

@@ -4,6 +4,8 @@ Author: scholar_navis@PureAmaya
 
 import gradio as gr
 
+from gradio.events import Dependency
+
 class Textbox(gr.Textbox):
     def style(self,**kwargs):
         self.container = kwargs['container']
@@ -12,7 +14,7 @@ class Textbox(gr.Textbox):
     from gradio.blocks import Block
     if TYPE_CHECKING:
         from gradio.components import Timer
-        
+    
 class Row(gr.Row):
     def style(self,**kwargs):
         self.equal_height = kwargs['equal_height']
@@ -34,7 +36,6 @@ class Button(gr.Button):
     if TYPE_CHECKING:
         from gradio.components import Timer
 
-    
 class Dropdown(gr.Dropdown):
     def style(self,**kwargs):
         self.size = kwargs['container']
@@ -43,7 +44,6 @@ class Dropdown(gr.Dropdown):
     from gradio.blocks import Block
     if TYPE_CHECKING:
         from gradio.components import Timer
-
     
 class JSON(gr.JSON):
     def __init__(self, value = None, *, label = None, every = None, inputs = None, show_label = None, container = True, scale = None, min_width = 160, visible = True, elem_id = None, elem_classes = None, render = True, key = None, open = False, show_indices = False, height = None, max_height = 500, min_height = None,interactive=None):
@@ -53,7 +53,6 @@ class JSON(gr.JSON):
     if TYPE_CHECKING:
         from gradio.components import Timer
 
-    
 class CheckboxGroup(gr.CheckboxGroup):    
     def style(self,**kwargs):
         self.container = kwargs['container']
@@ -63,9 +62,14 @@ class CheckboxGroup(gr.CheckboxGroup):
     if TYPE_CHECKING:
         from gradio.components import Timer
 
+class Blocks(gr.Blocks):
+    def startup_events(self):
+        return self.run_startup_events()
     
-class Chatbot(gr.Chatbot):
-    def append(msg):
-        super().append(msg)
-
+class ChatMessage(gr.ChatMessage):
+    def __getitem__(self, index:int):
+        return self.content
     
+    def __setitem__(self, index:int, value): 
+        self.content = value
+        
