@@ -1,5 +1,6 @@
 /* Author: scholar_navis@PureAmaya */
 
+
 // 以后改成继承吧，不过现在也就用这一个，无所谓了
 function double_button_notification(title, msg, ok_label = 'ok', cancel_label = 'cancel', closable = false, ok_fn = null, cancel_fn = null, close_fn = null) {
     alertify.dialog('confirm')
@@ -16,6 +17,16 @@ function double_button_notification(title, msg, ok_label = 'ok', cancel_label = 
             'onok': ok_fn
         })
         .show();
+}
+
+/**
+ * @param {'success'|'warning'|'error'|'message'|'notify'} notifier_type
+ *  @param {'top-right'|'top-center'|'top-left'|'notify'|'bottom-right'|'bottom-center'|'bottom-left'} position
+ */
+function Notifier(msg,notifier_type,delay=5,position='top-right'){
+    alertify.set('notifier','position', position );
+    alertify.notify(msg, notifier_type, delay);
+    alertify.success('Current position : ' + alertify.get('notifier','position'));
 }
 
 

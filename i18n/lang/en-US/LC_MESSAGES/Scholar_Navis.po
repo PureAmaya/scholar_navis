@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-03-26 17:09+0800\n"
-"PO-Revision-Date: 2025-03-26 18:12+0800\n"
+"POT-Creation-Date: 2025-03-27 11:43+0800\n"
+"PO-Revision-Date: 2025-03-27 11:44+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -175,69 +175,71 @@ msgstr "Toggle between registration and login"
 msgid "正在执行一些模块的预热 ..."
 msgstr "Preheating some modules..."
 
-#: crazy_functions/crazy_utils.py:109 crazy_functions/crazy_utils.py:251
-#: crazy_functions/crazy_utils.py:289 crazy_functions/crazy_utils.py:306
+#: crazy_functions/crazy_utils.py:70 crazy_functions/crazy_utils.py:206
+#: crazy_functions/crazy_utils.py:229 crazy_functions/crazy_utils.py:246
 msgid "检测到程序终止"
 msgstr "Detection of program termination."
 
-#: crazy_functions/crazy_utils.py:234
+#: crazy_functions/crazy_utils.py:115 crazy_functions/crazy_utils.py:294
+msgid ""
+"发生错误。可能是模型/网络/输入内容过长等原因.可以尝试换到网络良好的环境、减少"
+"输入量或者使用限制更少的模型。具体原因如下：\n"
+"\n"
+"{}"
+msgstr ""
+"An error occurred. Possible reasons include issues with the model/network/"
+"excessive input length, etc. You can try switching to a better network "
+"environment, reducing the input length, or using a less restricted model. "
+"The specific reason is as follows:  \n"
+"\n"
+"{}"
+
+#: crazy_functions/crazy_utils.py:189
 msgid "请开始多线程操作"
 msgstr "Please begin multi-threaded operations."
 
-#: crazy_functions/crazy_utils.py:237
+#: crazy_functions/crazy_utils.py:192
 msgid "等待中"
 msgstr "Waiting for commands"
 
-#: crazy_functions/crazy_utils.py:247
+#: crazy_functions/crazy_utils.py:202
 msgid "执行中"
 msgstr "Executing..."
 
-#: crazy_functions/crazy_utils.py:265
+#: crazy_functions/crazy_utils.py:220
 msgid "已成功"
 msgstr "Successfully completed."
 
-#: crazy_functions/crazy_utils.py:284
-msgid ""
-"此线程失败前收到的回答：\n"
-"\n"
-msgstr ""
-"Successfully completed.\n"
-"\n"
-
-#: crazy_functions/crazy_utils.py:285
-msgid "输入过长已放弃"
-msgstr "Input too long, abandoned."
-
-#: crazy_functions/crazy_utils.py:299
+#: crazy_functions/crazy_utils.py:239
 msgid "OpenAI绑定信用卡可解除频率限制"
 msgstr "Bind a credit card to OpenAI to lift frequency restrictions."
 
-#: crazy_functions/crazy_utils.py:310
-msgid "已失败"
-msgstr "Failed."
+#: crazy_functions/crazy_utils.py:250
+msgid "多次重试失败，已终止进程"
+msgstr "Multiple retry attempts failed, process terminated."
 
-#: crazy_functions/crazy_utils.py:342
+#: crazy_functions/crazy_utils.py:281
 msgid "多线程操作已经开始，完成情况:"
 msgstr "Multithreaded operations completed:"
 
-#: crazy_functions/crazy_utils.py:450
+#: crazy_functions/crazy_utils.py:394
 msgid "抱歉, 我们暂时无法解析此PDF文档: {}."
 msgstr "Sorry, we are unable to parse this PDF document: {}."
 
-#: crazy_functions/crazy_utils.py:575
+#: crazy_functions/crazy_utils.py:519
 msgid "无法下载资源{}，请检查."
 msgstr "Unable to download resource {}, please check."
 
-#: crazy_functions/crazy_utils.py:607
+#: crazy_functions/crazy_utils.py:551
 msgid "正在执行命令 {}"
 msgstr "Executing command {}."
 
-#: crazy_functions/crazy_utils.py:623
+#: crazy_functions/crazy_utils.py:567
 msgid "正在解析论文, 请稍候。进度：正在排队, 等待线程锁..."
 msgstr ""
 "Parsing paper, please wait. Progress: Queued, waiting for thread lock..."
 
-#: crazy_functions/crazy_utils.py:631
+#: crazy_functions/crazy_utils.py:575
 msgid ""
 "正在解析论文, 请稍候。进度：正在加载NOUGAT... （提示：首次运行需要花费较长时"
 "间下载NOUGAT参数）"
@@ -245,7 +247,7 @@ msgstr ""
 "Parsing paper, please wait. Progress: Loading NOUGAT... (Note: The first run "
 "may take a long time to download NOUGAT parameters.)"
 
-#: crazy_functions/crazy_utils.py:638
+#: crazy_functions/crazy_utils.py:582
 msgid "Nougat解析论文失败"
 msgstr "Nougat paper parsing failed."
 
@@ -603,7 +605,7 @@ msgstr ""
 "asked at this point as well): "
 
 #: crazy_functions/scholar_navis/scripts/communicate_with_ai_about_research_progress.py:345
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:271
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:266
 msgid "选择总结库"
 msgstr "Select Summary Library"
 
@@ -751,28 +753,28 @@ msgstr "Intermediate files exported. Exporting logs..."
 msgid "输出结果失败，原因：{}"
 msgstr "Output failed, reason: {}."
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:44
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:43
 msgid "现在可以进行单篇文章的精细分析。支持总结库内置文章或上传的其他文章"
 msgstr ""
 "Now fine-grained analysis of individual articles is supported. It supports "
 "articles built into the summary library or other articles uploaded"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:44
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:43
 msgid "等待指令中..."
 msgstr "Waiting for commands..."
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:52
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:51
 msgid "[注意] 上传的文献多于1篇。<b>精细分析时仅使用第一篇文章</b>"
 msgstr ""
 "[Note] More than one article has been uploaded. <b>Only the first article "
 "will be used for fine-grained analysis</b>"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:68
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:67
 #: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:205
 msgid "该用户没有任何总结库"
 msgstr "The user has no article summarization library"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:70
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:69
 #: crazy_functions/scholar_navis/scripts/tools/article_library_ctrl.py:207
 msgid ""
 "下面是该用户拥有的总结库：\n"
@@ -781,7 +783,7 @@ msgstr ""
 "Below is the summary library owned by this user:\n"
 "\n"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:76
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:75
 msgid ""
 "没有指定任何文章。可以选择上传文章或者从总结库中选择一篇文章进行分析</br></"
 "br>{}"
@@ -790,38 +792,38 @@ msgstr ""
 "select an article from the article summarization library for analysis</br></"
 "br>{}"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:82
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:81
 msgid "没有上传可用的文章，<b>{}</b> 亦不是已有的总结库"
 msgstr ""
 "No available articles uploaded, neither is <b>{}</b> part of the existing "
 "summarization library"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:93
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:92
 msgid "总结库 <b>{}</b> 中不存在任何已经加载完成的文章"
 msgstr "There are no articles loaded in the <b>{}</b> summary library"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:121
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:114
 msgid "访问文章发布页"
 msgstr "Article Publisher Page"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:122
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:115
 msgid "复制文章"
 msgstr "Copy Article"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:123
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:116
 msgid "[下载文章]"
 msgstr "[Download Article]"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:139
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:132
 #: crazy_functions/scholar_navis/scripts/tools/common_plugin_para.py:97
 msgid "总结库"
 msgstr "article summarization library"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:140
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:133
 msgid "包含下面的文章："
 msgstr "includes the following articles:"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:141
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:134
 msgid ""
 "展开文字可以看到文章的预分析结果。如果没有正常显示标题，说明文章标题获取失"
 "败，但不影响后续使用"
@@ -830,11 +832,11 @@ msgstr ""
 "title does not display normally, it indicates that the article title "
 "retrieval has failed, but it does not affect subsequent use"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:142
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:135
 msgid "分析中使用的关键词："
 msgstr "Keywords used in analysis:"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:143
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:136
 msgid ""
 "如果没有正常的显示文章标题，可能是该文章没有doi，或是没有在metadata中设定标"
 "题，此时显示的一般为文件名"
@@ -843,13 +845,13 @@ msgstr ""
 "does not have a DOI, or the title has not been set in the metadata. In this "
 "case, the displayed title is generally the filename"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:144
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:137
 msgid "如果 [访问文章发布页] 不可用，可能是该文章没有doi，也可能是网络错误"
 msgstr ""
 "If [Article Publisher Page] is not available, it may be that the article "
 "does not have a DOI, or there may be a network error"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:157
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:152
 msgid ""
 "尚未输入一个可用的文章。可以选择上传一篇文章，也可以从加载的文章中选择一篇使"
 "用"
@@ -857,56 +859,56 @@ msgstr ""
 "No available articles have been input. You can either upload an article or "
 "select an article from the loaded articles to use"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:159
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:154
 msgid "您可以点击这里启动 In-library Articles Viewer"
 msgstr "You can click here to launch the In-library Articles Viewer"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:160
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:155
 msgid "以查阅该总结库包含的文章"
 msgstr " to view the articles included in this summary repository"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:168
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:163
 msgid "精细分析中..."
 msgstr "In fine-grained analysis of the article.."
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:172
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:167
 msgid "分析过程中出错！错误原因是：{}"
 msgstr "Error occurred during analysis! Error reason is: {}"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:197
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:192
 msgid ""
 "上传的文件 {} 不可用。我们不接受中文学位论文、加密文件、非PDF文件或损坏文件"
 msgstr ""
 "The uploaded file {} is unavailable. We do not accept Chinese doctoral "
 "dissertations, encrypted files, non-PDF files, or corrupted files."
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:205
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:200
 msgid "对pdf文件处理中..."
 msgstr "Processing PDF files..."
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:218
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:213
 #, python-brace-format
 msgid "[{i}/{total}] AI阅读中..."
 msgstr "[{i}/{total}] AI reading in progress..."
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:230
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:225
 msgid "对pdf文件完成"
 msgstr "Complete the PDF file."
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:247
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:242
 msgid "总结中..."
 msgstr "In summary..."
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:254
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:249
 msgid "分析的文章如下："
 msgstr "The analyzed articles are as follows:"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:256
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:251
 msgid "标题可能不准确，跳转连接亦或许无法使用，仅供参考"
 msgstr ""
 "Title may be inaccurate, link may not be functional, for reference only"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:258
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:253
 msgid ""
 "精细分析完成，以下是分析的结果（现在亦可以与AI进行交流，也可以下载分析的结"
 "果）: "
@@ -914,23 +916,23 @@ msgstr ""
 "Fine-grained analysis completed, the following are the analysis results (you "
 "can now also communicate with AI and download the analysis results): "
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:263
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:258
 msgid "下载分析结果："
 msgstr "Download analysis results:"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:270
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:265
 msgid "选定的文章"
 msgstr "Selected articles"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:270
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:265
 msgid "上传或使用总结库内的文章"
 msgstr "Upload or use articles from the summary library"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:271
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:266
 msgid "查看总结库内的文章"
 msgstr "View articles in the summarization library"
 
-#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:272
+#: crazy_functions/scholar_navis/scripts/fine_grained_analysis_of_article.py:267
 msgid "AI预先阅读内容"
 msgstr "AI pre-reads the content"
 
@@ -1774,45 +1776,62 @@ msgstr ""
 "If the browser does not open automatically, please copy and go to the "
 "following URL:"
 
-#: request_llms/bridge_all.py:73
+#: request_llms/bridge_all.py:74
 msgid "正在加载tokenizer，如果是第一次运行，可能需要一点时间下载参数"
 msgstr ""
 "Loading tokenizer, if it's the first run, it may take some time to download "
 "the parameters."
 
-#: request_llms/bridge_all.py:75
+#: request_llms/bridge_all.py:76
 msgid "加载tokenizer完毕"
 msgstr "Tokenizer loading complete."
 
-#: request_llms/bridge_all.py:105
+#: request_llms/bridge_all.py:106
 msgid "警告！API_URL配置选项将被弃用，请更换为API_URL_REDIRECT配置"
 msgstr ""
 "Warning! The API_URL configuration option will be deprecated. Please replace "
 "it with API_URL_REDIRECT configuration."
 
-#: request_llms/bridge_all.py:784
+#: request_llms/bridge_all.py:785
 msgid "one-api模型 {} 的 max_token 配置不是整数，请检查配置文件"
 msgstr ""
 "The max_token configuration for the one-api model {} is not an integer. "
 "Please check the configuration file."
 
-#: request_llms/bridge_all.py:823 toolbox.py:665
+#: request_llms/bridge_all.py:824 toolbox.py:651
 msgid "AZURE_CFG_ARRAY中配置的模型必须以azure开头"
 msgstr "The model configured in AZURE_CFG_ARRAY must start with azure."
 
-#: request_llms/bridge_all.py:883
+#: request_llms/bridge_all.py:884
 msgid "历史记录参数必须是List, 但是现在的类型是{}"
 msgstr " The history parameter must be a List, but the current type is {}."
 
-#: request_llms/bridge_all.py:969
+#: request_llms/bridge_all.py:979
 msgid "模型覆盖参数 '{}' 指向一个暂不支持的模型，请检查配置文件"
 msgstr ""
 "The model override parameter '{}' points to a model that is not currently "
 "supported. Please check the configuration file."
 
-#: request_llms/bridge_all.py:996
+#: request_llms/bridge_all.py:1006
 msgid "历史记录参数必须是List"
 msgstr "The history parameter must be a List."
+
+#: request_llms/bridge_all.py:1019
+msgid "过长的输入"
+msgstr "excessively long input"
+
+#: request_llms/bridge_all.py:1036
+msgid ""
+"输入过长，请使用支持更多token限制的模型，或者是减少/分批输入。程序已终止."
+msgstr ""
+"Input too long. Please use a model with a higher token limit or reduce/batch "
+"your input. Process terminated."
+
+#: request_llms/bridge_all.py:1037
+msgid "模型的最大允许长度的阈值: {} tokens, 当前输入的长度为: {} tokens"
+msgstr ""
+"The maximum allowed length threshold for the model: {} tokens, current input "
+"length: {} tokens"
 
 #: request_llms/bridge_chatgpt.py:136
 msgid "Endpoint不正确, 请检查AZURE_ENDPOINT的配置! 当前的Endpoint为:"
@@ -2523,59 +2542,72 @@ msgstr "Custom data loading failed, using default values."
 msgid "参数加载失败，使用默认值"
 msgstr "Parameter loading failed, using default values."
 
-#: toolbox.py:224
+#: toolbox.py:228
 msgid "检测到**滞留的缓存文档**，请及时处理"
 msgstr "Detected **pending cached documents**, please address them promptly."
 
-#: toolbox.py:224
+#: toolbox.py:228
 msgid "请及时点击“**保存当前对话**”获取所有滞留文档"
 msgstr ""
 "Please click **Save Current Conversation** promptly to retrieve all pending "
 "documents."
 
-#: toolbox.py:230
+#: toolbox.py:234
 msgid "正常"
 msgstr "OK"
 
-#: toolbox.py:311
+#: toolbox.py:315
 msgid "插件调度异常:\n"
 msgstr "Plugin scheduling exception:\n"
 
-#: toolbox.py:317
+#: toolbox.py:321
 msgid "插件调度异常"
 msgstr "Plugin scheduling exception."
 
-#: toolbox.py:602
+#: toolbox.py:588
 msgid "... (省略{}个文件的显示) ..."
 msgstr "... (omitting the display of {} files) ..."
 
-#: toolbox.py:604
+#: toolbox.py:590
 msgid "文件"
 msgstr "File(s)"
 
-#: toolbox.py:607
+#: toolbox.py:593
 msgid "我上传了文件，请查收"
 msgstr "I have uploaded the file, please check it."
 
-#: toolbox.py:609
+#: toolbox.py:595
 msgid "调用路径参数已自动修正到: "
 msgstr "The invocation path parameter has been automatically corrected to: "
 
-#: toolbox.py:610
+#: toolbox.py:596
 msgid "现在您点击任意函数插件时，以上文件将被作为输入参数"
 msgstr ""
 "Now, when you click on any function plugin, the above file will be used as "
 "the input parameter."
 
-#: toolbox.py:611
+#: toolbox.py:597
 msgid "请注意，当上述文件名出现异常时，请检查您的压缩包是否为UTF-8或CP437编码"
 msgstr ""
 "lease note, if the above file name appears abnormal, check whether your "
 "compressed package is encoded in UTF-8 or CP437."
 
-#: toolbox.py:613
+#: toolbox.py:599
 msgid "[Local Message] 收到以下文件 （上传到路径：{}）: "
 msgstr "[Local Message] Received the following files (uploaded to path: {}): "
+
+#~ msgid ""
+#~ "此线程失败前收到的回答：\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Successfully completed.\n"
+#~ "\n"
+
+#~ msgid "输入过长已放弃"
+#~ msgstr "Input too long, abandoned."
+
+#~ msgid "已失败"
+#~ msgstr "Failed."
 
 #~ msgid "您可以点击这里"
 #~ msgstr "You can click here"

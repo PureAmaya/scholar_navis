@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-03-26 20:11+0800\n"
-"PO-Revision-Date: 2025-03-26 20:11+0800\n"
+"POT-Creation-Date: 2025-03-27 11:41+0800\n"
+"PO-Revision-Date: 2025-03-27 11:41+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -168,68 +168,68 @@ msgstr "注册登录切换"
 msgid "正在执行一些模块的预热 ..."
 msgstr "正在执行一些模块的预热 ..."
 
-#: crazy_functions/crazy_utils.py:109 crazy_functions/crazy_utils.py:251
-#: crazy_functions/crazy_utils.py:289 crazy_functions/crazy_utils.py:306
+#: crazy_functions/crazy_utils.py:70 crazy_functions/crazy_utils.py:206
+#: crazy_functions/crazy_utils.py:229 crazy_functions/crazy_utils.py:246
 msgid "检测到程序终止"
 msgstr "检测到程序终止"
 
-#: crazy_functions/crazy_utils.py:234
+#: crazy_functions/crazy_utils.py:115 crazy_functions/crazy_utils.py:294
+msgid ""
+"发生错误。可能是模型/网络/输入内容过长等原因.可以尝试换到网络良好的环境、减"
+"少输入量或者使用限制更少的模型。具体原因如下：\n"
+"\n"
+"{}"
+msgstr ""
+"发生错误。可能是模型/网络/输入内容过长等原因.可以尝试换到网络良好的环境、减"
+"少输入量或者使用限制更少的模型。具体原因如下：\n"
+"\n"
+"{}"
+
+#: crazy_functions/crazy_utils.py:189
 msgid "请开始多线程操作"
 msgstr "请开始多线程操作"
 
-#: crazy_functions/crazy_utils.py:237
+#: crazy_functions/crazy_utils.py:192
 msgid "等待中"
 msgstr "等待中"
 
-#: crazy_functions/crazy_utils.py:247
+#: crazy_functions/crazy_utils.py:202
 msgid "执行中"
 msgstr "执行中"
 
-#: crazy_functions/crazy_utils.py:265
+#: crazy_functions/crazy_utils.py:220
 msgid "已成功"
 msgstr "已成功"
 
-#: crazy_functions/crazy_utils.py:284
-msgid ""
-"此线程失败前收到的回答：\n"
-"\n"
-msgstr ""
-"此线程失败前收到的回答：\n"
-"\n"
-
-#: crazy_functions/crazy_utils.py:285
-msgid "输入过长已放弃"
-msgstr "输入过长已放弃"
-
-#: crazy_functions/crazy_utils.py:299
+#: crazy_functions/crazy_utils.py:239
 msgid "OpenAI绑定信用卡可解除频率限制"
 msgstr "OpenAI绑定信用卡可解除频率限制"
 
-#: crazy_functions/crazy_utils.py:310
-msgid "已失败"
-msgstr "已失败"
+#: crazy_functions/crazy_utils.py:250
+msgid "多次重试失败，已终止进程"
+msgstr "多次重试失败，已终止进程"
 
-#: crazy_functions/crazy_utils.py:342
+#: crazy_functions/crazy_utils.py:281
 msgid "多线程操作已经开始，完成情况:"
 msgstr "多线程操作已经开始，完成情况:"
 
-#: crazy_functions/crazy_utils.py:450
+#: crazy_functions/crazy_utils.py:394
 msgid "抱歉, 我们暂时无法解析此PDF文档: {}."
 msgstr "抱歉, 我们暂时无法解析此PDF文档: {}."
 
-#: crazy_functions/crazy_utils.py:575
+#: crazy_functions/crazy_utils.py:519
 msgid "无法下载资源{}，请检查."
 msgstr "无法下载资源{}，请检查."
 
-#: crazy_functions/crazy_utils.py:607
+#: crazy_functions/crazy_utils.py:551
 msgid "正在执行命令 {}"
 msgstr "正在执行命令 {}"
 
-#: crazy_functions/crazy_utils.py:623
+#: crazy_functions/crazy_utils.py:567
 msgid "正在解析论文, 请稍候。进度：正在排队, 等待线程锁..."
 msgstr "正在解析论文, 请稍候。进度：正在排队, 等待线程锁..."
 
-#: crazy_functions/crazy_utils.py:631
+#: crazy_functions/crazy_utils.py:575
 msgid ""
 "正在解析论文, 请稍候。进度：正在加载NOUGAT... （提示：首次运行需要花费较长时"
 "间下载NOUGAT参数）"
@@ -237,7 +237,7 @@ msgstr ""
 "正在解析论文, 请稍候。进度：正在加载NOUGAT... （提示：首次运行需要花费较长时"
 "间下载NOUGAT参数）"
 
-#: crazy_functions/crazy_utils.py:638
+#: crazy_functions/crazy_utils.py:582
 msgid "Nougat解析论文失败"
 msgstr "Nougat解析论文失败"
 
@@ -1637,37 +1637,51 @@ msgstr "已重置"
 msgid "如果浏览器没有自动打开，请复制并转到以下URL:"
 msgstr "如果浏览器没有自动打开，请复制并转到以下URL:"
 
-#: request_llms/bridge_all.py:73
+#: request_llms/bridge_all.py:74
 msgid "正在加载tokenizer，如果是第一次运行，可能需要一点时间下载参数"
 msgstr "正在加载tokenizer，如果是第一次运行，可能需要一点时间下载参数"
 
-#: request_llms/bridge_all.py:75
+#: request_llms/bridge_all.py:76
 msgid "加载tokenizer完毕"
 msgstr "加载tokenizer完毕"
 
-#: request_llms/bridge_all.py:105
+#: request_llms/bridge_all.py:106
 msgid "警告！API_URL配置选项将被弃用，请更换为API_URL_REDIRECT配置"
 msgstr "警告！API_URL配置选项将被弃用，请更换为API_URL_REDIRECT配置"
 
-#: request_llms/bridge_all.py:784
+#: request_llms/bridge_all.py:785
 msgid "one-api模型 {} 的 max_token 配置不是整数，请检查配置文件"
 msgstr "one-api模型 {} 的 max_token 配置不是整数，请检查配置文件"
 
-#: request_llms/bridge_all.py:823 toolbox.py:665
+#: request_llms/bridge_all.py:824 toolbox.py:651
 msgid "AZURE_CFG_ARRAY中配置的模型必须以azure开头"
 msgstr "AZURE_CFG_ARRAY中配置的模型必须以azure开头"
 
-#: request_llms/bridge_all.py:883
+#: request_llms/bridge_all.py:884
 msgid "历史记录参数必须是List, 但是现在的类型是{}"
 msgstr "历史记录参数必须是List, 但是现在的类型是{}"
 
-#: request_llms/bridge_all.py:969
+#: request_llms/bridge_all.py:979
 msgid "模型覆盖参数 '{}' 指向一个暂不支持的模型，请检查配置文件"
 msgstr "模型覆盖参数 '{}' 指向一个暂不支持的模型，请检查配置文件"
 
-#: request_llms/bridge_all.py:996
+#: request_llms/bridge_all.py:1006
 msgid "历史记录参数必须是List"
 msgstr "历史记录参数必须是List"
+
+#: request_llms/bridge_all.py:1019
+msgid "过长的输入"
+msgstr "过长的输入"
+
+#: request_llms/bridge_all.py:1036
+msgid ""
+"输入过长，请使用支持更多token限制的模型，或者是减少/分批输入。程序已终止."
+msgstr ""
+"输入过长，请使用支持更多token限制的模型，或者是减少/分批输入。程序已终止."
+
+#: request_llms/bridge_all.py:1037
+msgid "模型的最大允许长度的阈值: {} tokens, 当前输入的长度为: {} tokens"
+msgstr "模型的最大允许长度的阈值: {} tokens, 当前输入的长度为: {} tokens"
 
 #: request_llms/bridge_chatgpt.py:136
 msgid "Endpoint不正确, 请检查AZURE_ENDPOINT的配置! 当前的Endpoint为:"
@@ -2322,54 +2336,70 @@ msgstr "自定义数据加载失败，使用默认值"
 msgid "参数加载失败，使用默认值"
 msgstr "参数加载失败，使用默认值"
 
-#: toolbox.py:224
+#: toolbox.py:228
 msgid "检测到**滞留的缓存文档**，请及时处理"
 msgstr "检测到**滞留的缓存文档**，请及时处理"
 
-#: toolbox.py:224
+#: toolbox.py:228
 msgid "请及时点击“**保存当前对话**”获取所有滞留文档"
 msgstr "请及时点击“**保存当前对话**”获取所有滞留文档"
 
-#: toolbox.py:230
+#: toolbox.py:234
 msgid "正常"
 msgstr "正常"
 
-#: toolbox.py:311
+#: toolbox.py:315
 msgid "插件调度异常:\n"
 msgstr "插件调度异常:\n"
 
-#: toolbox.py:317
+#: toolbox.py:321
 msgid "插件调度异常"
 msgstr "插件调度异常"
 
-#: toolbox.py:602
+#: toolbox.py:588
 msgid "... (省略{}个文件的显示) ..."
 msgstr "... (省略{}个文件的显示) ..."
 
-#: toolbox.py:604
+#: toolbox.py:590
 msgid "文件"
 msgstr "文件"
 
-#: toolbox.py:607
+#: toolbox.py:593
 msgid "我上传了文件，请查收"
 msgstr "我上传了文件，请查收"
 
-#: toolbox.py:609
+#: toolbox.py:595
 msgid "调用路径参数已自动修正到: "
 msgstr "调用路径参数已自动修正到: "
 
-#: toolbox.py:610
+#: toolbox.py:596
 msgid "现在您点击任意函数插件时，以上文件将被作为输入参数"
 msgstr "现在您点击任意函数插件时，以上文件将被作为输入参数"
 
-#: toolbox.py:611
+#: toolbox.py:597
 msgid "请注意，当上述文件名出现异常时，请检查您的压缩包是否为UTF-8或CP437编码"
 msgstr ""
 "请注意，当上述文件名出现异常时，请检查您的压缩包是否为UTF-8或CP437编码"
 
-#: toolbox.py:613
+#: toolbox.py:599
 msgid "[Local Message] 收到以下文件 （上传到路径：{}）: "
 msgstr "[Local Message] 收到以下文件 （上传到路径：{}）: "
+
+#~ msgid "不详"
+#~ msgstr "不详"
+
+#~ msgid ""
+#~ "此线程失败前收到的回答：\n"
+#~ "\n"
+#~ msgstr ""
+#~ "此线程失败前收到的回答：\n"
+#~ "\n"
+
+#~ msgid "输入过长已放弃"
+#~ msgstr "输入过长已放弃"
+
+#~ msgid "已失败"
+#~ msgstr "已失败"
 
 #~ msgid "您可以点击这里"
 #~ msgstr "您可以点击这里"

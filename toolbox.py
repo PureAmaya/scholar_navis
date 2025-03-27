@@ -1,6 +1,10 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-03-27
+- remove functions: get_reduce_token_percent
+
+
 Modified by PureAmaya on 2025-03-18
 - Fix the issue of content not displaying properly due to incorrect parameter settings for ChatMessage in update_ui_lastest_msg.
     (issue #9)
@@ -360,24 +364,6 @@ def HotReload(f):
     - select_api_key:           根据当前的模型类别，抽取可用的api-key
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 """
-
-
-def get_reduce_token_percent(text:str):
-    """
-    * 此函数未来将被弃用
-    """
-    try:
-        # text = "maximum context length is 4097 tokens. However, your messages resulted in 4870 tokens"
-        pattern = r"(\d+)\s+tokens\b"
-        match = re.findall(pattern, text)
-        EXCEED_ALLO = 500  # 稍微留一点余地，否则在回复时会因余量太少出问题
-        max_limit = float(match[0]) - EXCEED_ALLO
-        current_tokens = float(match[1])
-        ratio = max_limit / current_tokens
-        assert ratio > 0 and ratio < 1
-        return ratio, str(int(current_tokens - max_limit))
-    except:
-        return 0.5, "不详"
 
 
 def write_history_to_file(

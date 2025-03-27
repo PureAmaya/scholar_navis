@@ -1,6 +1,10 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-3-27
+- remove functions: input_clipping
+- Add user-visible alerts for exceeding the maximum token limit and other potential errors.
+
 Modified by PureAmaya on 2025-3-1
 - Add a 1.1-second delay between each task in the multi-threaded service to address the issue of certain services allowing only one access per second.
 - Add some omitted, untranslated text.
@@ -13,6 +17,7 @@ Modified by PureAmaya on 2024-12-28
 
 '''
 
+import re
 from toolbox import update_ui,trimmed_format_exc, get_max_token, Singleton, update_ui_lastest_msg
 from shared_utils.scholar_navis.multi_lang import _
 from shared_utils.char_visual_effect import scolling_visual_effect
@@ -20,50 +25,6 @@ from shared_utils.config_loader import get_conf
 import threading
 import os
 import logging
-
-def input_clipping(inputs, history, max_token_limit):
-    """
-    当输入文本 + 历史文本超出最大限制时，采取措施丢弃一部分文本。
-    输入：
-        - inputs 本次请求
-        - history 历史上下文
-        - max_token_limit 最大token限制
-    输出:
-        - inputs 本次请求（经过clip）
-        - history 历史上下文（经过clip）
-    """
-    import numpy as np
-    from request_llms.bridge_all import model_info
-    enc = model_info["gpt-3.5-turbo"]['tokenizer']
-    def get_token_num(txt): return len(enc.encode(txt, disallowed_special=()))
-
-    mode = 'input-and-history'
-    # 当 输入部分的token占比 小于 全文的一半时，只裁剪历史
-    input_token_num = get_token_num(inputs)
-    if input_token_num < max_token_limit//2:
-        mode = 'only-history'
-        max_token_limit = max_token_limit - input_token_num
-
-    everything = [inputs] if mode == 'input-and-history' else ['']
-    everything.extend(history)
-    n_token = get_token_num('\n'.join(everything))
-    everything_token = [get_token_num(e) for e in everything]
-    delta = max(everything_token) // 16 # 截断时的颗粒度
-
-    while n_token > max_token_limit:
-        where = np.argmax(everything_token)
-        encoded = enc.encode(everything[where], disallowed_special=())
-        clipped_encoded = encoded[:len(encoded)-delta]
-        everything[where] = enc.decode(clipped_encoded)[:-1]    # -1 to remove the may-be illegal char
-        everything_token[where] = get_token_num(everything[where])
-        n_token = get_token_num('\n'.join(everything))
-
-    if mode == 'input-and-history':
-        inputs = everything[0]
-    else:
-        pass
-    history = everything[1:]
-    return inputs, history
 
 def request_gpt_model_in_new_thread_with_ui_alive(
         inputs, inputs_show_user, llm_kwargs,
@@ -100,7 +61,7 @@ def request_gpt_model_in_new_thread_with_ui_alive(
     # 看门狗耐心
     watch_dog_patience = 5
     # 请求任务
-    def _req_gpt(inputs, history, sys_prompt):
+    def _req_gpt(executor:ThreadPoolExecutor,inputs, history, sys_prompt):
         retry_op = retry_times_at_unknown_error
         exceeded_cnt = 0
         while True:
@@ -115,21 +76,9 @@ def request_gpt_model_in_new_thread_with_ui_alive(
                 return result
             except ConnectionAbortedError as token_exceeded_error:
                 # 【第二种情况】：Token溢出
-                if handle_token_exceed:
-                    exceeded_cnt += 1
-                    # 【选择处理】 尝试计算比例，尽可能多地保留文本
-                    from toolbox import get_reduce_token_percent
-                    p_ratio, n_exceed = get_reduce_token_percent(str(token_exceeded_error))
-                    MAX_TOKEN = get_max_token(llm_kwargs)
-                    EXCEED_ALLO = 512 + 512 * exceeded_cnt
-                    inputs, history = input_clipping(inputs, history, max_token_limit=MAX_TOKEN-EXCEED_ALLO)
-                    mutable[0] += f'[Local Message] {_("警告，文本过长将进行截断，Token溢出数：")}{n_exceed}。\n\n'
-                    continue # 返回重试
-                else:
-                    # 【选择放弃】
-                    tb_str = '```\n' + trimmed_format_exc() + '```'
-                    mutable[0] += f"[Local Message] {_('警告，在执行过程中遭遇问题')}, Traceback：\n\n{tb_str}\n\n"
-                    return mutable[0] # 放弃
+                    mutable[0] += f'[Local Message] {str(token_exceeded_error)}\n\n'
+                    executor.shutdown(wait=False,cancel_futures=True)
+                    return ''
             except:
                 # 【第三种情况】：其他错误：重试几次
                 tb_str = '```\n' + trimmed_format_exc() + '```'
@@ -143,11 +92,12 @@ def request_gpt_model_in_new_thread_with_ui_alive(
                     time.sleep(5)
                     continue # 返回重试
                 else:
-                    time.sleep(5)
-                    return mutable[0] # 放弃
+                    mutable[0] += f'[Local Message] {_("多次重试失败，已终止进程")}\n\n'
+                    executor.shutdown(wait=False,cancel_futures=True)
+                    return ''
 
     # 提交任务
-    future = executor.submit(_req_gpt, inputs, history, sys_prompt)
+    future = executor.submit(_req_gpt,executor, inputs, history, sys_prompt)
     while True:
         # yield一次以刷新前端页面
         time.sleep(refresh_interval/2)
@@ -158,9 +108,14 @@ def request_gpt_model_in_new_thread_with_ui_alive(
         yield from update_ui_lastest_msg(mutable[0],chatbot=chatbot, history=[],delay=refresh_interval/2) # 刷新界面
 
     final_result :str = future.result()
-    yield from update_ui_lastest_msg(final_result,chatbot=chatbot, history=[],delay=refresh_interval/2) # 如果最后成功了，则删除报错信息
-    return final_result
-
+    if  final_result: # 有成果才输出
+        yield from update_ui_lastest_msg(final_result,chatbot=chatbot, history=[],delay=refresh_interval/2) # 如果最后成功了，则删除报错信息
+        return final_result
+    else:
+        msg = _('发生错误。可能是模型/网络/输入内容过长等原因.可以尝试换到网络良好的环境、减少输入量或者使用限制更少的模型。具体原因如下：\n\n{}').format(mutable[0])
+        yield from update_ui_lastest_msg(msg,chatbot=chatbot, history=[])
+        raise ValueError(msg)
+    
 def can_multi_process(llm) -> bool:
     from request_llms.bridge_all import model_info
 
@@ -240,7 +195,7 @@ def request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency(
     watch_dog_patience = 5
 
     # 子线程任务
-    def _req_gpt(index, inputs, history, sys_prompt,max_workers):
+    def _req_gpt(executor:ThreadPoolExecutor,index, inputs, history, sys_prompt,max_workers):
         gpt_say = ""
         retry_op = retry_times_at_unknown_error
         exceeded_cnt = 0
@@ -266,24 +221,9 @@ def request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency(
                 return gpt_say
             except ConnectionAbortedError as token_exceeded_error:
                 # 【第二种情况】：Token溢出
-                if handle_token_exceed:
-                    exceeded_cnt += 1
-                    # 【选择处理】 尝试计算比例，尽可能多地保留文本
-                    from toolbox import get_reduce_token_percent
-                    p_ratio, n_exceed = get_reduce_token_percent(str(token_exceeded_error))
-                    MAX_TOKEN = get_max_token(llm_kwargs)
-                    EXCEED_ALLO = 512 + 512 * exceeded_cnt
-                    inputs, history = input_clipping(inputs, history, max_token_limit=MAX_TOKEN-EXCEED_ALLO)
-                    gpt_say += f'[Local Message] {_("警告，文本过长将进行截断，Token溢出数: ")}{n_exceed}。\n\n'
-                    mutable[index][2] = f"截断重试"
-                    continue # 返回重试
-                else:
-                    # 【选择放弃】
-                    tb_str = '```\n' + trimmed_format_exc() + '```'
-                    gpt_say += f"[Local Message] {_('警告，线程{}在执行过程中遭遇问题').format(index)}, Traceback：\n\n{tb_str}\n\n"
-                    if len(mutable[index][0]) > 0: gpt_say += _("此线程失败前收到的回答：\n\n") + mutable[index][0]
-                    mutable[index][2] = _("输入过长已放弃")
-                    return gpt_say # 放弃
+                mutable[index][2] += f'[Local Message] {str(token_exceeded_error)}\n\n'
+                executor.shutdown(cancel_futures=True,wait=False)
+                return ''
             except:
                 # 【第三种情况】：其他错误
                 if detect_timeout(): raise RuntimeError(_("检测到程序终止"))
@@ -307,13 +247,12 @@ def request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency(
                     mutable[index][2] = f"{_('重试中')} {retry_times_at_unknown_error-retry_op}/{retry_times_at_unknown_error}"
                     continue # 返回重试
                 else:
-                    mutable[index][2] = _("已失败")
-                    wait = 5
-                    time.sleep(5)
-                    return gpt_say # 放弃
+                    mutable[index][2] = _("多次重试失败，已终止进程")
+                    executor.shutdown(cancel_futures=True,wait=False)
+                    return ''
 
     # 异步任务开始
-    futures = [executor.submit(_req_gpt, index, inputs, history, sys_prompt,max_workers) for index, inputs, history, sys_prompt in zip(
+    futures = [executor.submit(_req_gpt,executor, index, inputs, history, sys_prompt,max_workers) for index, inputs, history, sys_prompt in zip(
         range(len(inputs_array)), inputs_array, history_array, sys_prompt_array)]
     cnt = 0
 
@@ -349,7 +288,12 @@ def request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency(
     gpt_response_collection = []
     for inputs_show_user, f in zip(inputs_show_user_array, futures):
         gpt_res = f.result()
-        gpt_response_collection.extend([inputs_show_user, gpt_res])
+        if gpt_res:
+            gpt_response_collection.extend([inputs_show_user, gpt_res])
+        else:
+            msg = _('发生错误。可能是模型/网络/输入内容过长等原因.可以尝试换到网络良好的环境、减少输入量或者使用限制更少的模型。具体原因如下：\n\n{}').format(stat_str)
+            yield from update_ui_lastest_msg(msg,chatbot=chatbot, history=[])
+            raise ValueError(msg)
 
     # 是否在结束时，在界面上显示结果
     if show_user_at_complete:
