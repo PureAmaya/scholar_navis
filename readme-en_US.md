@@ -1,4 +1,14 @@
-<h1 align="center"><center><font size="6"><b>Scholar Navis</b></font></center></h1>
+<center>
+  <img 
+    src="https://raw.githubusercontent.com/PureAmaya/scholar_navis/refs/heads/dev/themes/svg/logo.svg?sanitize=true" 
+    width="35"
+    height="35"
+    valign="middle"
+  >
+  &nbsp;&nbsp;
+  <font size="6"><b>Scholar Navis</b></font>
+</center>
+
 
 <p align="right"><i>
 A pipeline-based research progress analysis tool based on gpt_academic</i></p>

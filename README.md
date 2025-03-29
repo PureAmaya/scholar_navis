@@ -1,4 +1,16 @@
-<h1 align="center"><center><font size="6"><b>Scholar Navis</b></font></center></h1>
+
+<center>
+  <img 
+    src="https://raw.githubusercontent.com/PureAmaya/scholar_navis/refs/heads/dev/themes/svg/logo.svg?sanitize=true" 
+    width="35"
+    height="35"
+    valign="middle"
+  >
+  &nbsp;&nbsp;
+  <font size="6"><b>Scholar Navis</b></font>
+</center>
+
+
 
 <p align="right"><i>一款基于 gpt_academic 的流水线式领域进展分析工具</i></p>
 

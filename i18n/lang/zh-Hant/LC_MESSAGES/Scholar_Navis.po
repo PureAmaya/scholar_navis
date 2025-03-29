@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-03-27 11:41+0800\n"
-"PO-Revision-Date: 2025-03-27 11:43+0800\n"
+"POT-Creation-Date: 2025-03-29 12:19+0800\n"
+"PO-Revision-Date: 2025-03-29 12:19+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_TW\n"
@@ -2037,6 +2037,15 @@ msgstr "日誌"
 #: shared_utils/scholar_navis/gpt_academic_handler.py:222
 msgid "Scholar Navis 加载失败"
 msgstr "Scholar Navis 加載失敗"
+
+#: shared_utils/scholar_navis/scholar_navis_web_services.py:157
+msgid ""
+"一款基于 gpt_academic 的流水线式领域进展分析工具。允许用户从大量文章中摘取有"
+"用的信息（例如研究进展，缺口，符合用户需求的句子，并且支持用母语显示"
+msgstr ""
+"一款基於 gpt_academic 的流水線式領域進展分析工具。它允許用戶從大量文章中提取"
+"有用的信息（例如研究進展、空白點以及符合用戶需求的句子），並且支持以用戶的母"
+"語顯示。"
 
 #: shared_utils/scholar_navis/user_account_manager.py:56
 msgid "当前密码不能为空"

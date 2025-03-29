@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-03-27 11:43+0800\n"
-"PO-Revision-Date: 2025-03-27 11:44+0800\n"
+"POT-Creation-Date: 2025-03-29 12:18+0800\n"
+"PO-Revision-Date: 2025-03-29 12:19+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -2233,6 +2233,16 @@ msgstr "Logs"
 #: shared_utils/scholar_navis/gpt_academic_handler.py:222
 msgid "Scholar Navis 加载失败"
 msgstr "Scholar Navis failed to load"
+
+#: shared_utils/scholar_navis/scholar_navis_web_services.py:157
+msgid ""
+"一款基于 gpt_academic 的流水线式领域进展分析工具。允许用户从大量文章中摘取有"
+"用的信息（例如研究进展，缺口，符合用户需求的句子，并且支持用母语显示"
+msgstr ""
+"A pipeline-based domain progress analysis tool built on gpt_academic. It "
+"allows users to extract useful information from a large number of articles "
+"(such as research progress, gaps, and sentences that meet the user's needs) "
+"and supports display in the user's native language."
 
 #: shared_utils/scholar_navis/user_account_manager.py:56
 msgid "当前密码不能为空"
