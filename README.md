@@ -1,20 +1,18 @@
+<div align="center">
+    <img  src="https://raw.githubusercontent.com/PureAmaya/scholar_navis/refs/heads/dev/themes/svg/logo.svg?sanitize=true" width="80">
 
-<center>
-  <img 
-    src="https://raw.githubusercontent.com/PureAmaya/scholar_navis/refs/heads/dev/themes/svg/logo.svg?sanitize=true" 
-    width="35"
-    height="35"
-    valign="middle"
-  >
-  &nbsp;&nbsp;
-  <font size="6"><b>Scholar Navis</b></font>
-</center>
+<h1 align="center">Scholar Navis</h1>
 
+  <p align="center">
+    一款基于 gpt_academic 的流水线式领域进展分析工具
+    <br />
+    允许用户从大量文章中摘取有用的信息（例如研究进展，缺口，符合用户需求的句子，并且支持用母语显示)
+  </p>
 
+  | [简体中文](README.md) | [繁体中文](readme-zh_Hant.md) | [English](readme-en_US.md) |
 
-<p align="right"><i>一款基于 gpt_academic 的流水线式领域进展分析工具</i></p>
+</div>
 
-| [简体中文](README.md) | [繁体中文](readme-zh_Hant.md) | [English](readme-en_US.md) |
 
 ### 事先说明
 
