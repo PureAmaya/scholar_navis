@@ -1,19 +1,18 @@
-<center>
-  <img 
-    src="https://raw.githubusercontent.com/PureAmaya/scholar_navis/refs/heads/dev/themes/svg/logo.svg?sanitize=true" 
-    width="35"
-    height="35"
-    valign="middle"
-  >
-  &nbsp;&nbsp;
-  <font size="6"><b>Scholar Navis</b></font>
-</center>
+<div align="center">
+    <img  src="https://raw.githubusercontent.com/PureAmaya/scholar_navis/refs/heads/dev/themes/svg/logo.svg?sanitize=true" width="80">
 
+<h1 align="center">Scholar Navis</h1>
 
-<p align="right"><i>
-A pipeline-based research progress analysis tool based on gpt_academic</i></p>
+  <p align="center">
+    A pipeline-based domain progress analysis tool built on gpt_academic
+    <br />
+    allows users to extract useful information from a large number of articles <br>
+(such as research progress, gaps, and sentences that meet the user's needs)
+  </p>
 
-| [简体中文](README.md) | [繁体中文](readme-zh_Hant.md) | [English](readme-en_US.md) |
+  | [简体中文](README.md) | [繁体中文](readme-zh_Hant.md) | [English](readme-en_US.md) |
+
+</div>
 
 ### Pre-announcement
 
