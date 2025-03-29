@@ -5,6 +5,7 @@ Author: scholar_navis@PureAmaya
 import os
 import json
 import traceback
+from typing import Literal
 import aiofiles
 import hashlib
 from functools import wraps
@@ -12,8 +13,9 @@ from fastapi import Depends, Form
 from fastapi.responses import FileResponse,PlainTextResponse,JSONResponse,HTMLResponse
 from .other_tools import base64_decode
 from bs4 import BeautifulSoup
+from shared_utils.scholar_navis.multi_lang import _
 
-from .const_and_singleton import WEB_SERVICES_ROOT_PATH,NOTIFICATION_ROOT_PATH,GPT_ACADEMIC_ROOT_PATH
+from .const_and_singleton import WEB_SERVICES_ROOT_PATH,NOTIFICATION_ROOT_PATH,GPT_ACADEMIC_ROOT_PATH,VERSION
 
 maintenance_json : dict = {
     'state' :  False,
@@ -131,14 +133,51 @@ def enable_api(app,get_user):
                 await f.write(json.dumps(maintenance_json))
                 return JSONResponse(maintenance_json)
             
-    @app.get("/ico/{path:path}") # 现在还没ico
-    async def image(path:str):
-        if path.startswith('svg/'):
-            realpath = os.path.join(GPT_ACADEMIC_ROOT_PATH,'themes','svg',path[4:])
-        else: realpath = os.path.join(GPT_ACADEMIC_ROOT_PATH,path)
-        if os.path.isfile(realpath):
-            return FileResponse(realpath,media_type='image/svg+xml')
-        else: return PlainTextResponse('bad request',status_code=400)
+    @app.get("/favicon.ico")
+    async def ico(size:Literal['192','512'] = None):
+        assert size in ['192','512'] or not size, 'invaild png_size'
+
+        if not size:
+            realpath = os.path.join(GPT_ACADEMIC_ROOT_PATH,'themes','svg','logo.svg')
+            media_type='image/svg+xml'
+        if size:
+            realpath = os.path.join(GPT_ACADEMIC_ROOT_PATH,'themes','svg','logo_png',f'logo_{size}x{size}.png')
+            media_type='image/png'
+
+        try:
+            return FileResponse(realpath,media_type=media_type)
+        except: 
+            return PlainTextResponse('bad request',status_code=404)
+
+    @app.get("/manifest.json")
+    async def manifest():
+        _json = {
+            "name": "Scholar Navis",               # 应用名称（必填）
+            "short_name": "Scholar Navis",            # 短名称（主屏幕显示）
+            "description": _("一款基于 gpt_academic 的流水线式领域进展分析工具。允许用户从大量文章中摘取有用的信息（例如研究进展，缺口，符合用户需求的句子，并且支持用母语显示"),  # 应用描述
+            "version": VERSION,             # 版本号（自定义格式）
+            "start_url": "/",               # 启动页面（必填）
+            "display": "standalone",        # 独立窗口模式（必填）
+            "icons": [
+                {
+                "src": "/favicon.ico?size=192",
+                "sizes": "192x192",
+                "type": "image/png"
+                },
+                {
+                "src": "/favicon.ico?size=512",
+                "sizes": "512x512",
+                "type": "image/png"
+                },
+                {
+                "src": "/favicon.ico",
+                "sizes": "any",
+                "type": "image/svg+xml"
+                }
+            ]
+            }
+        return JSONResponse(_json)
+
 
 
 def check_login(user):
