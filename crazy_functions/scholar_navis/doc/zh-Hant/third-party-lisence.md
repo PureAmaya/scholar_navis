@@ -37,6 +37,7 @@ Scholar Navis 使用 AGPL-3.0 許可證。
 | SourceHanSansSC-VF.otf.woff2 | SIL OPEN FONT LICENSE | Version 1.1                       |
 | tiktoken                     | MIT License           |                                   |
 | uvicorn                      | BSD-3-Clause          |                                   |
+| Vue.js                       | MIT license           |                                   |
 | websockets                   | BSD-3-Clause          |                                   |
 | zhipuai                      | unknown               | https://pypi.org/project/zhipuai/ |
 
@@ -108,4 +109,8 @@ Scholar Navis 使用 AGPL-3.0 許可證。
 
 - 支持推理模型，支持更新的模型
 
-- 簡體中文用戶將自動使用國內的 JS 靜態資源
+- 使用本地化JS技術提升執行效率
+
+- 支援用戶自選顯示語言與大語言模型輸出語言
+
+- 更完善的用戶登入註冊系統與優化界面

@@ -1,6 +1,13 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-04-11
+- Remove unused imports.
+- Only resources and scripts from the same origin are allowed to load.
+- Add user language acquisition feature.
+- Adjust gradio routing.
+- Compatible with the new version of multilingual function.
+
 Modified by PureAmaya on 2025-03-19
 - Provide authentication for some APIs.
 
@@ -18,11 +25,12 @@ Modified by PureAmaya on 2024-12-28
 '''
 import os
 import fastapi
-from shared_utils.scholar_navis.multi_lang import _
-from fastapi import Depends, Request, status,FastAPI, Request, HTTPException
+from multi_language import init_language,LANGUAGE_DISPLAY,MULTILINGUAL
+from fastapi import Depends, Request
 from fastapi.responses import FileResponse, RedirectResponse,JSONResponse,PlainTextResponse
 from starlette.middleware.base import BaseHTTPMiddleware
 import uvicorn
+from urllib.parse import unquote
 import gradio as gr
 from toolbox import FriendlyException
 from shared_utils.config_loader import get_conf
@@ -32,6 +40,8 @@ from shared_utils.scholar_navis.const_and_singleton import font_path
 
 PATH_PRIVATE_UPLOAD, PATH_LOGGING = get_conf('PATH_PRIVATE_UPLOAD', 'PATH_LOGGING')
 
+
+_ = lambda  text:init_language(text,LANGUAGE_DISPLAY)
 
 class SecurityMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request, call_next):
@@ -46,37 +56,31 @@ class SecurityMiddleware(BaseHTTPMiddleware):
 
         return response
 
-
-def start_app(app_block:gr.Blocks, authenticator:gr.Blocks,CONCURRENT_COUNT, AUTHENTICATION, PORT, SSL_KEYFILE, SSL_CERTFILE):
+# gr.Blocks
+def start_app(apps:dict,CONCURRENT_COUNT, AUTHENTICATION, PORT, SSL_KEYFILE, SSL_CERTFILE):
 
     # --- --- configurate gradio app block --- ---
 
-    app_block.ssl_verify = False
-    app_block.favicon_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "docs/logo.png")
-    app_block.blocked_paths = ['data',"config.py", "__pycache__", "config_private.py", "docker-compose.yml", "Dockerfile", f"{PATH_LOGGING}/admin"]
-    app_block.dev_mode = False
-    app_block.config = app_block.get_config_file()
-    app_block.enable_queue = True
-    app_block.queue(default_concurrency_limit=CONCURRENT_COUNT)
-    app_block.validate_queue_settings()
-    app_block.show_api = False
-    app_block.config = app_block.get_config_file()
-    max_threads = 40
-    app_block.max_threads = max(
-        app_block._queue.max_thread_count if app_block.enable_queue else 0, max_threads
-    )
-    app_block.is_colab = False
-    app_block.is_kaggle = False
-    app_block.is_sagemaker = False
-    
+    for lang,app_block in apps.items():
+        app_block.ssl_verify = False
+        app_block.favicon_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "docs/logo.png")
+        app_block.blocked_paths = ['data',"config.py", "__pycache__", "config_private.py", "docker-compose.yml", "Dockerfile", f"{PATH_LOGGING}/admin"]
+        app_block.dev_mode = False
+        app_block.config = app_block.get_config_file()
+        app_block.enable_queue = False
+        app_block.queue(default_concurrency_limit=CONCURRENT_COUNT)
+        app_block.validate_queue_settings()
+        app_block.show_api = False
+        app_block.config = app_block.get_config_file()
+        max_threads = 40
+        app_block.max_threads = max(
+            app_block._queue.max_thread_count if app_block.enable_queue else 0, max_threads
+        )
+        app_block.is_colab = False
+        app_block.is_kaggle = False
+        app_block.is_sagemaker = False
+
     gradio_path = '/main'
-
-    # --- --- configurate authenticator block --- ---
-    authenticator.ssl_verify = False
-    authenticator.enable_queue  = False
-    authenticator.show_api = False
-    authenticator.config = authenticator.get_config_file()
-
     auth_path = '/auth'
 
     # --- --- configurate gradio app --- ---
@@ -99,14 +103,24 @@ def start_app(app_block:gr.Blocks, authenticator:gr.Blocks,CONCURRENT_COUNT, AUT
     from auth import check_user_token
     def get_user(request: Request):
         if AUTHENTICATION:
-            token = request.cookies.get("user_token") or request.cookies.get("user_token")
+            token = request.cookies.get("user_token")
             if not token:return None
+            token = unquote(token)
             accessible,user = check_user_token(token)
             if accessible: return user
             return None
         else:
             return 'default_user' # 啊好麻烦，直接匿名访问给个默认用户名得了
-        
+
+    # 读取语言设置
+    def get_lang(request:Request) -> str:
+        """
+        获取用户语言。当启用多语言时可用。没启用的时候返回一个空值
+        """
+        if MULTILINGUAL:
+            return request.cookies.get("lang",LANGUAGE_DISPLAY)
+        else:return ''
+
     def validate_path_safety(path_or_url, user):
         sensitive_path = None
         path_or_url = os.path.relpath(path_or_url)
@@ -140,9 +154,9 @@ def start_app(app_block:gr.Blocks, authenticator:gr.Blocks,CONCURRENT_COUNT, AUT
         return allow
 
     @gradio_app.get("/")
-    async def auth_redirect(request: Request,user: dict = Depends(get_user)):
+    async def auth_redirect(user: dict = Depends(get_user),lang :str = Depends(get_lang)):
         if user:
-            return RedirectResponse(url=gradio_path)
+            return RedirectResponse(url=f'{gradio_path}/{lang}')
         else: 
             return  RedirectResponse(url=auth_path)
     
@@ -160,7 +174,10 @@ def start_app(app_block:gr.Blocks, authenticator:gr.Blocks,CONCURRENT_COUNT, AUT
     #@gradio_app.get("/file/{path:path}", dependencies=dependencies)
     #@gradio_app.head("/file={path_or_url:path}", dependencies=dependencies)
     @gradio_app.get("/file={path_or_url:path}", dependencies=dependencies)
-    async def file(path_or_url: str,user = Depends(get_user)):
+    async def file(path_or_url: str,user = Depends(get_user),lang = Depends(get_lang)):
+
+        _ = lambda txt:init_language(txt,lang)
+
         try:
             if validate_path_safety(path_or_url, user):
                 return FileResponse(path_or_url)
@@ -174,7 +191,7 @@ def start_app(app_block:gr.Blocks, authenticator:gr.Blocks,CONCURRENT_COUNT, AUT
     
     # scholar navis的web api和服务
     from .scholar_navis.scholar_navis_web_services import enable_api,enable_services
-    enable_api(gradio_app,get_user);enable_services(gradio_app,get_user)
+    enable_api(gradio_app,get_user,get_lang);enable_services(gradio_app,get_user,get_lang)
 
     # --- --- favicon and block fastapi api reference routes --- ---
 
@@ -189,10 +206,15 @@ def start_app(app_block:gr.Blocks, authenticator:gr.Blocks,CONCURRENT_COUNT, AUT
     ssl_certfile = None if SSL_CERTFILE == "" else SSL_CERTFILE
     server_name = "0.0.0.0"
 
-    gradio_app = gr.mount_gradio_app(gradio_app,app_block, path=gradio_path,auth_dependency=get_user)
+    if len(apps) == 1:
+        gr.mount_gradio_app(gradio_app, apps[LANGUAGE_DISPLAY], path=gradio_path, auth_dependency=get_user)
+    else:
+        for lang,app in apps.items():
+            gr.mount_gradio_app(gradio_app, app, path=f'{gradio_path}/{lang}', auth_dependency=get_user)
+
     if AUTHENTICATION:
-        gradio_app = gr.mount_gradio_app(gradio_app,authenticator, path=auth_path)
-        authenticator.enable_queue = False
-    else:del authenticator
+        from auth import enable_auth
+        enable_auth(gradio_app,auth_path,get_lang)
+
     
     uvicorn.run(gradio_app, host=server_name, port=PORT,log_level="warning",ssl_keyfile=ssl_keyfile,ssl_certfile=ssl_certfile)

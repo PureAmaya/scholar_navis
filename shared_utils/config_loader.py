@@ -1,6 +1,10 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-04-08
+- Remove redundant features: set_conf and set_multi_conf
+
+
 Modified by PureAmaya on 2025-02-21
 - Remove redundant features: warm_up_modules()
 
@@ -108,15 +112,3 @@ def get_conf(*args):
     return res
 
 
-def set_conf(key, value):
-    from toolbox import read_single_conf_with_lru_cache
-    read_single_conf_with_lru_cache.cache_clear()
-    get_conf.cache_clear()
-    os.environ[key] = str(value)
-    altered = get_conf(key)
-    return altered
-
-
-def set_multi_conf(dic):
-    for k, v in dic.items(): set_conf(k, v)
-    return

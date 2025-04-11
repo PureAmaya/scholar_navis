@@ -1,9 +1,7 @@
 # add by scholar_navis(@PureAmaya)
 
-from enum import Enum
-from typing import Literal
-from .const_and_singleton import get_data_dir
 
+from typing import Literal
 import os
 import sqlite3
 
@@ -37,7 +35,7 @@ class SQLiteDatabase:
             raise ValueError('Unacceptable database')
 
         try:
-            db_path = f"{os.path.join(get_data_dir('db'),self.db_type)}.db"
+            db_path = os.path.join('data','db',f"{self.db_type}.db")
             self.conn = sqlite3.connect(db_path)
             self.cur = self.conn.cursor()
 

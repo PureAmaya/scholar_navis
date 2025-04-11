@@ -1,0 +1,417 @@
+/* Author: scholar_navis@PureAmaya */
+
+/* 左上角的设置与文件上传 */
+#floating_panel_switch_btn,
+#dark_mode_toggle {
+    /* 定位系统 */
+    position: fixed;
+    top: 20px;
+    z-index: 10;
+
+    /* 尺寸控制 */
+    width: auto;
+    min-width: 96px;
+    max-width: 160px;
+    height: 48px;
+    padding: 0 16px;
+
+    /* 学术一点的视觉风格 */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    font-family: -apple-system, 'Segoe UI', sans-serif;
+    font-size: 0.95em;
+    font-weight: 500;
+    color: #2d3748;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+
+    /* 文字截断保护 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 左侧按钮定位 */
+#floating_panel_switch_btn {
+    left: 20px;
+}
+
+/* 右侧按钮定位 */
+#dark_mode_toggle {
+    right: 20px;
+}
+
+/* 暗黑模式适配 */
+body.dark #floating_panel_switch_btn,
+body.dark #dark_mode_toggle {
+    background: #1a202c;
+    border-color: #2d3748;
+    color: #e2e8f0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+body.dark #floating_panel_switch_btn:hover,
+body.dark #dark_mode_toggle:hover {
+    background: #2d3748;
+    border-color: #4a5568;
+}
+
+body.dark #floating_panel_switch_btn img,
+body.dark #dark_mode_toggle img {
+    filter: invert(98%) opacity(0.9);
+}
+
+/* 图标样式微调 */
+#floating_panel_switch_btn img,
+#dark_mode_toggle img {
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+    flex-shrink: 0;
+}
+
+/* 响应式宽度控制 */
+@media (min-width: 640px) {
+
+    #floating_panel_switch_btn,
+    #dark_mode_toggle {
+        min-width: 112px;
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* 小屏幕定位微调 */
+    #floating_panel_switch_btn,
+    #dark_mode_toggle {
+        top: 12px;
+        min-width: 80px;
+        max-width: 140px;
+        height: 40px;
+        padding: 0 12px;
+        font-size: 0.9em;
+    }
+
+    /* 小屏幕图标缩小 */
+    #floating_panel_switch_btn img,
+    #dark_mode_toggle img {
+        width: 18px;
+        height: 18px;
+        margin-right: 4px;
+    }
+
+    /* 小屏幕边距优化 */
+    #floating_panel_switch_btn {
+        left: 12px;
+    }
+
+    #dark_mode_toggle {
+        right: 12px;
+    }
+}
+
+/* 交互 */
+@media (hover: hover) {
+
+    #floating_panel_switch_btn:hover,
+    #dark_mode_toggle:hover {
+        background: #f8f9fa;
+        border-color: #cbd5e0;
+    }
+}
+
+#floating_panel_switch_btn:active,
+#dark_mode_toggle:active {
+    background: #f1f5f9;
+    transform: scale(0.98);
+}
+
+
+/* 更安全的版本 - 处理嵌套结构 */
+body footer:not(.footer-content),
+div footer:not(.footer-content),
+section footer:not(.footer-content) {
+    display: none !important;
+    height: 0;
+    visibility: hidden;
+}
+
+/* 保留目标 footer */
+footer.footer-content {
+    display: block !important;
+    /* 确保自身显示 */
+}
+
+.footer-content {
+    width: 100%;
+    /* 确保内容区域撑满容器 */
+    margin-top: auto;
+    /* 关键属性 - 用于粘性页脚 */
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    /* 电脑端横向分布 */
+    align-items: center;
+    flex-wrap: wrap;
+    /* 允许内容换行 */
+}
+
+.footer-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* 新增居中控制 */
+    width: 100%;
+    /* 强制占满宽度 */
+    flex: 0 0 auto;
+    /* 防止flex收缩 */
+    padding: 0.5rem 0;
+    flex-direction: row;
+    /* 保持水平布局 */
+    flex-wrap: wrap;
+    /* 允许内容换行 */
+    justify-content: center;
+    /* 居中显示 */
+}
+
+/* 修改后的移动端适配 */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1.5rem 1rem;
+    }
+
+    .footer-item {}
+
+    .footer-item p {
+        white-space: nowrap;
+        /* 防止段落内换行 */
+        flex-wrap: wrap;
+        /* 允许flex项换行 */
+    }
+
+    .footer-item a {
+        max-width: none;
+        /* 移除宽度限制 */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        /* 过长显示省略号 */
+        display: inline-block;
+        /* 保持内联特性 */
+    }
+
+    .version {
+        display: none;
+    }
+}
+
+/* 文字样式 */
+.footer-item p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #495057;
+    /* 深灰色文字 */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* 链接样式 */
+.footer-item a {
+    color: #2c3e50;
+    /* 深蓝色链接 */
+    text-decoration: none;
+    transition: color 0.2s;
+    /* 防止内容被截断 */
+    overflow: visible;
+    /* 确保flex容器不换行 */
+    flex-wrap: nowrap;
+    /* 最大宽度控制（可选） */
+    max-width: 95vw;
+}
+
+.footer-item a:hover {
+    color: #3498db;
+    /* 适度的悬停色 */
+    text-decoration: underline;
+}
+
+/* 版本号样式 */
+.version {
+    font-size: 0.8rem;
+    color: #6c757d;
+    /* 灰色版本号 */
+    margin-left: 0.5rem;
+}
+
+/* 图标调整 */
+.footer-item svg {
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+}
+
+/* 引用美化 */
+blockquote {
+    margin: 1.5em 0;
+    padding: 1em 1.5em;
+    border-left: 4px solid #dfe2e5;
+    /* GitHub风格浅灰竖线 */
+    background-color: #f6f8fa;
+    /* GitHub代码块同款背景 */
+    color: #6a737d;
+    /* 中灰色文字 */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    border-radius: 3px;
+    /* 轻微圆角 */
+    line-height: 1.6;
+    overflow: auto;
+    /* 防止内容溢出 */
+}
+
+/* 代码块样式 */
+blockquote code {
+    background-color: rgba(27, 31, 35, 0.05);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+/* 标题强化 */
+blockquote> :first-child {
+    font-weight: 600;
+    color: #24292e;
+    margin-bottom: 0.5em;
+}
+
+/* ========== Details 整体样式 ========== */
+details {
+    margin: 1.5em 0;
+    border: 1px solid #dfe2e5;
+    border-radius: 3px;
+    background-color: #f6f8fa;
+    transition: all 0.3s ease;
+}
+
+/* ========== Summary 标题样式 ========== */
+summary {
+    padding: 1em 1.5em;
+    background-color: #f6f8fa;
+    color: #24292e;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 3px;
+    position: relative;
+    list-style: none;
+    /* 移除默认三角 */
+}
+
+/* 自定义三角图标 */
+summary::before {
+    content: "+";
+    color: #6a737d;
+    margin-right: 0.8em;
+    display: inline-block;
+    width: 1em;
+}
+
+/* 悬停效果 */
+summary:hover {
+    background-color: #e1e4e8;
+}
+
+/* ========== Open 状态样式 ========== */
+details[open] {
+    border-color: #0366d6;
+    /* GitHub 蓝色 */
+}
+
+details[open] summary {
+    border-bottom: 1px solid #dfe2e5;
+    background-color: #ffffff;
+}
+
+details[open] summary::before {
+    content: "-";
+    color: #0366d6;
+}
+
+/* ========== 内容区域样式 ========== */
+details> :not(summary) {
+    padding: 1em 1.5em;
+    color: #6a737d;
+    line-height: 1.6;
+    border-radius: 0 0 3px 3px;
+}
+
+/* 内部代码块样式 */
+details code {
+    background-color: rgba(27, 31, 35, 0.05);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+
+/* ===== 黑暗模式适配 ===== */
+body.dark blockquote,
+body.dark details {
+    border-color: #444c56;
+    background-color: #2d333b;
+}
+
+body.dark summary {
+    background-color: #2d333b;
+    color: #adbac7;
+    border-color: #444c56;
+}
+
+body.dark details[open] {
+    border-color: #539bf5;
+}
+
+body.dark details[open] summary {
+    background-color: #373e47;
+    border-bottom-color: #444c56;
+}
+
+body.dark blockquote {
+    color: #768390;
+    border-left-color: #539bf5;
+}
+
+body.dark summary::before {
+    color: #768390;
+}
+
+body.dark details[open] summary::before {
+    color: #539bf5;
+}
+
+body.dark details code {
+    background-color: rgba(99, 110, 123, 0.4);
+    color: #cdd9e5;
+}
+
+/* ===== 通用过渡效果 ===== */
+blockquote,
+details,
+summary {
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        color 0.3s ease;
+}
+
+/* ========== 过渡动画 ========== */
+details> :not(summary) {
+    animation: fadeIn 0.3s ease;
+}
+

@@ -3,7 +3,7 @@
 
 <h1 align="center">Scholar Navis</h1>
 
-  <p align="center">
+<p align="center">
     A pipeline-based domain progress analysis tool built on gpt_academic
     <br />
     allows users to extract useful information from a large number of articles <br>
@@ -42,7 +42,11 @@ This software is developed based on gpt_academic (3.83) and is considered a deri
 
 - The goal is to reduce the use and spread of ChatGPT clones by shell companies.
 
+- Break language barriers and deepen academic exchanges.
+
 - To minimize the phenomenon of AI making things up out of thin air, the choice is made to use uploaded literature as the primary basis for AI analysis.
+
+- Help researchers read more literature, extract valuable insights, broaden scientific perspectives, and enhance research efficiency—all in less time.
 
 - With this tool, one can start from determining the research direction, proceed with a streamlined process of downloading articles, formulating research topics, analyzing the current state and gaps in the field, uncovering areas that have not been studied by predecessors, and making detailed summaries of interesting articles. It also allows for asking questions about unclear points and providing answers for them.
 
@@ -50,7 +54,9 @@ This software is developed based on gpt_academic (3.83) and is considered a deri
 
 - Open source.
 
-- User-friendly. Each possible use scenario has its corresponding help document.
+- Localization support enables seamless language switching, while users retain full control over the preferred LLM response language.
+
+- UserLogin-friendly. Each possible use scenario has its corresponding help document.
 
 - Supports both Chinese and English languages. (GPT supports multiple languages, **but the ability to understand different languages may vary among different GPTs** ) . 
 
@@ -130,13 +136,13 @@ This software is developed based on gpt_academic (3.83) and is considered a deri
 
 3. You can also use our online service. [Simplified Chinese Version (Optimized for Mainland China)](https://cn.scholarnavis.com/)、[English Version](https://scholarnavis.com/). Both versions are identical in terms of functionality, with the only differences being the display language and the location of the servers and the routes. 
 
-### User Guide
+### UserLogin Guide
 
 #### Conversation Section
 
 1. Run `main.py` to enable gpt_academic, and on the right side of the opened web page, you should see five blocks of Scholar Navis. Clicking on them will display usage tips.
    
-   <img title="" src="docs/img/scholar_navis_functions - en-US.png" alt="" data-align="inline" width="401"> <img title="" src="docs/img/function_ui - en-US.png" alt="" width="159">
+   <img title="" src="docs/img/scholar_navis_functions - en-US.png" alt="" data-align="inline" width="" height="200"> <img title="" src="docs/img/function_ui - en-US.png" alt="" width="" height="200">
 
 2. There are 6 plugins ([`PubMed Open Access Articles Download`](crazy_functions/scholar_navis/doc/en-US/PubMed-Open-Access-Articles-Download.md), [`Cache PDF Articles`](crazy_functions/scholar_navis/doc/en-US/Cache-PDF-Articles.md), [`Summarize Articles by Keywords`](crazy_functions/scholar_navis/doc/en-US/Summarize-Articles-by-Keywords.md), [`Communicate with AI about Research Progress`](crazy_functions/scholar_navis/doc/en-US/Communicate-with-AI-about-Research-Progress.md), [ `Fine-grained Analysis of Article`](crazy_functions/scholar_navis/doc/en-US/Fine-grained-Analysis-of-Article.md) and `Extract useful Sentences`) each of which comes with a simple operation guide and function description. To switch to the tool, go to `Auxiliary Commands` -> `help: help document` to view it.
 
@@ -162,26 +168,26 @@ This software is developed based on gpt_academic (3.83) and is considered a deri
 
 ```mermaid
 flowchart TD
-A[\Define \n research direction ./] --> B(Download articles)
-B -->|Through PubMed| C[PubMed Open Access  .\n Articles Download]
+A[\Define research direction/] --> B(Download articles)
+B -->|Through PubMed| C[PubMed Open Access Articles Download]
 B -->|Not via PubMed| D(Download articles manually)
 C --> |OA articles sufficient| preE(Complete article collection)
 preE --> E[Cache PDF Articles]
 C --> |Supplement non-OA/non-PubMed articles| D
 
 D --> preE
-E --> |Through keyword constraint analysis| F[Summarize Articles .\n by keywords]
-F --> G[Communicate with AI \n about Research Progress .]
+E --> |Through keyword constraint analysis| F[Summarize Articles by keywords]
+F --> G[Communicate with AI about Research Progress]
 G --> G1(Draw mind map) & G2(Find source articles) & G3(Propose research topics) & G4(Communication)
-G1 & G2 & G3 --> H(Engage in dialogue \n for in-depth discussion)
-H --> |Identify key articles| J[Fine-grained Analysis of Article .]
+G1 & G2 & G3 --> H(Engage in dialogue for in-depth discussion)
+H --> |Identify key articles| J[Fine-grained Analysis of Article]
 
-preE --> extract1[Extract Useful Sentences  .]
+preE --> extract1[Extract Useful Sentences]
 extract1 --> |Set content requirements & classification| extract2(Relevant sentences with criteria)
 extract2 --> extract_title(Interesting articles) & extract_sentences(Original sentences) & extract_trans(Translation results)
 extract_title & extract_sentences & extract_trans --> extract3(Read and screen)
 
-H & J & G4 & extract3 --> I[/Understand \n research progress and gaps .\]
+H & J & G4 & extract3 --> I[/Power literature research synthesis and discovery\]
 
 class C,E,F,G,J,extract1 function;
 class A,I start_and_termination;
@@ -192,7 +198,7 @@ classDef start_and_termination fill:#ffffff, stroke:#64748b, stroke-width:3px, f
 
 ### Developer Documentation
 
-        To be continued...
+To be continued...
 
 ### Copyright Information
 

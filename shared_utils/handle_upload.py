@@ -1,6 +1,9 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-04-11
+- Output in English only.
+
 Modified by PureAmaya on 2025-03-19
 - Remove unused imports.
 - Add internationalization support.
@@ -13,7 +16,6 @@ import os
 import zipfile
 import tarfile
 import shutil
-from shared_utils.scholar_navis.multi_lang import _
 
 def html_local_file(file):
     base_path = os.path.dirname(__file__)  # 项目目录
@@ -106,7 +108,7 @@ def extract_archive(file_path, dest_dir):
                 print("Successfully extracted zip archive to {}".format(dest_dir))
         except:
             print("Failed to extract zip archive to {}".format(dest_dir))
-            return '\n\n{}'.format(_("解压失败! 请检查压缩文件是否损坏。"))
+            return '\n\n{}'.format('Decompression failed! Please check if the compressed file is corrupted.')
         
     elif file_extension in [".tar", ".gz", ".bz2"]:
         with tarfile.open(file_path, "r:*") as tarobj:
@@ -132,7 +134,7 @@ def extract_archive(file_path, dest_dir):
                 print("Successfully extracted rar archive to {}".format(dest_dir))
         except:
             print("Rar format requires additional dependencies to install")
-            return '\n\n{}'.format(_("解压失败! 需要安装pip install rarfile来解压rar文件。建议：使用zip压缩格式。"))
+            return '\n\n{}'.format('Extraction failed! You need to install pip install rarfile to extract RAR files. Suggestion: Use the ZIP compression format.')
 
     # 第三方库，需要预先pip install py7zr
     elif file_extension == ".7z":

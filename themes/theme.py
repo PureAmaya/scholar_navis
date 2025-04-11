@@ -1,6 +1,10 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-04-11
+- The JS events for the reset and stop buttons have been removed from the py file.
+- Remove useless js_code_for_persistent_cookie_init.
+
 Modified by PureAmaya on 2024-12-28
 - Add i18n support
 - Due to the removal of certain features/replacement by gradio components, the corresponding code has been removed.
@@ -38,35 +42,4 @@ def from_cookie_str(c):
     serialized_dict = base64.b64decode(c.encode("utf-8"))
     serialized_dict.decode("utf-8")
     return json.loads(serialized_dict)
-
-
-"""
--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-第 3 部分
-内嵌的javascript代码（这部分代码会逐渐移动到common.js中）
--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-"""
-
-
-js_code_for_persistent_cookie_init = """(web_cookie_cache, cookie) => {
-    return [getCookie("web_cookie_cache"), cookie];
-}
-"""
-
-# 详见 themes/common.js
-js_code_reset = """
-(a,b,c)=>{
-    let stopButton = document.getElementById("elem_stop");
-    stopButton.click();
-    return reset_conversation(a,b);
-}
-"""
-
-
-js_code_clear = """
-(a,b)=>{
-    return ["", ""];
-}
-"""
-
 

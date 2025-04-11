@@ -16,13 +16,11 @@ import json
 import time
 import logging
 import requests
-import base64
 import os
-import glob
 from toolbox import update_ui, is_any_api_key, select_api_key, what_keys, clip_history, trimmed_format_exc, is_the_upload_folder, \
     update_ui_lastest_msg, get_max_token, encode_image, have_any_recent_upload_image_files
 from shared_utils.config_loader import get_conf
-from shared_utils.scholar_navis.multi_lang import _
+from multi_language import _
 
 proxies, TIMEOUT_SECONDS, MAX_RETRY, API_ORG, AZURE_CFG_ARRAY = \
     get_conf('proxies', 'TIMEOUT_SECONDS', 'MAX_RETRY', 'API_ORG', 'AZURE_CFG_ARRAY')

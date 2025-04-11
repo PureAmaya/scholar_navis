@@ -13,13 +13,13 @@ Modified by PureAmaya on 2024-12-28
 import json
 import os
 import time
-import logging
 
 from toolbox import update_ui, log_chat
 from toolbox import ChatBotWithCookies
-from shared_utils.scholar_navis.multi_lang import _
+from multi_language import init_language
 import requests
 
+_ = init_language
 
 class MoonShotInit:
 
@@ -158,6 +158,10 @@ def msg_handle_error(llm_kwargs, chunk_decoded):
 def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot:ChatBotWithCookies,
             history:list=[], system_prompt:str='', stream:bool=True, additional_fn:str=None):
     chatbot.append([inputs, ""])
+
+    lang = chatbot.get_language()
+    _ = lambda text: init_language(text, lang)
+
     if not inputs:inputs = ' ' # 空白输入报错
     if additional_fn is not None:
         from core_functional import handle_core_functionality

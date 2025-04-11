@@ -6,7 +6,9 @@ from hashlib import sha256
 from base64 import urlsafe_b64encode
 from cryptography.fernet import Fernet
 from shared_utils.config_loader import get_conf
-from shared_utils.scholar_navis.multi_lang import _
+from multi_language import init_language
+
+_ = init_language
 
 # 从配置获取原始字符串（如 "my_secret"）
 secret_str = get_conf('SECRET').strip()

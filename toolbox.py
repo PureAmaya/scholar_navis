@@ -1,9 +1,12 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-04-11
+- Compatible with the new multilingual feature.
+- Optimize the ChatBotWithCookie development experience.
+
 Modified by PureAmaya on 2025-03-27
 - remove functions: get_reduce_token_percent
-
 
 Modified by PureAmaya on 2025-03-18
 - Fix the issue of content not displaying properly due to incorrect parameter settings for ChatMessage in update_ui_lastest_msg.
@@ -26,7 +29,7 @@ import inspect
 import re
 import os
 import base64
-import gradio_compatibility_layer as gradio
+from dependencies.i18n import gradio_i18n as gradio
 import shutil
 import glob
 import logging
@@ -34,8 +37,6 @@ import uuid
 from functools import wraps
 from textwrap import dedent
 from shared_utils.config_loader import get_conf
-from shared_utils.config_loader import set_conf
-from shared_utils.config_loader import set_multi_conf
 from shared_utils.config_loader import read_single_conf_with_lru_cache
 from shared_utils.key_pattern_manager import select_api_key
 from shared_utils.key_pattern_manager import is_any_api_key
@@ -54,7 +55,7 @@ from shared_utils.handle_upload import file_manifest_filter_type
 from shared_utils.handle_upload import extract_archive
 from shared_utils.scholar_navis.user_custom_manager import get_api_key,get_url_redirect
 from typing import List, Literal
-from shared_utils.scholar_navis.multi_lang import _
+from multi_language import init_language, LANGUAGE_DISPLAY
 
 pj = os.path.join
 default_user_name = "default_user"
@@ -99,21 +100,31 @@ class ChatBotWithCookies(list):
 
     def get_user(self):
         return self._cookies.get("user_name", default_user_name)
+
+    def get_language(self):
+        return self._cookies.get("lang", LANGUAGE_DISPLAY)
     
-    def append(self, object):
-        if isinstance(object, (gradio.ChatMessage,dict)):# 已经准备好的信息
-            super().append(object)
-        
-        elif isinstance(object, (list,set,tuple)) and len(object) == 2:
+    def append(self, msg):
+        if isinstance(msg, gradio.ChatMessage):# 已经准备好的信息，不允许了现在，为多语言让步
+            super().append(self._convert_to_gr_msg(msg.role, msg.content))
+
+        elif isinstance(msg,dict):
+            super().append(self._convert_to_gr_msg(msg['role'], msg['content']))
+
+        elif isinstance(msg, (list, set, tuple)) and len(msg) == 2:
             # 兼容最新版的messages的chatbot
-            super().append(self._convert_to_gr_msg('user',object[0]))
-            super().append(self._convert_to_gr_msg('assistant',object[1]))
+            super().append(self._convert_to_gr_msg('user', msg[0]))
+            super().append(self._convert_to_gr_msg('assistant', msg[1]))
         
         else:raise ValueError("Invalid value type")
         
     def __setitem__(self, index:int, value): 
-        if isinstance(value, (gradio.ChatMessage,dict)):# 正常的ChatMessage
-            super().__setitem__(index, value)
+        if isinstance(value, gradio.ChatMessage):# 正常的ChatMessage
+            super().__setitem__(index, self._convert_to_gr_msg(value.role,value.content))
+
+        elif isinstance(value, dict):# 正常的ChatMessage
+            super().__setitem__(index, self._convert_to_gr_msg(value['role'], value['content']))
+
         elif isinstance(value, (list,set,tuple)) and len(value) == 2:
             # 兼容旧版的[(,)]
             if index < 0:index = index * 2
@@ -139,16 +150,22 @@ class ChatBotWithCookies(list):
         elif index >= 0:index = index  * 2
         return [super().__getitem__(index),super().__getitem__(index + 1)]
     
-    def _convert_to_gr_msg(self,role:Literal['user','assistant'],obj):
-        if not obj:obj = ''
-        if isinstance(obj, gradio.ChatMessage):return gradio.ChatMessage(role=role,content=obj.content) 
-        elif isinstance(obj,(gradio.Markdown,gradio.HTML)):return gradio.ChatMessage(role=role,content=obj) 
-        elif isinstance(obj,dict):
-            if 'role' in obj and 'content' in obj:
-                return gradio.ChatMessage(role=role,content=obj['content'])
-            else:return gradio.ChatMessage(role=role,content=str(obj))
-        elif isinstance(obj,str):return gradio.ChatMessage(role=role,content=obj)
+    def _convert_to_gr_msg(self, role:Literal['user','assistant'], content):
+        if not content:content = ''
+
+        #lang = self._cookies.get('language', LANGUAGE_DISPLAY)
+
+        if isinstance(content, gradio.ChatMessage):msg=content.content
+        elif isinstance(content, (gradio.Markdown, gradio.HTML)):msg=content
+        elif isinstance(content, dict):
+            if 'role' in content and 'content' in content:
+                msg=content['content']
+            else:msg=str(content)
+        elif isinstance(content, str):
+            msg=content
         else:raise ValueError("Invalid value type")
+
+        return gradio.ChatMessage(role=role, content=msg)
         
 INIT_SYS_PROMPT = get_conf('INIT_SYS_PROMPT')
 def ArgsGeneralWrapper(f):
@@ -159,13 +176,16 @@ def ArgsGeneralWrapper(f):
     """
     def decorated(request: gradio.Request, cookies:dict, max_length:int, llm_model:str,
                   txt:str,top_p:float, temperature:float, chatbot:list,
-                  history:list, system_prompt:str, plugin_advanced_arg:dict,user_custom_data: dict, *args):  
+                  history:list, system_prompt:str, plugin_advanced_arg:dict,user_custom_data: dict, *args):
+
+        lang = request.cookies.get('lang')
+        _ = lambda text: init_language(text, lang)
 
         # 获取openai用的api
-        api_key = get_api_key(user_custom_data,"API_KEY",True)
+        api_key = get_api_key(user_custom_data,"API_KEY")
         url_redirect = get_url_redirect('API_URL_REDIRECT',user_custom_data)
         # 方便获取其他供应商的api_key
-        def get_other_provider_api_key(provider_api_type:str):return get_api_key(user_custom_data,provider_api_type,True)
+        def get_other_provider_api_key(provider_api_type:str):return get_api_key(user_custom_data,provider_api_type)
         
         if llm_model.startswith('custom-'):
             # 自定义模型使用openai兼容方案，覆盖一些openai的设定
@@ -190,6 +210,7 @@ def ArgsGeneralWrapper(f):
             'llm_model': llm_model,
             'temperature': temperature,
             'user_name': user_name,
+            'lang':lang,
         })
         llm_kwargs = {
             'api_key': cookies['api_key'], 
@@ -231,7 +252,7 @@ def ArgsGeneralWrapper(f):
     return decorated
 
 
-def update_ui(chatbot:ChatBotWithCookies, history, msg=_("正常"), **kwargs):  # 刷新界面
+def update_ui(chatbot:ChatBotWithCookies, history, msg='OK', **kwargs):  # 刷新界面
     
     """
     刷新用户界面
@@ -312,13 +333,13 @@ def CatchException(f):
             tb_str = '```\n' + trimmed_format_exc() + '```'
             if len(chatbot_with_cookie) == 0:
                 chatbot_with_cookie.clear()
-            chatbot_with_cookie.append([_("插件调度异常:\n") + tb_str, e.generate_error_html()])
+            chatbot_with_cookie.append(["Plugin scheduling exception:\n" + tb_str, e.generate_error_html()])
             yield from update_ui(chatbot=chatbot_with_cookie, history=history, msg=f'异常')  # 刷新界面
         except Exception as e:
             tb_str = '```\n' + trimmed_format_exc() + '```'
             if len(chatbot_with_cookie) == 0:
                 chatbot_with_cookie.clear()
-            chatbot_with_cookie.append([_("插件调度异常"), f"[Local Message] {_('插件调用出错: ')}\n\n{tb_str} \n"])
+            chatbot_with_cookie.append(["Plugin scheduling exception", f"[Local Message] 'Plugin scheduling exception: '\n\n{tb_str} \n"])
             yield from update_ui(chatbot=chatbot_with_cookie, history=history, msg=f'异常 {e}')  # 刷新界面
 
     return decorated
@@ -373,7 +394,6 @@ def write_history_to_file(
     将对话记录history以Markdown格式写入文件中。如果没有指定文件名，则使用当前时间生成文件名。
     """
     import os
-    import time
 
     if file_fullname is None:
         if file_basename is not None:
@@ -551,6 +571,9 @@ def on_file_uploaded(
             return chatbot, txt
         else:return txt
 
+    lang = request.cookies.get('lang')
+    _ = lambda text: init_language(text, lang)
+
     # 创建工作路径
     user_name = default_user_name if not request.username else request.username
     time_tag = gen_time_str()
@@ -648,7 +671,7 @@ def load_chat_cookies():
     if len(AZURE_CFG_ARRAY) > 0:
         for azure_model_name, azure_cfg_dict in AZURE_CFG_ARRAY.items():
             if not azure_model_name.startswith("azure"):
-                raise ValueError(_("AZURE_CFG_ARRAY中配置的模型必须以azure开头"))
+                raise ValueError('The models configured in AZURE_CFG_ARRAY must start with "azure".')
             AZURE_API_KEY_ = azure_cfg_dict["AZURE_API_KEY"]
             if is_any_api_key(AZURE_API_KEY_):
                 if is_any_api_key(API_KEY):
@@ -855,6 +878,8 @@ def is_the_upload_folder(string):
 def get_user(chatbotwithcookies:ChatBotWithCookies):
     return chatbotwithcookies._cookies.get("user_name", default_user_name)
 
+def get_language(chatbotwithcookies:ChatBotWithCookies):
+    return chatbotwithcookies._cookies.get("language")
 
 class ProxyNetworkActivate:
     """

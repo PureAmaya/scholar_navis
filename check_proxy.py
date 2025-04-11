@@ -8,7 +8,9 @@ Modified by PureAmaya on 2024-12-28
 - Add i18n support
 '''
 
-from shared_utils.scholar_navis.multi_lang import _
+from multi_language import init_language
+
+_ =init_language
 
 
 def check_proxy(proxies, return_ip=False):

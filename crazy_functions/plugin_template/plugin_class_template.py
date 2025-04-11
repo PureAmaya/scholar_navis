@@ -22,7 +22,7 @@ class GptAcademicPluginTemplate():
         pass
 
 
-    def define_arg_selection_menu(self):
+    def define_arg_selection_menu(self,lang):
         """
         An example as below:
             ```
@@ -41,8 +41,8 @@ class GptAcademicPluginTemplate():
         raise NotImplementedError("You need to implement this method in your plugin class")
 
 
-    def get_js_code_for_generating_menu(self, btnName):
-        define_arg_selection = self.define_arg_selection_menu()
+    def get_js_code_for_generating_menu(self, lang):
+        define_arg_selection = self.define_arg_selection_menu(lang)
 
         if len(define_arg_selection.keys()) > 8:
             raise ValueError("You can only have up to 8 arguments in the define_arg_selection")

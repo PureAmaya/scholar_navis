@@ -37,6 +37,7 @@ Scholar Navis uses the AGPL-3.0 license.
 | SourceHanSansSC-VF.otf.woff2 | SIL OPEN FONT LICENSE | Version 1.1                                                                                       |
 | tiktoken                     | MIT License           |                                                                                                   |
 | uvicorn                      | BSD-3-Clause          |                                                                                                   |
+| Vue.js                       | MIT license           |                                   |
 | websockets                   | BSD-3-Clause          |                                                                                                   |
 | zhipuai                      | unknown               | https://pypi.org/project/zhipuai/                                                                 |
 
@@ -92,9 +93,9 @@ Scholar Navis uses the AGPL-3.0 license.
 
 - Multi-threaded download of PubMed OA articles.
 
-- User login, registration, information saving and recording (sensitive information is encrypted as much as possible). Supports anonymous use (sensitive information is also encrypted locally) ** (however, the server can obtain this sensitive content through certain methods).**
+- UserLogin login, registration, information saving and recording (sensitive information is encrypted as much as possible). Supports anonymous use (sensitive information is also encrypted locally) ** (however, the server can obtain this sensitive content through certain methods).**
 
-- User-facing API customization and model customization features.
+- UserLogin-facing API customization and model customization features.
 
 - Scheduled cleanup of uploaded and generated files.
 
@@ -108,4 +109,8 @@ Scholar Navis uses the AGPL-3.0 license.
 
 - Supports inference models, supports updated models.
 
-- Simplified Chinese users will automatically use domestic JS static resources.
+- Accelerate performance with localized JS
+
+- Support user-selected display languages and LLM output languages。
+
+- Enhanced user login/registration system with improved UI.

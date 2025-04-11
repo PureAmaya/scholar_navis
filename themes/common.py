@@ -64,11 +64,11 @@ def minimize_js(common_js_path):
 def get_common_html_javascript_code():
     js = "\n"
     common_js_path_list = [
-        "themes/common.js",
-        "themes/scholar_navis/notify.js",
-        "themes/scholar_navis/custom_api_key.js",
-        "themes/scholar_navis/scholar_navis_init.js",
-        "themes/init.js",
+        "themes/js/common.js",
+        "themes/js/notify.js",
+        "themes/js/custom_api_key.js",
+        "themes/js/scholar_navis_init.js",
+        "themes/js/init.js",
     ]
     # 解释：除init.js外，其余的js要么是第三方的独立库，要么就是封装的方法
 

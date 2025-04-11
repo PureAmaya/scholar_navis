@@ -19,9 +19,11 @@ import logging
 import traceback
 import requests
 from shared_utils.config_loader import get_conf
-from shared_utils.scholar_navis.multi_lang import _
-from gradio_compatibility_layer import HTML
+from multi_language import init_language
+from dependencies.i18n.gradio_i18n import HTML
 from shared_utils.advanced_markdown_format import md2html
+
+_ = init_language
 
 # config_private.py放自己的秘密如API和代理网址
 # 读取时首先看是否存在私密的config_private配置文件（不受git管控），如果有，则覆盖原config文件
@@ -289,7 +291,10 @@ def get_predict_function(
         chatbot 为WebUI中显示的对话列表，修改它，然后yeild出去，可以直接修改对话界面内容
         additional_fn代表点击的哪个按钮，按钮见functional.py
         """
+        lang = chatbot.get_language()
+        _ = lambda text: init_language(text, lang)
         APIKEY = llm_kwargs['custom_api_key'](api_key_conf_name)
+
         if len(APIKEY) == 0:
             raise RuntimeError(_("APIKEY为空,请检查配置文件的{}。或者可以自定义 {} API-KEY").format(api_key_conf_name,friendly_name))
         if inputs == "":

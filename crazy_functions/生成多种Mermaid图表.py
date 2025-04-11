@@ -20,15 +20,15 @@ Modified by PureAmaya on 2024-12-28
 
 import os
 import re
-from toolbox import CatchException, update_ui, report_exception, update_ui_lastest_msg
+from toolbox import CatchException, update_ui, report_exception
 from .crazy_utils import request_gpt_model_in_new_thread_with_ui_alive
 from crazy_functions.plugin_template.plugin_class_template import (
     GptAcademicPluginTemplate,
 )
 from crazy_functions.plugin_template.plugin_class_template import ArgProperty
 from gradio import HTML
-from shared_utils.scholar_navis.other_tools import base64_encode,generate_base64_html_webpage
-from shared_utils.scholar_navis.multi_lang import _
+from shared_utils.scholar_navis.other_tools import base64_encode, generate_base64_html_webpage
+from multi_language import init_language
 from shared_utils.advanced_markdown_format import md2html
 
 # 以下是每类图表的PROMPT
@@ -216,10 +216,12 @@ mindmap
 
 
 def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwargs):
-    
     GPT_prefer_language = plugin_kwargs['gpt_prefer_lang']
     index = plugin_kwargs['index']
-    
+
+    lang = chatbot.get_language()
+    _ = lambda text: init_language(text, lang)
+
     ############################## <第 0 步，切割输入> ##################################
     # 借用PDF切割中的函数对文本进行切割
     TOKEN_LIMIT_PER_FRAGMENT = 2500
@@ -243,7 +245,7 @@ def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwarg
     for i in range(n_txt):
         NUM_OF_WORD = MAX_WORD_TOTAL // n_txt
         i_say = f"Read this section, recapitulate the content of this section with less than {NUM_OF_WORD} words in English: {txt[i]}"
-        i_say_show_user = f"[{i+1}/{n_txt}] Read this section, recapitulate the content of this section with less than {NUM_OF_WORD} words: {txt[i][:200]} ...."
+        i_say_show_user = f"[{i + 1}/{n_txt}] Read this section, recapitulate the content of this section with less than {NUM_OF_WORD} words: {txt[i][:200]} ...."
         gpt_say = yield from request_gpt_model_in_new_thread_with_ui_alive(
             i_say,
             i_say_show_user,  # i_say=真正给chatgpt的提问， i_say_show_user=给用户看的提问
@@ -253,7 +255,8 @@ def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwarg
                 "The main content of the previous section is?",
                 last_iteration_result,
             ],  # 迭代上一次的结果
-            sys_prompt= f"Extracts the main content from the text section where it is located for graphing purposes, answer me with {GPT_prefer_language}.",  # 提示
+            sys_prompt=f"Extracts the main content from the text section where it is located for graphing purposes, answer me with {GPT_prefer_language}.",
+            # 提示
         )
         results.append(gpt_say)
         last_iteration_result = gpt_say
@@ -279,7 +282,8 @@ def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwarg
         chatbot.append([i_say_show_user, gpt_say])
         yield from update_ui(chatbot=chatbot, history=[])  # 更新UI
         i_say = {SELECT_PROMPT.format(subject=results_txt)}
-        i_say_show_user = _('请判断适合使用的流程图类型,其中数字对应关系为:1-流程图,2-序列图,3-类图,4-饼图,5-甘特图,6-状态图,7-实体关系图,8-象限提示图。由于不管提供文本是什么,模型大概率认为"思维导图"最合适,因此思维导图仅能通过参数调用.')
+        i_say_show_user = _(
+            '请判断适合使用的流程图类型,其中数字对应关系为:1-流程图,2-序列图,3-类图,4-饼图,5-甘特图,6-状态图,7-实体关系图,8-象限提示图。由于不管提供文本是什么,模型大概率认为"思维导图"最合适,因此思维导图仅能通过参数调用.')
         for i in range(3):
             gpt_say = yield from request_gpt_model_in_new_thread_with_ui_alive(
                 inputs=i_say,
@@ -322,9 +326,10 @@ def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwarg
         i_say = PROMPT_8.format(subject=results_txt)
     elif gpt_say == "9":
         i_say = PROMPT_9.format(subject=results_txt)
-    i_say_show_user = _("请根据判断结果绘制相应的图表。如需绘制思维导图请使用参数调用,同时过大的图表可能需要复制到在线编辑器中进行渲染.")
+    i_say_show_user = _(
+        "请根据判断结果绘制相应的图表。如需绘制思维导图请使用参数调用,同时过大的图表可能需要复制到在线编辑器中进行渲染.")
     gpt_say = yield from request_gpt_model_in_new_thread_with_ui_alive(
-        inputs= f'{i_say}\n And answer me with Markdown and {GPT_prefer_language}.',
+        inputs=f'{i_say}\n And answer me with Markdown and {GPT_prefer_language}.',
         inputs_show_user=i_say_show_user,
         llm_kwargs=llm_kwargs,
         chatbot=chatbot,
@@ -339,10 +344,10 @@ def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwarg
 
     # 小图与大图跳转
     mermaid = '<pre class="mermaid">{}</pre>'.format(match)
-    html_b64 =base64_encode(mermaid)
-    chatbot.append([{'role':'user','content':_('请点击查看绘制结果')},
-                    {'role':'assistant','content':generate_base64_html_webpage(html_b64,_("点击查看大图"))}])
-    
+    html_b64 = base64_encode(mermaid)
+    chatbot.append([{'role': 'user', 'content': _('请点击查看绘制结果')},
+                    {'role': 'assistant', 'content': generate_base64_html_webpage(html_b64, _("点击查看大图"))}])
+
     # 提示
     substitute_html = HTML(
         '''
@@ -351,10 +356,11 @@ def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwarg
         <summary>{}</summary>
         {}
         </details>
-            '''.format(_("上方为生成的图形"),_("如果生成失败，可以点击这里查看AI返回的内容并自行修复"),md2html(gpt_say))
-        )
-    chatbot.append([{'role':'user','content':substitute_html},
-                    {'role':'assistant','content':_("此外，您还可以对于绘制的图形进行问答。")}])
+            '''.format(_("上方为生成的图形"), _("如果生成失败，可以点击这里查看AI返回的内容并自行修复"),
+                       md2html(gpt_say))
+    )
+    chatbot.append([{'role': 'user', 'content': substitute_html},
+                    {'role': 'assistant', 'content': _("此外，您还可以对于绘制的图形进行问答。")}])
     history.append(gpt_say)
     history.extend(results)
     yield from update_ui(chatbot=chatbot, history=history)
@@ -362,7 +368,7 @@ def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwarg
 
 @CatchException
 def 生成多种Mermaid图表(
-    txt, llm_kwargs, plugin_kwargs, chatbot, history, system_prompt, web_port
+        txt, llm_kwargs, plugin_kwargs, chatbot, history, lang
 ):
     """
     txt             输入栏用户输入的文本，例如需要翻译的一段话，再例如一个包含了待处理文件的路径
@@ -373,6 +379,8 @@ def 生成多种Mermaid图表(
     system_prompt   给gpt的静默提醒
     web_port        当前软件运行的端口号
     """
+
+    _ = lambda text: init_language(text, lang)
 
     # 基本信息：功能、贡献者
     chatbot.append(
@@ -435,21 +443,20 @@ def 生成多种Mermaid图表(
         else:
             file_num = len(file_manifest)
             for i in range(file_num):  # 依次处理文件
-                i_say_show_user = f"[{i+1}/{file_num}] {_('处理文件: ')} {file_manifest[i]}"
+                i_say_show_user = f"[{i + 1}/{file_num}] {_('处理文件: ')} {file_manifest[i]}"
                 gpt_say = _("[Local Message] 收到。")  # 用户提示
                 chatbot.append([i_say_show_user, gpt_say])
                 yield from update_ui(chatbot=chatbot, history=history)  # 更新UI
                 history = []  # 如输入区内容为文件则清空历史记录
                 history.append(final_result[i])
                 yield from 解析历史输入(
-                    history, llm_kwargs, file_manifest, chatbot, plugin_kwargs
+                    history, llm_kwargs, file_manifest, chatbot, plugin_kwargs, lang
                 )
+
 
 # 暂时无用，无需国际化
 #  Temporarily useless, no need for internationalization
 class Mermaid_Gen(GptAcademicPluginTemplate):
-    def __init__(self):
-        pass
 
     def define_arg_selection_menu(self):
         gui_definition = {
@@ -475,7 +482,7 @@ class Mermaid_Gen(GptAcademicPluginTemplate):
         return gui_definition
 
     def execute(
-        txt, llm_kwargs, plugin_kwargs, chatbot, history, system_prompt, user_request
+            txt, llm_kwargs, plugin_kwargs, chatbot, history, system_prompt, user_request
     ):
         options = [
             "由LLM决定",

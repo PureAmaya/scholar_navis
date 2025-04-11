@@ -41,13 +41,19 @@
 
 - 希望減少一些皮包公司的套殼 ChatGPT 的使用和濫用。
 
+- 打破語言壁壘，深化學術交流。
+
 - 為了盡可能減少 AI 空穴來風捏造現象，選擇將上傳的文獻作為 AI 分析的最主要依據。
+
+- 協助研究者在更短時間內閱讀更多文獻，獲取有價值的資訊，拓展科學視野，並提升科研效率。
 
 - 使用此工具，可以從確定研究方向開始，流水線式地下載文章，規劃題目，分析當前領域的研究現狀和缺口，發掘前人尚未研究的方向，對感興趣的文章進行精細摘要，對不清楚的地方進行提問並為之解答。
 
 ### 工具特色
 
 - 開源。
+
+- 本地化支援實現無縫語言切換，同時用戶可自由設定大語言模型的回應語言。
 
 - 使用簡單。每個可能的使用場景均有其對應的說明文件。
 
@@ -134,7 +140,7 @@
 
 #### 對話部分
 
-1. 運行 `main.py` 启用 gpt_academic，在打開的網頁的右側，應當能看到 Scholar Navis 的5個方塊，點擊後可以看到使用提示。<img title="" src="docs/img/scholar_navis_functions -  zh-Hant.png" alt="" data-align="inline" width="448"> <img title="" src="docs/img/function_ui -  zh-Hant.png" alt="" width="130">
+1. 運行 `main.py` 启用 gpt_academic，在打開的網頁的右側，應當能看到 Scholar Navis 的5個方塊，點擊後可以看到使用提示。<img height="200" src="docs/img/scholar_navis_functions -  zh-Hant.png"/> <img height="200" src="docs/img/function_ui -  zh-Hant.png"/>
 
 2. 6個插件（[`PubMed OpenAccess文章獲取`](crazy_functions/scholar_navis/doc/zh-Hant/PubMed-Open-Access-Articles-Download.md)、[`緩存pdf文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Cache-PDF-Articles.md)、[`按關鍵詞分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Summarize-Articles-by-Keywords.md)、[`與AI交流研究進展`](crazy_functions/scholar_navis/doc/zh-Hant/Communicate-with-AI-about-Research-Progress.md)、[`精細分析文獻`](crazy_functions/scholar_navis/doc/zh-Hant/Fine-grained-Analysis-of-Article.md)和`摘取有用語句`）其均內置了簡潔的操作指南和功能作用，切換到該工具，`輔助指令` -> `help: 帮助文檔`即可查看。
 
@@ -179,7 +185,7 @@ extract1 --> |設定好內容要求與分類| extract2(有用的語句)
 extract2 --> extract_title(感興趣的文章) & extract_sentences(感興趣的原句) & extract_trans(翻譯的結果)
 extract_title & extract_sentences & extract_trans --> extract3(閱讀與篩選)
 
-H & J & G4 & extract3--> I[/了解研究進展和缺口\]
+H & J & G4 & extract3--> I[/文獻研究綜合與知識發現\]
 
 class C,E,F,G,J,extract1 function;
 class A,I start_and_termination;
@@ -190,7 +196,7 @@ classDef start_and_termination fill:#ffffff, stroke:#64748b, stroke-width:3px, f
 
 ### 開發者文檔
 
-        待補充...
+待補充...
 
 ### 版權信息
 

@@ -8,12 +8,12 @@ import yaml
 import shutil
 import codecs
 from enum import Enum
-from shared_utils.scholar_navis.multi_lang import _
+from multi_language import init_language
 from functools import wraps
 from datetime import datetime
 from shared_utils.config_loader import get_conf
 from shared_utils.scholar_navis.const_and_singleton import VERSION
-from shared_utils.scholar_navis.const_and_singleton import SCHOLAR_NAVIS_ROOT_PATH,GPT_ACADEMIC_ROOT_PATH
+from shared_utils.scholar_navis.const_and_singleton import SCHOLAR_NAVIS_PLUGIN_ROOT_DIR,GPT_ACADEMIC_ROOT_DIR
 from toolbox import ChatBotWithCookies, update_ui, get_log_folder, get_user
 
 LANGUAGE_GPT_PREFER,LANGUAGE_DISPLAY = get_conf('LANGUAGE_GPT_PREFER','LANGUAGE_DISPLAY')
@@ -64,7 +64,9 @@ def check_library_exist_and_assistant(accept_nonexistent=False,accept_blank = Fa
             yield from update_ui(chatbot=chatbot, history=[])  # 这里是为了防止部分插件在按下终止按钮再次运行后，再次显示终止前的内容
             
             # < --------------------参数获取与检验，以及传递一些信息--------------- >
-            
+            lang = chatbot.get_language()
+            _ = lambda text: init_language(text, lang)
+
             plugin_kwargs = args[2]
             txt: str = args[0].strip() #去除无用空格等不可见字符 即所谓的 main_input
             username = username=get_user(chatbot)
@@ -122,7 +124,7 @@ def check_library_exist_and_assistant(accept_nonexistent=False,accept_blank = Fa
             this_library_fp = os.path.join(tool_root, library_name)
             
             # 插件的文档文件夹
-            doc_dir = os.path.join(SCHOLAR_NAVIS_ROOT_PATH,'doc',LANGUAGE_DISPLAY) 
+            doc_dir = os.path.join(SCHOLAR_NAVIS_PLUGIN_ROOT_DIR, 'doc', LANGUAGE_DISPLAY)
                 
             # < --------------------通用型用户命令解析--------------------- >
             doc_fp = ''
@@ -233,7 +235,7 @@ def check_library_exist_and_assistant(accept_nonexistent=False,accept_blank = Fa
 def get_def_user_library_list():
     """返回默认用户名下所有的总结库清单
     """
-    default_user_dir =  os.path.join(GPT_ACADEMIC_ROOT_PATH,'gpt_log','default_user','scholar_navis')
+    default_user_dir =  os.path.join(GPT_ACADEMIC_ROOT_DIR, 'gpt_log', 'default_user', 'scholar_navis')
     return get_this_user_library_list(default_user_dir)
 
 

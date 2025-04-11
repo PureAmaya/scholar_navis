@@ -6,12 +6,13 @@ import os
 import yaml
 import glob
 import shutil
-from shared_utils.scholar_navis.multi_lang import _
+from multi_language import init_language
 from shared_utils.scholar_navis.const_and_singleton import VERSION
 from crazy_functions.crazy_utils import get_files_from_everything
 from .tools.common_plugin_para import common_plugin_para
 from .tools.article_library_ctrl import check_library_exist_and_assistant, lib_manifest
 from toolbox import CatchException, get_log_folder, get_user, update_ui, update_ui_lastest_msg
+
 
 @check_library_exist_and_assistant(accept_nonexistent=True, accept_blank=False)
 @CatchException
@@ -32,10 +33,12 @@ def 缓存pdf文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, syste
     library_name = plugin_kwargs['lib']
     command = plugin_kwargs['command']
     command_para = plugin_kwargs['command_para']
+    lang = user_request.cookies.get('lang')
+    _ = lambda text: init_language(text, lang)
 
     # 操作的总结库的根目录
     this_library_root_dir = os.path.join(get_log_folder(
-        user=get_user(chatbot), plugin_name='scholar_navis'), library_name) # ? 要不要后面把这个放到修饰器里？
+        user=get_user(chatbot), plugin_name='scholar_navis'), library_name)  # ? 要不要后面把这个放到修饰器里？
     # 缓存与储存目录
     cache_dir = os.path.join(this_library_root_dir, 'cache')
     repo_dir = os.path.join(this_library_root_dir, 'repository')
@@ -44,7 +47,7 @@ def 缓存pdf文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, syste
     # 单独为新建总结库处理一下情况
     if (not os.path.exists(manifest_fp)):
         # 并且没有上传任何可用的文件，提醒后终止程序
-        if txt == '' or (not os.path.exists(txt)):# 顺便阻止意外的建立文件夹
+        if txt == '' or (not os.path.exists(txt)):  # 顺便阻止意外的建立文件夹
             chatbot.append([_("<b>{}</b> 是一个不存在的总结库").format(library_name),
                             _("可以通过上传文章（含压缩包）的方式创建新的总结库")])
             yield from update_ui(chatbot=chatbot, history=history)  # 刷新界面
@@ -77,7 +80,6 @@ def 缓存pdf文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, syste
         with open(manifest_fp, 'r') as f:
             manifest_dict = yaml.safe_load(f)
 
-
     # 获取必要的信息
     present_keywords = manifest_dict[lib_manifest.key_words.value]
     pdfs_in_cache = glob.glob(f"{cache_dir}/*.pdf")
@@ -94,9 +96,9 @@ def 缓存pdf文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, syste
 
         if workflow_done:
             chatbot.append([_("流程警告："), _("当前总结库已经总结完毕，无法添加新的文章")])
-            yield from update_ui(chatbot=chatbot, history=history,msg='warning')  # 刷新界面
-        else: yield from _upload_file(txt,chatbot,repo_dir,cache_dir,pdfs_in_cache)
-
+            yield from update_ui(chatbot=chatbot, history=history, msg='warning')  # 刷新界面
+        else:
+            yield from _upload_file(txt, chatbot, repo_dir, cache_dir, pdfs_in_cache, lang)
 
     # < --------------------更新关键词 --------------- >
 
@@ -113,9 +115,11 @@ def 缓存pdf文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, syste
 
         if workflow_done:
             chatbot.append([_("流程警告："), _("当前总结库已经总结完毕，无法更新关键词")])
-            yield from update_ui(chatbot=chatbot, history=history,msg='warning')  # 刷新界面
-        else:yield from _update_keywords(chatbot,present_keywords,command,command_para,manifest_dict,manifest_fp)
-        
+            yield from update_ui(chatbot=chatbot, history=history, msg='warning')  # 刷新界面
+        else:
+            yield from _update_keywords(chatbot, present_keywords, command, command_para, manifest_dict, manifest_fp,
+                                        lang)
+
     # < --------------------检查该项工具的流程是否全部完成。--------------- >
     error = False
     # manifest_fp 直接没了。
@@ -143,17 +147,21 @@ def 缓存pdf文献(txt: str, llm_kwargs, plugin_kwargs, chatbot, history, syste
         error = True
 
     if not error:
-        chatbot.append([_('所有的工序已经完成，该工具的流程结束。<ul><li>已导入pdf数量：{in_cache}(缓存中), {in_repo}(库中)</li><li>关键词：{keywords}</li></ul>')
-                        .format(in_cache=len(pdfs_in_cache), in_repo=len(pdfs_in_repo), keywords=", ".join(present_keywords)),
-                        _("在使用 <b>按关键词总结文献</b> 进行AI总结之前，您可以选择继续添加文章、修改关键词。")])
+        chatbot.append([
+                           _('所有的工序已经完成，该工具的流程结束。<ul><li>已导入pdf数量：{in_cache}(缓存中), {in_repo}(库中)</li><li>关键词：{keywords}</li></ul>')
+                       .format(in_cache=len(pdfs_in_cache), in_repo=len(pdfs_in_repo),
+                               keywords=", ".join(present_keywords)),
+                           _("在使用 <b>按关键词总结文献</b> 进行AI总结之前，您可以选择继续添加文章、修改关键词。")])
     yield from update_ui(chatbot=chatbot, history=history)  # 刷新界面
 
     if workflow_done:
         chatbot.append([_('该总结库已经完成了总结分析。无法添加新的文章或修改关键词。如果要修改请新建总结库'),
-                _("关于总结内容等信息，请使用 <b>按关键词总结文献</b> 查看")])
+                        _("关于总结内容等信息，请使用 <b>按关键词总结文献</b> 查看")])
         yield from update_ui(chatbot=chatbot, history=history)  # 刷新界面
 
-def _upload_file(txt,chatbot,repo_dir,cache_dir,pdfs_in_cache):
+
+def _upload_file(txt, chatbot, repo_dir, cache_dir, pdfs_in_cache, lang):
+    _ = lambda text: init_language(text, lang)
     _1, pdfs_user_uploaded, _2 = get_files_from_everything(txt, type='.pdf')
     if len(pdfs_user_uploaded) == 0:
         chatbot.append([_("没有上传pdf，或者尚未上传任何文件，该步骤跳过..."),
@@ -174,57 +182,63 @@ def _upload_file(txt,chatbot,repo_dir,cache_dir,pdfs_in_cache):
 
     chatbot.append(
         [_("pdf加载成功"),
-        _("本次<b>上传{upload_count}篇</b>文章，<b>新加载{new_count}篇</b>文章，<b>总计{cache_count}篇</b>文章存在于缓存中待分析（已有<b>{repo}篇</b>文章分析完毕）")
-        .format(upload_count=len(pdfs_user_uploaded), new_count=new_cache_count - old_cache_count, cache_count=new_cache_count, repo=len(glob.glob(f'{repo_dir}/*.yml')))
-        ])
+         _("本次<b>上传{upload_count}篇</b>文章，<b>新加载{new_count}篇</b>文章，<b>总计{cache_count}篇</b>文章存在于缓存中待分析（已有<b>{repo}篇</b>文章分析完毕）")
+         .format(upload_count=len(pdfs_user_uploaded), new_count=new_cache_count - old_cache_count,
+                 cache_count=new_cache_count, repo=len(glob.glob(f'{repo_dir}/*.yml')))
+         ])
     yield from update_ui(chatbot=chatbot, history=[])  # 刷新界面
 
 
-def _update_keywords(chatbot,present_keywords,command,command_para,manifest_dict,manifest_fp):
+def _update_keywords(chatbot, present_keywords, command, command_para, manifest_dict, manifest_fp, lang):
+    _ = lambda text: init_language(text, lang)
     # 获取新输入的关键词
-        new_keywords = []
-        if len(command_para.split(',')) > len(command_para.split('，')):
-            _new_keywords = command_para.split(',')
-        else:
-            _new_keywords = command_para.split('，')
-        for key in _new_keywords:
-            new_keywords.append(key.strip())
+    new_keywords = []
+    if len(command_para.split(',')) > len(command_para.split('，')):
+        _new_keywords = command_para.split(',')
+    else:
+        _new_keywords = command_para.split('，')
+    for key in _new_keywords:
+        new_keywords.append(key.strip())
 
-        # 已经有关键词了，然后强制更新
-        if len(present_keywords) > 0 and command == 'key-force':
-            manifest_dict[lib_manifest.key_words.value] = new_keywords
-            with open(manifest_fp, 'w') as f:
-                f.write(yaml.safe_dump(manifest_dict))
-            yield from update_ui_lastest_msg(_('关键词已更新</br></br><b>现在的关键词为：</b></br>{new}</br></br><b>此前的关键词为：</b></br>{old}')
-                                                .format(new="<br>".join(new_keywords), old="<br>".join(present_keywords)), chatbot, [])
-            present_keywords = new_keywords
+    # 已经有关键词了，然后强制更新
+    if len(present_keywords) > 0 and command == 'key-force':
+        manifest_dict[lib_manifest.key_words.value] = new_keywords
+        with open(manifest_fp, 'w') as f:
+            f.write(yaml.safe_dump(manifest_dict))
+        yield from update_ui_lastest_msg(
+            _('关键词已更新</br></br><b>现在的关键词为：</b></br>{new}</br></br><b>此前的关键词为：</b></br>{old}')
+            .format(new="<br>".join(new_keywords), old="<br>".join(present_keywords)), chatbot, [])
+        present_keywords = new_keywords
 
-        # 已经有关键词了，但是不强制更新
-        elif len(present_keywords) > 0 and command == 'key':
-            yield from update_ui_lastest_msg(_('已存在关键词，不会进行修改（如果还没有总结，可以试试关键词强制更新）</br></br><b>现在的关键词为：</b></br>{}')
-                                            .format("<br>".join(present_keywords)), chatbot, [])
+    # 已经有关键词了，但是不强制更新
+    elif len(present_keywords) > 0 and command == 'key':
+        yield from update_ui_lastest_msg(
+            _('已存在关键词，不会进行修改（如果还没有总结，可以试试关键词强制更新）</br></br><b>现在的关键词为：</b></br>{}')
+            .format("<br>".join(present_keywords)), chatbot, [])
 
-        # 还没关键词，是否强制随意了
-        elif len(present_keywords) == 0:
-            manifest_dict[lib_manifest.key_words.value] = new_keywords
-            with open(manifest_fp, 'w') as f:
-                f.write(yaml.safe_dump(manifest_dict))
-            yield from update_ui_lastest_msg(_('关键词已更新</br></br><b>现在的关键词为：</b></br>{new}')
-                                            .format(new="<br>".join(new_keywords)), chatbot, [])
-            present_keywords = new_keywords
+    # 还没关键词，是否强制随意了
+    elif len(present_keywords) == 0:
+        manifest_dict[lib_manifest.key_words.value] = new_keywords
+        with open(manifest_fp, 'w') as f:
+            f.write(yaml.safe_dump(manifest_dict))
+        yield from update_ui_lastest_msg(_('关键词已更新</br></br><b>现在的关键词为：</b></br>{new}')
+                                         .format(new="<br>".join(new_keywords)), chatbot, [])
+        present_keywords = new_keywords
 
 
-execute = 缓存pdf文献 # 用于热更新
+execute = 缓存pdf文献  # 用于热更新
+
 
 class pdf_cacher(common_plugin_para):
-    def define_arg_selection_menu(self):
-        gui_definition = super().define_arg_selection_menu()
+    def define_arg_selection_menu(self, lang):
+        _ = lambda text: init_language(text, lang)
+        gui_definition = super().define_arg_selection_menu(lang)
         gui_definition.update(self.add_file_upload_field(
             description=_('上传1篇pdf文献或多篇pdf的压缩包')))
         gui_definition.update(self.add_lib_field(
             True, _('创建或选择总结库'), _('如要创建新的总结库，请输入一个新名字')))
         gui_definition.update(self.add_command_selector(
-            ['key', 'key-force'], [_('查询或更新关键词'), _('强制更新关键词')], [True, True],'key'))
+            ['key', 'key-force'], [_('查询或更新关键词'), _('强制更新关键词')], [True, True], 'key'))
         gui_definition.update(self.add_command_para_field(
             description=_('在此处输入用于更新的关键词（中英文逗号分割）')))
         return gui_definition

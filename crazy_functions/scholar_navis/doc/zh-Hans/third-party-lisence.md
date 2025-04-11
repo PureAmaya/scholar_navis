@@ -5,7 +5,7 @@ Scholar Navis 使用 AGPL-3.0 license 许可证
 **第三方包与项目：**
 
 | 名称                           | 许可证                   | 备注                                |
-| ---------------------------- | --------------------- | --------------------------------- |
+|------------------------------|-----------------------| --------------------------------- |
 | gpt_academic                 | GPL-3.0               | 发生修改，修改请参见原gpt_academic文件的头部区域    |
 | aiohttp                      | Apache-2.0            |                                   |
 | alertifyJS                   | GPL-3.0               |                                   |
@@ -35,6 +35,7 @@ Scholar Navis 使用 AGPL-3.0 license 许可证
 | SourceHanSansSC-VF.otf.woff2 | SIL OPEN FONT LICENSE | Version 1.1                       |
 | tiktoken                     | MIT License           |                                   |
 | uvicorn                      | BSD-3-Clause          |                                   |
+| Vue.js                       | MIT license           |                                   |
 | websockets                   | BSD-3-Clause          |                                   |
 | zhipuai                      | unknown               | https://pypi.org/project/zhipuai/ |
 
@@ -106,4 +107,8 @@ Scholar Navis 使用 AGPL-3.0 license 许可证
 
 - 支持推理模型，支持更新的模型
 
-- 简体中文用户将自动使用国内的JS静态资源
+- 使用本地化地JS，加快速度
+
+- 支持用户选择显示语言和LLM输出语言
+
+- 更完善的用户登陆注册系统和UI

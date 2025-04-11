@@ -3,7 +3,7 @@
 
 <h1 align="center">Scholar Navis</h1>
 
-  <p align="center">
+<p align="center">
     一款基于 gpt_academic 的流水线式领域进展分析工具
     <br />
     允许用户从大量文章中摘取有用的信息（例如研究进展，缺口，符合用户需求的句子，并且支持用母语显示)
@@ -12,7 +12,6 @@
   | [简体中文](README.md) | [繁体中文](readme-zh_Hant.md) | [English](readme-en_US.md) |
 
 </div>
-
 
 ### 事先说明
 
@@ -40,13 +39,19 @@
 
 - 希望减少一些皮包公司的套壳ChatGPT的使用和泛滥。
 
+- 打破语言壁垒，加深学术交流
+
 - 为尽可能减少AI凭空捏造的现象，选择把上传的文献作为AI分析的最主要依据。
+
+- 协助研究者在更短的时间内阅读更多的文献，获取更多有价值的信息，拓宽科学视野，提高科研效率。
 
 - 使用此工具，可以从确定研究方向开始，流水线式地下载文章，拟定课题，分析当前领域的研究现状和缺口，发掘前人尚未研究的方向，对感兴趣的文章进行精细摘要、对不清楚的地方进行提问并为之解答。
 
 ### 工具特色
 
 - 开源。
+
+- 本地化支持，用户可自由切换语言，也可以自由地选择LLM使用地语言。
 
 - 使用简单。每个可能的使用场景均有其对应的帮助文档。
 
@@ -117,7 +122,7 @@
 
 #### Docker 安装
 
-        待补充...
+待补充...
 
 #### 配置
 
@@ -133,7 +138,7 @@
 
 1. 运行`main.py`启用 gpt_academic，在打开的web的右侧，应当能够看到 Scholar Navis 的5个方块，点击后可以看到使用提示。
    
-   <img title="" src="docs/img/scholar_navis_functions.png" alt="" data-align="inline" width="448"> <img title="" src="docs/img/function_ui.png" alt="" width="130">
+   <img title="" src="docs/img/scholar_navis_functions.png" alt="" data-align="inline" width="" height="200"> <img title="" src="docs/img/function_ui.png" alt="" width="" height="200">
 
 2. 6个插件（[`PubMed OpenAccess文章获取`](crazy_functions/scholar_navis/doc/zh-Hans/PubMed-Open-Access-Articles-Download.md)、[`缓存pdf文献`](crazy_functions/scholar_navis/doc/zh-Hans/Cache-PDF-Articles.md)、[`按关键词分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Summarize-Articles-by-Keywords.md)、[`与AI交流研究进展`](crazy_functions/scholar_navis/doc/zh-Hans/Communicate-with-AI-about-Research-Progress.md)、[`精细分析文献`](crazy_functions/scholar_navis/doc/zh-Hans/Fine-grained-Analysis-of-Article.md)和`摘取有用语句`）其均内置了简洁的操作指南和功能作用，切换到该工具，`辅助指令` -> `help: 帮助文档`即可查看。
 
@@ -178,7 +183,7 @@ preE --> extract1[摘取有用语句]
  extract2 --> extract_title(感兴趣的文章) & extract_sentences(感兴趣的原句) & extract_trans(翻译的结果)
  extract_title & extract_sentences & extract_trans --> extract3(阅读与筛选)
 
-H & J & G4 & extract3--> I[/了解研究进展和缺口\]
+H & J & G4 & extract3--> I[/文献研究综合与知识发现\]
 
 
 
@@ -191,7 +196,7 @@ classDef start_and_termination fill:#ffffff, stroke:#64748b, stroke-width:3px, f
 
 ### 开发者文档
 
-        待补充...
+待补充...
 
 ### 版权信息
 
