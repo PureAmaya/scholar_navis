@@ -1,12 +1,13 @@
 '''
 Original Author: gpt_academic@binary-husky
 
-Modified by PureAmaya on 2025-04-11
+Modified by PureAmaya on 2025-04-12
 - Remove unused imports.
 - Only resources and scripts from the same origin are allowed to load.
 - Add user language acquisition feature.
 - Adjust gradio routing.
 - Compatible with the new version of multilingual function.
+- Cancel specified font.
 
 Modified by PureAmaya on 2025-03-19
 - Provide authentication for some APIs.
@@ -88,17 +89,6 @@ def start_app(apps:dict,CONCURRENT_COUNT, AUTHENTICATION, PORT, SSL_KEYFILE, SSL
     gradio_app = fastapi.FastAPI()
     gradio_app.add_middleware(SecurityMiddleware)
 
-    # 中间件处理所有HTTP请求
-    @gradio_app.middleware("http")
-    async def serve_font_middleware(request: Request, call_next):
-        # 检查请求路径是否包含目标字符串
-        if "static/fonts/SourceHanSans" in request.url.path:
-            # 返回指定文件，替换为实际文件路径
-            return FileResponse(font_path)
-        # 不满足条件则继续处理其他路由
-        response = await call_next(request)
-        return response
-    
     # ##### 鉴权 #########
     from auth import check_user_token
     def get_user(request: Request):

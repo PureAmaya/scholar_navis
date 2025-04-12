@@ -159,7 +159,7 @@ def build_gradio(lang:str):
             gr_L2 = lambda scale, elem_id: gr.Row()
             CHATBOT_HEIGHT /= 2
 
-        with gr.Tab(label=_('对话功能'),id = '0'):
+        with gr.Tab(label=_('对话功能'),id = '0',elem_classes='main_tab'):
             with gr_L1():
                 with gr_L2(scale=2, elem_id="gpt-chat"):
                     chatbot = gr.Chatbot(type='messages',label=_("当前模型: {}").format(LLM_MODEL),
@@ -221,7 +221,7 @@ def build_gradio(lang:str):
                                 with gr.Row():
                                     switchy_bt = gr.Button(r"请先从插件列表中选择", variant="secondary", elem_id="elem_switchy_bt").style(size="sm")
                         #with gr.Row():
-        t = gr.Tab(label = _('摘取有用语句'),id=1)
+        t = gr.Tab(label = _('摘取有用语句'),id=1,elem_classes='main_tab')
 
         # 左上角工具栏定义
         from themes.gui_toolbar import define_gui_toolbar

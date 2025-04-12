@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Scholar Navis\n"
-"POT-Creation-Date: 2025-04-11 21:42+0800\n"
-"PO-Revision-Date: 2025-04-11 21:43+0800\n"
+"POT-Creation-Date: 2025-04-12 23:16+0800\n"
+"PO-Revision-Date: 2025-04-12 23:16+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: gkoishi0514@gmail.com\n"
 "Language: en_US\n"
@@ -13,6 +13,65 @@ msgstr ""
 "X-Poedit-Basepath: ../../../../..\n"
 "X-Poedit-KeywordsList: l(\"%s\")\n"
 "X-Poedit-SearchPath-0: .\n"
+
+#: auth.py:52
+msgid "用户名不能为空"
+msgstr "Username cannot be empty."
+
+#: auth.py:55
+msgid "用户名无效"
+msgstr "Username invalid."
+
+#: auth.py:58
+msgid "用户名不能以特殊字符开头"
+msgstr "Username cannot start with a special character."
+
+#: auth.py:61
+msgid "用户名只能包含字母、数字和下划线"
+msgstr "Username can only contain letters, numbers, and underscores."
+
+#: auth.py:74 shared_utils/scholar_navis/user_account_manager.py:62
+msgid "密码不能为空"
+msgstr "Password cannot be empty."
+
+#: auth.py:76
+msgid "密码不符合要求。至少八位且有大小写字母和数字，且不能无效字符"
+msgstr ""
+"The password does not meet the requirements. It must be at least eight "
+"characters long, include both uppercase and lowercase letters and numbers, "
+"and contain no invalid characters."
+
+#: auth.py:106
+msgid "当前用户不存在"
+msgstr "Current user does not exist."
+
+#: auth.py:113
+msgid "密码错误"
+msgstr "Password is incorrect."
+
+#: auth.py:146
+msgid "登陆失败，请稍后再试"
+msgstr "Login failed, please try again later."
+
+#: auth.py:148
+msgid "登陆成功"
+msgstr "Login successful."
+
+#: auth.py:164
+msgid "当前用户已存在，请使用其他用户名"
+msgstr "The current username already exists. Please use a different username."
+
+#: auth.py:170
+msgid "密码不能与用户名相同"
+msgstr "The password cannot be the same as the username."
+
+#: auth.py:182
+msgid "注册失败，请稍后再试"
+msgstr "Registration failed, please try again later."
+
+#: auth.py:184
+msgid "注册成功"
+msgstr "Registration successful."
 
 #: check_proxy.py:25 check_proxy.py:30 check_proxy.py:32 check_proxy.py:34
 #: check_proxy.py:41
@@ -39,24 +98,24 @@ msgstr "Proxy location query timed out, the proxy may be invalid."
 msgid "正在执行一些模块的预热 ..."
 msgstr "Preheating some modules..."
 
-#: crazy_functions/crazy_utils.py:79 crazy_functions/crazy_utils.py:219
-#: crazy_functions/crazy_utils.py:242 crazy_functions/crazy_utils.py:259
+#: crazy_functions/crazy_utils.py:75 crazy_functions/crazy_utils.py:215
+#: crazy_functions/crazy_utils.py:238 crazy_functions/crazy_utils.py:255
 msgid "检测到程序终止"
 msgstr "Detection of program termination."
 
-#: crazy_functions/crazy_utils.py:95
+#: crazy_functions/crazy_utils.py:91
 msgid "警告，在执行过程中遭遇问题"
 msgstr "Warning, encountered an issue during execution."
 
-#: crazy_functions/crazy_utils.py:98
+#: crazy_functions/crazy_utils.py:94
 msgid "重试中，请稍等."
 msgstr "Retrying, please wait."
 
-#: crazy_functions/crazy_utils.py:104 crazy_functions/crazy_utils.py:263
+#: crazy_functions/crazy_utils.py:100 crazy_functions/crazy_utils.py:259
 msgid "多次重试失败，已终止进程"
 msgstr "Multiple retry attempts failed, process terminated."
 
-#: crazy_functions/crazy_utils.py:124 crazy_functions/crazy_utils.py:307
+#: crazy_functions/crazy_utils.py:120 crazy_functions/crazy_utils.py:303
 msgid ""
 "发生错误。可能是模型/网络/输入内容过长等原因.可以尝试换到网络良好的环境、减少"
 "输入量或者使用限制更少的模型。具体原因如下：\n"
@@ -70,47 +129,47 @@ msgstr ""
 "\n"
 "{}"
 
-#: crazy_functions/crazy_utils.py:202
+#: crazy_functions/crazy_utils.py:198
 msgid "请开始多线程操作"
 msgstr "Please begin multi-threaded operations."
 
-#: crazy_functions/crazy_utils.py:205
+#: crazy_functions/crazy_utils.py:201
 msgid "等待中"
 msgstr "Waiting for commands"
 
-#: crazy_functions/crazy_utils.py:215
+#: crazy_functions/crazy_utils.py:211
 msgid "执行中"
 msgstr "Executing..."
 
-#: crazy_functions/crazy_utils.py:233
+#: crazy_functions/crazy_utils.py:229
 msgid "已成功"
 msgstr "Successfully completed."
 
-#: crazy_functions/crazy_utils.py:245
+#: crazy_functions/crazy_utils.py:241
 msgid "警告，线程{}在执行过程中遭遇问题"
 msgstr "Warning, thread {} encountered an issue during execution."
 
-#: crazy_functions/crazy_utils.py:252
+#: crazy_functions/crazy_utils.py:248
 msgid "OpenAI绑定信用卡可解除频率限制"
 msgstr "Bind a credit card to OpenAI to lift frequency restrictions."
 
-#: crazy_functions/crazy_utils.py:257
+#: crazy_functions/crazy_utils.py:253
 msgid "等待重试"
 msgstr "Waiting to retry"
 
-#: crazy_functions/crazy_utils.py:260
+#: crazy_functions/crazy_utils.py:256
 msgid "重试中"
 msgstr "Retrying"
 
-#: crazy_functions/crazy_utils.py:294
+#: crazy_functions/crazy_utils.py:290
 msgid "多线程操作已经开始，完成情况:"
 msgstr "Multithreaded operations completed:"
 
-#: crazy_functions/crazy_utils.py:407
+#: crazy_functions/crazy_utils.py:402
 msgid "抱歉, 我们暂时无法解析此PDF文档: {}."
 msgstr "Sorry, we are unable to parse this PDF document: {}."
 
-#: crazy_functions/crazy_utils.py:532
+#: crazy_functions/crazy_utils.py:527
 msgid "无法下载资源{}，请检查."
 msgstr "Unable to download resource {}, please check."
 
@@ -803,79 +862,79 @@ msgstr "View articles in the summarization library"
 msgid "AI预先阅读内容"
 msgstr "AI pre-reads the content"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:119
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:118
 msgid "完成已有文章的检查"
 msgstr "Completed the review of existing articles"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:123
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:122
 msgid "所有需要下载的文章已经缓存"
 msgstr "All necessary articles to be downloaded have been cached"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:141
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:140
 msgid "下载将使用网络代理"
 msgstr "Download will use a network proxy"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:142
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:141
 msgid "下载不使用网络代理"
 msgstr "Download without using a network proxy"
 
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:167
 #: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:168
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:169
 msgid "下载中，请等待..."
 msgstr "Downloading, please wait..."
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:173
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:172
 msgid "当前下载进度"
 msgstr "Current download progre"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:174
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:173
 msgid "下载数"
 msgstr "Download count"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:174
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:173
 msgid "已经存在的文章不含在内"
 msgstr "articles that already exist are not included"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:175
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:174
 msgid "完成百分比"
 msgstr "Completion percentage"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:176
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:175
 msgid "不使用网络代理"
 msgstr "Do not use web proxy"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:176
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:175
 msgid "使用网络代理"
 msgstr "Use web proxy"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:234
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:233
 msgid "api解析失败"
 msgstr "API parsing failed"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:240
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:239
 msgid "api解析成功"
 msgstr "API parsing succeeded"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:304
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:303
 msgid "用户终止下载"
 msgstr "UserLogin cancels download"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:445
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:444
 msgid "上传您在PubMed中保存的csv格式的引文（citations）文件以执行新的下载任务"
 msgstr ""
 "Upload the CSV format citation file saved in PubMed to perform a new "
 "download task"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:446
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:445
 msgid "按下 <b>停止</b> 按钮以终止该下载进程"
 msgstr "Press the <b>Stop</b> button to terminate the download process"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:447
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:446
 msgid "下载的时间比较耗时，可以打开新的页面进行ai对话"
 msgstr ""
 "Downloading takes a long time, you can open a new tab for AI conversation"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:448
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:447
 msgid ""
 "<font color=red>[提醒]</font> 当前一次下载任务终止后，再次运行可能会显示出之"
 "前的下载内容，尚未知如何修复。可以尝试`重置`"
@@ -884,19 +943,19 @@ msgstr ""
 "terminated, the previous download content may be displayed again, and it is "
 "unknown how to fix it. Try to `reset`"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:449
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:448
 msgid "批量从PubMed上下载 OpenAccess 文章"
 msgstr "Download OpenAccess articles from PubMed in bulk."
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:458
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:457
 msgid "正在处理..."
 msgstr "Processing..."
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:463
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:462
 msgid "注意，上传的文件不是可用的csv文件"
 msgstr "Note, the uploaded file is not a valid CSV file"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:477
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:476
 msgid ""
 "读取出错！可能是文件内容缺失或错误，请检查\"PMID\", \"PMCID\", \"Title\", "
 "\"DOI\"及其内容是否是使用英文逗号分割，以及内容是否正确"
@@ -905,7 +964,7 @@ msgstr ""
 "Please check that \"PMID\", \"PMCID\", \"Title\", \"DOI\" and their contents "
 "are separated by English commas, and that the content is correct"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:481
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:480
 msgid ""
 "上传的文件中，缺少 \"PMID\", \"PMCID\", \"Title\", \"DOI\"其中的若干项目，或"
 "拼写错误，请检查"
@@ -913,24 +972,24 @@ msgstr ""
 "There are missing items or spelling errors in the uploaded files, such as "
 "\"PMID\", \"PMCID\", \"Title\", \"DOI\" . Please check"
 
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:492
 #: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:493
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:494
 msgid "正在记录文章信息... "
 msgstr "Recording article information... "
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:493
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:492
 msgid "(文件较大，请等待)"
 msgstr "(Please wait as the file is too large)"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:503
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:502
 msgid "文章信息记录完成"
 msgstr "Article information record completed"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:510
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:509
 msgid "正在下载文章..."
 msgstr "Downloading article..."
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:520
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:519
 msgid ""
 "出现错误。请检查上传的csv是否正确、代理格式是否正确、网络条件是否良好或其他可"
 "能存在的问题"
@@ -939,50 +998,50 @@ msgstr ""
 "format is correct, if the network conditions are good, or if there are any "
 "other possible issues"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:550
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:549
 msgid "此次 PubMed Open Access 下载任务执行完成"
 msgstr "The PubMed Open Access download task has been completed"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:551
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:550
 msgid "下载成功的文章"
 msgstr "Downloaded Articles"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:552
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:551
 msgid "下载失败的文章"
 msgstr "Download Failed Articles"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:553
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:552
 msgid "下载成功率"
 msgstr "Download success rate"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:554
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:553
 msgid "如果下载失败，则需要手动下载"
 msgstr "If download fails, you need to manually download"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:555
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:554
 msgid "为什么会这样"
 msgstr "Why"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:556
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:555
 msgid "点击获取下载的文章"
 msgstr "Click to get the article"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:556
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:555
 msgid "点击获取下载日志"
 msgstr "Click to get the download log"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:557
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:556
 msgid ""
 "可以直接将下载完成的文章进行分析: 用<b>缓存pdf文献</b>开始总结分析这些文章"
 msgstr ""
 "You can directly analyze the articles that have been downloaded: Begin "
 "summarizing and analyzing these articles using the <b>Cache PDF Articles</b>"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:575
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:574
 msgid "上传保存的文章列表"
 msgstr "Upload saved article list"
 
-#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:575
+#: crazy_functions/scholar_navis/scripts/pubmed_openaccess_articles_download.py:574
 msgid "一般为csv格式"
 msgstr "Generally in CSV format"
 
@@ -1513,7 +1572,7 @@ msgstr "First, you extract a summary from the chat history."
 msgid "处理文件: "
 msgstr "Process files: "
 
-#: main.py:97
+#: main.py:98
 msgid ""
 "\n"
 "    ## gpt_academic：\n"
@@ -1563,15 +1622,15 @@ msgstr ""
 "</br></br>To use a large model, enter your key in the API-KEY field at the "
 "top left corner."
 
-#: main.py:143
+#: main.py:144
 msgid "上传与设置"
 msgstr "Upload and Settings"
 
-#: main.py:144
+#: main.py:145
 msgid "暗黑模式"
 msgstr "Dark mode"
 
-#: main.py:147
+#: main.py:148
 msgid ""
 "下方内容为 AI 生成，不代表任何立场，可能存在片面甚至错误。仅供参考，开发者及"
 "其组织不负任何责任"
@@ -1580,7 +1639,7 @@ msgstr ""
 "be one-sided or even incorrect. For reference only, the developers and their "
 "organization bear no responsibility."
 
-#: main.py:148
+#: main.py:149
 msgid ""
 "联网系统信息安全无法得到充分保证，最好是个人、小组织内使用，保证服务提供者可"
 "信，并且敏感信息最好不要上传。另外，当启用登录功能时，服务商能够储存您api-"
@@ -1593,52 +1652,52 @@ msgstr ""
 "your API key. It is not recommended to use untrusted or unknown service "
 "providers."
 
-#: main.py:161
+#: main.py:162
 msgid "对话功能"
 msgstr "Dialogue feature"
 
-#: main.py:164 main.py:291 themes/gui_toolbar.py:318 themes/gui_toolbar.py:328
-#: themes/gui_toolbar.py:333
+#: main.py:165 main.py:292 themes/gui_toolbar.py:320 themes/gui_toolbar.py:330
+#: themes/gui_toolbar.py:335
 msgid "当前模型: {}"
 msgstr "Current model: {}"
 
-#: main.py:170
+#: main.py:171
 msgid "输入区"
 msgstr "Input area"
 
-#: main.py:174 main.py:184
+#: main.py:175 main.py:185
 msgid "提交"
 msgstr "Submit"
 
-#: main.py:186 shared_utils/scholar_navis/gpt_academic_handler.py:186
+#: main.py:187 shared_utils/scholar_navis/gpt_academic_handler.py:186
 msgid "重置"
 msgstr "Reset"
 
-#: main.py:187
+#: main.py:188
 msgid "停止"
 msgstr "Stop"
 
-#: main.py:188
+#: main.py:189
 msgid "清除"
 msgstr "Clear"
 
-#: main.py:190
+#: main.py:191
 msgid "Tip: 按Enter提交, 按Shift+Enter换行"
 msgstr "Tip: Press Enter to submit, press Shift+Enter to insert a newline."
 
-#: main.py:192
+#: main.py:193
 msgid "Scholar Navis 功能区"
 msgstr "Scholar Navis functional area"
 
-#: main.py:223
+#: main.py:224
 msgid "摘取有用语句"
 msgstr "Extract useful sentences"
 
-#: main.py:257
+#: main.py:258
 msgid "已重置"
 msgstr "Reset completed"
 
-#: main.py:345
+#: main.py:346
 msgid "如果浏览器没有自动打开，请复制并转到以下URL:"
 msgstr ""
 "If the browser does not open automatically, please copy and go to the "
@@ -1735,7 +1794,7 @@ msgid "由于提问含不合规内容被Azure过滤"
 msgstr ""
 "The question contains non-compliant content and has been filtered by Azure."
 
-#: request_llms/bridge_chatgpt.py:236 request_llms/bridge_chatgpt_vision.py:85
+#: request_llms/bridge_chatgpt.py:236 request_llms/bridge_chatgpt_vision.py:83
 msgid "输入已识别为openai的api_key"
 msgstr "The input has been recognized as an openai API key."
 
@@ -1805,7 +1864,7 @@ msgstr "Json parsing is unconventional."
 msgid "Json异常"
 msgstr "Json exception."
 
-#: request_llms/bridge_chatgpt.py:395 request_llms/bridge_moonshot.py:133
+#: request_llms/bridge_chatgpt.py:395 request_llms/bridge_moonshot.py:132
 msgid "请登录OpenAI查看详情"
 msgstr "Please log in to OpenAI for details."
 
@@ -1816,7 +1875,7 @@ msgstr ""
 "Incorrect api_key, please make modifications: You can customize it at the "
 "top, or contact the administrator to update the configuration file."
 
-#: request_llms/bridge_chatgpt_vision.py:89
+#: request_llms/bridge_chatgpt_vision.py:87
 msgid "缺少api_key，请在 config.py 中配置或在上方进行自定义"
 msgstr ""
 "api_key is missing. Please configure it in config.py or customize it at the "
@@ -1884,7 +1943,7 @@ msgstr "API exception:"
 msgid "解析错误,获得以下报错信息："
 msgstr "Parsing error, obtained the following error message:"
 
-#: shared_utils/fastapi_server.py:182
+#: shared_utils/fastapi_server.py:175
 msgid "您没有访问该目录/文件的权限"
 msgstr "You do not have permission to access this directory/file."
 
@@ -2105,67 +2164,7 @@ msgstr "Logs"
 msgid "Scholar Navis 加载失败"
 msgstr "Scholar Navis failed to load"
 
-#: shared_utils/scholar_navis/new_auth.py:52
-msgid "用户名不能为空"
-msgstr "Username cannot be empty."
-
-#: shared_utils/scholar_navis/new_auth.py:55
-msgid "用户名无效"
-msgstr "Username invalid."
-
-#: shared_utils/scholar_navis/new_auth.py:58
-msgid "用户名不能以特殊字符开头"
-msgstr "Username cannot start with a special character."
-
-#: shared_utils/scholar_navis/new_auth.py:61
-msgid "用户名只能包含字母、数字和下划线"
-msgstr "Username can only contain letters, numbers, and underscores."
-
-#: shared_utils/scholar_navis/new_auth.py:74
-#: shared_utils/scholar_navis/user_account_manager.py:62
-msgid "密码不能为空"
-msgstr "Password cannot be empty."
-
-#: shared_utils/scholar_navis/new_auth.py:76
-msgid "密码不符合要求。至少八位且有大小写字母和数字，且不能无效字符"
-msgstr ""
-"The password does not meet the requirements. It must be at least eight "
-"characters long, include both uppercase and lowercase letters and numbers, "
-"and contain no invalid characters."
-
-#: shared_utils/scholar_navis/new_auth.py:106
-msgid "当前用户不存在"
-msgstr "Current user does not exist."
-
-#: shared_utils/scholar_navis/new_auth.py:113
-msgid "密码错误"
-msgstr "Password is incorrect."
-
-#: shared_utils/scholar_navis/new_auth.py:146
-msgid "登陆失败，请稍后再试"
-msgstr "Login failed, please try again later."
-
-#: shared_utils/scholar_navis/new_auth.py:148
-msgid "登陆成功"
-msgstr "Login successful."
-
-#: shared_utils/scholar_navis/new_auth.py:164
-msgid "当前用户已存在，请使用其他用户名"
-msgstr "The current username already exists. Please use a different username."
-
-#: shared_utils/scholar_navis/new_auth.py:170
-msgid "密码不能与用户名相同"
-msgstr "The password cannot be the same as the username."
-
-#: shared_utils/scholar_navis/new_auth.py:182
-msgid "注册失败，请稍后再试"
-msgstr "Registration failed, please try again later."
-
-#: shared_utils/scholar_navis/new_auth.py:184
-msgid "注册成功"
-msgstr "Registration successful."
-
-#: shared_utils/scholar_navis/scholar_navis_web_services.py:183
+#: shared_utils/scholar_navis/scholar_navis_web_services.py:182
 msgid ""
 "一款基于 gpt_academic 的流水线式领域进展分析工具。允许用户从大量文章中摘取有"
 "用的信息（例如研究进展，缺口，符合用户需求的句子，并且支持用母语显示"
@@ -2226,7 +2225,7 @@ msgstr ""
 msgid "确认参数并执行"
 msgstr "Confirm parameters and execute"
 
-#: themes/gui_advanced_plugin_class.py:53 themes/gui_toolbar.py:212
+#: themes/gui_advanced_plugin_class.py:53 themes/gui_toolbar.py:214
 msgid "取消"
 msgstr "Cancel"
 
@@ -2235,19 +2234,19 @@ msgstr "Cancel"
 msgid "未选定任何插件"
 msgstr "No plugin selected."
 
-#: themes/gui_toolbar.py:54
+#: themes/gui_toolbar.py:55
 msgid "LLM_MODEL 没有设定，需要一个默认的模型"
 msgstr "LLM_MODEL is not set, a default model is needed."
 
-#: themes/gui_toolbar.py:56
+#: themes/gui_toolbar.py:57
 msgid "INIT_SYS_PROMPT 没有设定，需要一个默认的系统提示"
 msgstr "INIT_SYS_PROMPT is not set, a default system prompt is needed."
 
-#: themes/gui_toolbar.py:58
+#: themes/gui_toolbar.py:59
 msgid "AVAIL_LLM_MODELS 没有设定，需要一个可用模型列表"
 msgstr "AVAIL_LLM_MODELS is not set, a list of available models is needed."
 
-#: themes/gui_toolbar.py:62
+#: themes/gui_toolbar.py:63
 msgid ""
 "\n"
 "    <p>在此处自定义您的api-key，访问更多模型。</p>\n"
@@ -2313,7 +2312,7 @@ msgstr ""
 "</ul>\n"
 "</details>"
 
-#: themes/gui_toolbar.py:87
+#: themes/gui_toolbar.py:88
 msgid ""
 "\n"
 "    <p>使用该功能添加自定义模型或使用openAI重定向服务。\n"
@@ -2377,11 +2376,11 @@ msgstr ""
 "</ul>\n"
 "</details>"
 
-#: themes/gui_toolbar.py:111
+#: themes/gui_toolbar.py:112
 msgid "上传文件"
 msgstr "Upload File"
 
-#: themes/gui_toolbar.py:114
+#: themes/gui_toolbar.py:115
 msgid ""
 "请上传本地文件 / 压缩包以供使用。请注意: 上传文件后会自动把输入区修改为相应路"
 "径"
@@ -2389,174 +2388,177 @@ msgstr ""
 "Please upload a local file or zip package for use. Note: After uploading the "
 "file, the input area will be automatically updated to the corresponding path."
 
-#: themes/gui_toolbar.py:115
+#: themes/gui_toolbar.py:116
 msgid "支持 zip, rar, pdf, csv"
 msgstr "Supports zip, rar, pdf, csv formats"
 
-#: themes/gui_toolbar.py:116
+#: themes/gui_toolbar.py:117
 msgid "模型与语言"
 msgstr "Model and language"
 
-#: themes/gui_toolbar.py:117
+#: themes/gui_toolbar.py:118
 msgid "<p>推荐使用高并发服务商 (即速率限制较为宽松)</p>"
 msgstr ""
 "<p>It is recommended to use high-concurrency service providers (i.e., those "
 "with more lenient rate limits).</p>"
 
-#: themes/gui_toolbar.py:121
+#: themes/gui_toolbar.py:122
 msgid "更换LLM模型/请求源"
 msgstr "Change LLM Model/Request Source"
 
-#: themes/gui_toolbar.py:121
+#: themes/gui_toolbar.py:122
 msgid "推理模型(o1,o3,r1等)速度较慢，但是效果较好"
 msgstr ""
 "The reasoning models (o1, o3, r1, etc.) are slower but yield better results."
 
-#: themes/gui_toolbar.py:123
+#: themes/gui_toolbar.py:124
 msgid "会重新加载网页"
 msgstr "The webpage will reload."
 
-#: themes/gui_toolbar.py:125
+#: themes/gui_toolbar.py:126
 msgid "选择语言"
 msgstr "Select language"
 
-#: themes/gui_toolbar.py:131
+#: themes/gui_toolbar.py:132
 msgid "留空时使用默认prompt: {}"
 msgstr "Leave blank to use the default prompt: {}"
 
-#: themes/gui_toolbar.py:169
+#: themes/gui_toolbar.py:171
 msgid "选择服务商"
 msgstr "Select Service Provider"
 
-#: themes/gui_toolbar.py:169
+#: themes/gui_toolbar.py:171
 msgid "仅用于api自定义，不影响模型选择"
 msgstr "Used only for API customization, does not affect model selection."
 
-#: themes/gui_toolbar.py:170
+#: themes/gui_toolbar.py:172
 msgid "不输入则使用内置API KEY"
 msgstr "If not entered, use the built-in API KEY."
 
-#: themes/gui_toolbar.py:170
+#: themes/gui_toolbar.py:172
 msgid "自定义API-KEY"
 msgstr "Custom API-KEY"
 
-#: themes/gui_toolbar.py:173
+#: themes/gui_toolbar.py:175
 msgid "自定义重定向"
 msgstr "Custom Redirect"
 
-#: themes/gui_toolbar.py:174
+#: themes/gui_toolbar.py:176
 msgid "重定向路径"
 msgstr "Redirection Path"
 
-#: themes/gui_toolbar.py:176
+#: themes/gui_toolbar.py:178
 msgid "自定义模型"
 msgstr "Custom Model"
 
-#: themes/gui_toolbar.py:176
+#: themes/gui_toolbar.py:178
 msgid "此处输入非内置模型（一行一个）"
 msgstr "Enter non-built-in models here (one per line)."
 
-#: themes/gui_toolbar.py:201
+#: themes/gui_toolbar.py:203
 msgid "帮助"
 msgstr "Help"
 
-#: themes/gui_toolbar.py:204
+#: themes/gui_toolbar.py:206
 msgid "更改密码"
 msgstr "Change Password"
 
-#: themes/gui_toolbar.py:205
+#: themes/gui_toolbar.py:207
 msgid "当前登录用户"
 msgstr "Current logged-in user"
 
-#: themes/gui_toolbar.py:206
+#: themes/gui_toolbar.py:208
 msgid "请注意，点击确认后立即生效"
 msgstr "Please note, it will take effect immediately upon clicking confirm."
 
-#: themes/gui_toolbar.py:207
+#: themes/gui_toolbar.py:209
 msgid "当前密码"
 msgstr "Current Password"
 
-#: themes/gui_toolbar.py:207
+#: themes/gui_toolbar.py:209
 msgid "请输入当前密码"
 msgstr "Please enter your current password."
 
-#: themes/gui_toolbar.py:208
+#: themes/gui_toolbar.py:210
 msgid "修改密码"
 msgstr "Change Password"
 
-#: themes/gui_toolbar.py:208
+#: themes/gui_toolbar.py:210
 msgid "请输入新密码"
 msgstr "Please enter a new password."
 
-#: themes/gui_toolbar.py:209
+#: themes/gui_toolbar.py:211
 msgid "确认修改的密码"
 msgstr "Confirm the modified password."
 
-#: themes/gui_toolbar.py:209
+#: themes/gui_toolbar.py:211
 msgid "请再次输入新密码"
 msgstr "Please enter the new password again."
 
-#: themes/gui_toolbar.py:211
+#: themes/gui_toolbar.py:213
 msgid "确认修改"
 msgstr "Confirm Changes"
 
-#: themes/gui_toolbar.py:213
+#: themes/gui_toolbar.py:215
 msgid "退出登录"
 msgstr "Logout"
 
-#: themes/gui_toolbar.py:274
+#: themes/gui_toolbar.py:276
 msgid "自定义数据加载失败，使用默认值"
 msgstr "Custom data loading failed, using default values."
 
-#: themes/gui_toolbar.py:317
+#: themes/gui_toolbar.py:319
 msgid "参数加载失败，使用默认值"
 msgstr "Parameter loading failed, using default values."
 
-#: themes/gui_toolbar.py:341
+#: themes/gui_toolbar.py:343
 msgid "包含不可使用的字符，请重新输入"
 msgstr "Contains invalid characters, please re-enter."
 
-#: toolbox.py:246
+#: toolbox.py:249
 msgid "检测到**滞留的缓存文档**，请及时处理"
 msgstr "Detected **pending cached documents**, please address them promptly."
 
-#: toolbox.py:246
+#: toolbox.py:249
 msgid "请及时点击“**保存当前对话**”获取所有滞留文档"
 msgstr ""
 "Please click **Save Current Conversation** promptly to retrieve all pending "
 "documents."
 
-#: toolbox.py:609
+#: toolbox.py:611
 msgid "... (省略{}个文件的显示) ..."
 msgstr "... (omitting the display of {} files) ..."
 
-#: toolbox.py:611
+#: toolbox.py:613
 msgid "文件"
 msgstr "File(s)"
 
-#: toolbox.py:614
+#: toolbox.py:616
 msgid "我上传了文件，请查收"
 msgstr "I have uploaded the file, please check it."
 
-#: toolbox.py:616
+#: toolbox.py:618
 msgid "调用路径参数已自动修正到: "
 msgstr "The invocation path parameter has been automatically corrected to: "
 
-#: toolbox.py:617
+#: toolbox.py:619
 msgid "现在您点击任意函数插件时，以上文件将被作为输入参数"
 msgstr ""
 "Now, when you click on any function plugin, the above file will be used as "
 "the input parameter."
 
-#: toolbox.py:618
+#: toolbox.py:620
 msgid "请注意，当上述文件名出现异常时，请检查您的压缩包是否为UTF-8或CP437编码"
 msgstr ""
 "lease note, if the above file name appears abnormal, check whether your "
 "compressed package is encoded in UTF-8 or CP437."
 
-#: toolbox.py:620
+#: toolbox.py:622
 msgid "[Local Message] 收到以下文件 （上传到路径：{}）: "
 msgstr "[Local Message] Received the following files (uploaded to path: {}): "
+
+#~ msgid "多语言选择已禁用"
+#~ msgstr "Multilingual selection is disabled."
 
 #~ msgid "欢迎使用 Scholar Navis"
 #~ msgstr "Welcome to Scholar Navis"

@@ -120,11 +120,11 @@ def define_gui_toolbar(chatbot,help_menu_description,lang):
             md_dropdown:gr.Dropdown = gr.Dropdown(AVAIL_LLM_MODELS, value=LLM_MODEL, 
                                                 elem_id="elem_model_sel",elem_classes='dropdown_in_modal',
                                                 label=_("更换LLM模型/请求源"),info=_('推理模型(o1,o3,r1等)速度较慢，但是效果较好')).style(container=False)
-            if MULTILINGUAL:
-                lang_dropdown = gr.Dropdown(value=_get_user_language, info=f"<b>{_('会重新加载网页')}</b>",
-                                            inputs=[md_dropdown], choices=SUPPORT_DISPLAY_LANGUAGE_TUPLE,
-                                            label=_('选择语言'))
-                # inputs=[md_dropdown] 没有任何实际意义，只是为了把gr.Request传过去
+
+            lang_dropdown = gr.Dropdown(value=_get_user_language, info=f"<b>{_('会重新加载网页')}</b>",
+                                        inputs=[md_dropdown], choices=SUPPORT_DISPLAY_LANGUAGE_TUPLE,
+                                        label=_('选择语言'),interactive=MULTILINGUAL)
+            # inputs=[md_dropdown] 没有任何实际意义，只是为了把gr.Request传过去
 
             top_p = gr.Slider(minimum=-0, maximum=1.0, value=1.0, step=0.01,interactive=True, label="Top-p (nucleus sampling)",elem_id="elem_top")
             temperature = gr.Slider(minimum=-0, maximum=2.0, value=1.0, step=0.01, interactive=True, label="Temperature", elem_id="elem_temperature")
@@ -152,6 +152,7 @@ def define_gui_toolbar(chatbot,help_menu_description,lang):
                                     inputs=[lang_dropdown],
                                     outputs=None,
                                     js= ''' (lang_dropdown)=> {setCookie("lang",lang_dropdown,365); window.location.href = "/"; }''')
+
 
             # 尝试修复选择modal以外的内容时，界面意外关闭的情况
             md_dropdown.blur(None,None,None,js='BanModalPointEvents')# 这样子写没有括号的js就能用...

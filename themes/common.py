@@ -1,6 +1,10 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-04-12
+- Cancel specified font.
+
+
 Modified by PureAmaya on 2025-03-18
 - Change the local JS to defer loading to ensure the correct loading sequence.
 
@@ -18,21 +22,21 @@ import json
 import gradio as gr
 
 theme = gr.themes.Base(
-        secondary_hue="indigo",
-        neutral_hue="gray",
-        radius_size="xxl",
-        font=['Source Han Sans', 'Source Han Sans', 'Source Han Sans', 'Source Han Sans'],
-        font_mono=['Source Han Sans', 'Source Han Sans', 'Source Han Sans', 'Source Han Sans'],
-    ).set(
-        code_background_fill='*neutral_300',
-        code_background_fill_dark='*neutral_600',
-        shadow_drop='0 1px 5px 0 rgb(0 0 0 / 0.1)',
-        shadow_drop_lg='0 2px 5px 0 rgb(0 0 0 / 0.1)',
-        checkbox_border_width='*panel_border_width',
-        input_background_fill='white',
-        input_border_color='*neutral_300',
-        input_border_width='1px'
-    )
+    secondary_hue="indigo",
+    neutral_hue="gray",
+    radius_size="xxl",
+    font=["sans-serif"],
+    font_mono=["monospace"]
+).set(
+    code_background_fill='*neutral_300',
+    code_background_fill_dark='*neutral_600',
+    shadow_drop='0 1px 5px 0 rgb(0 0 0 / 0.1)',
+    shadow_drop_lg='0 2px 5px 0 rgb(0 0 0 / 0.1)',
+    checkbox_border_width='*panel_border_width',
+    input_background_fill='white',
+    input_border_color='*neutral_300',
+    input_border_width='1px'
+)
 
 
 def minimize_js(common_js_path):
@@ -59,6 +63,7 @@ def minimize_js(common_js_path):
         return minimized_js_path
     except:
         return common_js_path
+
 
 @lru_cache
 def get_common_html_javascript_code():
@@ -93,12 +98,12 @@ def register_advanced_plugin_init_code(key, code):
 
     # 将代码存储在字典中
     plugin_init_info_lib[key]['secondary_menu_code'] = code
-    
+
 
 plugin_init_info_lib = {}
 
 
-def call_plugin(plugin,advance_arg_input_legacy):
+def call_plugin(plugin, advance_arg_input_legacy):
     gui_args = {}
 
     if len(advance_arg_input_legacy) != 0:
@@ -108,53 +113,57 @@ def call_plugin(plugin,advance_arg_input_legacy):
 
     # 执行插件
     # usr_confirmed_arg
-    #push_data_to_gradio_component(json.dumps(gui_args), "invisible_current_pop_up_plugin_arg_final", "string")
+    # push_data_to_gradio_component(json.dumps(gui_args), "invisible_current_pop_up_plugin_arg_final", "string")
     # invisible_callback_btn_for_plugin_exe
-    #push_data_to_gradio_component(current_btn_name, "invisible_callback_btn_for_plugin_exe", "string")
-    
+    # push_data_to_gradio_component(current_btn_name, "invisible_callback_btn_for_plugin_exe", "string")
+
     # plugin_arg_menu,usr_confirmed_arg,invisible_callback_btn_for_plugin_exe
-    return gr.update(visible=False),json.dumps(gui_args),plugin[0]
-    
+    return gr.update(visible=False), json.dumps(gui_args), plugin[0]
 
-def run_advanced_plugin_launch_code(name,plugin_content,txt,plugin_advanced_arg):
 
+def run_advanced_plugin_launch_code(name, plugin_content, txt, plugin_advanced_arg):
     # 分配按钮和菜单数据
     # usr_confirmed_arg
-    #push_data_to_gradio_component(gui_base64_string, "invisible_current_pop_up_plugin_arg", "string")
+    # push_data_to_gradio_component(gui_base64_string, "invisible_current_pop_up_plugin_arg", "string")
     # new_plugin_callback
-    #push_data_to_gradio_component(btn_name, "invisible_callback_btn_for_plugin_exe", "string")
-    usr_editing_arg = base64.b64encode(plugin_content['JsMenu'].encode('utf-8')).decode('utf-8') # JSMenu生成那边已经没有base64编码了
+    # push_data_to_gradio_component(btn_name, "invisible_callback_btn_for_plugin_exe", "string")
+    usr_editing_arg = base64.b64encode(plugin_content['JsMenu'].encode('utf-8')).decode(
+        'utf-8')  # JSMenu生成那边已经没有base64编码了
     gui_json_data = json.loads(plugin_content['JsMenu'])
-    
+
     # 使参数菜单显现
     text_cnt = 0
     dropdown_cnt = 8
-    
-    output_gr = [gr.update(visible=False,render=False) for i in range(16)]
-    
+
+    output_gr = [gr.update(visible=False, render=False) for i in range(16)]
+
     for key in gui_json_data:
         gui_args = json.loads(gui_json_data[key])
 
         if (gui_args['type'] == 'string'):
-            edit_para ={}
-            
+            edit_para = {}
+
             if (key == "main_input"):
-                #为了与旧插件兼容，生成菜单时，自动加载输入栏的值
+                # 为了与旧插件兼容，生成菜单时，自动加载输入栏的值
                 edit_para.update({'value': txt})
 
-            elif (key == "advanced_arg") :
+            elif (key == "advanced_arg"):
                 # 为了与旧插件兼容，生成菜单时，自动加载旧高级参数输入区的值
                 edit_para.update({'value': plugin_advanced_arg})
-            
+
             else:
                 edit_para.update({'value': gui_args['default_value']})
-            
-            output_gr[text_cnt] = gr.update(visible=True,render=True,label=gui_args['title'] ,info = gui_args['description'] ,placeholder=gui_args['description'],**edit_para)
+
+            output_gr[text_cnt] = gr.update(visible=True, render=True, label=gui_args['title'],
+                                            info=gui_args['description'], placeholder=gui_args['description'],
+                                            **edit_para)
             text_cnt += 1;
 
         if (gui_args['type'] == 'dropdown'):
-            output_gr[dropdown_cnt].update(visible=True,render=True,choices=gui_args['options'],label=gui_args['title'],info = gui_args['description'],value=gui_args['default_value'])
+            output_gr[dropdown_cnt].update(visible=True, render=True, choices=gui_args['options'],
+                                           label=gui_args['title'], info=gui_args['description'],
+                                           value=gui_args['default_value'])
             dropdown_cnt += 1;
 
     # plugin_arg_menu,  invisible_callback_btn_for_plugin_exe （new_plugin_callback）,usr_editing_arg , 浮动面板上的组件
-    return gr.update(visible=True),name,usr_editing_arg,*output_gr
+    return gr.update(visible=True), name, usr_editing_arg, *output_gr

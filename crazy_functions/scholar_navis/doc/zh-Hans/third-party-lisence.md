@@ -32,7 +32,6 @@ Scholar Navis 使用 AGPL-3.0 license 许可证
 | Requests                     | Apache-2.0            |                                   |
 | rich                         | MIT License           |                                   |
 | rjsmin                       | Apache-2.0            |                                   |
-| SourceHanSansSC-VF.otf.woff2 | SIL OPEN FONT LICENSE | Version 1.1                       |
 | tiktoken                     | MIT License           |                                   |
 | uvicorn                      | BSD-3-Clause          |                                   |
 | Vue.js                       | MIT license           |                                   |
