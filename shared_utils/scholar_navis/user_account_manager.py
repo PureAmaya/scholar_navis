@@ -9,14 +9,14 @@ import string
 from .sqlite import SQLiteDatabase
 from .const_and_singleton import ph
 from .other_tools import generate_random_string
-from shared_utils.scholar_navis.multi_lang import _
+from multi_language import init_language
 
 
-def generate_user_token(username):
+def generate_user_token(username) -> str:
     return generate_random_string(length=64,chars=string.ascii_letters+string.digits,seed=username)
 
 def check_username_valid(username_input):
-    """检查用户名是否有效"""
+    """检查用户名是否有效，有效返回true，否则返回false。"""
     return bool(re.match(r'^[a-zA-Z0-9_]+$', username_input))
 
 
@@ -32,6 +32,10 @@ def check_password_strong(password_input:str):
     password_input = password_input.strip()
     if len(password_input) < 8:
         return False
+
+    if not re.match(r'^[\x20-\x7E]+$', password_input):  # 检查是否只包含ASCII字符
+        return False
+
     has_lowercase = re.search(r'[a-z]', password_input) is not None    # 检查小写字母
     has_uppercase = re.search(r'[A-Z]', password_input) is not None    # 检查大写字母
     has_digit = re.search(r'\d', password_input) is not None            # 检查数字
@@ -47,7 +51,8 @@ def check_password_match(password_input,username):
     except Exception as e:
         return False
 
-def change_password(current_password_input,new_password_input,new_password_confirm_input,username):
+def change_password(current_password_input,new_password_input,new_password_confirm_input,username,lang):
+    _ = lambda text: init_language(text, lang)
     new_password_input = new_password_input.strip()
     current_password_input = current_password_input.strip()
     new_password_confirm_input = new_password_confirm_input.strip()

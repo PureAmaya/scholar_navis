@@ -1,6 +1,11 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-04-11
+- Add the Grok3 series models.
+- Updated information for the Gemini series models and added support for customization.
+- Compatible with the new multilingual feature.
+
 Modified by PureAmaya on 2025-03-10
 - Add model: qwq-plus, claude-3-7-sonnet-latest
 
@@ -29,14 +34,14 @@ Modified by PureAmaya on 2024-12-28
     具备多线程调用能力的函数：在函数插件中被调用，灵活而简洁
     2. predict_no_ui_long_connection(...)
 """
-import tiktoken, copy, re
+import tiktoken
 from functools import lru_cache
 from concurrent.futures import ThreadPoolExecutor
 from toolbox import trimmed_format_exc,update_ui
 from shared_utils.text_mask import apply_gpt_academic_string_mask
 from shared_utils.map_names import read_one_api_model_name
 from shared_utils.config_loader import get_conf
-from shared_utils.scholar_navis.multi_lang import _
+from multi_language import init_language
 import threading, time, copy
 from .scholar_navis.model_info import model_info_class
 
@@ -49,10 +54,6 @@ from .bridge_chatglm import predict as chatglm_ui
 from .bridge_chatglm3 import predict_no_ui_long_connection as chatglm3_noui
 from .bridge_chatglm3 import predict as chatglm3_ui
 
-
-from .bridge_google_gemini import predict as genai_ui
-from .bridge_google_gemini import predict_no_ui_long_connection  as genai_noui
-
 from .bridge_zhipu import predict_no_ui_long_connection as zhipu_noui
 from .bridge_zhipu import predict as zhipu_ui
 
@@ -64,13 +65,19 @@ from .oai_std_model_template import get_predict_function
 
 colors = ['#FF00FF', '#00FFFF', '#FF0000', '#990099', '#009999', '#990044']
 
+_= init_language
+
 class LazyloadTiktoken(object):
+
+
+
     def __init__(self, model):
         self.model = model
 
     @staticmethod
     @lru_cache(maxsize=128)
     def get_encoder(model):
+
         print(_('正在加载tokenizer，如果是第一次运行，可能需要一点时间下载参数'))
         tmp = tiktoken.encoding_for_model(model)
         print(_('加载tokenizer完毕'))
@@ -89,7 +96,7 @@ API_URL_REDIRECT, AZURE_ENDPOINT, AZURE_ENGINE = get_conf("API_URL_REDIRECT", "A
 openai_endpoint = "https://api.openai.com/v1/chat/completions"
 api2d_endpoint = "https://openai.api2d.net/v1/chat/completions"
 newbing_endpoint = "wss://sydney.bing.com/sydney/ChatHub"
-gemini_endpoint = "https://generativelanguage.googleapis.com/v1beta/models"
+gemini_endpoint = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions"
 claude_endpoint = "https://api.anthropic.com/v1/messages"
 cohere_endpoint = "https://api.cohere.ai/v1/chat"
 ollama_endpoint = "http://localhost:11434/api/chat"
@@ -295,44 +302,6 @@ model_info = {
         "tokenizer": tokenizer_gpt35,
         "token_cnt": get_token_num_gpt35,
     },
-
-    # gemini
-    "gemini-2.0-flash": {
-        "fn_with_ui": genai_ui,
-        "fn_without_ui": genai_noui,
-        "endpoint": gemini_endpoint,
-        "max_token": 1048576,
-        "tokenizer": tokenizer_gpt35,
-        "token_cnt": get_token_num_gpt35,
-    },
-    
-    "gemini-1.5-flash": {
-        "fn_with_ui": genai_ui,
-        "fn_without_ui": genai_noui,
-        "endpoint": gemini_endpoint,
-        "max_token": 1048576,
-        "tokenizer": tokenizer_gpt35,
-        "token_cnt": get_token_num_gpt35,
-    },
-
-    "gemini-1.5-flash-8b": {
-        "fn_with_ui": genai_ui,
-        "fn_without_ui": genai_noui,
-        "endpoint": gemini_endpoint,
-        "max_token": 1048576,
-        "tokenizer": tokenizer_gpt35,
-        "token_cnt": get_token_num_gpt35,
-    },
-
-    "gemini-1.5-pro": {
-        "fn_with_ui": genai_ui,
-        "fn_without_ui": genai_noui,
-        "endpoint": gemini_endpoint,
-        "max_token": 2097152,
-        "tokenizer": tokenizer_gpt35,
-        "token_cnt": get_token_num_gpt35,
-    },
-
 
     # cohere
     "cohere-command-r-plus": {
@@ -737,14 +706,89 @@ if "deepseek-chat" in AVAIL_LLM_MODELS or "deepseek-reasoner" in AVAIL_LLM_MODEL
         print(trimmed_format_exc())
 
 
+# -=-=-=-=-=-=- Google Gemini -=-=-=-=-=-=-
+if any (m.startswith('gemini') for m in AVAIL_LLM_MODELS ) :
+    try:
+        gemini_noui, gemini_ui = get_predict_function(
+            api_key_conf_name="GEMINI_API_KEY", friendly_name='Gemini',max_output_token=8192, disable_proxy=False
+            )
+        model_info.update({
+            "gemini-2.5-pro-preview-03-25":{
+                "fn_with_ui": gemini_ui,
+                "fn_without_ui": gemini_noui,
+                "endpoint": gemini_endpoint,
+                "can_multi_thread": True,
+                "max_token": 1048576,
+                "tokenizer": tokenizer_gpt35,
+                "token_cnt": get_token_num_gpt35,
+            },
+            "gemini-2.0-flash":{
+                "fn_with_ui": gemini_ui,
+                "fn_without_ui": gemini_noui,
+                "endpoint": gemini_endpoint,
+                "can_multi_thread": True,
+                "max_token": 1048576,
+                "tokenizer": tokenizer_gpt35,
+                "token_cnt": get_token_num_gpt35,
+            },
+            "gemini-2.0-flash-lite": {
+                "fn_with_ui": gemini_ui,
+                "fn_without_ui": gemini_noui,
+                "endpoint": gemini_endpoint,
+                "can_multi_thread": True,
+                "max_token": 1048576,
+                "tokenizer": tokenizer_gpt35,
+                "token_cnt": get_token_num_gpt35,
+            },
+        })
+    except:
+        print(trimmed_format_exc())
+
+
 # -=-=-=-=-=-=- X.Grok -=-=-=-=-=-=-
-if "grok-2" in AVAIL_LLM_MODELS:
+if any(m.startswith("grok-") for m in AVAIL_LLM_MODELS):
     try:
         grok_noui, grok_ui = get_predict_function(
             api_key_conf_name="XAI_API_KEY",friendly_name='Grok', max_output_token=8192, disable_proxy=False
             )
         model_info.update({
             "grok-2":{
+                "fn_with_ui": grok_ui,
+                "fn_without_ui": grok_noui,
+                "endpoint": 'https://api.x.ai/v1/chat/completions',
+                "can_multi_thread": True,
+                "max_token": 131072,
+                "tokenizer": tokenizer_gpt35,
+                "token_cnt": get_token_num_gpt35,
+            },
+            "grok-3-mini-fast": {
+                "fn_with_ui": grok_ui,
+                "fn_without_ui": grok_noui,
+                "endpoint": 'https://api.x.ai/v1/chat/completions',
+                "can_multi_thread": True,
+                "max_token": 131072,
+                "tokenizer": tokenizer_gpt35,
+                "token_cnt": get_token_num_gpt35,
+            },
+            "grok-3-mini": {
+                "fn_with_ui": grok_ui,
+                "fn_without_ui": grok_noui,
+                "endpoint": 'https://api.x.ai/v1/chat/completions',
+                "can_multi_thread": True,
+                "max_token": 131072,
+                "tokenizer": tokenizer_gpt35,
+                "token_cnt": get_token_num_gpt35,
+            },
+            "grok-3-fast": {
+                "fn_with_ui": grok_ui,
+                "fn_without_ui": grok_noui,
+                "endpoint": 'https://api.x.ai/v1/chat/completions',
+                "can_multi_thread": True,
+                "max_token": 131072,
+                "tokenizer": tokenizer_gpt35,
+                "token_cnt": get_token_num_gpt35,
+            },
+            "grok-3": {
                 "fn_with_ui": grok_ui,
                 "fn_without_ui": grok_noui,
                 "endpoint": 'https://api.x.ai/v1/chat/completions',
@@ -865,7 +909,7 @@ def LLM_CATCH_EXCEPTION(f):
     return decorated
 
 
-def predict_no_ui_long_connection(inputs:str, llm_kwargs:dict, history:list, sys_prompt:str, observe_window:list=[], console_slience:bool=False):
+def predict_no_ui_long_connection(inputs:str, llm_kwargs:dict, history:list, sys_prompt:str, observe_window:list=[], console_slience:bool=False,lang:str = None):
     """
     发送至LLM，等待回复，一次性完成，不显示中间过程。但内部（尽可能地）用stream的方法避免中途网线被掐。
     inputs：
@@ -879,6 +923,8 @@ def predict_no_ui_long_connection(inputs:str, llm_kwargs:dict, history:list, sys
     observe_window = None：
         用于负责跨越线程传递已经输出的部分，大部分时候仅仅为了fancy的视觉效果，留空即可。observe_window[0]：观测窗。observe_window[1]：看门狗
     """
+
+    _ = lambda txt:init_language(txt,lang)
 
     if not isinstance(history,list):
         raise ValueError(_("历史记录参数必须是List, 但是现在的类型是{}").format(type(history)))
@@ -901,7 +947,7 @@ def predict_no_ui_long_connection(inputs:str, llm_kwargs:dict, history:list, sys
         # 检查输入长度
     accessible,msg1,msg2 = check_actual_inputs_length(inputs=inputs,history=history,
                                             token_cnt = model_info[llm_kwargs['llm_model']]['token_cnt'],
-                                            max_token = model_info[llm_kwargs['llm_model']]['max_token'])
+                                            max_token = model_info[llm_kwargs['llm_model']]['max_token'],lang=lang)
 
     if not accessible:
         raise ConnectionAbortedError(f'{msg1}. {msg2}') # 兼容crazy_utils.py的异常处理
@@ -1001,6 +1047,8 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot,
             additional_fn:str=None          # 基础功能区按钮的附加功能
         ):
     """
+    lang = chatbot.get_language()
+    _ = lambda text: init_language(text, lang)
 
     if not isinstance(history,list):
         raise ValueError(_("历史记录参数必须是List"))
@@ -1012,7 +1060,7 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot,
     # 检查输入长度
     accessible,msg1,msg2 = check_actual_inputs_length(inputs=inputs,history=history,
                                             token_cnt = model_info[llm_kwargs['llm_model']]['token_cnt'],
-                                            max_token = model_info[llm_kwargs['llm_model']]['max_token'])
+                                            max_token = model_info[llm_kwargs['llm_model']]['max_token'],lang=lang)
 
     if not accessible:
         chatbot.append([msg1,msg2])
@@ -1029,7 +1077,10 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot,
     yield from method(inputs, llm_kwargs, plugin_kwargs, chatbot, history, system_prompt, stream, additional_fn)
 
 
-def check_actual_inputs_length(inputs:str,history:list,token_cnt,max_token):
+def check_actual_inputs_length(inputs:str,history:list,token_cnt,max_token,lang):
+
+    _ = lambda text: init_language(text, lang)
+
     actual_input = f'{inputs}\n{"\n".join(history)}'
     threshold = int(0.95 * max_token)
     if token_cnt(actual_input) > threshold:

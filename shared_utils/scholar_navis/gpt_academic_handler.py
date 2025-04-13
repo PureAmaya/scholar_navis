@@ -4,20 +4,17 @@ Author: scholar_navis@PureAmaya
 
 import sys
 import gradio as gr
-from .multi_lang import _
+from multi_language import init_language
 from shared_utils.config_loader import get_conf
 from .const_and_singleton import GPT_SUPPORT_LAMGUAGE
-from old_file_clear import start_clear_old_files
 from .other_tools import generate_text_file_download
 from shared_utils.colorful import print亮黄
 
 ENABLE_PUBMED_DOWNLOADER,EXTRACT_USEFUL_SENTENCES_THREADS_MAX_NUM=get_conf('ENABLE_PUBMED_DOWNLOADER','EXTRACT_USEFUL_SENTENCES_THREADS_MAX_NUM')
 
-def registrator(function_plugins: dict):
-
+def registrator(function_plugins: dict,lang:str):
+    _ = lambda text:init_language(text,lang)
     # 负责与 gpt_academic 交互，用它调用，合理（
-
-    start_clear_old_files()
 
     #try:
     from crazy_functions.scholar_navis.scripts.cache_pdf_articles import pdf_cacher
@@ -102,7 +99,9 @@ def registrator(function_plugins: dict):
     return function_plugins
 
 
-def common_functions_panel_registrator(plugins: dict):
+def common_functions_panel_registrator(plugins: dict,lang:str):
+    _ = lambda text: init_language(text, lang)
+
     gr.HTML('<h3 align="center">{}</h3>'.format(_("Scholar Navis 文章总结分析工具")))
     with gr.Row(equal_height=True):
         for index, (k, plugin) in enumerate(plugins.items()):
@@ -121,8 +120,8 @@ def common_functions_panel_registrator(plugins: dict):
     return plugins
 
 
-def extract_useful_sentenses_panel(cookies,md_dropdown,temperature,top_p,user_custom_data):
-    
+def extract_useful_sentenses_panel(cookies,md_dropdown,temperature,top_p,user_custom_data,lang):
+    _ = lambda text: init_language(text, lang)
     
     template_content ='''\
 title,text

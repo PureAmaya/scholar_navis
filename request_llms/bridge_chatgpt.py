@@ -19,8 +19,8 @@ import traceback
 import requests
 import random
 from shared_utils.config_loader import get_conf
-from shared_utils.scholar_navis.multi_lang import _
-from gradio_compatibility_layer import HTML
+from multi_language import init_language
+from dependencies.i18n.gradio_i18n import HTML
 from shared_utils.advanced_markdown_format import md2html
 
 # config_private.py放自己的秘密如API和代理网址
@@ -33,6 +33,8 @@ proxies, TIMEOUT_SECONDS, MAX_RETRY, API_ORG, AZURE_CFG_ARRAY = \
 
 timeout_bot_msg = '[Local Message] Request timeout. Network error. Please check proxy settings in config.py.' + \
                   '网络错误，检查代理服务器是否可用，以及代理设置的格式是否正确，格式须是[协议]://[地址]:[端口]，缺一不可。'
+
+_ = init_language
 
 def _get_url_redirect_and_check(llm_kwargs:dict,model_info:dict):
     custom_endpoint = llm_kwargs['custom_url_redirect']
@@ -225,6 +227,9 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot:ChatBotWith
     chatbot 为WebUI中显示的对话列表，修改它，然后yeild出去，可以直接修改对话界面内容
     additional_fn代表点击的哪个按钮，按钮见functional.py
     """
+    lang = chatbot.get_language()
+    _ = lambda text: init_language(text, lang)
+
     from .bridge_all import model_info
     if is_any_api_key(inputs):
         chatbot._cookies['api_key'] = inputs

@@ -1,0 +1,2 @@
+from .text_i18n import SUPPORT_DISPLAY_LANGUAGE_TUPLE,SUPPORT_DISPLAY_LANGUAGE,get_translator
+from . import gradio_i18n

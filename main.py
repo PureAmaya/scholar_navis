@@ -1,6 +1,10 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-04-11
+- The JS events for the reset and stop buttons have been removed from the py file.
+- Compatible with the new multilingual feature.
+
 Modified by PureAmaya on 2025-03-18
 - The initialization of JS is handed over to JS itself for execution.
 
@@ -23,98 +27,122 @@ Modified by PureAmaya on 2024-12-28
 - Adjust HTML footer, title, copyright, help documentation, AI warning, etc.
 '''
 
+from crazy_functional import get_crazy_functions
 import os, json; os.environ['no_proxy'] = '*' # 避免代理网络产生意外污染
 from shared_utils.scholar_navis.gpt_academic_handler import common_functions_panel_registrator,extract_useful_sentenses_panel
-from themes.scholar_navis.html_head_manager import head
+from themes.html_head_manager import head
 from themes.common import run_advanced_plugin_launch_code
-from shared_utils.scholar_navis.multi_lang import _,selected_language
-from shared_utils.scholar_navis.const_and_singleton import footer
+from multi_language import init_language,LANGUAGE_DISPLAY,MULTILINGUAL
+from shared_utils.scholar_navis.const_and_singleton import footer,NOTIFICATION_ROOT_DIR
+from dependencies.i18n import SUPPORT_DISPLAY_LANGUAGE
+from dependencies import gradio_compatibility_layer  as gr
+from shared_utils.fastapi_server import start_app
+from shared_utils.cookie_manager import make_cookie_cache, make_history_cache
+from themes.common import theme
+from shared_utils.config_loader import get_conf
+from toolbox import find_free_port, on_file_uploaded, ArgsGeneralWrapper, DummyWith
+from request_llms.bridge_all import predict
+from themes.theme import assign_user_uuid
+import threading, webbrowser, time
+from old_file_auto_cleaner import start_clear_old_files
 
-help_menu_description = \
-_("""
-## gpt_academic：
-Github源代码开源和更新[地址](https://github.com/binary-husky/gpt_academic),
-感谢热情的[开发者们](https://github.com/binary-husky/gpt_academic/graphs/contributors).
-
-
-## Scholar Navis：
-**[Scholar Navis](https://github.com/PureAmaya/scholar_navis)为 gpt_academic的衍生作品**<br>
-关于对gpt_acadmic的修改和使用帮助，请阅读[README](https://github.com/PureAmaya/scholar_navis/blob/main/README.md).
-
-</br>普通对话使用说明: 1. 输入问题; 2. 点击提交
-</br></br>基础功能区使用说明: 1. 输入文本; 2. 点击任意基础功能区按钮
-</br></br>函数插件区使用说明: 1. 输入路径/问题, 或者上传文件; 2. 点击任意函数插件区按钮
-</br></br>如何保存对话: 点击保存当前的对话按钮
-</br></br>如何语音对话: 请阅读Wiki
-</br></br>要使用大模型，请在左上角的 API-KEY 中输入您的密钥。
-""")
+# 统一读取配置
+proxies, WEB_PORT, LLM_MODEL, CONCURRENT_COUNT, AUTHENTICATION = get_conf('proxies', 'WEB_PORT', 'LLM_MODEL',
+                                                                          'CONCURRENT_COUNT', 'AUTHENTICATION')
+CHATBOT_HEIGHT, LAYOUT, AVAIL_LLM_MODELS, AUTO_CLEAR_TXT = get_conf('CHATBOT_HEIGHT', 'LAYOUT', 'AVAIL_LLM_MODELS',
+                                                                    'AUTO_CLEAR_TXT')
+AUTO_CLEAR_TXT = get_conf('AUTO_CLEAR_TXT')
+SSL_KEYFILE, SSL_CERTFILE = get_conf('SSL_KEYFILE', 'SSL_CERTFILE')
 
 
 def main():
-    import gradio_compatibility_layer as gr
-    #if gr.__version__ not in ['3.32.9', '3.32.10', '3.32.11']:
-    #    raise ModuleNotFoundError("使用项目内置Gradio获取最优体验! 请运行 `pip install -r requirements.txt` 指令安装内置Gradio及其他依赖, 详情信息见requirements.txt.")
-    from request_llms.bridge_all import predict
-    from shared_utils.config_loader import get_conf
-    from toolbox import find_free_port, on_file_uploaded, ArgsGeneralWrapper, DummyWith
 
-    # 读取配置
-    proxies, WEB_PORT, LLM_MODEL, CONCURRENT_COUNT, AUTHENTICATION = get_conf('proxies', 'WEB_PORT', 'LLM_MODEL', 'CONCURRENT_COUNT', 'AUTHENTICATION')
-    CHATBOT_HEIGHT, LAYOUT, AVAIL_LLM_MODELS, AUTO_CLEAR_TXT = get_conf('CHATBOT_HEIGHT', 'LAYOUT', 'AVAIL_LLM_MODELS', 'AUTO_CLEAR_TXT')
-    AUTO_CLEAR_TXT= get_conf( 'AUTO_CLEAR_TXT')
-    SSL_KEYFILE, SSL_CERTFILE = get_conf('SSL_KEYFILE', 'SSL_CERTFILE')
-    
+    # 非gradio部分，使用固定语言
+    _ = lambda text:init_language(text,LANGUAGE_DISPLAY)
+
+
+    global AVAIL_LLM_MODELS
     if LLM_MODEL not in AVAIL_LLM_MODELS: AVAIL_LLM_MODELS += [LLM_MODEL]
 
     # 如果WEB_PORT是-1, 则随机选取WEB端口
     PORT = find_free_port() if WEB_PORT <= 0 else WEB_PORT
-    from check_proxy import get_current_version
-    from themes.theme import js_code_clear, js_code_reset
-    from themes.theme import assign_user_uuid
-    
-    # SCHOAR NAVIS 
-    title_html = f"<h1 align=\"center\">Scholar Navis</h1>"
-    
-    notification_fp = os.path.join(os.path.dirname(__file__),'notification','notification.txt')
-    if os.path.exists(notification_fp):
-        with open(notification_fp,'r',encoding='utf-8') as f:
-            title_html = title_html + f'<p style="text-align: left; margin-left: 20px; margin-right: 20px;">{f.read()}</p>'
-    
-    # 对话、日志记录（暂时先不要）
-    #if CONFIG['enable_user_usage_log']:enable_log(PATH_LOGGING)
-
-    # 高级函数插件
-    from crazy_functional import get_crazy_functions
-    DEFAULT_FN_GROUPS = [] #get_conf('DEFAULT_FN_GROUPS') 目前用不到分组了
-    plugins = get_crazy_functions()
-    all_plugin_groups = list(set([g for _, plugin in plugins.items() for g in plugin['Group'].split('|')]))
-    if 'Scholar Navis' in all_plugin_groups: all_plugin_groups.remove('Scholar Navis')
-    match_group = lambda tags, groups: any([g in groups for g in tags.split('|')])
-
-    # 处理markdown文本格式的转变
-    #gr.Chatbot.postprocess = format_io
 
     # 代理与自动更新
     from check_proxy import check_proxy
     proxy_info = check_proxy(proxies)
 
-    # 切换布局
-    gr_L1 = lambda: gr.Row()
-    gr_L2 = lambda scale, elem_id: gr.Column(scale=scale, elem_id=elem_id, min_width=400)
-    if LAYOUT == "TOP-DOWN":
-        gr_L1 = lambda: DummyWith()
-        gr_L2 = lambda scale, elem_id: gr.Row()
-        CHATBOT_HEIGHT /= 2
+    # 构建gradio（多语言）
+    apps = {}
+    if MULTILINGUAL:
+        for lang in SUPPORT_DISPLAY_LANGUAGE:
+            apps.update(build_gradio(lang))
+    else:
+        apps.update(build_gradio(LANGUAGE_DISPLAY))
+
+    # 运行一些异步任务：自动更新、打开浏览器页面、预热tiktoken模块
+    run_delayed_tasks()
+
+     # 启用清理进程
+    start_clear_old_files()
+
+    # 最后，正式开始服务
+    start_app(apps,CONCURRENT_COUNT, AUTHENTICATION, PORT, SSL_KEYFILE, SSL_CERTFILE)
+
+
+def build_gradio(lang:str):
+
+    # gradio部分，使用偏好语言
+    _ = lambda text: init_language(text, lang)
+
+    help_menu_description = \
+        _("""
+    ## gpt_academic：
+    Github源代码开源和更新[地址](https://github.com/binary-husky/gpt_academic),
+    感谢热情的[开发者们](https://github.com/binary-husky/gpt_academic/graphs/contributors).
+
+
+    ## Scholar Navis：
+    **[Scholar Navis](https://github.com/PureAmaya/scholar_navis)为 gpt_academic的衍生作品**<br>
+    关于对gpt_acadmic的修改和使用帮助，请阅读[README](https://github.com/PureAmaya/scholar_navis/blob/main/README.md).
+
+    </br>普通对话使用说明: 1. 输入问题; 2. 点击提交
+    </br></br>基础功能区使用说明: 1. 输入文本; 2. 点击任意基础功能区按钮
+    </br></br>函数插件区使用说明: 1. 输入路径/问题, 或者上传文件; 2. 点击任意函数插件区按钮
+    </br></br>如何保存对话: 点击保存当前的对话按钮
+    </br></br>如何语音对话: 请阅读Wiki
+    </br></br>要使用大模型，请在左上角的 API-KEY 中输入您的密钥。
+    """)
+
+    # 高级函数插件
+    DEFAULT_FN_GROUPS = [] #get_conf('DEFAULT_FN_GROUPS') 目前用不到分组了
+    plugins = get_crazy_functions(lang)
+    all_plugin_groups = list(set([g for m, plugin in plugins.items() for g in plugin['Group'].split('|')]))
+    if 'Scholar Navis' in all_plugin_groups: all_plugin_groups.remove('Scholar Navis')
+    match_group = lambda tags, groups: any([g in groups for g in tags.split('|')])
 
     cancel_handles = []
     customize_btns = {}
     predefined_btns = {}
-    from shared_utils.cookie_manager import make_cookie_cache, make_history_cache
-    from themes.common import theme
+
+    # SCHOAR NAVIS
+    title_html = f"<h1 align=\"center\">Scholar Navis</h1>"
+
+    notification_lang_fp = os.path.join(NOTIFICATION_ROOT_DIR,lang,'notification.txt')
+    notification_fp = os.path.join(NOTIFICATION_ROOT_DIR, 'notification.txt')
+
+    if os.path.isfile(notification_lang_fp):
+        path = notification_lang_fp
+    else: path = notification_fp
+
+    if os.path.exists(path):
+        with open(path, 'r', encoding='utf-8') as f:
+            title_html = title_html + f'<p style="text-align: left; margin-left: 20px; margin-right: 20px;">{f.read()}</p>'
+
     with gr.Blocks(title="Scholar Navis", head=head(), theme=theme,analytics_enabled=False) as app_block:
+
         with gr.Row():
             floating_panel_switch_btn = gr.Button(value=_("上传与设置"),icon=os.path.join('themes','svg','gear.svg'),elem_id='floating_panel_switch_btn') # 的新浮动面板按钮
-            dark_mode_btn = gr.Button(_('暗黑模式'),icon=os.path.join('themes','svg','dark_mode_toggle.svg'), elem_id='dark_mode_toggle')
+            dark_mode_btn = gr.Button(value=_('暗黑模式'),icon=os.path.join('themes','svg','dark_mode_toggle.svg'), elem_id='dark_mode_toggle')
             
         gr.HTML(title_html)
         gr.HTML('<strong>{}</strong>'.format(_("下方内容为 AI 生成，不代表任何立场，可能存在片面甚至错误。仅供参考，开发者及其组织不负任何责任")))
@@ -122,20 +150,29 @@ def main():
 
         cookies, web_cookie_cache = make_cookie_cache() # 定义 后端state（cookies）、前端（web_cookie_cache）两兄弟
 
-        with gr.Tab(_('对话功能'),id = '0'):
+        # 切换布局
+        global CHATBOT_HEIGHT
+        gr_L1 = lambda: gr.Row()
+        gr_L2 = lambda scale, elem_id: gr.Column(scale=scale, elem_id=elem_id, min_width=400)
+        if LAYOUT == "TOP-DOWN":
+            gr_L1 = lambda: DummyWith()
+            gr_L2 = lambda scale, elem_id: gr.Row()
+            CHATBOT_HEIGHT /= 2
+
+        with gr.Tab(label=_('对话功能'),id = '0',elem_classes='main_tab'):
             with gr_L1():
                 with gr_L2(scale=2, elem_id="gpt-chat"):
-                    chatbot = gr.Chatbot(type='messages',label=_("当前模型: {}").format(LLM_MODEL), 
+                    chatbot = gr.Chatbot(type='messages',label=_("当前模型: {}").format(LLM_MODEL),
                                         elem_id="gpt-chatbot",show_copy_button=True,show_copy_all_button=True,
                                         height=580,sanitize_html=False)
                     if LAYOUT == "TOP-DOWN":  chatbot.height = CHATBOT_HEIGHT/3
                     history, history_cache, history_cache_update = make_history_cache() # 定义 后端state（history）、前端（history_cache）、后端setter（history_cache_update）三兄弟
                 with gr_L2(scale=1, elem_id="gpt-panel"):
-                    with gr.Accordion(_("输入区"), open=True, elem_id="input-panel") as area_input_primary:
+                    with gr.Accordion(label = _("输入区"), open=True, elem_id="input-panel") as area_input_primary:
                         with gr.Row():
                             txt = gr.Textbox(show_label=False, placeholder="Input question here.", elem_id='user_input_main',show_copy_button=True).style(container=False)
                         with gr.Row(elem_id="gpt-submit-row"):
-                            multiplex_submit_btn = gr.Button(_("提交"), elem_id="elem_submit_visible", variant="primary")
+                            multiplex_submit_btn = gr.Button(value=_("提交"), elem_id="elem_submit_visible", variant="primary")
                             multiplex_sel = gr.Dropdown(
                                 choices=[
                                     "常规对话", # 应该是无用了
@@ -145,16 +182,16 @@ def main():
                                 ], value="常规对话",
                                 interactive=False, label='', show_label=False,visible=False,
                                 elem_classes='normal_mut_select', elem_id="gpt-submit-dropdown").style(container=False)
-                            submit_btn = gr.Button(_("提交"), elem_id="elem_submit", variant="primary", visible=False)
+                            submit_btn = gr.Button(value=_("提交"), elem_id="elem_submit", variant="primary", visible=False)
                         with gr.Row():
-                            resetBtn = gr.Button(_("重置"), elem_id="elem_reset", variant="secondary"); resetBtn.style(size="sm")
-                            stopBtn = gr.Button(_("停止"), elem_id="elem_stop", variant="secondary"); stopBtn.style(size="sm")
-                            clearBtn = gr.Button(_("清除"), elem_id="elem_clear", variant="secondary", visible=True); clearBtn.style(size="sm")
+                            resetBtn = gr.Button(value=_("重置"), elem_id="elem_reset", variant="secondary"); resetBtn.style(size="sm")
+                            stopBtn = gr.Button(value=_("停止"), elem_id="elem_stop", variant="secondary"); stopBtn.style(size="sm")
+                            clearBtn = gr.Button(value =_("清除"), elem_id="elem_clear", variant="secondary", visible=True); clearBtn.style(size="sm")
                         with gr.Row():
-                            status = gr.Markdown(_("Tip: 按Enter提交, 按Shift+Enter换行"), elem_id="state-panel")
+                            status = gr.Markdown(value= _("Tip: 按Enter提交, 按Shift+Enter换行"), elem_id="state-panel")
                     
-                    with gr.Accordion(_("Scholar Navis 功能区"), open=True, elem_id="sn-panel"):
-                        plugins = common_functions_panel_registrator(plugins)
+                    with gr.Accordion(label = _("Scholar Navis 功能区"), open=True, elem_id="sn-panel"):
+                        plugins = common_functions_panel_registrator(plugins,lang)
                     
 
 
@@ -184,22 +221,21 @@ def main():
                                 with gr.Row():
                                     switchy_bt = gr.Button(r"请先从插件列表中选择", variant="secondary", elem_id="elem_switchy_bt").style(size="sm")
                         #with gr.Row():
-        t = gr.Tab(_('摘取有用语句'),id=1)
+        t = gr.Tab(label = _('摘取有用语句'),id=1,elem_classes='main_tab')
 
         # 左上角工具栏定义
         from themes.gui_toolbar import define_gui_toolbar
         tooltip_panel,init_event_list, max_length_sl, system_prompt, file_upload_2, md_dropdown, top_p, temperature,user_custom_data = \
-            define_gui_toolbar(chatbot, help_menu_description)
+            define_gui_toolbar(chatbot, help_menu_description,lang)
 
         # 插件二级菜单的实现
         from themes.gui_advanced_plugin_class import define_gui_advanced_plugin_class
         plugin_arg_menu,new_plugin_callback, route_switchy_bt_with_arg, usr_confirmed_arg,usr_editing_arg,plugin_arg_list= \
-            define_gui_advanced_plugin_class(plugins)
-        floating_panel_switch_btn
+            define_gui_advanced_plugin_class(plugins,lang)
         
         t.__enter__()
         # 在这里注册摘取功能
-        extract_useful_sentenses_panel(cookies,md_dropdown,temperature,top_p,user_custom_data)
+        extract_useful_sentenses_panel(cookies,md_dropdown,temperature,top_p,user_custom_data,lang)
         t.__exit__()
 
         gr.HTML(footer)
@@ -218,12 +254,12 @@ def main():
         multiplex_sel.select(
             None, [multiplex_sel], None, js="""(multiplex_sel)=>run_multiplex_shift(multiplex_sel)""")
         cancel_handles.append(submit_btn.click(**predict_args))
-        resetBtn.click(None, None, [chatbot, history, status], js=js_code_reset)   # 先在前端快速清除chatbot&status
+        resetBtn.click(None, None, [chatbot, history, status], js='reset_conversation')   # 先在前端快速清除chatbot&status
         reset_server_side_args = (lambda history: ('',[], [], _("已重置"), json.dumps(history)), [history], [txt,chatbot, history, status, history_cache])
         resetBtn.click(*reset_server_side_args)    # 再在后端清除history，把history转存history_cache备用
-        clearBtn.click(None, None, [txt,txt], js=js_code_clear)
+        clearBtn.click(None, None, [txt,txt], js='''()=>{return ["", ""];}''')
         if AUTO_CLEAR_TXT:
-            submit_btn.click(None, None, [txt,txt], js=js_code_clear)
+            submit_btn.click(None, None, [txt,txt], js='''()=>{return ["", ""];}''')
 
         for btn in customize_btns.values():
             click_handle = btn.click(fn=ArgsGeneralWrapper(predict), inputs=[*input_combo, gr.State(True), gr.State(btn.value)], outputs=output_combo)
@@ -235,7 +271,7 @@ def main():
         for item in plugins.items():
             k = item[0]
             if plugins[k].get("Class", None):
-                plugins[k]["JsMenu"] = plugins[k]["Class"]().get_js_code_for_generating_menu(k)
+                plugins[k]["JsMenu"] = plugins[k]["Class"]().get_js_code_for_generating_menu(lang)
             if not plugins[k].get("AsButton", True): continue
 
             def aaa(txt,plugin_advanced_arg,gr_button):
@@ -250,11 +286,13 @@ def main():
         dropdown.select(None, [dropdown], None, js="""(dropdown)=>run_dropdown_shift(dropdown)""")
 
         # 模型切换时的回调
-        def on_md_dropdown_changed(k):
+        def on_md_dropdown_changed(request:gr.Request,k):
+            lang = request.cookies.get('lang')
+            _ = lambda txt: init_language(txt, lang)
             return {chatbot: gr.update(label=_("当前模型: {}").format(k))}
         md_dropdown.select(on_md_dropdown_changed, [md_dropdown], [chatbot])
 
-        switchy_bt.click(None, [switchy_bt], None, js="(switchy_bt)=>on_flex_button_click(switchy_bt)")
+        # switchy_bt.click(None, [switchy_bt], None, js="(switchy_bt)=>on_flex_button_click(switchy_bt)")
         
         # 新一代插件的高级参数区确认按钮（隐藏）
         click_handle_ng = new_plugin_callback.click(route_switchy_bt_with_arg,
@@ -278,26 +316,40 @@ def main():
         # 暗黑模式切换
         dark_mode_btn.click(None,None,None,js="""dark_mode_toggle""")
 
+        # i8n （该方案暂时废弃）
+        # 获取所有已追踪的组件列表 (在定义完所有追踪组件之后!)
+        # 用 list() 创建一个快照，因为 WeakSet 不能直接用于 outputs
+        #tracked_components_list = list(gr.TRACKED_COMPONENTS_FOR_I18N)
+
+        #_init_language = {
+        #    'fn':lambda x,y:change_language_for_gradio(x, y, tracked_components_list),
+        #    'inputs':[language_state,lang_dropdown],
+        #    'outputs':[language_state] + tracked_components_list
+        #}
+        #lang_dropdown.change(**_init_language)
+        # 初始化的时候，顺便初始化一下语言
+        #init_event_list.append(_init_language)
+
+        # 初始化的脚本
         for event in init_event_list:app_block.load(**event)
+
+    return {lang:app_block}
+
     # Gradio的inbrowser触发不太稳定，回滚代码到原始的浏览器打开函数
-    def run_delayed_tasks():
-        import threading, webbrowser, time
-        print()
-        print(_("如果浏览器没有自动打开，请复制并转到以下URL:"))
-        print(f"http://localhost:{PORT}\n")
 
-        def open_browser(): time.sleep(2); webbrowser.open_new_tab(f"http://localhost:{PORT}")
+def run_delayed_tasks():
+    # 非gradio部分，使用固定语言
+    _ = lambda text: init_language(text, LANGUAGE_DISPLAY)
 
-        if get_conf('AUTO_OPEN_BROWSER'):
-            threading.Thread(target=open_browser, name="open-browser", daemon=True).start() # 打开浏览器页面
 
-    # 运行一些异步任务：自动更新、打开浏览器页面、预热tiktoken模块
-    run_delayed_tasks()
+    print()
+    print(_("如果浏览器没有自动打开，请复制并转到以下URL:"))
+    print(f"http://localhost:{WEB_PORT}\n")
 
-    # 最后，正式开始服务
-    from shared_utils.fastapi_server import start_app
-    from auth import authenticator
-    start_app(app_block,authenticator, CONCURRENT_COUNT, AUTHENTICATION, PORT, SSL_KEYFILE, SSL_CERTFILE)
+    def open_browser(): time.sleep(2); webbrowser.open_new_tab(f"http://localhost:{WEB_PORT}")
+
+    if get_conf('AUTO_OPEN_BROWSER'):
+        threading.Thread(target=open_browser, name="open-browser", daemon=True).start() # 打开浏览器页面
 
 
 if __name__ == "__main__":

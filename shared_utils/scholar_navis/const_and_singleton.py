@@ -23,22 +23,19 @@ GPT_SUPPORT_LAMGUAGE = (
 )
 
 
-GPT_ACADEMIC_ROOT_PATH = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+GPT_ACADEMIC_ROOT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 """gpt_academic根目录"""
-SCHOLAR_NAVIS_ROOT_PATH = os.path.join(
-    GPT_ACADEMIC_ROOT_PATH, "crazy_functions", "scholar_navis"
+SCHOLAR_NAVIS_PLUGIN_ROOT_DIR = os.path.join(
+    GPT_ACADEMIC_ROOT_DIR, "crazy_functions", "scholar_navis"
 )
 """scholar navis 插件的根目录"""
-WEB_SERVICES_ROOT_PATH = os.path.join(GPT_ACADEMIC_ROOT_PATH, "web_services")
+WEB_SERVICES_ROOT_DIR = os.path.join(GPT_ACADEMIC_ROOT_DIR, "web_services")
 """一些WEB服务的根目录"""
-NOTIFICATION_ROOT_PATH = os.path.join(GPT_ACADEMIC_ROOT_PATH, "notification")
+NOTIFICATION_ROOT_DIR = os.path.join(GPT_ACADEMIC_ROOT_DIR, "notification")
 """一些简易通知的根目录"""
-GITHUB_RELEASE_VERSION_URL = "https://raw.githubusercontent.com/PureAmaya/scholar_navis/refs/heads/main/crazy_functions/scholar_navis/version"
-"""github上，获取最新版版本号的url"""
-
 
 try:
-    with open(os.path.join(GPT_ACADEMIC_ROOT_PATH, "version"), "r") as f:
+    with open(os.path.join(GPT_ACADEMIC_ROOT_DIR, "version"), "r") as f:
         VERSION = f.read().strip()
 except:
     VERSION = "1.0.0"
@@ -46,17 +43,8 @@ except:
 
 if __name__ == "__main__":
     print("")
-    print(GPT_ACADEMIC_ROOT_PATH)
-    print(SCHOLAR_NAVIS_ROOT_PATH)
-
-
-# ! 没啥用，找个时间删了
-def get_data_dir(root_dir: str):
-    root_dir = os.path.join("data", root_dir)
-    if not os.path.exists(root_dir):
-        os.makedirs(root_dir)
-    # SCHOLAR_NAVIS_ROOT_PATH/data/root_dir/sub_dir
-    return root_dir
+    print(GPT_ACADEMIC_ROOT_DIR)
+    print(SCHOLAR_NAVIS_PLUGIN_ROOT_DIR)
 
 
 footer = """

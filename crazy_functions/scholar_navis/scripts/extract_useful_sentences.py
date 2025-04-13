@@ -16,7 +16,7 @@ from datetime import datetime
 from typing import Literal
 from ...crazy_utils import get_files_from_everything
 from concurrent.futures import ThreadPoolExecutor
-from shared_utils.scholar_navis.multi_lang import _
+from multi_language import init_language
 from shared_utils.scholar_navis.pdf_reader import get_pdf_content
 from request_llms.bridge_all import predict_no_ui_long_connection 
 from shared_utils.scholar_navis.other_tools import generate_random_string
@@ -130,6 +130,8 @@ class for_gradio:
         Returns:
             _cookies,content_classification,content_requirements,target_language,below_accordion_updater
         """
+        lang = request.cookies.get('lang')
+
         if not cookies:cookies = {}
         
         # 加载上传的文件
@@ -139,6 +141,7 @@ class for_gradio:
         # 显示后续内容
         below_accordion_updater = gr.update(visible=True)
         # 更新cookies
+        new_cookies.update({'lang':lang})
         cookies.update(new_cookies)
         return  cookies,content_classification,content_requirements,target_language,below_accordion_updater
     
@@ -167,6 +170,7 @@ class for_gradio:
 
     @staticmethod
     def before_start_task(cookies,content_classification,content_requirements,lang):
+        _ = lambda text: init_language(text, lang)
         """运行前进行一些检查。成功了再运行
 
         Returns:
@@ -206,7 +210,8 @@ class for_gradio:
         Yields:
             log日志
         """
-        
+        lang = request.cookies.get('lang')
+        _ = lambda text: init_language(text, lang)
         gr.Info(_('任务开始执行'),duration=5)
 
         llm_kwargs = for_gradio.llm_kwargs_combiner(request,cookies,md_dropdown,top_p,temperature,user_custom_data)
@@ -265,7 +270,8 @@ class worker:
         Returns:
             str: 需要下载文件的路径
         """
-        
+        lang = cookies.get('lang')
+        _ = lambda text: init_language(text, lang)
         work_path = cookies.get('extract_sentences_work_path','')
         
         if not os.path.isdir(work_path) or not work_path:
@@ -288,6 +294,10 @@ class worker:
         return file_path
     
     def __init__(self,cookies,logger,llm_kwargs,create_or_load_task,add_extra_pdf, content_requirements,content_classification:str,target_language,max_workers):
+
+        self.lang = cookies.get('lang')
+        self._ = lambda text: init_language(text,  self.lang)
+
         self.work_path = cookies.get('extract_sentences_work_path') # 这样子的话，再修改任务名就没用了233
         tmp_dir = os.path.join(self.work_path,'tmp');os.makedirs(tmp_dir,exist_ok=True)
         self._logger = logger
@@ -306,7 +316,7 @@ class worker:
 
         ###### 先把用户上传的文件存放在临时目录 #$###########
         if not create_or_load_task or not os.path.isfile(create_or_load_task):
-            raise gr.Error(_('文件不存在。请上传文件或选择已有文件'))
+            raise gr.Error(self._('文件不存在。请上传文件或选择已有文件'))
         
         if create_or_load_task.lower().endswith('.zip'):
             with ZipFile(create_or_load_task) as zf:
@@ -317,10 +327,10 @@ class worker:
                         for file in file_list:
                             if file.lower().endswith('.pdf'):
                                 missing_but_pdf_exist = True
-                                gr.Warning(_('压缩包中缺少必要文件 {}，但是有pdf文件，将按照新任务执行。如果您的压缩包内只有pdf，请忽略该提醒').format(os.path.basename(essential_file)))
+                                gr.Warning(self._('压缩包中缺少必要文件 {}，但是有pdf文件，将按照新任务执行。如果您的压缩包内只有pdf，请忽略该提醒').format(os.path.basename(essential_file)))
                                 break
                         if missing_but_pdf_exist:break
-                        raise gr.Error(_('压缩包中缺少必要文件 {}，请重新上传或选择已有文件').format(os.path.basename(essential_file)))
+                        raise gr.Error(self._('压缩包中缺少必要文件 {}，请重新上传或选择已有文件').format(os.path.basename(essential_file)))
                 zf.extractall(tmp_dir)
         
         elif create_or_load_task.lower().endswith('.rar'):
@@ -332,10 +342,10 @@ class worker:
                         for file in file_list:
                             if file.lower().endswith('.pdf'):
                                 missing_but_pdf_exist = True
-                                gr.Warning(_('压缩包中缺少必要文件 {}，但是有pdf文件，将按照新任务执行。如果您的压缩包内只有pdf，请忽略该提醒').format(os.path.basename(essential_file)))
+                                gr.Warning(self._('压缩包中缺少必要文件 {}，但是有pdf文件，将按照新任务执行。如果您的压缩包内只有pdf，请忽略该提醒').format(os.path.basename(essential_file)))
                                 break
                         if missing_but_pdf_exist:break
-                        raise gr.Error(_('压缩包中缺少必要文件 {}，请重新上传或选择已有文件').format(os.path.basename(essential_file)))
+                        raise gr.Error(self._('压缩包中缺少必要文件 {}，请重新上传或选择已有文件').format(os.path.basename(essential_file)))
                 rf.extractall(tmp_dir)
         else:
             # 部分文件更改成统一的文件名
@@ -457,7 +467,7 @@ class worker:
                 return key in self._extract_acceptable_sentences_json
             elif type =='result':
                 return key in self._result_json
-            else:raise ValueError('type参数错误')
+            else:raise ValueError(self._('type参数错误'))
         
     def _exec_multithread(self,pdf_file_fp,title,content,index):
         if title: title_to_print = self._title_splice_in_log(title)
@@ -470,57 +480,57 @@ class worker:
         sleep((sleep_time + self._max_workers) * 1.1)
 
         # 首先，把新加的pdf导入到最开始的csv中（如果有的话）
-        if self._check_lifespan_termination('一开始的'):return
+        if self._check_lifespan_termination():return
         if pdf_file_fp:
             success,title,result =self._convert_pdf_to_article_csv_line(pdf_file_fp)
             if success:
                 title_to_print = self._title_splice_in_log(title)
-                self._update_log('info',_('{} 加载pdf成功').format(title_to_print))
+                self._update_log('info',self._('{} 加载pdf成功').format(title_to_print))
                 content = result;title = title.strip()
                 with lock:self._articles.update({title:content})
             else:
-                self._update_log('error',_('{} 加载pdf: 失败，后续过程将跳过。原因：{}').format(title_to_print,result))
+                self._update_log('error',self._('{} 加载pdf: 失败，后续过程将跳过。原因：{}').format(title_to_print,result))
                 return
             
         # 之后，根据title和content先获取有用的句子（根据内容要求摘取句子）
-        if self._check_lifespan_termination('获取有用句子'):return
+        if self._check_lifespan_termination():return
         success,title,result = self._extract_get_useful_sentences(title,content)
         if not success:
-            self._update_log('error',_('{} 获取有用句子失败，后续过程将跳过。原因：{}').format(title_to_print,result))
+            self._update_log('error',self._('{} 获取有用句子失败，后续过程将跳过。原因：{}').format(title_to_print,result))
             return
         else:
-            self._update_log('info',_('{} 获取有用句子成功').format(title_to_print))
+            self._update_log('info',self._('{} 获取有用句子成功').format(title_to_print))
             with lock:self._useful_sentences_json.update({title:result})
             
         # 摘取可以接受的句子（根据内容分类摘取和整理句子）
-        if self._check_lifespan_termination('摘取可接受句子'):return
+        if self._check_lifespan_termination():return
         success,title,result = self._extract_acceptable_sentences(title,result)
         if not success:
-            self._update_log('error',_('{} 摘取可接受句子失败，后续过程将跳过。原因：{}').format(title_to_print,result))
+            self._update_log('error',self._('{} 摘取可接受句子失败，后续过程将跳过。原因：{}').format(title_to_print,result))
             return
         else:
-            self._update_log('info',_('{} 摘取可接受句子成功').format(title_to_print))
+            self._update_log('info',self._('{} 摘取可接受句子成功').format(title_to_print))
             with lock:self._extract_acceptable_sentences_json.update({title:result})
             
         # 翻译可接受的句子、
-        if self._check_lifespan_termination('翻译可接受句子'):return
+        if self._check_lifespan_termination():return
         success,title,result = self._translate_acceptable_sentences(title,result)
         if not success:
-            self._update_log('error',_('{} 翻译可接受句子失败，后续过程将跳过。原因：{}').format(title_to_print,result))
+            self._update_log('error',self._('{} 翻译可接受句子失败，后续过程将跳过。原因：{}').format(title_to_print,result))
             return
         else:
-            self._update_log('info',_('{} 翻译可接受句子成功').format(title_to_print))
+            self._update_log('info',self._('{} 翻译可接受句子成功').format(title_to_print))
             with lock:self._result_json.update({title:result})
 
-    def _check_lifespan_termination(self,who):
+    def _check_lifespan_termination(self):
         """超时了（该死了）=true
         """
 
         cc = time() - self._time > self.lifespan
         if cc: 
             if self._executor:self._executor.shutdown(wait=False)
-            self._executor = None # 貌似这样子可以修复重新进入之前的多线程任务、然后瞬间完成的bug 
-            print(_('用户终止提取有用语句'))
+            self._executor = None # 貌似这样子可以修复重新进入之前的多线程任务、然后瞬间完成的bug
+            self._update_log('info',msg=self._('用户终止提取有用语句'))
             exit()
         return cc
 
@@ -538,7 +548,7 @@ class worker:
         """
         try:
             if os.path.exists(pdf_fp):
-                doi,title,txt = get_pdf_content(pdf_fp,(0,1),True,self._llm_kwargs)
+                doi,title,txt = get_pdf_content(self.lang,pdf_fp,(0,1),True,self._llm_kwargs)
                 os.remove(pdf_fp) # 然后把这个PDF删除
                 if self._check_already_exist_inf('articles',title):return True,title,''
                 return True,title,txt
@@ -599,7 +609,7 @@ class worker:
             if self._check_already_exist_inf('acceptable_sentences',title) or not useful_sentences.strip():return True,title,''
             
             for requirement in self._content_classification:
-                if self._check_lifespan_termination('可接受内部'):return
+                if self._check_lifespan_termination():return
                 this_prompt = prompt.format(requirement)
                 success,a = self._request_llm(this_prompt,useful_sentences)
                 if not success:return False,title,a
@@ -632,14 +642,14 @@ class worker:
             prompt = f'Please translate the following text into {self._target_language}'
             
             for requirement in self._content_classification:
-                if self._check_lifespan_termination('翻译内部1'):return
+                if self._check_lifespan_termination():return
                 
                 this_requirement_sentences = acceptable_sentences.get(requirement,[]) # {要求 : [每个句子的List]}
 
                 acceptable_sentences[requirement] = [] # 清空原原文，方便一些
                 # 翻译句子
                 for sentence in this_requirement_sentences:
-                    if self._check_lifespan_termination('翻译内部2'):return
+                    if self._check_lifespan_termination():return
                     stripped_sentence = sentence.strip()
                     if stripped_sentence and stripped_sentence != '.':
                         success,result = self._request_llm(prompt,stripped_sentence) # 请求翻译
@@ -661,7 +671,11 @@ class worker:
             if os.path.isfile(pdf_fp):
                 task_para_list.append((pdf_fp,None,None,task_index))
                 task_index += 1
-            else: gr.Warning(_('文件 {} 不存在，跳过').format(pdf_fp))
+            else:
+                msg = self._('文件 {} 不存在，跳过').format(pdf_fp)
+                gr.Warning(msg)
+                self._update_log('warning',msg)
+
         for task_target in self._articles.items():
             task_para_list.append((None,task_target[0],task_target[1],task_index))
             task_index += 1
@@ -673,7 +687,7 @@ class worker:
                 features.append(feature)
             
             
-            self._update_log('info',_('任务开始执行'))
+            self._update_log('info',self._('任务开始执行'))
             yield '\n'.join(self._log)
             
 
@@ -702,7 +716,7 @@ class worker:
         # 每一块：{title: {requirement: [original_sentences_0,translated_sentences_0,.......]}}
         
         try:
-            self._update_log('info',_('正在导出结果文件...')) 
+            self._update_log('info',self._('正在导出结果文件...'))
             yield '\n'.join(self._log)
             
             # 最终的结果
@@ -726,7 +740,7 @@ class worker:
                                     writer.writerow(csv_line)
                                     csv_line = []
         
-            self._update_log('info',_('结果文件导出成功。正在导出中间文件...')) 
+            self._update_log('info',self._('结果文件导出成功。正在导出中间文件...'))
             yield '\n'.join(self._log)
         
             # 中间文件
@@ -743,7 +757,7 @@ class worker:
             with open(self._parameter_json_fp,'w',encoding='utf-8') as f:
                 f.write(json.dumps(self._parameter_json,ensure_ascii=False,indent=4))
             
-            self._update_log('info',_('中间文件导出完成。正在导出日志...')) 
+            self._update_log('info',self._('中间文件导出完成。正在导出日志...'))
             yield '\n'.join(self._log)
             
             # 导出一次日志
@@ -751,7 +765,7 @@ class worker:
                 f.write('\n'.join(self._log))
         
         except Exception as e:
-            self._update_log('error',_('输出结果失败，原因：{}').format(e))
+            self._update_log('error',self._('输出结果失败，原因：{}').format(e))
             yield '\n'.join(self._log)
         
 

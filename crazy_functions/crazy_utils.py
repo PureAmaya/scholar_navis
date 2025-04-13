@@ -1,6 +1,9 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-04-11
+- Feature removal: NOUGAT_parse_pdf, nougat_interface.
+
 Modified by PureAmaya on 2025-3-27
 - remove functions: input_clipping
 - Add user-visible alerts for exceeding the maximum token limit and other potential errors.
@@ -17,14 +20,12 @@ Modified by PureAmaya on 2024-12-28
 
 '''
 
-import re
-from toolbox import update_ui,trimmed_format_exc, get_max_token, Singleton, update_ui_lastest_msg
-from shared_utils.scholar_navis.multi_lang import _
+from toolbox import update_ui,trimmed_format_exc, update_ui_lastest_msg
+from multi_language import init_language
 from shared_utils.char_visual_effect import scolling_visual_effect
 from shared_utils.config_loader import get_conf
-import threading
-import os
-import logging
+
+_ = init_language
 
 def request_gpt_model_in_new_thread_with_ui_alive(
         inputs, inputs_show_user, llm_kwargs,
@@ -53,6 +54,10 @@ def request_gpt_model_in_new_thread_with_ui_alive(
     import time
     from concurrent.futures import ThreadPoolExecutor
     from request_llms.bridge_all import predict_no_ui_long_connection
+
+    lang = chatbot.get_language()
+    _ = lambda text: init_language(text, lang)
+
     # 用户反馈
     chatbot.append([inputs_show_user, ""])
     yield from update_ui(chatbot=chatbot, history=[]) # 刷新界面
@@ -70,7 +75,7 @@ def request_gpt_model_in_new_thread_with_ui_alive(
                 raise RuntimeError(_("检测到程序终止"))
             try:
                 # 【第一种情况】：顺利完成
-                result = predict_no_ui_long_connection(
+                result = predict_no_ui_long_connection(lang=lang,
                     inputs=inputs, llm_kwargs=llm_kwargs,
                     history=history, sys_prompt=sys_prompt, observe_window=mutable)
                 return result
@@ -175,6 +180,10 @@ def request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency(
     from request_llms.bridge_all import predict_no_ui_long_connection
     assert len(inputs_array) == len(history_array)
     assert len(inputs_array) == len(sys_prompt_array)
+
+    lang = chatbot.get_language()
+    _ = lambda text: init_language(text, lang)
+
     if max_workers == -1: # 读取配置文件
         try: max_workers = get_conf('DEFAULT_WORKER_NUM')
         except: max_workers = 8
@@ -213,7 +222,7 @@ def request_gpt_model_multi_threads_with_very_awesome_ui_and_high_efficiency(
                     sleep_time -= max_workers
                 time.sleep((sleep_time + max_workers) * 1.1)
 
-                gpt_say = predict_no_ui_long_connection(
+                gpt_say = predict_no_ui_long_connection(lang=lang,
                     inputs=inputs, llm_kwargs=llm_kwargs, history=history,
                     sys_prompt=sys_prompt, observe_window=mutable[index], console_slience=True
                 )
@@ -329,7 +338,6 @@ def read_and_clean_pdf_text(fp):
     import fitz, copy
     import re
     import numpy as np
-    from shared_utils.colorful import print亮黄, print亮绿
     fc = 0  # Index 0 文本
     fs = 1  # Index 1 字体
     fb = 2  # Index 2 框框
@@ -537,53 +545,6 @@ def get_files_from_everything(txt, type): # type='.md'
         success = False
 
     return success, file_manifest, project_folder
-
-
-
-@Singleton
-class nougat_interface():
-    def __init__(self):
-        self.threadLock = threading.Lock()
-
-    def nougat_with_timeout(self, command, cwd, timeout=3600):
-        import subprocess
-        from toolbox import ProxyNetworkActivate
-        logging.info(_('正在执行命令 {}').format(command))
-        with ProxyNetworkActivate("Nougat_Download"):
-            process = subprocess.Popen(command, shell=False, cwd=cwd, env=os.environ)
-        try:
-            stdout, stderr = process.communicate(timeout=timeout)
-        except subprocess.TimeoutExpired:
-            process.kill()
-            stdout, stderr = process.communicate()
-            print("Process timed out!")
-            return False
-        return True
-
-
-    def NOUGAT_parse_pdf(self, fp, chatbot, history):
-        from toolbox import update_ui_lastest_msg
-
-        yield from update_ui_lastest_msg(_("正在解析论文, 请稍候。进度：正在排队, 等待线程锁..."),
-                                         chatbot=chatbot, history=history, delay=0)
-        self.threadLock.acquire()
-        import glob, threading, os
-        from toolbox import get_log_folder, gen_time_str
-        dst = os.path.join(get_log_folder(plugin_name='nougat'), gen_time_str())
-        os.makedirs(dst)
-
-        yield from update_ui_lastest_msg(_("正在解析论文, 请稍候。进度：正在加载NOUGAT... （提示：首次运行需要花费较长时间下载NOUGAT参数）"),
-                                         chatbot=chatbot, history=history, delay=0)
-        command = ['nougat', '--out', os.path.abspath(dst), os.path.abspath(fp)]
-        self.nougat_with_timeout(command, cwd=os.getcwd(), timeout=3600)
-        res = glob.glob(os.path.join(dst,'*.mmd'))
-        if len(res) == 0:
-            self.threadLock.release()
-            raise RuntimeError(_("Nougat解析论文失败"))
-        self.threadLock.release()
-        return res[0]
-
-
 
 
 def try_install_deps(deps, reload_m=[]):

@@ -14,7 +14,7 @@ from crazy_functions.scholar_navis.scripts.tools.article_library_ctrl import pdf
 from shared_utils.scholar_navis.other_tools import fix_problematic_text
 
 
-def get_pdf_content(pdf_path,page_range: tuple | int,allow_ai_assist,llmkwargs = None):
+def get_pdf_content(lang,pdf_path,page_range: tuple | int,allow_ai_assist,llmkwargs = None):
     if allow_ai_assist and llmkwargs is None:
         raise RuntimeError('AI-assisted features must provide LLM model parameters.')
 

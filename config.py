@@ -1,6 +1,11 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-04-11
+- Add the Grok3 series models.
+- Updated information for the Gemini series models and added support for customization.
+- Add multilingual toggle option.
+
 Modified by PureAmaya on 2025-03-06
 - Add models: claude-3-7-sonnet-latest, qwen-long and qwq-plus.
 
@@ -56,7 +61,8 @@ else:
 # [step 3]>> Model selection is (Note: LLM_MODEL is the default selected model and it must be included in the AVAIL_LLM_MODELS list)
 LLM_MODEL = "deepseek-chat" # 可选 / Optional ↓↓↓
 AVAIL_LLM_MODELS = ["gpt-4o", "gpt-4o-mini", "o1",'o1-mini','o1-preview','o3-mini','gpt-4.5-preview',
-                    "grok-2",
+                    "grok-2",'grok-3-mini-fast','grok-3-mini','grok-3-fast','grok-3',
+                    "gemini-2.5-pro-preview-03-25","gemini-2.0-flash","gemini-2.0-flash-lite",
                     "glm-4-plus","glm-4-airx","glm-4-air","glm-4-flashx","glm-zero-preview",
                     "moonshot-v1-8k","moonshot-v1-32k","moonshot-v1-128k", 
                     'qwq-plus',"qwen-max","qwen-plus","qwen-turbo",'qwen-long',
@@ -284,10 +290,13 @@ PLUGIN_HOT_RELOAD = False
 
 ##### Scholar Navis 添加的配置 #####
 
+
+
+
 # [step 5]
 # 模型显示偏好语言，通常只要模型支持该语言就可以。用户可以自行选择
 # The language preference for displaying models, which is usually only required if the model supports it.
-# User can choose their own preference.
+# UserLogin can choose their own preference.
 # e.g. '简体中文','繁體中文','English','日本語','Français','Deutsch','Русский,"العربية",Español'
 LANGUAGE_GPT_PREFER = '简体中文' 
 
@@ -296,6 +305,11 @@ LANGUAGE_GPT_PREFER = '简体中文'
 # The language of the WEB and program display. Based on gettext, it can be modified or added to other languages.
 # 目前可用：'zh-Hans','zh-Hant','en-US'
 LANGUAGE_DISPLAY = 'zh-Hans'
+
+# [step 6.5]
+# 是否要启动多语言切换功能（会多占用一些资源）
+# Do you want to enable the multilingual switching feature (it will consume some additional resources)
+MULTILINGUAL = True
 
 # [step 7]
 # 是否自动清理临时文件（tmp）（目前不含gradio的临时文件，仅包含用户产生的）

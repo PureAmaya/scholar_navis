@@ -1,6 +1,9 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-04-13
+- Adjust the logic for `finish_reason == "stop"` to the end to prevent incomplete display of content from some model outputs.
+
 Modified by PureAmaya on 2025-03-06
 - Remove unnecessary print.
 - Due to Alibaba Cloud's introduction of a new inference model, the Qwen series models have been moved here. User-friendly names have also been added for distinction.
@@ -19,9 +22,11 @@ import logging
 import traceback
 import requests
 from shared_utils.config_loader import get_conf
-from shared_utils.scholar_navis.multi_lang import _
-from gradio_compatibility_layer import HTML
+from multi_language import init_language
+from dependencies.i18n.gradio_i18n import HTML
 from shared_utils.advanced_markdown_format import md2html
+
+_ = init_language
 
 # config_private.py放自己的秘密如API和代理网址
 # 读取时首先看是否存在私密的config_private配置文件（不受git管控），如果有，则覆盖原config文件
@@ -249,9 +254,6 @@ def get_predict_function(
                 )
             if chunk:
                 try:
-                    if finish_reason == "stop":
-                        logging.info(f"[response] {result}")
-                        break
                     if response_text:result += response_text
                     if observe_window is not None:
                         # 观测窗，把已经获取的数据显示出去
@@ -261,6 +263,9 @@ def get_predict_function(
                         if len(observe_window) >= 2:
                             if (time.time() - observe_window[1]) > watch_dog_patience:
                                 raise RuntimeError("用户取消了程序。")
+                    if finish_reason == "stop":
+                        logging.info(f"[response] {result}")
+                        break
                 except Exception as e:
                     traceback.print_exc()
                     chunk = get_full_error(chunk, stream_response)
@@ -289,7 +294,10 @@ def get_predict_function(
         chatbot 为WebUI中显示的对话列表，修改它，然后yeild出去，可以直接修改对话界面内容
         additional_fn代表点击的哪个按钮，按钮见functional.py
         """
+        lang = chatbot.get_language()
+        _ = lambda text: init_language(text, lang)
         APIKEY = llm_kwargs['custom_api_key'](api_key_conf_name)
+
         if len(APIKEY) == 0:
             raise RuntimeError(_("APIKEY为空,请检查配置文件的{}。或者可以自定义 {} API-KEY").format(api_key_conf_name,friendly_name))
         if inputs == "":
@@ -404,10 +412,6 @@ def get_predict_function(
                         print(chunk_decoded)
                         return
 
-                    if finish_reason == "stop":
-                        logging.info(f"[response] {gpt_replying_buffer}")
-                        break
-
                     status_text = f"finish_reason: {finish_reason}"
                     if response_text:gpt_replying_buffer += response_text
                     if reasoning_content:gpt_reasoning_buffer += reasoning_content
@@ -435,6 +439,11 @@ def get_predict_function(
                     yield from update_ui(
                         chatbot=chatbot, history=history, msg=status_text
                     )  # 刷新界面
+
+                    if finish_reason == "stop":
+                        logging.info(f"[response] {gpt_replying_buffer}")
+                        break
+
                 except Exception as e:
                     yield from update_ui(
                         chatbot=chatbot, history=history, msg=_("Json解析不合常规")

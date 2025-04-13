@@ -8,15 +8,18 @@ Modified by PureAmaya on 2024-12-28
 - Adjust HTML footer, title, copyright, help documentation, AI warning, etc.
 '''
 
-import gradio_compatibility_layer as gr
+from dependencies import gradio_compatibility_layer  as gr
 import json
 from toolbox import ArgsGeneralWrapper, HotReload
 from gradio_modal import Modal
-from shared_utils.scholar_navis.multi_lang import _
+from multi_language import init_language
 
 # 这里后续可以再优化一下，添加一些自定义组件什么的
 
-def define_gui_advanced_plugin_class(plugins):
+def define_gui_advanced_plugin_class(plugins,lang):
+
+    _ = lambda x:init_language(x,lang)
+
     # 定义新一代插件的高级参数区
     with Modal(visible=False, elem_id="plugin_arg_menu",elem_classes='modal',allow_user_close=True) as plugin_arg_menu:
         
@@ -26,7 +29,7 @@ def define_gui_advanced_plugin_class(plugins):
         usr_confirmed_arg = gr.Textbox(label='final',show_label=False, placeholder=_("请输入"), lines=1, visible=False,
                 elem_id=f"invisible_current_pop_up_plugin_arg_final")
         
-        with gr.Tab(_('选择插件参数')):
+        with gr.Tab(label=_('选择插件参数')):
             plugin_arg_list = [];
             with gr.Column():
                 for u in range(8):
@@ -40,19 +43,19 @@ def define_gui_advanced_plugin_class(plugins):
                     _dp.blur(None,None,None,js='BanModalPointEvents')
                     _dp.change(None,inputs=usr_editing_arg,outputs=usr_confirmed_arg,js='(usr_editing_arg)=>execute_current_pop_up_plugin(usr_editing_arg)')
                     plugin_arg_list.append(_dp)
-        with gr.Tab(_('使用说明')):
-            gr.Markdown(_('在 <b>辅助指令</b> 中，可以看到每个功能根据不同需求而写的详细说明'))
+        with gr.Tab(label=_('使用说明')):
+            gr.Markdown(value=_('在 <b>辅助指令</b> 中，可以看到每个功能根据不同需求而写的详细说明'))
         with gr.Row():
 
-            arg_confirm_btn = gr.Button(_("确认参数并执行"), variant="primary")
+            arg_confirm_btn = gr.Button(value=_("确认参数并执行"), variant="primary")
             arg_confirm_btn.style(size="sm")
 
-            arg_cancel_btn = gr.Button(_("取消"), variant="primary")
+            arg_cancel_btn = gr.Button(value=_("取消"), variant="primary")
             arg_cancel_btn.click(fn=lambda:gr.update(visible=False),inputs=None,outputs=plugin_arg_menu)
             arg_cancel_btn.style(size="sm")
 
             arg_confirm_btn.click(fn=lambda:gr.update(visible=False), inputs=None, outputs=plugin_arg_menu, js='function abbrgigr(){document.getElementById("invisible_callback_btn_for_plugin_exe").click();}')
-            invisible_callback_btn_for_plugin_exe = gr.Button(_("未选定任何插件"), variant="secondary", visible=False, elem_id="invisible_callback_btn_for_plugin_exe",size='sm')
+            invisible_callback_btn_for_plugin_exe = gr.Button(value=_("未选定任何插件"), variant="secondary", visible=False, elem_id="invisible_callback_btn_for_plugin_exe",size='sm')
             # 随变按钮的回调函数注册
             def route_switchy_bt_with_arg(request: gr.Request, input_order, *arg):
                 arguments = {k:v for k,v in zip(input_order, arg)}      # 重新梳理输入参数，转化为kwargs字典

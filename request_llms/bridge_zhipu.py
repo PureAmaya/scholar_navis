@@ -7,10 +7,12 @@ Modified by PureAmaya on 2024-12-28
 
 import time
 import os
-from toolbox import update_ui, get_conf, update_ui_lastest_msg, log_chat
-from toolbox import check_packages, report_exception, have_any_recent_upload_image_files
+from toolbox import update_ui, update_ui_lastest_msg, log_chat
+from toolbox import check_packages, have_any_recent_upload_image_files
 from toolbox import ChatBotWithCookies
-from shared_utils.scholar_navis.multi_lang import _
+from multi_language import init_language
+
+_ = init_language
 
 model_name = '智谱AI大模型'
 zhipuai_default_model = 'glm-4'
@@ -59,6 +61,10 @@ def predict(inputs:str, llm_kwargs:dict, plugin_kwargs:dict, chatbot:ChatBotWith
         ⭐单线程方法
         函数的说明请见 request_llms/bridge_all.py
     """
+
+    lang = chatbot.get_language()
+    _ = lambda text: init_language(text, lang)
+
     chatbot.append([inputs, ""])
     yield from update_ui(chatbot=chatbot, history=history)
 

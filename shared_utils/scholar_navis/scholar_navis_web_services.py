@@ -5,30 +5,35 @@ Author: scholar_navis@PureAmaya
 import os
 import json
 import traceback
+from typing import Literal
 import aiofiles
-import hashlib
 from functools import wraps
 from fastapi import Depends, Form
 from fastapi.responses import FileResponse,PlainTextResponse,JSONResponse,HTMLResponse
 from .other_tools import base64_decode
 from bs4 import BeautifulSoup
+from multi_language import init_language,LANGUAGE_DISPLAY,MULTILINGUAL
 
-from .const_and_singleton import WEB_SERVICES_ROOT_PATH,NOTIFICATION_ROOT_PATH,GPT_ACADEMIC_ROOT_PATH
+from .const_and_singleton import WEB_SERVICES_ROOT_DIR,NOTIFICATION_ROOT_DIR,GPT_ACADEMIC_ROOT_DIR,VERSION
 
 maintenance_json : dict = {
     'state' :  False,
     'title':'',
     'message':'',
+    'code':"0",
 }
 
-def enable_services(app,get_user):
+
+
+
+def enable_services(app,get_user,get_lang):
     @app.get("/services/pdf_viewer/{path:path}")
     @check_login(Depends(get_user))
     async def pdf_viewer(path:str):
 
         if path.startswith('web/gpt_log'):realpath = path[4:]
         elif path.startswith('web/tmp'):realpath = path[4:]
-        else:realpath = os.path.join(WEB_SERVICES_ROOT_PATH,'pdf.js',path)
+        else:realpath = os.path.join(WEB_SERVICES_ROOT_DIR, 'pdf.js', path)
         #else: return PlainTextResponse('bad request. Not support this path.',status_code=400)
     
         
@@ -108,37 +113,96 @@ def enable_services(app,get_user):
             return PlainTextResponse(f'invaild request parameter.\n\n{str(e)}',status_code=400)
     
     
-def enable_api(app,get_user):
-    
+def enable_api(app,get_user,get_lang):
+
+    @app.get("/api")
+    @check_login(Depends(get_user))
+    async def api_info():
+        return PlainTextResponse('OK')
+
     @app.get("/api/notification/msg")
     @check_login(Depends(get_user))
-    async def notification_maintenance():
-        maintenance_json_fp = os.path.join(NOTIFICATION_ROOT_PATH ,'msg.json')
+    async def notification_maintenance(lang=Depends(get_lang)):
+
+        maintenance_json_lang_fp = os.path.join(NOTIFICATION_ROOT_DIR,lang,'msg.json')
+        maintenance_json_fp = os.path.join(NOTIFICATION_ROOT_DIR, 'msg.json')
+
+        if os.path.isfile(maintenance_json_lang_fp):
+            path = maintenance_json_lang_fp
+        else:
+            path = maintenance_json_fp
+
         try:
-            async with aiofiles.open(maintenance_json_fp,'r',encoding='utf-8') as f:
+            async with aiofiles.open(path,'r',encoding='utf-8') as f:
                 a = await f.read()
                 json_ : dict= json.loads(a)
                 # 检查是否有需要的键
                 for key in maintenance_json.keys():
                     if not key in json_.keys():
                         raise Exception(f'invaild json format. No key {key} found.')
-                json_.setdefault('hash',hashlib.md5(a.encode('utf-8')).hexdigest())
                 return JSONResponse(json_)
         except:
-            traceback.print_exc()
-            os.makedirs(NOTIFICATION_ROOT_PATH,exist_ok=True)
-            async with aiofiles.open(maintenance_json_fp,'w',encoding='utf-8') as f:
+            os.makedirs(NOTIFICATION_ROOT_DIR, exist_ok=True)
+            async with aiofiles.open(path,'w',encoding='utf-8') as f:
                 await f.write(json.dumps(maintenance_json))
                 return JSONResponse(maintenance_json)
+
+    @app.get("/api/info")
+    async def info():
+        result = {
+            'version':VERSION,
+            'lang':LANGUAGE_DISPLAY,
+            'multilingual':MULTILINGUAL
+        }
+        return result
+
             
-    @app.get("/ico/{path:path}") # 现在还没ico
-    async def image(path:str):
-        if path.startswith('svg/'):
-            realpath = os.path.join(GPT_ACADEMIC_ROOT_PATH,'themes','svg',path[4:])
-        else: realpath = os.path.join(GPT_ACADEMIC_ROOT_PATH,path)
-        if os.path.isfile(realpath):
-            return FileResponse(realpath,media_type='image/svg+xml')
-        else: return PlainTextResponse('bad request',status_code=400)
+    @app.get("/favicon.ico")
+    async def ico(size:Literal['192','512'] = None):
+        assert size in ['192','512'] or not size, 'invaild png_size'
+
+        if not size:
+            realpath = os.path.join(GPT_ACADEMIC_ROOT_DIR, 'themes', 'svg', 'logo.svg')
+            media_type='image/svg+xml'
+        if size:
+            realpath = os.path.join(GPT_ACADEMIC_ROOT_DIR, 'themes', 'svg', 'logo_png', f'logo_{size}x{size}.png')
+            media_type='image/png'
+
+        try:
+            return FileResponse(realpath,media_type=media_type)
+        except: 
+            return PlainTextResponse('bad request',status_code=404)
+
+    @app.get("/manifest.json")
+    async def manifest(lang = Depends(get_lang)):
+        _ = lambda text:init_language(text, lang)
+        _json = {
+            "name": "Scholar Navis",               # 应用名称（必填）
+            "short_name": "Scholar Navis",            # 短名称（主屏幕显示）
+            "description": _("一款基于 gpt_academic 的流水线式领域进展分析工具。允许用户从大量文章中摘取有用的信息（例如研究进展，缺口，符合用户需求的句子，并且支持用母语显示"),  # 应用描述
+            "version": VERSION,             # 版本号（自定义格式）
+            "start_url": "/",               # 启动页面（必填）
+            "display": "standalone",        # 独立窗口模式（必填）
+            "icons": [
+                {
+                "src": "/favicon.ico?size=192",
+                "sizes": "192x192",
+                "type": "image/png"
+                },
+                {
+                "src": "/favicon.ico?size=512",
+                "sizes": "512x512",
+                "type": "image/png"
+                },
+                {
+                "src": "/favicon.ico",
+                "sizes": "any",
+                "type": "image/svg+xml"
+                }
+            ]
+            }
+        return JSONResponse(_json)
+
 
 
 def check_login(user):

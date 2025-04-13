@@ -3,7 +3,6 @@ Author: scholar_navis@PureAmaya
 '''
 
 import os
-import json
 import shutil
 import tarfile
 import zipfile
@@ -13,9 +12,8 @@ from time import time,sleep
 from datetime import datetime
 from bs4 import BeautifulSoup
 from shared_utils.scholar_navis.other_tools import generate_download_file
-from shared_utils.scholar_navis.const_and_singleton import get_data_dir
 from shared_utils.scholar_navis.sqlite import SQLiteDatabase
-from shared_utils.scholar_navis.multi_lang import _
+from multi_language import init_language
 from requests.adapters import HTTPAdapter,Retry
 from shared_utils.config_loader import get_conf
 from concurrent.futures import ThreadPoolExecutor
@@ -34,7 +32,7 @@ lock = threading.Lock()
 
 # /home/hirasawayui/ai/lab_gpt_academic/database/pubmedOA
 
-headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2774.1 Safari/537.36'}
+headers = {'UserLogin-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2774.1 Safari/537.36'}
 pubmed_api = 'https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=[PMCID]'
 
 
@@ -51,10 +49,10 @@ adapter = HTTPAdapter(max_retries=retries)
 class openaccess_download:
 
 
-    def __init__(self) -> None:
+    def __init__(self,lang) -> None:
         
         # 下载文件夹创建和获取
-        self._local_pdf_storage_dir  = get_data_dir('pubmedOA_download')
+        self._local_pdf_storage_dir  = os.path.join('data','pubmedOA_download')
         # 下载总数
         self._total = 0
         # 下载完成（含下载失败）数
@@ -70,6 +68,8 @@ class openaccess_download:
         self.download_status = {'status':'waiting','success_pmid':[],'success_fp':[],'failed_pmid':[],'log_fp':''}
         
         self.timer = None
+
+        self._ = lambda text: init_language(text, lang)
         
 
     # 只能在这里加一个proxy了。。
@@ -115,11 +115,11 @@ class openaccess_download:
                     # 记录一下，这个PMCID在本地数据库中找到了
                     self._each_download_status_dict_list[index]['STATUS'] = 'cached'
                     without_network_requirement += 1
-        yield from update_ui_lastest_msg(_('完成已有文章的检查'),chatbot=chatbot,history=[])
+        yield from update_ui_lastest_msg(self._('完成已有文章的检查'),chatbot=chatbot,history=[])
 
         # 如果不用网络请求的和总数一致，就不用进行网络请求了
         if without_network_requirement == len(PMIDs):
-            yield from update_ui_lastest_msg(_('所有需要下载的文章已经缓存'),chatbot=chatbot,history=[])
+            yield from update_ui_lastest_msg(self._('所有需要下载的文章已经缓存'),chatbot=chatbot,history=[])
             # 输出结果
             self.__update_conclusion_list_to_export_path(tmp_dir=tmp_dir)
             self.__download_log_updater()
@@ -137,8 +137,8 @@ class openaccess_download:
         
         if not proxies is None:
             session.proxies = proxies
-            yield from update_ui_lastest_msg(_('下载将使用网络代理'),chatbot=chatbot,history=[])
-        else:yield from update_ui_lastest_msg(_('下载不使用网络代理'),chatbot=chatbot,history=[])
+            yield from update_ui_lastest_msg(self._('下载将使用网络代理'),chatbot=chatbot,history=[])
+        else:yield from update_ui_lastest_msg(self._('下载不使用网络代理'),chatbot=chatbot,history=[])
 
         
         # <--------------- 多线程下载 ------------------->     
@@ -164,15 +164,15 @@ class openaccess_download:
                     self.timer = time() # 这边也加上吧
                     features.append(self._executor.submit(thread_task, pmcid,))
             
-            print(_('下载中，请等待...'))
-            yield from update_ui_lastest_msg(_('下载中，请等待...'),chatbot=chatbot,history=[])
+            print(self._('下载中，请等待...'))
+            yield from update_ui_lastest_msg(self._('下载中，请等待...'),chatbot=chatbot,history=[])
             
             # ! 按理来说，这里不应该有chatbot的，但是为了能实现终止，就只能在这放一个了
             # 这里别问，问就是从外部移动来的，凑合用吧
-            _download_title = _('当前下载进度')
-            _downlaod_count = _('下载数');_download_count_msg = _('已经存在的文章不含在内')
-            _download_precent = _('完成百分比')
-            _download_no_proxy = _('不使用网络代理');_download_with_proxy = _('使用网络代理')
+            _download_title = self._('当前下载进度')
+            _downlaod_count = self._('下载数');_download_count_msg = self._('已经存在的文章不含在内')
+            _download_precent = self._('完成百分比')
+            _download_no_proxy = self._('不使用网络代理');_download_with_proxy = self._('使用网络代理')
             while True:
                 #如果还没下载完
                 if not self._n == self._total:
@@ -186,8 +186,7 @@ class openaccess_download:
                     
                 #如果下载完了，破坏循环
                 else: break
-    
-        print(_("所有文件下载完成"))
+
         session.close() # 关闭所有网络请求
         
         # <--------------- 输出文件 -------------------> 
@@ -231,13 +230,13 @@ class openaccess_download:
             self.__download_log_updater()
         except:
             self._each_download_status_dict_list[id]['STATUS'] = 'failed'
-            self._each_download_status_dict_list[id]['INFO'] = _('api解析失败')
+            self._each_download_status_dict_list[id]['INFO'] = self._('api解析失败')
             self._n += 1 # 解析错误，进度 +1
             self.__download_log_updater()
             return
         
         response.close()
-        self._each_download_status_dict_list[id]['STATUS'] = _('api解析成功')
+        self._each_download_status_dict_list[id]['STATUS'] = self._('api解析成功')
         self.__download_log_updater()
         soup = BeautifulSoup(response.text, "xml")
         
@@ -301,8 +300,7 @@ class openaccess_download:
                         self._executor = None
                         response.close()
                         session.close()
-                        print(_('用户终止下载'))
-                        raise RuntimeError(_('用户终止下载'))
+                        raise RuntimeError(self._('用户终止下载'))
         
         except Exception as e :
             self._each_download_status_dict_list[id]['STATUS'] = 'failed'
@@ -439,6 +437,10 @@ def PubMed_OpenAccess文章获取(txt, llm_kwargs, plugin_kwargs, chatbot, histo
     - 下载的链接可以放到输入框中作为缓存地址
 
     """
+    lang = user_request.cookies.get('lang')
+    _ = lambda text: init_language(text, lang)
+
+
     line1 = _('上传您在PubMed中保存的csv格式的引文（citations）文件以执行新的下载任务')
     line2 = _('按下 <b>停止</b> 按钮以终止该下载进程')
     line3 = _('下载的时间比较耗时，可以打开新的页面进行ai对话')
@@ -510,7 +512,7 @@ def PubMed_OpenAccess文章获取(txt, llm_kwargs, plugin_kwargs, chatbot, histo
     try:
         # 内含：下载与终止
         # 会一直阻塞，直到终止 or 下载完毕
-        dl = openaccess_download()
+        dl = openaccess_download(lang)
         yield from dl.download(proxies,pmids,pmcids,chatbot) 
         
     except Exception as e:
@@ -566,8 +568,9 @@ def PubMed_OpenAccess文章获取(txt, llm_kwargs, plugin_kwargs, chatbot, histo
 execute = PubMed_OpenAccess文章获取 # 用于热更新
 
 class PubMed_Open_Access_Articles_Download(common_plugin_para):
-    def define_arg_selection_menu(self):
-        gui_definition = super().define_arg_selection_menu()
+    def define_arg_selection_menu(self, lang):
+        _ = lambda text: init_language(text, lang)
+        gui_definition = super().define_arg_selection_menu(lang)
         gui_definition.update(self.add_file_upload_field(title=_('上传保存的文章列表'),description=_('一般为csv格式')))
         return gui_definition
 
