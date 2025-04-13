@@ -1,6 +1,9 @@
 '''
 Original Author: gpt_academic@binary-husky
 
+Modified by PureAmaya on 2025-04-13
+- Adjust the logic for `finish_reason == "stop"` to the end to prevent incomplete display of content from some model outputs.
+
 Modified by PureAmaya on 2025-03-06
 - Remove unnecessary print.
 - Due to Alibaba Cloud's introduction of a new inference model, the Qwen series models have been moved here. User-friendly names have also been added for distinction.
@@ -251,9 +254,6 @@ def get_predict_function(
                 )
             if chunk:
                 try:
-                    if finish_reason == "stop":
-                        logging.info(f"[response] {result}")
-                        break
                     if response_text:result += response_text
                     if observe_window is not None:
                         # 观测窗，把已经获取的数据显示出去
@@ -263,6 +263,9 @@ def get_predict_function(
                         if len(observe_window) >= 2:
                             if (time.time() - observe_window[1]) > watch_dog_patience:
                                 raise RuntimeError("用户取消了程序。")
+                    if finish_reason == "stop":
+                        logging.info(f"[response] {result}")
+                        break
                 except Exception as e:
                     traceback.print_exc()
                     chunk = get_full_error(chunk, stream_response)
@@ -409,10 +412,6 @@ def get_predict_function(
                         print(chunk_decoded)
                         return
 
-                    if finish_reason == "stop":
-                        logging.info(f"[response] {gpt_replying_buffer}")
-                        break
-
                     status_text = f"finish_reason: {finish_reason}"
                     if response_text:gpt_replying_buffer += response_text
                     if reasoning_content:gpt_reasoning_buffer += reasoning_content
@@ -440,6 +439,11 @@ def get_predict_function(
                     yield from update_ui(
                         chatbot=chatbot, history=history, msg=status_text
                     )  # 刷新界面
+
+                    if finish_reason == "stop":
+                        logging.info(f"[response] {gpt_replying_buffer}")
+                        break
+
                 except Exception as e:
                     yield from update_ui(
                         chatbot=chatbot, history=history, msg=_("Json解析不合常规")
