@@ -3,7 +3,7 @@ beautifulsoup4==4.12.3
 colorama==0.4.6
 cryptography~=44.0.1
 fastapi==0.115.6
-gradio==5.20.0
+gradio==5.25.0
 Markdown==3.7
 pandas==2.2.3
 pydantic==2.10.4
