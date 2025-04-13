@@ -1,13 +1,14 @@
 '''
 Original Author: gpt_academic@binary-husky
 
-Modified by PureAmaya on 2025-04-12
+Modified by PureAmaya on 2025-04-13
 - Remove unused imports.
 - Only resources and scripts from the same origin are allowed to load.
 - Add user language acquisition feature.
-- Adjust gradio routing.
+- Adjust API and gradio routing.
 - Compatible with the new version of multilingual function.
 - Cancel specified font.
+- Added redirects for multilingual/monolingual/authorization requirements.
 
 Modified by PureAmaya on 2025-03-19
 - Provide authentication for some APIs.
@@ -27,6 +28,7 @@ Modified by PureAmaya on 2024-12-28
 import os
 import fastapi
 from multi_language import init_language,LANGUAGE_DISPLAY,MULTILINGUAL
+from dependencies.i18n import SUPPORT_DISPLAY_LANGUAGE
 from fastapi import Depends, Request
 from fastapi.responses import FileResponse, RedirectResponse,JSONResponse,PlainTextResponse
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -196,15 +198,37 @@ def start_app(apps:dict,CONCURRENT_COUNT, AUTHENTICATION, PORT, SSL_KEYFILE, SSL
     ssl_certfile = None if SSL_CERTFILE == "" else SSL_CERTFILE
     server_name = "0.0.0.0"
 
+    # 单语言版
     if len(apps) == 1:
         gr.mount_gradio_app(gradio_app, apps[LANGUAGE_DISPLAY], path=gradio_path, auth_dependency=get_user)
+
+        # 误入多语言，直接重定向到默认语言
+        @gradio_app.middleware("http")
+        async def dispatch(request: Request, call_next):
+            path = request.url.path
+
+            # 检查是否是 /main/ 开头但不是 /main/{lang} 形式的路径
+            if path.startswith(gradio_path) and path != gradio_path:
+                lang = path.split("/")[2]
+                if lang in SUPPORT_DISPLAY_LANGUAGE:  # 已配置的可用语言列表
+                    return RedirectResponse(url=gradio_path)
+            return await call_next(request)
+    # 多语言版
     else:
         for lang,app in apps.items():
             gr.mount_gradio_app(gradio_app, app, path=f'{gradio_path}/{lang}', auth_dependency=get_user)
+        # /main路由此时没啥用，重定向到指定语言界面
+        @gradio_app.get(gradio_path)
+        async def redirect_to_default_lang():
+            return RedirectResponse(url="/")
 
     if AUTHENTICATION:
         from auth import enable_auth
         enable_auth(gradio_app,auth_path,get_lang)
+    else:
+        @gradio_app.get(auth_path)
+        async def redirect_to_default_lang():
+            return RedirectResponse(url="/")
 
     
     uvicorn.run(gradio_app, host=server_name, port=PORT,log_level="warning",ssl_keyfile=ssl_keyfile,ssl_certfile=ssl_certfile)
