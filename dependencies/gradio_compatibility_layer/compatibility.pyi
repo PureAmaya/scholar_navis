@@ -14,6 +14,7 @@ class Textbox(gr.Textbox):
     from gradio.blocks import Block
     if TYPE_CHECKING:
         from gradio.components import Timer
+        from gradio.components.base import Component
     
 class Row(gr.Row):
     def style(self,**kwargs):
@@ -23,6 +24,7 @@ class Row(gr.Row):
     from gradio.blocks import Block
     if TYPE_CHECKING:
         from gradio.components import Timer
+        from gradio.components.base import Component
     
 class Button(gr.Button):
     def __init__(self, value = "Run", *, every = None, inputs = None, variant = "secondary", size = None, icon = None, link = None, visible = True, interactive = True, elem_id = None, elem_classes = None, render = True, key = None, scale = None, min_width = None,info_str=None):
@@ -35,6 +37,7 @@ class Button(gr.Button):
     from gradio.blocks import Block
     if TYPE_CHECKING:
         from gradio.components import Timer
+        from gradio.components.base import Component
 
 class Dropdown(gr.Dropdown):
     def style(self,**kwargs):
@@ -44,6 +47,7 @@ class Dropdown(gr.Dropdown):
     from gradio.blocks import Block
     if TYPE_CHECKING:
         from gradio.components import Timer
+        from gradio.components.base import Component
     
 class JSON(gr.JSON):
     def __init__(self, value = None, *, label = None, every = None, inputs = None, show_label = None, container = True, scale = None, min_width = 160, visible = True, elem_id = None, elem_classes = None, render = True, key = None, open = False, show_indices = False, height = None, max_height = 500, min_height = None,interactive=None):
@@ -52,6 +56,7 @@ class JSON(gr.JSON):
     from gradio.blocks import Block
     if TYPE_CHECKING:
         from gradio.components import Timer
+        from gradio.components.base import Component
 
 class CheckboxGroup(gr.CheckboxGroup):    
     def style(self,**kwargs):
@@ -61,6 +66,7 @@ class CheckboxGroup(gr.CheckboxGroup):
     from gradio.blocks import Block
     if TYPE_CHECKING:
         from gradio.components import Timer
+        from gradio.components.base import Component
 
 class Blocks(gr.Blocks):
     def startup_events(self):

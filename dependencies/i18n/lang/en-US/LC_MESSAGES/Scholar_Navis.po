@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Scholar Navis\n"
-"POT-Creation-Date: 2025-04-12 23:16+0800\n"
-"PO-Revision-Date: 2025-04-12 23:16+0800\n"
+"POT-Creation-Date: 2025-04-13 21:45+0800\n"
+"PO-Revision-Date: 2025-04-13 21:46+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: gkoishi0514@gmail.com\n"
 "Language: en_US\n"
@@ -1452,27 +1452,27 @@ msgstr "Utilize AI-assisted features"
 msgid "AI补全信息，速度较慢"
 msgstr "AI fill in information, slow speed"
 
-#: crazy_functions/生成多种Mermaid图表.py:242
+#: crazy_functions/生成多种Mermaid图表.py:245
 msgid "从以下文本中提取摘要"
 msgstr "Extract a summary from the following text"
 
-#: crazy_functions/生成多种Mermaid图表.py:244
+#: crazy_functions/生成多种Mermaid图表.py:247
 msgid "文章极长，不能达到预期效果"
 msgstr "The article is extremely long and cannot achieve the expected effect."
 
-#: crazy_functions/生成多种Mermaid图表.py:279
+#: crazy_functions/生成多种Mermaid图表.py:282
 msgid "接下来将判断适合的图表类型,如连续3次判断失败将会使用流程图进行绘制"
 msgstr ""
 "Next, the suitable chart type will be determined. If the determination fails "
 "consecutively three times, a flowchart will be used for drawing."
 
-#: crazy_functions/生成多种Mermaid图表.py:281
-#: crazy_functions/生成多种Mermaid图表.py:437
-#: crazy_functions/生成多种Mermaid图表.py:447
+#: crazy_functions/生成多种Mermaid图表.py:284
+#: crazy_functions/生成多种Mermaid图表.py:443
+#: crazy_functions/生成多种Mermaid图表.py:453
 msgid "[Local Message] 收到。"
 msgstr "[Local Message] Received."
 
-#: crazy_functions/生成多种Mermaid图表.py:286
+#: crazy_functions/生成多种Mermaid图表.py:289
 msgid ""
 "请判断适合使用的流程图类型,其中数字对应关系为:1-流程图,2-序列图,3-类图,4-饼"
 "图,5-甘特图,6-状态图,7-实体关系图,8-象限提示图。由于不管提供文本是什么,模型大"
@@ -1485,7 +1485,7 @@ msgstr ""
 "most suitable option regardless of the provided text, mind maps can only be "
 "invoked through parameter settings."
 
-#: crazy_functions/生成多种Mermaid图表.py:330
+#: crazy_functions/生成多种Mermaid图表.py:333
 msgid ""
 "请根据判断结果绘制相应的图表。如需绘制思维导图请使用参数调用,同时过大的图表可"
 "能需要复制到在线编辑器中进行渲染."
@@ -1494,34 +1494,34 @@ msgstr ""
 "map needs to be drawn, please use parameter invocation. Additionally, overly "
 "large charts may need to be copied to an online editor for rendering."
 
-#: crazy_functions/生成多种Mermaid图表.py:348
+#: crazy_functions/生成多种Mermaid图表.py:354
 msgid "请点击查看绘制结果"
 msgstr "Please click to view the drawing results."
 
-#: crazy_functions/生成多种Mermaid图表.py:349
+#: crazy_functions/生成多种Mermaid图表.py:355
 msgid "点击查看大图"
 msgstr "Click to view larger image."
 
-#: crazy_functions/生成多种Mermaid图表.py:359
+#: crazy_functions/生成多种Mermaid图表.py:365
 msgid "上方为生成的图形"
 msgstr "The above is the generated graphic."
 
-#: crazy_functions/生成多种Mermaid图表.py:359
+#: crazy_functions/生成多种Mermaid图表.py:365
 msgid "如果生成失败，可以点击这里查看AI返回的内容并自行修复"
 msgstr ""
 " If the generation fails, you can click here to view the content returned by "
 "the AI and fix it yourself."
 
-#: crazy_functions/生成多种Mermaid图表.py:363
+#: crazy_functions/生成多种Mermaid图表.py:369
 msgid "此外，您还可以对于绘制的图形进行问答。"
 msgstr ""
 "In addition, you can also ask and answer questions about the drawn graphics."
 
-#: crazy_functions/生成多种Mermaid图表.py:388
+#: crazy_functions/生成多种Mermaid图表.py:394
 msgid "函数插件功能？"
 msgstr "Function plugin features?"
 
-#: crazy_functions/生成多种Mermaid图表.py:389
+#: crazy_functions/生成多种Mermaid图表.py:395
 msgid ""
 "根据当前聊天历史或指定的路径文件(文件内容优先)绘制多种mermaid图表，将会由对话"
 "模型首先判断适合的图表类型，随后绘制图表。        \n"
@@ -1534,19 +1534,19 @@ msgstr ""
 "You can also use plugin parameters to specify the type of chart to be drawn. "
 "Function plugin contributor: Menghuan1918"
 
-#: crazy_functions/生成多种Mermaid图表.py:411
-#: crazy_functions/生成多种Mermaid图表.py:419
-#: crazy_functions/生成多种Mermaid图表.py:427
+#: crazy_functions/生成多种Mermaid图表.py:417
+#: crazy_functions/生成多种Mermaid图表.py:425
+#: crazy_functions/生成多种Mermaid图表.py:433
 msgid "解析项目: {}"
 msgstr "Parsing project: {}"
 
-#: crazy_functions/生成多种Mermaid图表.py:412
+#: crazy_functions/生成多种Mermaid图表.py:418
 msgid "找到了.doc文件，但是该文件格式不被支持，请先转化为.docx格式。"
 msgstr ""
 "Found a .doc file, but this file format is not supported. Please convert it "
 "to .docx format first."
 
-#: crazy_functions/生成多种Mermaid图表.py:420
+#: crazy_functions/生成多种Mermaid图表.py:426
 msgid ""
 "导入软件依赖失败。使用该模块需要额外依赖，安装方法```pip install --upgrade "
 "pymupdf```。"
@@ -1555,7 +1555,7 @@ msgstr ""
 "dependencies. You can install them using the following command: `pip install "
 "--upgrade pymupdf`."
 
-#: crazy_functions/生成多种Mermaid图表.py:428
+#: crazy_functions/生成多种Mermaid图表.py:434
 msgid ""
 "导入软件依赖失败。使用该模块需要额外依赖，安装方法```pip install --upgrade "
 "python-docx pywin32```。"
@@ -1564,11 +1564,11 @@ msgstr ""
 "to use this module. Installation method: ```pip install --upgrade python-"
 "docx pywin32```."
 
-#: crazy_functions/生成多种Mermaid图表.py:436
+#: crazy_functions/生成多种Mermaid图表.py:442
 msgid "首先你从历史记录中提取摘要"
 msgstr "First, you extract a summary from the chat history."
 
-#: crazy_functions/生成多种Mermaid图表.py:446
+#: crazy_functions/生成多种Mermaid图表.py:452
 msgid "处理文件: "
 msgstr "Process files: "
 
@@ -1767,7 +1767,7 @@ msgstr ""
 "The current Endpoint is:"
 
 #: request_llms/bridge_chatgpt.py:169
-#: request_llms/oai_std_model_template.py:225
+#: request_llms/oai_std_model_template.py:228
 msgid "请求超时，正在重试"
 msgstr "Request timed out, retrying."
 
@@ -1830,7 +1830,7 @@ msgid "Endpoint不满足要求"
 msgstr "The Endpoint does not meet the requirements."
 
 #: request_llms/bridge_chatgpt.py:300
-#: request_llms/oai_std_model_template.py:368
+#: request_llms/oai_std_model_template.py:371
 msgid "请求超时"
 msgstr "Request timed out."
 
@@ -1849,18 +1849,18 @@ msgid "无法读取以下数据，请检查配置. "
 msgstr "Unable to read the following data, please check the configuration. "
 
 #: request_llms/bridge_chatgpt.py:376
-#: request_llms/oai_std_model_template.py:434
+#: request_llms/oai_std_model_template.py:433
 msgid "深度思考"
 msgstr "Deep thinking"
 
 #: request_llms/bridge_chatgpt.py:384
-#: request_llms/oai_std_model_template.py:272
-#: request_llms/oai_std_model_template.py:445
+#: request_llms/oai_std_model_template.py:275
+#: request_llms/oai_std_model_template.py:449
 msgid "Json解析不合常规"
 msgstr "Json parsing is unconventional."
 
 #: request_llms/bridge_chatgpt.py:389
-#: request_llms/oai_std_model_template.py:454
+#: request_llms/oai_std_model_template.py:458
 msgid "Json异常"
 msgstr "Json exception."
 
@@ -1912,38 +1912,38 @@ msgstr ""
 "No recently uploaded image files detected. Please upload images in jpg "
 "format, and also note that the file extension should be in lowercase."
 
-#: request_llms/oai_std_model_template.py:183
-#: request_llms/oai_std_model_template.py:299
+#: request_llms/oai_std_model_template.py:186
+#: request_llms/oai_std_model_template.py:302
 msgid "APIKEY为空,请检查配置文件的{}。或者可以自定义 {} API-KEY"
 msgstr ""
 "APIKEY is empty, please check the configuration {}. Alternatively, you can "
 "customize {} API-KEY."
 
-#: request_llms/oai_std_model_template.py:235
+#: request_llms/oai_std_model_template.py:238
 msgid "获得空的回复，可能原因: "
 msgstr "Received an empty response, possible reasons: "
 
-#: request_llms/oai_std_model_template.py:250
+#: request_llms/oai_std_model_template.py:253
 msgid "API异常,请检测终端输出。可能的原因是: {}"
 msgstr "API exception, please check terminal output. Possible cause: {}"
 
-#: request_llms/oai_std_model_template.py:311
+#: request_llms/oai_std_model_template.py:314
 msgid "等待响应"
 msgstr "Waiting for response."
 
-#: request_llms/oai_std_model_template.py:401
+#: request_llms/oai_std_model_template.py:404
 msgid "[Local Message] {},获得以下报错信息：\n"
 msgstr "[Local Message] {}, received the following error message:\n"
 
-#: request_llms/oai_std_model_template.py:407
+#: request_llms/oai_std_model_template.py:410
 msgid "API异常: "
 msgstr "API exception:"
 
-#: request_llms/oai_std_model_template.py:451
+#: request_llms/oai_std_model_template.py:455
 msgid "解析错误,获得以下报错信息："
 msgstr "Parsing error, obtained the following error message:"
 
-#: shared_utils/fastapi_server.py:175
+#: shared_utils/fastapi_server.py:177
 msgid "您没有访问该目录/文件的权限"
 msgstr "You do not have permission to access this directory/file."
 
@@ -2525,35 +2525,51 @@ msgstr ""
 "Please click **Save Current Conversation** promptly to retrieve all pending "
 "documents."
 
-#: toolbox.py:611
+#: toolbox.py:339
+msgid "插件调度异常:\n"
+msgstr "Plugin scheduling exception:\n"
+
+#: toolbox.py:340 toolbox.py:346
+msgid "异常"
+msgstr "Exception."
+
+#: toolbox.py:345
+msgid "插件调度异常"
+msgstr "Plugin scheduling exception."
+
+#: toolbox.py:345
+msgid "插件调用出错: "
+msgstr "Plugin call error: "
+
+#: toolbox.py:614
 msgid "... (省略{}个文件的显示) ..."
 msgstr "... (omitting the display of {} files) ..."
 
-#: toolbox.py:613
+#: toolbox.py:616
 msgid "文件"
 msgstr "File(s)"
 
-#: toolbox.py:616
+#: toolbox.py:619
 msgid "我上传了文件，请查收"
 msgstr "I have uploaded the file, please check it."
 
-#: toolbox.py:618
+#: toolbox.py:621
 msgid "调用路径参数已自动修正到: "
 msgstr "The invocation path parameter has been automatically corrected to: "
 
-#: toolbox.py:619
+#: toolbox.py:622
 msgid "现在您点击任意函数插件时，以上文件将被作为输入参数"
 msgstr ""
 "Now, when you click on any function plugin, the above file will be used as "
 "the input parameter."
 
-#: toolbox.py:620
+#: toolbox.py:623
 msgid "请注意，当上述文件名出现异常时，请检查您的压缩包是否为UTF-8或CP437编码"
 msgstr ""
 "lease note, if the above file name appears abnormal, check whether your "
 "compressed package is encoded in UTF-8 or CP437."
 
-#: toolbox.py:622
+#: toolbox.py:625
 msgid "[Local Message] 收到以下文件 （上传到路径：{}）: "
 msgstr "[Local Message] Received the following files (uploaded to path: {}): "
 
@@ -2698,12 +2714,6 @@ msgstr "[Local Message] Received the following files (uploaded to path: {}): "
 
 #~ msgid "正常"
 #~ msgstr "OK"
-
-#~ msgid "插件调度异常:\n"
-#~ msgstr "Plugin scheduling exception:\n"
-
-#~ msgid "插件调度异常"
-#~ msgstr "Plugin scheduling exception."
 
 #~ msgid ""
 #~ "此线程失败前收到的回答：\n"
