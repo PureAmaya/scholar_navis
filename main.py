@@ -356,7 +356,6 @@ if __name__ == "__main__":
     # gradio版本检查
     # 非gradio部分，使用固定语言
     version = gr.gr_version.split('.')
-    print(version)
     if int(version[0]) <= 5 and int(version[1]) <= 22 and int(version[2]) <= 0:
         raise ImportError(
             "The Gradio version {} you are currently using has a critical vulnerability (CVE-2024-8966). Please update immediately via requirements.txt!".format(
