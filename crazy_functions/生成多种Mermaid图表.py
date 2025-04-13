@@ -1,6 +1,9 @@
 '''
 Original Author: gpt_academic@binary-husky & Menghuan1918
 
+Modified by PureAmaya on 2025-04-13
+- Fix the issue where the regular expression fails to match and outputs an exception when retrieving drawing results.
+
 Modified by PureAmaya on 2025-03-21
 - When viewing the original GPT output in mermaid format, switch to using the markdown-to-html conversion method.
 
@@ -339,8 +342,11 @@ def 解析历史输入(history, llm_kwargs, file_manifest, chatbot, plugin_kwarg
 
     # 在chatbot中添加预览图表，并支持跳转到大窗口查看
     # 这里有点乱，先这样吧
-    pattern = r'mermaid(.*?)```'
-    match = re.findall(pattern, gpt_say, re.DOTALL)[0]
+    try:
+        pattern = r'mermaid(.*?)```'
+        match = re.findall(pattern, gpt_say, re.DOTALL)[0]
+    except:
+        match = gpt_say.replace("'''",'').replace("mermaid",'')
 
     # 小图与大图跳转
     mermaid = '<pre class="mermaid">{}</pre>'.format(match)

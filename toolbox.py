@@ -1,7 +1,7 @@
 '''
 Original Author: gpt_academic@binary-husky
 
-Modified by PureAmaya on 2025-04-11
+Modified by PureAmaya on 2025-04-13
 - Compatible with the new multilingual feature.
 - Optimize the ChatBotWithCookie development experience.
 
@@ -327,20 +327,23 @@ def CatchException(f):
     @wraps(f)
     def decorated(main_input:str, llm_kwargs:dict, plugin_kwargs:dict,
                   chatbot_with_cookie:ChatBotWithCookies, history:list, *args, **kwargs):
+
+        _ = lambda txt:init_language(txt,chatbot_with_cookie,get_language())
+
         try:
             yield from f(main_input, llm_kwargs, plugin_kwargs, chatbot_with_cookie, history, *args, **kwargs)
         except FriendlyException as e:
             tb_str = '```\n' + trimmed_format_exc() + '```'
             if len(chatbot_with_cookie) == 0:
                 chatbot_with_cookie.clear()
-            chatbot_with_cookie.append(["Plugin scheduling exception:\n" + tb_str, e.generate_error_html()])
-            yield from update_ui(chatbot=chatbot_with_cookie, history=history, msg=f'异常')  # 刷新界面
+            chatbot_with_cookie.append([_("插件调度异常:\n") + tb_str, e.generate_error_html()])
+            yield from update_ui(chatbot=chatbot_with_cookie, history=history, msg=_('异常'))  # 刷新界面
         except Exception as e:
             tb_str = '```\n' + trimmed_format_exc() + '```'
             if len(chatbot_with_cookie) == 0:
                 chatbot_with_cookie.clear()
-            chatbot_with_cookie.append(["Plugin scheduling exception", f"[Local Message] 'Plugin scheduling exception: '\n\n{tb_str} \n"])
-            yield from update_ui(chatbot=chatbot_with_cookie, history=history, msg=f'异常 {e}')  # 刷新界面
+            chatbot_with_cookie.append([_("插件调度异常"), f"[Local Message] {_('插件调用出错: ')}\n\n{tb_str} \n"])
+            yield from update_ui(chatbot=chatbot_with_cookie, history=history, msg=f'{_("异常")} {e}')  # 刷新界面
 
     return decorated
 
@@ -878,8 +881,8 @@ def is_the_upload_folder(string):
 def get_user(chatbotwithcookies:ChatBotWithCookies):
     return chatbotwithcookies._cookies.get("user_name", default_user_name)
 
-def get_language(chatbotwithcookies:ChatBotWithCookies):
-    return chatbotwithcookies._cookies.get("language")
+def get_language(chatbotwithcookies:ChatBotWithCookies)-> str :
+    return chatbotwithcookies._cookies.get("language",LANGUAGE_DISPLAY)
 
 class ProxyNetworkActivate:
     """
