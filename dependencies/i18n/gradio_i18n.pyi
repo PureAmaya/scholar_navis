@@ -54,6 +54,7 @@ class Button(gr.Button, TranslatableMixin):
     from gradio.blocks import Block
     if TYPE_CHECKING:
         from gradio.components import Timer
+        from gradio.components.base import Component
 
 class Textbox(gr.Textbox, TranslatableMixin):
     _translatable_attrs = [('value','value'),('info','info'),('label', 'label'), ('placeholder', 'placeholder')]
@@ -68,6 +69,7 @@ class Textbox(gr.Textbox, TranslatableMixin):
     from gradio.blocks import Block
     if TYPE_CHECKING:
         from gradio.components import Timer
+        from gradio.components.base import Component
 
 
 class Tab(gr.Tab, TranslatableMixin):
@@ -79,6 +81,7 @@ class Tab(gr.Tab, TranslatableMixin):
     from gradio.blocks import Block
     if TYPE_CHECKING:
         from gradio.components import Timer
+        from gradio.components.base import Component
 
 class Row(gr.Row):
     def style(self, **kwargs):
@@ -88,6 +91,7 @@ class Row(gr.Row):
     from gradio.blocks import Block
     if TYPE_CHECKING:
         from gradio.components import Timer
+        from gradio.components.base import Component
 
 
 class Dropdown(gr.Dropdown):
@@ -98,6 +102,7 @@ class Dropdown(gr.Dropdown):
     from gradio.blocks import Block
     if TYPE_CHECKING:
         from gradio.components import Timer
+        from gradio.components.base import Component
 
 
 class CheckboxGroup(gr.CheckboxGroup):
@@ -108,6 +113,7 @@ class CheckboxGroup(gr.CheckboxGroup):
     from gradio.blocks import Block
     if TYPE_CHECKING:
         from gradio.components import Timer
+        from gradio.components.base import Component
 
 
 class Blocks(gr.Blocks):

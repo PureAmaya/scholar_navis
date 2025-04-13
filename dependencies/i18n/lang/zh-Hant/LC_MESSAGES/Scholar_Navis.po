@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Scholar Navis\n"
-"POT-Creation-Date: 2025-04-12 19:17+0800\n"
-"PO-Revision-Date: 2025-04-12 19:17+0800\n"
+"POT-Creation-Date: 2025-04-13 21:46+0800\n"
+"PO-Revision-Date: 2025-04-13 21:46+0800\n"
 "Last-Translator: PureAmaya <gkoishi0514@gmail.com>\n"
 "Language-Team: gkoishi0514@gmail.com\n"
 "Language: zh_TW\n"
@@ -1340,25 +1340,25 @@ msgstr "使用AI輔助功能"
 msgid "AI补全信息，速度较慢"
 msgstr "AI補全資訊，速度較慢"
 
-#: crazy_functions/生成多种Mermaid图表.py:242
+#: crazy_functions/生成多种Mermaid图表.py:245
 msgid "从以下文本中提取摘要"
 msgstr "從以下文本中提取摘要"
 
-#: crazy_functions/生成多种Mermaid图表.py:244
+#: crazy_functions/生成多种Mermaid图表.py:247
 msgid "文章极长，不能达到预期效果"
 msgstr "文章過於冗長，無法達到預期效果。"
 
-#: crazy_functions/生成多种Mermaid图表.py:279
+#: crazy_functions/生成多种Mermaid图表.py:282
 msgid "接下来将判断适合的图表类型,如连续3次判断失败将会使用流程图进行绘制"
 msgstr "接下來將判斷適合的圖表類型，如連續3次判斷失敗將會使用流程圖進行繪製。"
 
-#: crazy_functions/生成多种Mermaid图表.py:281
-#: crazy_functions/生成多种Mermaid图表.py:437
-#: crazy_functions/生成多种Mermaid图表.py:447
+#: crazy_functions/生成多种Mermaid图表.py:284
+#: crazy_functions/生成多种Mermaid图表.py:443
+#: crazy_functions/生成多种Mermaid图表.py:453
 msgid "[Local Message] 收到。"
 msgstr "[Local Message] 收到。"
 
-#: crazy_functions/生成多种Mermaid图表.py:286
+#: crazy_functions/生成多种Mermaid图表.py:289
 msgid ""
 "请判断适合使用的流程图类型,其中数字对应关系为:1-流程图,2-序列图,3-类图,4-饼"
 "图,5-甘特图,6-状态图,7-实体关系图,8-象限提示图。由于不管提供文本是什么,模型大"
@@ -1368,7 +1368,7 @@ msgstr ""
 "4-餅圖，5-甘特圖，6-狀態圖，7-實體關係圖，8-象限提示圖。由於無論提供的文本是"
 "什麼，模型大概率認為\"思維導圖\"最合適，因此思維導圖僅能通過參數調用。"
 
-#: crazy_functions/生成多种Mermaid图表.py:330
+#: crazy_functions/生成多种Mermaid图表.py:333
 msgid ""
 "请根据判断结果绘制相应的图表。如需绘制思维导图请使用参数调用,同时过大的图表可"
 "能需要复制到在线编辑器中进行渲染."
@@ -1376,31 +1376,31 @@ msgstr ""
 "請根據判斷結果繪製相應的圖表。如需繪製思維導圖請使用參數調用，同時過大的圖表"
 "可能需要複製到在線編輯器中進行渲染。"
 
-#: crazy_functions/生成多种Mermaid图表.py:348
+#: crazy_functions/生成多种Mermaid图表.py:354
 msgid "请点击查看绘制结果"
 msgstr "請點擊查看繪製結果"
 
-#: crazy_functions/生成多种Mermaid图表.py:349
+#: crazy_functions/生成多种Mermaid图表.py:355
 msgid "点击查看大图"
 msgstr "點擊查看大圖"
 
-#: crazy_functions/生成多种Mermaid图表.py:359
+#: crazy_functions/生成多种Mermaid图表.py:365
 msgid "上方为生成的图形"
 msgstr "上方為生成的圖形"
 
-#: crazy_functions/生成多种Mermaid图表.py:359
+#: crazy_functions/生成多种Mermaid图表.py:365
 msgid "如果生成失败，可以点击这里查看AI返回的内容并自行修复"
 msgstr "如果生成失敗，可以點擊這裡查看AI返回的內容並自行修復"
 
-#: crazy_functions/生成多种Mermaid图表.py:363
+#: crazy_functions/生成多种Mermaid图表.py:369
 msgid "此外，您还可以对于绘制的图形进行问答。"
 msgstr "此外，您還可以對於繪製的圖形進行問答。"
 
-#: crazy_functions/生成多种Mermaid图表.py:388
+#: crazy_functions/生成多种Mermaid图表.py:394
 msgid "函数插件功能？"
 msgstr "函數插件功能？"
 
-#: crazy_functions/生成多种Mermaid图表.py:389
+#: crazy_functions/生成多种Mermaid图表.py:395
 msgid ""
 "根据当前聊天历史或指定的路径文件(文件内容优先)绘制多种mermaid图表，将会由对话"
 "模型首先判断适合的图表类型，随后绘制图表。        \n"
@@ -1410,17 +1410,17 @@ msgstr ""
 "話模型首先判斷適合的圖表類型，隨後繪製圖表。        \n"
 "您也可以使用插件參數指定繪製的圖表類型，函數插件貢獻者：Menghuan1918"
 
-#: crazy_functions/生成多种Mermaid图表.py:411
-#: crazy_functions/生成多种Mermaid图表.py:419
-#: crazy_functions/生成多种Mermaid图表.py:427
+#: crazy_functions/生成多种Mermaid图表.py:417
+#: crazy_functions/生成多种Mermaid图表.py:425
+#: crazy_functions/生成多种Mermaid图表.py:433
 msgid "解析项目: {}"
 msgstr "解析項目：{}"
 
-#: crazy_functions/生成多种Mermaid图表.py:412
+#: crazy_functions/生成多种Mermaid图表.py:418
 msgid "找到了.doc文件，但是该文件格式不被支持，请先转化为.docx格式。"
 msgstr "找到了.doc文件，但是該文件格式不被支援，請先轉化為.docx格式。"
 
-#: crazy_functions/生成多种Mermaid图表.py:420
+#: crazy_functions/生成多种Mermaid图表.py:426
 msgid ""
 "导入软件依赖失败。使用该模块需要额外依赖，安装方法```pip install --upgrade "
 "pymupdf```。"
@@ -1428,7 +1428,7 @@ msgstr ""
 "導入軟件依賴失敗。使用該模塊需要額外依賴，安裝方法```pip install --upgrade "
 "pymupdf```。"
 
-#: crazy_functions/生成多种Mermaid图表.py:428
+#: crazy_functions/生成多种Mermaid图表.py:434
 msgid ""
 "导入软件依赖失败。使用该模块需要额外依赖，安装方法```pip install --upgrade "
 "python-docx pywin32```。"
@@ -1436,11 +1436,11 @@ msgstr ""
 "導入軟件依賴失敗。使用該模塊需要額外依賴，安裝方法```pip install --upgrade "
 "python-docx pywin32```。"
 
-#: crazy_functions/生成多种Mermaid图表.py:436
+#: crazy_functions/生成多种Mermaid图表.py:442
 msgid "首先你从历史记录中提取摘要"
 msgstr "首先你從歷史記錄中提取摘要"
 
-#: crazy_functions/生成多种Mermaid图表.py:446
+#: crazy_functions/生成多种Mermaid图表.py:452
 msgid "处理文件: "
 msgstr "處理文件: "
 
@@ -1519,8 +1519,8 @@ msgstr ""
 msgid "对话功能"
 msgstr "對話功能"
 
-#: main.py:165 main.py:292 themes/gui_toolbar.py:324 themes/gui_toolbar.py:334
-#: themes/gui_toolbar.py:339
+#: main.py:165 main.py:292 themes/gui_toolbar.py:320 themes/gui_toolbar.py:330
+#: themes/gui_toolbar.py:335
 msgid "当前模型: {}"
 msgstr "當前模型：{}"
 
@@ -1615,7 +1615,7 @@ msgid "Endpoint不正确, 请检查AZURE_ENDPOINT的配置! 当前的Endpoint为
 msgstr "Endpoint不正確，請檢查AZURE_ENDPOINT的配置！當前的Endpoint為："
 
 #: request_llms/bridge_chatgpt.py:169
-#: request_llms/oai_std_model_template.py:225
+#: request_llms/oai_std_model_template.py:228
 msgid "请求超时，正在重试"
 msgstr "請求逾時，正在重試"
 
@@ -1672,7 +1672,7 @@ msgid "Endpoint不满足要求"
 msgstr "Endpoint不滿足要求"
 
 #: request_llms/bridge_chatgpt.py:300
-#: request_llms/oai_std_model_template.py:368
+#: request_llms/oai_std_model_template.py:371
 msgid "请求超时"
 msgstr "請求超時"
 
@@ -1689,18 +1689,18 @@ msgid "无法读取以下数据，请检查配置. "
 msgstr "無法讀取以下數據，請檢查配置。"
 
 #: request_llms/bridge_chatgpt.py:376
-#: request_llms/oai_std_model_template.py:434
+#: request_llms/oai_std_model_template.py:433
 msgid "深度思考"
 msgstr "深度思考"
 
 #: request_llms/bridge_chatgpt.py:384
-#: request_llms/oai_std_model_template.py:272
-#: request_llms/oai_std_model_template.py:445
+#: request_llms/oai_std_model_template.py:275
+#: request_llms/oai_std_model_template.py:449
 msgid "Json解析不合常规"
 msgstr "Json解析不合常規"
 
 #: request_llms/bridge_chatgpt.py:389
-#: request_llms/oai_std_model_template.py:454
+#: request_llms/oai_std_model_template.py:458
 msgid "Json异常"
 msgstr "Json異常"
 
@@ -1746,36 +1746,36 @@ msgstr ""
 "沒有檢測到任何近期上傳的圖像文件，請上傳jpg格式的图片，此外，請注意拓展名需要"
 "小寫"
 
-#: request_llms/oai_std_model_template.py:183
-#: request_llms/oai_std_model_template.py:299
+#: request_llms/oai_std_model_template.py:186
+#: request_llms/oai_std_model_template.py:302
 msgid "APIKEY为空,请检查配置文件的{}。或者可以自定义 {} API-KEY"
 msgstr "APIKEY為空，請檢查配置文件的{}。或者可以自定義 {} API-KEY"
 
-#: request_llms/oai_std_model_template.py:235
+#: request_llms/oai_std_model_template.py:238
 msgid "获得空的回复，可能原因: "
 msgstr "獲得空的回覆，可能原因："
 
-#: request_llms/oai_std_model_template.py:250
+#: request_llms/oai_std_model_template.py:253
 msgid "API异常,请检测终端输出。可能的原因是: {}"
 msgstr "API異常，請檢測終端輸出。可能的原因是：{}"
 
-#: request_llms/oai_std_model_template.py:311
+#: request_llms/oai_std_model_template.py:314
 msgid "等待响应"
 msgstr "等待響應"
 
-#: request_llms/oai_std_model_template.py:401
+#: request_llms/oai_std_model_template.py:404
 msgid "[Local Message] {},获得以下报错信息：\n"
 msgstr "[Local Message] {}，獲得以下報錯信息：\n"
 
-#: request_llms/oai_std_model_template.py:407
+#: request_llms/oai_std_model_template.py:410
 msgid "API异常: "
 msgstr "API異常："
 
-#: request_llms/oai_std_model_template.py:451
+#: request_llms/oai_std_model_template.py:455
 msgid "解析错误,获得以下报错信息："
 msgstr "解析錯誤，獲得以下報錯資訊："
 
-#: shared_utils/fastapi_server.py:175
+#: shared_utils/fastapi_server.py:177
 msgid "您没有访问该目录/文件的权限"
 msgstr "您沒有訪問該目錄/文件的權限"
 
@@ -2030,7 +2030,7 @@ msgstr "在 <b>輔助指令</b> 中，可以看見每個功能根據不同需求
 msgid "确认参数并执行"
 msgstr "確認參數並執行"
 
-#: themes/gui_advanced_plugin_class.py:53 themes/gui_toolbar.py:218
+#: themes/gui_advanced_plugin_class.py:53 themes/gui_toolbar.py:214
 msgid "取消"
 msgstr "取消"
 
@@ -2217,99 +2217,95 @@ msgstr "選擇語言"
 msgid "留空时使用默认prompt: {}"
 msgstr "留空時使用默認prompt: {}"
 
-#: themes/gui_toolbar.py:159
-msgid "多语言选择已禁用"
-msgstr "Multilingual selection is disabled."
-
-#: themes/gui_toolbar.py:175
+#: themes/gui_toolbar.py:171
 msgid "选择服务商"
 msgstr "選擇服務商"
 
-#: themes/gui_toolbar.py:175
+#: themes/gui_toolbar.py:171
 msgid "仅用于api自定义，不影响模型选择"
 msgstr "僅用於api自定義，不影響模型選擇"
 
-#: themes/gui_toolbar.py:176
+#: themes/gui_toolbar.py:172
 msgid "不输入则使用内置API KEY"
 msgstr "不輸入則使用內置API KEY"
 
-#: themes/gui_toolbar.py:176
+#: themes/gui_toolbar.py:172
 msgid "自定义API-KEY"
 msgstr "自定義API-KEY"
 
-#: themes/gui_toolbar.py:179
+#: themes/gui_toolbar.py:175
 msgid "自定义重定向"
 msgstr "自定義重定向"
 
-#: themes/gui_toolbar.py:180
+#: themes/gui_toolbar.py:176
 msgid "重定向路径"
 msgstr "重定向路徑"
 
-#: themes/gui_toolbar.py:182
+#: themes/gui_toolbar.py:178
 msgid "自定义模型"
 msgstr "自定義模型"
 
-#: themes/gui_toolbar.py:182
+#: themes/gui_toolbar.py:178
 msgid "此处输入非内置模型（一行一个）"
 msgstr "此處輸入非內置模型（一行一個）"
 
-#: themes/gui_toolbar.py:207
+#: themes/gui_toolbar.py:203
 msgid "帮助"
 msgstr "幫助"
 
-#: themes/gui_toolbar.py:210
+#: themes/gui_toolbar.py:206
 msgid "更改密码"
 msgstr "更改密碼"
 
-#: themes/gui_toolbar.py:211
+#: themes/gui_toolbar.py:207
 msgid "当前登录用户"
 msgstr "當前登錄用戶"
 
-#: themes/gui_toolbar.py:212
+#: themes/gui_toolbar.py:208
 msgid "请注意，点击确认后立即生效"
 msgstr "請注意，點擊確認後立即生效"
 
-#: themes/gui_toolbar.py:213
+#: themes/gui_toolbar.py:209
 msgid "当前密码"
 msgstr "當前密碼"
 
-#: themes/gui_toolbar.py:213
+#: themes/gui_toolbar.py:209
 msgid "请输入当前密码"
 msgstr "請輸入當前密碼"
 
-#: themes/gui_toolbar.py:214
+#: themes/gui_toolbar.py:210
 msgid "修改密码"
 msgstr "修改密碼"
 
-#: themes/gui_toolbar.py:214
+#: themes/gui_toolbar.py:210
 msgid "请输入新密码"
 msgstr "請輸入新密碼"
 
-#: themes/gui_toolbar.py:215
+#: themes/gui_toolbar.py:211
 msgid "确认修改的密码"
 msgstr "確認修改的密碼"
 
-#: themes/gui_toolbar.py:215
+#: themes/gui_toolbar.py:211
 msgid "请再次输入新密码"
 msgstr "請再次輸入新密碼"
 
-#: themes/gui_toolbar.py:217
+#: themes/gui_toolbar.py:213
 msgid "确认修改"
 msgstr "確認修改"
 
-#: themes/gui_toolbar.py:219
+#: themes/gui_toolbar.py:215
 msgid "退出登录"
 msgstr "退出登錄"
 
-#: themes/gui_toolbar.py:280
+#: themes/gui_toolbar.py:276
 msgid "自定义数据加载失败，使用默认值"
 msgstr "自定義數據加載失敗，使用默認值"
 
-#: themes/gui_toolbar.py:323
+#: themes/gui_toolbar.py:319
 msgid "参数加载失败，使用默认值"
 msgstr "參數加載失敗，使用默認值"
 
-#: themes/gui_toolbar.py:347
+#: themes/gui_toolbar.py:343
 msgid "包含不可使用的字符，请重新输入"
 msgstr "包含不可使用的字元，請重新輸入"
 
@@ -2321,34 +2317,53 @@ msgstr "檢測到**瀾留的緩存文檔**，請及時處理"
 msgid "请及时点击“**保存当前对话**”获取所有滞留文档"
 msgstr "請及時點擊“**保存當前對話**”獲取所有瀾留文檔"
 
-#: toolbox.py:611
+#: toolbox.py:339
+msgid "插件调度异常:\n"
+msgstr "插件調度異常:\n"
+
+#: toolbox.py:340 toolbox.py:346
+msgid "异常"
+msgstr "异常"
+
+#: toolbox.py:345
+msgid "插件调度异常"
+msgstr "插件調度異常"
+
+#: toolbox.py:345
+msgid "插件调用出错: "
+msgstr "插件呼叫出錯: "
+
+#: toolbox.py:614
 msgid "... (省略{}个文件的显示) ..."
 msgstr "... (省略{}個文件的顯示) ..."
 
-#: toolbox.py:613
+#: toolbox.py:616
 msgid "文件"
 msgstr "文件"
 
-#: toolbox.py:616
+#: toolbox.py:619
 msgid "我上传了文件，请查收"
 msgstr "我上傳了文件，請查收"
 
-#: toolbox.py:618
+#: toolbox.py:621
 msgid "调用路径参数已自动修正到: "
 msgstr "調用路徑參數已自動修正到："
 
-#: toolbox.py:619
+#: toolbox.py:622
 msgid "现在您点击任意函数插件时，以上文件将被作为输入参数"
 msgstr "現在您點擊任意函數插件時，以上文件將被作為輸入參數"
 
-#: toolbox.py:620
+#: toolbox.py:623
 msgid "请注意，当上述文件名出现异常时，请检查您的压缩包是否为UTF-8或CP437编码"
 msgstr ""
 "請注意，當上述文件名出現異常時，請檢查您的壓縮包是否為 UTF-8 或 CP437 編碼"
 
-#: toolbox.py:622
+#: toolbox.py:625
 msgid "[Local Message] 收到以下文件 （上传到路径：{}）: "
 msgstr "[Local Message] 收到以下文件（上傳到路徑：{}）："
+
+#~ msgid "多语言选择已禁用"
+#~ msgstr "Multilingual selection is disabled."
 
 #~ msgid "欢迎使用 Scholar Navis"
 #~ msgstr "歡迎使用 Scholar Navis"
@@ -2472,12 +2487,6 @@ msgstr "[Local Message] 收到以下文件（上傳到路徑：{}）："
 
 #~ msgid "正常"
 #~ msgstr "正常"
-
-#~ msgid "插件调度异常:\n"
-#~ msgstr "插件調度異常:\n"
-
-#~ msgid "插件调度异常"
-#~ msgstr "插件調度異常"
 
 #, fuzzy
 #~| msgid "密码不能为空"
